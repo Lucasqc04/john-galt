@@ -1,0 +1,10 @@
+ignores:
+  [
+    '@commitlint/*',
+    '@typescript-eslint/*',
+    'commitizen',
+    'depcheck',
+    'prettier',
+    'prettier-*',
+  ]
+skip-missing: true
