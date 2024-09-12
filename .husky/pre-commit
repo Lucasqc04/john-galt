@@ -1,3 +1,5 @@
 npm audit fix
 
 npx lint-staged
+
+npx depcheck

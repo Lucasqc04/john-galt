@@ -26,6 +26,7 @@
     "@vitejs/plugin-react-swc": "^3.5.0",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
+    "depcheck": "^1.4.7",
     "eslint": "^9.10.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
