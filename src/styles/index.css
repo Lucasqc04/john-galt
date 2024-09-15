@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    --bg-primary-light: #ffffff;
+    --bg-primary-dark: #1a202c;
+    --text-primary-light: #000000;
+    --text-primary-dark: #ffffff;
+    background-color: var(--bg-primary-light);
+    color: var(--text-primary-light);
+  }
+
+  .dark html {
+    --bg-primary-light: #1a202c;
+    --bg-primary-dark: #ffffff;
+    --text-primary-light: #ffffff;
+    --text-primary-dark: #000000;
+    background-color: var(--bg-primary-dark);
+    color: var(--text-primary-dark);
+  }
+
+  .bg-primary-light {
+    background-color: var(--bg-primary-light);
+  }
+
+  .bg-primary-dark {
+    background-color: var(--bg-primary-dark);
+  }
+
+  .text-primary-light {
+    color: var(--text-primary-light);
+  }
+
+  .text-primary-dark {
+    color: var(--text-primary-dark);
+  }
+}
