@@ -1,16 +1,14 @@
-import React, { createContext, ReactNode, useContext, useState } from 'react';
+import { createContext, ReactNode, useContext, useState } from 'react';
 import { ThemeMode } from '../../domain/entities/theme.entity';
 
-interface ThemeContextType {
+type ThemeContextType = {
   theme: ThemeMode;
   toggleTheme: () => void;
-}
+};
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export const ThemeProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<ThemeMode>(ThemeMode.light);
 
   const toggleTheme = () => {
@@ -24,12 +22,12 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({
       {children}
     </ThemeContext.Provider>
   );
-};
+}
 
-export const useTheme = (): ThemeContextType => {
+export function useTheme(): ThemeContextType {
   const context = useContext(ThemeContext);
   if (!context) {
     throw new Error('useTheme must be used within a ThemeProvider');
   }
   return context;
-};
+}

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ThemeMode } from '../../domain/entities/theme.entity';
 
-export function useThemeViewModel() {
+export function useTheme() {
   const [currentTheme, setCurrentTheme] = useState<ThemeMode>(ThemeMode.light);
 
   const toggleTheme = () => {

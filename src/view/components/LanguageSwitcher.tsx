@@ -1,10 +1,9 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
-import brasil from '../assets/images/brasil.png'; // Imagem da bandeira do Brasil
-import espanha from '../assets/images/espanha.png'; // Imagem da bandeira da Espanha
-import estadosUnidos from '../assets/images/estados-unidos.png'; // Imagem da bandeira dos EUA
+import brasil from '../assets/images/brasil.png';
+import espanha from '../assets/images/espanha.png';
+import estadosUnidos from '../assets/images/estados-unidos.png';
 
-const LanguageSwitcher: React.FC = () => {
+export function LanguageSwitcher() {
   const { i18n } = useTranslation();
 
   return (
@@ -31,6 +30,4 @@ const LanguageSwitcher: React.FC = () => {
       </button>
     </div>
   );
-};
-
-export default LanguageSwitcher;
+}

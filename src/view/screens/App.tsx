@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import LanguageSwitcher from '../components/LanguageSwitcher';
+import { LanguageSwitcher } from '../components/LanguageSwitcher';
 import ThemeToggleButton from '../components/ThemeToggleButton';
-import { useThemeViewModel } from '../viewmodels/theme.viewmodel';
+import { useTheme } from './useTheme';
 
-const App: React.FC = () => {
-  const { currentTheme, toggleTheme } = useThemeViewModel();
+export function App() {
+  const { currentTheme, toggleTheme } = useTheme();
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -25,6 +25,4 @@ const App: React.FC = () => {
       </main>
     </div>
   );
-};
-
-export default App;
+}
