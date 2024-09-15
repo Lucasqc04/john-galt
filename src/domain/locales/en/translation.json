@@ -1,4 +1,15 @@
 {
   "welcome": "Welcome to our website!",
-  "description": "This is a sample website."
+  "description": "This is a sample website.",
+
+  "cardNamePlaceholder": "Cardholder's Name",
+  "cardNumberPlaceholder": "Card Number",
+  "expiryDatePlaceholder": "MM/YY",
+  "cvvPlaceholder": "CVV",
+  "visa": "Visa",
+  "mastercard": "MasterCard",
+  "elo": "Elo",
+  "amex": "American Express",
+  "hipercard": "Hipercard",
+  "confirmPaymentButton": "Confirm Payment"
 }

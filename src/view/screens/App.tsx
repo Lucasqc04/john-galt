@@ -5,6 +5,8 @@ import { LanguageSwitcher } from '../components/LanguageSwitcher';
 import ThemeToggleButton from '../components/ThemeToggleButton';
 import { useTheme } from './useTheme';
 
+import NotFound from './notfound/NotFound';
+
 export function App() {
   const { currentTheme, toggleTheme } = useTheme();
   const { t } = useTranslation();
@@ -32,6 +34,8 @@ export function App() {
             </div>
           }
         ></Route>
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

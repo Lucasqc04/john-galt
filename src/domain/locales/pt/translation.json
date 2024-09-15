@@ -1,4 +1,15 @@
 {
   "welcome": "Bem-vindo ao nosso site!",
-  "description": "Este é um site de exemplo."
+  "description": "Este é um site de exemplo.",
+
+  "cardNamePlaceholder": "Nome no cartão",
+  "cardNumberPlaceholder": "Número do cartão",
+  "expiryDatePlaceholder": "MM/AA",
+  "cvvPlaceholder": "CVV",
+  "visa": "Visa",
+  "mastercard": "MasterCard",
+  "elo": "Elo",
+  "amex": "American Express",
+  "hipercard": "Hipercard",
+  "confirmPaymentButton": "Confirmar Pagamento"
 }
