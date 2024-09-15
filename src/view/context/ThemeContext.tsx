@@ -1,5 +1,5 @@
 import React, { createContext, ReactNode, useContext, useState } from 'react';
-import { ThemeMode } from '../models/theme.model';
+import { ThemeMode } from '../../domain/entities/theme.entity';
 
 interface ThemeContextType {
   theme: ThemeMode;
@@ -11,10 +11,12 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const ThemeProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [theme, setTheme] = useState<ThemeMode>('light');
+  const [theme, setTheme] = useState<ThemeMode>(ThemeMode.light);
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+    setTheme((prevTheme) =>
+      prevTheme === ThemeMode.light ? ThemeMode.dark : ThemeMode.light,
+    );
   };
 
   return (

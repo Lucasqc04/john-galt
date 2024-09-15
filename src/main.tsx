@@ -1,9 +1,9 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import './config/i18n';
-import { ThemeProvider } from './context/ThemeContext';
-import './styles/index.css';
-import App from './views/App';
+import './domain/locales/Language';
+import { ThemeProvider } from './view/context/ThemeContext';
+import App from './view/screens/App';
+import './view/styles/index.css';
 
 const root = createRoot(document.getElementById('root')!);
 
