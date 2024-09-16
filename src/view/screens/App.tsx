@@ -1,6 +1,11 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import {
+  Navigate,
+  Route,
+  BrowserRouter as Router,
+  Routes,
+} from 'react-router-dom';
 import { LanguageSwitcher } from '../components/LanguageSwitcher';
 import ThemeToggleButton from '../components/ThemeToggleButton';
 import { useTheme } from './useTheme';
@@ -16,6 +21,7 @@ export function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<Navigate to="/pt" />} />
         <Route
           path="/:lang"
           element={
