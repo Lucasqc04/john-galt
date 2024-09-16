@@ -1,11 +1,10 @@
-import React from 'react';
 import { FaMoon, FaSun } from 'react-icons/fa';
 
-interface ThemeToggleButtonProps {
+type ThemeToggleButtonProps = {
   onClick: () => void;
-}
+};
 
-const ThemeToggleButton: React.FC<ThemeToggleButtonProps> = ({ onClick }) => {
+export function ThemeToggleButton({ onClick }: ThemeToggleButtonProps) {
   return (
     <label className="inline-flex items-center relative cursor-pointer">
       <input
@@ -25,6 +24,4 @@ const ThemeToggleButton: React.FC<ThemeToggleButtonProps> = ({ onClick }) => {
       />
     </label>
   );
-};
-
-export default ThemeToggleButton;
+}
