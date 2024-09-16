@@ -16,6 +16,7 @@ export function LanguageSwitcher() {
 
   useEffect(() => {
     i18n.changeLanguage(lang);
+    document.documentElement.lang = lang || 'pt';
   }, [i18n, lang]);
 
   return (
