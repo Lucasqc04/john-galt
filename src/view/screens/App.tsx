@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { LanguageSwitcher } from '../components/LanguageSwitcher';
 import ThemeToggleButton from '../components/ThemeToggleButton';
+import { DefaultLayout } from '../layout/DefaultyLayout';
 import { useTheme } from './useTheme';
 
 export function App() {
@@ -32,6 +33,7 @@ export function App() {
             </div>
           }
         ></Route>
+        <Route path="/" element={<DefaultLayout />}></Route>
       </Routes>
     </Router>
   );
