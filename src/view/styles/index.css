@@ -79,6 +79,14 @@
   }
 }
 
+* {
+  overflow-x: hidden;
+}
+
+h1 {
+  overflow: hidden;
+}
+
 .circles li {
   position: absolute;
   display: block;
@@ -176,4 +184,31 @@
     opacity: 0;
     border-radius: 50%;
   }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+::-webkit-scrollbar-horizontal {
+  height: 12px;
+}
+
+::-webkit-scrollbar-vertical {
+  width: 12px;
 }

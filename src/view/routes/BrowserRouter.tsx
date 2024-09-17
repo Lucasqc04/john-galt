@@ -6,6 +6,7 @@ import {
   Routes,
 } from 'react-router-dom';
 import { Loader } from '../components/Loader';
+import { DefaultLayout } from '../layout/DefaultyLayout';
 import { NotFound } from '../screens/NotFound';
 import { Page } from '../screens/Page';
 
@@ -15,7 +16,9 @@ export function BrowserRouter() {
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<Navigate to="/pt" />} />
-          <Route path="/:lang" element={<Page />} />
+          <Route path="/:lang" element={<DefaultLayout />}>
+            <Route index element={<Page />} />
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
