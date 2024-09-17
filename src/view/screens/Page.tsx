@@ -12,12 +12,12 @@ export function Page() {
   }, [currentTheme]);
 
   return (
-    <div className="bg-primary-light dark:bg-primary-dark text-black dark:text-white">
-      <header className="absolute z-10 top-0 left-0 p-4 flex items-center justify-between">
+    <div className="text-black dark:text-white w-screen">
+      <header className="absolute z-50 top-0 left-0 p-4 flex items-center justify-between">
         <ThemeToggleButton onClick={toggleTheme} />
         <LanguageSwitcher />
       </header>
-      <main className="px-4">
+      <main>
         <Hero />
       </main>
     </div>
