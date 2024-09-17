@@ -1,48 +1,39 @@
-// src/view/screens/PaymentForm.tsx
-import React, { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { usePaymentViewModel } from '../../viewmodel/PaymentViewModel';
+import { usePayment } from './usePayment';
 
-// Função para identificar a bandeira do cartão
 const getCardFlag = (cardNumber: string) => {
   const bin = cardNumber.substring(0, 6);
 
-  // Visa (inicia com 4)
   if (/^4/.test(bin)) return 'visa';
 
-  // Mastercard (inicia com 5)
   if (/^5[1-5]/.test(bin)) return 'mastercard';
 
-  // Elo (diversos bins)
   if (/^4011|4312|4389|4514|4576|5041|5066|5090|6277|6363/.test(bin))
     return 'elo';
 
-  // Amex (inicia com 34 ou 37)
   if (/^3[47]/.test(bin)) return 'amex';
 
-  // Hipercard (inicia com 6062 ou 3841)
   if (/^606282|3841/.test(bin)) return 'hipercard';
 
-  return 'default'; // Retorno padrão caso não reconheça a bandeira
+  return 'default';
 };
 
-const PaymentForm: React.FC = () => {
-  const { t } = useTranslation(); // Hook para traduções
-  const { paymentData, handleInputChange, submitPayment } =
-    usePaymentViewModel();
-  const [cardFlag, setCardFlag] = useState('default'); // Estado para armazenar a bandeira do cartão
+export function PaymentForm() {
+  const { t } = useTranslation();
+  const { paymentData, handleInputChange, submitPayment } = usePayment();
+  const [cardFlag, setCardFlag] = useState('default');
 
   const handleCardNumberChange = (value: string) => {
     handleInputChange('cardNumber', value);
 
-    // Atualiza a bandeira do cartão conforme o número muda
     const flag = getCardFlag(value);
     setCardFlag(flag);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    submitPayment(); // Chama a função de submissão da ViewModel
+    submitPayment();
   };
 
   return (
@@ -50,7 +41,6 @@ const PaymentForm: React.FC = () => {
       onSubmit={handleSubmit}
       className="flex flex-col justify-around bg-gray-800 p-4 border border-white border-opacity-30 rounded-lg shadow-md max-w-xs mx-auto"
     >
-      {/* Nome no cartão */}
       <div className="flex flex-row items-center justify-between mb-3">
         <input
           className="w-full h-10 border-none outline-none text-sm bg-gray-800 text-white font-semibold caret-orange-500 pl-2 mb-3 flex-grow"
@@ -63,7 +53,6 @@ const PaymentForm: React.FC = () => {
           required
         />
         <div className="flex items-center justify-center relative w-14 h-9 bg-gray-800 border border-white border-opacity-20 rounded-md">
-          {/* Logo do Cartão baseado no estado cardFlag */}
           {cardFlag === 'visa' && (
             <img
               src="src/view/assets/images/logocard/visa-logo.png"
@@ -124,7 +113,6 @@ const PaymentForm: React.FC = () => {
         </div>
       </div>
 
-      {/* Número do Cartão */}
       <input
         className="w-full h-10 border-none outline-none text-sm bg-gray-800 text-white font-semibold caret-orange-500 pl-2"
         type="text"
@@ -132,12 +120,11 @@ const PaymentForm: React.FC = () => {
         id="cardNumber"
         placeholder={t('cardNumberPlaceholder')}
         value={paymentData.cardNumber}
-        onChange={(e) => handleCardNumberChange(e.target.value)} // Usa a função que atualiza o número e a bandeira
+        onChange={(e) => handleCardNumberChange(e.target.value)}
         maxLength={16}
         required
       />
 
-      {/* Expiry e CVV */}
       <div className="flex flex-row justify-between space-x-2">
         <input
           className="w-full h-10 border-none outline-none text-sm bg-gray-800 text-white font-semibold caret-orange-500 pl-2"
@@ -164,7 +151,6 @@ const PaymentForm: React.FC = () => {
         />
       </div>
 
-      {/* Botão de Confirmar */}
       <button
         type="submit"
         className="mt-4 bg-orange-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-orange-600"
@@ -173,6 +159,4 @@ const PaymentForm: React.FC = () => {
       </button>
     </form>
   );
-};
-
-export default PaymentForm;
+}

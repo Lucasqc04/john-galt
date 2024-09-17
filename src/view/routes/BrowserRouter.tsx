@@ -6,6 +6,7 @@ import {
   Routes,
 } from 'react-router-dom';
 import { Loader } from '../components/Loader';
+import { NotFound } from '../screens/NotFound';
 import { Page } from '../screens/Page';
 
 export function BrowserRouter() {
@@ -15,6 +16,7 @@ export function BrowserRouter() {
         <Routes>
           <Route path="/" element={<Navigate to="/pt" />} />
           <Route path="/:lang" element={<Page />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
     </Router>
