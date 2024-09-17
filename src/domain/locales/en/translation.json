@@ -1,4 +1,6 @@
 {
-  "welcome": "Welcome to our website!",
-  "description": "This is a sample website."
+  "HeroTitle": "Secure your path in crypto with DIY technology",
+  "HeroDescription": "We are a WEB3 company that offers security and privacy with DIY technology, enabling 100% offline self-custody with DIY technology",
+  "HeroGetInTouchButton": "Get In Touch",
+  "HeroLearnMoreButton": "Learn More"
 }
