@@ -79,14 +79,6 @@
   }
 }
 
-* {
-  overflow-x: hidden;
-}
-
-h1 {
-  overflow: hidden;
-}
-
 .circles li {
   position: absolute;
   display: block;
