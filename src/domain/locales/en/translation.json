@@ -2,5 +2,16 @@
   "HeroTitle": "Secure your path in crypto with DIY technology",
   "HeroDescription": "We are a WEB3 company that offers security and privacy with DIY technology, enabling 100% offline self-custody with DIY technology",
   "HeroGetInTouchButton": "Get In Touch",
-  "HeroLearnMoreButton": "Learn More"
+  "HeroLearnMoreButton": "Learn More",
+
+  "cardNamePlaceholder": "Cardholder's Name",
+  "cardNumberPlaceholder": "Card Number",
+  "expiryDatePlaceholder": "MM/YY",
+  "cvvPlaceholder": "CVV",
+  "visa": "Visa",
+  "mastercard": "MasterCard",
+  "elo": "Elo",
+  "amex": "American Express",
+  "hipercard": "Hipercard",
+  "confirmPaymentButton": "Confirm Payment"
 }
