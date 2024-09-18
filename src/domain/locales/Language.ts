@@ -17,4 +17,11 @@ const Language = i18n.use(initReactI18next).init({
   },
 });
 
+export enum LanguageTexts {
+  HeroTitle = 'HeroTitle',
+  HeroDescription = 'HeroDescription',
+  HeroGetInTouchButton = 'HeroGetInTouchButton',
+  HeroLearnMoreButton = 'HeroLearnMoreButton',
+}
+
 export default Language;

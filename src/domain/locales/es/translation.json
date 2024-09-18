@@ -1,4 +1,17 @@
 {
-  "welcome": "¡Bienvenido a nuestro sitio web!",
-  "description": "Este es un sitio web de ejemplo."
+  "HeroTitle": "Asegure su camino en cripto con tecnología de bricolaje",
+  "HeroDescription": "Somos una empresa WEB3 que ofrece seguridad y privacidad con tecnología DIY, permitiendo la autocustodia 100% offline con tecnología DIY.",
+  "HeroGetInTouchButton": "Ponte en contacto",
+  "HeroLearnMoreButton": "Más información",
+
+  "cardNamePlaceholder": "Nombre del titular",
+  "cardNumberPlaceholder": "Número de tarjeta",
+  "expiryDatePlaceholder": "MM/AA",
+  "cvvPlaceholder": "CVV",
+  "visa": "Visa",
+  "mastercard": "MasterCard",
+  "elo": "Elo",
+  "amex": "American Express",
+  "hipercard": "Hipercard",
+  "confirmPaymentButton": "Confirmar Pago"
 }
