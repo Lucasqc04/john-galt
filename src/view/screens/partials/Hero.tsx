@@ -26,7 +26,7 @@ export function Hero() {
     <>
       <BackgroundAnimated />
       <section className="grid grid-cols-1 md:grid-cols-12 px-4 md:px-8 h-screen">
-        <article className=" h-2/3 col-span-12 md:col-span-6 flex flex-col gap-y-4 items-center justify-center">
+        <article className=" h-full col-span-12 md:col-span-6 flex flex-col gap-y-4 items-center justify-center">
           <h1 className="max-w-2xl text-4xl md:text-6xl text-center font-bold whitespace-pre-wrap break-words animate-fade-right animate-once animate-duration-500 animate-delay-300">
             {styleFirstWord(t(LanguageTexts.HeroTitle))}
           </h1>
