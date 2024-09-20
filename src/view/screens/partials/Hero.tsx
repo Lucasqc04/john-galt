@@ -43,9 +43,7 @@ export function Hero() {
             </button>
           </div>
         </article>
-        <article className="col-span-6">
-          <h1>Imagem</h1>
-        </article>
+        <article className="col-span-6"> </article>
       </section>
     </>
   );
