@@ -10,9 +10,9 @@ function styleFirstWord(text: string): string | JSX.Element {
     const remainingText = words.join(' ');
 
     return (
-      <span>
+      <>
         <span className="text-orange-500">{firstWord}</span> {remainingText}
-      </span>
+      </>
     );
   }
 

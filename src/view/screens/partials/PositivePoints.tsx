@@ -1,6 +1,26 @@
 import classNames from 'classnames';
 import { useInView } from 'react-intersection-observer';
 
+function styleThreeWordsAfterFourth(text: string): string | JSX.Element {
+  const words = text.split(' ');
+
+  if (words.length > 4) {
+    const firstPart = words.slice(0, 4).join(' ');
+    const styledWords = words.slice(4, 7).join(' ');
+    const remainingPart = words.slice(7).join(' ');
+
+    return (
+      <>
+        {firstPart}
+        <span className="text-orange-500"> {styledWords} </span>
+        {remainingPart}
+      </>
+    );
+  }
+
+  return text;
+}
+
 export function PositivePoints() {
   const { ref, inView } = useInView({
     threshold: 0.1,
@@ -21,7 +41,9 @@ export function PositivePoints() {
             !inView && 'opacity-0',
           )}
         >
-          Fique por dentro de tudo que precisa para investir com segurança
+          {styleThreeWordsAfterFourth(
+            'Fique por dentro de tudo que precisa para investir com segurança',
+          )}
         </h2>
       </article>
     </section>
