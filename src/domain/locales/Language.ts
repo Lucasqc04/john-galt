@@ -1,5 +1,7 @@
 import i18n from 'i18next';
+import { useEffect } from 'react';
 import { initReactI18next } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 import translationEN from './en/translation.json';
 import translationES from './es/translation.json';
 import translationPT from './pt/translation.json';
@@ -24,6 +26,23 @@ export enum LanguageTexts {
   HeroDescription = 'HeroDescription',
   HeroGetInTouchButton = 'HeroGetInTouchButton',
   HeroLearnMoreButton = 'HeroLearnMoreButton',
+}
+
+export function useLanguage() {
+  const { lang } = useParams();
+
+  useEffect(() => {
+    if (lang) {
+      i18n.changeLanguage(lang);
+      localStorage.setItem('language', lang);
+    }
+  }, [lang]);
+
+  const currentLang = localStorage.getItem('language');
+
+  return {
+    currentLang,
+  };
 }
 
 export default Language;
