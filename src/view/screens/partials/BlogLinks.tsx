@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
+import { MdArrowForward } from 'react-icons/md';
 import { useInView } from 'react-intersection-observer';
 
 export function BlogLinks() {
@@ -14,7 +15,8 @@ export function BlogLinks() {
         ref={ref}
         className={classNames(
           'container transition-opacity duration-500',
-          inView ? 'opacity-100 animate-fade-right' : 'opacity-0',
+          inView && 'opacity-100 animate-fade-right',
+          !inView && 'opacity-0',
         )}
       >
         <h1 className="text-center text-3xl lg:text-5xl tracking-wider text-gray-900 dark:text-white">
@@ -47,29 +49,7 @@ export function BlogLinks() {
                   <p className="text-base tracking-wide text-orange-500">
                     {t('ReadMore')}
                   </p>
-                  <svg
-                    className="ml-3 lg:ml-6"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width={20}
-                    height={18}
-                    viewBox="0 0 20 18"
-                    fill="none"
-                  >
-                    <path
-                      d="M11.7998 1L18.9998 8.53662L11.7998 16.0732"
-                      stroke="#4338ca"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M1 8.53662H19"
-                      stroke="#4338ca"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                  <MdArrowForward size={28} className="ml-3 lg:ml-6" />
                 </div>
               </div>
             </div>
