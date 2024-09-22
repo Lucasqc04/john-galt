@@ -12,20 +12,29 @@ export function LanguageSwitcher() {
   const { lang } = useParams<{ lang: string }>();
   const navigate = useNavigate();
 
-  const [selectedLanguage, setSelectedLanguage] = useState(lang || 'pt');
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    localStorage.getItem('language') || lang || 'pt',
+  );
 
   function changeLanguage(newLang: string) {
     i18n.changeLanguage(newLang);
     document.documentElement.lang = newLang;
     setSelectedLanguage(newLang);
+    localStorage.setItem('language', newLang);
     navigate(`/${newLang}`);
   }
 
   useEffect(() => {
+    const savedLanguage = localStorage.getItem('language') || 'pt';
     if (lang) {
       i18n.changeLanguage(lang);
       document.documentElement.lang = lang;
       setSelectedLanguage(lang);
+      localStorage.setItem('language', lang);
+    } else {
+      i18n.changeLanguage(savedLanguage);
+      document.documentElement.lang = savedLanguage;
+      setSelectedLanguage(savedLanguage);
     }
   }, [i18n, lang]);
 
