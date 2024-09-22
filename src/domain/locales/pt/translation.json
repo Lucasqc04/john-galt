@@ -3,6 +3,7 @@
   "HeroDescription": "Somos uma empresa WEB3 que oferece segurança e privacidade com tecnologia DIY, possibilitando autocustódia 100% offline.",
   "HeroGetInTouchButton": "Entre em Contato",
   "HeroLearnMoreButton": "Saiba Mais",
+
   "cardNamePlaceholder": "Nome no cartão",
   "cardNumberPlaceholder": "Número do cartão",
   "expiryDatePlaceholder": "MM/AA",
@@ -12,5 +13,18 @@
   "elo": "Elo",
   "amex": "American Express",
   "hipercard": "Hipercard",
-  "confirmPaymentButton": "Confirmar Pagamento"
+  "confirmPaymentButton": "Confirmar Pagamento",
+
+  "BlogTitle": "Blog DIY LAB",
+  "CardTitle1": "Crescimento das Criptomoedas",
+  "CardDescription1": "Descubra como as criptomoedas estão crescendo e transformando o mercado financeiro.",
+  "CardTitle2": "Segurança em Criptomoedas",
+  "CardDescription2": "Aprenda a guardar suas criptomoedas com segurança para evitar perdas e fraudes.",
+  "CardTitle3": "Investindo em Criptomoedas",
+  "CardDescription3": "Dicas e estratégias para investir em criptomoedas de forma inteligente.",
+  "CardTitle4": "Futuro das Criptomoedas",
+  "CardDescription4": "O que esperar do futuro das criptomoedas e como elas podem impactar a economia.",
+  "CardTitle5": "Armazenamento Seguro",
+  "CardDescription5": "Métodos e ferramentas para armazenar suas criptomoedas de forma segura.",
+  "ReadMore": "Leia mais"
 }
