@@ -36,7 +36,7 @@ export function PositivePoints() {
       >
         <h2
           className={classNames(
-            'text-6xl text-center text-white dark:text-black font-bold whitespace-pre-wrap break-words max-w-4xl ',
+            'text-6xl max-md:text-4xl text-center text-white dark:text-black font-bold whitespace-pre-wrap break-words max-w-4xl max-md:max-w-6xl ',
             inView && 'opacity-100 animate-fade-right',
             !inView && 'opacity-0',
           )}
