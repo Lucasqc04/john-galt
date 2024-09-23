@@ -25,7 +25,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { useEffect, useState } from 'react';
 import { FaMoon, FaSun } from 'react-icons/fa';
-import { LanguageSwitcher } from '../components/LanguageSwitcher';
+import { LanguageSwitcher } from '../components/LanguageSwitcher/LanguageSwitcher';
 import { useTheme } from '../screens/useTheme';
 
 const products = [
