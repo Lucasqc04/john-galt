@@ -1,6 +1,6 @@
 export function Footer() {
   return (
-    <footer className=" rounded-t-xl shadow dark:bg-white">
+    <footer className=" rounded-t-xl shadow dark:bg-slate-800">
       <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8  dark:bg-slate-800">
         <div className="sm:flex sm:items-center sm:justify-between  dark:bg-slate-800">
           <a
