@@ -6,7 +6,7 @@ export function Newsletter() {
           <h3 className="dark:text-white-white text-4xl font-bold">
             Subscribe to Our Newsletter
           </h3>
-          <p className="text-base mt-6 text-gray-300">
+          <p className="text-base mt-6 dark:text-white">
             Subscribe to our newsletter and stay up to date with the latest
             news, updates, and exclusive offers. Get valuable insights. Join our
             community today!
@@ -15,7 +15,7 @@ export function Newsletter() {
             <input
               type="email"
               placeholder="Enter your email"
-              className="text-gray-300 w-full outline-none bg-transparent text-sm px-4 py-3"
+              className="dark:text-white w-full outline-none bg-transparent text-sm px-4 py-3"
             />
             <button
               type="button"
@@ -45,7 +45,7 @@ export function Newsletter() {
             <h3 className="dark:text-white-white text-xl font-semibold mb-3">
               Customization
             </h3>
-            <p className="text-gray-300 text-sm">
+            <p className="dark:text-white text-sm">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
               accumsan, nunc et tempus blandit, metus mi consectetur felis
               turpis vitae ligula.
@@ -85,7 +85,7 @@ export function Newsletter() {
             <h3 className="dark:text-white-white text-xl font-semibold mb-3">
               Security
             </h3>
-            <p className="text-gray-300 text-sm">
+            <p className="dark:text-white text-sm">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
               accumsan, nunc et tempus blandit, metus mi consectetur felis
               turpis vitae ligula.
