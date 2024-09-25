@@ -1,6 +1,6 @@
 export function Footer() {
   return (
-    <footer className="bg-white rounded-t-xl shadow dark:bg-gray-800">
+    <footer className="bg-white shadow dark:bg-gray-800">
       <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           <a
