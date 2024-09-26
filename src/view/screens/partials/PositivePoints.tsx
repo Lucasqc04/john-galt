@@ -42,7 +42,7 @@ export function PositivePoints() {
   });
 
   return (
-    <section className="w-full h-screen px-8 bg-slate-800 dark:bg-primary-light flex flex-col justify-start items-center">
+    <section className="w-full min-h-screen px-8 bg-slate-800 dark:bg-primary-light flex flex-col justify-start items-center">
       <article
         ref={ref}
         className={classNames(
@@ -61,11 +61,11 @@ export function PositivePoints() {
           )}
         </h2>
       </article>
-      <article className="w-full pl-8 pt-32 flex justify-around">
+      <article className="w-full pl-8 pt-32 flex flex-wrap justify-around">
         {positivePoints.map((item, idx) => (
           <div
             key={idx}
-            className="bg-primary-light dark:border h-72 w-72 rounded-md shadow-sm flex justify-center items-center"
+            className="bg-primary-light dark:border h-72 w-full sm:w-60 md:w-72 lg:w-72 rounded-md shadow-sm flex justify-center items-center m-4"
           >
             <span className="text-xl text-black font-bold">{item.title}</span>
           </div>
