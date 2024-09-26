@@ -1,5 +1,6 @@
 import { BlogLinks } from './partials/BlogLinks';
 import { Hero } from './partials/Hero';
+import { Newsletter } from './partials/Newsletter';
 import { PositivePoints } from './partials/PositivePoints';
 
 export function Page() {
@@ -8,6 +9,7 @@ export function Page() {
       <Hero />
       <PositivePoints />
       <BlogLinks />
+      <Newsletter />
     </>
   );
 }
