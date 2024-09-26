@@ -21,17 +21,32 @@ function styleThreeWordsAfterFourth(text: string): string | JSX.Element {
   return text;
 }
 
+const positivePoints = [
+  {
+    title: 'Segurança e Privacidade',
+  },
+  {
+    title: 'Mentalidade Soberana',
+  },
+  {
+    title: 'Protocolos Open Source',
+  },
+  {
+    title: 'Transparência Total',
+  },
+];
+
 export function PositivePoints() {
   const { ref, inView } = useInView({
     threshold: 0.1,
   });
 
   return (
-    <section className="grid grid-cols-12 px-8 h-screen w-full  bg-slate-800 dark:bg-primary-light">
+    <section className="w-full h-screen px-8 bg-slate-800 dark:bg-primary-light flex flex-col justify-start items-center">
       <article
         ref={ref}
         className={classNames(
-          'col-span-full h-full flex flex-col gap-y-4 items-center justify-start pt-16 transition-opacity duration-500',
+          'w-full flex items-start justify-center pt-16 transition-opacity duration-500',
         )}
       >
         <h2
@@ -45,6 +60,16 @@ export function PositivePoints() {
             'Fique por dentro de tudo que precisa para investir com segurança',
           )}
         </h2>
+      </article>
+      <article className="w-full pl-8 pt-32 flex justify-around">
+        {positivePoints.map((item, idx) => (
+          <div
+            key={idx}
+            className="bg-primary-light dark:border h-72 w-72 rounded-md shadow-sm flex justify-center items-center"
+          >
+            <span className="text-xl text-black font-bold">{item.title}</span>
+          </div>
+        ))}
       </article>
     </section>
   );
