@@ -1,5 +1,8 @@
+import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
+import { useInView } from 'react-intersection-observer';
 import { LanguageTexts } from '../../../domain/locales/Language';
+import HeroImage from '../../assets/images/hero-image.png';
 import { BackgroundAnimated } from '../../components/BackgroundAnimated';
 
 function styleFirstWord(text: string): string | JSX.Element {
@@ -21,12 +24,16 @@ function styleFirstWord(text: string): string | JSX.Element {
 
 export function Hero() {
   const { t } = useTranslation();
+  const { ref, inView } = useInView({ threshold: 0.1 });
 
   return (
     <>
       <BackgroundAnimated />
-      <section className="grid grid-cols-1 md:grid-cols-12 px-4 md:px-8 h-screen">
-        <article className=" h-full col-span-12 md:col-span-6 flex flex-col gap-y-4 items-center justify-center">
+      <section
+        ref={ref}
+        className="grid grid-cols-1 md:grid-cols-12 px-4 md:px-8 h-screen"
+      >
+        <article className="h-full col-span-12 md:col-span-6 flex flex-col gap-y-4 items-center justify-center">
           <h1 className="max-w-2xl text-4xl md:text-6xl text-center font-bold whitespace-pre-wrap break-words animate-fade-right animate-once animate-duration-500 animate-delay-300">
             {styleFirstWord(t(LanguageTexts.HeroTitle))}
           </h1>
@@ -42,7 +49,17 @@ export function Hero() {
             </button>
           </div>
         </article>
-        <article className="hidden md:block col-span-6"></article>
+        <article className="hidden md:flex h-full col-span-12 md:col-span-6 flex-col gap-y-4 items-center justify-center">
+          <img
+            src={HeroImage}
+            alt="NFT/Crypto Image"
+            className={classNames(
+              'w-full max-w-3xl',
+              inView && 'opacity-100 animate-fade-right',
+              !inView && 'opacity-0',
+            )}
+          />
+        </article>
       </section>
     </>
   );

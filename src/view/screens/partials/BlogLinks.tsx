@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
+import { MdArrowForward } from 'react-icons/md';
 import { useInView } from 'react-intersection-observer';
 
 export function BlogLinks() {
@@ -14,13 +15,14 @@ export function BlogLinks() {
         ref={ref}
         className={classNames(
           'container transition-opacity duration-500',
-          inView ? 'opacity-100 animate-fade-right' : 'opacity-0',
+          inView && 'opacity-100 animate-fade-right',
+          !inView && 'opacity-0',
         )}
       >
         <h1 className="text-center text-3xl lg:text-5xl tracking-wider text-gray-900 dark:text-white">
           {t('BlogTitle')}
         </h1>
-        <div className="mt-12 lg:mt-24">
+        <div className="pt-12 lg:pt-24">
           <div className="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-8">
             <div>
               <img
@@ -43,33 +45,11 @@ export function BlogLinks() {
                 <p className="text-gray-700 dark:text-gray-300 text-base lg:text-lg lg:leading-8 tracking-wide mt-6 w-11/12">
                   {t('CardDescription1')}
                 </p>
-                <div className="w-full mt-4 justify-end flex items-center cursor-pointer">
+                <div className="w-full pt-4 justify-end flex items-center cursor-pointer gap-x-3 lg:gap-x-6">
                   <p className="text-base tracking-wide text-orange-500">
                     {t('ReadMore')}
                   </p>
-                  <svg
-                    className="ml-3 lg:ml-6"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width={20}
-                    height={18}
-                    viewBox="0 0 20 18"
-                    fill="none"
-                  >
-                    <path
-                      d="M11.7998 1L18.9998 8.53662L11.7998 16.0732"
-                      stroke="#4338ca"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M1 8.53662H19"
-                      stroke="#4338ca"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                  <MdArrowForward size={28} />
                 </div>
               </div>
             </div>
@@ -122,7 +102,7 @@ export function BlogLinks() {
                   </div>
                 </div>
               </div>
-              <div className="mt-10 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-8">
+              <div className="pt-10 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-8">
                 <div>
                   <img
                     className="w-full"
