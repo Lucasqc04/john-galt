@@ -11,6 +11,11 @@ export enum LanguageTexts {
   HeroDescription = 'HeroDescription',
   HeroGetInTouchButton = 'HeroGetInTouchButton',
   HeroLearnMoreButton = 'HeroLearnMoreButton',
+  FooterAbout = 'FooterAbout',
+  FooterPrivacyPolicy = 'FooterPrivacyPolicy',
+  FooterLicensing = 'FooterLicensing',
+  FooterContact = 'FooterContact',
+  FooterAllRightsReserved = 'FooterAllRightsReserved',
 }
 
 export enum AcceptedLanguages {
@@ -21,7 +26,7 @@ export enum AcceptedLanguages {
 
 const savedLanguage = localStorage.getItem('language') || AcceptedLanguages.pt;
 
-const Language = i18n.use(initReactI18next).init({
+i18n.use(initReactI18next).init({
   resources: {
     pt: { translation: translationPT },
     en: { translation: translationEN },
@@ -44,11 +49,13 @@ export function useLanguage() {
     }
   }, [lang]);
 
-  const currentLang = localStorage.getItem('language');
+  const currentLang =
+    (localStorage.getItem('language') as AcceptedLanguages) ||
+    AcceptedLanguages.pt;
 
   return {
     currentLang,
   };
 }
 
-export default Language;
+export default i18n;
