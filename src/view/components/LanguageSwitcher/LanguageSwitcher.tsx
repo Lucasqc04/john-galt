@@ -8,11 +8,10 @@ import { useLanguageSwitcher } from './useLanguageSwitcher';
 
 export function LanguageSwitcher() {
   const { language } = useLanguageSwitcher();
-
   return (
     <div className="flex gap-2">
       <Popover className="relative">
-        <PopoverButton className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900 dark:text-white">
+        <PopoverButton className="flex items-center gap-x-1 text-sm font-semibold leading-6">
           {language.current === AcceptedLanguages.pt && (
             <>
               <img src={brasil} alt="Português" className="h-5 w-5" />
@@ -32,30 +31,30 @@ export function LanguageSwitcher() {
             </>
           )}
           <ChevronDownIcon
-            className="h-5 w-5 text-gray-400 dark:text-gray-200"
+            className="h-5 w-5 text-gray-400"
             aria-hidden="true"
           />
         </PopoverButton>
 
-        <PopoverPanel className="absolute z-10 mt-2 w-36 rounded-lg bg-white dark:bg-gray-700 shadow-lg ring-1 ring-gray-900/5">
+        <PopoverPanel className="absolute z-10 mt-2 w-36 rounded-lg bg-white shadow-lg ring-1 ring-gray-900/5">
           <div className="py-2">
             <button
               onClick={() => language.change(AcceptedLanguages.pt)}
-              className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600"
+              className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
             >
               <img src={brasil} alt="Português" className="mr-2 h-5 w-5" />
               Português
             </button>
             <button
               onClick={() => language.change(AcceptedLanguages.en)}
-              className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600"
+              className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
             >
               <img src={estadosUnidos} alt="English" className="mr-2 h-5 w-5" />
               English
             </button>
             <button
               onClick={() => language.change(AcceptedLanguages.es)}
-              className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600"
+              className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
             >
               <img src={espanha} alt="Español" className="mr-2 h-5 w-5" />
               Español
