@@ -1,4 +1,9 @@
+import { useTranslation } from 'react-i18next'; // Importar useTranslation
+import { LanguageTexts } from '../../domain/locales/Language';
+
 export function Footer() {
+  const { t } = useTranslation(); // Usar o hook para traduções
+
   return (
     <footer className="bg-white shadow dark:bg-gray-800">
       <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
@@ -14,22 +19,23 @@ export function Footer() {
           <ul className="flex flex-wrap items-center mb-6 text-sm font-medium dark:text-white-white sm:mb-0 dark:text-white-gray-400">
             <li>
               <a href="#" className="hover:underline me-4 md:me-6">
-                About
+                {t(LanguageTexts.FooterAbout)}{' '}
+                {/* Usar a função t para tradução */}
               </a>
             </li>
             <li>
               <a href="#" className="hover:underline me-4 md:me-6">
-                Privacy Policy
+                {t(LanguageTexts.FooterPrivacyPolicy)}
               </a>
             </li>
             <li>
               <a href="#" className="hover:underline me-4 md:me-6">
-                Licensing
+                {t(LanguageTexts.FooterLicensing)}
               </a>
             </li>
             <li>
               <a href="#" className="hover:underline">
-                Contact
+                {t(LanguageTexts.FooterContact)}
               </a>
             </li>
           </ul>
@@ -40,7 +46,7 @@ export function Footer() {
           <a href="#" className="hover:underline">
             DIY LAB™
           </a>
-          . All Rights Reserved.
+          . {t(LanguageTexts.FooterAllRightsReserved)}
         </span>
       </div>
     </footer>

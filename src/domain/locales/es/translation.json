@@ -3,6 +3,21 @@
   "HeroDescription": "Somos una empresa WEB3 que ofrece seguridad y privacidad con tecnología DIY, permitiendo la autocustodia 100% offline con tecnología DIY.",
   "HeroGetInTouchButton": "Ponte en contacto",
   "HeroLearnMoreButton": "Más información",
+  "NewsletterTitle": "Suscríbete a Nuestro Boletín",
+  "NewsletterDescription": "Suscríbete a nuestro boletín y mantente al día con las últimas noticias, actualizaciones y ofertas exclusivas. Obtén información valiosa. ¡Únete a nuestra comunidad hoy!",
+  "NewsletterEmailPlaceholder": "Ingresa tu correo electrónico",
+  "NewsletterSubmitButton": "Enviar",
+  "CustomizationTitle": "Personalización",
+  "CustomizationDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan, nunc et tempus blandit, metus mi consectetur felis turpis vitae ligula.",
+  "SecurityTitle": "Seguridad",
+  "SecurityDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan, nunc et tempus blandit, metus mi consectetur felis turpis vitae ligula.",
+
+  "PositivePointsTitle": "Mantente al tanto de todo lo que necesitas para invertir con seguridad",
+  "SecurityAndPrivacy": "Seguridad y Privacidad",
+  "SovereignMindset": "Mentalidad Soberana",
+  "OpenSourceProtocols": "Protocolos de Código Abierto",
+  "TotalTransparency": "Transparencia Total",
+
   "cardNamePlaceholder": "Nombre del titular",
   "cardNumberPlaceholder": "Número de tarjeta",
   "expiryDatePlaceholder": "MM/AA",
@@ -24,5 +39,11 @@
   "CardDescription4": "Qué esperar del futuro de las criptomonedas y cómo pueden impactar la economía.",
   "CardTitle5": "Almacenamiento Seguro",
   "CardDescription5": "Métodos y herramientas para almacenar tus criptomonedas de forma segura.",
-  "ReadMore": "Leer más"
+  "ReadMore": "Leer más",
+
+  "FooterAbout": "Acerca de",
+  "FooterPrivacyPolicy": "Política de Privacidad",
+  "FooterLicensing": "Licencia",
+  "FooterContact": "Contacto",
+  "FooterAllRightsReserved": "Todos los derechos reservados."
 }
