@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { t } from 'i18next'; // Importe a função t
+import { t } from 'i18next';
 import { useInView } from 'react-intersection-observer';
 import brain from '../../assets/images/ai-generated-9026009.svg';
 import chain from '../../assets/images/chain-5596267_1920.png';
@@ -66,7 +66,6 @@ export function PositivePoints() {
           )}
         >
           {styleThreeWordsAfterFourth(t('PositivePointsTitle'))}{' '}
-          {/* Usando t para traduzir o título */}
         </h2>
       </article>
       <article className="w-full pl-8 pt-32 flex flex-wrap justify-around">
