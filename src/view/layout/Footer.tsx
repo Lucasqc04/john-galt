@@ -1,8 +1,8 @@
-import { useTranslation } from 'react-i18next'; // Importar useTranslation
+import { useTranslation } from 'react-i18next';
 import { LanguageTexts } from '../../domain/locales/Language';
 
 export function Footer() {
-  const { t } = useTranslation(); // Usar o hook para traduções
+  const { t } = useTranslation();
 
   return (
     <footer className="bg-white shadow dark:bg-gray-800">
@@ -20,7 +20,6 @@ export function Footer() {
             <li>
               <a href="#" className="hover:underline me-4 md:me-6">
                 {t(LanguageTexts.FooterAbout)}{' '}
-                {/* Usar a função t para tradução */}
               </a>
             </li>
             <li>
