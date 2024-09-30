@@ -1,10 +1,5 @@
 import classNames from 'classnames';
-import { t } from 'i18next'; // Importe a função t
 import { useInView } from 'react-intersection-observer';
-import brain from '../../assets/images/ai-generated-9026009.svg';
-import chain from '../../assets/images/chain-5596267_1920.png';
-import eye from '../../assets/images/eye-5336786_1920.png';
-import security from '../../assets/images/security-4497950.png';
 
 function styleThreeWordsAfterFourth(text: string): string | JSX.Element {
   const words = text.split(' ');
@@ -28,20 +23,16 @@ function styleThreeWordsAfterFourth(text: string): string | JSX.Element {
 
 const positivePoints = [
   {
-    image: security,
-    size: { width: '200px', height: '200px' },
+    title: 'Segurança e Privacidade',
   },
   {
-    image: brain,
-    size: { width: '200px', height: '200px' },
+    title: 'Mentalidade Soberana',
   },
   {
-    image: chain,
-    size: { width: '200px', height: '200px' },
+    title: 'Protocolos Open Source',
   },
   {
-    image: eye,
-    size: { width: '200px', height: '200px' },
+    title: 'Transparência Total',
   },
 ];
 
@@ -60,33 +51,23 @@ export function PositivePoints() {
       >
         <h2
           className={classNames(
-            'text-6xl max-md:text-4xl text-center text-white dark:text-black font-bold whitespace-pre-wrap break-words max-w-4xl max-md:max-w-6xl',
+            'text-6xl max-md:text-4xl text-center text-white dark:text-black font-bold whitespace-pre-wrap break-words max-w-4xl max-md:max-w-6xl ',
             inView && 'opacity-100 animate-fade-right',
             !inView && 'opacity-0',
           )}
         >
-          {styleThreeWordsAfterFourth(t('PositivePointsTitle'))}{' '}
-          {/* Usando t para traduzir o título */}
+          {styleThreeWordsAfterFourth(
+            'Fique por dentro de tudo que precisa para investir com segurança',
+          )}
         </h2>
       </article>
       <article className="w-full pl-8 pt-32 flex flex-wrap justify-around">
         {positivePoints.map((item, idx) => (
           <div
             key={idx}
-            className="bg-primary-light dark:border h-72 w-full sm:w-60 md:w-72 lg:w-72 rounded-md shadow-sm flex flex-col justify-center items-center m-4"
+            className="bg-primary-light dark:border h-72 w-full sm:w-60 md:w-72 lg:w-72 rounded-md shadow-sm flex justify-center items-center m-4"
           >
-            <img
-              src={item.image}
-              alt={t(`SecurityAndPrivacy`)}
-              style={{ width: item.size.width, height: item.size.height }}
-              className="object-contain mb-4"
-            />
-            <span className="text-xl text-black font-bold">
-              {idx === 0 && t('SecurityAndPrivacy')}
-              {idx === 1 && t('SovereignMindset')}
-              {idx === 2 && t('OpenSourceProtocols')}
-              {idx === 3 && t('TotalTransparency')}
-            </span>
+            <span className="text-xl text-black font-bold">{item.title}</span>
           </div>
         ))}
       </article>
