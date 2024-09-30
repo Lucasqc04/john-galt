@@ -72,7 +72,11 @@ export function PositivePoints() {
         {positivePoints.map((item, idx) => (
           <div
             key={idx}
-            className="bg-primary-light dark:border h-72 w-full sm:w-60 md:w-72 lg:w-72 rounded-md shadow-sm flex flex-col justify-center items-center m-4"
+            className={classNames(
+              'bg-primary-light dark:border h-72 w-full sm:w-60 md:w-72 lg:w-72 rounded-md shadow-sm flex flex-col justify-center items-center m-4',
+              inView && 'opacity-100 animate-fade-right',
+              !inView && 'opacity-0',
+            )}
           >
             <img
               src={item.image}
