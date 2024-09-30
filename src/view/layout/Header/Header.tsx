@@ -54,7 +54,7 @@ export default function Header() {
 
         {menu.isOpen &&
           createPortal(
-            <div className="fixed top-0 left-0 h-screen w-screen bg-white dark:bg-gray-900 z-50 flex flex-col justify-center items-center p-6">
+            <div className="fixed top-0 left-0 h-screen w-screen bg-white dark:bg-gray-900 z-50 flex flex-col justify-between items-center p-6">
               <div className="w-full flex justify-between items-center">
                 <h1 className="font-extrabold text-2xl text-center text-gray-900 dark:text-white">
                   DIY LAB
