@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { t } from 'i18next';
 import { useInView } from 'react-intersection-observer';
 
 function styleThreeWordsAfterFourth(text: string): string | JSX.Element {
@@ -56,16 +57,18 @@ export function PositivePoints() {
             !inView && 'opacity-0',
           )}
         >
-          {styleThreeWordsAfterFourth(
-            'Fique por dentro de tudo que precisa para investir com segurança',
-          )}
+          {styleThreeWordsAfterFourth(t('PositivePointsTitle'))}{' '}
         </h2>
       </article>
       <article className="w-full pl-8 pt-32 flex flex-wrap justify-around">
         {positivePoints.map((item, idx) => (
           <div
             key={idx}
-            className="bg-primary-light dark:border h-72 w-full sm:w-60 md:w-72 lg:w-72 rounded-md shadow-sm flex justify-center items-center m-4"
+            className={classNames(
+              'bg-primary-light dark:border h-72 w-full sm:w-60 md:w-72 lg:w-72 rounded-md shadow-sm flex flex-col justify-center items-center m-4',
+              inView && 'opacity-100 animate-fade-right',
+              !inView && 'opacity-0',
+            )}
           >
             <span className="text-xl text-black font-bold">{item.title}</span>
           </div>
