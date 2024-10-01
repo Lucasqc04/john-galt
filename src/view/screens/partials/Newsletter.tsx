@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { FiLock, FiSettings } from 'react-icons/fi';
 
 export function Newsletter() {
   const { t } = useTranslation();
@@ -30,13 +31,7 @@ export function Newsletter() {
 
         <div className="grid md:grid-cols-2 gap-8">
           <div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="fill-black w-12 mb-6 inline-block border border-gray-500 p-3 rounded-md"
-              viewBox="0 0 32 32"
-            >
-              {/* SVG Path */}
-            </svg>
+            <FiSettings className="w-12 h-12 mb-6 inline-block border border-gray-500 p-3 rounded-md" />
             <h3 className="dark:text-white-white text-xl font-semibold mb-3">
               {t('CustomizationTitle')}
             </h3>
@@ -45,13 +40,7 @@ export function Newsletter() {
             </p>
           </div>
           <div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-12 mb-6 inline-block border border-gray-500 p-3 rounded-md"
-              viewBox="0 0 682.667 682.667"
-            >
-              {/* SVG Path */}
-            </svg>
+            <FiLock className="w-12 h-12 mb-6 inline-block border border-gray-500 p-3 rounded-md" />
             <h3 className="dark:text-white-white text-xl font-semibold mb-3">
               {t('SecurityTitle')}
             </h3>
