@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 import { t } from 'i18next'; // Importe a função t
 import { useInView } from 'react-intersection-observer';
-import brain from '../../assets/images/ai-generated-9026009.svg';
-import chain from '../../assets/images/chain-5596267_1920.png';
-import eye from '../../assets/images/eye-5336786_1920.png';
-import security from '../../assets/images/security-4497950.png';
+import Brain from '../../assets/images/Brain.svg';
+import Chain from '../../assets/images/Chain.png';
+import Eye from '../../assets/images/Eye.png';
+import Security from '../../assets/images/Security.png';
 
 function styleThreeWordsAfterFourth(text: string): string | JSX.Element {
   const words = text.split(' ');
@@ -28,19 +28,19 @@ function styleThreeWordsAfterFourth(text: string): string | JSX.Element {
 
 const positivePoints = [
   {
-    image: security,
+    image: Security,
     size: { width: '200px', height: '200px' },
   },
   {
-    image: brain,
+    image: Brain,
     size: { width: '200px', height: '200px' },
   },
   {
-    image: chain,
+    image: Chain,
     size: { width: '200px', height: '200px' },
   },
   {
-    image: eye,
+    image: Eye,
     size: { width: '200px', height: '200px' },
   },
 ];
