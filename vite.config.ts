@@ -10,7 +10,7 @@ export default defineConfig({
       usePolling: true,
     },
     hmr: {
-      clientPort: 5173,
+      port: 5172,
     },
   },
 });
