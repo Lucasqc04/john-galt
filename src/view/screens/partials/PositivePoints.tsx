@@ -1,6 +1,10 @@
 import classNames from 'classnames';
 import { t } from 'i18next';
 import { useInView } from 'react-intersection-observer';
+import Brain from '../../assets/images/Brain.svg';
+import Chain from '../../assets/images/Chain.png';
+import Eye from '../../assets/images/Eye.png';
+import Security from '../../assets/images/Security.png';
 
 function styleThreeWordsAfterFourth(text: string): string | JSX.Element {
   const words = text.split(' ');
@@ -24,16 +28,25 @@ function styleThreeWordsAfterFourth(text: string): string | JSX.Element {
 
 const positivePoints = [
   {
-    title: 'Segurança e Privacidade',
-  },
-  {
+    image: Brain,
+
     title: 'Mentalidade Soberana',
+    size: { width: '200px', height: '200px' },
   },
   {
+    image: Chain,
     title: 'Protocolos Open Source',
+    size: { width: '200px', height: '200px' },
   },
   {
+    image: Eye,
     title: 'Transparência Total',
+    size: { width: '200px', height: '200px' },
+  },
+  {
+    image: Security,
+    size: { width: '200px', height: '200px' },
+    title: 'Segurança e Privacidade',
   },
 ];
 
@@ -70,6 +83,7 @@ export function PositivePoints() {
               !inView && 'opacity-0',
             )}
           >
+            <img src={item.image} alt={item.title} className="w-full" />
             <span className="text-xl text-black font-bold">{item.title}</span>
           </div>
         ))}

@@ -1,5 +1,6 @@
 import { t } from 'i18next';
-import bitkit from '../../../../dist/assets/6.png';
+import bitkit from '../../assets/bitcoin-btc-logo.svg';
+
 export function Services() {
   return (
     <div className=" bg-slate-100 dark:bg-gray-800 dark:text-white-white grid lg:grid-cols mt-10 mb-10 p-12">
