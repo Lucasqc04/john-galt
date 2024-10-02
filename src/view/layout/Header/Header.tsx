@@ -1,6 +1,5 @@
-import { Bars3Icon } from '@heroicons/react/24/outline';
 import { createPortal } from 'react-dom';
-import { FaMoon, FaSun } from 'react-icons/fa';
+import { FaBars, FaMoon, FaSun } from 'react-icons/fa';
 import { MdClose } from 'react-icons/md';
 import { NavLinks } from './NavLinks';
 import { useHeader } from './useHeader';
@@ -9,18 +8,16 @@ export default function Header() {
   const { isLargeScreen, menu, theme } = useHeader();
 
   return (
-    <header className="absolute z-50 top-0 left-0 p-4 flex items-center justify-between w-full max-w-[100vw]">
+    <header className="absolute z- top-0 left-0 p-4 flex items-center justify-between w-full max-w-[100vw]">
       <nav
         aria-label="Global"
         className="w-full flex items-center justify-between p-6 lg:px-8"
       >
-        <div className="flex lg:flex-1 justify-center lg:justify-start">
+        <div className="flex lg:flex-1">
           <h1 className="font-extrabold self-center text-2xl whitespace-nowrap dark:text-white">
             DIY LAB
           </h1>
         </div>
-
-        {/* Botão do menu mobile */}
         <div className="flex lg:hidden">
           <button
             type="button"
@@ -28,14 +25,12 @@ export default function Header() {
             className="inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-white"
           >
             <span className="sr-only">Open main menu</span>
-            <Bars3Icon aria-hidden="true" className="h-6 w-6" />
+            <FaBars aria-hidden="true" className="h-6 w-6" />
           </button>
         </div>
 
-        {/* Links de navegação para telas grandes */}
         <NavLinks isVisible={isLargeScreen} isLargeScreen={isLargeScreen} />
 
-        {/* Switch de tema para telas grandes */}
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <label className="inline-flex items-center relative cursor-pointer">
             <input
@@ -56,10 +51,9 @@ export default function Header() {
           </label>
         </div>
 
-        {/* Menu mobile */}
         {menu.isOpen &&
           createPortal(
-            <div className="fixed top-0 left-0 h-screen w-screen bg-white dark:bg-gray-900 z-50 flex flex-col justify-center items-center p-6">
+            <div className="fixed top-0 left-0 h-screen w-screen bg-white dark:bg-gray-900 z-50 flex flex-col justify-between items-center p-6">
               <div className="w-full flex justify-between items-center">
                 <h1 className="font-extrabold text-2xl text-center text-gray-900 dark:text-white">
                   DIY LAB
@@ -75,10 +69,13 @@ export default function Header() {
               <NavLinks
                 isVisible
                 isLargeScreen={isLargeScreen}
-                closeButton={null}
+                closeButton={
+                  <button onClick={menu.close}>
+                    <MdClose size={24} />
+                  </button>
+                }
               />
 
-              {/* Switch de tema no mobile */}
               <div className="mt-10">
                 <label className="inline-flex items-center relative cursor-pointer">
                   <input
