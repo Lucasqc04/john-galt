@@ -15,6 +15,7 @@ import {
 } from '@heroicons/react/20/solid';
 import { ReactNode } from 'react';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 import { LanguageSwitcher } from '../../components/LanguageSwitcher/LanguageSwitcher';
 
 const products = [
@@ -59,11 +60,22 @@ export function NavLinks({
   closeButton,
   isVisible,
   isLargeScreen,
+  LinkCallBack,
 }: {
   closeButton?: ReactNode;
   isVisible: boolean;
   isLargeScreen: boolean;
+  LinkCallBack?: () => void;
 }) {
+  const navigate = useNavigate();
+
+  const handleOnLink = (path: string, callback?: () => void) => {
+    if (callback) {
+      callback();
+    }
+    navigate(path);
+  };
+
   return (
     <>
       {isVisible && (
@@ -101,13 +113,13 @@ export function NavLinks({
                         />
                       </div>
                       <div className="flex-auto">
-                        <a
-                          href={item.href}
+                        <button
+                          onClick={() => handleOnLink(item.href)}
                           className="block font-semibold text-gray-900 dark:text-white"
                         >
                           {item.name}
                           <span className="absolute inset-0" />
-                        </a>
+                        </button>
                         <p className="text-gray-600 dark:text-gray-400">
                           {item.description}
                         </p>
@@ -133,24 +145,24 @@ export function NavLinks({
               </PopoverPanel>
             </Popover>
 
-            <a
-              href="#"
+            <button
+              onClick={() => handleOnLink('#', LinkCallBack)}
               className="text-2xl lg:text-sm font-semibold leading-6 text-gray-900 dark:text-white"
             >
               Quem Somos
-            </a>
-            <a
-              href="#"
+            </button>
+            <button
+              onClick={() => handleOnLink('#', LinkCallBack)}
               className="text-2xl lg:text-sm font-semibold leading-6 text-gray-900 dark:text-white"
             >
               Marketplace
-            </a>
-            <a
-              href="#"
+            </button>
+            <button
+              onClick={() => handleOnLink('#', LinkCallBack)}
               className="text-2xl lg:text-sm font-semibold leading-6 text-gray-900 dark:text-white"
             >
               Company
-            </a>
+            </button>
             <LanguageSwitcher />
           </PopoverGroup>
         </>

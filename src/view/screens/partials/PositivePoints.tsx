@@ -53,6 +53,7 @@ const positivePoints = [
 export function PositivePoints() {
   const { ref, inView } = useInView({
     threshold: 0.1,
+    triggerOnce: true,
   });
 
   return (
@@ -80,7 +81,6 @@ export function PositivePoints() {
             className={classNames(
               'bg-primary-light dark:border h-72 w-full sm:w-60 md:w-72 lg:w-72 rounded-md shadow-sm flex flex-col justify-center items-center m-4',
               inView && 'opacity-100 animate-fade-right',
-              !inView && 'opacity-0',
             )}
           >
             <img src={item.image} alt={item.title} className="w-full" />
