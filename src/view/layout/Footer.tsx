@@ -24,17 +24,17 @@ export function Footer() {
             </li>
             <li>
               <a href="#" className="hover:underline me-4 md:me-6">
-                {t(LanguageTexts.FooterPrivacyPolicy)}
+                Privacy Policy
               </a>
             </li>
             <li>
               <a href="#" className="hover:underline me-4 md:me-6">
-                {t(LanguageTexts.FooterLicensing)}
+                Licensing
               </a>
             </li>
             <li>
               <a href="#" className="hover:underline">
-                {t(LanguageTexts.FooterContact)}
+                Contact
               </a>
             </li>
           </ul>
@@ -45,7 +45,7 @@ export function Footer() {
           <a href="#" className="hover:underline">
             DIY LAB™
           </a>
-          . {t(LanguageTexts.FooterAllRightsReserved)}
+          . All Rights Reserved.
         </span>
       </div>
     </footer>

@@ -8,17 +8,16 @@ export default function Header() {
   const { isLargeScreen, menu, theme } = useHeader();
 
   return (
-    <header className="absolute z-50 top-0 left-0 p-4 flex items-center justify-between w-full max-w-[100vw]">
+    <header className="absolute z- top-0 left-0 p-4 flex items-center justify-between w-full max-w-[100vw]">
       <nav
         aria-label="Global"
         className="w-full flex items-center justify-between p-6 lg:px-8"
       >
-        <div className="flex lg:flex-1 justify-center lg:justify-start">
+        <div className="flex lg:flex-1">
           <h1 className="font-extrabold self-center text-2xl whitespace-nowrap dark:text-white">
             DIY LAB
           </h1>
         </div>
-
         <div className="flex lg:hidden">
           <button
             type="button"
@@ -70,7 +69,11 @@ export default function Header() {
               <NavLinks
                 isVisible
                 isLargeScreen={isLargeScreen}
-                closeButton={null}
+                closeButton={
+                  <button onClick={menu.close}>
+                    <MdClose size={24} />
+                  </button>
+                }
               />
 
               <div className="mt-10">
