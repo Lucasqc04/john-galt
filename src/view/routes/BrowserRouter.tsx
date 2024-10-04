@@ -25,9 +25,9 @@ export function BrowserRouter() {
           />
           <Route path="/:lang" element={<DefaultLayout />}>
             <Route index element={<Page />} />
+            <Route path="produtos" element={<Products />} />
           </Route>
           <Route path="*" element={<NotFound />} />
-          <Route path="/produtos" element={<Products />}></Route>
         </Routes>
       </Suspense>
     </Router>

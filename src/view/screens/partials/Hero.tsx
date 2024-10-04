@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { useInView } from 'react-intersection-observer';
 import { useNavigate } from 'react-router-dom';
-import { LanguageTexts } from '../../../domain/locales/Language';
+import { LanguageTexts, useLanguage } from '../../../domain/locales/Language';
 import HeroImage from '../../assets/images/hero-image.png';
 import { BackgroundAnimated } from '../../components/BackgroundAnimated';
 
@@ -29,8 +29,9 @@ export function Hero() {
   const navigate = useNavigate();
 
   const handleButton = () => {
-    navigate('/produtos');
+    navigate(`/${currentLang || 'pt'}/produtos`);
   };
+  const { currentLang } = useLanguage();
 
   return (
     <>
