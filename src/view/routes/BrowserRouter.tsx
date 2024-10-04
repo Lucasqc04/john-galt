@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import { useLanguage } from '../../domain/locales/Language';
 import { Loader } from '../components/Loader';
+import { Products } from '../components/Products/Products';
 import { DefaultLayout } from '../layout/DefaultyLayout';
 import { NotFound } from '../screens/NotFound';
 import { Page } from '../screens/Page';
@@ -26,6 +27,7 @@ export function BrowserRouter() {
             <Route index element={<Page />} />
           </Route>
           <Route path="*" element={<NotFound />} />
+          <Route path="/produtos" element={<Products />}></Route>
         </Routes>
       </Suspense>
     </Router>
