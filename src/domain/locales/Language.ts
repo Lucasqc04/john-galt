@@ -9,7 +9,7 @@ import translationPT from './pt/translation.json';
 export enum LanguageTexts {
   HeroTitle = 'HeroTitle',
   HeroDescription = 'HeroDescription',
-  HeroGetInTouchButton = 'HeroGetInTouchButton',
+  HeroProductsButton = 'HeroProductsButton',
   HeroLearnMoreButton = 'HeroLearnMoreButton',
   FooterAbout = 'FooterAbout',
   FooterPrivacyPolicy = 'FooterPrivacyPolicy',

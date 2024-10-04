@@ -42,7 +42,7 @@ export function Hero() {
           </p>
           <div className="w-full flex flex-col md:flex-row gap-y-4 md:gap-y-0 gap-x-4">
             <button className="w-full py-2 bg-orange-500 text-white font-semibold rounded-sm transition-colors duration-300 hover:bg-orange-600 shadow-md">
-              {t(LanguageTexts.HeroGetInTouchButton)}
+              {t(LanguageTexts.HeroProductsButton)}
             </button>
             <button className="w-full py-2 border border-solid border-orange-500 font-semibold rounded-sm transition-all duration-500 hover:bg-orange-500 hover:text-white shadow-md">
               {t(LanguageTexts.HeroLearnMoreButton)}
