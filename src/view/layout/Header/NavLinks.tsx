@@ -4,15 +4,7 @@ import {
   PopoverGroup,
   PopoverPanel,
 } from '@headlessui/react';
-import {
-  ArrowPathIcon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  PhoneIcon,
-  PlayCircleIcon,
-  SquaresPlusIcon,
-} from '@heroicons/react/20/solid';
+import { CursorArrowRaysIcon, PhoneIcon } from '@heroicons/react/20/solid';
 import { ReactNode } from 'react';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
@@ -20,41 +12,23 @@ import { LanguageSwitcher } from '../../components/LanguageSwitcher/LanguageSwit
 
 const products = [
   {
-    name: 'Analytics',
-    description: 'Get a better understanding of your traffic',
-    href: '#',
-    icon: ChartPieIcon,
-  },
-  {
-    name: 'Engagement',
-    description: 'Speak directly to your customers',
-    href: '#',
+    name: 'BITKIT',
+    href: '/bitkit',
     icon: CursorArrowRaysIcon,
   },
   {
-    name: 'Security',
-    description: 'Your customers’ data will be safe and secure',
-    href: '#',
-    icon: FingerPrintIcon,
+    name: 'SEEDKIT',
+    href: '/seedkit',
+    icon: CursorArrowRaysIcon,
   },
   {
-    name: 'Integrations',
-    description: 'Connect with third-party tools',
-    href: '#',
-    icon: SquaresPlusIcon,
-  },
-  {
-    name: 'Automations',
-    description: 'Build strategic funnels that will convert',
-    href: '#',
-    icon: ArrowPathIcon,
+    name: 'BITMASTER',
+    href: '/bit',
+    icon: CursorArrowRaysIcon,
   },
 ];
 
-const callsToAction = [
-  { name: 'Watch demo', href: '#', icon: PlayCircleIcon },
-  { name: 'Contact sales', href: '#', icon: PhoneIcon },
-];
+const callsToAction = [{ name: 'Contact sales', href: '#', icon: PhoneIcon }];
 
 export function NavLinks({
   closeButton,
@@ -120,9 +94,6 @@ export function NavLinks({
                           {item.name}
                           <span className="absolute inset-0" />
                         </button>
-                        <p className="text-gray-600 dark:text-gray-400">
-                          {item.description}
-                        </p>
                       </div>
                     </div>
                   ))}
