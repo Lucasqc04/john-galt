@@ -1,6 +1,7 @@
 import { createPortal } from 'react-dom';
 import { FaBars, FaMoon, FaSun } from 'react-icons/fa';
 import { MdClose } from 'react-icons/md';
+import Logo from '../../assets/logo.svg';
 import { NavLinks } from './NavLinks';
 import { useHeader } from './useHeader';
 
@@ -14,9 +15,8 @@ export default function Header() {
         className="w-full flex items-center justify-between p-6 lg:px-8"
       >
         <div className="flex lg:flex-1 justify-center lg:justify-start">
-          <h1 className="font-extrabold self-center text-2xl whitespace-nowrap dark:text-white">
-            DIY LAB
-          </h1>
+          <img src={Logo} alt="" className="w-24 h-22" />
+          <span className="sr-only">DIY LAB</span>
         </div>
 
         <div className="flex lg:hidden">
@@ -56,9 +56,8 @@ export default function Header() {
           createPortal(
             <div className="fixed top-0 left-0 h-screen w-screen bg-white dark:bg-gray-900 z-50 flex flex-col justify-between items-center p-6">
               <div className="w-full flex justify-between items-center">
-                <h1 className="font-extrabold text-2xl text-center text-gray-900 dark:text-white">
-                  DIY LAB
-                </h1>
+                <img src={Logo} alt="" className="w-24 h-22" />
+                <span className="sr-only">DIY LAB</span>
                 <button
                   onClick={menu.close}
                   className="text-gray-700 dark:text-white p-4"
