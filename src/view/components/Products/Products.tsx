@@ -31,27 +31,27 @@ export function Products() {
   return (
     <>
       <BackgroundAnimatedProducts />
-      <div className="container mx-auto p-4 dark:bg-white-white">
-        <div className="text-center mb-14 mt-6">
+      <div className="container mx-auto p-4 dark:bg-white-white ">
+        <div className="text-center mb-14 mt-[50%] sm:mt-[10%]">
           <h1 className="text-5xl font-bold dark:text-white">
             <span className="text-orange-500">Nossos</span> Produtos
           </h1>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
           {products.map((product) => (
             <div
               key={product.id}
-              className="bg-white p-4 rounded-lg shadow-xl flex flex-col"
+              className="bg-white dark:bg-slate-700 p-8 rounded-lg shadow-xl flex flex-col "
             >
               <img
                 src={product.img}
                 alt={product.title}
-                className="mb-4 rounded h-32 object-cover"
+                className="mb-4 rounded h-42 object-cover"
               />
-              <h1 className="text-lg font-semibold mb-2 flex-grow">
+              <h1 className="text-lg text-white  font-semibold mb-2 flex-grow">
                 {product.title}
               </h1>
-              <p className="text-gray-700 mb-4 flex-grow">
+              <p className="dark:text-white text-gray-700 mb-4 flex-grow">
                 {product.description}
               </p>
               <button className="w-full font-bold bg-orange-500  text-white dark:text-white py-2 rounded-md hover:bg-orange-600 transition-colors">

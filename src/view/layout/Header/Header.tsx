@@ -15,8 +15,10 @@ export default function Header() {
         className="w-full flex items-center justify-between p-6 lg:px-8"
       >
         <div className="flex lg:flex-1 justify-center lg:justify-start">
-          <img src={Logo} alt="" className="w-24 h-22" />
-          <span className="sr-only">DIY LAB</span>
+          <a href="/">
+            <img src={Logo} alt="" className="w-24 h-22" />
+            <span className="sr-only">DIY LAB</span>
+          </a>
         </div>
 
         <div className="flex lg:hidden">
