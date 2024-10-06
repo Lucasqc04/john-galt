@@ -81,7 +81,9 @@ export class RemoteDataSource {
     url,
     body,
   }: RemotePostReq<Response>): RemoteRequestRes<Response> {
-    const { data } = await this.api.post<Response>(url, body);
+    const { data } = await this.api.post<Response>(url, body, {
+      timeout: 10000,
+    });
 
     const serialized = model.safeParse(data);
 
