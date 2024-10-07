@@ -1,7 +1,9 @@
+import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '../../../domain/locales/Language';
 import Bitkit1 from '../../assets/Bitkit/Bitkit 1.png';
 import Bitkit6 from '../../assets/Bitkit/Bitkit 6.png';
 import Bitkit7 from '../../assets/Bitkit/Bitkit 7.png';
-import { BackgroundAnimatedProducts } from '../../styles/Products/Products.styles';
+import { BackgroundAnimatedProduct } from '../../styles/Products/Product.styles';
 
 export function Products() {
   const products = [
@@ -27,10 +29,15 @@ export function Products() {
         ' Para aqueles que buscam o mais alto nível de proteção em suas transações financeiras.',
     },
   ];
+  const { currentLang } = useLanguage();
+  const navigate = useNavigate();
+  const handleButton = () => {
+    navigate(`/${currentLang || 'pt'}/produto`);
+  };
 
   return (
     <>
-      <BackgroundAnimatedProducts />
+      <BackgroundAnimatedProduct />
       <div className="container mx-auto p-4 dark:bg-white-white ">
         <div className="text-center mb-14 mt-[50%] sm:mt-[10%]">
           <h1 className="text-5xl font-bold dark:text-white">
@@ -54,7 +61,10 @@ export function Products() {
               <p className="dark:text-white text-gray-700 mb-4 flex-grow">
                 {product.description}
               </p>
-              <button className="w-full font-bold bg-orange-500  text-white dark:text-white py-2 rounded-md hover:bg-orange-600 transition-colors">
+              <button
+                onClick={handleButton}
+                className="w-full font-bold bg-orange-500  text-white dark:text-white py-2 rounded-md hover:bg-orange-600 transition-colors"
+              >
                 Comprar Agora
               </button>
             </div>
