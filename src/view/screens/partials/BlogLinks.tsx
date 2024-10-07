@@ -16,9 +16,6 @@ export function BlogLinks() {
     currentLang = 'en';
   }
 
-  console.log('Current Language:', currentLang);
-  console.log('Blog Data:', blogData);
-
   return (
     <div className="bg-slate-100 dark:bg-slate-800 px-4 xl:px-0 py-8">
       <div
@@ -29,8 +26,11 @@ export function BlogLinks() {
           !inView && 'opacity-0',
         )}
       >
-        <h1 className="text-center text-2xl lg:text-4xl tracking-wider text-gray-900 dark:text-white">
-          {t('BlogTitle')}
+        <h1 className="text-center text-2xl lg:text-6xl font-bold tracking-wider text-gray-900 dark:text-white">
+          <span className="text-orange-500 text-5xl lg:text-6xl font-bold">
+            BLOG
+          </span>
+          <span className="ml-2">DIYLAB</span>
         </h1>
         <div className="pt-8 lg:pt-16">
           <div className="container mx-auto px-4">
