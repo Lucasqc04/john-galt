@@ -1,40 +1,46 @@
 import { useTranslation } from 'react-i18next';
 import { LanguageTexts } from '../../domain/locales/Language';
+import LogoWhite from '../assets/logo-white.svg';
+import Logo from '../assets/logo.svg';
+import { useHeader } from './Header/useHeader';
 
 export function Footer() {
   const { t } = useTranslation();
+  const { theme } = useHeader();
 
   return (
     <footer className="bg-slate-100 dark:bg-gray-800 ">
       <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
-          <a
-            href="#"
-            className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
-          >
-            <h1 className="font-extrabold self-center text-2xl whitespace-nowrap dark:text-white-white">
-              DIY LAB
-            </h1>
-          </a>
+          <div className="flex lg:flex-1 justify-center lg:justify-start">
+            <a href="/">
+              <img
+                src={theme.isDarkTheme ? LogoWhite : Logo}
+                alt=""
+                className="w-24 h-22"
+              />
+              <span className="sr-only">DIY LAB</span>
+            </a>
+          </div>
           <ul className="flex flex-wrap items-center mb-6 text-sm font-medium dark:text-white-white sm:mb-0 dark:text-white-gray-400">
             <li>
               <a href="#" className="hover:underline me-4 md:me-6">
-                {t(LanguageTexts.FooterAbout)}{' '}
+                {t(LanguageTexts.FooterAbout)}
               </a>
             </li>
             <li>
               <a href="#" className="hover:underline me-4 md:me-6">
-                Privacy Policy
+                {t(LanguageTexts.FooterPrivacyPolicy)}
               </a>
             </li>
             <li>
               <a href="#" className="hover:underline me-4 md:me-6">
-                Licensing
+                {t(LanguageTexts.FooterLicensing)}
               </a>
             </li>
             <li>
               <a href="#" className="hover:underline">
-                Contact
+                {t(LanguageTexts.FooterContact)}
               </a>
             </li>
           </ul>
@@ -45,7 +51,7 @@ export function Footer() {
           <a href="#" className="hover:underline">
             DIY LAB™
           </a>
-          . All Rights Reserved.
+          . {t(LanguageTexts.FooterAllRightsReserved)}
         </span>
       </div>
     </footer>
