@@ -10,7 +10,7 @@ export default function Header() {
   const { isLargeScreen, menu, theme } = useHeader();
 
   return (
-    <header className="absolute z-50 top-0 left-0 p-4 flex items-center justify-between w-full max-w-[100vw]">
+    <header className="absolute z-50 top-0 left-0 pt-0 md:p-4 flex items-center justify-between w-full max-w-[100vw]">
       <nav
         aria-label="Global"
         className="w-full flex items-center justify-between p-6 lg:px-8"
