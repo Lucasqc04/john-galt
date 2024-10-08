@@ -1,3 +1,4 @@
+import { Products } from '../components/Products/Products';
 import { BlogLinks } from './partials/BlogLinks';
 import { Hero } from './partials/Hero';
 import { Newsletter } from './partials/Newsletter/Newsletter';
@@ -9,6 +10,7 @@ export function Page() {
     <>
       <Hero />
       <PositivePoints />
+      <Products />
       <BlogLinks />
       {/* <Services /> */}
       <Newsletter />

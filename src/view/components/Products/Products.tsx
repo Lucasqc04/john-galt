@@ -38,7 +38,7 @@ export function Products() {
   return (
     <>
       <BackgroundAnimatedProduct />
-      <div className="container mx-auto p-4 dark:bg-white-white ">
+      <div className="container mx-auto p-4 mb-20 dark:bg-white-white ">
         <div className="text-center mb-14 mt-[50%] sm:mt-[10%]">
           <h1 className="text-5xl font-bold dark:text-white">
             <span className="text-orange-500">Nossos</span> Produtos
