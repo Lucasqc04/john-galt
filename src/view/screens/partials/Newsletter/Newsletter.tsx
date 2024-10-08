@@ -1,36 +1,9 @@
-import { useState } from 'react';
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
-import { InsertNewsletter } from '../../../../domain/entities/Newsletter.entity';
-import { UseCases } from '../../../../domain/usecases/UseCases';
+import { FormProvider } from 'react-hook-form';
 import { Loader } from '../../../components/Loader';
+import { useNewsletter } from './useNewsletter';
 
 export function Newsletter() {
-  const [loading, setLoading] = useState<boolean>(false);
-  const { t } = useTranslation();
-
-  const form = useForm<InsertNewsletter>();
-  const { register, handleSubmit } = form;
-
-  const onSubmit: SubmitHandler<InsertNewsletter> = async (data) => {
-    setLoading(true);
-    try {
-      const { result } = await UseCases.newsletter.insert.execute(data);
-
-      if (result.type === 'ERROR') {
-        switch (result.error.code) {
-          case 'SERIALIZATION':
-            alert('ERRO DE SERIALIZAÇÃO!');
-            return;
-          default:
-            alert('ERRO DESCONHECIDO');
-            return;
-        }
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { t, form, loading, register, onsubmit } = useNewsletter();
 
   if (loading) <Loader />;
 
@@ -45,7 +18,7 @@ export function Newsletter() {
         </p>
         <FormProvider {...form}>
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={onsubmit}
             className="bg-transparent border border-gray-500 flex p-1 rounded-full mt-12"
           >
             <input
