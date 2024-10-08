@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { AcceptedLanguages } from '../../../domain/locales/Language';
 
 export function useLanguageSwitcher() {
   const { i18n } = useTranslation();
   const { lang } = useParams<{ lang: AcceptedLanguages }>();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [selectedLanguage, setSelectedLanguage] = useState(
     localStorage.getItem('language') || lang || AcceptedLanguages.pt,
@@ -17,7 +18,10 @@ export function useLanguageSwitcher() {
     document.documentElement.lang = newLang;
     setSelectedLanguage(newLang);
     localStorage.setItem('language', newLang);
-    navigate(`/${newLang}`);
+
+    const currentPath = location.pathname.split('/');
+    currentPath[1] = newLang;
+    navigate(currentPath.join('/'));
   }
 
   useEffect(() => {

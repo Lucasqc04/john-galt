@@ -6,9 +6,11 @@ export function useHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { currentTheme, toggleTheme } = useTheme();
   const { width } = useWindowSize();
+  const [isDarkTheme, setIsDarkTheme] = useState(currentTheme === 'dark');
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', currentTheme === 'dark');
+    setIsDarkTheme(currentTheme === 'dark');
   }, [currentTheme]);
 
   const isLargeScreen = width > 1024;
@@ -21,6 +23,7 @@ export function useHeader() {
     },
     theme: {
       toggle: toggleTheme,
+      isDarkTheme,
     },
     isLargeScreen,
   };

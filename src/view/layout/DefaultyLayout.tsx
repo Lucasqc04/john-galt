@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { useLanguage } from '../../domain/locales/Language';
-import { Footer } from './Footer';
+import { Footer } from './Footer/Footer';
 import Header from './Header/Header';
 export function DefaultLayout() {
   useLanguage();
