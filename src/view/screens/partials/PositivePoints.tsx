@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
 import { useInView } from 'react-intersection-observer';
 import Brain from '../../assets/images/Brain.svg';
 import Chain from '../../assets/images/Chain.png';
@@ -29,28 +29,28 @@ function styleThreeWordsAfterFourth(text: string): string | JSX.Element {
 const positivePoints = [
   {
     image: Brain,
-
-    title: 'Mentalidade Soberana',
+    titleKey: 'MentalityTitle',
     size: { width: '200px', height: '200px' },
   },
   {
     image: Chain,
-    title: 'Protocolos Open Source',
+    titleKey: 'ProtocolsTitle',
     size: { width: '200px', height: '200px' },
   },
   {
     image: Eye,
-    title: 'Transparência Total',
+    titleKey: 'TransparencyTitle',
     size: { width: '200px', height: '200px' },
   },
   {
     image: Security,
+    titleKey: 'SecurityTitle',
     size: { width: '200px', height: '200px' },
-    title: 'Segurança e Privacidade',
   },
 ];
 
 export function PositivePoints() {
+  const { t } = useTranslation();
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true,
@@ -66,7 +66,7 @@ export function PositivePoints() {
       >
         <h2
           className={classNames(
-            'text-6xl max-md:text-4xl text-center text-white dark:text-black font-bold whitespace-pre-wrap break-words max-w-4xl max-md:max-w-6xl ',
+            'text-6xl max-md:text-4xl text-center text-white dark:text-black font-bold whitespace-pre-wrap break-words max-w-4xl max-md:max-w-6xl',
             inView && 'opacity-100 animate-fade-right',
             !inView && 'opacity-0',
           )}
@@ -83,8 +83,10 @@ export function PositivePoints() {
               inView && 'opacity-100 animate-fade-right',
             )}
           >
-            <img src={item.image} alt={item.title} className="w-full" />
-            <span className="text-xl text-black font-bold">{item.title}</span>
+            <img src={item.image} alt={t(item.titleKey)} className="w-full" />
+            <span className="text-xl text-black font-bold">
+              {t(item.titleKey)}
+            </span>
           </div>
         ))}
       </article>

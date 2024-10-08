@@ -6,29 +6,11 @@ import {
 } from '@headlessui/react';
 import { CursorArrowRaysIcon, PhoneIcon } from '@heroicons/react/20/solid';
 import { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import { MdKeyboardArrowDown } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { blogData } from '../../../blogContent/blogPosts'; // Certifique-se de que isso está correto
 import { LanguageSwitcher } from '../../components/LanguageSwitcher/LanguageSwitcher';
-
-const products = [
-  {
-    name: 'BITKIT',
-    href: '/bitkit',
-    icon: CursorArrowRaysIcon,
-  },
-  {
-    name: 'SEEDKIT',
-    href: '/seedkit',
-    icon: CursorArrowRaysIcon,
-  },
-  {
-    name: 'BITMASTER',
-    href: '/bit',
-    icon: CursorArrowRaysIcon,
-  },
-];
-
-const callsToAction = [{ name: 'Contact sales', href: '#', icon: PhoneIcon }];
 
 export function NavLinks({
   closeButton,
@@ -42,6 +24,14 @@ export function NavLinks({
   LinkCallBack?: () => void;
 }) {
   const navigate = useNavigate();
+  const { i18n } = useTranslation();
+
+  let currentLang = i18n.language.split('-')[0] as 'pt' | 'en' | 'es';
+  const supportedLanguages = ['pt', 'en', 'es'];
+
+  if (!supportedLanguages.includes(currentLang)) {
+    currentLang = 'en';
+  }
 
   const handleOnLink = (path: string, callback?: () => void) => {
     if (callback) {
@@ -49,6 +39,26 @@ export function NavLinks({
     }
     navigate(path);
   };
+
+  const products = [
+    {
+      name: 'BITKIT',
+      href: `/${currentLang}/bitkit`,
+      icon: CursorArrowRaysIcon,
+    },
+    {
+      name: 'SEEDKIT',
+      href: `/${currentLang}/seedkit`,
+      icon: CursorArrowRaysIcon,
+    },
+    {
+      name: 'BITMASTER',
+      href: `/${currentLang}/bitmaster`,
+      icon: CursorArrowRaysIcon,
+    },
+  ];
+
+  const callsToAction = [{ name: 'Contact sales', href: '#', icon: PhoneIcon }];
 
   return (
     <>
@@ -72,7 +82,7 @@ export function NavLinks({
 
               <PopoverPanel
                 transition
-                className="absolute -left-32 lg:-left-8 top-full z-10  w-screen max-w-md overflow-hidden rounded-3xl bg-white dark:bg-gray-800 dark:text-white shadow-lg ring-1 ring-gray-900/5 transition"
+                className="absolute -left-32 lg:-left-8 top-full z-10 w-screen max-w-md overflow-hidden rounded-3xl bg-white dark:bg-gray-800 dark:text-white shadow-lg ring-1 ring-gray-900/5 transition"
               >
                 <div className="p-4">
                   {products.map((item) => (
@@ -117,23 +127,80 @@ export function NavLinks({
             </Popover>
 
             <button
-              onClick={() => handleOnLink('#', LinkCallBack)}
+              onClick={() =>
+                handleOnLink(`/${currentLang}/about`, LinkCallBack)
+              }
               className="text-2xl lg:text-sm font-semibold leading-6 text-gray-900 dark:text-white"
             >
               Quem Somos
             </button>
             <button
-              onClick={() => handleOnLink('#', LinkCallBack)}
+              onClick={() =>
+                handleOnLink(`/${currentLang}/marketplace`, LinkCallBack)
+              }
               className="text-2xl lg:text-sm font-semibold leading-6 text-gray-900 dark:text-white"
             >
               Marketplace
             </button>
             <button
-              onClick={() => handleOnLink('#', LinkCallBack)}
+              onClick={() =>
+                handleOnLink(`/${currentLang}/company`, LinkCallBack)
+              } // Altere para o caminho correto da página "Company"
               className="text-2xl lg:text-sm font-semibold leading-6 text-gray-900 dark:text-white"
             >
               Company
             </button>
+
+            <Popover className="relative">
+              <PopoverButton className="text-2xl flex items-center justify-center gap-x-1 lg:text-sm font-semibold leading-6 text-gray-900 dark:text-white">
+                Blogs
+                <MdKeyboardArrowDown
+                  aria-hidden="true"
+                  size={isLargeScreen ? 24 : 28}
+                  className="flex-none text-gray-500 dark:text-white"
+                />
+              </PopoverButton>
+
+              <PopoverPanel
+                transition
+                className="absolute -left-32 lg:-left-8 top-full z-10 w-screen max-w-md overflow-hidden rounded-3xl bg-white dark:bg-gray-800 dark:text-white shadow-lg ring-1 ring-gray-900/5 transition"
+              >
+                <div className="p-4 grid grid-cols-1 gap-y-4">
+                  {Object.keys(blogData).map((postId) => {
+                    const post = blogData[postId];
+                    const translation = post.translations[currentLang];
+
+                    if (!translation) {
+                      console.error(
+                        `No translation found for language: ${currentLang}`,
+                      );
+                      return null;
+                    }
+                    return (
+                      <div
+                        key={postId}
+                        className="flex items-center gap-x-4 rounded-lg p-4 text-sm leading-6 text-gray-800 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800"
+                      >
+                        <img
+                          src={post.image}
+                          alt={translation.title}
+                          className="h-12 w-12 rounded-lg object-cover"
+                        />
+                        <Link
+                          key={postId}
+                          to={`/${currentLang}/blog/${postId}`}
+                          className="bg-white dark:bg-slate-800   overflow-hidden transition-transform transform hover:scale-105"
+                        >
+                          {translation.title}
+                          <span className="absolute inset-0" />
+                        </Link>
+                      </div>
+                    );
+                  })}
+                </div>
+              </PopoverPanel>
+            </Popover>
+
             <LanguageSwitcher />
           </PopoverGroup>
         </>
