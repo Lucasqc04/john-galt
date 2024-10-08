@@ -128,7 +128,7 @@ export function NavLinks({
 
             <button
               onClick={() =>
-                handleOnLink(`/${currentLang}/about`, LinkCallBack)
+                handleOnLink(`/${currentLang}/sobre-nos`, LinkCallBack)
               }
               className="text-2xl lg:text-sm font-semibold leading-6 text-gray-900 dark:text-white"
             >

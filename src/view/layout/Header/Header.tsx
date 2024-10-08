@@ -10,7 +10,7 @@ export default function Header() {
   const { isLargeScreen, menu, theme } = useHeader();
 
   return (
-    <header className="absolute z-50 top-0 left-0 p-4 flex items-center justify-between w-full max-w-[100vw]">
+    <header className="absolute z-50 top-0 left-0 pt-0 md:p-4 flex items-center justify-between w-full max-w-[100vw]">
       <nav
         aria-label="Global"
         className="w-full flex items-center justify-between p-6 lg:px-8"
@@ -57,7 +57,7 @@ export default function Header() {
 
         {menu.isOpen &&
           createPortal(
-            <div className="fixed top-0 left-0 h-screen w-screen bg-white dark:bg-gray-900 z-50 flex flex-col justify-between items-center p-6">
+            <div className="fixed top-0 left-0 h-screen w-screen bg-white dark:bg-gray-900 z-50 flex flex-col justify-around items-center px-6">
               <div className="w-full flex justify-between items-center">
                 <img
                   src={theme.isDarkTheme ? LogoWhite : Logo}
