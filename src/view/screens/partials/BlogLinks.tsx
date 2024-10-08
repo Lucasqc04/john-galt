@@ -4,16 +4,21 @@ import { MdArrowForward } from 'react-icons/md';
 import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
 import { blogData } from '../../../blogContent/blogPosts';
+import { AcceptedLanguages } from '../../../domain/locales/Language';
 
 export function BlogLinks() {
   const { t, i18n } = useTranslation();
   const { ref, inView } = useInView({ threshold: 0.1 });
 
-  let currentLang = i18n.language.split('-')[0] as 'pt' | 'en' | 'es';
-  const supportedLanguages = ['pt', 'en', 'es'];
+  let currentLang = i18n.language.split('-')[0] as AcceptedLanguages;
+  const supportedLanguages = [
+    AcceptedLanguages.pt,
+    AcceptedLanguages.en,
+    AcceptedLanguages.es,
+  ];
 
   if (!supportedLanguages.includes(currentLang)) {
-    currentLang = 'en';
+    currentLang = AcceptedLanguages.en;
   }
 
   return (
