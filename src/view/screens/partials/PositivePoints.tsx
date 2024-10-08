@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { useInView } from 'react-intersection-observer';
-import Brain from '../../assets/images/Brain.svg';
-import Chain from '../../assets/images/Chain.png';
-import Eye from '../../assets/images/Eye.png';
-import Security from '../../assets/images/Security.png';
+import PositivePoints1 from '../../assets/images/positive-points/positive-points-1.png';
+import PositivePoints2 from '../../assets/images/positive-points/positive-points-2.png';
+import PositivePoints3 from '../../assets/images/positive-points/positive-points-3.png';
+import PositivePoints4 from '../../assets/images/positive-points/positive-points-4.png';
 
 function styleThreeWordsAfterFourth(text: string): string | JSX.Element {
   const words = text.split(' ');
@@ -28,22 +28,22 @@ function styleThreeWordsAfterFourth(text: string): string | JSX.Element {
 
 const positivePoints = [
   {
-    image: Brain,
+    image: PositivePoints1,
     titleKey: 'MentalityTitle',
     size: { width: '200px', height: '200px' },
   },
   {
-    image: Chain,
+    image: PositivePoints2,
     titleKey: 'ProtocolsTitle',
     size: { width: '200px', height: '200px' },
   },
   {
-    image: Eye,
+    image: PositivePoints3,
     titleKey: 'TransparencyTitle',
     size: { width: '200px', height: '200px' },
   },
   {
-    image: Security,
+    image: PositivePoints4,
     titleKey: 'SecurityTitle',
     size: { width: '200px', height: '200px' },
   },
