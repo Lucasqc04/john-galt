@@ -4,9 +4,12 @@ import { AcceptedLanguages } from '../../../domain/locales/Language';
 import brasil from '../../assets/images/brasil.png';
 import espanha from '../../assets/images/espanha.png';
 import estadosUnidos from '../../assets/images/estados-unidos.png';
-import { useLanguageSwitcher } from './useLanguageSwitcher';
+import {
+  LanguageSwitcherProps,
+  useLanguageSwitcher,
+} from './useLanguageSwitcher';
 
-export function LanguageSwitcher() {
+export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
   const { language } = useLanguageSwitcher();
 
   return (
@@ -16,19 +19,19 @@ export function LanguageSwitcher() {
           {language.current === AcceptedLanguages.pt && (
             <>
               <img src={brasil} alt="Português" className="h-5 w-5" />
-              Português
+              <span className={className}>Português</span>
             </>
           )}
           {language.current === AcceptedLanguages.en && (
             <>
               <img src={estadosUnidos} alt="English" className="h-5 w-5" />
-              English
+              <span className={className}>English</span>
             </>
           )}
           {language.current === AcceptedLanguages.es && (
             <>
               <img src={espanha} alt="Español" className="h-5 w-5" />
-              Español
+              <span className={className}>Español</span>
             </>
           )}
           <ChevronDownIcon
