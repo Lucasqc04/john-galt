@@ -18,7 +18,7 @@ const Product: React.FC = () => {
 
   const productData: Product = {
     id: 1,
-    name: 'Trezor One – Curso Grátis',
+    name: 'Bitkit',
     price: 850.0,
     originalPrice: 1299.0,
     description: 'Um verdadeiro bunker para guardar seu bitcoin',
@@ -47,10 +47,6 @@ const Product: React.FC = () => {
   useEffect(() => {
     setProduct(productData);
   }, []);
-
-  if (!product) {
-    return <div>Carregando...</div>;
-  }
 
   if (!product) {
     return <div>Carregando...</div>;
