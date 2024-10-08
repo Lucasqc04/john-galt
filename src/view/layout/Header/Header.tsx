@@ -57,7 +57,7 @@ export default function Header() {
 
         {menu.isOpen &&
           createPortal(
-            <div className="fixed top-0 left-0 h-screen w-screen bg-white dark:bg-gray-900 z-50 flex flex-col justify-between items-center p-6">
+            <div className="fixed top-0 left-0 h-screen w-screen bg-white dark:bg-gray-900 z-50 flex flex-col justify-around items-center px-6">
               <div className="w-full flex justify-between items-center">
                 <img
                   src={theme.isDarkTheme ? LogoWhite : Logo}
