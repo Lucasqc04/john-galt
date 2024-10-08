@@ -1,12 +1,12 @@
 import { useTranslation } from 'react-i18next';
-import { LanguageTexts } from '../../domain/locales/Language';
-import LogoWhite from '../assets/logo-white.svg';
-import Logo from '../assets/logo.svg';
-import { useHeader } from './Header/useHeader';
+import { LanguageTexts } from '../../../domain/locales/Language';
+import LogoWhite from '../../assets/logo-white.svg';
+import Logo from '../../assets/logo.svg';
+import { useFooter } from './useFooter';
 
 export function Footer() {
   const { t } = useTranslation();
-  const { theme } = useHeader();
+  const { theme } = useFooter();
 
   return (
     <footer className="bg-slate-100 dark:bg-gray-800 ">
@@ -16,7 +16,7 @@ export function Footer() {
             <a href="/">
               <img
                 src={theme.isDarkTheme ? LogoWhite : Logo}
-                alt=""
+                alt="Logo"
                 className="w-24 h-22"
               />
               <span className="sr-only">DIY LAB</span>

@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { blogData } from '../../blogContent/blogPosts';
+import { AcceptedLanguages } from '../../domain/locales/Language';
 import { BackgroundAnimated } from '../components/BackgroundAnimated';
 
 export function BlogPost() {
@@ -13,10 +14,11 @@ export function BlogPost() {
     return <h2>{t('PostNotFound')}</h2>;
   }
 
-  const currentLang = (localStorage.getItem('language') || 'pt') as
-    | 'pt'
-    | 'en'
-    | 'es';
+  const currentLang = (localStorage.getItem('language') ||
+    AcceptedLanguages.pt) as
+    | AcceptedLanguages.pt
+    | AcceptedLanguages.en
+    | AcceptedLanguages.es;
   const translations = post.translations[currentLang];
 
   return (

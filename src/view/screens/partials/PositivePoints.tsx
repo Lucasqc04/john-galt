@@ -71,7 +71,7 @@ export function PositivePoints() {
             !inView && 'opacity-0',
           )}
         >
-          {styleThreeWordsAfterFourth(t('PositivePointsTitle'))}{' '}
+          {styleThreeWordsAfterFourth(t('PositivePointsTitle'))}
         </h2>
       </article>
       <article className="w-full pl-8 pt-32 flex flex-wrap justify-around">
