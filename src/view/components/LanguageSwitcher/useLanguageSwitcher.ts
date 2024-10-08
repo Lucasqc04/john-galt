@@ -3,6 +3,10 @@ import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { AcceptedLanguages } from '../../../domain/locales/Language';
 
+export type LanguageSwitcherProps = {
+  className?: string;
+};
+
 export function useLanguageSwitcher() {
   const { i18n } = useTranslation();
   const { lang } = useParams<{ lang: AcceptedLanguages }>();

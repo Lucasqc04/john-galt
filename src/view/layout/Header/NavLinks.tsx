@@ -134,23 +134,6 @@ export function NavLinks({
             >
               Quem Somos
             </button>
-            <button
-              onClick={() =>
-                handleOnLink(`/${currentLang}/marketplace`, LinkCallBack)
-              }
-              className="text-2xl lg:text-sm font-semibold leading-6 text-gray-900 dark:text-white"
-            >
-              Marketplace
-            </button>
-            <button
-              onClick={() =>
-                handleOnLink(`/${currentLang}/company`, LinkCallBack)
-              } // Altere para o caminho correto da página "Company"
-              className="text-2xl lg:text-sm font-semibold leading-6 text-gray-900 dark:text-white"
-            >
-              Company
-            </button>
-
             <Popover className="relative">
               <PopoverButton className="text-2xl flex items-center justify-center gap-x-1 lg:text-sm font-semibold leading-6 text-gray-900 dark:text-white">
                 Blogs
@@ -201,7 +184,7 @@ export function NavLinks({
               </PopoverPanel>
             </Popover>
 
-            <LanguageSwitcher />
+            <LanguageSwitcher className="text-xl flex items-center justify-center gap-x-2 lg:text-sm font-semibold leading-6 text-gray-900 dark:text-white" />
           </PopoverGroup>
         </>
       )}
