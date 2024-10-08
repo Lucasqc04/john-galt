@@ -4,7 +4,7 @@ export function NotFound() {
   const navigate = useNavigate();
 
   const handleHomeRedirect = () => {
-    navigate('/en');
+    navigate('/');
   };
 
   return (
