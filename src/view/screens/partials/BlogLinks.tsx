@@ -55,7 +55,7 @@ export function BlogLinks() {
                   <Link
                     key={postId}
                     to={`blog/${postId}`}
-                    className="bg-white dark:bg-slate-700 shadow-lg rounded-xl overflow-hidden transition-transform transform hover:scale-105"
+                    className="bg-white dark:bg-slate-700 shadow-lg rounded-xl overflow-hidden transition-transform transform hover:scale-95 md:scale-90"
                   >
                     <img
                       className="w-full h-48 object-cover"
@@ -70,7 +70,7 @@ export function BlogLinks() {
                         {translation.date || 'Data Desconhecida'}
                       </p>
                     </div>
-                    <div className="px-4 py-4">
+                    <div className="px-4 py-4 md:p-3 lg:p-4">
                       <h2 className="text-2xl text-gray-900 dark:text-white font-semibold tracking-wider">
                         {t(translation.title)}
                       </h2>
