@@ -30,22 +30,18 @@ const positivePoints = [
   {
     image: PositivePoints1,
     titleKey: 'MentalityTitle',
-    size: { width: '200px', height: '200px' },
   },
   {
     image: PositivePoints2,
     titleKey: 'ProtocolsTitle',
-    size: { width: '200px', height: '200px' },
   },
   {
     image: PositivePoints3,
     titleKey: 'TransparencyTitle',
-    size: { width: '200px', height: '200px' },
   },
   {
     image: PositivePoints4,
     titleKey: 'SecurityTitle',
-    size: { width: '200px', height: '200px' },
   },
 ];
 
@@ -57,7 +53,7 @@ export function PositivePoints() {
   });
 
   return (
-    <section className="w-full min-h-screen px-8 bg-slate-800 dark:bg-primary-light flex flex-col justify-start items-center">
+    <section className="w-full min-h-screen px-4 sm:px-8 bg-slate-800 dark:bg-primary-light flex flex-col justify-start items-center">
       <article
         ref={ref}
         className={classNames(
@@ -66,7 +62,7 @@ export function PositivePoints() {
       >
         <h2
           className={classNames(
-            'text-6xl max-md:text-4xl text-center text-white dark:text-black font-bold whitespace-pre-wrap break-words max-w-4xl max-md:max-w-6xl',
+            'text-4xl md:text-6xl text-center text-white dark:text-black font-bold whitespace-pre-wrap break-words max-w-4xl',
             inView && 'opacity-100 animate-fade-right',
             !inView && 'opacity-0',
           )}
@@ -74,16 +70,22 @@ export function PositivePoints() {
           {styleThreeWordsAfterFourth(t('PositivePointsTitle'))}
         </h2>
       </article>
-      <article className="w-full pl-8 pt-32 flex flex-wrap justify-around">
+
+      <article className="w-full  sm:pt-32 flex flex-wrap justify-around gap-y-4 md:p-14">
         {positivePoints.map((item, idx) => (
           <div
             key={idx}
             className={classNames(
-              'bg-primary-light dark:border h-72 w-full sm:w-60 md:w-72 lg:w-72 rounded-md shadow-sm flex flex-col justify-center items-center m-4',
+              'bg-primary-light dark:border h-72 w-full sm:w-60 md:w-64 lg:w-72 rounded-md shadow-sm flex flex-col justify-center items-center m-4 p-4 md:p-6 lg:p-8',
               inView && 'opacity-100 animate-fade-right',
             )}
           >
-            <img src={item.image} alt={t(item.titleKey)} className="w-full" />
+            <img
+              src={item.image}
+              alt={t(item.titleKey)}
+              className="w-2/3 sm:w-40 md:w-44 lg:w-2/3 max-h-48"
+            />
+
             <span className="text-xl text-black font-bold">
               {t(item.titleKey)}
             </span>
