@@ -17,7 +17,7 @@ function styleThreeWordsAfterFourth(text: string): string | JSX.Element {
     return (
       <>
         {firstPart}
-        <span className="text-orange-500"> {styledWords} </span>
+        <span className="text-[#F6911D]"> {styledWords} </span>
         {remainingPart}
       </>
     );

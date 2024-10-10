@@ -32,7 +32,7 @@ export function BlogLinks() {
         )}
       >
         <h1 className="text-center text-2xl lg:text-6xl font-bold tracking-wider text-gray-900 dark:text-white">
-          <span className="text-orange-500 text-5xl lg:text-6xl font-bold">
+          <span className="text-[#F6911D] text-5xl lg:text-6xl font-bold">
             BLOG
           </span>
           <span className="ml-2">DIYLAB</span>
@@ -62,7 +62,7 @@ export function BlogLinks() {
                       src={post.image}
                       alt={translation.title}
                     />
-                    <div className="py-2 px-4 w-full flex justify-between bg-orange-500">
+                    <div className="py-2 px-4 w-full flex justify-between bg-[#F6911D]">
                       <p className="text-sm text-white font-semibold tracking-wide">
                         {translation.author || 'Autor Desconhecido'}
                       </p>
@@ -78,7 +78,7 @@ export function BlogLinks() {
                         {t(translation.subtitle)}
                       </p>
                       <div className="pt-2 flex items-center cursor-pointer gap-x-3">
-                        <p className="text-sm text-orange-500">
+                        <p className="text-sm text-[#F6911D]">
                           {t('ReadMore')}
                         </p>
                         <MdArrowForward size={24} />

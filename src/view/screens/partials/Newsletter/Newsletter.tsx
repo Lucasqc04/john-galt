@@ -31,7 +31,7 @@ export function Newsletter() {
             />
             <button
               type="submit"
-              className="bg-orange-500 text-white hover:bg-orange-300 transition-all dark:text-white text-sm rounded-full px-6 py-3"
+              className="bg-[#F6911D] text-white hover:bg-orange-300 transition-all dark:text-white text-sm rounded-full px-6 py-3"
             >
               {t('NewsletterSubmitButton')}
             </button>

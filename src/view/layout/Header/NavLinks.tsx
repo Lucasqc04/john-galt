@@ -71,7 +71,7 @@ export function NavLinks({
           )}
           <PopoverGroup className="flex flex-col items-center justify-center gap-y-10 lg:gap-x-12 lg:flex-row lg:gap-y-0">
             <Popover className="relative">
-              <PopoverButton className="text-2xl flex items-center justify-center gap-x-1 lg:text-sm font-semibold leading-6 text-gray-900 dark:text-white">
+              <PopoverButton className="text-2xl flex items-center justify-center gap-x-1 lg:text-sm font-semibold leading-6 hover:text-[#F6911D]">
                 Produtos
                 <MdKeyboardArrowDown
                   aria-hidden="true"
@@ -88,18 +88,18 @@ export function NavLinks({
                   {products.map((item) => (
                     <div
                       key={item.name}
-                      className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700"
+                      className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:text-[#F6911D] hover:bg-gray-50 dark:hover:bg-gray-700"
                     >
-                      <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg text-gray-900 dark:text-white group-hover:bg-white dark:group-hover:bg-gray-700">
+                      <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg hover:text-[#F6911D] group-hover:bg-white dark:group-hover:bg-gray-700">
                         <item.icon
                           aria-hidden="true"
-                          className="h-6 w-6 text-gray-500 dark:text-white group-hover:text-indigo-600"
+                          className="h-6 w-6 dark:text-white hover:text-[#F6911D]"
                         />
                       </div>
                       <div className="flex-auto">
                         <button
                           onClick={() => handleOnLink(item.href)}
-                          className="block font-semibold text-gray-900 dark:text-white"
+                          className="block font-semibold hover:text-[#F6911D]"
                         >
                           {item.name}
                           <span className="absolute inset-0" />
@@ -113,7 +113,7 @@ export function NavLinks({
                     <a
                       key={item.name}
                       href={item.href}
-                      className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600"
+                      className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 hover:text-[#F6911D]"
                     >
                       <item.icon
                         aria-hidden="true"
@@ -130,17 +130,17 @@ export function NavLinks({
               onClick={() =>
                 handleOnLink(`/${currentLang}/sobre-nos`, LinkCallBack)
               }
-              className="text-2xl lg:text-sm font-semibold leading-6 text-gray-900 dark:text-white"
+              className="text-2xl lg:text-sm font-semibold leading-6 hover:text-[#F6911D]"
             >
               Quem Somos
             </button>
             <Popover className="relative">
-              <PopoverButton className="text-2xl flex items-center justify-center gap-x-1 lg:text-sm font-semibold leading-6 text-gray-900 dark:text-white">
+              <PopoverButton className="text-2xl flex items-center justify-center gap-x-1 lg:text-sm font-semibold leading-6 hover:text-[#F6911D]">
                 Blogs
                 <MdKeyboardArrowDown
                   aria-hidden="true"
                   size={isLargeScreen ? 24 : 28}
-                  className="flex-none text-gray-500 dark:text-white"
+                  className="flex-none hover:text-[#F6911D]"
                 />
               </PopoverButton>
 
@@ -184,7 +184,7 @@ export function NavLinks({
               </PopoverPanel>
             </Popover>
 
-            <LanguageSwitcher className="text-xl flex items-center justify-center gap-x-2 lg:text-sm font-semibold leading-6 text-gray-900 dark:text-white" />
+            <LanguageSwitcher className="text-xl flex items-center justify-center gap-x-2 lg:text-sm font-semibold leading-6 hover:text-[#F6911D]" />
           </PopoverGroup>
         </>
       )}

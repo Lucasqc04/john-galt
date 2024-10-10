@@ -19,7 +19,7 @@ function styleFirstWord(text: string): string | JSX.Element {
 
     return (
       <>
-        <span className="text-orange-500">{firstWord}</span> {remainingText}
+        <span className="text-[#F6911D]">{firstWord}</span> {remainingText}
       </>
     );
   }
@@ -54,11 +54,11 @@ export function Hero() {
           <div className="w-full flex flex-col md:flex-row gap-y-4 md:gap-y-0 gap-x-4">
             <button
               onClick={handleButton}
-              className="w-full py-2 bg-orange-500 text-white font-semibold rounded-sm transition-colors duration-300 hover:bg-orange-600 shadow-md"
+              className="w-full py-2 bg-[#F6911D] text-white font-semibold rounded-sm transition-colors duration-300 hover:bg-orange-600 shadow-md"
             >
               {t(LanguageTexts.HeroProductsButton)}
             </button>
-            <button className="w-full py-2 border border-solid border-orange-500 font-semibold rounded-sm transition-all duration-500 hover:bg-orange-500 hover:text-white shadow-md">
+            <button className="w-full py-2 border border-solid border-[#F6911D] font-semibold rounded-sm transition-all duration-500 hover:bg-[#F6911D] hover:text-white shadow-md">
               {t(LanguageTexts.HeroLearnMoreButton)}
             </button>
           </div>

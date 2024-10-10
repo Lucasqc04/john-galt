@@ -41,7 +41,7 @@ export function Products() {
       <section className="w-full min-h-screen flex flex-col justify-center items-center py-12">
         <div className="container p-4 sm:p-8 dark:bg-white-white">
           <h2 className="text-6xl text-center font-bold dark:text-white mb-8">
-            <span className="text-orange-500">Nossos</span> Produtos
+            <span className="text-[#F6911D]">Nossos</span> Produtos
           </h2>
           <article className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 gap-y-8">
             {products.map((product) => (
@@ -62,7 +62,7 @@ export function Products() {
                 </p>
                 <button
                   onClick={handleButton}
-                  className="w-full font-bold bg-orange-500 text-white dark:text-white py-2 rounded-md hover:bg-orange-600 transition-colors"
+                  className="w-full font-bold bg-[#F6911D] text-white dark:text-white py-2 rounded-md hover:bg-orange-600 transition-colors"
                 >
                   Comprar Agora
                 </button>
