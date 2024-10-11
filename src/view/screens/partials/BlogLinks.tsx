@@ -4,23 +4,15 @@ import { MdArrowForward } from 'react-icons/md';
 import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
 import { blogData } from '../../../blogContent/blogPosts';
-import { AcceptedLanguages } from '../../../domain/locales/Language';
+import { LanguageTexts } from '../../../domain/locales/Language';
 import { ROUTES } from '../../routes/Routes';
+import { styleFirstWord } from '../../utils/StyleFirstWord';
+import { useCurrentLang } from '../../utils/useCurrentLang';
 
 export function BlogLinks() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
+  const { currentLang } = useCurrentLang();
   const { ref, inView } = useInView({ threshold: 0.1 });
-
-  let currentLang = i18n.language.split('-')[0] as AcceptedLanguages;
-  const supportedLanguages = [
-    AcceptedLanguages.pt,
-    AcceptedLanguages.en,
-    AcceptedLanguages.es,
-  ];
-
-  if (!supportedLanguages.includes(currentLang)) {
-    currentLang = AcceptedLanguages.en;
-  }
 
   return (
     <div className="bg-slate-100 dark:bg-slate-800 px-4 xl:px-0 py-8">
@@ -33,10 +25,7 @@ export function BlogLinks() {
         )}
       >
         <h1 className="text-center text-2xl lg:text-6xl font-bold tracking-wider text-gray-900 dark:text-white">
-          <span className="text-[#F6911D] text-5xl lg:text-6xl font-bold">
-            BLOG
-          </span>
-          <span className="ml-2">DIYLAB</span>
+          {styleFirstWord(t(LanguageTexts.blogs.title))}
         </h1>
         <div className="pt-8 lg:pt-16">
           <div className="container mx-auto px-4">

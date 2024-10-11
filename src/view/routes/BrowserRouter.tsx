@@ -8,12 +8,12 @@ import {
 import { AcceptedLanguages, useLanguage } from '../../domain/locales/Language';
 import { Loader } from '../components/Loader';
 import Product from '../components/Product/Product';
-import { Products } from '../components/Products/Products';
 import { DefaultLayout } from '../layout/DefaultyLayout';
 import { About } from '../screens/About';
 import { BlogPost } from '../screens/BlogPost';
 import { NotFound } from '../screens/NotFound';
 import { Page } from '../screens/Page';
+import { Products } from '../screens/partials/Products';
 import { ROUTES } from './Routes';
 
 export function BrowserRouter() {

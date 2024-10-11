@@ -1,14 +1,91 @@
 {
-  "HeroTitle": "Proteção de Bitcoin Offline com Segurança Web3",
-  "HeroDescription": "Somos uma empresa WEB3 que oferece segurança e privacidade com tecnologia DIY, possibilitando autocustódia 100% offline.",
-  "HeroProductsButton": "Nossos Produtos",
-  "HeroLearnMoreButton": "Saiba Mais",
-
-  "PositivePointsTitle": "Fique por dentro de tudo que precisa para investir com segurança",
-  "MentalityTitle": "Mentalidade Soberana",
-  "ProtocolsTitle": "Protocolos Open Source",
-  "TransparencyTitle": "Transparência Total",
-  "SecurityTitle": "Segurança e Privacidade",
+  "header": {
+    "links": ["Produtos", "Quem Somos", "Blogs"]
+  },
+  "hero": {
+    "title": "Proteção de Bitcoin Offline com Segurança Web3",
+    "description": "Somos uma empresa WEB3 que oferece segurança e privacidade com tecnologia DIY, possibilitando autocustódia 100% offline.",
+    "buttons": {
+      "products": "Nossos Produtos",
+      "learnMore": "Saiba Mais"
+    }
+  },
+  "positivePoints": {
+    "title": "Fique por dentro de tudo que precisa para investir com segurança",
+    "cards": [
+      "Mentalidade Soberana",
+      "Protocolos Open Source",
+      "Transparência Total",
+      "Segurança e Privacidade"
+    ]
+  },
+  "statistics": {
+    "title": "A DIY LAB está revolucionando a soberania cripto no Brasil - demais opções",
+    "infos": [
+      {
+        "title": "+ 2 Mil",
+        "description": "Bitcoiners nas comunidades DIY"
+      },
+      {
+        "title": "+ WEB3",
+        "description": "Eliminando Intermediários e Empoderando Usuários"
+      },
+      {
+        "title": "+ 20 Mil",
+        "description": "Pessoas nos acompanhando nas redes"
+      },
+      {
+        "title": "Global",
+        "description": "Tenha um controle cripto em qualquer lugar"
+      }
+    ],
+    "text": "Bitcoiners que foram transformados pelo BITKIT"
+  },
+  "products": {
+    "title": "Nossos produtos",
+    "infos": [
+      {
+        "title": "Seu Kit Completo para o Mundo do Bitcoin!",
+        "description": "Tenha tudo o que precisa em um único pacote para maximizar seus investimentos em Bitcoin."
+      },
+      {
+        "title": "Proteja Suas Chaves Privadas com Segurança!",
+        "description": "Ideal para investidores que priorizam a segurança e desejam garantir a proteção de suas chaves privadas."
+      },
+      {
+        "title": "Segurança Elevada para Seus Investimentos!',",
+        "description": "Para aqueles que buscam o mais alto nível de proteção em suas transações financeiras."
+      }
+    ],
+    "buyNowButton": "Comprar Agora"
+  },
+  "blogs": {
+    "title": "BLOG DIY"
+  },
+  "newsletter": {
+    "title": "Inscreva-se no Nosso Newsletter",
+    "description": "Inscreva-se no nosso newsletter e mantenha-se atualizado com as últimas notícias, atualizações e ofertas exclusivas. Obtenha insights valiosos. Junte-se à nossa comunidade hoje!",
+    "form": {
+      "email": "Digite seu email",
+      "submitButton": "Enviar"
+    }
+  },
+  "footer": {
+    "links": ["Sobre", "Política de Privacidade", "Licenciamento", "Contato"],
+    "allRightsReserved": "Todos os direitos reservados."
+  },
+  "about": {
+    "title": "Manifesto DIY Security Lab",
+    "subtitle": "Bitcoin, Liberdade e Soberania",
+    "manifest": [
+      "Na DIY Sec Lab, acreditamos profundamente no Bitcoin como uma ferramenta de emancipação individual. Ele não é apenas uma moeda digital, mas um símbolo de liberdade e soberania, permitindo que cada pessoa tome o controle de seu próprio destino, sem depender de intermediários ou instituições centralizadas",
+      "Sabemos que a verdadeira liberdade só é possível com segurança. É por isso que defendemos o armazenamento offline das criptomoedas, onde o usuário é o único guardião de seus ativos. Nosso compromisso é facilitar esse processo, tornando acessível a todos a possibilidade de proteger seus fundos de forma independente e segura, longe das ameaças digitais.",
+      "O Bitcoin abre caminho para um futuro onde o poder volta às mãos das pessoas. Na DIY Sec Lab, nossa missão é apoiar essa jornada, oferecendo as ferramentas e o conhecimento necessários para que cada indivíduo possa viver essa soberania com confiança, simplicidade e responsabilidade. Acreditamos que o Bitcoin é a chave para a verdadeira autonomia, e estamos aqui para ajudar a abrir essa porta."
+    ]
+  },
+  "post": {
+    "notFound": "Post Não Encontrado!"
+  },
 
   "cardNamePlaceholder": "Nome no cartão",
   "cardNumberPlaceholder": "Número do cartão",
@@ -36,15 +113,5 @@
   "ServiceTitle": "Serviços",
   "ServiceDescription": "Proteja e conquiste sua jornada cripto com as melhores ferramentas.",
   "CustomizationDescription": "Tudo que você precisa em um bitkit",
-  "ServiceGetInTouchButton": "Comprar",
-  "NewsletterTitle": "Inscreva-se no Nosso Newsletter",
-  "NewsletterDescription": "Inscreva-se no nosso newsletter e mantenha-se atualizado com as últimas notícias, atualizações e ofertas exclusivas. Obtenha insights valiosos. Junte-se à nossa comunidade hoje!",
-  "NewsletterEmailPlaceholder": "Digite seu email",
-  "NewsletterSubmitButton": "Enviar",
-
-  "FooterAbout": "Sobre",
-  "FooterPrivacyPolicy": "Política de Privacidade",
-  "FooterLicensing": "Licenciamento",
-  "FooterContact": "Contato",
-  "FooterAllRightsReserved": "Todos os direitos reservados."
+  "ServiceGetInTouchButton": "Comprar"
 }
