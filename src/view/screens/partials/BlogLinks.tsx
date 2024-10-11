@@ -5,6 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
 import { blogData } from '../../../blogContent/blogPosts';
 import { AcceptedLanguages } from '../../../domain/locales/Language';
+import { ROUTES } from '../../routes/Routes';
 
 export function BlogLinks() {
   const { t, i18n } = useTranslation();
@@ -54,7 +55,7 @@ export function BlogLinks() {
                 return (
                   <Link
                     key={postId}
-                    to={`blog/${postId}`}
+                    to={ROUTES.blog.call(postId)}
                     className="bg-white dark:bg-slate-700 shadow-lg rounded-xl overflow-hidden transition-transform transform hover:scale-95 md:scale-90"
                   >
                     <img

@@ -1,29 +1,48 @@
+import classNames from 'classnames';
+import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { FaBars, FaMoon, FaSun } from 'react-icons/fa';
 import { MdClose } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 import LogoWhite from '../../assets/logo-white.svg';
 import Logo from '../../assets/logo.svg';
+import { ROUTES } from '../../routes/Routes';
 import { NavLinks } from './NavLinks';
 import { useHeader } from './useHeader';
 
 export default function Header() {
-  const { isLargeScreen, menu, theme } = useHeader();
+  const { isLargeScreen, menu, theme, products } = useHeader();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <header className="absolute z-50 top-0 left-0 pt-0 md:p-4 flex items-center justify-between w-full max-w-[100vw]">
+    <header
+      className={classNames(
+        'fixed z-50 top-0 left-0 pt-0 md:p-4 flex items-center justify-between w-full max-w-[100vw] transition-all duration-300',
+        isScrolled && 'shadow-sm bg-primary-light dark:bg-primary-dark',
+      )}
+    >
       <nav
         aria-label="Global"
-        className="w-full flex items-center justify-between p-6 lg:px-8"
+        className="w-full flex items-center justify-between"
       >
         <div className="flex lg:flex-1 justify-center lg:justify-start">
-          <a href="/">
+          <Link to={ROUTES.home.call()}>
             <img
               src={theme.isDarkTheme ? LogoWhite : Logo}
-              alt=""
+              alt="DIY LAB Logo"
               className="w-24 h-22"
             />
             <span className="sr-only">DIY LAB</span>
-          </a>
+          </Link>
         </div>
 
         <div className="flex lg:hidden">
@@ -37,7 +56,11 @@ export default function Header() {
           </button>
         </div>
 
-        <NavLinks isVisible={isLargeScreen} isLargeScreen={isLargeScreen} />
+        <NavLinks
+          products={products}
+          isVisible={isLargeScreen}
+          isLargeScreen={isLargeScreen}
+        />
 
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <label className="inline-flex items-center relative cursor-pointer">
@@ -61,7 +84,7 @@ export default function Header() {
               <div className="w-full flex justify-between items-center">
                 <img
                   src={theme.isDarkTheme ? LogoWhite : Logo}
-                  alt=""
+                  alt="DIY LAB Logo"
                   className="w-24 h-22"
                 />
                 <span className="sr-only">DIY LAB</span>
@@ -74,6 +97,7 @@ export default function Header() {
               </div>
 
               <NavLinks
+                products={products}
                 isVisible
                 isLargeScreen={isLargeScreen}
                 closeButton={null}
