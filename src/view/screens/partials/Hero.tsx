@@ -58,9 +58,12 @@ export function Hero() {
             >
               {t(LanguageTexts.HeroProductsButton)}
             </button>
-            <button className="w-full py-2 border border-solid border-[#F6911D] font-semibold rounded-sm transition-all duration-500 hover:bg-[#F6911D] hover:text-white shadow-md">
+            <a
+              href="#statistics"
+              className="w-full py-2 text-center border border-solid border-[#F6911D] font-semibold rounded-sm transition-all duration-500 hover:bg-[#F6911D] hover:text-white shadow-md"
+            >
               {t(LanguageTexts.HeroLearnMoreButton)}
-            </button>
+            </a>
           </div>
         </article>
         <article className="hidden md:flex h-full col-span-12 md:col-span-6 flex-col gap-y-4 justify-center items-center">
