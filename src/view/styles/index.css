@@ -38,6 +38,10 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .circles li {
   position: absolute;
   display: block;

@@ -4,34 +4,39 @@ import {
   PopoverGroup,
   PopoverPanel,
 } from '@headlessui/react';
-import { CursorArrowRaysIcon, PhoneIcon } from '@heroicons/react/20/solid';
+import { PhoneIcon } from '@heroicons/react/20/solid';
 import { ReactNode } from 'react';
-import { useTranslation } from 'react-i18next';
+import { IconType } from 'react-icons';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { Link, useNavigate } from 'react-router-dom';
-import { blogData } from '../../../blogContent/blogPosts'; // Certifique-se de que isso está correto
+import { blogData } from '../../../blogContent/blogPosts';
 import { LanguageSwitcher } from '../../components/LanguageSwitcher/LanguageSwitcher';
+import { ROUTES } from '../../routes/Routes';
+import { useCurrentLang } from '../../utils/useCurrentLang';
+
+export type Products = {
+  name: string;
+  href: string;
+  icon: IconType;
+};
+
+export type NavLinksProps = {
+  products: Products[];
+  isVisible: boolean;
+  closeButton?: ReactNode;
+  isLargeScreen: boolean;
+  LinkCallBack?: () => void;
+};
 
 export function NavLinks({
+  products,
   closeButton,
   isVisible,
   isLargeScreen,
   LinkCallBack,
-}: {
-  closeButton?: ReactNode;
-  isVisible: boolean;
-  isLargeScreen: boolean;
-  LinkCallBack?: () => void;
-}) {
+}: NavLinksProps) {
   const navigate = useNavigate();
-  const { i18n } = useTranslation();
-
-  let currentLang = i18n.language.split('-')[0] as 'pt' | 'en' | 'es';
-  const supportedLanguages = ['pt', 'en', 'es'];
-
-  if (!supportedLanguages.includes(currentLang)) {
-    currentLang = 'en';
-  }
+  const { currentLang } = useCurrentLang();
 
   const handleOnLink = (path: string, callback?: () => void) => {
     if (callback) {
@@ -39,24 +44,6 @@ export function NavLinks({
     }
     navigate(path);
   };
-
-  const products = [
-    {
-      name: 'BITKIT',
-      href: `/${currentLang}/bitkit`,
-      icon: CursorArrowRaysIcon,
-    },
-    {
-      name: 'SEEDKIT',
-      href: `/${currentLang}/seedkit`,
-      icon: CursorArrowRaysIcon,
-    },
-    {
-      name: 'BITMASTER',
-      href: `/${currentLang}/bitmaster`,
-      icon: CursorArrowRaysIcon,
-    },
-  ];
 
   const callsToAction = [{ name: 'Contact sales', href: '#', icon: PhoneIcon }];
 
@@ -128,7 +115,7 @@ export function NavLinks({
 
             <button
               onClick={() =>
-                handleOnLink(`/${currentLang}/sobre-nos`, LinkCallBack)
+                handleOnLink(ROUTES.about.call(currentLang), LinkCallBack)
               }
               className="text-2xl lg:text-sm font-semibold leading-6 hover:text-[#F6911D]"
             >
@@ -171,7 +158,7 @@ export function NavLinks({
                         />
                         <Link
                           key={postId}
-                          to={`/${currentLang}/blog/${postId}`}
+                          to={ROUTES.blog.callLang(currentLang, postId)}
                           className="bg-white dark:bg-slate-800   overflow-hidden transition-transform transform hover:scale-105"
                         >
                           {translation.title}
