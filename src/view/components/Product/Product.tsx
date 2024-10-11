@@ -86,7 +86,7 @@ const Product: React.FC = () => {
                 />
               </div>
               <div className="mb-4">
-                <button className="bg-orange-600 text-2xl text-white w-[40%] py-4 px-6 rounded-md">
+                <button className="bg-[#F6911D] text-2xl text-white w-[40%] py-4 px-6 rounded-md">
                   Comprar
                 </button>
               </div>
@@ -104,7 +104,7 @@ const Product: React.FC = () => {
                     placeholder="Digite seu CEP"
                     className="border py-2 px-4 w-48 rounded-md dark:bg-slate-800"
                   />
-                  <button className="bg-orange-600 text-white py-2 px-6 rounded-md">
+                  <button className="bg-[#F6911D] text-white py-2 px-6 rounded-md">
                     Consultar
                   </button>
                 </div>
@@ -115,7 +115,7 @@ const Product: React.FC = () => {
           <div>
             <h1 className="text-4xl font-bold mb-20 mt-36 text-center ">
               Recursos Básicos e Avançados em um só
-              <span className="text-orange-600"> Kit</span>
+              <span className="text-[#F6911D]"> Kit</span>
             </h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {resources.map((resource, index) => (
