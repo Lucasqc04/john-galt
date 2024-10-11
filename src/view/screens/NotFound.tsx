@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../routes/Routes';
 
 export function NotFound() {
   const navigate = useNavigate();
 
   const handleHomeRedirect = () => {
-    navigate('/');
+    navigate(ROUTES.home.call());
   };
 
   return (

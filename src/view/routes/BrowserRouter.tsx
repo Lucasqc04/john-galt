@@ -14,6 +14,7 @@ import { About } from '../screens/About';
 import { BlogPost } from '../screens/BlogPost';
 import { NotFound } from '../screens/NotFound';
 import { Page } from '../screens/Page';
+import { ROUTES } from './Routes';
 
 export function BrowserRouter() {
   const { currentLang } = useLanguage();
@@ -23,17 +24,17 @@ export function BrowserRouter() {
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route
-            path="/"
+            path={ROUTES.home.call()}
             element={
               <Navigate to={`/${currentLang || AcceptedLanguages.pt}`} />
             }
           />
-          <Route path="/:lang" element={<DefaultLayout />}>
+          <Route path={ROUTES.lang.call()} element={<DefaultLayout />}>
             <Route index element={<Page />} />
-            <Route path="produtos" element={<Products />} />
-            <Route path="blog/:id" element={<BlogPost />} />
-            <Route path="produto" element={<Product />} />
-            <Route path="sobre-nos" element={<About />} />
+            <Route path={ROUTES.products.path} element={<Products />} />
+            <Route path={ROUTES.blog.path} element={<BlogPost />} />
+            <Route path={ROUTES.product.path} element={<Product />} />
+            <Route path={ROUTES.about.path} element={<About />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
