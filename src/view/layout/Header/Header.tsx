@@ -1,3 +1,5 @@
+import classNames from 'classnames';
+import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { FaBars, FaMoon, FaSun } from 'react-icons/fa';
 import { MdClose } from 'react-icons/md';
@@ -10,12 +12,27 @@ import { useHeader } from './useHeader';
 
 export default function Header() {
   const { isLargeScreen, menu, theme, products } = useHeader();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <header className="absolute z-50 top-0 left-0 pt-0 md:p-4 flex items-center justify-between w-full max-w-[100vw]">
+    <header
+      className={classNames(
+        'fixed z-50 top-0 left-0 pt-0 md:p-4 flex items-center justify-between w-full max-w-[100vw] transition-all duration-300',
+        isScrolled && 'shadow-sm bg-primary-light dark:bg-primary-dark',
+      )}
+    >
       <nav
         aria-label="Global"
-        className="w-full flex items-center justify-between p-6 lg:px-8"
+        className="w-full flex items-center justify-between"
       >
         <div className="flex lg:flex-1 justify-center lg:justify-start">
           <Link to={ROUTES.home.call()}>
