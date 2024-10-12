@@ -6,10 +6,12 @@ import {
 } from '@headlessui/react';
 import { PhoneIcon } from '@heroicons/react/20/solid';
 import { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import { IconType } from 'react-icons';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { Link, useNavigate } from 'react-router-dom';
 import { blogData } from '../../../blogContent/blogPosts';
+import { LanguageTexts } from '../../../domain/locales/Language';
 import { LanguageSwitcher } from '../../components/LanguageSwitcher/LanguageSwitcher';
 import { ROUTES } from '../../routes/Routes';
 import { useCurrentLang } from '../../utils/useCurrentLang';
@@ -36,6 +38,7 @@ export function NavLinks({
   LinkCallBack,
 }: NavLinksProps) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { currentLang } = useCurrentLang();
 
   const handleOnLink = (path: string, callback?: () => void) => {
@@ -59,7 +62,7 @@ export function NavLinks({
           <PopoverGroup className="flex flex-col items-center justify-center gap-y-10 lg:gap-x-12 lg:flex-row lg:gap-y-0">
             <Popover className="relative">
               <PopoverButton className="text-2xl flex items-center justify-center gap-x-1 lg:text-sm font-semibold leading-6 hover:text-[#F6911D]">
-                Produtos
+                {t(LanguageTexts.header.links[0])}
                 <MdKeyboardArrowDown
                   aria-hidden="true"
                   size={isLargeScreen ? 24 : 28}
@@ -119,11 +122,11 @@ export function NavLinks({
               }
               className="text-2xl lg:text-sm font-semibold leading-6 hover:text-[#F6911D]"
             >
-              Quem Somos
+              {t(LanguageTexts.header.links[1])}
             </button>
             <Popover className="relative">
               <PopoverButton className="text-2xl flex items-center justify-center gap-x-1 lg:text-sm font-semibold leading-6 hover:text-[#F6911D]">
-                Blogs
+                {t(LanguageTexts.header.links[2])}
                 <MdKeyboardArrowDown
                   aria-hidden="true"
                   size={isLargeScreen ? 24 : 28}

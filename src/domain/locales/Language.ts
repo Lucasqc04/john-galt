@@ -6,17 +6,61 @@ import translationEN from './en/translation.json';
 import translationES from './es/translation.json';
 import translationPT from './pt/translation.json';
 
-export enum LanguageTexts {
-  HeroTitle = 'HeroTitle',
-  HeroDescription = 'HeroDescription',
-  HeroProductsButton = 'HeroProductsButton',
-  HeroLearnMoreButton = 'HeroLearnMoreButton',
-  FooterAbout = 'FooterAbout',
-  FooterPrivacyPolicy = 'FooterPrivacyPolicy',
-  FooterLicensing = 'FooterLicensing',
-  FooterContact = 'FooterContact',
-  FooterAllRightsReserved = 'FooterAllRightsReserved',
-}
+export const LanguageTexts = {
+  header: {
+    links: ['header.links.0', 'header.links.1', 'header.links.2'],
+  },
+  hero: {
+    title: 'hero.title',
+    description: 'hero.description',
+    buttons: {
+      products: 'hero.buttons.products',
+      learnMore: 'hero.buttons.learnMore',
+    },
+  },
+  positivePoints: {
+    title: 'positivePoints.title',
+    cards: {
+      mentality: 'positivePoints.cards.0',
+      protocols: 'positivePoints.cards.1',
+      transparency: 'positivePoints.cards.2',
+      security: 'positivePoints.cards.3',
+    },
+  },
+  statistics: {
+    title: 'statistics.title',
+    infos: 'statistics.infos',
+    text: 'statistics.text',
+  },
+  products: {
+    title: 'products.title',
+    infos: 'products.infos',
+    buyNowButton: 'products.buyNowButton',
+  },
+  blogs: {
+    title: 'blogs.title',
+  },
+  newsletter: {
+    title: 'newsletter.title',
+    description: 'newsletter.description',
+    form: {
+      email: 'newsletter.form.email',
+      submitButton: 'newsletter.form.submitButton',
+    },
+  },
+  footer: {
+    links: 'footer.links',
+    allRightsReserved: 'footer.allRightsReserved',
+  },
+  about: {
+    title: 'about.title',
+    subtitle: 'about.subtitle',
+    manifest: 'about.manifest',
+  },
+  post: {
+    notFound: 'post.notFound',
+  },
+};
 
 export enum AcceptedLanguages {
   pt = 'pt',
