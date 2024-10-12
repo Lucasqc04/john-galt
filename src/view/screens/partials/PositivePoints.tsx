@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { useInView } from 'react-intersection-observer';
+import { LanguageTexts } from '../../../domain/locales/Language';
 import PositivePoints1 from '../../assets/images/positive-points/positive-points-1.png';
 import PositivePoints2 from '../../assets/images/positive-points/positive-points-2.png';
 import PositivePoints3 from '../../assets/images/positive-points/positive-points-3.png';
@@ -29,19 +30,19 @@ function styleThreeWordsAfterFourth(text: string): string | JSX.Element {
 const positivePoints = [
   {
     image: PositivePoints1,
-    titleKey: 'MentalityTitle',
+    titleKey: LanguageTexts.positivePoints.cards.mentality,
   },
   {
     image: PositivePoints2,
-    titleKey: 'ProtocolsTitle',
+    titleKey: LanguageTexts.positivePoints.cards.protocols,
   },
   {
     image: PositivePoints3,
-    titleKey: 'TransparencyTitle',
+    titleKey: LanguageTexts.positivePoints.cards.transparency,
   },
   {
     image: PositivePoints4,
-    titleKey: 'SecurityTitle',
+    titleKey: LanguageTexts.positivePoints.cards.security,
   },
 ];
 
@@ -67,7 +68,7 @@ export function PositivePoints() {
             !inView && 'opacity-0',
           )}
         >
-          {styleThreeWordsAfterFourth(t('PositivePointsTitle'))}
+          {styleThreeWordsAfterFourth(t(LanguageTexts.positivePoints.title))}
         </h2>
       </article>
 
@@ -86,7 +87,7 @@ export function PositivePoints() {
               className="w-2/3 sm:w-40 md:w-44 lg:w-2/3 max-h-48"
             />
 
-            <span className="text-xl text-black font-bold">
+            <span className="text-xl text-center text-black font-bold">
               {t(item.titleKey)}
             </span>
           </div>

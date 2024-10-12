@@ -1,34 +1,42 @@
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { useLanguage } from '../../../domain/locales/Language';
+import { LanguageTexts, useLanguage } from '../../../domain/locales/Language';
 import Bitkit1 from '../../assets/Bitkit/Bitkit 1.png';
 import Bitkit6 from '../../assets/Bitkit/Bitkit 6.png';
 import Bitkit7 from '../../assets/Bitkit/Bitkit 7.png';
 import { BackgroundAnimatedProduct } from '../../styles/Products/Product.styles';
+import { styleFirstWord } from '../../utils/StyleFirstWord';
+
+type Infos = {
+  title: string;
+  description: string;
+};
 
 export function Products() {
+  const { t } = useTranslation();
+
+  const infos = t(LanguageTexts.products.infos, {
+    returnObjects: true,
+  }) as Infos[];
+
   const products = [
     {
-      id: 1,
       img: Bitkit1,
-      title: ' Seu Kit Completo para o Mundo do Bitcoin!',
-      description:
-        ' Tenha tudo o que precisa em um único pacote para maximizar seus investimentos em Bitcoin.',
+      title: infos[0].title,
+      description: infos[0].description,
     },
     {
-      id: 2,
       img: Bitkit7,
-      title: ' Proteja Suas Chaves Privadas com Segurança!',
-      description:
-        ' Ideal para investidores que priorizam a segurança e desejam garantir a proteção de suas chaves privadas.',
+      title: infos[1].title,
+      description: infos[1].description,
     },
     {
-      id: 3,
       img: Bitkit6,
-      title: ' Segurança Elevada para Seus Investimentos!',
-      description:
-        ' Para aqueles que buscam o mais alto nível de proteção em suas transações financeiras.',
+      title: infos[2].title,
+      description: infos[2].description,
     },
   ];
+
   const { currentLang } = useLanguage();
   const navigate = useNavigate();
   const handleButton = () => {
@@ -41,12 +49,12 @@ export function Products() {
       <section className="w-full min-h-screen flex flex-col justify-center items-center py-12">
         <div className="container p-4 sm:p-8 dark:bg-white-white">
           <h2 className="text-6xl text-center font-bold dark:text-white mb-8">
-            <span className="text-[#F6911D]">Nossos</span> Produtos
+            {styleFirstWord(t(LanguageTexts.products.title))}
           </h2>
           <article className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 gap-y-8">
-            {products.map((product) => (
+            {products.map((product, idx) => (
               <div
-                key={product.id}
+                key={idx}
                 className="bg-white dark:bg-slate-700 p-8 rounded-lg shadow-xl flex flex-col"
               >
                 <img
@@ -64,7 +72,7 @@ export function Products() {
                   onClick={handleButton}
                   className="w-full font-bold bg-[#F6911D] text-white dark:text-white py-2 rounded-md hover:bg-orange-600 transition-colors"
                 >
-                  Comprar Agora
+                  {t(LanguageTexts.products.buyNowButton)}
                 </button>
               </div>
             ))}
