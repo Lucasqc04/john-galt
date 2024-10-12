@@ -36,11 +36,6 @@ export function useHeader() {
       href: ROUTES.products.SEEDKIT.call(currentLang),
       icon: MdTouchApp,
     },
-    {
-      name: 'BITMASTER',
-      href: ROUTES.products.BITMASTER.call(currentLang),
-      icon: MdTouchApp,
-    },
   ];
 
   return {

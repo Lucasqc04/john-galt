@@ -9,23 +9,7 @@ import {
 } from '../../../domain/locales/Language';
 import HeroImage from '../../assets/images/hero-image.png';
 import { BackgroundAnimated } from '../../components/BackgroundAnimated';
-
-function styleFirstWord(text: string): string | JSX.Element {
-  const words = text.split(' ');
-
-  if (words.length > 0) {
-    const firstWord = words.shift();
-    const remainingText = words.join(' ');
-
-    return (
-      <>
-        <span className="text-[#F6911D]">{firstWord}</span> {remainingText}
-      </>
-    );
-  }
-
-  return text;
-}
+import { styleFirstWord } from '../../utils/StyleFirstWord';
 
 export function Hero() {
   const { t } = useTranslation();
@@ -46,23 +30,23 @@ export function Hero() {
       >
         <article className="h-full col-span-12 md:col-span-6 flex flex-col gap-y-4 justify-center items-center">
           <h1 className="max-w-2xl text-4xl md:text-6xl text-center font-bold whitespace-pre-wrap break-words animate-fade-right animate-once animate-duration-500 animate-delay-300">
-            {styleFirstWord(t(LanguageTexts.HeroTitle))}
+            {styleFirstWord(t(LanguageTexts.hero.title))}
           </h1>
           <p className="max-w-2xl text-base md:text-lg text-center font-semibold animate-flip-up animate-once">
-            {t(LanguageTexts.HeroDescription)}
+            {t(LanguageTexts.hero.description)}
           </p>
           <div className="w-full flex flex-col md:flex-row gap-y-4 md:gap-y-0 gap-x-4">
             <button
               onClick={handleButton}
               className="w-full py-2 bg-[#F6911D] text-white font-semibold rounded-sm transition-colors duration-300 hover:bg-orange-600 shadow-md"
             >
-              {t(LanguageTexts.HeroProductsButton)}
+              {t(LanguageTexts.hero.buttons.products)}
             </button>
             <a
               href="#statistics"
               className="w-full py-2 text-center border border-solid border-[#F6911D] font-semibold rounded-sm transition-all duration-500 hover:bg-[#F6911D] hover:text-white shadow-md"
             >
-              {t(LanguageTexts.HeroLearnMoreButton)}
+              {t(LanguageTexts.hero.buttons.learnMore)}
             </a>
           </div>
         </article>

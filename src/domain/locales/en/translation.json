@@ -1,13 +1,92 @@
 {
-  "HeroTitle": "Offline Bitcoin Protection with Web3 Security",
-  "HeroDescription": "We use Web3 technology to guarantee your security, eliminating intermediaries and offering full control over your self-custody.",
-  "HeroGetInTouchButton": "Our Products",
-  "HeroLearnMoreButton": "Learn More",
-  "PositivePointsTitle": "Stay informed about everything you need to invest securely",
-  "MentalityTitle": "Sovereign Mentality",
-  "ProtocolsTitle": "Open Source Protocols",
-  "TransparencyTitle": "Full Transparency",
-  "SecurityTitle": "Security and Privacy",
+  "header": {
+    "links": ["Products", "About Us", "Blogs"]
+  },
+  "hero": {
+    "title": "Offline Bitcoin Protection with Web3 Security",
+    "description": "We are a WEB3 company offering security and privacy with DIY technology, enabling 100% offline self-custody.",
+    "buttons": {
+      "products": "Our Products",
+      "learnMore": "Learn More"
+    }
+  },
+  "positivePoints": {
+    "title": "Stay informed about everything you need to invest securely",
+    "cards": [
+      "Sovereign Mentality",
+      "Open Source Protocols",
+      "Full Transparency",
+      "Security and Privacy"
+    ]
+  },
+  "statistics": {
+    "title": "DIY LAB is revolutionizing crypto sovereignty in Brazil - more options",
+    "infos": [
+      {
+        "title": "+ 2K",
+        "description": "Bitcoiners in DIY communities"
+      },
+      {
+        "title": "+ WEB3",
+        "description": "Eliminating Intermediaries and Empowering Users"
+      },
+      {
+        "title": "+ 20K",
+        "description": "People following us on social media"
+      },
+      {
+        "title": "Global",
+        "description": "Have crypto control from anywhere"
+      }
+    ],
+    "text": "Bitcoiners who were transformed by BITKIT"
+  },
+  "products": {
+    "title": "Our Products",
+    "infos": [
+      {
+        "title": "Your Complete Kit for the World of Bitcoin!",
+        "description": "Have everything you need in one package to maximize your Bitcoin investments."
+      },
+      {
+        "title": "Protect Your Private Keys with Security!",
+        "description": "Ideal for investors who prioritize security and want to ensure the protection of their private keys."
+      },
+      {
+        "title": "Enhanced Security for Your Investments!",
+        "description": "For those seeking the highest level of protection in their financial transactions."
+      }
+    ],
+    "buyNowButton": "Buy Now"
+  },
+  "blogs": {
+    "title": "BLOG DIY"
+  },
+  "newsletter": {
+    "title": "Subscribe to Our Newsletter",
+    "description": "Subscribe to our newsletter and stay up to date with the latest news, updates, and exclusive offers. Get valuable insights. Join our community today!",
+    "form": {
+      "email": "Enter your email",
+      "submitButton": "Submit"
+    }
+  },
+  "footer": {
+    "links": ["About", "Privacy Policy", "Licensing", "Contact"],
+    "allRightsReserved": "All Rights Reserved."
+  },
+  "about": {
+    "title": "DIY Security Lab Manifesto",
+    "subtitle": "Bitcoin, Freedom, and Sovereignty",
+    "manifest": [
+      "At DIY Sec Lab, we deeply believe in Bitcoin as a tool for individual emancipation. It is not just a digital currency, but a symbol of freedom and sovereignty, allowing each person to take control of their own destiny without relying on intermediaries or centralized institutions.",
+      "We know that true freedom is only possible with security. That is why we advocate for the offline storage of cryptocurrencies, where the user is the sole guardian of their assets. Our commitment is to facilitate this process, making it accessible for everyone to protect their funds independently and securely, away from digital threats.",
+      "Bitcoin paves the way for a future where power returns to the hands of the people. At DIY Sec Lab, our mission is to support this journey by providing the tools and knowledge necessary for each individual to live this sovereignty with confidence, simplicity, and responsibility. We believe that Bitcoin is the key to true autonomy, and we are here to help open that door."
+    ]
+  },
+  "post": {
+    "notFound": "Post Not Found!"
+  },
+
   "cardNamePlaceholder": "Cardholder's Name",
   "cardNumberPlaceholder": "Card Number",
   "expiryDatePlaceholder": "MM/YY",
@@ -21,14 +100,5 @@
   "ServiceTitle": "Services",
   "ServiceDescription": "Protect and conquer your crypto journey with the best tools.",
   "CustomizationDescription": "Everything you need in a bitkit",
-  "ServiceGetInTouchButton": "Buy",
-  "NewsletterTitle": "Subscribe to Our Newsletter",
-  "NewsletterDescription": "Subscribe to our newsletter and stay up to date with the latest news, updates, and exclusive offers. Get valuable insights. Join our community today!",
-  "NewsletterEmailPlaceholder": "Enter your email",
-  "NewsletterSubmitButton": "Submit",
-  "FooterAbout": "About",
-  "FooterPrivacyPolicy": "Privacy Policy",
-  "FooterLicensing": "Licensing",
-  "FooterContact": "Contact",
-  "FooterAllRightsReserved": "All Rights Reserved."
+  "ServiceGetInTouchButton": "Buy"
 }

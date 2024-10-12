@@ -25,8 +25,5 @@ export const ROUTES = {
     SEEDKIT: {
       call: (currentLang: string) => `/${currentLang}/seedkit`,
     },
-    BITMASTER: {
-      call: (currentLang: string) => `/${currentLang}/bitkit`,
-    },
   },
 };
