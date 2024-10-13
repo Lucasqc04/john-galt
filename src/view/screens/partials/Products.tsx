@@ -72,8 +72,8 @@ export function Products() {
     });
   };
 
-  const handleButton = () => {
-    navigate(`/${currentLang || 'pt'}/produto`);
+  const handleButton = (productId: number) => {
+    navigate(`/${currentLang || 'pt'}/produto/${productId}`);
   };
 
   return (
@@ -117,7 +117,7 @@ export function Products() {
                 </p>
 
                 <button
-                  onClick={handleButton}
+                  onClick={() => handleButton(product.id)}
                   className="w-full font-bold bg-[#F6911D] text-white dark:text-white py-2 rounded-md hover:bg-orange-600 transition-colors"
                 >
                   {t(LanguageTexts.products.buyNowButton)}

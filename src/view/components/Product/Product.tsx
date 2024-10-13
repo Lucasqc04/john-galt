@@ -1,5 +1,7 @@
+// Product.tsx
 import React, { useEffect, useState } from 'react';
 import { FaChevronLeft, FaChevronRight, FaTruckFast } from 'react-icons/fa6';
+import { useParams } from 'react-router-dom';
 import Bitkit1 from '../../assets/Bitkit/Bitkit 1.png';
 import Bitkit2 from '../../assets/Bitkit/Bitkit 2.png';
 import Bitkit3 from '../../assets/Bitkit/Bitkit 3.png';
@@ -21,27 +23,47 @@ interface Product {
 
 const Product: React.FC = () => {
   const [product, setProduct] = useState<Product | null>(null);
-
-  const productData: Product = {
-    id: 1,
-    name: 'Bitkit',
-    price: 850.0,
-    originalPrice: 1299.0,
-    description: 'Um verdadeiro bunker para guardar seu bitcoin',
-    images: [Bitkit6, Bitkit7, Bitkit1, Bitkit2, Bitkit3, Bitkit4, Bitkit5],
-  };
-
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const { id } = useParams<{ id: string }>();
+
+  const products: Product[] = [
+    {
+      id: 1,
+      name: 'Bitkit',
+      price: 850.0,
+      originalPrice: 1299.0,
+      description: 'Um verdadeiro bunker para guardar seu bitcoin',
+      images: [Bitkit6, Bitkit7, Bitkit1, Bitkit2, Bitkit3, Bitkit4, Bitkit5],
+    },
+    {
+      id: 3,
+      name: 'Bitkit Pro',
+      price: 1200.0,
+      originalPrice: 1599.0,
+      description: 'A versão Pro para os entusiastas de bitcoin',
+      images: [Bitkit1, Bitkit2, Bitkit3, Bitkit4, Bitkit5],
+    },
+  ];
+
+  useEffect(() => {
+    const selectedProduct = products.find((p) => p.id === Number(id));
+    setProduct(selectedProduct || null);
+    setCurrentImageIndex(0); // Reseta o índice da imagem ao mudar de produto
+  }, [id]);
+
+  if (!product) {
+    return <div>Carregando...</div>;
+  }
 
   const handleNextImage = () => {
     setCurrentImageIndex((prevIndex) =>
-      prevIndex === productData.images.length - 1 ? 0 : prevIndex + 1,
+      prevIndex === product.images.length - 1 ? 0 : prevIndex + 1,
     );
   };
 
   const handlePrevImage = () => {
     setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? productData.images.length - 1 : prevIndex - 1,
+      prevIndex === 0 ? product.images.length - 1 : prevIndex - 1,
     );
   };
 
@@ -68,14 +90,6 @@ const Product: React.FC = () => {
     'Compatibilidade com Sparrow Wallet, Specter Desktop, Nunchuk e BlueWallet',
   ];
 
-  useEffect(() => {
-    setProduct(productData);
-  }, []);
-
-  if (!product) {
-    return <div>Carregando...</div>;
-  }
-
   return (
     <>
       <BackgroundAnimatedProduct />
@@ -93,8 +107,8 @@ const Product: React.FC = () => {
                 </button>
 
                 <img
-                  src={productData.images[currentImageIndex]}
-                  alt={productData.name}
+                  src={product.images[currentImageIndex]}
+                  alt={product.name}
                   className="w-[80%] h-auto object-cover rounded-md shadow-lg"
                 />
 
@@ -108,7 +122,7 @@ const Product: React.FC = () => {
 
               {/* Thumbnail Section */}
               <div className="flex mt-4 space-x-2 justify-center">
-                {productData.images.map((image, index) => (
+                {product.images.map((image, index) => (
                   <img
                     key={index}
                     src={image}
@@ -127,15 +141,15 @@ const Product: React.FC = () => {
             {/* Product Info Section */}
             <div className="lg:w-1/2">
               <h1 className="text-2xl md:text-3xl font-bold dark:text-white mb-4">
-                {productData.name}
+                {product.name}
               </h1>
               <div className="dark:text-white line-through text-lg">
-                R${productData.originalPrice.toFixed(2)}
+                R${product.originalPrice.toFixed(2)}
               </div>
               <div className="dark:text-gray-400 text-3xl md:text-4xl font-bold mb-4">
-                R${productData.price.toFixed(2)}
+                R${product.price.toFixed(2)}
               </div>
-              <p className="dark:text-white mb-6">{productData.description}</p>
+              <p className="dark:text-white mb-6">{product.description}</p>
 
               <div className="flex items-center mb-6">
                 <input

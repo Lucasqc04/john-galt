@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { MdTouchApp } from 'react-icons/md';
+import { useParams } from 'react-router-dom';
 import { ThemeMode } from '../../../domain/entities/theme.entity';
 import { ROUTES } from '../../routes/Routes';
 import { useTheme } from '../../screens/useTheme';
@@ -10,6 +11,7 @@ export function useHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { currentTheme, toggleTheme } = useTheme();
   const { width } = useWindowSize();
+  const { id } = useParams<{ id: string | undefined }>();
   const [isDarkTheme, setIsDarkTheme] = useState(
     currentTheme === ThemeMode.dark,
   );
@@ -28,12 +30,12 @@ export function useHeader() {
   const products = [
     {
       name: 'BITKIT',
-      href: ROUTES.products.BITKIK.call(currentLang),
+      href: ROUTES.product.call(currentLang, id ?? '1'), // Usando '1' como valor padrão
       icon: MdTouchApp,
     },
     {
       name: 'SEEDKIT',
-      href: ROUTES.products.SEEDKIT.call(currentLang),
+      href: ROUTES.product.call(currentLang, id ?? '3'), // Usando '3' como valor padrão
       icon: MdTouchApp,
     },
   ];

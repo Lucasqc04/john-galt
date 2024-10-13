@@ -15,15 +15,19 @@ export const ROUTES = {
     call: (currentLang: string) => `/${currentLang}/sobre-nos`,
   },
   product: {
-    path: 'produto',
+    path: 'produto/:id',
+    call: (currentLang: string, id: string = '1') =>
+      `/${currentLang}/produto/${id}`,
   },
   products: {
-    path: 'produtos',
-    BITKIK: {
-      call: (currentLang: string) => `/${currentLang}/bitkit`,
+    path: 'produtos/:id',
+    BITKIT: {
+      call: (currentLang: string, id: string = '1') =>
+        `/${currentLang}/produto/${id}`,
     },
     SEEDKIT: {
-      call: (currentLang: string) => `/${currentLang}/seedkit`,
+      call: (currentLang: string, id: string = '3') =>
+        `/${currentLang}/produto/${id}`,
     },
   },
 };
