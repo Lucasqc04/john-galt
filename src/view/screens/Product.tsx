@@ -1,40 +1,40 @@
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaChevronLeft, FaChevronRight, FaTruckFast } from 'react-icons/fa6';
 import { useParams } from 'react-router-dom';
-import Bitkit1 from '../../assets/Bitkit/Bitkit 1.png';
-import Bitkit2 from '../../assets/Bitkit/Bitkit 2.png';
-import Bitkit3 from '../../assets/Bitkit/Bitkit 3.png';
-import Bitkit4 from '../../assets/Bitkit/Bitkit 4.png';
-import Bitkit5 from '../../assets/Bitkit/Bitkit 5.png';
-import Bitkit6 from '../../assets/Bitkit/Bitkit 6.png';
-import Bitkit7 from '../../assets/Bitkit/Bitkit 7.png';
-import { BlogLinks } from '../../screens/partials/BlogLinks';
-import { BackgroundAnimatedProduct } from '../../styles/Products/Product.styles';
+import Bitkit1 from '../assets/Bitkit/Bitkit 1.png';
+import Bitkit2 from '../assets/Bitkit/Bitkit 2.png';
+import Bitkit3 from '../assets/Bitkit/Bitkit 3.png';
+import Bitkit4 from '../assets/Bitkit/Bitkit 4.png';
+import Bitkit5 from '../assets/Bitkit/Bitkit 5.png';
+import Bitkit6 from '../assets/Bitkit/Bitkit 6.png';
+import Bitkit7 from '../assets/Bitkit/Bitkit 7.png';
+import { BackgroundAnimatedProduct } from '../styles/Products/Product.styles';
+import { BlogLinks } from './partials/BlogLinks';
 
-interface Product {
+type Product = {
   id: number;
   name: string;
   price: number;
   originalPrice: number;
   description: string;
   images: string[];
-}
+};
 
-interface ShippingOption {
+type ShippingOption = {
   id: number;
   name: string;
-  price: string; // Agora como string para corresponder à resposta da API
+  price: string;
   delivery_time: number;
   company: {
     id: number;
     name: string;
     picture: string;
   };
-}
+};
 
-const Product: React.FC = () => {
+export function Product() {
   const [product, setProduct] = useState<Product | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { id } = useParams<{ id: string }>();
@@ -45,34 +45,31 @@ const Product: React.FC = () => {
 
   const API_URL = import.meta.env.VITE_API_URL;
 
-  // Produtos disponíveis
-  const products: Product[] = [
-    {
-      id: 1,
-      name: 'Bitkit',
-      price: 850.0,
-      originalPrice: 1299.0,
-      description: 'Um verdadeiro bunker para guardar seu bitcoin',
-      images: [Bitkit6, Bitkit7, Bitkit1, Bitkit2, Bitkit3, Bitkit4, Bitkit5],
-    },
-    {
-      id: 3,
-      name: 'Bitkit Pro',
-      price: 1200.0,
-      originalPrice: 1599.0,
-      description: 'A versão Pro para os entusiastas de bitcoin',
-      images: [Bitkit1, Bitkit2, Bitkit3, Bitkit4, Bitkit5],
-    },
-  ];
-
-  // Carregar o produto selecionado com base no ID da URL
   useEffect(() => {
+    const products: Product[] = [
+      {
+        id: 1,
+        name: 'Bitkit',
+        price: 850.0,
+        originalPrice: 1299.0,
+        description: 'Um verdadeiro bunker para guardar seu bitcoin',
+        images: [Bitkit6, Bitkit7, Bitkit1, Bitkit2, Bitkit3, Bitkit4, Bitkit5],
+      },
+      {
+        id: 3,
+        name: 'Bitkit Pro',
+        price: 1200.0,
+        originalPrice: 1599.0,
+        description: 'A versão Pro para os entusiastas de bitcoin',
+        images: [Bitkit1, Bitkit2, Bitkit3, Bitkit4, Bitkit5],
+      },
+    ];
+
     const selectedProduct = products.find((p) => p.id === Number(id));
     setProduct(selectedProduct || null);
     setCurrentImageIndex(0);
   }, [id]);
 
-  // Funções para navegação no carrossel
   if (!product) {
     return <div>Carregando...</div>;
   }
@@ -110,7 +107,6 @@ const Product: React.FC = () => {
     'Compatibilidade com Sparrow Wallet, Specter Desktop, Nunchuk e BlueWallet',
   ];
 
-  // Função para calcular o frete com base no CEP
   const handleCalculateShipping = async () => {
     setLoading(true);
     setError(null);
@@ -118,7 +114,7 @@ const Product: React.FC = () => {
       const response = await axios.post(`${API_URL}shipping/calculate`, {
         cep: cep,
       });
-      setShippingOptions(response.data.options); // Atualizando para usar a nova estrutura
+      setShippingOptions(response.data.options);
       console.log('Frete calculado com sucesso');
     } catch (error) {
       setError('Erro ao calcular o frete. Tente novamente.');
@@ -138,7 +134,6 @@ const Product: React.FC = () => {
       <div className="min-h-screen pt-[35%] md:pt-[15%] lg:pt-[10%]">
         <div className="max-w-7xl mx-auto p-4">
           <div className="lg:flex lg:gap-12">
-            {/* Seção do Carrossel de Imagens */}
             <div className="lg:w-1/2 mb-6 lg:mb-0 relative">
               <div className="flex items-center justify-center space-x-4">
                 <button
@@ -160,7 +155,6 @@ const Product: React.FC = () => {
                 </button>
               </div>
 
-              {/* Miniaturas */}
               <div className="flex mt-4 space-x-2 justify-center">
                 {product.images.map((image, index) => (
                   <img
@@ -178,7 +172,6 @@ const Product: React.FC = () => {
               </div>
             </div>
 
-            {/* Seção de Informações do Produto */}
             <div className="lg:w-1/2">
               <h1 className="text-2xl md:text-3xl font-bold dark:text-white mb-4">
                 {product.name}
@@ -208,7 +201,6 @@ const Product: React.FC = () => {
                 </button>
               </div>
 
-              {/* Exibir Opções de Frete */}
               <div>
                 <div className="flex items-center mb-4">
                   <FaTruckFast className="text-lg md:text-2xl text-black dark:text-white mr-2" />
@@ -284,6 +276,4 @@ const Product: React.FC = () => {
       </div>
     </>
   );
-};
-
-export default Product;
+}
