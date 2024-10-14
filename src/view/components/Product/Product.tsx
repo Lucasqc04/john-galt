@@ -1,4 +1,5 @@
-// Product.tsx
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { FaChevronLeft, FaChevronRight, FaTruckFast } from 'react-icons/fa6';
 import { useParams } from 'react-router-dom';
@@ -21,11 +22,30 @@ interface Product {
   images: string[];
 }
 
+interface ShippingOption {
+  id: number;
+  name: string;
+  price: string; // Agora como string para corresponder à resposta da API
+  delivery_time: number;
+  company: {
+    id: number;
+    name: string;
+    picture: string;
+  };
+}
+
 const Product: React.FC = () => {
   const [product, setProduct] = useState<Product | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { id } = useParams<{ id: string }>();
+  const [cep, setCep] = useState('');
+  const [shippingOptions, setShippingOptions] = useState<ShippingOption[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [, setError] = useState<string | null>(null);
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
+  // Produtos disponíveis
   const products: Product[] = [
     {
       id: 1,
@@ -45,16 +65,17 @@ const Product: React.FC = () => {
     },
   ];
 
+  // Carregar o produto selecionado com base no ID da URL
   useEffect(() => {
     const selectedProduct = products.find((p) => p.id === Number(id));
     setProduct(selectedProduct || null);
     setCurrentImageIndex(0);
   }, [id]);
 
+  // Funções para navegação no carrossel
   if (!product) {
     return <div>Carregando...</div>;
   }
-
   const handleNextImage = () => {
     setCurrentImageIndex((prevIndex) =>
       prevIndex === product.images.length - 1 ? 0 : prevIndex + 1,
@@ -63,14 +84,13 @@ const Product: React.FC = () => {
 
   const handlePrevImage = () => {
     setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? product.images.length - 1 : prevIndex - 1,
+      prevIndex === 0 ? product?.images.length! - 1 : prevIndex - 1,
     );
   };
 
   const handleThumbnailClick = (index: number) => {
     setCurrentImageIndex(index);
   };
-
   const resources = [
     'Open Source',
     'Câmera para transações totalmente air-gapped',
@@ -90,13 +110,35 @@ const Product: React.FC = () => {
     'Compatibilidade com Sparrow Wallet, Specter Desktop, Nunchuk e BlueWallet',
   ];
 
+  // Função para calcular o frete com base no CEP
+  const handleCalculateShipping = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.post(`${API_URL}shipping/calculate`, {
+        cep: cep,
+      });
+      setShippingOptions(response.data.options); // Atualizando para usar a nova estrutura
+      console.log('Frete calculado com sucesso');
+    } catch (error) {
+      setError('Erro ao calcular o frete. Tente novamente.');
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (!product) {
+    return <div>Carregando...</div>;
+  }
+
   return (
     <>
       <BackgroundAnimatedProduct />
       <div className="min-h-screen pt-[35%] md:pt-[15%] lg:pt-[10%]">
         <div className="max-w-7xl mx-auto p-4">
           <div className="lg:flex lg:gap-12">
-            {/* Carousel Section */}
+            {/* Seção do Carrossel de Imagens */}
             <div className="lg:w-1/2 mb-6 lg:mb-0 relative">
               <div className="flex items-center justify-center space-x-4">
                 <button
@@ -105,13 +147,11 @@ const Product: React.FC = () => {
                 >
                   <FaChevronLeft />
                 </button>
-
                 <img
                   src={product.images[currentImageIndex]}
                   alt={product.name}
                   className="w-[80%] h-auto object-cover rounded-md shadow-lg"
                 />
-
                 <button
                   onClick={handleNextImage}
                   className="bg-[#F6911D] text-white p-2 rounded-full"
@@ -120,7 +160,7 @@ const Product: React.FC = () => {
                 </button>
               </div>
 
-              {/* Thumbnail Section */}
+              {/* Miniaturas */}
               <div className="flex mt-4 space-x-2 justify-center">
                 {product.images.map((image, index) => (
                   <img
@@ -138,7 +178,7 @@ const Product: React.FC = () => {
               </div>
             </div>
 
-            {/* Product Info Section */}
+            {/* Seção de Informações do Produto */}
             <div className="lg:w-1/2">
               <h1 className="text-2xl md:text-3xl font-bold dark:text-white mb-4">
                 {product.name}
@@ -153,38 +193,58 @@ const Product: React.FC = () => {
 
               <div className="flex items-center mb-6">
                 <input
-                  type="number"
-                  className="border py-2 px-4 w-12 md:w-16 text-center rounded-md dark:bg-slate-800 dark:text-gray-400"
-                  defaultValue={1}
+                  type="text"
+                  placeholder="Digite seu CEP"
+                  value={cep}
+                  onChange={(e) => setCep(e.target.value)}
+                  className="p-2 border border-gray-300 rounded-md"
                 />
-              </div>
-              <div className="mb-4">
-                <button className="bg-[#F6911D] text-lg md:text-2xl text-white w-[60%] md:w-[40%] py-2 md:py-4 px-6 rounded-md">
-                  Comprar
+                <button
+                  onClick={handleCalculateShipping}
+                  className="bg-[#F6911D] text-white p-2 rounded-md ml-2"
+                  disabled={loading}
+                >
+                  {loading ? 'Calculando...' : 'Calcular Frete'}
                 </button>
               </div>
 
+              {/* Exibir Opções de Frete */}
               <div>
                 <div className="flex items-center mb-4">
                   <FaTruckFast className="text-lg md:text-2xl text-black dark:text-white mr-2" />
                   <h1 className="text-lg md:text-2xl font-bold dark:text-white">
-                    Envio: R$ 40,00 (para todo o Brasil)
+                    Opções de Envio:
                   </h1>
                 </div>
-                <div className="flex items-center gap-4">
-                  <input
-                    type="text"
-                    placeholder="Digite seu CEP"
-                    className="border py-2 px-4 w-40 md:w-48 rounded-md dark:bg-slate-800"
-                  />
-                  <button className="bg-[#F6911D] text-white py-2 px-6 rounded-md">
-                    Consultar
-                  </button>
-                </div>
+
+                {shippingOptions.length > 0 ? (
+                  <ul className="ml-4">
+                    {shippingOptions.map((option) => (
+                      <li
+                        key={option.id}
+                        className="flex items-center dark:text-white mb-2"
+                      >
+                        <img
+                          src={option.company.picture}
+                          alt={option.company.name}
+                          className="w-10 h-10 mr-2"
+                        />
+                        <div>
+                          <strong>{option.name}</strong>: R${' '}
+                          {parseFloat(option.price).toFixed(2)} - Entrega em{' '}
+                          {option.delivery_time} dias
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <span className="ml-2 text-lg md:text-2xl dark:text-white">
+                    Informe o CEP
+                  </span>
+                )}
               </div>
             </div>
           </div>
-
           <div>
             <h1 className="text-3xl md:text-4xl font-bold mb-20 mt-36 text-center ">
               Recursos Básicos e Avançados em um só
