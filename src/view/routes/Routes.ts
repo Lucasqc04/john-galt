@@ -20,7 +20,7 @@ export const ROUTES = {
       `/${currentLang}/produto/${id}`,
   },
   products: {
-    path: 'produtos/:id',
+    path: 'produtos',
     BITKIT: {
       call: (currentLang: string, id: string = '1') =>
         `/${currentLang}/produto/${id}`,

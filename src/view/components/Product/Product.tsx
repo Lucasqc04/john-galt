@@ -48,7 +48,7 @@ const Product: React.FC = () => {
   useEffect(() => {
     const selectedProduct = products.find((p) => p.id === Number(id));
     setProduct(selectedProduct || null);
-    setCurrentImageIndex(0); // Reseta o índice da imagem ao mudar de produto
+    setCurrentImageIndex(0);
   }, [id]);
 
   if (!product) {
