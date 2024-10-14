@@ -17,6 +17,17 @@ export function useHeader() {
   );
   const { currentLang } = useCurrentLang();
 
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   useEffect(() => {
     document.documentElement.classList.toggle(
       ThemeMode.dark,
@@ -30,12 +41,12 @@ export function useHeader() {
   const products = [
     {
       name: 'BITKIT',
-      href: ROUTES.product.call(currentLang, id ?? '1'), // Usando '1' como valor padrão
+      href: ROUTES.product.call(currentLang, id ?? '1'),
       icon: MdTouchApp,
     },
     {
       name: 'SEEDKIT',
-      href: ROUTES.product.call(currentLang, id ?? '3'), // Usando '3' como valor padrão
+      href: ROUTES.product.call(currentLang, id ?? '3'),
       icon: MdTouchApp,
     },
   ];
@@ -52,5 +63,6 @@ export function useHeader() {
     },
     products,
     isLargeScreen,
+    isScrolled,
   };
 }
