@@ -16,13 +16,13 @@ import { LanguageSwitcher } from '../../components/LanguageSwitcher/LanguageSwit
 import { ROUTES } from '../../routes/Routes';
 import { useCurrentLang } from '../../utils/useCurrentLang';
 
-export type Products = {
+type Products = {
   name: string;
   href: string;
   icon: IconType;
 };
 
-export type NavLinksProps = {
+type NavLinksProps = {
   products: Products[];
   isVisible: boolean;
   closeButton?: ReactNode;
