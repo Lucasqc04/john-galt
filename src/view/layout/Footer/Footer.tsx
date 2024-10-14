@@ -26,7 +26,7 @@ export function Footer() {
               <span className="sr-only">DIY LAB</span>
             </a>
           </div>
-          <ul className="flex flex-col sm:flex-row flex-wrap items-center text-center sm:text-left mb-6 text-sm font-medium dark:text-white sm:mb-0 dark:text-gray-400">
+          <ul className="flex flex-col sm:flex-row flex-wrap items-center text-center sm:text-left mb-6 text-sm font-medium sm:mb-0 dark:text-gray-400">
             {links.map((link, idx) => (
               <li key={idx}>
                 <a href="#" className="hover:underline mb-2 sm:mb-0 sm:me-6">

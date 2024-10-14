@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { FaBars, FaMoon, FaSun } from 'react-icons/fa';
 import { MdClose } from 'react-icons/md';
@@ -11,17 +10,7 @@ import { NavLinks } from './NavLinks';
 import { useHeader } from './useHeader';
 
 export default function Header() {
-  const { isLargeScreen, menu, theme, products } = useHeader();
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const { isLargeScreen, menu, theme, products, isScrolled } = useHeader();
 
   return (
     <header
