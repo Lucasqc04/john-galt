@@ -65,11 +65,12 @@ export class RemoteDataSource {
     url,
     params,
   }: RemoteGetReq<Response>): RemoteRequestRes<Response> {
-    const { data } = await this.api.get<Response>(url, { params });
+    const { data } = await this.api.get<Response>(url, {
+      params,
+      timeout: 10000,
+    });
 
     const serialized = model.safeParse(data);
-
-    console.log(serialized.error?.errors);
 
     if (!serialized.success) return null;
 

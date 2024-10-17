@@ -26,6 +26,10 @@ export function useNewsletter() {
             return;
         }
       }
+
+      alert('CADASTRADO COM SUCESSO!');
+    } catch {
+      alert('ERRO AO CADASTRAR NEWSLETTER');
     } finally {
       setLoading(false);
     }
