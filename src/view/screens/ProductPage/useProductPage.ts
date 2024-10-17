@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useMemo, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { LanguageTexts } from '../../../domain/locales/Language';
@@ -52,13 +53,18 @@ type Infos = {
 };
 
 export function useProductPage() {
+  const [loading, setLoading] = useState<boolean>(false);
   const { t } = useTranslation();
+
+  const form = useForm<{
+    postalCode: string;
+  }>();
+  const { register, handleSubmit } = form;
+
   const [product, setProduct] = useState<Product | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { id } = useParams<{ id: string }>();
-  const [postalCode, setPostalCode] = useState('');
   const [shippingOptions, setShippingOptions] = useState<ShippingOption[]>([]);
-  const [loading, setLoading] = useState(false);
   const [, setError] = useState<string | null>(null);
 
   const API_URL = import.meta.env.VITE_API_URL;
@@ -120,18 +126,19 @@ export function useProductPage() {
     setCurrentImageIndex(index);
   };
 
-  const handleCalculateShipping = async () => {
+  const onSubmit: SubmitHandler<{
+    postalCode: string;
+  }> = async (data) => {
     setLoading(true);
     setError(null);
     try {
       const response = await axios.post(`${API_URL}/shipping/calculate`, {
-        postalCode: postalCode,
+        postalCode: data.postalCode,
       });
       setShippingOptions(response.data);
-      console.log('Frete calculado com sucesso');
     } catch (error) {
       setError('Erro ao calcular o frete. Tente novamente.');
-      console.error(error);
+      alert(error);
     } finally {
       setLoading(false);
     }
@@ -139,8 +146,10 @@ export function useProductPage() {
 
   return {
     t,
-    product,
+    form,
     loading,
+    product,
+    register,
     image: {
       next: handleNextImage,
       prev: handlePrevImage,
@@ -148,12 +157,8 @@ export function useProductPage() {
       thumbnail: handleThumbnailClick,
     },
     shipping: {
-      calculate: handleCalculateShipping,
+      calculate: handleSubmit(onSubmit),
       options: shippingOptions,
-    },
-    postalCode: {
-      value: postalCode,
-      set: setPostalCode,
     },
     resources,
   };

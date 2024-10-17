@@ -2,12 +2,13 @@ import { FaChevronLeft, FaChevronRight, FaTruckFast } from 'react-icons/fa6';
 import { MdCheck } from 'react-icons/md';
 import { LanguageTexts } from '../../../domain/locales/Language';
 
+import { FormProvider } from 'react-hook-form';
 import { BackgroundAnimatedProduct } from '../../styles/Products/Product.styles';
 import { BlogLinks } from '../partials/BlogLinks';
 import { useProductPage } from './useProductPage';
 
 export function ProductPage() {
-  const { t, product, image, shipping, loading, postalCode, resources } =
+  const { t, form, register, product, image, shipping, loading, resources } =
     useProductPage();
 
   if (!product) {
@@ -69,23 +70,23 @@ export function ProductPage() {
                 R${product.price.toFixed(2)}
               </div>
               <p className="dark:text-white mb-6">{product.description}</p>
-
-              <form className="flex items-center mb-6">
-                <input
-                  type="text"
-                  placeholder="Digite seu CEP"
-                  value={postalCode.value}
-                  onChange={(e) => postalCode.set(e.target.value)}
-                  className="p-2 border border-gray-300 rounded-md"
-                />
-                <button
-                  onClick={shipping.calculate}
-                  className="bg-[#F6911D] text-white p-2 rounded-md ml-2"
-                  disabled={loading}
-                >
-                  {loading ? 'Calculando...' : 'Calcular Frete'}
-                </button>
-              </form>
+              <FormProvider {...form}>
+                <form className="flex items-center mb-6">
+                  <input
+                    type="text"
+                    placeholder="Digite seu CEP"
+                    {...register('postalCode')}
+                    className="p-2 border border-gray-300 rounded-md"
+                  />
+                  <button
+                    onClick={shipping.calculate}
+                    className="bg-[#F6911D] text-white p-2 rounded-md ml-2"
+                    disabled={loading}
+                  >
+                    {loading ? 'Calculando...' : 'Calcular Frete'}
+                  </button>
+                </form>
+              </FormProvider>
 
               <div>
                 <div className="flex items-center mb-4">

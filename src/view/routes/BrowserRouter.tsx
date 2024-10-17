@@ -13,7 +13,7 @@ import { BlogPost } from '../screens/BlogPost';
 import { NotFound } from '../screens/NotFound';
 import { Page } from '../screens/Page';
 import { Products } from '../screens/partials/Products';
-import { ProductPage } from '../screens/ProductPage/Product';
+import { ProductPage } from '../screens/ProductPage/ProductPage';
 import { ROUTES } from './Routes';
 
 export function BrowserRouter() {
