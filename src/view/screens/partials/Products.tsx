@@ -31,18 +31,18 @@ export function Products() {
     {
       id: 1,
       name: infos[0].title,
-      price: 100,
-      originalPrice: 120,
+      price: 150,
+      originalPrice: 180,
       description: infos[0].description,
-      images: [Bitkit1, Bitkit2, Bitkit3, Bitkit4, Bitkit5, Bitkit6, Bitkit7],
+      images: [Bitkit1, Bitkit2, Bitkit3, Bitkit4, Bitkit5],
     },
     {
       id: 3,
       name: infos[2].title,
-      price: 200,
-      originalPrice: 240,
+      price: 800,
+      originalPrice: 850,
       description: infos[2].description,
-      images: [Bitkit1, Bitkit2, Bitkit3, Bitkit4, Bitkit5, Bitkit6, Bitkit7],
+      images: [Bitkit7, Bitkit1, Bitkit2, Bitkit3, Bitkit4, Bitkit5, Bitkit6],
     },
   ];
 
