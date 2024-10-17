@@ -36,6 +36,8 @@ export const LanguageTexts = {
     title: 'products.title',
     infos: 'products.infos',
     buyNowButton: 'products.buyNowButton',
+    resourcesTitle: 'products.resourcesTitle',
+    resources: 'products.resources',
   },
   blogs: {
     title: 'blogs.title',

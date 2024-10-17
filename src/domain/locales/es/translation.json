@@ -57,6 +57,25 @@
         "description": "Para aquellos que buscan el más alto nivel de protección en sus transacciones financieras."
       }
     ],
+    "resourcesTitle": "Recursos Básicos y Avanzados en un Solo Kit",
+    "resources": [
+      "Código Abierto",
+      "Cámara para transacciones completamente desconectadas",
+      "Dispositivo Amnésico",
+      "Conexión USB",
+      "Frase de Contraseña (Passphrase)",
+      "Direcciones Multisig",
+      "Batería Recargable",
+      "Compatibilidad con PSBT",
+      "Creación de Mnemotécnico con Entropía Manual",
+      "6 métodos de Respaldo de Mnemotécnico",
+      "Pantalla Táctil LCD de 2.0 pulgadas",
+      "Compatibilidad con Bip39",
+      "Papel para anotar las 12 o 24 palabras",
+      "Punzonadora automática para marcar en placa de metal",
+      "Placa de Metal",
+      "Compatibilidad con Sparrow Wallet, Specter Desktop, Nunchuk y BlueWallet"
+    ],
     "buyNowButton": "Comprar ahora"
   },
   "blogs": {

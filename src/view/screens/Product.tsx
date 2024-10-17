@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaChevronLeft, FaChevronRight, FaTruckFast } from 'react-icons/fa6';
+import { MdCheck } from 'react-icons/md';
 import { useParams } from 'react-router-dom';
 import { LanguageTexts } from '../../domain/locales/Language';
 import Bitkit1 from '../assets/Bitkit/Bitkit 1.png';
@@ -12,6 +13,7 @@ import Bitkit4 from '../assets/Bitkit/Bitkit 4.png';
 import Bitkit5 from '../assets/Bitkit/Bitkit 5.png';
 import Bitkit6 from '../assets/Bitkit/Bitkit 6.png';
 import Bitkit7 from '../assets/Bitkit/Bitkit 7.png';
+import { Loader } from '../components/Loader';
 import { BackgroundAnimatedProduct } from '../styles/Products/Product.styles';
 import { BlogLinks } from './partials/BlogLinks';
 
@@ -57,6 +59,10 @@ export function Product() {
     returnObjects: true,
   }) as Infos[];
 
+  const resources = t(LanguageTexts.products.resources, {
+    returnObjects: true,
+  }) as string[];
+
   useEffect(() => {
     const products = [
       {
@@ -83,7 +89,7 @@ export function Product() {
   }, [id, infos]);
 
   if (!product) {
-    return <div>Carregando...</div>;
+    return <Loader />;
   }
   const handleNextImage = () => {
     setCurrentImageIndex((prevIndex) =>
@@ -100,24 +106,6 @@ export function Product() {
   const handleThumbnailClick = (index: number) => {
     setCurrentImageIndex(index);
   };
-  const resources = [
-    'Open Source',
-    'Câmera para transações totalmente air-gapped',
-    'Dispositivo Amnésico',
-    'Conexão usb',
-    'Passphrase',
-    'Endereços Multisig',
-    'Bateria carregável',
-    'Suporte a PSBT',
-    'Criação de Mnemonico com entropia manual',
-    '6 métodos de Backup de Mnemonico',
-    'Tela sensível ao toque LCD de 2,0 polegadas',
-    'Compatibilidade com Bip39',
-    'Papel para anotação das 12 ou 24 palavras',
-    'Punção automático para marcação em placa de metal',
-    'Placa de metal',
-    'Compatibilidade com Sparrow Wallet, Specter Desktop, Nunchuk e BlueWallet',
-  ];
 
   const handleCalculateShipping = async () => {
     setLoading(true);
@@ -251,27 +239,14 @@ export function Product() {
           </div>
           <div>
             <h1 className="text-3xl md:text-4xl font-bold mb-20 mt-36 text-center ">
-              Recursos Básicos e Avançados em um só
+              {t(LanguageTexts.products.resourcesTitle)}
               <span className="text-[#F6911D]"> Kit</span>
             </h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {resources.map((resource, index) => (
                 <ul key={index} className="list-none">
-                  <li className="flex items-center mb-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={2}
-                      stroke="green"
-                      className="w-6 h-6 md:w-10 md:h-10 mr-2"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
+                  <li className="flex items-center gap-x-4">
+                    <MdCheck size={32} className="text-green-700" />
                     <span className="dark:text-white font-medium text-lg md:text-xl">
                       {resource}
                     </span>
