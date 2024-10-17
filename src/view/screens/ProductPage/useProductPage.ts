@@ -1,9 +1,13 @@
-import axios from 'axios';
 import { useEffect, useMemo, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import {
+  CalculatedShipping,
+  CalculateShipping,
+} from '../../../domain/entities/Shipping.entity';
 import { LanguageTexts } from '../../../domain/locales/Language';
+import { UseCases } from '../../../domain/usecases/UseCases';
 import Bitkit1 from '../../assets/Bitkit/Bitkit 1.png';
 import Bitkit2 from '../../assets/Bitkit/Bitkit 2.png';
 import Bitkit3 from '../../assets/Bitkit/Bitkit 3.png';
@@ -21,32 +25,6 @@ type Product = {
   images: string[];
 };
 
-type ShippingOption = {
-  id: number;
-  name: string;
-  price?: string;
-  company: {
-    id: number;
-    name: string;
-    picture: string;
-  };
-
-  discount?: number;
-  currency?: string;
-  deliveryTime?: number;
-  customPrice?: number;
-  customDeliveryTime?: number;
-  deliveryRange?: {
-    max: number;
-    min: number;
-  };
-  additionalServices?: {
-    collect: false;
-    ownHand: false;
-    receipt: false;
-  };
-};
-
 type Infos = {
   title: string;
   description: string;
@@ -56,18 +34,16 @@ export function useProductPage() {
   const [loading, setLoading] = useState<boolean>(false);
   const { t } = useTranslation();
 
-  const form = useForm<{
-    postalCode: string;
-  }>();
+  const form = useForm<CalculateShipping>();
   const { register, handleSubmit } = form;
 
   const [product, setProduct] = useState<Product | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { id } = useParams<{ id: string }>();
-  const [shippingOptions, setShippingOptions] = useState<ShippingOption[]>([]);
+  const [shippingOptions, setShippingOptions] = useState<CalculatedShipping[]>(
+    [],
+  );
   const [, setError] = useState<string | null>(null);
-
-  const API_URL = import.meta.env.VITE_API_URL;
 
   const infos = useMemo(() => {
     return t(LanguageTexts.products.infos, {
@@ -126,19 +102,26 @@ export function useProductPage() {
     setCurrentImageIndex(index);
   };
 
-  const onSubmit: SubmitHandler<{
-    postalCode: string;
-  }> = async (data) => {
+  const onSubmit: SubmitHandler<CalculateShipping> = async (data) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.post(`${API_URL}/shipping/calculate`, {
-        postalCode: data.postalCode,
-      });
-      setShippingOptions(response.data);
-    } catch (error) {
+      const { result } = await UseCases.shipping.calculate.execute(data);
+
+      if (result.type === 'ERROR') {
+        switch (result.error.code) {
+          case 'SERIALIZATION':
+            alert('ERRO DE SERIALIZAÇÃO!');
+            return;
+          default:
+            alert('ERRO DESCONHECIDO');
+            return;
+        }
+      }
+      setShippingOptions(result.data);
+    } catch {
       setError('Erro ao calcular o frete. Tente novamente.');
-      alert(error);
+      alert('ERRO AO CALCULAR O FRETE');
     } finally {
       setLoading(false);
     }
@@ -147,8 +130,9 @@ export function useProductPage() {
   return {
     t,
     form,
-    loading,
     product,
+    loading,
+    resources,
     register,
     image: {
       next: handleNextImage,
@@ -160,6 +144,5 @@ export function useProductPage() {
       calculate: handleSubmit(onSubmit),
       options: shippingOptions,
     },
-    resources,
   };
 }
