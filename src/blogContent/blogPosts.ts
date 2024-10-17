@@ -1,7 +1,7 @@
-import image1 from './image1/image1.jpg';
-import image2 from './image2/image2.jpg';
-import image3 from './image3/image3.jpg';
-import image4 from './image4/image4.jpg';
+import image1 from './image1/image1.png';
+import image2 from './image2/image2.png';
+import image3 from './image3/image3.png';
+import image4 from './image4/image4.png';
 
 type Language = 'pt' | 'en' | 'es';
 
