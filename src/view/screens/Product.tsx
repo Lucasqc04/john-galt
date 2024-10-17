@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FaChevronLeft, FaChevronRight, FaTruckFast } from 'react-icons/fa6';
 import { useParams } from 'react-router-dom';
+import { LanguageTexts } from '../../domain/locales/Language';
 import Bitkit1 from '../assets/Bitkit/Bitkit 1.png';
 import Bitkit2 from '../assets/Bitkit/Bitkit 2.png';
 import Bitkit3 from '../assets/Bitkit/Bitkit 3.png';
@@ -34,7 +36,13 @@ type ShippingOption = {
   };
 };
 
+type Infos = {
+  title: string;
+  description: string;
+};
+
 export function Product() {
+  const { t } = useTranslation();
   const [product, setProduct] = useState<Product | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { id } = useParams<{ id: string }>();
@@ -45,30 +53,34 @@ export function Product() {
 
   const API_URL = import.meta.env.VITE_API_URL;
 
+  const infos = t(LanguageTexts.products.infos, {
+    returnObjects: true,
+  }) as Infos[];
+
   useEffect(() => {
-    const products: Product[] = [
+    const products = [
       {
         id: 1,
-        name: 'Bitkit',
-        price: 850.0,
-        originalPrice: 1299.0,
-        description: 'Um verdadeiro bunker para guardar seu bitcoin',
-        images: [Bitkit6, Bitkit7, Bitkit1, Bitkit2, Bitkit3, Bitkit4, Bitkit5],
+        name: infos[0].title,
+        price: 150,
+        originalPrice: 180,
+        description: infos[0].description,
+        images: [Bitkit1, Bitkit2, Bitkit3, Bitkit4, Bitkit5],
       },
       {
         id: 3,
-        name: 'Bitkit Pro',
-        price: 1200.0,
-        originalPrice: 1599.0,
-        description: 'A versão Pro para os entusiastas de bitcoin',
-        images: [Bitkit1, Bitkit2, Bitkit3, Bitkit4, Bitkit5],
+        name: infos[2].title,
+        price: 800,
+        originalPrice: 850,
+        description: infos[2].description,
+        images: [Bitkit7, Bitkit1, Bitkit2, Bitkit3, Bitkit4, Bitkit5, Bitkit6],
       },
     ];
 
     const selectedProduct = products.find((p) => p.id === Number(id));
     setProduct(selectedProduct || null);
     setCurrentImageIndex(0);
-  }, [id]);
+  }, [id, infos]);
 
   if (!product) {
     return <div>Carregando...</div>;
