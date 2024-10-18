@@ -61,7 +61,7 @@ export function NavLinks({
           )}
           <PopoverGroup className="flex flex-col items-center justify-center gap-y-10 lg:gap-x-12 lg:flex-row lg:gap-y-0">
             <Popover className="relative">
-              <PopoverButton className="text-2xl flex items-center justify-center gap-x-1 lg:text-sm font-semibold leading-6 hover:text-[#F6911D]">
+              <PopoverButton className="text-2xl flex items-center justify-center gap-x-1 lg:text-sm font-semibold leading-6 text-black dark:text-white hover:text-[#F6911D]">
                 {t(LanguageTexts.header.links[0])}
                 <MdKeyboardArrowDown
                   aria-hidden="true"
@@ -78,7 +78,7 @@ export function NavLinks({
                   {products.map((item) => (
                     <div
                       key={item.name}
-                      className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:text-[#F6911D] hover:bg-gray-50 dark:hover:bg-gray-700"
+                      className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6  hover:text-[#F6911D] hover:bg-gray-50 dark:hover:bg-gray-700"
                     >
                       <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg hover:text-[#F6911D] group-hover:bg-white dark:group-hover:bg-gray-700">
                         <item.icon
@@ -120,12 +120,12 @@ export function NavLinks({
               onClick={() =>
                 handleOnLink(ROUTES.about.call(currentLang), LinkCallBack)
               }
-              className="text-2xl lg:text-sm font-semibold leading-6 hover:text-[#F6911D]"
+              className="text-2xl lg:text-sm font-semibold leading-6 text-black dark:text-white hover:text-[#F6911D]"
             >
               {t(LanguageTexts.header.links[1])}
             </button>
             <Popover className="relative">
-              <PopoverButton className="text-2xl flex items-center justify-center gap-x-1 lg:text-sm font-semibold leading-6 hover:text-[#F6911D]">
+              <PopoverButton className="text-2xl flex items-center justify-center gap-x-1 lg:text-sm font-semibold leading-6 text-black dark:text-white hover:text-[#F6911D]">
                 {t(LanguageTexts.header.links[2])}
                 <MdKeyboardArrowDown
                   aria-hidden="true"
