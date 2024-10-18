@@ -30,7 +30,6 @@ export const LanguageTexts = {
   statistics: {
     title: 'statistics.title',
     infos: 'statistics.infos',
-    text: 'statistics.text',
   },
   products: {
     title: 'products.title',
