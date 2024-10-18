@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { LanguageTexts } from '../../../domain/locales/Language';
-import StatisticsImage from '../../assets/images/Statistics/Statistics.jfif';
+import StatisticsImage from '../../assets/images/Statistics/Statistics.jpg';
 
 type Info = {
   title: string;
