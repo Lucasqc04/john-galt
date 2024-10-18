@@ -48,7 +48,7 @@ export function BlogLinks() {
                     className="bg-white dark:bg-slate-700 shadow-lg rounded-xl overflow-hidden transition-transform transform hover:scale-95 md:scale-90"
                   >
                     <img
-                      className="w-full max-h-96"
+                      className="w-full"
                       src={post.image}
                       alt={translation.title}
                     />
