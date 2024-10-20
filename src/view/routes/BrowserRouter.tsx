@@ -6,6 +6,7 @@ import {
   Routes,
 } from 'react-router-dom';
 import { AcceptedLanguages, useLanguage } from '../../domain/locales/Language';
+import { Checkout } from '../components/Checkout/Checkout';
 import { Loader } from '../components/Loader';
 import { DefaultLayout } from '../layout/DefaultyLayout';
 import { About } from '../screens/About';
@@ -35,6 +36,7 @@ export function BrowserRouter() {
             <Route path={ROUTES.blog.path} element={<BlogPost />} />
             <Route path={ROUTES.product.path} element={<ProductPage />} />
             <Route path={ROUTES.about.path} element={<About />} />
+            <Route path={ROUTES.checkout.path} element={<Checkout />}></Route>
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

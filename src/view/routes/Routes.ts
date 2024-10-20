@@ -14,6 +14,10 @@ export const ROUTES = {
     path: 'sobre-nos',
     call: (currentLang: string) => `/${currentLang}/sobre-nos`,
   },
+  checkout: {
+    path: 'checkout',
+    call: (currentLang: string) => `/${currentLang}/checkout`,
+  },
   product: {
     path: 'produto/:id',
     call: (currentLang: string, id: string = '1') =>

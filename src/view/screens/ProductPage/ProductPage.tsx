@@ -1,19 +1,28 @@
 import { FaChevronLeft, FaChevronRight, FaTruckFast } from 'react-icons/fa6';
 import { MdCheck } from 'react-icons/md';
-import { LanguageTexts } from '../../../domain/locales/Language';
+import { LanguageTexts, useLanguage } from '../../../domain/locales/Language';
 
 import { FormProvider } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../routes/Routes';
 import { BackgroundAnimatedProduct } from '../../styles/Products/Product.styles';
 import { BlogLinks } from '../partials/BlogLinks';
 import { useProductPage } from './useProductPage';
 
 export function ProductPage() {
+  const navigate = useNavigate();
+  const { currentLang } = useLanguage();
   const { t, form, register, product, image, shipping, loading, resources } =
     useProductPage();
 
   if (!product) {
     return <div>Carregando...</div>;
   }
+
+  const handleNavigate = () => {
+    const checkoutUrl = ROUTES.checkout.call(currentLang);
+    navigate(checkoutUrl);
+  };
 
   return (
     <>
@@ -70,6 +79,12 @@ export function ProductPage() {
                 R${product.price.toFixed(2)}
               </div>
               <p className="dark:text-white mb-6">{product.description}</p>
+              <button
+                onClick={handleNavigate}
+                className="bg-[#F6911D] text-white p-2 rounded-md ml-2"
+              >
+                Comprar
+              </button>
               <FormProvider {...form}>
                 <form className="flex items-center mb-6">
                   <input
