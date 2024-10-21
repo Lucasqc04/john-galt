@@ -53,23 +53,25 @@ export function Cart() {
             </li>
           ))}
         </ul>
-        <div className="flex justify-between mt-4">
-          <button
-            onClick={cart.clear}
-            className="bg-[#F6911D] text-white px-4 py-2 rounded mr-2"
-          >
-            {t(LanguageTexts.cart.clearCart)}
-          </button>
+        <div className="flex justify-between">
+          <div className="flex flex-col gap-y-2">
+            <button
+              onClick={cart.clear}
+              className="bg-[#F6911D] text-white px-4 py-2 rounded"
+            >
+              {t(LanguageTexts.cart.clearCart)}
+            </button>
+            <Link
+              to={ROUTES.cart.checkout.call(currentLang)}
+              className="bg-blue-500 text-white px-4 py-2 rounded"
+            >
+              {t(LanguageTexts.cart.checkout)}
+            </Link>
+          </div>
           <div className="font-bold text-lg dark:text-white">
             {t('cart.total')}: ${cart.total.toFixed(2)}
           </div>
         </div>
-        <Link
-          to={ROUTES.cart.checkout.call(currentLang)}
-          className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
-        >
-          {t(LanguageTexts.cart.checkout)}
-        </Link>
       </div>
     </div>
   );
