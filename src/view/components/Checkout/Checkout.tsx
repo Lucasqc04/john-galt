@@ -21,7 +21,7 @@ interface CheckoutForm {
   lastName: string;
   identification: Identification;
   couponCode?: string;
-  orderID: string;
+  orderID: string; // A ordem ID será gerada automaticamente
 }
 
 export function Checkout() {
@@ -49,6 +49,9 @@ export function Checkout() {
       description: item.name,
     }));
 
+    // Gera um orderID único, usando timestamp e random
+    const orderID = `ORDER-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+
     const requestData = {
       couponCode: data.couponCode || '',
       items,
@@ -59,7 +62,7 @@ export function Checkout() {
         type: data.identification.type,
         number: data.identification.number,
       },
-      orderID: data.orderID,
+      orderID, // Usa o orderID gerado automaticamente
     };
 
     try {
@@ -74,7 +77,6 @@ export function Checkout() {
         window.location.href = response.data.initPoint;
       } else {
         alert('Pagamento não foi aprovado');
-        console.log(cartItems);
       }
 
       reset();
@@ -207,23 +209,6 @@ export function Checkout() {
               {...register('couponCode')}
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
             />
-          </div>
-
-          {/* Campo de Order ID */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Order ID
-            </label>
-            <input
-              type="text"
-              {...register('orderID', { required: 'Este campo é obrigatório' })}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-            />
-            {errors.orderID && (
-              <span className="text-red-500 text-sm">
-                {errors.orderID.message}
-              </span>
-            )}
           </div>
 
           {/* Botão de Submit */}
