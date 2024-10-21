@@ -1,12 +1,10 @@
-import { useTranslation } from 'react-i18next';
 import { LanguageTexts } from '../../../domain/locales/Language';
 import LogoWhite from '../../assets/logo-white.svg';
 import Logo from '../../assets/logo.svg';
 import { useFooter } from './useFooter';
 
 export function Footer() {
-  const { t } = useTranslation();
-  const { theme } = useFooter();
+  const { t, theme } = useFooter();
 
   const links = t(LanguageTexts.footer.links, {
     returnObjects: true,

@@ -37,6 +37,7 @@ export const LanguageTexts = {
     buyNowButton: 'products.buyNowButton',
     resourcesTitle: 'products.resourcesTitle',
     resources: 'products.resources',
+    addToCartButton: 'products.addToCartButton',
   },
   blogs: {
     title: 'blogs.title',
@@ -60,6 +61,16 @@ export const LanguageTexts = {
   },
   post: {
     notFound: 'post.notFound',
+  },
+  cart: {
+    emptyCart: 'cart.emptyCart',
+    title: 'cart.title',
+    price: 'cart.price',
+    quantity: 'cart.quantity',
+    remove: 'cart.remove',
+    clearCart: 'cart.clearCart',
+    total: 'cart.total',
+    checkout: 'cart.checkout',
   },
 };
 

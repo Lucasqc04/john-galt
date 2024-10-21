@@ -1,6 +1,10 @@
 {
   "header": {
-    "links": ["Produtos", "Quem Somos", "Blogs"]
+    "links": [
+      "Produtos",
+      "Quem Somos",
+      "Blogs"
+    ]
   },
   "hero": {
     "title": "Proteção de Bitcoin Offline com Segurança Web3",
@@ -52,7 +56,7 @@
         "description": "Ideal para investidores que priorizam a segurança e desejam garantir a proteção de suas chaves privadas."
       },
       {
-        "title": "Segurança Elevada para Seus Investimentos!',",
+        "title": "Segurança Elevada para Seus Investimentos!",
         "description": "Para aqueles que buscam o mais alto nível de proteção em suas transações financeiras."
       }
     ],
@@ -61,22 +65,35 @@
       "Open Source",
       "Câmera para transações totalmente air-gapped",
       "Dispositivo Amnésico",
-      "Conexão usb",
+      "Conexão USB",
       "Passphrase",
       "Endereços Multisig",
-      "Bateria carregável",
+      "Bateria Carregável",
       "Suporte a PSBT",
-      "Criação de Mnemonico com entropia manual",
-      "6 métodos de Backup de Mnemonico",
+      "Criação de Mnemônico com Entropia Manual",
+      "6 métodos de Backup de Mnemônico",
       "Tela sensível ao toque LCD de 2,0 polegadas",
       "Compatibilidade com Bip39",
       "Papel para anotação das 12 ou 24 palavras",
-      "Punção automático para marcação em placa de metal",
+      "Punção automática para marcação em placa de metal",
       "Placa de metal",
       "Compatibilidade com Sparrow Wallet, Specter Desktop, Nunchuk e BlueWallet"
     ],
-    "buyNowButton": "Comprar Agora"
+    "buyNowButton": "Comprar Agora",
+    "addToCartButton": "Adicionar ao Carrinho",
+    "quantity": "Quantidade",
+    "goToCart": "Ir para o Carrinho"
   },
+   "cart": {
+    "title": "Carrinho de Compras",
+    "emptyCart": "Seu carrinho está vazio.",
+    "price": "Preço",
+    "quantity": "Quantidade",
+    "remove": "Remover",
+    "clearCart": "Limpar Carrinho",
+    "total": "Total",
+    "checkout": "Ir para Checkout"
+},
   "blogs": {
     "title": "BLOG DIY"
   },
@@ -89,7 +106,12 @@
     }
   },
   "footer": {
-    "links": ["Sobre", "Política de Privacidade", "Licenciamento", "Contato"],
+    "links": [
+      "Sobre",
+      "Política de Privacidade",
+      "Licenciamento",
+      "Contato"
+    ],
     "allRightsReserved": "Todos os direitos reservados."
   },
   "about": {
@@ -104,7 +126,6 @@
   "post": {
     "notFound": "Post Não Encontrado!"
   },
-
   "cardNamePlaceholder": "Nome no cartão",
   "cardNumberPlaceholder": "Número do cartão",
   "expiryDatePlaceholder": "MM/AA",
@@ -127,7 +148,6 @@
   "CardTitle5": "Armazenamento Seguro",
   "CardDescription5": "Métodos e ferramentas para armazenar suas criptomoedas de forma segura.",
   "ReadMore": "Leia mais",
-
   "ServiceTitle": "Serviços",
   "ServiceDescription": "Proteja e conquiste sua jornada cripto com as melhores ferramentas.",
   "CustomizationDescription": "Tudo que você precisa em um bitkit",

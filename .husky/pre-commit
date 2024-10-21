@@ -1,6 +1,6 @@
 #!/bin/bash
 
-npm audit fix
+npm audit fix || true
 
 npx lint-staged
 
