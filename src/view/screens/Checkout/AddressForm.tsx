@@ -1,15 +1,5 @@
 import { useFormContext } from 'react-hook-form';
-
-type Address = {
-  street: string;
-  city: string;
-  state: string;
-  zipCode: string;
-};
-
-type CheckoutForm = {
-  address: Address;
-};
+import { CheckoutForm } from './useCheckout';
 
 export function AddressForm() {
   const {

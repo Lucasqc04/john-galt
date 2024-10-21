@@ -1,21 +1,29 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { useCartContext } from '../../context/CartContext';
+
+type Address = {
+  street: string;
+  city: string;
+  state: string;
+  zipCode: string;
+};
 
 type Identification = {
   type: 'CPF' | 'CNPJ';
   number: string;
 };
 
-type CheckoutForm = {
-  couponCode?: string;
+export type CheckoutForm = {
   payerEmail: string;
   firstName: string;
   lastName: string;
   identification: Identification;
+  couponCode?: string;
+  address: Address;
 };
-
 export function useCheckout() {
   const { items, updateItemQuantity, remove, clear } = useCartContext();
 
@@ -33,6 +41,16 @@ export function useCheckout() {
   } = form;
 
   const [paymentMethod, setPaymentMethod] = useState<string>('MP');
+  const navigate = useNavigate();
+  const [currentStep, setCurrentStep] = useState(1);
+
+  const nextStep = () => {
+    setCurrentStep(currentStep + 1);
+  };
+
+  const prevStep = () => {
+    setCurrentStep(currentStep - 1);
+  };
 
   const onSubmit = async (data: CheckoutForm) => {
     try {
@@ -61,6 +79,12 @@ export function useCheckout() {
   };
 
   return {
+    navigate,
+    steps: {
+      current: currentStep,
+      next: nextStep,
+      prev: prevStep,
+    },
     form: {
       provider: form,
       errors,

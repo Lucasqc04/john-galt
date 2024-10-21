@@ -1,25 +1,14 @@
-import { useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { FaTrash } from 'react-icons/fa';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
-import { useNavigate } from 'react-router-dom';
 import { AddressForm } from './AddressForm';
+import { PersonForm } from './PersonForm';
 import { StepIndicator } from './StepIndicator';
 import { useCheckout } from './useCheckout';
 
 export function Checkout() {
-  const { form, cart } = useCheckout();
-  const navigate = useNavigate();
-  const [currentStep, setCurrentStep] = useState(1);
-
-  const nextStep = () => {
-    setCurrentStep(currentStep + 1);
-  };
-
-  const prevStep = () => {
-    setCurrentStep(currentStep - 1);
-  };
+  const { form, cart, navigate, steps } = useCheckout();
 
   return (
     <main className="min-h-screen flex flex-col px-4 py-8">
@@ -30,131 +19,31 @@ export function Checkout() {
         <h1 className="text-4xl font-semibold">Checkout</h1>
       </header>
       <StepIndicator
-        currentStep={currentStep}
+        currentStep={steps.current}
         steps={[{ title: 'Infos' }, { title: 'Endereço' }]}
       />
       <section className="w-full flex flex-col lg:flex-row gap-x-4">
         <article className="w-full lg:w-2/3">
           <FormProvider {...form.provider}>
             <form onSubmit={form.submit} className="flex flex-col gap-y-2 pt-4">
-              {currentStep === 1 && (
-                <>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Email do Pagador
-                    </label>
-                    <input
-                      type="email"
-                      {...form.register('payerEmail', { required: true })}
-                      className="w-full p-2 border border-gray-300 rounded-md"
-                    />
-                    {form.errors.payerEmail && (
-                      <span className="text-red-500 text-sm">
-                        Este campo é obrigatório
-                      </span>
-                    )}
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Primeiro Nome
-                    </label>
-                    <input
-                      type="text"
-                      {...form.register('firstName', { required: true })}
-                      className="w-full p-2 border border-gray-300 rounded-md"
-                    />
-                    {form.errors.firstName && (
-                      <span className="text-red-500 text-sm">
-                        Este campo é obrigatório
-                      </span>
-                    )}
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium text-gray-700">
-                      Sobrenome
-                    </label>
-                    <input
-                      type="text"
-                      {...form.register('lastName', { required: true })}
-                      className="w-full p-2 border border-gray-300 rounded-md"
-                    />
-                    {form.errors.lastName && (
-                      <span className="text-red-500 text-sm">
-                        Este campo é obrigatório
-                      </span>
-                    )}
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium text-gray-700">
-                      Tipo de Identificação
-                    </label>
-                    <select
-                      {...form.register('identification.type', {
-                        required: true,
-                      })}
-                      className="w-full p-2 border border-gray-300 rounded-md"
-                    >
-                      <option value="CPF">CPF</option>
-                      <option value="CNPJ">CNPJ</option>
-                    </select>
-                    {form.errors.identification?.type && (
-                      <span className="text-red-500 text-sm">
-                        Este campo é obrigatório
-                      </span>
-                    )}
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium text-gray-700">
-                      Número de Identificação
-                    </label>
-                    <input
-                      type="text"
-                      {...form.register('identification.number', {
-                        required: true,
-                      })}
-                      className="w-full p-2 border border-gray-300 rounded-md"
-                    />
-                    {form.errors.identification?.number && (
-                      <span className="text-red-500 text-sm">
-                        Este campo é obrigatório
-                      </span>
-                    )}
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium text-gray-700">
-                      Código do Cupom
-                    </label>
-                    <input
-                      type="text"
-                      {...form.register('couponCode')}
-                      className="w-full p-2 border border-gray-300 rounded-md"
-                    />
-                  </div>
-                </>
-              )}
-
-              {currentStep === 2 && <AddressForm />}
+              {steps.current === 1 && <PersonForm />}
+              {steps.current === 2 && <AddressForm />}
             </form>
           </FormProvider>
           <div className="w-full flex justify-between py-4">
-            {currentStep > 1 && (
+            {steps.current > 1 && (
               <button
                 type="button"
-                onClick={prevStep}
+                onClick={steps.prev}
                 className="w-48 bg-gray-500 text-white p-2 rounded-md font-semibold"
               >
                 Voltar
               </button>
             )}
-            {currentStep < 2 ? (
+            {steps.current < 2 ? (
               <button
                 type="button"
-                onClick={nextStep}
+                onClick={steps.next}
                 className="w-48 bg-blue-500 text-white p-2 rounded-md font-semibold"
               >
                 Próximo
