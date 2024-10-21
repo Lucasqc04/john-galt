@@ -42,12 +42,9 @@ export function NavLinks({
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { currentLang } = useCurrentLang();
-  const { cartItems } = useCartContext();
+  const { items } = useCartContext();
 
-  const totalItems = cartItems.reduce(
-    (total, item) => total + item.quantity,
-    0,
-  );
+  const totalItems = items.reduce((total, item) => total + item.quantity, 0);
 
   const handleOnLink = (path: string, callback?: () => void) => {
     if (callback) {

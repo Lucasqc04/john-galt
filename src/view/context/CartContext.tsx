@@ -15,10 +15,11 @@ type CartItem = {
 };
 
 type CartContextType = {
-  cartItems: CartItem[];
-  addToCart: (item: CartItem) => void;
-  removeFromCart: (id: string) => void;
-  clearCart: () => void;
+  items: CartItem[];
+  add: (item: CartItem) => void;
+  remove: (id: string) => void;
+  updateItemQuantity: (id: string, quantity: number) => void;
+  clear: () => void;
 };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -33,7 +34,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }, [cartItems]);
 
-  const addToCart = (item: CartItem) => {
+  const add = (item: CartItem) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((i) => i.id === item.id);
       if (existingItem) {
@@ -45,17 +46,31 @@ export function CartProvider({ children }: { children: ReactNode }) {
     });
   };
 
-  const removeFromCart = (id: string) => {
+  const remove = (id: string) => {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
-  const clearCart = () => {
+  const updateItemQuantity = (id: string, quantity: number) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item,
+      ),
+    );
+  };
+
+  const clear = () => {
     setCartItems([]);
   };
 
   return (
     <CartContext.Provider
-      value={{ cartItems, addToCart, removeFromCart, clearCart }}
+      value={{
+        items: cartItems,
+        add,
+        clear,
+        remove,
+        updateItemQuantity,
+      }}
     >
       {children}
     </CartContext.Provider>
