@@ -40,7 +40,7 @@ export function Checkout() {
                 Voltar
               </button>
             )}
-            {steps.current < 2 ? (
+            {steps.current < 2 && (
               <button
                 type="button"
                 onClick={steps.next}
@@ -48,33 +48,28 @@ export function Checkout() {
               >
                 Próximo
               </button>
-            ) : (
-              <button
-                type="submit"
-                className="w-48 bg-blue-500 text-white p-2 rounded-md font-semibold"
-              >
-                Finalizar Pagamento
-              </button>
             )}
           </div>
         </article>
-        <aside className="w-full lg:w-1/3">
-          <h2 className="text-lg font-bold">Itens no Carrinho</h2>
-          <ul className="flex flex-col gap-y-2 pt-2">
+        <aside className="w-full lg:w-1/3 p-4">
+          <h2 className="text-lg font-bold dark:text-white">
+            Itens no Carrinho
+          </h2>
+          <ul className="flex flex-col gap-y-4 pt-4">
             {cart.items.map((item) => (
               <li
                 key={item.id}
-                className="mb-4 flex items-center justify-between border-b border-gray-300 pb-4 dark:border-gray-700"
+                className="flex items-center justify-between border-b border-gray-300 pb-4 dark:border-gray-700"
               >
-                <div className="flex">
+                <div className="flex items-center gap-x-4">
                   <img
                     src={item.imageUrl}
                     alt={item.name}
-                    className="w-16 h-16"
+                    className="w-16 h-16 object-cover rounded-md"
                   />
                   <div>
                     <p className="font-semibold dark:text-white">{item.name}</p>
-                    <p className="dark:text-gray-300">
+                    <p className="dark:text-gray-300 text-gray-500">
                       ${item.price.toFixed(2)}
                     </p>
                   </div>
@@ -85,6 +80,7 @@ export function Checkout() {
                       onClick={() =>
                         cart.updateItemQuantity(item.id, item.quantity + 1)
                       }
+                      className="text-gray-700 dark:text-white hover:text-blue-500 dark:hover:text-blue-300"
                     >
                       <TiArrowSortedUp size={24} />
                     </button>
@@ -94,21 +90,49 @@ export function Checkout() {
                           cart.updateItemQuantity(item.id, item.quantity - 1);
                         }
                       }}
+                      className="text-gray-700 dark:text-white hover:text-blue-500 dark:hover:text-blue-300"
                     >
                       <TiArrowSortedDown size={24} />
                     </button>
                   </div>
-                  <p className="dark:text-gray-300 text-xl">{item.quantity}</p>
+                  <p className="dark:text-gray-300 text-xl font-semibold">
+                    {item.quantity}
+                  </p>
                 </div>
                 <button
                   onClick={() => cart.remove(item.id)}
-                  className="bg-red-500 text-white px-4 py-2 rounded ml-4 flex items-center"
+                  className="bg-red-500 text-white px-3 py-2 rounded-md hover:bg-red-600 transition-colors"
                 >
                   <FaTrash />
                 </button>
               </li>
             ))}
           </ul>
+
+          <div className="mt-6">
+            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              Código do Cupom
+            </label>
+            <div className="flex gap-x-2 mt-2">
+              <input
+                type="text"
+                {...form.register('couponCode')}
+                className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600"
+              />
+              <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors">
+                Aplicar
+              </button>
+            </div>
+          </div>
+
+          {steps.current === 2 && (
+            <button
+              type="submit"
+              className="w-full bg-blue-500 text-white p-2 mt-6 rounded-md font-semibold hover:bg-blue-600 transition-colors"
+            >
+              Finalizar Pagamento
+            </button>
+          )}
         </aside>
       </section>
     </main>

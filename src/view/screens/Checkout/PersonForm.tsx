@@ -82,17 +82,6 @@ export function PersonForm() {
           <span className="text-red-500 text-sm">Este campo é obrigatório</span>
         )}
       </div>
-
-      <div>
-        <label className="text-sm font-medium text-gray-700">
-          Código do Cupom
-        </label>
-        <input
-          type="text"
-          {...register('couponCode')}
-          className="w-full p-2 border border-gray-300 rounded-md"
-        />
-      </div>
     </>
   );
 }
