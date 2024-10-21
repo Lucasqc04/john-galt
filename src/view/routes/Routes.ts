@@ -17,24 +17,25 @@ export const ROUTES = {
   cart: {
     path: 'carrinho',
     call: (currentLang: string) => `/${currentLang}/carrinho`,
-  checkout: {
-    path: 'checkout',
-    call: (currentLang: string) => `/${currentLang}/checkout`,
-  },
-  product: {
-    path: 'produto/:id',
-    call: (currentLang: string, id: string = '1') =>
-      `/${currentLang}/produto/${id}`,
-  },
-  products: {
-    path: 'produtos',
-    BITKIT: {
+    checkout: {
+      path: 'checkout',
+      call: (currentLang: string) => `/${currentLang}/checkout`,
+    },
+    product: {
+      path: 'produto/:id',
       call: (currentLang: string, id: string = '1') =>
         `/${currentLang}/produto/${id}`,
     },
-    SEEDKIT: {
-      call: (currentLang: string, id: string = '3') =>
-        `/${currentLang}/produto/${id}`,
+    products: {
+      path: 'produtos',
+      BITKIT: {
+        call: (currentLang: string, id: string = '1') =>
+          `/${currentLang}/produto/${id}`,
+      },
+      SEEDKIT: {
+        call: (currentLang: string, id: string = '3') =>
+          `/${currentLang}/produto/${id}`,
+      },
     },
   },
 };

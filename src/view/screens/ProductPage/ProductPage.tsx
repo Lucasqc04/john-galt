@@ -2,18 +2,13 @@ import { useEffect, useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { FaChevronLeft, FaChevronRight, FaTruckFast } from 'react-icons/fa6';
 import { MdCheck } from 'react-icons/md';
-import Swal from 'sweetalert2';
- 
-import { LanguageTexts, useLanguage } from '../../../domain/locales/Language';
- 
-import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert';
+import { LanguageTexts } from '../../../domain/locales/Language';
 import { ROUTES } from '../../routes/Routes';
 import { BackgroundAnimatedProduct } from '../../styles/Products/Product.styles';
+import { useCurrentLang } from '../../utils/useCurrentLang';
 import { BlogLinks } from '../partials/BlogLinks';
 import { useProductPage } from './useProductPage';
-
- 
-import { useCurrentLang } from '../../utils/useCurrentLang';
 
 type CartItem = {
   id: string;
@@ -76,11 +71,6 @@ export function ProductPage() {
     return <div>{t('loading')}</div>;
   }
 
-  const handleNavigate = () => {
-    const checkoutUrl = ROUTES.checkout.call(currentLang);
-    navigate(checkoutUrl);
-  };
-
   return (
     <>
       <BackgroundAnimatedProduct />
@@ -139,12 +129,21 @@ export function ProductPage() {
                 R${product.price.toFixed(2)}
               </div>
               <p className="dark:text-white mb-6">{product.description}</p>
-              <button
-                onClick={handleNavigate}
-                className="bg-[#F6911D] text-white p-2 rounded-md ml-2"
-              >
-                Comprar
-              </button>
+              <div className="flex items-center mb-6">
+                <input
+                  type="number"
+                  value={quantity}
+                  onChange={(e) => setQuantity(Number(e.target.value))}
+                  min={1}
+                  className="w-16 p-2 border border-gray-300 rounded-md"
+                />
+                <button
+                  onClick={handleAddToCart}
+                  className="bg-[#F6911D] text-white p-2 rounded-md ml-2"
+                >
+                  {t(LanguageTexts.products.addToCartButton)}
+                </button>
+              </div>
               <FormProvider {...form}>
                 <form className="flex items-center mb-6">
                   <input
@@ -202,22 +201,6 @@ export function ProductPage() {
                 )}
               </div>
             </div>
-          </div>
-
-          <div className="flex items-center mb-6">
-            <input
-              type="number"
-              value={quantity}
-              onChange={(e) => setQuantity(Number(e.target.value))}
-              min={1}
-              className="w-16 p-2 border border-gray-300 rounded-md"
-            />
-            <button
-              onClick={handleAddToCart}
-              className="bg-[#F6911D] text-white p-2 rounded-md ml-2"
-            >
-              {t(LanguageTexts.products.addToCartButton)}
-            </button>
           </div>
 
           <div>

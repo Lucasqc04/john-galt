@@ -1,73 +1,91 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-
-interface Item {
-  id: string;
-  name: string;
-  quantity: number;
-  price: number;
-  category_id: string;
-  description: string;
-}
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 interface Identification {
   type: 'CPF' | 'CNPJ';
   number: string;
 }
 
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+  imageUrl: string;
+}
+
 interface CheckoutForm {
-  couponCode?: string;
   payerEmail: string;
   firstName: string;
   lastName: string;
   identification: Identification;
-  items: Item[];
+  couponCode?: string;
+  orderID: string;
 }
 
 export function Checkout() {
   const API_URL = String(import.meta.env.VITE_API_URL);
+  const [paymentMethod, setPaymentMethod] = useState<'MP' | 'BTC'>('MP');
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<CheckoutForm>();
 
-  const [paymentMethod, setPaymentMethod] = useState<string>('MP');
+  const onSubmit: SubmitHandler<CheckoutForm> = async (data) => {
+    const cartItems: Product[] = JSON.parse(
+      localStorage.getItem('cartItems') || '[]',
+    );
 
-  const onSubmit = async (data: CheckoutForm) => {
+    const items = cartItems.map((item) => ({
+      id: item.id,
+      name: item.name,
+      quantity: item.quantity,
+      price: item.price,
+      category_id: 'KIT DE TECNOLOGIA',
+      description: item.name,
+    }));
+
+    const requestData = {
+      couponCode: data.couponCode || '',
+      items,
+      payerEmail: data.payerEmail,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      identification: {
+        type: data.identification.type,
+        number: data.identification.number,
+      },
+      orderID: data.orderID,
+    };
+
     try {
-      // Ajusta os dados de pagamento para a estrutura esperada pela API
-      const paymentData = {
-        couponCode: data.couponCode,
-        paymentMethod,
-        items: data.items,
-        payerEmail: data.payerEmail,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        identification: data.identification,
-      };
-
       const response = await axios.post(
         `${API_URL}create-payment/${paymentMethod}`,
-        paymentData,
+        requestData,
       );
-      console.log(API_URL);
-      // Verifica se a URL de pagamento foi retornada
-      if (response.data.paymentUrl) {
-        // Redireciona o cliente para a página de pagamento do Mercado Pago
-        window.location.href = response.data.paymentUrl;
+      console.log('Pagamento realizado com sucesso:', response.data);
+      alert('Pagamento realizado com sucesso!');
+
+      if (response.data.initPoint) {
+        window.location.href = response.data.initPoint;
       } else {
-        alert('Pagamento não foi aprovado.');
+        alert('Pagamento não foi aprovado');
+        console.log(cartItems);
       }
+
+      reset();
     } catch (error) {
-      console.error('Erro ao processar pagamento', error);
-      alert('Ocorreu um erro ao processar o pagamento.');
+      console.error('Erro ao processar pagamento:', error);
+      alert('Erro ao processar pagamento. Tente novamente.');
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center  p-4 mt-20">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 mt-20">
       <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-lg">
         <h1 className="text-2xl font-bold mb-6 text-center">Checkout</h1>
 
@@ -79,12 +97,14 @@ export function Checkout() {
             </label>
             <input
               type="email"
-              {...register('payerEmail', { required: true })}
+              {...register('payerEmail', {
+                required: 'Este campo é obrigatório',
+              })}
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
             />
             {errors.payerEmail && (
               <span className="text-red-500 text-sm">
-                Este campo é obrigatório
+                {errors.payerEmail.message}
               </span>
             )}
           </div>
@@ -96,12 +116,14 @@ export function Checkout() {
             </label>
             <input
               type="text"
-              {...register('firstName', { required: true })}
+              {...register('firstName', {
+                required: 'Este campo é obrigatório',
+              })}
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
             />
             {errors.firstName && (
               <span className="text-red-500 text-sm">
-                Este campo é obrigatório
+                {errors.firstName.message}
               </span>
             )}
           </div>
@@ -113,12 +135,14 @@ export function Checkout() {
             </label>
             <input
               type="text"
-              {...register('lastName', { required: true })}
+              {...register('lastName', {
+                required: 'Este campo é obrigatório',
+              })}
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
             />
             {errors.lastName && (
               <span className="text-red-500 text-sm">
-                Este campo é obrigatório
+                {errors.lastName.message}
               </span>
             )}
           </div>
@@ -129,31 +153,31 @@ export function Checkout() {
               Tipo de Identificação
             </label>
             <select
-              {...register('identification.type', { required: true })}
+              {...register('identification.type', {
+                required: 'Este campo é obrigatório',
+              })}
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
             >
               <option value="CPF">CPF</option>
               <option value="CNPJ">CNPJ</option>
             </select>
-            {errors.identification?.type && (
-              <span className="text-red-500 text-sm">
-                Este campo é obrigatório
-              </span>
-            )}
           </div>
 
+          {/* Número de Identificação */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Número de Identificação
             </label>
             <input
               type="text"
-              {...register('identification.number', { required: true })}
+              {...register('identification.number', {
+                required: 'Este campo é obrigatório',
+              })}
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
             />
             {errors.identification?.number && (
               <span className="text-red-500 text-sm">
-                Este campo é obrigatório
+                {errors.identification.number.message}
               </span>
             )}
           </div>
@@ -165,7 +189,7 @@ export function Checkout() {
             </label>
             <select
               value={paymentMethod}
-              onChange={(e) => setPaymentMethod(e.target.value)}
+              onChange={(e) => setPaymentMethod(e.target.value as 'MP' | 'BTC')}
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
             >
               <option value="MP">Mercado Pago</option>
@@ -185,14 +209,21 @@ export function Checkout() {
             />
           </div>
 
-          {/* Itens do Checkout */}
+          {/* Campo de Order ID */}
           <div>
-            <h2 className="text-lg font-bold">Itens no Carrinho</h2>
-            <ul>
-              {/* Exemplos de itens, você pode substituir isso pela lógica do seu carrinho */}
-              <li>ID: 123 - Produto A - Quantidade: 2 - Preço: R$50</li>
-              <li>ID: 456 - Produto B - Quantidade: 1 - Preço: R$30</li>
-            </ul>
+            <label className="block text-sm font-medium text-gray-700">
+              Order ID
+            </label>
+            <input
+              type="text"
+              {...register('orderID', { required: 'Este campo é obrigatório' })}
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+            />
+            {errors.orderID && (
+              <span className="text-red-500 text-sm">
+                {errors.orderID.message}
+              </span>
+            )}
           </div>
 
           {/* Botão de Submit */}
