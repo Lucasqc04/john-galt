@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import {
   CalculatedShipping,
@@ -57,7 +57,6 @@ export function useProductPage() {
     [],
   );
   const [, setError] = useState<string | null>(null);
-  const navigate = useNavigate();
 
   const infos = useMemo(() => {
     return t(LanguageTexts.products.infos, {
@@ -212,19 +211,14 @@ export function useProductPage() {
     }
   }, []);
 
-  const handleNavigate = () => {
-    const checkoutUrl = ROUTES.cart.checkout.call(currentLang);
-    navigate(checkoutUrl);
-  };
-
   return {
     t,
     form,
     product,
     loading,
     resources,
+    currentLang,
     register,
-    navigate: handleNavigate,
     cart: {
       add: handleAddToCart,
     },

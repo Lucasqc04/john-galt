@@ -4,6 +4,9 @@ import { MdCheck } from 'react-icons/md';
 
 import { LanguageTexts } from '../../../domain/locales/Language';
 
+import { Link } from 'react-router-dom';
+import { Loader } from '../../components/Loader';
+import { ROUTES } from '../../routes/Routes';
 import { BackgroundAnimatedProduct } from '../../styles/Products/Product.styles';
 import { BlogLinks } from '../partials/BlogLinks';
 import { useProductPage } from './useProductPage';
@@ -19,12 +22,12 @@ export function ProductPage() {
     quantity,
     shipping,
     resources,
+    currentLang,
     register,
-    navigate,
   } = useProductPage();
 
   if (!product) {
-    return <div>{t('loading')}</div>;
+    return <Loader />;
   }
 
   return (
@@ -85,12 +88,6 @@ export function ProductPage() {
                 R${product.price.toFixed(2)}
               </div>
               <p className="dark:text-white mb-6">{product.description}</p>
-              <button
-                onClick={navigate}
-                className="bg-[#F6911D] text-white p-2 rounded-md ml-2"
-              >
-                Comprar
-              </button>
               <FormProvider {...form}>
                 <form className="flex items-center mb-6">
                   <input
@@ -164,6 +161,12 @@ export function ProductPage() {
             >
               {t(LanguageTexts.products.addToCartButton)}
             </button>
+            <Link
+              to={ROUTES.cart.checkout.call(currentLang)}
+              className="bg-[#F6911D] text-white p-2 rounded-md ml-2"
+            >
+              Comprar
+            </Link>
           </div>
 
           <div>
