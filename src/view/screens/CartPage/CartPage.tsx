@@ -1,49 +1,13 @@
-import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { FaTrash } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
-import { LanguageTexts, useLanguage } from '../../../domain/locales/Language';
+import { Link } from 'react-router-dom';
+import { LanguageTexts } from '../../../domain/locales/Language';
 import { ROUTES } from '../../routes/Routes';
-
-type CartItem = {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-  imageUrl: string;
-};
+import { useCartPage } from './useCartPage';
 
 export function CartPage() {
-  const { t } = useTranslation();
-  const { currentLang } = useLanguage();
-  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-    const storedCart = localStorage.getItem('cartItems');
-    return storedCart ? JSON.parse(storedCart) : [];
-  });
-  const navigate = useNavigate();
+  const { t, currentLang, cart } = useCartPage();
 
-  useEffect(() => {
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-  }, [cartItems]);
-
-  const removeFromCart = (id: string) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
-  };
-
-  const clearCart = () => {
-    setCartItems([]);
-  };
-
-  const handleCheckout = () => {
-    navigate(ROUTES.cart.checkout.call(currentLang));
-  };
-
-  const total = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0,
-  );
-
-  if (cartItems.length === 0) {
+  if (cart.items.length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center dark:bg-gray-900">
         <h1 className="text-4xl font-bold dark:text-white">
@@ -60,7 +24,7 @@ export function CartPage() {
           {t(LanguageTexts.cart.title)}
         </h2>
         <ul>
-          {cartItems.map((item) => (
+          {cart.items.map((item) => (
             <li
               key={item.id}
               className="mb-4 flex items-center border-b border-gray-300 pb-4 dark:border-gray-700"
@@ -80,7 +44,7 @@ export function CartPage() {
                 </p>
               </div>
               <button
-                onClick={() => removeFromCart(item.id)}
+                onClick={() => cart.remove(item.id)}
                 className="bg-red-500 text-white px-4 py-2 rounded ml-4 flex items-center"
               >
                 <FaTrash className="mr-2" />
@@ -91,21 +55,21 @@ export function CartPage() {
         </ul>
         <div className="flex justify-between mt-4">
           <button
-            onClick={clearCart}
+            onClick={cart.clear}
             className="bg-[#F6911D] text-white px-4 py-2 rounded mr-2"
           >
             {t(LanguageTexts.cart.clearCart)}
           </button>
           <div className="font-bold text-lg dark:text-white">
-            {t('cart.total')}: ${total.toFixed(2)}
+            {t('cart.total')}: ${cart.total.toFixed(2)}
           </div>
         </div>
-        <button
-          onClick={handleCheckout}
+        <Link
+          to={ROUTES.cart.checkout.call(currentLang)}
           className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
         >
           {t(LanguageTexts.cart.checkout)}
-        </button>
+        </Link>
       </div>
     </div>
   );
