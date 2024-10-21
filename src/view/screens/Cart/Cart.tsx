@@ -2,10 +2,10 @@ import { FaTrash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { LanguageTexts } from '../../../domain/locales/Language';
 import { ROUTES } from '../../routes/Routes';
-import { useCartPage } from './useCartPage';
+import { useCart } from './useCart';
 
-export function CartPage() {
-  const { t, currentLang, cart } = useCartPage();
+export function Cart() {
+  const { t, currentLang, cart } = useCart();
 
   if (cart.items.length === 0) {
     return (

@@ -10,7 +10,7 @@ type CartItem = {
   imageUrl: string;
 };
 
-export function useCartPage() {
+export function useCart() {
   const { t } = useTranslation();
   const { currentLang } = useLanguage();
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
