@@ -20,7 +20,7 @@ export function Cart() {
   }
 
   return (
-    <div className="min-h-screen pt-[15%] md:pt-[10%] lg:pt-[5%] dark:bg-gray-900">
+    <div className="min-h-screen pt-[15%] md:pt-[10%] dark:bg-gray-900">
       <div className="max-w-7xl mx-auto p-4">
         <div className="flex items-center gap-x-4 border-b pb-2">
           <button onClick={() => navigate(-1)}>
