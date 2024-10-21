@@ -2,28 +2,28 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-interface Item {
+type Item = {
   id: string;
   name: string;
   quantity: number;
   price: number;
   category_id: string;
   description: string;
-}
+};
 
-interface Identification {
+type Identification = {
   type: 'CPF' | 'CNPJ';
   number: string;
-}
+};
 
-interface CheckoutForm {
+type CheckoutForm = {
   couponCode?: string;
   payerEmail: string;
   firstName: string;
   lastName: string;
   identification: Identification;
   items: Item[];
-}
+};
 
 export function Checkout() {
   const API_URL = String(import.meta.env.VITE_API_URL);
@@ -51,14 +51,12 @@ export function Checkout() {
         `${API_URL}create-payment/${paymentMethod}`,
         paymentData,
       );
-      console.log(API_URL);
       if (response.data.paymentUrl) {
         window.location.href = response.data.paymentUrl;
       } else {
         alert('Pagamento não foi aprovado.');
       }
-    } catch (error) {
-      console.error('Erro ao processar pagamento', error);
+    } catch {
       alert('Ocorreu um erro ao processar o pagamento.');
     }
   };
