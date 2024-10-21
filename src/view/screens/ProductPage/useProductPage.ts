@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import {
   CalculatedShipping,
   CalculateShipping,
@@ -19,6 +20,7 @@ import Bitkit7 from '../../assets/Bitkit/Bitkit 7.png';
 type Product = {
   id: number;
   name: string;
+  title: string;
   price: number;
   originalPrice: number;
   description: string;
@@ -58,21 +60,23 @@ export function useProductPage() {
   }, [t]);
 
   useEffect(() => {
-    const products = [
+    const products: Product[] = [
       {
         id: 1,
-        name: infos[0].title,
+        name: 'SEEDKIT',
+        title: infos[0].title,
         price: 150,
         originalPrice: 180,
         description: infos[0].description,
         images: [Bitkit1, Bitkit2, Bitkit3, Bitkit4, Bitkit5],
       },
       {
-        id: 3,
-        name: infos[2].title,
+        id: 2,
+        name: 'BITKIT',
+        title: infos[1].title,
         price: 800,
         originalPrice: 850,
-        description: infos[2].description,
+        description: infos[1].description,
         images: [Bitkit7, Bitkit1, Bitkit2, Bitkit3, Bitkit4, Bitkit5, Bitkit6],
       },
     ];
@@ -127,6 +131,39 @@ export function useProductPage() {
     }
   };
 
+  const addToCart = (quantity: number) => {
+    if (product) {
+      const productToAdd = {
+        id: product.id.toString(),
+        name: product.name,
+        price: product.price,
+        quantity,
+        imageUrl: product.images[0],
+      };
+
+      const storedCart = localStorage.getItem('cartItems');
+      const cartItems = storedCart ? JSON.parse(storedCart) : [];
+      const existingItem = cartItems.find(
+        (item: { id: string }) => item.id === productToAdd.id,
+      );
+
+      if (existingItem) {
+        existingItem.quantity += quantity;
+      } else {
+        cartItems.push(productToAdd);
+      }
+
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
+      Swal.fire({
+        title: 'Adicionado ao carrinho!',
+        text: `${productToAdd.name} (Quantidade: ${quantity})`,
+        icon: 'success',
+        confirmButtonText: 'OK',
+      });
+    }
+  };
+
   return {
     t,
     form,
@@ -134,6 +171,7 @@ export function useProductPage() {
     loading,
     resources,
     register,
+    addToCart,
     image: {
       next: handleNextImage,
       prev: handlePrevImage,

@@ -37,6 +37,7 @@ export const LanguageTexts = {
     buyNowButton: 'products.buyNowButton',
     resourcesTitle: 'products.resourcesTitle',
     resources: 'products.resources',
+    addToCartButton: 'products.addToCartButton',
   },
   blogs: {
     title: 'blogs.title',

@@ -8,12 +8,14 @@ import { PhoneIcon } from '@heroicons/react/20/solid';
 import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IconType } from 'react-icons';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { Link, useNavigate } from 'react-router-dom';
 import { blogData } from '../../../blogContent/blogPosts';
 import { LanguageTexts } from '../../../domain/locales/Language';
 import { LanguageSwitcher } from '../../components/LanguageSwitcher/LanguageSwitcher';
 import { ROUTES } from '../../routes/Routes';
+import { useCart } from '../../screens/CartPage/UseCartPage';
 import { useCurrentLang } from '../../utils/useCurrentLang';
 
 type Products = {
@@ -40,6 +42,12 @@ export function NavLinks({
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { currentLang } = useCurrentLang();
+  const { cartItems } = useCart();
+
+  const totalItems = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0,
+  );
 
   const handleOnLink = (path: string, callback?: () => void) => {
     if (callback) {
@@ -48,7 +56,13 @@ export function NavLinks({
     navigate(path);
   };
 
-  const callsToAction = [{ name: 'Contact sales', href: '#', icon: PhoneIcon }];
+  const callsToAction = [
+    {
+      name: 'Contact sales',
+      href: 'https://api.whatsapp.com/send?phone=+5511994458337&text=gostaria+de+saber+mais+sobre+os+produtos+DiyCripto%21',
+      icon: PhoneIcon,
+    },
+  ];
 
   return (
     <>
@@ -78,9 +92,9 @@ export function NavLinks({
                   {products.map((item) => (
                     <div
                       key={item.name}
-                      className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6  hover:text-[#F6911D] hover:bg-gray-50 dark:hover:bg-gray-700"
+                      className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:text-[#F6911D] hover:bg-gray-50 dark:hover:bg-gray-700"
                     >
-                      <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg hover:text-[#F6911D] group-hover:bg-white dark:group-hover:bg-gray-700">
+                      <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg group-hover:bg-white dark:group-hover:bg-gray-700">
                         <item.icon
                           aria-hidden="true"
                           className="h-6 w-6 dark:text-white hover:text-[#F6911D]"
@@ -162,7 +176,7 @@ export function NavLinks({
                         <Link
                           key={postId}
                           to={ROUTES.blog.callLang(currentLang, postId)}
-                          className="bg-white dark:bg-slate-800   overflow-hidden transition-transform transform hover:scale-105"
+                          className="bg-white dark:bg-slate-800 overflow-hidden transition-transform transform hover:scale-105"
                         >
                           {translation.title}
                           <span className="absolute inset-0" />
@@ -175,6 +189,18 @@ export function NavLinks({
             </Popover>
 
             <LanguageSwitcher className="text-xl flex items-center justify-center gap-x-2 lg:text-sm font-semibold leading-6 hover:text-[#F6911D]" />
+
+            <Link
+              to={ROUTES.cart.call(currentLang)}
+              className="relative ml-4 flex items-center"
+            >
+              <AiOutlineShoppingCart className="h-6 w-6 text-gray-700 dark:text-white" />
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-semibold rounded-full px-1">
+                  {totalItems}
+                </span>
+              )}
+            </Link>
           </PopoverGroup>
         </>
       )}

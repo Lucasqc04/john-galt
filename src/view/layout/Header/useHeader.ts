@@ -40,13 +40,13 @@ export function useHeader() {
 
   const products = [
     {
-      name: 'BITKIT',
+      name: 'SEEDKIT',
       href: ROUTES.product.call(currentLang, id ?? '1'),
       icon: MdTouchApp,
     },
     {
-      name: 'SEEDKIT',
-      href: ROUTES.product.call(currentLang, id ?? '3'),
+      name: 'BITKIT',
+      href: ROUTES.product.call(currentLang, id ?? '2'),
       icon: MdTouchApp,
     },
   ];

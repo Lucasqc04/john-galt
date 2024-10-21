@@ -1,6 +1,10 @@
 {
   "header": {
-    "links": ["Products", "About Us", "Blogs"]
+    "links": [
+      "Products",
+      "About Us",
+      "Blogs"
+    ]
   },
   "hero": {
     "title": "Offline Bitcoin Protection with Web3 Security",
@@ -75,8 +79,21 @@
       "Metal Plate",
       "Compatibility with Sparrow Wallet, Specter Desktop, Nunchuk, and BlueWallet"
     ],
-    "buyNowButton": "Buy Now"
+    "buyNowButton": "Buy Now",
+    "addToCartButton": "Add to Cart",
+    "quantity": "Quantity",
+    "goToCart": "Go to Cart"
   },
+  "cart": {
+    "title": "Shopping Cart",
+    "emptyCart": "Your cart is empty.",
+    "price": "Price",
+    "quantity": "Quantity",
+    "remove": "Remove",
+    "clearCart": "Clear Cart",
+    "total": "Total",
+    "checkout": "Go to Checkout"
+},
   "blogs": {
     "title": "BLOG DIY"
   },
@@ -89,7 +106,12 @@
     }
   },
   "footer": {
-    "links": ["About", "Privacy Policy", "Licensing", "Contact"],
+    "links": [
+      "About",
+      "Privacy Policy",
+      "Licensing",
+      "Contact"
+    ],
     "allRightsReserved": "All Rights Reserved."
   },
   "about": {
@@ -104,7 +126,6 @@
   "post": {
     "notFound": "Post Not Found!"
   },
-
   "cardNamePlaceholder": "Cardholder's Name",
   "cardNumberPlaceholder": "Card Number",
   "expiryDatePlaceholder": "MM/YY",

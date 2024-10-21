@@ -1,18 +1,75 @@
+import { useEffect, useState } from 'react';
+import { FormProvider } from 'react-hook-form';
 import { FaChevronLeft, FaChevronRight, FaTruckFast } from 'react-icons/fa6';
 import { MdCheck } from 'react-icons/md';
+import Swal from 'sweetalert2';
 import { LanguageTexts } from '../../../domain/locales/Language';
-
-import { FormProvider } from 'react-hook-form';
 import { BackgroundAnimatedProduct } from '../../styles/Products/Product.styles';
 import { BlogLinks } from '../partials/BlogLinks';
 import { useProductPage } from './useProductPage';
 
+import { ROUTES } from '../../routes/Routes';
+import { useCurrentLang } from '../../utils/useCurrentLang';
+
+type CartItem = {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+  imageUrl: string;
+};
+
 export function ProductPage() {
-  const { t, form, register, product, image, shipping, loading, resources } =
-    useProductPage();
+  const { currentLang } = useCurrentLang();
+  const {
+    t,
+    form,
+    register,
+    product,
+    image,
+    shipping,
+    loading,
+    resources,
+    addToCart,
+  } = useProductPage();
+  const [quantity, setQuantity] = useState(1);
+
+  const handleAddToCart = () => {
+    if (product) {
+      const productToAdd: CartItem = {
+        id: product.id.toString(),
+        name: product.name,
+        price: product.price,
+        quantity,
+        imageUrl: product.images[0],
+      };
+
+      addToCart(quantity);
+      Swal.fire({
+        title: t('products.addToCartButton'),
+        text: `${productToAdd.name} (${t('products.quantity')}: ${quantity})`,
+        showCancelButton: true,
+        confirmButtonText: 'OK',
+        cancelButtonText: t('products.goToCart'),
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.reload();
+        } else if (result.isDismissed) {
+          window.location.href = ROUTES.cart.call(currentLang);
+        }
+      });
+    }
+  };
+
+  useEffect(() => {
+    const storedCart = localStorage.getItem('cartItems');
+    if (storedCart) {
+      console.log('Carrinho carregado:', JSON.parse(storedCart));
+    }
+  }, []);
 
   if (!product) {
-    return <div>Carregando...</div>;
+    return <div>{t('loading')}</div>;
   }
 
   return (
@@ -60,9 +117,12 @@ export function ProductPage() {
             </div>
 
             <div className="lg:w-1/2">
-              <h2 className="text-2xl md:text-3xl font-bold dark:text-white mb-4">
+              <h1 className="text-2xl md:text-3xl font-bold dark:text-white mb-4">
                 {product.name}
-              </h2>
+              </h1>
+              <h4 className="text-xl md:text-2xl font-bold dark:text-white mb-3">
+                {product.title}
+              </h4>
               <div className="dark:text-white line-through text-lg">
                 R${product.originalPrice.toFixed(2)}
               </div>
@@ -128,6 +188,23 @@ export function ProductPage() {
               </div>
             </div>
           </div>
+
+          <div className="flex items-center mb-6">
+            <input
+              type="number"
+              value={quantity}
+              onChange={(e) => setQuantity(Number(e.target.value))}
+              min={1}
+              className="w-16 p-2 border border-gray-300 rounded-md"
+            />
+            <button
+              onClick={handleAddToCart}
+              className="bg-[#F6911D] text-white p-2 rounded-md ml-2"
+            >
+              {t(LanguageTexts.products.addToCartButton)}
+            </button>
+          </div>
+
           <div>
             <h2 className="text-3xl md:text-4xl font-bold mb-20 mt-36 text-center ">
               {t(LanguageTexts.products.resourcesTitle)}
