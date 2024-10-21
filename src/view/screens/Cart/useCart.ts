@@ -1,36 +1,15 @@
-import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../../../domain/locales/Language';
-
-type CartItem = {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-  imageUrl: string;
-};
+import { useCartContext } from '../../context/CartContext';
 
 export function useCart() {
   const { t } = useTranslation();
   const { currentLang } = useLanguage();
-  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-    const storedCart = localStorage.getItem('cartItems');
-    return storedCart ? JSON.parse(storedCart) : [];
-  });
+  const { items, updateItemQuantity, remove, clear } = useCartContext();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-  }, [cartItems]);
-
-  const removeFromCart = (id: string) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
-  };
-
-  const clearCart = () => {
-    setCartItems([]);
-  };
-
-  const total = cartItems.reduce(
+  const total = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0,
   );
@@ -38,11 +17,13 @@ export function useCart() {
   return {
     t,
     currentLang,
+    navigate,
     cart: {
       total,
-      items: cartItems,
-      clear: clearCart,
-      remove: removeFromCart,
+      items,
+      clear,
+      remove,
+      updateItemQuantity,
     },
   };
 }
