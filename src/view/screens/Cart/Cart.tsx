@@ -1,16 +1,13 @@
 import { FaTrash } from 'react-icons/fa';
 import { IoArrowBack } from 'react-icons/io5';
 import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { LanguageTexts } from '../../../domain/locales/Language';
-import { useCartContext } from '../../context/CartContext';
 import { ROUTES } from '../../routes/Routes';
 import { useCart } from './useCart';
 
 export function Cart() {
-  const { t, currentLang, cart } = useCart();
-  const { updateItemQuantity } = useCartContext();
-  const navigate = useNavigate();
+  const { t, currentLang, cart, navigate } = useCart();
 
   if (cart.items.length === 0) {
     return (
@@ -35,7 +32,7 @@ export function Cart() {
         </div>
         <div className="w-full pt-4 flex flex-col gap-y-6">
           <p className="font-semibold">
-            Você tem {cart.items.length} items no carrinho
+            Você tem {cart.items.length} itens no carrinho
           </p>
           <ul>
             {cart.items.map((item) => (
@@ -59,23 +56,23 @@ export function Cart() {
                 <div className="flex items-center gap-x-2">
                   <div className="flex flex-col items-center">
                     <button
-                      onClick={() => {
-                        updateItemQuantity(item.id, item.quantity++);
-                      }}
+                      onClick={() =>
+                        cart.updateItemQuantity(item.id, item.quantity + 1)
+                      }
                     >
                       <TiArrowSortedUp size={24} />
                     </button>
                     <button
                       onClick={() => {
-                        updateItemQuantity(item.id, item.quantity--);
+                        if (item.quantity > 1) {
+                          cart.updateItemQuantity(item.id, item.quantity - 1);
+                        }
                       }}
                     >
                       <TiArrowSortedDown size={24} />
                     </button>
                   </div>
-                  <p className="dark:text-gray-300 text-xl">
-                    {/**{t(LanguageTexts.cart.quantity)}: */} {item.quantity}
-                  </p>
+                  <p className="dark:text-gray-300 text-xl">{item.quantity}</p>
                 </div>
                 <button
                   onClick={() => cart.remove(item.id)}
@@ -103,7 +100,7 @@ export function Cart() {
             </Link>
           </div>
           <div className="font-bold text-lg dark:text-white">
-            {t('cart.total')}: ${cart.total.toFixed(2)}
+            {t('cart.total')}: ${cart.total.toFixed(2)}{' '}
           </div>
         </div>
       </div>

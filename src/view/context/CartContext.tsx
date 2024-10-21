@@ -35,26 +35,26 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [cartItems]);
 
   const add = (item: CartItem) => {
-    setCartItems((prevItems) => {
-      const existingItem = prevItems.find((i) => i.id === item.id);
+    setCartItems((prev) => {
+      const existingItem = prev.find((i) => i.id === item.id);
       if (existingItem) {
-        return prevItems.map((i) =>
+        return prev.map((i) =>
           i.id === item.id ? { ...i, quantity: i.quantity + item.quantity } : i,
         );
       }
-      return [...prevItems, item];
+      return [...prev, item];
     });
   };
 
   const remove = (id: string) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
   const updateItemQuantity = (id: string, quantity: number) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item,
-      ),
+    if (quantity < 1) return;
+
+    setCartItems((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, quantity } : item)),
     );
   };
 
