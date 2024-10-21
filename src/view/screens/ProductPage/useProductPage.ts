@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import {
   CalculatedShipping,
@@ -16,6 +16,8 @@ import Bitkit4 from '../../assets/Bitkit/Bitkit 4.png';
 import Bitkit5 from '../../assets/Bitkit/Bitkit 5.png';
 import Bitkit6 from '../../assets/Bitkit/Bitkit 6.png';
 import Bitkit7 from '../../assets/Bitkit/Bitkit 7.png';
+import { ROUTES } from '../../routes/Routes';
+import { useCurrentLang } from '../../utils/useCurrentLang';
 
 type Product = {
   id: number;
@@ -27,6 +29,14 @@ type Product = {
   images: string[];
 };
 
+type CartItem = {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+  imageUrl: string;
+};
+
 type Infos = {
   title: string;
   description: string;
@@ -35,6 +45,7 @@ type Infos = {
 export function useProductPage() {
   const [loading, setLoading] = useState<boolean>(false);
   const { t } = useTranslation();
+  const { currentLang } = useCurrentLang();
 
   const form = useForm<CalculateShipping>();
   const { register, handleSubmit } = form;
@@ -46,6 +57,7 @@ export function useProductPage() {
     [],
   );
   const [, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const infos = useMemo(() => {
     return t(LanguageTexts.products.infos, {
@@ -164,6 +176,47 @@ export function useProductPage() {
     }
   };
 
+  const [quantity, setQuantity] = useState(1);
+
+  const handleAddToCart = () => {
+    if (product) {
+      const productToAdd: CartItem = {
+        id: product.id.toString(),
+        name: product.name,
+        price: product.price,
+        quantity,
+        imageUrl: product.images[0],
+      };
+
+      addToCart(quantity);
+      Swal.fire({
+        title: t('products.addToCartButton'),
+        text: `${productToAdd.name} (${t('products.quantity')}: ${quantity})`,
+        showCancelButton: true,
+        confirmButtonText: 'OK',
+        cancelButtonText: t('products.goToCart'),
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.reload();
+        } else if (result.isDismissed) {
+          window.location.href = ROUTES.cart.call(currentLang);
+        }
+      });
+    }
+  };
+
+  useEffect(() => {
+    const storedCart = localStorage.getItem('cartItems');
+    if (storedCart) {
+      console.log('Carrinho carregado:', JSON.parse(storedCart));
+    }
+  }, []);
+
+  const handleNavigate = () => {
+    const checkoutUrl = ROUTES.cart.checkout.call(currentLang);
+    navigate(checkoutUrl);
+  };
+
   return {
     t,
     form,
@@ -171,12 +224,19 @@ export function useProductPage() {
     loading,
     resources,
     register,
-    addToCart,
+    navigate: handleNavigate,
+    cart: {
+      add: handleAddToCart,
+    },
     image: {
       next: handleNextImage,
       prev: handlePrevImage,
       current: currentImageIndex,
       thumbnail: handleThumbnailClick,
+    },
+    quantity: {
+      value: quantity,
+      set: setQuantity,
     },
     shipping: {
       calculate: handleSubmit(onSubmit),
