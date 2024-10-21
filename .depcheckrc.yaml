@@ -10,8 +10,5 @@ ignores:
     'postcss',
     'tailwindcss',
     'tailwindcss-animated',
-    'axios',
-    'zod',
-    'react-icons',
   ]
 skip-missing: true
