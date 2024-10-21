@@ -1,13 +1,26 @@
+import { useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { FaTrash } from 'react-icons/fa';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
 import { useNavigate } from 'react-router-dom';
+import { AddressForm } from './AddressForm';
+import { StepIndicator } from './StepIndicator';
 import { useCheckout } from './useCheckout';
 
 export function Checkout() {
-  const { form, paymentMethod, cart } = useCheckout();
+  const { form, cart } = useCheckout();
   const navigate = useNavigate();
+  const [currentStep, setCurrentStep] = useState(1);
+  const totalSteps = 2;
+
+  const nextStep = () => {
+    setCurrentStep(currentStep + 1);
+  };
+
+  const prevStep = () => {
+    setCurrentStep(currentStep - 1);
+  };
 
   return (
     <main className="min-h-screen flex flex-col px-4 py-8">
@@ -17,125 +30,140 @@ export function Checkout() {
         </button>
         <h1 className="text-4xl font-semibold">Checkout</h1>
       </header>
+      <StepIndicator currentStep={currentStep} totalSteps={totalSteps} />{' '}
       <section className="w-full flex flex-col lg:flex-row gap-x-4">
         <article className="p-6 w-full lg:w-2/3">
           <FormProvider {...form.provider}>
             <form onSubmit={form.submit} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Email do Pagador
-                </label>
-                <input
-                  type="email"
-                  {...form.register('payerEmail', { required: true })}
-                  className="w-full p-2 border border-gray-300 rounded-md"
-                />
-                {form.errors.payerEmail && (
-                  <span className="text-red-500 text-sm">
-                    Este campo é obrigatório
-                  </span>
+              {currentStep === 1 && (
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Email do Pagador
+                    </label>
+                    <input
+                      type="email"
+                      {...form.register('payerEmail', { required: true })}
+                      className="w-full p-2 border border-gray-300 rounded-md"
+                    />
+                    {form.errors.payerEmail && (
+                      <span className="text-red-500 text-sm">
+                        Este campo é obrigatório
+                      </span>
+                    )}
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Primeiro Nome
+                    </label>
+                    <input
+                      type="text"
+                      {...form.register('firstName', { required: true })}
+                      className="w-full p-2 border border-gray-300 rounded-md"
+                    />
+                    {form.errors.firstName && (
+                      <span className="text-red-500 text-sm">
+                        Este campo é obrigatório
+                      </span>
+                    )}
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Sobrenome
+                    </label>
+                    <input
+                      type="text"
+                      {...form.register('lastName', { required: true })}
+                      className="w-full p-2 border border-gray-300 rounded-md"
+                    />
+                    {form.errors.lastName && (
+                      <span className="text-red-500 text-sm">
+                        Este campo é obrigatório
+                      </span>
+                    )}
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Tipo de Identificação
+                    </label>
+                    <select
+                      {...form.register('identification.type', {
+                        required: true,
+                      })}
+                      className="w-full p-2 border border-gray-300 rounded-md"
+                    >
+                      <option value="CPF">CPF</option>
+                      <option value="CNPJ">CNPJ</option>
+                    </select>
+                    {form.errors.identification?.type && (
+                      <span className="text-red-500 text-sm">
+                        Este campo é obrigatório
+                      </span>
+                    )}
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Número de Identificação
+                    </label>
+                    <input
+                      type="text"
+                      {...form.register('identification.number', {
+                        required: true,
+                      })}
+                      className="w-full p-2 border border-gray-300 rounded-md"
+                    />
+                    {form.errors.identification?.number && (
+                      <span className="text-red-500 text-sm">
+                        Este campo é obrigatório
+                      </span>
+                    )}
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Código do Cupom
+                    </label>
+                    <input
+                      type="text"
+                      {...form.register('couponCode')}
+                      className="w-full p-2 border border-gray-300 rounded-md"
+                    />
+                  </div>
+                </div>
+              )}
+
+              {currentStep === 2 && <AddressForm />}
+
+              <div className="flex justify-between">
+                {currentStep > 1 && (
+                  <button
+                    type="button"
+                    onClick={prevStep}
+                    className="bg-gray-500 text-white p-2 rounded-md font-semibold"
+                  >
+                    Voltar
+                  </button>
                 )}
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Primeiro Nome
-                </label>
-                <input
-                  type="text"
-                  {...form.register('firstName', { required: true })}
-                  className="w-full p-2 border border-gray-300 rounded-md"
-                />
-                {form.errors.firstName && (
-                  <span className="text-red-500 text-sm">
-                    Este campo é obrigatório
-                  </span>
+                {currentStep < 2 ? (
+                  <button
+                    type="button"
+                    onClick={nextStep}
+                    className="bg-blue-500 text-white p-2 rounded-md font-semibold"
+                  >
+                    Próximo
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    className="bg-blue-500 text-white p-2 rounded-md font-semibold"
+                  >
+                    Finalizar Pagamento
+                  </button>
                 )}
-              </div>
-
-              <div>
-                <label className="text-sm font-medium text-gray-700">
-                  Sobrenome
-                </label>
-                <input
-                  type="text"
-                  {...form.register('lastName', { required: true })}
-                  className="w-full p-2 border border-gray-300 rounded-md"
-                />
-                {form.errors.lastName && (
-                  <span className="text-red-500 text-sm">
-                    Este campo é obrigatório
-                  </span>
-                )}
-              </div>
-
-              <div>
-                <label className="text-sm font-medium text-gray-700">
-                  Tipo de Identificação
-                </label>
-                <select
-                  {...form.register('identification.type', { required: true })}
-                  className="w-full p-2 border border-gray-300 rounded-md"
-                >
-                  <option value="CPF">CPF</option>
-                  <option value="CNPJ">CNPJ</option>
-                </select>
-                {form.errors.identification?.type && (
-                  <span className="text-red-500 text-sm">
-                    Este campo é obrigatório
-                  </span>
-                )}
-              </div>
-
-              <div>
-                <label className="text-sm font-medium text-gray-700">
-                  Número de Identificação
-                </label>
-                <input
-                  type="text"
-                  {...form.register('identification.number', {
-                    required: true,
-                  })}
-                  className="w-full p-2 border border-gray-300 rounded-md"
-                />
-                {form.errors.identification?.number && (
-                  <span className="text-red-500 text-sm">
-                    Este campo é obrigatório
-                  </span>
-                )}
-              </div>
-
-              <div>
-                <label className="text-sm font-medium text-gray-700">
-                  Método de Pagamento
-                </label>
-                <select
-                  value={paymentMethod.value}
-                  onChange={(e) => paymentMethod.set(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded-md"
-                >
-                  <option value="MP">Mercado Pago</option>
-                  <option value="BTC">Bitcoin</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Código do Cupom
-                </label>
-                <input
-                  type="text"
-                  {...form.register('couponCode')}
-                  className="w-full p-2 border border-gray-300 rounded-md"
-                />
-              </div>
-              <div>
-                <button
-                  type="submit"
-                  className="w-full bg-blue-500 text-white p-2 rounded-md font-semibold hover:bg-blue-600"
-                >
-                  Finalizar Pagamento
-                </button>
               </div>
             </form>
           </FormProvider>
