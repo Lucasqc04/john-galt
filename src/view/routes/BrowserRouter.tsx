@@ -11,7 +11,7 @@ import { DefaultLayout } from '../layout/DefaultyLayout';
 import { About } from '../screens/About';
 import { BlogPost } from '../screens/BlogPost';
 import { Cart } from '../screens/Cart/Cart';
-import { Checkout } from '../screens/Checkout';
+import { Checkout } from '../screens/Checkout/Checkout';
 import { NotFound } from '../screens/NotFound';
 import { Page } from '../screens/Page';
 import { Products } from '../screens/partials/Products';

@@ -1,82 +1,24 @@
-import axios from 'axios';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-
-type Item = {
-  id: string;
-  name: string;
-  quantity: number;
-  price: number;
-  category_id: string;
-  description: string;
-};
-
-type Identification = {
-  type: 'CPF' | 'CNPJ';
-  number: string;
-};
-
-type CheckoutForm = {
-  couponCode?: string;
-  payerEmail: string;
-  firstName: string;
-  lastName: string;
-  identification: Identification;
-  items: Item[];
-};
+import { useCheckout } from './useCheckout';
 
 export function Checkout() {
-  const API_URL = String(import.meta.env.VITE_API_URL);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<CheckoutForm>();
-
-  const [paymentMethod, setPaymentMethod] = useState<string>('MP');
-
-  const onSubmit = async (data: CheckoutForm) => {
-    try {
-      const paymentData = {
-        couponCode: data.couponCode,
-        paymentMethod,
-        items: data.items,
-        payerEmail: data.payerEmail,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        identification: data.identification,
-      };
-
-      const response = await axios.post(
-        `${API_URL}create-payment/${paymentMethod}`,
-        paymentData,
-      );
-      if (response.data.paymentUrl) {
-        window.location.href = response.data.paymentUrl;
-      } else {
-        alert('Pagamento não foi aprovado.');
-      }
-    } catch {
-      alert('Ocorreu um erro ao processar o pagamento.');
-    }
-  };
+  const { form, paymentMethod } = useCheckout();
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center  p-4 mt-20">
       <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-lg">
         <h1 className="text-2xl font-bold mb-6 text-center">Checkout</h1>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={form.submit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Email do Pagador
             </label>
             <input
               type="email"
-              {...register('payerEmail', { required: true })}
+              {...form.register('payerEmail', { required: true })}
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
             />
-            {errors.payerEmail && (
+            {form.errors.payerEmail && (
               <span className="text-red-500 text-sm">
                 Este campo é obrigatório
               </span>
@@ -89,10 +31,10 @@ export function Checkout() {
             </label>
             <input
               type="text"
-              {...register('firstName', { required: true })}
+              {...form.register('firstName', { required: true })}
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
             />
-            {errors.firstName && (
+            {form.errors.firstName && (
               <span className="text-red-500 text-sm">
                 Este campo é obrigatório
               </span>
@@ -105,10 +47,10 @@ export function Checkout() {
             </label>
             <input
               type="text"
-              {...register('lastName', { required: true })}
+              {...form.register('lastName', { required: true })}
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
             />
-            {errors.lastName && (
+            {form.errors.lastName && (
               <span className="text-red-500 text-sm">
                 Este campo é obrigatório
               </span>
@@ -120,13 +62,13 @@ export function Checkout() {
               Tipo de Identificação
             </label>
             <select
-              {...register('identification.type', { required: true })}
+              {...form.register('identification.type', { required: true })}
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
             >
               <option value="CPF">CPF</option>
               <option value="CNPJ">CNPJ</option>
             </select>
-            {errors.identification?.type && (
+            {form.errors.identification?.type && (
               <span className="text-red-500 text-sm">
                 Este campo é obrigatório
               </span>
@@ -139,10 +81,10 @@ export function Checkout() {
             </label>
             <input
               type="text"
-              {...register('identification.number', { required: true })}
+              {...form.register('identification.number', { required: true })}
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
             />
-            {errors.identification?.number && (
+            {form.errors.identification?.number && (
               <span className="text-red-500 text-sm">
                 Este campo é obrigatório
               </span>
@@ -154,8 +96,8 @@ export function Checkout() {
               Método de Pagamento
             </label>
             <select
-              value={paymentMethod}
-              onChange={(e) => setPaymentMethod(e.target.value)}
+              value={paymentMethod.value}
+              onChange={(e) => paymentMethod.set(e.target.value)}
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
             >
               <option value="MP">Mercado Pago</option>
@@ -169,7 +111,7 @@ export function Checkout() {
             </label>
             <input
               type="text"
-              {...register('couponCode')}
+              {...form.register('couponCode')}
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
             />
           </div>
