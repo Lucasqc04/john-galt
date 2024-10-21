@@ -41,12 +41,12 @@ export function useHeader() {
   const products = [
     {
       name: 'SEEDKIT',
-      href: ROUTES.product.call(currentLang, id ?? '1'),
+      href: ROUTES.cart.product.call(currentLang, id ?? '1'),
       icon: MdTouchApp,
     },
     {
       name: 'BITKIT',
-      href: ROUTES.product.call(currentLang, id ?? '2'),
+      href: ROUTES.cart.product.call(currentLang, id ?? '2'),
       icon: MdTouchApp,
     },
   ];

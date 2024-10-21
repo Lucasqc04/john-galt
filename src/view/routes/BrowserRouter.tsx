@@ -33,12 +33,15 @@ export function BrowserRouter() {
           />
           <Route path={ROUTES.lang.call()} element={<DefaultLayout />}>
             <Route index element={<Page />} />
-            <Route path={ROUTES.products.path} element={<Products />} />
+            <Route path={ROUTES.cart.products.path} element={<Products />} />
             <Route path={ROUTES.blog.path} element={<BlogPost />} />
-            <Route path={ROUTES.product.path} element={<ProductPage />} />
+            <Route path={ROUTES.cart.product.path} element={<ProductPage />} />
             <Route path={ROUTES.about.path} element={<About />} />
             <Route path={ROUTES.cart.path} element={<CartPage />} />
-            <Route path={ROUTES.checkout.path} element={<Checkout />}></Route>
+            <Route
+              path={ROUTES.cart.checkout.path}
+              element={<Checkout />}
+            ></Route>
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

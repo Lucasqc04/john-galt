@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaTrash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '../../../domain/locales/Language';
+import { ROUTES } from '../../routes/Routes';
 
 interface CartItem {
   id: string;
@@ -13,6 +15,7 @@ interface CartItem {
 
 export function CartPage() {
   const { t } = useTranslation();
+  const { currentLang } = useLanguage();
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     const storedCart = localStorage.getItem('cartItems');
     return storedCart ? JSON.parse(storedCart) : [];
@@ -32,7 +35,7 @@ export function CartPage() {
   };
 
   const handleCheckout = () => {
-    navigate('/checkout');
+    navigate(ROUTES.cart.checkout.call(currentLang));
   };
 
   const total = cartItems.reduce(
