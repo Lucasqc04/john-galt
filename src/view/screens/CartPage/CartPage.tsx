@@ -2,16 +2,16 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaTrash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { useLanguage } from '../../../domain/locales/Language';
+import { LanguageTexts, useLanguage } from '../../../domain/locales/Language';
 import { ROUTES } from '../../routes/Routes';
 
-interface CartItem {
+type CartItem = {
   id: string;
   name: string;
   price: number;
   quantity: number;
   imageUrl: string;
-}
+};
 
 export function CartPage() {
   const { t } = useTranslation();
@@ -47,7 +47,7 @@ export function CartPage() {
     return (
       <div className="min-h-screen flex items-center justify-center dark:bg-gray-900">
         <h1 className="text-4xl font-bold dark:text-white">
-          {t('cart.emptyCart')}
+          {t(LanguageTexts.cart.emptyCart)}
         </h1>
       </div>
     );
@@ -57,7 +57,7 @@ export function CartPage() {
     <div className="min-h-screen pt-[15%] md:pt-[10%] lg:pt-[5%] dark:bg-gray-900">
       <div className="max-w-7xl mx-auto p-4">
         <h2 className="text-3xl font-bold mb-4 dark:text-white">
-          {t('cart.title')}
+          {t(LanguageTexts.cart.title)}
         </h2>
         <ul>
           {cartItems.map((item) => (
@@ -73,10 +73,10 @@ export function CartPage() {
               <div className="flex-1">
                 <p className="font-semibold dark:text-white">{item.name}</p>
                 <p className="dark:text-gray-300">
-                  {t('cart.price')}: ${item.price.toFixed(2)}
+                  {t(LanguageTexts.cart.price)}: ${item.price.toFixed(2)}
                 </p>
                 <p className="dark:text-gray-300">
-                  {t('cart.quantity')}: {item.quantity}
+                  {t(LanguageTexts.cart.quantity)}: {item.quantity}
                 </p>
               </div>
               <button
@@ -84,7 +84,7 @@ export function CartPage() {
                 className="bg-red-500 text-white px-4 py-2 rounded ml-4 flex items-center"
               >
                 <FaTrash className="mr-2" />
-                {t('cart.remove')}
+                {t(LanguageTexts.cart.remove)}
               </button>
             </li>
           ))}
@@ -94,7 +94,7 @@ export function CartPage() {
             onClick={clearCart}
             className="bg-[#F6911D] text-white px-4 py-2 rounded mr-2"
           >
-            {t('cart.clearCart')}
+            {t(LanguageTexts.cart.clearCart)}
           </button>
           <div className="font-bold text-lg dark:text-white">
             {t('cart.total')}: ${total.toFixed(2)}
@@ -104,7 +104,7 @@ export function CartPage() {
           onClick={handleCheckout}
           className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
         >
-          {t('cart.checkout')}
+          {t(LanguageTexts.cart.checkout)}
         </button>
       </div>
     </div>

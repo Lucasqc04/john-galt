@@ -62,6 +62,16 @@ export const LanguageTexts = {
   post: {
     notFound: 'post.notFound',
   },
+  cart: {
+    emptyCart: 'cart.emptyCart',
+    title: 'cart.title',
+    price: 'cart.price',
+    quantity: 'cart.quantity',
+    remove: 'cart.remove',
+    clearCart: 'cart.clearCart',
+    total: 'cart.total',
+    checkout: 'cart.checkout',
+  },
 };
 
 export enum AcceptedLanguages {

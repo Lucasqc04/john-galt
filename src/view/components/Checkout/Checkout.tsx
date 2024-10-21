@@ -37,7 +37,6 @@ export function Checkout() {
 
   const onSubmit = async (data: CheckoutForm) => {
     try {
-      // Ajusta os dados de pagamento para a estrutura esperada pela API
       const paymentData = {
         couponCode: data.couponCode,
         paymentMethod,
@@ -53,9 +52,7 @@ export function Checkout() {
         paymentData,
       );
       console.log(API_URL);
-      // Verifica se a URL de pagamento foi retornada
       if (response.data.paymentUrl) {
-        // Redireciona o cliente para a página de pagamento do Mercado Pago
         window.location.href = response.data.paymentUrl;
       } else {
         alert('Pagamento não foi aprovado.');
@@ -72,7 +69,6 @@ export function Checkout() {
         <h1 className="text-2xl font-bold mb-6 text-center">Checkout</h1>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          {/* Campo de Email */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Email do Pagador
@@ -89,7 +85,6 @@ export function Checkout() {
             )}
           </div>
 
-          {/* Campo de Primeiro Nome */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Primeiro Nome
@@ -106,7 +101,6 @@ export function Checkout() {
             )}
           </div>
 
-          {/* Campo de Sobrenome */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Sobrenome
@@ -123,7 +117,6 @@ export function Checkout() {
             )}
           </div>
 
-          {/* Identificação */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Tipo de Identificação
@@ -158,7 +151,6 @@ export function Checkout() {
             )}
           </div>
 
-          {/* Método de Pagamento */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Método de Pagamento
@@ -173,7 +165,6 @@ export function Checkout() {
             </select>
           </div>
 
-          {/* Campo de Cupom */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Código do Cupom
@@ -185,17 +176,14 @@ export function Checkout() {
             />
           </div>
 
-          {/* Itens do Checkout */}
           <div>
             <h2 className="text-lg font-bold">Itens no Carrinho</h2>
             <ul>
-              {/* Exemplos de itens, você pode substituir isso pela lógica do seu carrinho */}
               <li>ID: 123 - Produto A - Quantidade: 2 - Preço: R$50</li>
               <li>ID: 456 - Produto B - Quantidade: 1 - Preço: R$30</li>
             </ul>
           </div>
 
-          {/* Botão de Submit */}
           <div>
             <button
               type="submit"

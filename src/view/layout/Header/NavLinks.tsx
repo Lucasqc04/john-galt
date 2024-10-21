@@ -14,8 +14,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { blogData } from '../../../blogContent/blogPosts';
 import { LanguageTexts } from '../../../domain/locales/Language';
 import { LanguageSwitcher } from '../../components/LanguageSwitcher/LanguageSwitcher';
+import { useCartContext } from '../../context/CartContext';
 import { ROUTES } from '../../routes/Routes';
-import { useCart } from '../../screens/CartPage/UseCartPage';
 import { useCurrentLang } from '../../utils/useCurrentLang';
 
 type Products = {
@@ -42,7 +42,7 @@ export function NavLinks({
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { currentLang } = useCurrentLang();
-  const { cartItems } = useCart();
+  const { cartItems } = useCartContext();
 
   const totalItems = cartItems.reduce(
     (total, item) => total + item.quantity,
