@@ -12,7 +12,6 @@ export function Checkout() {
   const { form, cart } = useCheckout();
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
-  const totalSteps = 2;
 
   const nextStep = () => {
     setCurrentStep(currentStep + 1);
@@ -30,13 +29,16 @@ export function Checkout() {
         </button>
         <h1 className="text-4xl font-semibold">Checkout</h1>
       </header>
-      <StepIndicator currentStep={currentStep} totalSteps={totalSteps} />{' '}
+      <StepIndicator
+        currentStep={currentStep}
+        steps={[{ title: 'Infos' }, { title: 'Endereço' }]}
+      />
       <section className="w-full flex flex-col lg:flex-row gap-x-4">
-        <article className="p-6 w-full lg:w-2/3">
+        <article className="w-full lg:w-2/3">
           <FormProvider {...form.provider}>
-            <form onSubmit={form.submit} className="space-y-4">
+            <form onSubmit={form.submit} className="flex flex-col gap-y-2 pt-4">
               {currentStep === 1 && (
-                <div className="space-y-4">
+                <>
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
                       Email do Pagador
@@ -70,7 +72,7 @@ export function Checkout() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="text-sm font-medium text-gray-700">
                       Sobrenome
                     </label>
                     <input
@@ -86,7 +88,7 @@ export function Checkout() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="text-sm font-medium text-gray-700">
                       Tipo de Identificação
                     </label>
                     <select
@@ -106,7 +108,7 @@ export function Checkout() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="text-sm font-medium text-gray-700">
                       Número de Identificação
                     </label>
                     <input
@@ -124,7 +126,7 @@ export function Checkout() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="text-sm font-medium text-gray-700">
                       Código do Cupom
                     </label>
                     <input
@@ -133,40 +135,39 @@ export function Checkout() {
                       className="w-full p-2 border border-gray-300 rounded-md"
                     />
                   </div>
-                </div>
+                </>
               )}
 
               {currentStep === 2 && <AddressForm />}
-
-              <div className="flex justify-between">
-                {currentStep > 1 && (
-                  <button
-                    type="button"
-                    onClick={prevStep}
-                    className="bg-gray-500 text-white p-2 rounded-md font-semibold"
-                  >
-                    Voltar
-                  </button>
-                )}
-                {currentStep < 2 ? (
-                  <button
-                    type="button"
-                    onClick={nextStep}
-                    className="bg-blue-500 text-white p-2 rounded-md font-semibold"
-                  >
-                    Próximo
-                  </button>
-                ) : (
-                  <button
-                    type="submit"
-                    className="bg-blue-500 text-white p-2 rounded-md font-semibold"
-                  >
-                    Finalizar Pagamento
-                  </button>
-                )}
-              </div>
             </form>
           </FormProvider>
+          <div className="w-full flex justify-between py-4">
+            {currentStep > 1 && (
+              <button
+                type="button"
+                onClick={prevStep}
+                className="w-48 bg-gray-500 text-white p-2 rounded-md font-semibold"
+              >
+                Voltar
+              </button>
+            )}
+            {currentStep < 2 ? (
+              <button
+                type="button"
+                onClick={nextStep}
+                className="w-48 bg-blue-500 text-white p-2 rounded-md font-semibold"
+              >
+                Próximo
+              </button>
+            ) : (
+              <button
+                type="submit"
+                className="w-48 bg-blue-500 text-white p-2 rounded-md font-semibold"
+              >
+                Finalizar Pagamento
+              </button>
+            )}
+          </div>
         </article>
         <aside className="w-full lg:w-1/3">
           <h2 className="text-lg font-bold">Itens no Carrinho</h2>
