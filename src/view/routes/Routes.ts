@@ -17,6 +17,9 @@ export const ROUTES = {
   cart: {
     path: 'carrinho',
     call: (currentLang: string) => `/${currentLang}/carrinho`,
+  checkout: {
+    path: 'checkout',
+    call: (currentLang: string) => `/${currentLang}/checkout`,
   },
   product: {
     path: 'produto/:id',
