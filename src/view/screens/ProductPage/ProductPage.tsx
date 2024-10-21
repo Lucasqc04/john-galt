@@ -147,23 +147,25 @@ export function ProductPage() {
             </div>
           </div>
 
-          <div className="flex items-center mb-6">
-            <input
-              type="number"
-              value={quantity.value}
-              onChange={(e) => quantity.set(Number(e.target.value))}
-              min={1}
-              className="w-16 p-2 border border-gray-300 rounded-md"
-            />
-            <button
-              onClick={cart.add}
-              className="bg-[#F6911D] text-white p-2 rounded-md ml-2"
-            >
-              {t(LanguageTexts.products.addToCartButton)}
-            </button>
+          <div className="flex flex-col gap-y-2 w-64">
+            <form className="flex gap-x-2">
+              <input
+                type="number"
+                value={quantity.value}
+                onChange={(e) => quantity.set(Number(e.target.value))}
+                min={1}
+                className="w-16 p-2 border border-gray-300 rounded-md"
+              />
+              <button
+                onClick={cart.add}
+                className="bg-[#F6911D] text-white p-2 rounded-md w-48"
+              >
+                {t(LanguageTexts.products.addToCartButton)}
+              </button>
+            </form>
             <Link
               to={ROUTES.cart.checkout.call(currentLang)}
-              className="bg-[#F6911D] text-white p-2 rounded-md ml-2"
+              className="bg-[#F6911D] text-white text-center p-2 rounded-md w-full"
             >
               Comprar
             </Link>
