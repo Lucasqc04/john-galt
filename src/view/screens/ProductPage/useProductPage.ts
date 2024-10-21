@@ -16,6 +16,7 @@ import Bitkit4 from '../../assets/Bitkit/Bitkit 4.png';
 import Bitkit5 from '../../assets/Bitkit/Bitkit 5.png';
 import Bitkit6 from '../../assets/Bitkit/Bitkit 6.png';
 import Bitkit7 from '../../assets/Bitkit/Bitkit 7.png';
+import { useCartContext } from '../../context/CartContext';
 import { ROUTES } from '../../routes/Routes';
 import { useCurrentLang } from '../../utils/useCurrentLang';
 
@@ -35,6 +36,7 @@ type CartItem = {
   price: number;
   quantity: number;
   imageUrl: string;
+  category_id: string;
 };
 
 type Infos = {
@@ -46,6 +48,7 @@ export function useProductPage() {
   const [loading, setLoading] = useState<boolean>(false);
   const { t } = useTranslation();
   const { currentLang } = useCurrentLang();
+  const { add } = useCartContext();
 
   const form = useForm<CalculateShipping>();
   const { register, handleSubmit } = form;
@@ -142,39 +145,6 @@ export function useProductPage() {
     }
   };
 
-  const addToCart = (quantity: number) => {
-    if (product) {
-      const productToAdd = {
-        id: product.id.toString(),
-        name: product.name,
-        price: product.price,
-        quantity,
-        imageUrl: product.images[0],
-      };
-
-      const storedCart = localStorage.getItem('cartItems');
-      const cartItems = storedCart ? JSON.parse(storedCart) : [];
-      const existingItem = cartItems.find(
-        (item: { id: string }) => item.id === productToAdd.id,
-      );
-
-      if (existingItem) {
-        existingItem.quantity += quantity;
-      } else {
-        cartItems.push(productToAdd);
-      }
-
-      localStorage.setItem('cartItems', JSON.stringify(cartItems));
-
-      Swal.fire({
-        title: 'Adicionado ao carrinho!',
-        text: `${productToAdd.name} (Quantidade: ${quantity})`,
-        icon: 'success',
-        confirmButtonText: 'OK',
-      });
-    }
-  };
-
   const [quantity, setQuantity] = useState(1);
 
   const handleAddToCart = () => {
@@ -185,9 +155,11 @@ export function useProductPage() {
         price: product.price,
         quantity,
         imageUrl: product.images[0],
+        category_id: product.name,
       };
 
-      addToCart(quantity);
+      add(productToAdd);
+
       Swal.fire({
         title: t('products.addToCartButton'),
         text: `${productToAdd.name} (${t('products.quantity')}: ${quantity})`,

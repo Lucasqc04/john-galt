@@ -12,6 +12,7 @@ type CartItem = {
   price: number;
   quantity: number;
   imageUrl: string;
+  category_id: string;
 };
 
 type CartContextType = {

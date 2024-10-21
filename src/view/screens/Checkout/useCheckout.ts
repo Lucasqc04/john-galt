@@ -1,15 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
-type Item = {
-  id: string;
-  name: string;
-  quantity: number;
-  price: number;
-  category_id: string;
-  description: string;
-};
+import { useCartContext } from '../../context/CartContext';
 
 type Identification = {
   type: 'CPF' | 'CNPJ';
@@ -22,16 +14,23 @@ type CheckoutForm = {
   firstName: string;
   lastName: string;
   identification: Identification;
-  items: Item[];
 };
 
 export function useCheckout() {
+  const { items, updateItemQuantity, remove, clear } = useCartContext();
+
+  const total = items.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0,
+  );
   const API_URL = String(import.meta.env.VITE_API_URL);
+
+  const form = useForm<CheckoutForm>();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<CheckoutForm>();
+  } = form;
 
   const [paymentMethod, setPaymentMethod] = useState<string>('MP');
 
@@ -40,7 +39,7 @@ export function useCheckout() {
       const paymentData = {
         couponCode: data.couponCode,
         paymentMethod,
-        items: data.items,
+        items: items,
         payerEmail: data.payerEmail,
         firstName: data.firstName,
         lastName: data.lastName,
@@ -51,8 +50,8 @@ export function useCheckout() {
         `${API_URL}/create-payment/${paymentMethod}`,
         paymentData,
       );
-      if (response.data.paymentUrl) {
-        window.location.href = response.data.paymentUrl;
+      if (response.data.initPoint) {
+        window.location.href = response.data.initPoint;
       } else {
         alert('Pagamento não foi aprovado.');
       }
@@ -63,6 +62,7 @@ export function useCheckout() {
 
   return {
     form: {
+      provider: form,
       errors,
       register,
       submit: handleSubmit(onSubmit),
@@ -70,6 +70,13 @@ export function useCheckout() {
     paymentMethod: {
       value: paymentMethod,
       set: setPaymentMethod,
+    },
+    cart: {
+      total,
+      items,
+      clear,
+      remove,
+      updateItemQuantity,
     },
   };
 }
