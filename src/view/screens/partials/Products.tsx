@@ -37,7 +37,7 @@ export function Products() {
       images: [Bitkit1, Bitkit2, Bitkit3, Bitkit4, Bitkit5],
     },
     {
-      id: 3,
+      id: 2,
       name: infos[2].title,
       price: 800,
       originalPrice: 850,

@@ -1,18 +1,33 @@
+import { FormProvider } from 'react-hook-form';
 import { FaChevronLeft, FaChevronRight, FaTruckFast } from 'react-icons/fa6';
 import { MdCheck } from 'react-icons/md';
+
 import { LanguageTexts } from '../../../domain/locales/Language';
 
-import { FormProvider } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import { Loader } from '../../components/Loader';
+import { ROUTES } from '../../routes/Routes';
 import { BackgroundAnimatedProduct } from '../../styles/Products/Product.styles';
 import { BlogLinks } from '../partials/BlogLinks';
 import { useProductPage } from './useProductPage';
 
 export function ProductPage() {
-  const { t, form, register, product, image, shipping, loading, resources } =
-    useProductPage();
+  const {
+    t,
+    cart,
+    form,
+    image,
+    loading,
+    product,
+    quantity,
+    shipping,
+    resources,
+    currentLang,
+    register,
+  } = useProductPage();
 
   if (!product) {
-    return <div>Carregando...</div>;
+    return <Loader />;
   }
 
   return (
@@ -60,9 +75,12 @@ export function ProductPage() {
             </div>
 
             <div className="lg:w-1/2">
-              <h2 className="text-2xl md:text-3xl font-bold dark:text-white mb-4">
+              <h1 className="text-2xl md:text-3xl font-bold dark:text-white mb-4">
                 {product.name}
-              </h2>
+              </h1>
+              <h4 className="text-xl md:text-2xl font-bold dark:text-white mb-3">
+                {product.title}
+              </h4>
               <div className="dark:text-white line-through text-lg">
                 R${product.originalPrice.toFixed(2)}
               </div>
@@ -128,6 +146,31 @@ export function ProductPage() {
               </div>
             </div>
           </div>
+
+          <div className="flex flex-col gap-y-2 w-64">
+            <form className="flex gap-x-2">
+              <input
+                type="number"
+                value={quantity.value}
+                onChange={(e) => quantity.set(Number(e.target.value))}
+                min={1}
+                className="w-16 p-2 border border-gray-300 rounded-md"
+              />
+              <button
+                onClick={cart.add}
+                className="bg-[#F6911D] text-white p-2 rounded-md w-48"
+              >
+                {t(LanguageTexts.products.addToCartButton)}
+              </button>
+            </form>
+            <Link
+              to={ROUTES.cart.checkout.call(currentLang)}
+              className="bg-[#F6911D] text-white text-center p-2 rounded-md w-full"
+            >
+              Comprar
+            </Link>
+          </div>
+
           <div>
             <h2 className="text-3xl md:text-4xl font-bold mb-20 mt-36 text-center ">
               {t(LanguageTexts.products.resourcesTitle)}

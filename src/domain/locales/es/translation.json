@@ -40,43 +40,56 @@
       }
     ]
   },
-  "products": {
-    "title": "Nuestros productos",
-    "infos": [
-      {
-        "title": "¡Tu Kit Completo para el Mundo del Bitcoin!",
-        "description": "Ten todo lo que necesitas en un solo paquete para maximizar tus inversiones en Bitcoin."
-      },
-      {
-        "title": "¡Protege Tus Claves Privadas con Seguridad!",
-        "description": "Ideal para inversores que priorizan la seguridad y desean garantizar la protección de sus claves privadas."
-      },
-      {
-        "title": "¡Seguridad Elevada para Tus Inversiones!",
-        "description": "Para aquellos que buscan el más alto nivel de protección en sus transacciones financieras."
-      }
-    ],
-    "resourcesTitle": "Recursos Básicos y Avanzados en un Solo Kit",
-    "resources": [
-      "Código Abierto",
-      "Cámara para transacciones completamente desconectadas",
-      "Dispositivo Amnésico",
-      "Conexión USB",
-      "Frase de Contraseña (Passphrase)",
-      "Direcciones Multisig",
-      "Batería Recargable",
-      "Compatibilidad con PSBT",
-      "Creación de Mnemotécnico con Entropía Manual",
-      "6 métodos de Respaldo de Mnemotécnico",
-      "Pantalla Táctil LCD de 2.0 pulgadas",
-      "Compatibilidad con Bip39",
-      "Papel para anotar las 12 o 24 palabras",
-      "Punzonadora automática para marcar en placa de metal",
-      "Placa de Metal",
-      "Compatibilidad con Sparrow Wallet, Specter Desktop, Nunchuk y BlueWallet"
-    ],
-    "buyNowButton": "Comprar ahora"
-  },
+"products": {
+  "title": "Nuestros productos",
+  "infos": [
+    {
+      "title": "¡Tu Kit Completo para el Mundo del Bitcoin!",
+      "description": "Ten todo lo que necesitas en un solo paquete para maximizar tus inversiones en Bitcoin."
+    },
+    {
+      "title": "¡Protege Tus Claves Privadas con Seguridad!",
+      "description": "Ideal para inversores que priorizan la seguridad y desean garantizar la protección de sus claves privadas."
+    },
+    {
+      "title": "¡Seguridad Elevada para Tus Inversiones!",
+      "description": "Para aquellos que buscan el más alto nivel de protección en sus transacciones financieras."
+    }
+  ],
+  "resourcesTitle": "Recursos Básicos y Avanzados en un Solo Kit",
+  "resources": [
+    "Código Abierto",
+    "Cámara para transacciones completamente desconectadas",
+    "Dispositivo Amnésico",
+    "Conexión USB",
+    "Frase de Contraseña (Passphrase)",
+    "Direcciones Multisig",
+    "Batería Recargable",
+    "Compatibilidad con PSBT",
+    "Creación de Mnemotécnico con Entropía Manual",
+    "6 métodos de Respaldo de Mnemotécnico",
+    "Pantalla Táctil LCD de 2.0 pulgadas",
+    "Compatibilidad con Bip39",
+    "Papel para anotar las 12 o 24 palabras",
+    "Punzonadora automática para marcar en placa de metal",
+    "Placa de Metal",
+    "Compatibilidad con Sparrow Wallet, Specter Desktop, Nunchuk y BlueWallet"
+  ],
+  "buyNowButton": "Comprar ahora",
+  "addToCartButton": "Añadir al carrito",
+  "quantity": "Cantidad",
+  "goToCart": "Ir al carrito"  
+},
+"cart": {
+  "title": "Carrito de Compras",
+  "emptyCart": "Tu carrito está vacío.",
+  "price": "Precio",
+  "quantity": "Cantidad",
+  "remove": "Eliminar",
+  "clearCart": "Limpiar Carrito",
+  "total": "Total",
+  "checkout": "Ir a la Caja"
+},
   "blogs": {
     "title": "BLOG DIY"
   },

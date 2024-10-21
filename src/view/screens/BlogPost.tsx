@@ -1,27 +1,21 @@
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { blogData } from '../../blogContent/blogPosts';
-import {
-  AcceptedLanguages,
-  LanguageTexts,
-} from '../../domain/locales/Language';
+import { LanguageTexts } from '../../domain/locales/Language';
 import { BackgroundAnimated } from '../components/BackgroundAnimated';
+import { useCurrentLang } from '../utils/useCurrentLang';
 
 export function BlogPost() {
   const { id } = useParams<{ id: string }>();
   const { t } = useTranslation();
+  const { currentLang } = useCurrentLang();
 
-  const post = id ? blogData[id] : undefined;
+  const post = id && blogData[id];
 
   if (!post) {
     return <h2>{t(LanguageTexts.post.notFound)}</h2>;
   }
 
-  const currentLang = (localStorage.getItem('language') ||
-    AcceptedLanguages.pt) as
-    | AcceptedLanguages.pt
-    | AcceptedLanguages.en
-    | AcceptedLanguages.es;
   const translations = post.translations[currentLang];
 
   return (
