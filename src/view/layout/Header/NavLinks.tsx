@@ -56,7 +56,7 @@ export function NavLinks({
   const callsToAction = [
     {
       name: 'Contact sales',
-      href: 'https://api.whatsapp.com/send?phone=+5511994458337&text=gostaria+de+saber+mais+sobre+os+produtos+DiyCripto%21',
+      href: 'https://api.whatsapp.com/send?phone=+5511994458337&text=Ol%C3%A1,%20Tudo%20bem?%0A%0AEu%20gostaria%20de%20saber%20mais%20sobre%20os%20produtos%20da%20DIY%20LAB...',
       icon: PhoneIcon,
     },
   ];
@@ -114,6 +114,8 @@ export function NavLinks({
                     <a
                       key={item.name}
                       href={item.href}
+                      target="_blank"
+                      rel="noopener"
                       className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 hover:text-[#F6911D]"
                     >
                       <item.icon
