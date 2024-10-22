@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LanguageTexts } from '../../../domain/locales/Language';
 import StatisticsImage from '../../assets/images/Statistics/Statistics.jpg';
+import { useWindowSize } from '../../utils/useWindowSize';
 
 type Info = {
   title: string;
@@ -9,6 +11,22 @@ type Info = {
 
 export function Statistics() {
   const { t } = useTranslation();
+  const { width } = useWindowSize();
+  const [scaleFactor, setScaleFactor] = useState(1);
+
+  useEffect(() => {
+    const ratio = window.devicePixelRatio;
+    if (ratio > 1) {
+      setScaleFactor(ratio);
+    }
+  }, [scaleFactor]);
+
+  const negativeMarginTop =
+    width < 640
+      ? '-mt-32'
+      : scaleFactor === 1
+        ? '-mt-64'
+        : `${-Math.min(128 * scaleFactor, 128)}px`;
 
   const infos = t(LanguageTexts.statistics.infos, {
     returnObjects: true,
@@ -38,7 +56,10 @@ export function Statistics() {
         </section>
       </div>
 
-      <div className="w-full flex justify-center -mt-32 md:-mt-64 z-20">
+      <div
+        className={`w-full flex justify-center z-20 ${scaleFactor === 1 && negativeMarginTop}`}
+        style={scaleFactor !== 1 ? { marginTop: negativeMarginTop } : {}}
+      >
         <img
           src={StatisticsImage}
           alt="Estatísticas"

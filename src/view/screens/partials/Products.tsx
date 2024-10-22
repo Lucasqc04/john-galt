@@ -30,6 +30,7 @@ export function Products() {
   const products = [
     {
       id: 1,
+      title: 'SEEDKIT',
       name: infos[0].title,
       price: 150,
       originalPrice: 180,
@@ -38,6 +39,7 @@ export function Products() {
     },
     {
       id: 2,
+      title: 'BITKIT',
       name: infos[2].title,
       price: 800,
       originalPrice: 850,
@@ -90,6 +92,9 @@ export function Products() {
                 key={idx}
                 className="bg-white dark:bg-slate-700 p-8 rounded-lg shadow-xl flex flex-col"
               >
+                <h2 className="text-center pb-2 font-bold text-xl">
+                  {product.title}
+                </h2>
                 <div className="flex items-center justify-center relative">
                   <button
                     onClick={() => handlePrevImage(idx)}
