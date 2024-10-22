@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { LanguageTexts } from '../../../domain/locales/Language';
 import LogoWhite from '../../assets/logo-white.svg';
 import Logo from '../../assets/logo.svg';
@@ -5,6 +6,13 @@ import { useFooter } from './useFooter';
 
 export function Footer() {
   const { t, theme } = useFooter();
+
+  const redirects = [
+    '#statistics',
+    '/:currentLang/politica-de-privacidade',
+    '/:currentLang/licenciamento',
+    '/:currentLang/contact',
+  ];
 
   const links = t(LanguageTexts.footer.links, {
     returnObjects: true,
@@ -27,9 +35,22 @@ export function Footer() {
           <ul className="flex flex-col sm:flex-row flex-wrap items-center text-center sm:text-left mb-6 text-sm font-medium sm:mb-0 dark:text-gray-400">
             {links.map((link, idx) => (
               <li key={idx}>
-                <a href="#" className="hover:underline mb-2 sm:mb-0 sm:me-6">
-                  {t(link)}
-                </a>
+                {idx === 0 && (
+                  <a
+                    href={redirects[idx]}
+                    className="hover:underline mb-2 sm:mb-0 sm:me-6"
+                  >
+                    {t(link)}
+                  </a>
+                )}
+                {idx > 0 && (
+                  <Link
+                    to={redirects[idx]}
+                    className="hover:underline mb-2 sm:mb-0 sm:me-6"
+                  >
+                    {t(link)}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
