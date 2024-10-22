@@ -71,7 +71,7 @@ export default function Header() {
 
         {menu.isOpen &&
           createPortal(
-            <div className="fixed top-0 left-0 h-screen w-screen bg-white dark:bg-gray-900 z-50 flex flex-col justify-around items-center px-6">
+            <div className="fixed top-0 left-0 h-screen w-screen bg-white dark:bg-gray-900 z-50 px-6">
               <div className="w-full flex justify-between items-center">
                 <img
                   src={theme.isDarkTheme ? LogoWhite : Logo}
@@ -86,14 +86,32 @@ export default function Header() {
                   <MdClose size={28} />
                 </button>
               </div>
-
-              <NavLinks
-                products={products}
-                isVisible
-                isLargeScreen={isLargeScreen}
-                closeButton={null}
-                LinkCallBack={() => menu.close()}
-              />
+              <div className="w-full h-3/4 flex flex-col justify-center items-center">
+                <NavLinks
+                  products={products}
+                  isVisible
+                  isLargeScreen={isLargeScreen}
+                  closeButton={null}
+                  LinkCallBack={() => menu.close()}
+                />
+              </div>
+              <div className="flex flex-1 justify-center items-center">
+                <div className="flex items-center">
+                  <label className="inline-flex items-center relative cursor-pointer ml-4">
+                    <input
+                      className="peer hidden"
+                      id="toggle"
+                      type="checkbox"
+                      checked={theme.isDarkTheme}
+                      onClick={theme.toggle}
+                      onChange={() => {}}
+                    />
+                    <div className="relative w-[110px] h-[50px] bg-white peer-checked:bg-zinc-500 rounded-full after:absolute after:content-[''] after:w-[40px] after:h-[40px] after:bg-gradient-to-r from-orange-500 to-yellow-400 peer-checked:after:from-zinc-900 peer-checked:after:to-zinc-900 after:rounded-full after:top-[5px] after:left-[5px] active:after:w-[50px] peer-checked:after:left-[105px] peer-checked:after:translate-x-[-100%] shadow-sm duration-300 after:duration-300 after:shadow-md"></div>
+                    <FaSun className="fill-white peer-checked:opacity-60 absolute w-6 h-6 left-[13px]" />
+                    <FaMoon className="fill-black opacity-60 peer-checked:opacity-70 peer-checked:fill-white absolute w-6 h-6 right-[13px]" />
+                  </label>
+                </div>
+              </div>
             </div>,
             document.body,
           )}

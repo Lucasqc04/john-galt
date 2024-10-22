@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { IconType } from 'react-icons';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { MdKeyboardArrowDown } from 'react-icons/md';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { blogData } from '../../../blogContent/blogPosts';
 import { LanguageTexts } from '../../../domain/locales/Language';
 import { LanguageSwitcher } from '../../components/LanguageSwitcher/LanguageSwitcher';
@@ -87,9 +87,10 @@ export function NavLinks({
               >
                 <div className="p-4">
                   {products.map((item) => (
-                    <div
+                    <button
                       key={item.name}
-                      className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:text-[#F6911D] hover:bg-gray-50 dark:hover:bg-gray-700"
+                      onClick={() => handleOnLink(item.href, LinkCallBack)}
+                      className="w-full group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:text-[#F6911D] hover:bg-gray-50 dark:hover:bg-gray-700"
                     >
                       <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg group-hover:bg-white dark:group-hover:bg-gray-700">
                         <item.icon
@@ -97,16 +98,10 @@ export function NavLinks({
                           className="h-6 w-6 dark:text-white hover:text-[#F6911D]"
                         />
                       </div>
-                      <div className="flex-auto">
-                        <button
-                          onClick={() => handleOnLink(item.href)}
-                          className="block font-semibold hover:text-[#F6911D]"
-                        >
-                          {item.name}
-                          <span className="absolute inset-0" />
-                        </button>
-                      </div>
-                    </div>
+                      <span className="font-semibold hover:text-[#F6911D]">
+                        {item.name}
+                      </span>
+                    </button>
                   ))}
                 </div>
                 <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50 dark:bg-gray-700">
@@ -172,14 +167,19 @@ export function NavLinks({
                           alt={translation.title}
                           className="h-12 w-12 rounded-lg object-cover"
                         />
-                        <Link
+                        <button
                           key={postId}
-                          to={ROUTES.blog.callLang(currentLang, postId)}
+                          onClick={() =>
+                            handleOnLink(
+                              ROUTES.blog.callLang(currentLang, postId),
+                              LinkCallBack,
+                            )
+                          }
                           className="bg-white dark:bg-slate-800 overflow-hidden transition-transform transform hover:scale-105"
                         >
                           {translation.title}
                           <span className="absolute inset-0" />
-                        </Link>
+                        </button>
                       </div>
                     );
                   })}
@@ -189,8 +189,10 @@ export function NavLinks({
 
             <LanguageSwitcher className="text-xl flex items-center justify-center gap-x-2 lg:text-sm font-semibold leading-6 hover:text-[#F6911D]" />
 
-            <Link
-              to={ROUTES.cart.call(currentLang)}
+            <button
+              onClick={() =>
+                handleOnLink(ROUTES.cart.call(currentLang), LinkCallBack)
+              }
               className="relative ml-4 flex items-center"
             >
               <AiOutlineShoppingCart className="h-6 w-6 text-gray-700 dark:text-white" />
@@ -199,7 +201,7 @@ export function NavLinks({
                   {totalItems}
                 </span>
               )}
-            </Link>
+            </button>
           </PopoverGroup>
         </>
       )}
