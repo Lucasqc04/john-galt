@@ -93,10 +93,10 @@ export function PositivePoints() {
           <div
             key={idx}
             className={classNames(
-              'bg-primary-light dark:border h-72 rounded-md shadow-sm flex flex-col justify-center items-center m-4 p-4 md:p-6 lg:p-8',
+              'bg-primary-light dark:border h-72 w-full sm:w-60 md:w-64 lg:w-72 rounded-md shadow-sm flex flex-col justify-center items-center m-4 p-4 md:p-6 lg:p-8',
               inView && 'opacity-100 animate-fade-right',
             )}
-            style={{ width: cardWidth }}
+            style={{ width: scaleFactor > 1 ? cardWidth : '' }}
           >
             <img
               src={item.image}
