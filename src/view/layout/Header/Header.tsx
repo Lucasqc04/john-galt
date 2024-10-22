@@ -71,7 +71,7 @@ export default function Header() {
 
         {menu.isOpen &&
           createPortal(
-            <div className="fixed top-0 left-0 h-screen w-screen bg-white dark:bg-gray-900 z-50 flex flex-col justify-around items-center px-6">
+            <div className="fixed top-0 left-0 h-screen w-screen bg-white dark:bg-gray-900 z-50 px-6">
               <div className="w-full flex justify-between items-center">
                 <img
                   src={theme.isDarkTheme ? LogoWhite : Logo}
@@ -86,14 +86,15 @@ export default function Header() {
                   <MdClose size={28} />
                 </button>
               </div>
-
-              <NavLinks
-                products={products}
-                isVisible
-                isLargeScreen={isLargeScreen}
-                closeButton={null}
-                LinkCallBack={() => menu.close()}
-              />
+              <div className="w-full h-3/4 flex flex-col justify-center items-center">
+                <NavLinks
+                  products={products}
+                  isVisible
+                  isLargeScreen={isLargeScreen}
+                  closeButton={null}
+                  LinkCallBack={() => menu.close()}
+                />
+              </div>
             </div>,
             document.body,
           )}
