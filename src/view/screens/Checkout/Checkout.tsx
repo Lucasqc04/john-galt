@@ -162,14 +162,38 @@ export function Checkout() {
               </span>
             </div>
 
-            {steps.current === 2 && (
-              <button
-                type="submit"
-                disabled={!isValid}
-                className="w-full bg-blue-500 text-white p-2 mt-6 rounded-md font-semibold hover:bg-blue-600 transition-colors"
-              >
-                Finalizar Pagamento
-              </button>
+            {steps.current === 2 && cart.shippingOptions.length > 0 && (
+              <>
+                <div className="py-4">
+                  <h3 className="text-lg font-semibold">
+                    Escolha uma opção de frete
+                  </h3>
+                  <ul>
+                    {cart.shippingOptions.map((option) => (
+                      <li key={option.id}>
+                        <label>
+                          <input
+                            type="radio"
+                            name="shippingOption"
+                            value={option.id}
+                            onChange={() => cart.onShippingSelect(option)}
+                          />
+                          {option.name} - R${' '}
+                          {parseFloat(option.price).toFixed(2)} -{' '}
+                          {option.deliveryTime} dias
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <button
+                  type="submit"
+                  disabled={!isValid}
+                  className="w-full bg-blue-500 text-white p-2 mt-6 rounded-md font-semibold hover:bg-blue-600 transition-colors"
+                >
+                  Finalizar Pagamento
+                </button>
+              </>
             )}
           </aside>
         </form>

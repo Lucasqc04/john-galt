@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { CalculatedShipping } from '../../../domain/entities/Shipping.entity';
+import { UseCases } from '../../../domain/usecases/UseCases';
 import { useCartContext } from '../../context/CartContext';
 
 type Address = {
@@ -62,26 +64,56 @@ export function useCheckout() {
     register,
     handleSubmit,
     getValues,
+    watch,
     formState: { errors, isValid },
   } = form;
 
   const [paymentMethod, setPaymentMethod] = useState<string>('MP');
-  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [shipping, setShipping] = useState<number>(0);
   const [discount, setDiscount] = useState<number>(0);
   const [total, setTotal] = useState<number>(subtotal + shipping);
+  const [shippingOptions, setShippingOptions] = useState<CalculatedShipping[]>(
+    [],
+  );
+  const navigate = useNavigate();
+
+  const zipCode = watch('address.zipCode');
 
   useEffect(() => {
     setTotal(subtotal + shipping - discount);
   }, [subtotal, shipping, discount]);
 
-  const nextStep = () => {
-    setCurrentStep(currentStep + 1);
+  useEffect(() => {
+    if (zipCode && zipCode.length === 8) {
+      fetchShippingOptions(zipCode);
+    }
+  }, [zipCode]);
+
+  const fetchShippingOptions = async (cep: string) => {
+    try {
+      const { result } = await UseCases.shipping.calculate.execute({
+        postalCode: cep,
+      });
+
+      if (result.type === 'ERROR') {
+        switch (result.error.code) {
+          case 'SERIALIZATION':
+            alert('ERRO DE SERIALIZAÇÃO!');
+            return;
+          default:
+            alert('ERRO DESCONHECIDO');
+            return;
+        }
+      }
+      setShippingOptions(result.data);
+    } catch {
+      alert('ERRO AO CALCULAR O FRETE');
+    }
   };
 
-  const prevStep = () => {
-    setCurrentStep(currentStep - 1);
+  const onShippingSelect = (selectedShipping: CalculatedShipping) => {
+    setShipping(parseFloat(selectedShipping.price));
   };
 
   const onSubmit = async (data: CheckoutForm) => {
@@ -142,8 +174,8 @@ export function useCheckout() {
     applyCoupon,
     steps: {
       current: currentStep,
-      next: nextStep,
-      prev: prevStep,
+      next: () => setCurrentStep(currentStep + 1),
+      prev: () => setCurrentStep(currentStep - 1),
     },
     form: {
       provider: form,
@@ -169,6 +201,8 @@ export function useCheckout() {
         value: shipping,
         set: setShipping,
       },
+      shippingOptions,
+      onShippingSelect,
     },
     isValid,
   };
