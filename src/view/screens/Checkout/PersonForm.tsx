@@ -10,9 +10,7 @@ export function PersonForm() {
   return (
     <>
       <div>
-        <label className="block text-sm font-medium text-gray-700">
-          Email do Pagador
-        </label>
+        <label className="block text-sm font-medium text-gray-700">Email</label>
         <input
           type="email"
           {...register('payerEmail', { required: true })}
@@ -24,9 +22,7 @@ export function PersonForm() {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700">
-          Primeiro Nome
-        </label>
+        <label className="block text-sm font-medium text-gray-700">Nome</label>
         <input
           type="text"
           {...register('firstName', { required: true })}
@@ -50,9 +46,7 @@ export function PersonForm() {
       </div>
 
       <div>
-        <label className="text-sm font-medium text-gray-700">
-          Tipo de Identificação
-        </label>
+        <label className="text-sm font-medium text-gray-700">Documento</label>
         <select
           {...register('identification.type', {
             required: true,

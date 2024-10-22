@@ -8,10 +8,10 @@ export function AddressForm() {
   } = useFormContext<CheckoutForm>();
 
   return (
-    <div className="space-y-4">
-      <div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="sm:col-span-2">
         <label className="block text-sm font-medium text-gray-700">
-          Endereço
+          Logradouro
         </label>
         <input
           type="text"
@@ -21,6 +21,32 @@ export function AddressForm() {
         {errors.address?.street && (
           <span className="text-red-500 text-sm">Este campo é obrigatório</span>
         )}
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700">
+          Número
+        </label>
+        <input
+          type="text"
+          {...register('address.number', { required: true })}
+          className="w-full p-2 border border-gray-300 rounded-md"
+        />
+        {errors.address?.number && (
+          <span className="text-red-500 text-sm">Este campo é obrigatório</span>
+        )}
+      </div>
+
+      {/* Complemento */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700">
+          Complemento
+        </label>
+        <input
+          type="text"
+          {...register('address.complement')}
+          className="w-full p-2 border border-gray-300 rounded-md"
+        />
       </div>
 
       <div>

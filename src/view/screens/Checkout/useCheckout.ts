@@ -6,6 +6,8 @@ import { useCartContext } from '../../context/CartContext';
 
 type Address = {
   street: string;
+  number: string;
+  complement?: string;
   city: string;
   state: string;
   zipCode: string;
@@ -34,12 +36,33 @@ export function useCheckout() {
   );
   const API_URL = String(import.meta.env.VITE_API_URL);
 
-  const form = useForm<CheckoutForm>();
+  const form = useForm<CheckoutForm>({
+    mode: 'onChange',
+    defaultValues: {
+      payerEmail: '',
+      firstName: '',
+      lastName: '',
+      identification: {
+        type: 'CPF',
+        number: '',
+      },
+      couponCode: '',
+      address: {
+        street: '',
+        number: '',
+        complement: '',
+        city: '',
+        state: '',
+        zipCode: '',
+      },
+    },
+  });
+
   const {
     register,
     handleSubmit,
     getValues,
-    formState: { errors },
+    formState: { errors, isValid },
   } = form;
 
   const [paymentMethod, setPaymentMethod] = useState<string>('MP');
@@ -147,5 +170,6 @@ export function useCheckout() {
         set: setShipping,
       },
     },
+    isValid,
   };
 }

@@ -8,7 +8,7 @@ import { StepIndicator } from './StepIndicator';
 import { useCheckout } from './useCheckout';
 
 export function Checkout() {
-  const { form, cart, navigate, steps, applyCoupon } = useCheckout();
+  const { form, cart, navigate, steps, applyCoupon, isValid } = useCheckout();
 
   return (
     <main className="min-h-screen flex flex-col px-4 py-8">
@@ -165,6 +165,7 @@ export function Checkout() {
             {steps.current === 2 && (
               <button
                 type="submit"
+                disabled={!isValid}
                 className="w-full bg-blue-500 text-white p-2 mt-6 rounded-md font-semibold hover:bg-blue-600 transition-colors"
               >
                 Finalizar Pagamento
