@@ -109,7 +109,7 @@ export function Checkout() {
             ))}
           </ul>
 
-          <div className="mt-6">
+          <div className="py-6">
             <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
               Código do Cupom
             </label>
@@ -123,6 +123,27 @@ export function Checkout() {
                 Aplicar
               </button>
             </div>
+          </div>
+
+          <div className="flex flex-col p-4 gap-y-2 border-t border-b">
+            <div className="w-full flex justify-between">
+              <span className="text-lg font-semibold">Subtotal</span>
+              <span className="text-lg font-semibold">
+                R$ {cart.total.toFixed(2)}
+              </span>
+            </div>
+            <div className="w-full flex justify-between ">
+              <span className="text-lg font-semibold">Frete</span>
+              <span className="text-lg font-semibold">
+                R$ {cart.total.toFixed(2)}
+              </span>
+            </div>
+          </div>
+          <div className="w-full flex justify-between p-4">
+            <span className="text-xl font-semibold">Total</span>
+            <span className="text-xl font-semibold">
+              R$ {cart.total.toFixed(2)}
+            </span>
           </div>
 
           {steps.current === 2 && (
