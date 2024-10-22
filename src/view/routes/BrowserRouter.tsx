@@ -38,11 +38,11 @@ export function BrowserRouter() {
             <Route path={ROUTES.cart.product.path} element={<ProductPage />} />
             <Route path={ROUTES.about.path} element={<About />} />
             <Route path={ROUTES.cart.path} element={<Cart />} />
-            <Route
-              path={ROUTES.cart.checkout.path}
-              element={<Checkout />}
-            ></Route>
           </Route>
+          <Route path={ROUTES.lang.call()}>
+            <Route path={ROUTES.cart.checkout.path} element={<Checkout />} />
+          </Route>
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
