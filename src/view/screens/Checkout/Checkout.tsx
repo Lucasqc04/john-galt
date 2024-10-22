@@ -8,7 +8,7 @@ import { StepIndicator } from './StepIndicator';
 import { useCheckout } from './useCheckout';
 
 export function Checkout() {
-  const { form, cart, navigate, steps } = useCheckout();
+  const { form, cart, navigate, steps, applyCoupon } = useCheckout();
 
   return (
     <main className="min-h-screen flex flex-col px-4 py-8">
@@ -70,7 +70,7 @@ export function Checkout() {
                   <div>
                     <p className="font-semibold dark:text-white">{item.name}</p>
                     <p className="dark:text-gray-300 text-gray-500">
-                      ${item.price.toFixed(2)}
+                      R$ {item.price.toFixed(2)}
                     </p>
                   </div>
                 </div>
@@ -119,7 +119,10 @@ export function Checkout() {
                 {...form.register('couponCode')}
                 className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600"
               />
-              <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors">
+              <button
+                onClick={applyCoupon}
+                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
+              >
                 Aplicar
               </button>
             </div>
@@ -129,15 +132,23 @@ export function Checkout() {
             <div className="w-full flex justify-between">
               <span className="text-lg font-semibold">Subtotal</span>
               <span className="text-lg font-semibold">
-                R$ {cart.total.toFixed(2)}
+                R$ {cart.subtotal.toFixed(2)}
               </span>
             </div>
             <div className="w-full flex justify-between ">
               <span className="text-lg font-semibold">Frete</span>
               <span className="text-lg font-semibold">
-                R$ {cart.total.toFixed(2)}
+                R$ {cart.shipping.value.toFixed(2)}
               </span>
             </div>
+            {cart.discount.value > 0 && (
+              <div className="w-full flex justify-between ">
+                <span className="text-lg font-semibold">Desconto</span>
+                <span className="text-lg font-semibold">
+                  -R$ {cart.discount.value.toFixed(2)}
+                </span>
+              </div>
+            )}
           </div>
           <div className="w-full flex justify-between p-4">
             <span className="text-xl font-semibold">Total</span>

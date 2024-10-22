@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useCartContext } from '../../context/CartContext';
@@ -24,10 +24,11 @@ export type CheckoutForm = {
   couponCode?: string;
   address: Address;
 };
+
 export function useCheckout() {
   const { items, updateItemQuantity, remove, clear } = useCartContext();
 
-  const total = items.reduce(
+  const subtotal = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0,
   );
@@ -37,12 +38,20 @@ export function useCheckout() {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = form;
 
   const [paymentMethod, setPaymentMethod] = useState<string>('MP');
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
+  const [shipping, setShipping] = useState<number>(0);
+  const [discount, setDiscount] = useState<number>(0);
+  const [total, setTotal] = useState<number>(subtotal + shipping);
+
+  useEffect(() => {
+    setTotal(subtotal + shipping - discount);
+  }, [subtotal, shipping, discount]);
 
   const nextStep = () => {
     setCurrentStep(currentStep + 1);
@@ -78,8 +87,36 @@ export function useCheckout() {
     }
   };
 
+  const applyCoupon = async () => {
+    try {
+      const COUPON = {
+        code: getValues('couponCode'),
+      };
+
+      const response = await axios.post(`${API_URL}/coupons/is-valid`, COUPON);
+      const coupon = response.data;
+
+      if (coupon.isActive && subtotal >= coupon.minPurchaseValue) {
+        const discountValue =
+          coupon.discountType === 'percentage'
+            ? Math.min(
+                (subtotal + shipping) * (coupon.discountValue / 100),
+                coupon.maxDiscountValue,
+              )
+            : Math.min(coupon.discountValue, coupon.maxDiscountValue);
+
+        setDiscount(discountValue);
+      } else {
+        alert('Cupom inválido ou não aplicável.');
+      }
+    } catch {
+      alert('Ocorreu um erro ao aplicar cupom.');
+    }
+  };
+
   return {
     navigate,
+    applyCoupon,
     steps: {
       current: currentStep,
       next: nextStep,
@@ -98,9 +135,17 @@ export function useCheckout() {
     cart: {
       total,
       items,
+      subtotal,
       clear,
       remove,
       updateItemQuantity,
+      discount: {
+        value: discount,
+      },
+      shipping: {
+        value: shipping,
+        set: setShipping,
+      },
     },
   };
 }
