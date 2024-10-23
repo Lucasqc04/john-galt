@@ -40,7 +40,7 @@ export function Cart() {
                 key={item.id}
                 className="mb-4 flex items-center justify-between border-b border-gray-300 pb-4 dark:border-gray-700"
               >
-                <div className="flex">
+                <div className="flex gap-x-4">
                   <img
                     src={item.imageUrl}
                     alt={item.name}

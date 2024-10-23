@@ -1,12 +1,9 @@
 import { FormProvider } from 'react-hook-form';
 import { FaChevronLeft, FaChevronRight, FaTruckFast } from 'react-icons/fa6';
 import { MdCheck } from 'react-icons/md';
-
 import { LanguageTexts } from '../../../domain/locales/Language';
 
-import { Link } from 'react-router-dom';
 import { Loader } from '../../components/Loader';
-import { ROUTES } from '../../routes/Routes';
 import { BackgroundAnimatedProduct } from '../../styles/Products/Product.styles';
 import { BlogLinks } from '../partials/BlogLinks';
 import { useProductPage } from './useProductPage';
@@ -22,7 +19,6 @@ export function ProductPage() {
     quantity,
     shipping,
     resources,
-    currentLang,
     register,
   } = useProductPage();
 
@@ -47,7 +43,7 @@ export function ProductPage() {
                 <img
                   src={product.images[image.current]}
                   alt={product.name}
-                  className="w-[80%] h-auto object-cover rounded-md shadow-lg"
+                  className="w-[80%] h-auto object-cover rounded-md shadow-lg dark:border-gray-700"
                 />
                 <button
                   onClick={image.next}
@@ -66,7 +62,7 @@ export function ProductPage() {
                     className={`w-12 h-12 md:w-16 md:h-16 object-cover cursor-pointer border ${
                       image.current === index
                         ? 'border-[#F6911D]'
-                        : 'border-gray-300'
+                        : 'border-gray-300 dark:border-gray-700'
                     } rounded-md`}
                     onClick={() => image.thumbnail(index)}
                   />
@@ -81,20 +77,35 @@ export function ProductPage() {
               <h4 className="text-xl md:text-2xl font-bold dark:text-white mb-3">
                 {product.title}
               </h4>
-              <div className="dark:text-white line-through text-lg">
+              <div className="text-lg dark:text-gray-400 line-through">
                 R${product.originalPrice.toFixed(2)}
               </div>
-              <div className="dark:text-gray-400 text-3xl md:text-4xl font-bold mb-4">
+              <div className="text-3xl md:text-4xl font-bold dark:text-white mb-4">
                 R${product.price.toFixed(2)}
               </div>
-              <p className="dark:text-white mb-6">{product.description}</p>
+              <p className="dark:text-gray-300 mb-6">{product.description}</p>
+              <div className="flex items-center mb-6">
+                <input
+                  type="number"
+                  value={quantity.value}
+                  onChange={(e) => quantity.set(Number(e.target.value))}
+                  min={1}
+                  className="w-16 p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                />
+                <button
+                  onClick={cart.add}
+                  className="bg-[#F6911D] text-white p-2 rounded-md ml-2"
+                >
+                  {t(LanguageTexts.products.addToCartButton)}
+                </button>
+              </div>
               <FormProvider {...form}>
                 <form className="flex items-center mb-6">
                   <input
                     type="text"
                     placeholder="Digite seu CEP"
                     {...register('postalCode')}
-                    className="p-2 border border-gray-300 rounded-md"
+                    className="p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600"
                   />
                   <button
                     onClick={shipping.calculate}
@@ -147,32 +158,8 @@ export function ProductPage() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-y-2 w-64">
-            <form className="flex gap-x-2">
-              <input
-                type="number"
-                value={quantity.value}
-                onChange={(e) => quantity.set(Number(e.target.value))}
-                min={1}
-                className="w-16 p-2 border border-gray-300 rounded-md"
-              />
-              <button
-                onClick={cart.add}
-                className="bg-[#F6911D] text-white p-2 rounded-md w-48"
-              >
-                {t(LanguageTexts.products.addToCartButton)}
-              </button>
-            </form>
-            <Link
-              to={ROUTES.cart.checkout.call(currentLang)}
-              className="bg-[#F6911D] text-white text-center p-2 rounded-md w-full"
-            >
-              Comprar
-            </Link>
-          </div>
-
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-20 mt-36 text-center ">
+            <h2 className="text-3xl md:text-4xl font-bold mb-20 mt-36 text-center dark:text-white">
               {t(LanguageTexts.products.resourcesTitle)}
               <span className="text-[#F6911D]"> Kit</span>
             </h2>

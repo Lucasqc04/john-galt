@@ -1,3 +1,4 @@
+import { FaInstagram } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { LanguageTexts } from '../../../domain/locales/Language';
 import LogoWhite from '../../assets/logo-white.svg';
@@ -54,7 +55,25 @@ export function Footer() {
               </li>
             ))}
           </ul>
+
+          <div className="group relative inline-block">
+            <a
+              href="https://www.instagram.com/diyseclab.io/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="focus:outline-none"
+            >
+              <FaInstagram
+                className="transform transition-transform duration-300 hover:scale-125 text-gray-700 dark:text-white hover:text-[#F6911D]"
+                size={40}
+              />
+            </a>
+            <span className="absolute -top-14 left-1/2 transform -translate-x-1/2 z-20 px-4 py-2 text-sm font-bold text-white bg-gray-900 rounded-lg shadow-lg transition-transform duration-300 ease-in-out scale-0 group-hover:scale-100">
+              Instagram
+            </span>
+          </div>
         </div>
+
         <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
         <span className="block text-center text-sm dark:text-gray-400">
           © 2024{' '}
