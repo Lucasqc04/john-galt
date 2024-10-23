@@ -17,18 +17,22 @@ export function StepIndicator({ currentStep, steps }: StepIndicatorProps) {
               className={`w-8 h-8 flex items-center justify-center rounded-full border-2 ${
                 index + 1 === currentStep
                   ? 'bg-blue-500 text-white'
-                  : 'bg-white text-blue-500 border-blue-500'
+                  : 'bg-white text-blue-500 border-blue-500 dark:bg-gray-700 dark:text-blue-300 dark:border-blue-300'
               }`}
             >
               {index + 1}
             </div>
-            <span className="text-sm text-center max-w-24">{step.title}</span>
+            <span className="text-sm text-center max-w-24 dark:text-gray-300">
+              {step.title}
+            </span>
           </div>
 
           {index < steps.length - 1 && (
             <div
               className={`flex-grow h-1 ${
-                index + 1 < currentStep ? 'bg-blue-500' : 'bg-gray-100'
+                index + 1 < currentStep
+                  ? 'bg-blue-500'
+                  : 'bg-gray-100 dark:bg-gray-600'
               }`}
             />
           )}
