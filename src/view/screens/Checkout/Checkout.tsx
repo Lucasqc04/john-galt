@@ -11,12 +11,17 @@ export function Checkout() {
   const { form, cart, navigate, steps, applyCoupon, isValid } = useCheckout();
 
   return (
-    <main className="min-h-screen flex flex-col px-4 py-8">
+    <main className="min-h-screen flex flex-col px-4 py-8 bg-white dark:bg-gray-900">
       <header className="flex gap-x-4 items-center">
         <button onClick={() => navigate(-1)}>
-          <IoMdArrowRoundBack size={28} />
+          <IoMdArrowRoundBack
+            size={28}
+            className="text-gray-900 dark:text-white"
+          />
         </button>
-        <h1 className="text-4xl font-semibold">Checkout</h1>
+        <h1 className="text-4xl font-semibold text-gray-900 dark:text-white">
+          Checkout
+        </h1>
       </header>
       <StepIndicator
         currentStep={steps.current}
@@ -38,7 +43,7 @@ export function Checkout() {
                 <button
                   type="button"
                   onClick={steps.prev}
-                  className="w-48 bg-gray-500 text-white p-2 rounded-md font-semibold"
+                  className="w-48 bg-gray-500 text-white p-2 rounded-md font-semibold dark:bg-gray-700 dark:hover:bg-gray-600"
                 >
                   Voltar
                 </button>
@@ -47,15 +52,15 @@ export function Checkout() {
                 <button
                   type="button"
                   onClick={steps.next}
-                  className="w-48 bg-blue-500 text-white p-2 rounded-md font-semibold"
+                  className="w-48 bg-blue-500 text-white p-2 rounded-md font-semibold hover:bg-blue-600 transition-colors"
                 >
                   Próximo
                 </button>
               )}
             </div>
           </article>
-          <aside className="w-full lg:w-1/3 p-4">
-            <h2 className="text-lg font-bold dark:text-white">
+          <aside className="w-full lg:w-1/3 p-4 bg-gray-50 dark:bg-gray-800 rounded-md shadow-lg">
+            <h2 className="text-lg font-bold text-gray-900 dark:text-white">
               Itens no Carrinho
             </h2>
             <ul className="flex flex-col gap-y-4 pt-4">
@@ -71,10 +76,10 @@ export function Checkout() {
                       className="w-16 h-16 object-cover rounded-md"
                     />
                     <div>
-                      <p className="font-semibold dark:text-white">
+                      <p className="font-semibold text-gray-900 dark:text-white">
                         {item.name}
                       </p>
-                      <p className="dark:text-gray-300 text-gray-500">
+                      <p className="text-gray-500 dark:text-gray-300">
                         R$ {item.price.toFixed(2)}
                       </p>
                     </div>
@@ -100,7 +105,7 @@ export function Checkout() {
                         <TiArrowSortedDown size={24} />
                       </button>
                     </div>
-                    <p className="dark:text-gray-300 text-xl font-semibold">
+                    <p className="text-xl font-semibold text-gray-900 dark:text-gray-300">
                       {item.quantity}
                     </p>
                   </div>
@@ -133,31 +138,39 @@ export function Checkout() {
               </div>
             </div>
 
-            <div className="flex flex-col p-4 gap-y-2 border-t border-b">
+            <div className="flex flex-col p-4 gap-y-2 border-t border-b border-gray-300 dark:border-gray-600">
               <div className="w-full flex justify-between">
-                <span className="text-lg font-semibold">Subtotal</span>
-                <span className="text-lg font-semibold">
+                <span className="text-lg font-semibold text-gray-900 dark:text-white">
+                  Subtotal
+                </span>
+                <span className="text-lg font-semibold text-gray-900 dark:text-white">
                   R$ {cart.subtotal.toFixed(2)}
                 </span>
               </div>
               <div className="w-full flex justify-between ">
-                <span className="text-lg font-semibold">Frete</span>
-                <span className="text-lg font-semibold">
+                <span className="text-lg font-semibold text-gray-900 dark:text-white">
+                  Frete
+                </span>
+                <span className="text-lg font-semibold text-gray-900 dark:text-white">
                   R$ {cart.shipping.value.toFixed(2)}
                 </span>
               </div>
               {cart.discount.value > 0 && (
                 <div className="w-full flex justify-between ">
-                  <span className="text-lg font-semibold">Desconto</span>
-                  <span className="text-lg font-semibold">
+                  <span className="text-lg font-semibold text-gray-900 dark:text-white">
+                    Desconto
+                  </span>
+                  <span className="text-lg font-semibold text-gray-900 dark:text-white">
                     -R$ {cart.discount.value.toFixed(2)}
                   </span>
                 </div>
               )}
             </div>
             <div className="w-full flex justify-between p-4">
-              <span className="text-xl font-semibold">Total</span>
-              <span className="text-xl font-semibold">
+              <span className="text-xl font-semibold text-gray-900 dark:text-white">
+                Total
+              </span>
+              <span className="text-xl font-semibold text-gray-900 dark:text-white">
                 R$ {cart.total.toFixed(2)}
               </span>
             </div>
@@ -165,18 +178,22 @@ export function Checkout() {
             {steps.current === 2 && cart.shippingOptions.length > 0 && (
               <>
                 <div className="py-4">
-                  <h3 className="text-lg font-semibold">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                     Escolha uma opção de frete
                   </h3>
                   <ul>
                     {cart.shippingOptions.map((option) => (
-                      <li key={option.id}>
+                      <li
+                        key={option.id}
+                        className="text-gray-900 dark:text-white"
+                      >
                         <label>
                           <input
                             type="radio"
                             name="shippingOption"
                             value={option.id}
                             onChange={() => cart.onShippingSelect(option)}
+                            className="mr-2"
                           />
                           {option.name} - R${' '}
                           {parseFloat(option.price).toFixed(2)} -{' '}

@@ -23,7 +23,6 @@ export default function Header() {
         aria-label="Global"
         className="w-full flex items-center justify-between"
       >
-        {/* Logo */}
         <div className="flex lg:flex-1 justify-center lg:justify-start">
           <Link to={ROUTES.home.call()}>
             <img
@@ -35,9 +34,7 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* Menu mobile */}
         <div className="flex lg:hidden items-center">
-          {/* Switch de tema no modo mobile */}
           <label className="inline-flex items-center relative cursor-pointer mr-4">
             <input
               className="peer hidden"
@@ -52,7 +49,6 @@ export default function Header() {
             <FaMoon className="fill-black opacity-60 peer-checked:opacity-70 peer-checked:fill-white absolute w-4 h-4 right-[10px]" />
           </label>
 
-          {/* Botão de menu */}
           <button
             type="button"
             onClick={menu.open}
@@ -63,14 +59,12 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Links para telas grandes */}
         <NavLinks
           products={products}
           isVisible={isLargeScreen}
           isLargeScreen={isLargeScreen}
         />
 
-        {/* Switch de tema para telas grandes */}
         <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center">
           <div className="flex items-center">
             <label className="inline-flex items-center relative cursor-pointer ml-4">
@@ -89,7 +83,6 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Modal para dispositivos móveis */}
         {menu.isOpen &&
           createPortal(
             <div className="fixed top-0 left-0 h-screen w-screen bg-white dark:bg-gray-900 z-50 px-6">
