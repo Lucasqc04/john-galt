@@ -11,7 +11,7 @@ import Bitkit5 from '../../assets/Bitkit/Bitkit 5.png';
 import Bitkit6 from '../../assets/Bitkit/Bitkit 6.png';
 import Bitkit7 from '../../assets/Bitkit/Bitkit 7.png';
 import { BackgroundAnimatedProduct } from '../../styles/Products/Product.styles';
-import { styleFirstWord } from '../../utils/StyleFirstWord';
+import { styleFirstWord } from '../../utils/StyleWord';
 
 type Infos = {
   title: string;
