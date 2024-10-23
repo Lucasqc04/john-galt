@@ -3,9 +3,7 @@ import { FaChevronLeft, FaChevronRight, FaTruckFast } from 'react-icons/fa6';
 import { MdCheck } from 'react-icons/md';
 import { LanguageTexts } from '../../../domain/locales/Language';
 
-import { Link } from 'react-router-dom';
 import { Loader } from '../../components/Loader';
-import { ROUTES } from '../../routes/Routes';
 import { BackgroundAnimatedProduct } from '../../styles/Products/Product.styles';
 import { BlogLinks } from '../partials/BlogLinks';
 import { useProductPage } from './useProductPage';
@@ -21,7 +19,6 @@ export function ProductPage() {
     quantity,
     shipping,
     resources,
-    currentLang,
     register,
   } = useProductPage();
 
@@ -160,31 +157,6 @@ export function ProductPage() {
                 )}
               </div>
             </div>
-          </div>
-
-          <div className="flex flex-col gap-y-2 w-64">
-            <form className="flex gap-x-2">
-              <input
-                type="number"
-                value={quantity.value}
-                onChange={(e) => quantity.set(Number(e.target.value))}
-                min={1}
-                className="w-16 p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:text-white"
-              />
-
-              <button
-                onClick={cart.add}
-                className="bg-[#F6911D] text-white p-2 rounded-md w-48"
-              >
-                {t(LanguageTexts.products.addToCartButton)}
-              </button>
-            </form>
-            <Link
-              to={ROUTES.cart.checkout.call(currentLang)}
-              className="bg-[#F6911D] text-white text-center p-2 rounded-md w-full"
-            >
-              Comprar
-            </Link>
           </div>
 
           <div>
