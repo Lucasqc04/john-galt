@@ -4,7 +4,7 @@ import { MdArrowForward } from 'react-icons/md';
 import { useInView } from 'react-intersection-observer';
 import { blogData } from '../../../blogContent/blogPosts';
 import { LanguageTexts } from '../../../domain/locales/Language';
-import { styleFirstWord } from '../../utils/StyleFirstWord';
+import { styleFirstWord } from '../../utils/StyleWord';
 import { useCurrentLang } from '../../utils/useCurrentLang';
 
 export function BlogLinks() {

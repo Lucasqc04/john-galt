@@ -14,3 +14,20 @@ export function styleFirstWord(text: string): string | JSX.Element {
 
   return text;
 }
+
+export function styleLastWord(text: string): string | JSX.Element {
+  const words = text.split(' ');
+
+  if (words.length > 0) {
+    const lastWord = words.pop();
+    const remainingText = words.join(' ');
+
+    return (
+      <>
+        {remainingText} <span className="text-[#F6911D]">{lastWord}</span>
+      </>
+    );
+  }
+
+  return text;
+}

@@ -11,7 +11,7 @@ import { IconType } from 'react-icons';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
-import { blogData } from '../../../blogContent/blogPosts';
+// import { blogData } from '../../../blogContent/blogPosts';
 import { LanguageTexts } from '../../../domain/locales/Language';
 import { LanguageSwitcher } from '../../components/LanguageSwitcher/LanguageSwitcher';
 import { useCartContext } from '../../context/CartContext';
@@ -133,7 +133,7 @@ export function NavLinks({
               {t(LanguageTexts.header.links[1])}
             </button>
 
-            <Popover className="relative">
+            {/* <Popover className="relative">
               <PopoverButton className="text-2xl flex items-center justify-center gap-x-1 lg:text-sm font-semibold leading-6 text-black dark:text-white hover:text-[#F6911D]">
                 {t(LanguageTexts.header.links[2])}
                 <MdKeyboardArrowDown
@@ -149,7 +149,7 @@ export function NavLinks({
               >
                 <div className="p-4 grid grid-cols-1 gap-y-4">
                   {Object.keys(blogData)
-                    .slice(0, 1) // Exibir apenas o primeiro post
+                    .slice(0, 1)
                     .map((postId) => {
                       const post = blogData[postId];
                       const translation = post.translations[currentLang];
@@ -188,7 +188,7 @@ export function NavLinks({
                     })}
                 </div>
               </PopoverPanel>
-            </Popover>
+            </Popover> */}
 
             <LanguageSwitcher className="text-xl flex items-center justify-center gap-x-2 lg:text-sm font-semibold leading-6 hover:text-[#F6911D]" />
 
