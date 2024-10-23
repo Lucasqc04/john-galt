@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useContext, useState } from 'react';
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { ThemeMode } from '../../domain/entities/theme.entity';
 
 type ThemeContextType = {
@@ -9,13 +15,23 @@ type ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<ThemeMode>(ThemeMode.light);
+  const [theme, setTheme] = useState<ThemeMode>(() => {
+    const savedTheme = localStorage.getItem('theme');
+    return savedTheme ? (savedTheme as ThemeMode) : ThemeMode.dark;
+  });
 
   const toggleTheme = () => {
-    setTheme((prevTheme) =>
-      prevTheme === ThemeMode.light ? ThemeMode.dark : ThemeMode.light,
-    );
+    setTheme((prevTheme) => {
+      const newTheme =
+        prevTheme === ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+      localStorage.setItem('theme', newTheme);
+      return newTheme;
+    });
   };
+
+  useEffect(() => {
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

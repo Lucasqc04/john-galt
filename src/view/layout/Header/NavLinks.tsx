@@ -132,6 +132,7 @@ export function NavLinks({
             >
               {t(LanguageTexts.header.links[1])}
             </button>
+
             <Popover className="relative">
               <PopoverButton className="text-2xl flex items-center justify-center gap-x-1 lg:text-sm font-semibold leading-6 text-black dark:text-white hover:text-[#F6911D]">
                 {t(LanguageTexts.header.links[2])}
@@ -147,42 +148,44 @@ export function NavLinks({
                 className="absolute -left-32 lg:-left-8 top-full z-10 w-screen max-w-md overflow-hidden rounded-3xl bg-white dark:bg-gray-800 dark:text-white shadow-lg ring-1 ring-gray-900/5 transition"
               >
                 <div className="p-4 grid grid-cols-1 gap-y-4">
-                  {Object.keys(blogData).map((postId) => {
-                    const post = blogData[postId];
-                    const translation = post.translations[currentLang];
+                  {Object.keys(blogData)
+                    .slice(0, 1) // Exibir apenas o primeiro post
+                    .map((postId) => {
+                      const post = blogData[postId];
+                      const translation = post.translations[currentLang];
 
-                    if (!translation) {
-                      console.error(
-                        `No translation found for language: ${currentLang}`,
-                      );
-                      return null;
-                    }
-                    return (
-                      <div
-                        key={postId}
-                        className="flex items-center gap-x-4 rounded-lg p-4 text-sm leading-6 text-gray-800 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800"
-                      >
-                        <img
-                          src={post.image}
-                          alt={translation.title}
-                          className="h-12 w-12 rounded-lg object-cover"
-                        />
-                        <button
+                      if (!translation) {
+                        console.error(
+                          `No translation found for language: ${currentLang}`,
+                        );
+                        return null;
+                      }
+                      return (
+                        <div
                           key={postId}
-                          onClick={() =>
-                            handleOnLink(
-                              ROUTES.blog.callLang(currentLang, postId),
-                              LinkCallBack,
-                            )
-                          }
-                          className="bg-white dark:bg-slate-800 overflow-hidden transition-transform transform hover:scale-105"
+                          className="flex items-center gap-x-4 rounded-lg p-4 text-sm leading-6 text-gray-800 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800"
                         >
-                          {translation.title}
-                          <span className="absolute inset-0" />
-                        </button>
-                      </div>
-                    );
-                  })}
+                          <img
+                            src={post.image}
+                            alt={translation.title}
+                            className="h-12 w-12 rounded-lg object-cover"
+                          />
+                          <button
+                            key={postId}
+                            onClick={() =>
+                              handleOnLink(
+                                ROUTES.blog.callLang(currentLang, postId),
+                                LinkCallBack,
+                              )
+                            }
+                            className="bg-white dark:bg-slate-800 overflow-hidden transition-transform transform hover:scale-105"
+                          >
+                            {translation.title}
+                            <span className="absolute inset-0" />
+                          </button>
+                        </div>
+                      );
+                    })}
                 </div>
               </PopoverPanel>
             </Popover>
