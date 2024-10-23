@@ -1,7 +1,6 @@
 import { FormProvider } from 'react-hook-form';
 import { FaChevronLeft, FaChevronRight, FaTruckFast } from 'react-icons/fa6';
 import { MdCheck } from 'react-icons/md';
-
 import { LanguageTexts } from '../../../domain/locales/Language';
 
 import { Link } from 'react-router-dom';
@@ -88,6 +87,21 @@ export function ProductPage() {
                 R${product.price.toFixed(2)}
               </div>
               <p className="dark:text-white mb-6">{product.description}</p>
+              <div className="flex items-center mb-6">
+                <input
+                  type="number"
+                  value={quantity.value}
+                  onChange={(e) => quantity.set(Number(e.target.value))}
+                  min={1}
+                  className="w-16 p-2 border border-gray-300 rounded-md"
+                />
+                <button
+                  onClick={cart.add}
+                  className="bg-[#F6911D] text-white p-2 rounded-md ml-2"
+                >
+                  {t(LanguageTexts.products.addToCartButton)}
+                </button>
+              </div>
               <FormProvider {...form}>
                 <form className="flex items-center mb-6">
                   <input
