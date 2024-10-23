@@ -9,7 +9,7 @@ import {
 } from '../../../domain/locales/Language';
 import HeroImage from '../../assets/images/hero-image.png';
 import { BackgroundAnimated } from '../../components/BackgroundAnimated';
-import { styleFirstWord } from '../../utils/StyleFirstWord';
+import { styleFirstWord } from '../../utils/StyleWord';
 
 export function Hero() {
   const { t } = useTranslation();

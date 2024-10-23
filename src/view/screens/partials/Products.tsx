@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { LanguageTexts, useLanguage } from '../../../domain/locales/Language';
+import Bitkit8 from '../../assets/Bitkit/3.png';
+import Bitkit9 from '../../assets/Bitkit/6.png';
 import Bitkit1 from '../../assets/Bitkit/Bitkit 1.png';
 import Bitkit2 from '../../assets/Bitkit/Bitkit 2.png';
 import Bitkit3 from '../../assets/Bitkit/Bitkit 3.png';
@@ -10,8 +12,16 @@ import Bitkit4 from '../../assets/Bitkit/Bitkit 4.png';
 import Bitkit5 from '../../assets/Bitkit/Bitkit 5.png';
 import Bitkit6 from '../../assets/Bitkit/Bitkit 6.png';
 import Bitkit7 from '../../assets/Bitkit/Bitkit 7.png';
+import Seedkit1 from '../../assets/seedkit/1.png';
+import Seedkit2 from '../../assets/seedkit/2.png';
+import Seedkit3 from '../../assets/seedkit/3.png';
+import Seedkit4 from '../../assets/seedkit/4.png';
+import Seedkit5 from '../../assets/seedkit/5.png';
+import Seedkit6 from '../../assets/seedkit/6.png';
+import Seedkit7 from '../../assets/seedkit/7.png';
+import Seedkit8 from '../../assets/seedkit/8.png';
 import { BackgroundAnimatedProduct } from '../../styles/Products/Product.styles';
-import { styleFirstWord } from '../../utils/StyleFirstWord';
+import { styleFirstWord } from '../../utils/StyleWord';
 
 type Infos = {
   title: string;
@@ -35,7 +45,16 @@ export function Products() {
       price: 150,
       originalPrice: 180,
       description: infos[0].description,
-      images: [Bitkit1, Bitkit2, Bitkit3, Bitkit4, Bitkit5],
+      images: [
+        Seedkit7,
+        Seedkit1,
+        Seedkit2,
+        Seedkit3,
+        Seedkit4,
+        Seedkit5,
+        Seedkit6,
+        Seedkit8,
+      ],
     },
     {
       id: 2,
@@ -44,7 +63,17 @@ export function Products() {
       price: 800,
       originalPrice: 850,
       description: infos[2].description,
-      images: [Bitkit7, Bitkit1, Bitkit2, Bitkit3, Bitkit4, Bitkit5, Bitkit6],
+      images: [
+        Bitkit7,
+        Bitkit1,
+        Bitkit2,
+        Bitkit3,
+        Bitkit4,
+        Bitkit5,
+        Bitkit6,
+        Bitkit8,
+        Bitkit9,
+      ],
     },
   ];
 
@@ -106,7 +135,7 @@ export function Products() {
                   <img
                     src={product.images[currentImageIndexes[idx]]}
                     alt={product.name}
-                    className="w-[80%] h-auto object-cover rounded-md shadow-lg"
+                    className="w-96 h-72 object-contain rounded-md"
                   />
 
                   <button

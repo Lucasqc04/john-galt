@@ -5,6 +5,7 @@ import { LanguageTexts } from '../../../domain/locales/Language';
 
 import { Loader } from '../../components/Loader';
 import { BackgroundAnimatedProduct } from '../../styles/Products/Product.styles';
+import { styleLastWord } from '../../utils/StyleWord';
 import { BlogLinks } from '../partials/BlogLinks';
 import { useProductPage } from './useProductPage';
 
@@ -160,8 +161,7 @@ export function ProductPage() {
 
           <div>
             <h2 className="text-3xl md:text-4xl font-bold mb-20 mt-36 text-center dark:text-white">
-              {t(LanguageTexts.products.resourcesTitle)}
-              <span className="text-[#F6911D]"> Kit</span>
+              {styleLastWord(t(LanguageTexts.products.resourcesTitle))}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {resources.map((resource, index) => (
