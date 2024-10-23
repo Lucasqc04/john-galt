@@ -94,8 +94,9 @@ export function ProductPage() {
                     type="text"
                     placeholder="Digite seu CEP"
                     {...register('postalCode')}
-                    className="p-2 border border-gray-300 rounded-md"
+                    className="p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:text-white"
                   />
+
                   <button
                     onClick={shipping.calculate}
                     className="bg-[#F6911D] text-white p-2 rounded-md ml-2"
@@ -154,8 +155,9 @@ export function ProductPage() {
                 value={quantity.value}
                 onChange={(e) => quantity.set(Number(e.target.value))}
                 min={1}
-                className="w-16 p-2 border border-gray-300 rounded-md"
+                className="w-16 p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:text-white"
               />
+
               <button
                 onClick={cart.add}
                 className="bg-[#F6911D] text-white p-2 rounded-md w-48"
