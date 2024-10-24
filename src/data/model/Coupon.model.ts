@@ -7,16 +7,18 @@ export class ValidateCouponModel {
 
 export const ValidatedCouponModel = z.object({
   discountType: z.nativeEnum(DiscountType),
-  discountValue: z.string().transform((val) => Number(val)),
+  discountValue: z
+    .union([z.string(), z.number()])
+    .transform((val) => Number(val)),
   isActive: z.boolean(),
   maxDiscountValue: z
-    .string()
+    .union([z.string(), z.number()])
     .nullable()
-    .transform((val) => Number(val)),
+    .transform((val) => (val === null ? null : Number(val))),
   minPurchaseValue: z
-    .string()
+    .union([z.string(), z.number()])
     .nullable()
-    .transform((val) => Number(val)),
+    .transform((val) => (val === null ? null : Number(val))),
   usageLimit: z.number().nullable(),
   usedCount: z.number(),
   validUntil: z.string(),
