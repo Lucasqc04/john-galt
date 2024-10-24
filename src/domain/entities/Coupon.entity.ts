@@ -38,7 +38,9 @@ export class ValidatedCoupon {
 
     entity.usedCount = model.usedCount;
 
-    entity.validUntil = model.validUntil;
+    if (model.validUntil) {
+      entity.validUntil = model.validUntil;
+    }
 
     return entity;
   }
