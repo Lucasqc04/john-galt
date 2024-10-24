@@ -5,19 +5,12 @@ import {
   useEffect,
   useState,
 } from 'react';
-
-type CartItem = {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-  imageUrl: string;
-  category_id: string;
-};
+import { PaymentItems } from '../../domain/entities/payment.entity';
 
 type CartContextType = {
-  items: CartItem[];
-  add: (item: CartItem) => void;
+  items: PaymentItems[];
+  TotalValue: number;
+  add: (item: PaymentItems) => void;
   remove: (id: string) => void;
   updateItemQuantity: (id: string, quantity: number) => void;
   clear: () => void;
@@ -26,7 +19,7 @@ type CartContextType = {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+  const [cartItems, setCartItems] = useState<PaymentItems[]>(() => {
     const storedCartItems = localStorage.getItem('cartItems');
     return storedCartItems ? JSON.parse(storedCartItems) : [];
   });
@@ -35,7 +28,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }, [cartItems]);
 
-  const add = (item: CartItem) => {
+  const add = (item: PaymentItems) => {
     setCartItems((prev) => {
       const existingItem = prev.find((i) => i.id === item.id);
       if (existingItem) {
@@ -63,10 +56,16 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setCartItems([]);
   };
 
+  const TotalValue = cartItems.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0,
+  );
+
   return (
     <CartContext.Provider
       value={{
         items: cartItems,
+        TotalValue,
         add,
         clear,
         remove,

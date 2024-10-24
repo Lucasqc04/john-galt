@@ -28,8 +28,6 @@ export class NewsletterRepositoryImpl implements NewsletterRepository {
       body: req,
     });
 
-    console.log(result);
-
     if (!result) {
       return Result.Error({ code: 'SERIALIZATION' });
     }

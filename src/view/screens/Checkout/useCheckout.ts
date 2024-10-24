@@ -2,53 +2,29 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import {
+  GetCheckout,
+  PaymentMethod,
+} from '../../../domain/entities/payment.entity';
 import { CalculatedShipping } from '../../../domain/entities/Shipping.entity';
 import { UseCases } from '../../../domain/usecases/UseCases';
 import { useCartContext } from '../../context/CartContext';
 
-type Address = {
-  street: string;
-  number: string;
-  complement?: string;
-  city: string;
-  state: string;
-  zipCode: string;
-};
-
-type Identification = {
-  type: 'CPF' | 'CNPJ';
-  number: string;
-};
-
-export type CheckoutForm = {
-  payerEmail: string;
-  firstName: string;
-  lastName: string;
-  identification: Identification;
-  couponCode?: string;
-  address: Address;
-};
-
 export function useCheckout() {
-  const { items, updateItemQuantity, remove, clear } = useCartContext();
+  const { items, TotalValue, updateItemQuantity, remove, clear } =
+    useCartContext();
 
-  const subtotal = items.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0,
-  );
-  const API_URL = String(import.meta.env.VITE_API_URL);
-
-  const form = useForm<CheckoutForm>({
+  const form = useForm<GetCheckout>({
     mode: 'onChange',
     defaultValues: {
-      payerEmail: '',
-      firstName: '',
-      lastName: '',
+      email: '',
+      name: '',
+      surname: '',
       identification: {
         type: 'CPF',
         number: '',
       },
-      couponCode: '',
+      coupon: '',
       address: {
         street: '',
         number: '',
@@ -72,7 +48,7 @@ export function useCheckout() {
   const [currentStep, setCurrentStep] = useState(1);
   const [shipping, setShipping] = useState<number>(0);
   const [discount, setDiscount] = useState<number>(0);
-  const [total, setTotal] = useState<number>(subtotal + shipping);
+  const [total, setTotal] = useState<number>(TotalValue + shipping);
   const [shippingOptions, setShippingOptions] = useState<CalculatedShipping[]>(
     [],
   );
@@ -81,8 +57,8 @@ export function useCheckout() {
   const zipCode = watch('address.zipCode');
 
   useEffect(() => {
-    setTotal(subtotal + shipping - discount);
-  }, [subtotal, shipping, discount]);
+    setTotal(TotalValue + shipping - discount);
+  }, [TotalValue, shipping, discount]);
 
   useEffect(() => {
     if (zipCode && zipCode.length === 8) {
@@ -116,46 +92,76 @@ export function useCheckout() {
     setShipping(parseFloat(selectedShipping.price));
   };
 
-  const onSubmit = async (data: CheckoutForm) => {
-    try {
-      const paymentData = {
-        couponCode: data.couponCode,
-        paymentMethod,
-        items: items,
-        payerEmail: data.payerEmail,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        identification: data.identification,
-      };
+  const onSubmit = async (data: GetCheckout) => {
+    const { result } = await UseCases.payment.create.execute({
+      coupon: data.coupon,
+      identification: data.identification,
+      address: data.address,
+      email: data.email,
+      method: PaymentMethod.MP,
+      name: data.name,
+      surname: data.surname,
+      items,
+    });
 
-      const response = await axios.post(
-        `${API_URL}/create-payment/${paymentMethod}`,
-        paymentData,
-      );
-      if (response.data.initPoint) {
-        window.location.href = response.data.initPoint;
-      } else {
-        alert('Pagamento não foi aprovado.');
+    if (result.type === 'ERROR') {
+      switch (result.error.code) {
+        case 'SERIALIZATION':
+          alert('ERRO DE SERIALIZAÇÃO. POR FAVOR, ENTRE EM CONTATO');
+          redirectToWhatsApp({ ...data, items });
+          return;
+        default:
+          alert('ERRO AO PROCESSAR PAGAMENTO. POR FAVOR, ENTRE EM CONTATO');
+          redirectToWhatsApp({ ...data, items });
+          return;
       }
-    } catch {
-      alert('Ocorreu um erro ao processar o pagamento.');
     }
+
+    window.location.href = result.data.paymentLink;
   };
+
+  function redirectToWhatsApp(data: GetCheckout) {
+    const phoneNumber = '5511994458337';
+
+    const itemsText =
+      data.items && Array.isArray(data.items)
+        ? data.items
+            .map((item) => `${item.name}, na quantidade de ${item.quantity}`)
+            .join('\n')
+        : 'Nenhum item encontrado';
+
+    const text = `Olá, meu nome é ${data.name} ${data.surname}. Houve um erro no pagamento via site e gostaria de finalizar meu pedido.
+
+    Nome Completo: ${data.name} ${data.surname}
+    Endereço: ${data.address.street}, ${data.address.number} - ${data.address.city}/${data.address.state}
+    Items: ${itemsText}
+    Valor de Frete: ${shipping ?? 'não informado'}
+    Total: ${total ?? 'não informado'}
+    Cupom: ${data.coupon ?? 'não informado'}`;
+
+    const encodedText = encodeURIComponent(text);
+    const whatsappURL = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedText}`;
+
+    window.location.href = whatsappURL;
+  }
 
   const applyCoupon = async () => {
     try {
       const COUPON = {
-        code: getValues('couponCode'),
+        code: getValues('coupon'),
       };
 
-      const response = await axios.post(`${API_URL}/coupons/is-valid`, COUPON);
+      const response = await axios.post(
+        `http:localhost:3000/coupons/is-valid`,
+        COUPON,
+      );
       const coupon = response.data;
 
-      if (coupon.isActive && subtotal >= coupon.minPurchaseValue) {
+      if (coupon.isActive && TotalValue >= coupon.minPurchaseValue) {
         const discountValue =
           coupon.discountType === 'percentage'
             ? Math.min(
-                (subtotal + shipping) * (coupon.discountValue / 100),
+                (TotalValue + shipping) * (coupon.discountValue / 100),
                 coupon.maxDiscountValue,
               )
             : Math.min(coupon.discountValue, coupon.maxDiscountValue);
@@ -190,7 +196,7 @@ export function useCheckout() {
     cart: {
       total,
       items,
-      subtotal,
+      subtotal: TotalValue,
       clear,
       remove,
       updateItemQuantity,

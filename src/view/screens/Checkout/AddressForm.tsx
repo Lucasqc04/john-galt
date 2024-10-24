@@ -1,11 +1,11 @@
 import { useFormContext } from 'react-hook-form';
-import { CheckoutForm } from './useCheckout';
+import { GetCheckout } from '../../../domain/entities/payment.entity';
 
 export function AddressForm() {
   const {
     register,
     formState: { errors },
-  } = useFormContext<CheckoutForm>();
+  } = useFormContext<GetCheckout>();
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -37,7 +37,6 @@ export function AddressForm() {
         )}
       </div>
 
-      {/* Complemento */}
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
           Complemento
