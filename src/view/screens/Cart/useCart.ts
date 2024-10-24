@@ -6,20 +6,16 @@ import { useCartContext } from '../../context/CartContext';
 export function useCart() {
   const { t } = useTranslation();
   const { currentLang } = useLanguage();
-  const { items, updateItemQuantity, remove, clear } = useCartContext();
+  const { items, TotalValue, updateItemQuantity, remove, clear } =
+    useCartContext();
   const navigate = useNavigate();
-
-  const total = items.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0,
-  );
 
   return {
     t,
     currentLang,
     navigate,
     cart: {
-      total,
+      total: TotalValue,
       items,
       clear,
       remove,

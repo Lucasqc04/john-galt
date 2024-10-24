@@ -1,11 +1,11 @@
 import { useFormContext } from 'react-hook-form';
-import { CheckoutForm } from './useCheckout';
+import { GetCheckout } from '../../../domain/entities/payment.entity';
 
 export function PersonForm() {
   const {
     register,
     formState: { errors },
-  } = useFormContext<CheckoutForm>();
+  } = useFormContext<GetCheckout>();
 
   return (
     <>
@@ -15,10 +15,10 @@ export function PersonForm() {
         </label>
         <input
           type="email"
-          {...register('payerEmail', { required: true })}
+          {...register('email', { required: true })}
           className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
         />
-        {errors.payerEmail && (
+        {errors.email && (
           <span className="text-red-500 text-sm">Este campo é obrigatório</span>
         )}
       </div>
@@ -29,10 +29,10 @@ export function PersonForm() {
         </label>
         <input
           type="text"
-          {...register('firstName', { required: true })}
+          {...register('name', { required: true })}
           className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
         />
-        {errors.firstName && (
+        {errors.name && (
           <span className="text-red-500 text-sm">Este campo é obrigatório</span>
         )}
       </div>
@@ -43,10 +43,10 @@ export function PersonForm() {
         </label>
         <input
           type="text"
-          {...register('lastName', { required: true })}
+          {...register('surname', { required: true })}
           className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
         />
-        {errors.lastName && (
+        {errors.surname && (
           <span className="text-red-500 text-sm">Este campo é obrigatório</span>
         )}
       </div>
