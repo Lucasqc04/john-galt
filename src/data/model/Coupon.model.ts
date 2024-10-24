@@ -21,6 +21,6 @@ export const ValidatedCouponModel = z.object({
     .transform((val) => (val === null ? null : Number(val))),
   usageLimit: z.number().nullable(),
   usedCount: z.number(),
-  validUntil: z.string(),
+  validUntil: z.string().optional(),
 });
 export type ValidatedCouponModel = z.infer<typeof ValidatedCouponModel>;
