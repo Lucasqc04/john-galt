@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -146,32 +145,40 @@ export function useCheckout() {
   }
 
   const applyCoupon = async () => {
-    try {
-      const COUPON = {
-        code: getValues('coupon'),
-      };
+    const COUPON = {
+      code: getValues('coupon') || '',
+    };
 
-      const response = await axios.post(
-        `http:localhost:3000/coupons/is-valid`,
-        COUPON,
-      );
-      const coupon = response.data;
+    const { result } = await UseCases.coupon.validate.execute({
+      code: COUPON.code,
+    });
 
-      if (coupon.isActive && TotalValue >= coupon.minPurchaseValue) {
-        const discountValue =
-          coupon.discountType === 'percentage'
-            ? Math.min(
-                (TotalValue + shipping) * (coupon.discountValue / 100),
-                coupon.maxDiscountValue,
-              )
-            : Math.min(coupon.discountValue, coupon.maxDiscountValue);
-
-        setDiscount(discountValue);
-      } else {
-        alert('Cupom inválido ou não aplicável.');
+    if (result.type === 'ERROR') {
+      switch (result.error.code) {
+        case 'SERIALIZATION':
+          alert('ERRO DE SERIALIZAÇÃO, POR FAVOR ENTRAR EM CONTATO');
+          return;
+        default:
+          alert('ERRO AO PROCESSAR CUPOM. ENTRE EM CONTATO.');
+          return;
       }
-    } catch {
-      alert('Ocorreu um erro ao aplicar cupom.');
+    }
+
+    const isActive = result.data.isActive;
+    const minPurchaseValue = result.data.minPurchaseValue ?? 0;
+    const maxDiscountValue = result.data.maxDiscountValue ?? Infinity;
+    const discountValue = result.data.discountValue ?? 0;
+
+    if (isActive && TotalValue >= minPurchaseValue) {
+      const calculatedDiscount =
+        result.data.discountType === 'percentage'
+          ? Math.min(
+              (TotalValue + shipping) * (discountValue / 100),
+              maxDiscountValue,
+            )
+          : Math.min(discountValue, maxDiscountValue);
+
+      setDiscount(calculatedDiscount);
     }
   };
 

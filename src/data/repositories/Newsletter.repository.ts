@@ -22,16 +22,20 @@ export class NewsletterRepositoryImpl implements NewsletterRepository {
   constructor(private api: RemoteDataSource) {}
 
   async insert(req: InsertReq): InsertRes {
-    const result = await this.api.post({
-      url: `/newsletter/create`,
-      model: InsertedNewsletterModel,
-      body: req,
-    });
+    try {
+      const result = await this.api.post({
+        url: `/newsletter/create`,
+        model: InsertedNewsletterModel,
+        body: req,
+      });
 
-    if (!result) {
-      return Result.Error({ code: 'SERIALIZATION' });
+      if (!result) {
+        return Result.Error({ code: 'SERIALIZATION' });
+      }
+
+      return Result.Success(result);
+    } catch {
+      return Result.Error({ code: 'UNKNOWN' });
     }
-
-    return Result.Success(result);
   }
 }
