@@ -126,7 +126,7 @@ export function Checkout() {
               <div className="flex gap-x-2 mt-2">
                 <input
                   type="text"
-                  {...form.register('couponCode')}
+                  {...form.register('coupon')}
                   className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600"
                 />
                 <button
