@@ -23,16 +23,20 @@ export class ShippingRepositoryImpl implements ShippingRepository {
   constructor(private api: RemoteDataSource) {}
 
   async calculate(req: CalculateReq): CalculateRes {
-    const result = await this.api.post({
-      url: `/shipping/calculate`,
-      model: z.array(CalculatedShippingModel),
-      body: req,
-    });
+    try {
+      const result = await this.api.post({
+        url: `/shipping/calculate`,
+        model: z.array(CalculatedShippingModel),
+        body: req,
+      });
 
-    if (!result) {
-      return Result.Error({ code: 'SERIALIZATION' });
+      if (!result) {
+        return Result.Error({ code: 'SERIALIZATION' });
+      }
+
+      return Result.Success(result);
+    } catch {
+      return Result.Error({ code: 'UNKNOWN' });
     }
-
-    return Result.Success(result);
   }
 }
