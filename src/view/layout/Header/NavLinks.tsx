@@ -11,7 +11,7 @@ import { IconType } from 'react-icons';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
-// import { blogData } from '../../../blogContent/blogPosts';
+import { blogData } from '../../../blogContent/blogPosts';
 import { LanguageTexts } from '../../../domain/locales/Language';
 import { LanguageSwitcher } from '../../components/LanguageSwitcher/LanguageSwitcher';
 import { useCartContext } from '../../context/CartContext';
@@ -51,6 +51,11 @@ export function NavLinks({
       callback();
     }
     navigate(path);
+  };
+
+  const handleCardClick = () => {
+    navigate(`${currentLang}/blog/1`);
+    window.scrollTo(0, 0);
   };
 
   const callsToAction = [
@@ -133,7 +138,7 @@ export function NavLinks({
               {t(LanguageTexts.header.links[1])}
             </button>
 
-            {/* <Popover className="relative">
+            <Popover className="relative">
               <PopoverButton className="text-2xl flex items-center justify-center gap-x-1 lg:text-sm font-semibold leading-6 text-black dark:text-white hover:text-[#F6911D]">
                 {t(LanguageTexts.header.links[2])}
                 <MdKeyboardArrowDown
@@ -166,12 +171,12 @@ export function NavLinks({
                           className="flex items-center gap-x-4 rounded-lg p-4 text-sm leading-6 text-gray-800 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800"
                         >
                           <img
-                            src={post.image}
+                            src={post.translations.pt.sections[0].image}
                             alt={translation.title}
-                            className="h-12 w-12 rounded-lg object-cover"
+                            className="h-12 w-12 rounded-lg object-cover cursor-pointer"
+                            onClick={() => handleCardClick()}
                           />
                           <button
-                            key={postId}
                             onClick={() =>
                               handleOnLink(
                                 ROUTES.blog.callLang(currentLang, postId),
@@ -188,7 +193,7 @@ export function NavLinks({
                     })}
                 </div>
               </PopoverPanel>
-            </Popover> */}
+            </Popover>
 
             <LanguageSwitcher className="text-xl flex items-center justify-center gap-x-2 lg:text-sm font-semibold leading-6 hover:text-[#F6911D]" />
 

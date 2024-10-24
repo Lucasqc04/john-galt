@@ -1,3 +1,4 @@
+import { AiOutlineWhatsApp } from 'react-icons/ai'; // Importando ícone do WhatsApp
 import { FaInstagram } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { LanguageTexts } from '../../../domain/locales/Language';
@@ -56,21 +57,41 @@ export function Footer() {
             ))}
           </ul>
 
-          <div className="group relative inline-block">
-            <a
-              href="https://www.instagram.com/diyseclab.io/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="focus:outline-none"
-            >
-              <FaInstagram
-                className="transform transition-transform duration-300 hover:scale-125 text-gray-700 dark:text-white hover:text-[#F6911D]"
-                size={40}
-              />
-            </a>
-            <span className="absolute -top-14 left-1/2 transform -translate-x-1/2 z-20 px-4 py-2 text-sm font-bold text-white bg-gray-900 rounded-lg shadow-lg transition-transform duration-300 ease-in-out scale-0 group-hover:scale-100">
-              Instagram
-            </span>
+          <div className="flex items-center justify-center sm:justify-between space-x-4">
+            {/* Botão do Instagram */}
+            <div className="group relative inline-block">
+              <a
+                href="https://www.instagram.com/diyseclab.io/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus:outline-none"
+              >
+                <FaInstagram
+                  className="transform transition-transform duration-300 hover:scale-125 text-gray-700 dark:text-white hover:text-[#F6911D]"
+                  size={40}
+                />
+              </a>
+              <span className="absolute -top-14 left-1/2 transform -translate-x-1/2 z-20 px-4 py-2 text-sm font-bold text-white bg-gray-900 rounded-lg shadow-lg transition-transform duration-300 ease-in-out scale-0 group-hover:scale-100">
+                Instagram
+              </span>
+            </div>
+
+            <div className="group relative inline-block">
+              <a
+                href="https://api.whatsapp.com/send?phone=+5511994458337&text=Ol%C3%A1,%20Tudo%20bem?%0A%0AEu%20gostaria%20de%20saber%20mais%20sobre%20os%20produtos%20da%20DIY%20LAB..."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus:outline-none"
+              >
+                <AiOutlineWhatsApp
+                  className="transform transition-transform duration-300 hover:scale-125 text-gray-700 dark:text-white hover:text-[#F6911D]"
+                  size={40}
+                />
+              </a>
+              <span className="absolute -top-14 left-1/2 transform -translate-x-1/2 z-20 px-4 py-2 text-sm font-bold text-white bg-gray-900 rounded-lg shadow-lg transition-transform duration-300 ease-in-out scale-0 group-hover:scale-100">
+                WhatsApp
+              </span>
+            </div>
           </div>
         </div>
 

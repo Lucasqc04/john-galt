@@ -112,7 +112,7 @@ export function Products() {
       <BackgroundAnimatedProduct />
       <section className="w-full min-h-screen flex flex-col justify-center items-center py-10">
         <div className="container p-4 sm:p-8 ">
-          <h2 className="text-6xl text-center font-bold dark:text-white mb-8">
+          <h2 className="text-4xl text-center font-bold dark:text-white mb-8">
             {styleFirstWord(t(LanguageTexts.products.title))}
           </h2>
           <article className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-16 gap-y-4">
@@ -145,11 +145,9 @@ export function Products() {
                     <FaChevronRight />
                   </button>
                 </div>
-
-                <p className="dark:text-white my-4 text-gray-700 mb-4">
+                <p className="dark:text-white my-4 text-gray-700 mb-4 whitespace-nowrap text-center">
                   {product.description}
                 </p>
-
                 <button
                   onClick={() => handleButton(product.id)}
                   className="w-full font-bold bg-[#F6911D] text-white dark:text-white py-2 rounded-md hover:bg-orange-600 transition-colors"
