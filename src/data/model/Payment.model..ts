@@ -17,10 +17,15 @@ class Identification {
 export class PaymentItemsModel {
   id!: string;
   name!: string;
-  price!: number;
   quantity!: number;
-  imageUrl!: string;
-  category_id!: string;
+  price!: number;
+  categoryId!: string;
+  description!: string;
+}
+
+class PhoneModel {
+  areaCode!: string;
+  number!: string;
 }
 
 export class GetCheckoutModel {
@@ -31,6 +36,7 @@ export class GetCheckoutModel {
   couponCode?: string;
   address!: Address;
   items!: PaymentItemsModel[];
+  phone!: PhoneModel;
 }
 
 export const CreatedCheckoutModel = z.object({

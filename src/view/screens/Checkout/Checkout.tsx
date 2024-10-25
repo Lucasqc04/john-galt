@@ -91,6 +91,7 @@ export function Checkout() {
                     <div className="flex items-center gap-x-2">
                       <div className="flex flex-col items-center">
                         <button
+                          type="button"
                           onClick={() =>
                             cart.updateItemQuantity(item.id, item.quantity + 1)
                           }
@@ -99,6 +100,7 @@ export function Checkout() {
                           <TiArrowSortedUp size={24} />
                         </button>
                         <button
+                          type="button"
                           onClick={() => {
                             if (item.quantity > 1) {
                               cart.updateItemQuantity(
@@ -133,7 +135,7 @@ export function Checkout() {
                 <div className="flex gap-x-2 mt-2">
                   <input
                     type="text"
-                    {...form.register('coupon')}
+                    {...form.register('couponCode')}
                     className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600"
                   />
                   <button
@@ -144,9 +146,9 @@ export function Checkout() {
                     Aplicar
                   </button>
                 </div>
-                {form.errors.coupon && (
+                {form.errors.couponCode && (
                   <span className="text-red-500 text-sm mt-1">
-                    {form.errors.coupon.message}
+                    {form.errors.couponCode.message}
                   </span>
                 )}
               </div>
