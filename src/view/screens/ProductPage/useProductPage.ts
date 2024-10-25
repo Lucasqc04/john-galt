@@ -141,22 +141,25 @@ export function useProductPage() {
     setLoading(true);
     setError(null);
     try {
+      if (data.postalCode.length < 8) {
+        return;
+      }
+
       const { result } = await UseCases.shipping.calculate.execute(data);
 
       if (result.type === 'ERROR') {
         switch (result.error.code) {
           case 'SERIALIZATION':
             alert('ERRO DE SERIALIZAÇÃO!');
+            setError('Erro ao calcular o frete. Tente novamente.');
             return;
           default:
             alert('ERRO DESCONHECIDO');
+            setError('Erro ao calcular o frete. Tente novamente.');
             return;
         }
       }
       setShippingOptions(result.data);
-    } catch {
-      setError('Erro ao calcular o frete. Tente novamente.');
-      alert('ERRO AO CALCULAR O FRETE');
     } finally {
       setLoading(false);
     }

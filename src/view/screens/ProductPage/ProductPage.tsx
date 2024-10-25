@@ -106,6 +106,10 @@ export function ProductPage() {
                     type="text"
                     placeholder="Digite seu CEP"
                     {...register('postalCode')}
+                    onChange={(e) => {
+                      const onlyNumbers = e.target.value.replace(/\D/g, '');
+                      e.target.value = onlyNumbers.slice(0, 8);
+                    }}
                     className="p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600"
                   />
                   <button
