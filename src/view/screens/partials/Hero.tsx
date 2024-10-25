@@ -55,7 +55,7 @@ export function Hero() {
             src={HeroImage}
             alt="NFT/Crypto Image"
             className={classNames(
-              'w-full max-w-3xl',
+              'w-[950px]  ', // Definindo largura e altura em pixels
               inView && 'opacity-100 animate-fade-right',
               !inView && 'opacity-0',
             )}

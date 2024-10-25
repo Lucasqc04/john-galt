@@ -1,7 +1,6 @@
-import image1 from './image1/image1.png';
-import image2 from './image2/image2.png';
-import image3 from './image3/image3.png';
-import image4 from './image4/image4.png';
+import Bitkit2 from '../view/assets/Bitkit/Bitkit 2.png';
+import Seedkit3 from '../view/assets/seedkit/3.png';
+import Bitkit8 from './image1/image1.png';
 
 type Language = 'pt' | 'en' | 'es';
 
@@ -12,184 +11,237 @@ export const blogData: Record<
       [key in Language]: {
         title: string;
         subtitle: string;
-        content: string[];
-        citation?: string;
-        author?: string;
-        date?: string;
+        sections: {
+          title: string;
+          content: string;
+          image?: string;
+          layout:
+            | 'left-text-right-image'
+            | 'right-text-left-image'
+            | 'text-only';
+        }[];
       };
     };
-    image: string;
   }
 > = {
-  '1': {
+  krux: {
     translations: {
       pt: {
-        title: 'Crescimento das Criptomoedas',
-        subtitle: 'A revolução financeira em andamento',
-        content: [
-          'Nos últimos anos, as criptomoedas deixaram de ser apenas uma curiosidade para se tornarem um dos principais tópicos de discussão no mundo financeiro.',
-          'O Bitcoin, por exemplo, surgiu como uma forma de dinheiro digital, mas agora é visto como um ativo de investimento por muitos.',
-          'As tecnologias de blockchain estão revolucionando não apenas o setor financeiro, mas também várias outras indústrias, desde a saúde até a cadeia de suprimentos.',
+        title: 'Krux: A melhor Carteira Bitcoin Air Gap e DIY',
+        subtitle:
+          'Uma carteira Bitcoin que te permite ter o maior nível de customização e segurança',
+        sections: [
+          {
+            title: 'O que é Krux',
+            content: `
+              A Krux é uma carteira de Bitcoin inovadora 100% open-source que destaca-se por sua segurança e autonomia. 
+              Em um cenário onde as criptomoedas ganham popularidade, a Krux se sobressai ao oferecer uma solução de armazenamento segura 
+              e fácil de usar, ideal tanto para iniciantes quanto para usuários experientes.
+              
+              O diferencial da Krux está em seus recursos de segurança avançados. Ao contrário de outras carteiras que dependem de conexões 
+              como Bluetooth ou NFC e atualizações enviadas por empresas, a Krux elimina esses riscos, não permitindo conexões à internet. 
+              Além disso, a geração das 12 ou 24 palavras-chave é feita por um sistema entrópico exclusivo, garantindo que a escolha 
+              seja única e protegida contra hacks.
+            `,
+            image: Bitkit8,
+            layout: 'left-text-right-image',
+          },
+          {
+            title: 'Principais Funcionalidades',
+            content: `
+              - Air-Gap (Armazenamento Offline): As chaves privadas são mantidas em um ambiente seguro e desconectado, reduzindo a exposição a malware e ataques cibernéticos.
+              - Geração Manual de Entropia: Diferentemente da maioria das carteiras, a Krux permite que você use uma foto para garantir a aleatoriedade na criação de sua chave privada.
+              - Carteira Amnésica: O sistema não armazena suas chaves privadas ou senhas, eliminando a necessidade de elementos seguros para proteger o hardware contra invasões físicas.
+            `,
+            image: '',
+            layout: 'text-only',
+          },
+          {
+            title: 'Funcionalidades Complementares',
+            content: `
+              - Carteira Isca: O sistema possui um processo de autenticação que garante que apenas você pode acessar e realizar transações em sua carteira.
+              - Interface Amigável: A Krux oferece uma interface intuitiva, facilitando o gerenciamento de suas criptomoedas, mesmo para iniciantes.
+              - Acesso Descentralizado: Em caso de perda ou roubo do dispositivo, você pode acessar seu saldo através de um dos quatro aplicativos descentralizados do Bitcoin.
+            `,
+            image: Bitkit2,
+            layout: 'right-text-left-image',
+          },
+          {
+            title: 'Como receber e enviar seus Bitcoins',
+            content: `
+              A KRUX foi desenvolvida com base no código do Bitcoin, o que a torna compatível com os principais aplicativos da rede, como Blue, Sparrow, Nunchuk e Specter.
+
+              Durante o processo de criação da chave privada, o usuário pode se conectar a um desses aplicativos apenas para visualizar o saldo e receber transferências. 
+              Isso facilita o gerenciamento diário, pois não é necessário ter o dispositivo físico em mãos para receber transações.
+
+              O objetivo é manter seu saldo sempre offline e protegido pela KRUX. Toda vez que você desejar sacar seus Bitcoins, será necessário validar a transação 
+              com a ajuda do leitor de QR Code do dispositivo. No entanto, caso não seja possível adquirir um novo aparelho em caso de perda, o usuário pode recuperar 
+              seu saldo online utilizando um dos quatro aplicativos da rede.
+            `,
+            image: Seedkit3,
+            layout: 'left-text-right-image',
+          },
+          {
+            title: 'Conclusão',
+            content: `
+              A Krux representa uma evolução significativa no armazenamento de criptomoedas, combinando segurança robusta com uma interface amigável e opções de personalização. 
+              Ao escolher a Krux, você não apenas protege seus ativos digitais, mas também se torna um participante ativo no crescente ecossistema de criptomoedas.
+
+              Empresas como a DIY SEC LAB são fundamentais nesse processo, oferecendo kits completos e suporte para garantir que a autocustódia seja realizada de ponta a ponta. 
+              Isso assegura não apenas a segurança total do Bitcoin, mas também um armazenamento eficaz da chave privada, que é essencial.
+
+              Se você busca uma maneira segura e eficiente de gerenciar suas criptomoedas, a Krux é a solução ideal. Com a crescente adoção das criptomoedas, investir em uma 
+              carteira que prioriza a segurança e a autonomia é uma decisão sábia. Experimente a Krux e descubra uma nova forma de interagir com o universo das criptomoedas!
+            `,
+            image: '',
+            layout: 'text-only',
+          },
         ],
-        citation:
-          '“O futuro das finanças é digital, descentralizado e global.”',
-        author: 'Autor Fictício 1',
-        date: '01/01/2024',
       },
       en: {
-        title: 'Growth of Cryptocurrencies',
-        subtitle: 'The ongoing financial revolution',
-        content: [
-          'In recent years, cryptocurrencies have gone from being a curiosity to one of the main topics of discussion in the financial world.',
-          'Bitcoin, for example, started as a form of digital money, but is now seen as an investment asset by many.',
-          'Blockchain technologies are revolutionizing not only the financial sector but also various other industries, from healthcare to supply chains.',
+        title: 'Krux: The Best Air Gap Bitcoin Wallet and DIY',
+        subtitle:
+          'A Bitcoin wallet that allows you the highest level of customization and security',
+        sections: [
+          {
+            title: 'What is Krux',
+            content: `
+              Krux is an innovative 100% open-source Bitcoin wallet that stands out for its security and autonomy. 
+              In a scenario where cryptocurrencies gain popularity, Krux excels by offering a secure and easy-to-use storage solution, 
+              ideal for both beginners and experienced users.
+              
+              The difference with Krux lies in its advanced security features. Unlike other wallets that rely on connections 
+              like Bluetooth or NFC and updates sent by companies, Krux eliminates these risks by not allowing internet connections. 
+              Additionally, the generation of 12 or 24 key phrases is done by a unique entropy system, ensuring that the choice 
+              is unique and protected against hacks.
+            `,
+            image: Bitkit8,
+            layout: 'left-text-right-image',
+          },
+          {
+            title: 'Main Features',
+            content: `
+              - Air-Gap (Offline Storage): Private keys are kept in a secure and disconnected environment, reducing exposure to malware and cyber attacks.
+              - Manual Entropy Generation: Unlike most wallets, Krux allows you to use a photo to ensure randomness in creating your private key.
+              - Amnesiac Wallet: The system does not store your private keys or passwords, eliminating the need for secure elements to protect the hardware against physical intrusions.
+            `,
+            image: '',
+            layout: 'text-only',
+          },
+          {
+            title: 'Complementary Features',
+            content: `
+              - Decoy Wallet: The system has an authentication process that ensures that only you can access and perform transactions in your wallet.
+              - User-Friendly Interface: Krux offers an intuitive interface, making it easy to manage your cryptocurrencies, even for beginners.
+              - Decentralized Access: In case of loss or theft of the device, you can access your balance through one of the four decentralized Bitcoin apps.
+            `,
+            image: Bitkit2,
+            layout: 'right-text-left-image',
+          },
+          {
+            title: 'How to Receive and Send Your Bitcoins',
+            content: `
+              KRUX was developed based on Bitcoin's code, making it compatible with the main network applications like Blue, Sparrow, Nunchuk, and Specter.
+
+              During the process of creating the private key, the user can connect to one of these applications only to view the balance and receive transfers. 
+              This facilitates daily management, as you do not need to have the physical device on hand to receive transactions.
+
+              The goal is to keep your balance always offline and protected by KRUX. Every time you want to withdraw your Bitcoins, you will need to validate the transaction 
+              with the help of the device's QR Code reader. However, if it is not possible to acquire a new device in case of loss, the user can recover 
+              their balance online using one of the four applications on the network.
+            `,
+            image: Seedkit3,
+            layout: 'left-text-right-image',
+          },
+          {
+            title: 'Conclusion',
+            content: `
+              Krux represents a significant evolution in cryptocurrency storage, combining robust security with a user-friendly interface and customization options. 
+              By choosing Krux, you not only protect your digital assets but also become an active participant in the growing cryptocurrency ecosystem.
+
+              Companies like DIY SEC LAB are fundamental in this process, providing complete kits and support to ensure that self-custody is carried out end-to-end. 
+              This ensures not only total security of Bitcoin but also effective storage of the private key, which is essential.
+
+              If you are looking for a secure and efficient way to manage your cryptocurrencies, Krux is the ideal solution. With the growing adoption of cryptocurrencies, investing in a 
+              wallet that prioritizes security and autonomy is a wise decision. Try Krux and discover a new way to interact with the world of cryptocurrencies!
+            `,
+            image: '',
+            layout: 'text-only',
+          },
         ],
-        citation:
-          '“The future of finance is digital, decentralized, and global.”',
-        author: 'Fictional Author 1',
-        date: '01/01/2024',
       },
       es: {
-        title: 'Crecimiento de las Criptomonedas',
-        subtitle: 'La revolución financiera en curso',
-        content: [
-          'En los últimos años, las criptomonedas han pasado de ser una curiosidad a uno de los principales temas de discusión en el mundo financiero.',
-          'Bitcoin, por ejemplo, surgió como una forma de dinero digital, pero ahora se ve como un activo de inversión para muchos.',
-          'Las tecnologías blockchain están revolucionando no solo el sector financiero, sino también varias otras industrias, desde la salud hasta la cadena de suministro.',
+        title: 'Krux: La mejor billetera de Bitcoin Air Gap y DIY',
+        subtitle:
+          'Una billetera de Bitcoin que te permite tener el mayor nivel de personalización y seguridad',
+        sections: [
+          {
+            title: '¿Qué es Krux?',
+            content: `
+              Krux es una billetera de Bitcoin innovadora 100% de código abierto que se destaca por su seguridad y autonomía. 
+              En un escenario donde las criptomonedas ganan popularidad, Krux se destaca al ofrecer una solución de almacenamiento segura 
+              y fácil de usar, ideal tanto para principiantes como para usuarios experimentados.
+              
+              La diferencia de Krux radica en sus características avanzadas de seguridad. A diferencia de otras billeteras que dependen de conexiones 
+              como Bluetooth o NFC y actualizaciones enviadas por empresas, Krux elimina estos riesgos al no permitir conexiones a Internet. 
+              Además, la generación de 12 o 24 frases clave se realiza mediante un sistema de entropía único, asegurando que la elección 
+              sea única y protegida contra hackeos.
+            `,
+            image: Bitkit8,
+            layout: 'left-text-right-image',
+          },
+          {
+            title: 'Características Principales',
+            content: `
+              - Air-Gap (Almacenamiento Offline): Las claves privadas se mantienen en un entorno seguro y desconectado, reduciendo la exposición a malware y ataques cibernéticos.
+              - Generación Manual de Entropía: A diferencia de la mayoría de las billeteras, Krux permite que uses una foto para garantizar la aleatoriedad en la creación de tu clave privada.
+              - Billetera Amnésica: El sistema no almacena tus claves privadas o contraseñas, eliminando la necesidad de elementos seguros para proteger el hardware contra invasiones físicas.
+            `,
+            image: '',
+            layout: 'text-only',
+          },
+          {
+            title: 'Características Complementarias',
+            content: `
+              - Billetera Cebo: El sistema tiene un proceso de autenticación que garantiza que solo tú puedes acceder y realizar transacciones en tu billetera.
+              - Interfaz Amigable: Krux ofrece una interfaz intuitiva, facilitando el manejo de tus criptomonedas, incluso para principiantes.
+              - Acceso Descentralizado: En caso de pérdida o robo del dispositivo, puedes acceder a tu saldo a través de una de las cuatro aplicaciones descentralizadas de Bitcoin.
+            `,
+            image: Bitkit2,
+            layout: 'right-text-left-image',
+          },
+          {
+            title: 'Cómo Recibir y Enviar tus Bitcoins',
+            content: `
+              KRUX fue desarrollada con base en el código de Bitcoin, lo que la hace compatible con las principales aplicaciones de la red, como Blue, Sparrow, Nunchuk y Specter.
+
+              Durante el proceso de creación de la clave privada, el usuario puede conectarse a una de estas aplicaciones solo para visualizar el saldo y recibir transferencias. 
+              Esto facilita la gestión diaria, ya que no es necesario tener el dispositivo físico en manos para recibir transacciones.
+
+              El objetivo es mantener tu saldo siempre offline y protegido por KRUX. Cada vez que desees retirar tus Bitcoins, será necesario validar la transacción 
+              con la ayuda del lector de código QR del dispositivo. Sin embargo, si no es posible adquirir un nuevo aparato en caso de pérdida, el usuario puede recuperar 
+              su saldo en línea utilizando una de las cuatro aplicaciones de la red.
+            `,
+            image: Seedkit3,
+            layout: 'left-text-right-image',
+          },
+          {
+            title: 'Conclusión',
+            content: `
+              Krux representa una evolución significativa en el almacenamiento de criptomonedas, combinando seguridad robusta con una interfaz amigable y opciones de personalización. 
+              Al elegir Krux, no solo proteges tus activos digitales, sino que también te conviertes en un participante activo en el creciente ecosistema de criptomonedas.
+
+              Empresas como DIY SEC LAB son fundamentales en este proceso, ofreciendo kits completos y soporte para garantizar que la autocustodia se realice de punta a punta. 
+              Esto asegura no solo la seguridad total de Bitcoin, sino también un almacenamiento eficaz de la clave privada, que es esencial.
+
+              Si buscas una manera segura y eficiente de gestionar tus criptomonedas, Krux es la solución ideal. Con la creciente adopción de las criptomonedas, invertir en una 
+              billetera que prioriza la seguridad y la autonomía es una decisión sabia. Prueba Krux y descubre una nueva forma de interactuar con el universo de las criptomonedas.
+            `,
+            image: '',
+            layout: 'text-only',
+          },
         ],
-        citation:
-          '“El futuro de las finanzas es digital, descentralizado y global.”',
-        author: 'Autor Ficticio 1',
-        date: '01/01/2024',
       },
     },
-    image: image1,
-  },
-  '2': {
-    translations: {
-      pt: {
-        title: 'O Impacto das Redes Sociais',
-        subtitle: 'Transformando a comunicação moderna',
-        content: [
-          'As redes sociais mudaram a forma como nos comunicamos e interagimos com o mundo.',
-          'Com plataformas como Facebook, Twitter e Instagram, as pessoas podem compartilhar suas vidas em tempo real e se conectar com amigos e familiares ao redor do globo.',
-          'No entanto, esse novo meio de comunicação também trouxe desafios, como a desinformação e a privacidade online.',
-        ],
-        citation: '“A comunicação é a chave para a conexão humana.”',
-        author: 'Autor Fictício 2',
-        date: '02/01/2024',
-      },
-      en: {
-        title: 'The Impact of Social Media',
-        subtitle: 'Transforming Modern Communication',
-        content: [
-          'Social media has changed the way we communicate and interact with the world.',
-          'With platforms like Facebook, Twitter, and Instagram, people can share their lives in real-time and connect with friends and family around the globe.',
-          'However, this new medium of communication has also brought challenges, such as misinformation and online privacy.',
-        ],
-        citation: '“Communication is the key to human connection.”',
-        author: 'Fictional Author 2',
-        date: '02/01/2024',
-      },
-      es: {
-        title: 'El Impacto de las Redes Sociales',
-        subtitle: 'Transformando la Comunicación Moderna',
-        content: [
-          'Las redes sociales han cambiado la forma en que nos comunicamos e interactuamos con el mundo.',
-          'Con plataformas como Facebook, Twitter e Instagram, las personas pueden compartir sus vidas en tiempo real y conectarse con amigos y familiares de todo el mundo.',
-          'Sin embargo, este nuevo medio de comunicación también ha traído desafíos, como la desinformación y la privacidad en línea.',
-        ],
-        citation: '“La comunicación es la clave para la conexión humana.”',
-        author: 'Autor Fictício 2',
-        date: '02/01/2024',
-      },
-    },
-    image: image2,
-  },
-  '3': {
-    translations: {
-      pt: {
-        title: 'Sustentabilidade e Meio Ambiente',
-        subtitle: 'Desafios e Oportunidades',
-        content: [
-          'Nos dias de hoje, a sustentabilidade tornou-se uma questão central em muitas discussões.',
-          'As mudanças climáticas, a poluição e a degradação dos recursos naturais estão exigindo que repensemos nosso modo de vida.',
-          'No entanto, essa crise também apresenta oportunidades para inovação e desenvolvimento de novas tecnologias sustentáveis.',
-        ],
-        citation:
-          '“A sustentabilidade não é um objetivo, mas uma maneira de viver.”',
-        author: 'Autor Fictício 3',
-        date: '03/01/2024',
-      },
-      en: {
-        title: 'Sustainability and the Environment',
-        subtitle: 'Challenges and Opportunities',
-        content: [
-          'Today, sustainability has become a central issue in many discussions.',
-          'Climate change, pollution, and the degradation of natural resources are forcing us to rethink our way of life.',
-          'However, this crisis also presents opportunities for innovation and the development of new sustainable technologies.',
-        ],
-        citation: '“Sustainability is not a goal, but a way of life.”',
-        author: 'Fictional Author 3',
-        date: '03/01/2024',
-      },
-      es: {
-        title: 'Sostenibilidad y Medio Ambiente',
-        subtitle: 'Desafíos y Oportunidades',
-        content: [
-          'Hoy en día, la sostenibilidad se ha convertido en un tema central en muchas discusiones.',
-          'El cambio climático, la contaminación y la degradación de los recursos naturales nos están obligando a replantear nuestra forma de vida.',
-          'Sin embargo, esta crisis también presenta oportunidades para la innovación y el desarrollo de nuevas tecnologías sostenibles.',
-        ],
-        citation:
-          '“La sostenibilidad no es un objetivo, sino una forma de vivir.”',
-        author: 'Autor Fictício 3',
-        date: '03/01/2024',
-      },
-    },
-    image: image3,
-  },
-  '4': {
-    translations: {
-      pt: {
-        title: 'Inteligência Artificial e o Futuro do Trabalho',
-        subtitle: 'Como a IA está transformando o mercado de trabalho',
-        content: [
-          'A inteligência artificial está mudando a forma como trabalhamos, tornando muitas tarefas mais eficientes e automatizadas.',
-          'Embora a IA possa substituir alguns empregos, também cria novas oportunidades em áreas que não existiam antes.',
-          'É importante que os trabalhadores se adaptem e aprendam novas habilidades para prosperar nesse novo cenário.',
-        ],
-        citation:
-          '“A tecnologia não substitui o trabalho humano; ela o transforma.”',
-        author: 'Autor Fictício 4',
-        date: '04/01/2024',
-      },
-      en: {
-        title: 'Artificial Intelligence and the Future of Work',
-        subtitle: 'How AI is Transforming the Job Market',
-        content: [
-          'Artificial intelligence is changing the way we work, making many tasks more efficient and automated.',
-          'While AI may replace some jobs, it also creates new opportunities in areas that didn’t exist before.',
-          'It’s important for workers to adapt and learn new skills to thrive in this new landscape.',
-        ],
-        citation: '“Technology doesn’t replace human work; it transforms it.”',
-        author: 'Fictional Author 4',
-        date: '04/01/2024',
-      },
-      es: {
-        title: 'Inteligencia Artificial y el Futuro del Trabajo',
-        subtitle: 'Cómo la IA está transformando el mercado laboral',
-        content: [
-          'La inteligencia artificial está cambiando la forma en que trabajamos, haciendo que muchas tareas sean más eficientes y automatizadas.',
-          'Aunque la IA puede reemplazar algunos trabajos, también crea nuevas oportunidades en áreas que antes no existían.',
-          'Es importante que los trabajadores se adapten y aprendan nuevas habilidades para prosperar en este nuevo escenario.',
-        ],
-        citation:
-          '“La tecnología no reemplaza el trabajo humano; lo transforma.”',
-        author: 'Autor Fictício 4',
-        date: '04/01/2024',
-      },
-    },
-    image: image4,
   },
 };
