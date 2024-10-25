@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import {
   GetCheckout,
-  PaymentItems,
+  Items,
   PaymentMethod,
 } from '../../../domain/entities/payment.entity';
 import { CalculatedShipping } from '../../../domain/entities/Shipping.entity';
@@ -17,14 +17,14 @@ export function useCheckout() {
   const form = useForm<GetCheckout>({
     mode: 'onChange',
     defaultValues: {
-      email: '',
-      name: '',
-      surname: '',
+      payerEmail: '',
+      firstName: '',
+      lastName: '',
       identification: {
         type: 'CPF',
         number: '',
       },
-      coupon: '',
+      couponCode: '',
       address: {
         street: '',
         number: '',
@@ -32,6 +32,10 @@ export function useCheckout() {
         city: '',
         state: '',
         zipCode: '',
+      },
+      phone: {
+        areaCode: '',
+        number: '',
       },
     },
   });
@@ -127,26 +131,29 @@ export function useCheckout() {
   const onSubmit = async (data: GetCheckout) => {
     setLoading(true);
     try {
-      const shippingItem: PaymentItems = {
+      const shippingItem: Items = {
         id: 'FRETE',
         name: 'Frete',
         price: shipping,
         quantity: 1,
         imageUrl: '',
-        category_id: 'FRETE',
+        categoryId: 'FRETE',
+        description: 'FRETE DO PRODUTO',
       };
 
       const itemsWithShipping = [...items, shippingItem];
 
       const { result } = await UseCases.payment.create.execute({
-        coupon: data.coupon,
+        couponCode: data.couponCode,
         identification: data.identification,
         address: data.address,
-        email: data.email,
+        payerEmail: data.payerEmail,
         method: PaymentMethod.MP,
-        name: data.name,
-        surname: data.surname,
+        firstName: data.firstName,
+        lastName: data.lastName,
         items: itemsWithShipping,
+        phone: data.phone,
+        orderID: data.orderID,
       });
 
       if (result.type === 'ERROR') {
@@ -178,14 +185,13 @@ export function useCheckout() {
             .join('\n')
         : 'Nenhum item encontrado';
 
-    const text = `Olá, meu nome é ${data.name} ${data.surname}. Houve um erro no pagamento via site e gostaria de finalizar meu pedido.
+    const text = `Olá, meu nome é ${data.firstName} ${data.lastName}. Houve um erro no pagamento via site e gostaria de finalizar meu pedido.
 
-    Nome Completo: ${data.name} ${data.surname}
     Endereço: ${data.address.street}, ${data.address.number} - ${data.address.city}/${data.address.state}
     Items: ${itemsText}
     Valor de Frete: ${shipping ?? 'não informado'}
     Total: ${total ?? 'não informado'}
-    Cupom: ${data.coupon ?? 'não informado'}`;
+    Cupom: ${data.couponCode ?? 'não informado'}`;
 
     const encodedText = encodeURIComponent(text);
     const whatsappURL = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedText}`;
@@ -197,7 +203,7 @@ export function useCheckout() {
     setLoading(true);
     try {
       const COUPON = {
-        code: getValues('coupon') || '',
+        code: getValues('couponCode') || '',
       };
 
       const { result } = await UseCases.coupon.validate.execute({
@@ -210,7 +216,7 @@ export function useCheckout() {
             alert('ERRO DE SERIALIZAÇÃO, POR FAVOR ENTRAR EM CONTATO');
             return;
           case 'NOT_FOUND':
-            setError('coupon', {
+            setError('couponCode', {
               type: 'manual',
               message: 'Cupom inexistente',
             });

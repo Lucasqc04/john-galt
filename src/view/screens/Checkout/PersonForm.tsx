@@ -15,10 +15,10 @@ export function PersonForm() {
         </label>
         <input
           type="email"
-          {...register('email', { required: true })}
+          {...register('payerEmail', { required: true })}
           className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
         />
-        {errors.email && (
+        {errors.payerEmail && (
           <span className="text-red-500 text-sm">Este campo é obrigatório</span>
         )}
       </div>
@@ -29,10 +29,10 @@ export function PersonForm() {
         </label>
         <input
           type="text"
-          {...register('name', { required: true })}
+          {...register('firstName', { required: true })}
           className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
         />
-        {errors.name && (
+        {errors.firstName && (
           <span className="text-red-500 text-sm">Este campo é obrigatório</span>
         )}
       </div>
@@ -43,10 +43,10 @@ export function PersonForm() {
         </label>
         <input
           type="text"
-          {...register('surname', { required: true })}
+          {...register('lastName', { required: true })}
           className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
         />
-        {errors.surname && (
+        {errors.lastName && (
           <span className="text-red-500 text-sm">Este campo é obrigatório</span>
         )}
       </div>

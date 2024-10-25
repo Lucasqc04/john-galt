@@ -1,7 +1,5 @@
-import {
-  CreatedCheckoutModel,
-  GetCheckoutModel,
-} from '../../data/model/Payment.model.';
+import { z } from 'zod';
+import { CreatedCheckoutModel } from '../../data/model/Payment.model.';
 
 export class Payment {
   cardName!: string;
@@ -10,74 +8,57 @@ export class Payment {
   cvv!: string;
 }
 
-class Address {
-  street!: string;
-  number!: string;
-  complement?: string;
-  city!: string;
-  state!: string;
-  zipCode!: string;
-}
+const Address = z.object({
+  city: z.string().min(1),
+  number: z.string().min(1),
+  state: z.string().min(2).max(2),
+  street: z.string().min(1),
+  zipCode: z.string().min(1).max(9),
+  complement: z.string().optional(),
+});
+type Address = z.infer<typeof Address>;
 
-class Identification {
-  type!: 'CPF' | 'CNPJ';
-  number!: string;
-}
+const Identification = z.object({
+  type: z.enum(['CPF', 'CNPJ']),
+  number: z.string().min(1),
+});
+type Identification = z.infer<typeof Identification>;
+
+const Phone = z.object({
+  areaCode: z.string().min(1),
+  number: z.string().min(1),
+});
+type Phone = z.infer<typeof Phone>;
 
 export enum PaymentMethod {
   'MP' = 'MP',
   'BTC' = 'BTC',
 }
 
-export class PaymentItems {
-  id!: string;
-  name!: string;
-  price!: number;
-  quantity!: number;
-  imageUrl!: string;
-  category_id!: string;
-}
+export const Items = z.object({
+  id: z.string().min(1),
+  name: z.string().min(1),
+  quantity: z.number(),
+  price: z.number(),
+  imageUrl: z.string(),
+  categoryId: z.string().min(1),
+  description: z.string().min(1),
+});
+export type Items = z.infer<typeof Items>;
 
-export class GetCheckout {
-  email!: string;
-  name!: string;
-  surname!: string;
-  identification!: Identification;
-  coupon?: string;
-  address!: Address;
-  method!: PaymentMethod;
-  items!: PaymentItems[];
-
-  public static toModel(entity: GetCheckout): GetCheckoutModel {
-    const model = new GetCheckoutModel();
-
-    model.address = {
-      city: entity.address.city,
-      number: entity.address.number,
-      state: entity.address.state,
-      street: entity.address.street,
-      zipCode: entity.address.zipCode,
-      complement: entity.address.complement,
-    };
-
-    model.couponCode = entity.coupon;
-
-    model.firstName = entity.name;
-
-    model.identification = {
-      number: entity.identification.number,
-      type: entity.identification.type,
-    };
-
-    model.lastName = entity.surname;
-
-    model.payerEmail = entity.email;
-
-    model.items = entity.items;
-
-    return model;
-  }
-}
+export const GetCheckout = z.object({
+  items: z.array(Items),
+  payerEmail: z.string().email().min(1),
+  firstName: z.string().min(1),
+  lastName: z.string().min(1),
+  identification: Identification,
+  orderID: z.string().min(1),
+  address: Address,
+  phone: Phone,
+  couponCode: z.string().optional(),
+  method: z.nativeEnum(PaymentMethod),
+});
+export type GetCheckout = z.infer<typeof GetCheckout>;
 
 export class CreatedCheckout {
   paymentLink!: string;
