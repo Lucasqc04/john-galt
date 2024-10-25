@@ -145,7 +145,7 @@ export function Products() {
                     <FaChevronRight />
                   </button>
                 </div>
-                <p className="dark:text-white my-4 text-gray-700 mb-4 whitespace-nowrap text-center">
+                <p className="dark:text-white my-4 text-gray-700 mb-4 text-center">
                   {product.description}
                 </p>
                 <button
