@@ -38,4 +38,7 @@ export const ROUTES = {
       },
     },
   },
+  products: {
+    call: (currentLang: string) => `/${currentLang}/produtos`,
+  },
 };

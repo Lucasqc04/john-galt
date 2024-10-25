@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { useInView } from 'react-intersection-observer';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   AcceptedLanguages,
   LanguageTexts,
@@ -9,17 +9,13 @@ import {
 } from '../../../domain/locales/Language';
 import HeroImage from '../../assets/images/hero-image.png';
 import { BackgroundAnimated } from '../../components/BackgroundAnimated';
+import { ROUTES } from '../../routes/Routes';
 import { styleFirstWord } from '../../utils/StyleWord';
 
 export function Hero() {
   const { t } = useTranslation();
-  const { ref, inView } = useInView({ threshold: 0.1 });
-  const navigate = useNavigate();
-
-  const handleButton = () => {
-    navigate(`/${currentLang || AcceptedLanguages.pt}/produtos`);
-  };
   const { currentLang } = useLanguage();
+  const { ref, inView } = useInView({ threshold: 0.1 });
 
   return (
     <>
@@ -36,12 +32,12 @@ export function Hero() {
             {t(LanguageTexts.hero.description)}
           </p>
           <div className="w-full flex flex-col md:flex-row gap-y-4 md:gap-y-0 gap-x-4">
-            <button
-              onClick={handleButton}
+            <Link
+              to={ROUTES.products.call(currentLang || AcceptedLanguages.pt)}
               className="w-full py-2 bg-[#F6911D] text-white font-semibold rounded-sm transition-colors duration-300 hover:bg-orange-600 shadow-md"
             >
               {t(LanguageTexts.hero.buttons.products)}
-            </button>
+            </Link>
             <a
               href="#statistics"
               className="w-full py-2 text-center border border-solid border-[#F6911D] font-semibold rounded-sm transition-all duration-500 hover:bg-[#F6911D] hover:text-white shadow-md"
