@@ -34,7 +34,7 @@ export function Hero() {
           <div className="w-full flex flex-col md:flex-row gap-y-4 md:gap-y-0 gap-x-4">
             <Link
               to={ROUTES.products.call(currentLang || AcceptedLanguages.pt)}
-              className="w-full py-2 bg-[#F6911D] text-white font-semibold rounded-sm transition-colors duration-300 hover:bg-orange-600 shadow-md"
+              className="w-full py-2 bg-[#F6911D] text-white text-center font-semibold rounded-sm transition-colors duration-300 hover:bg-orange-600 shadow-md"
             >
               {t(LanguageTexts.hero.buttons.products)}
             </Link>
