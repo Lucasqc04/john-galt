@@ -91,6 +91,7 @@ export function Checkout() {
                     <div className="flex items-center gap-x-2">
                       <div className="flex flex-col items-center">
                         <button
+                          type="button"
                           onClick={() =>
                             cart.updateItemQuantity(item.id, item.quantity + 1)
                           }
@@ -99,6 +100,7 @@ export function Checkout() {
                           <TiArrowSortedUp size={24} />
                         </button>
                         <button
+                          type="button"
                           onClick={() => {
                             if (item.quantity > 1) {
                               cart.updateItemQuantity(

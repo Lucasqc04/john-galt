@@ -11,10 +11,11 @@ export class Payment {
 const Address = z.object({
   city: z.string().min(1),
   number: z.string().min(1),
-  state: z.string().min(2).max(2),
+  state: z.string().min(1),
   street: z.string().min(1),
   zipCode: z.string().min(1).max(9),
   complement: z.string().optional(),
+  uf: z.string().min(2).max(2),
 });
 type Address = z.infer<typeof Address>;
 
@@ -38,6 +39,7 @@ export enum PaymentMethod {
 export const Items = z.object({
   id: z.string().min(1),
   name: z.string().min(1),
+  title: z.string().optional(),
   quantity: z.number(),
   price: z.number(),
   imageUrl: z.string(),
@@ -52,7 +54,6 @@ export const GetCheckout = z.object({
   firstName: z.string().min(1),
   lastName: z.string().min(1),
   identification: Identification,
-  orderID: z.string().min(1),
   address: Address,
   phone: Phone,
   couponCode: z.string().optional(),

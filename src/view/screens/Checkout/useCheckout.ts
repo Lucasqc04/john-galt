@@ -153,7 +153,6 @@ export function useCheckout() {
         lastName: data.lastName,
         items: itemsWithShipping,
         phone: data.phone,
-        orderID: data.orderID,
       });
 
       if (result.type === 'ERROR') {
