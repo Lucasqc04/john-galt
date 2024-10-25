@@ -1,8 +1,10 @@
 import { RemoteDataSource } from '../../data/datasource/Remote.datasource';
+import { AddressRepositoryImpl } from '../../data/repositories/Address.repository';
 import { CouponRepositoryImpl } from '../../data/repositories/Coupon.repository';
 import { NewsletterRepositoryImpl } from '../../data/repositories/Newsletter.repository';
 import { PaymentRepositoryImpl } from '../../data/repositories/Payment.repository';
 import { ShippingRepositoryImpl } from '../../data/repositories/Shipping,repository';
+import { ListAddressUseCaseImpl } from './Address/List.usecase';
 import { ValidateCouponUseCaseImpl } from './Coupons/validate.usecase';
 import { InsertNewsletterUseCaseImpl } from './Newsletter/insert.usecase';
 import { CreatePaymentUseCaseImpl } from './Payment/Create.usecase';
@@ -16,6 +18,7 @@ const NewsletterRepository = new NewsletterRepositoryImpl(api);
 const ShippingRepository = new ShippingRepositoryImpl(api);
 const PaymentRepository = new PaymentRepositoryImpl(api);
 const CouponRepository = new CouponRepositoryImpl(api);
+const AddressRepository = new AddressRepositoryImpl(api);
 
 export const UseCases = {
   newsletter: {
@@ -29,5 +32,8 @@ export const UseCases = {
   },
   coupon: {
     validate: new ValidateCouponUseCaseImpl(CouponRepository),
+  },
+  address: {
+    list: new ListAddressUseCaseImpl(AddressRepository),
   },
 };
