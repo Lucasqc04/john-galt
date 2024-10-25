@@ -40,7 +40,7 @@ export function BlogPost() {
   };
 
   return (
-    <div className="min-h-screen pt-[15%] md:pt-[10%] dark:bg-gray-900">
+    <div className="min-h-screen pt-[15%] md:pt-[10%] dark:bg-gray-900 px-8">
       <header className="text-center mb-14 mt-16">
         <h1 className="text-5xl font-bold text-[#F6911D] dark:text-[#F6911D]">
           {selectedPost.title}
@@ -50,7 +50,6 @@ export function BlogPost() {
         </h2>
       </header>
 
-      {/* Índice estilizado */}
       <nav className="mb-12">
         <ul className="flex flex-col items-start space-y-3 mb-10">
           {selectedPost.sections.map((section, index) => (
@@ -71,7 +70,7 @@ export function BlogPost() {
       {selectedPost.sections.map((section, index) => (
         <div
           key={index}
-          ref={(el) => (refSections.current[index] = el)} // Atualiza a referência aqui
+          ref={(el) => (refSections.current[index] = el)}
           className={`mb-16 flex flex-col ${
             section.layout === 'left-text-right-image'
               ? 'lg:flex-row'

@@ -53,11 +53,6 @@ export function NavLinks({
     navigate(path);
   };
 
-  const handleCardClick = () => {
-    navigate(`${currentLang}/blog/1`);
-    window.scrollTo(0, 0);
-  };
-
   const callsToAction = [
     {
       name: 'Contact sales',
@@ -166,29 +161,26 @@ export function NavLinks({
                         return null;
                       }
                       return (
-                        <div
+                        <button
                           key={postId}
+                          onClick={() =>
+                            handleOnLink(
+                              ROUTES.blog.callLang(currentLang, postId),
+                              LinkCallBack,
+                            )
+                          }
                           className="flex items-center gap-x-4 rounded-lg p-4 text-sm leading-6 text-gray-800 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800"
                         >
                           <img
                             src={post.translations.pt.sections[0].image}
                             alt={translation.title}
                             className="h-12 w-12 rounded-lg object-cover cursor-pointer"
-                            onClick={() => handleCardClick()}
                           />
-                          <button
-                            onClick={() =>
-                              handleOnLink(
-                                ROUTES.blog.callLang(currentLang, postId),
-                                LinkCallBack,
-                              )
-                            }
-                            className="bg-white dark:bg-slate-800 overflow-hidden transition-transform transform hover:scale-105"
-                          >
+                          <div className="bg-white dark:bg-slate-800 overflow-hidden transition-transform transform hover:scale-105">
                             {translation.title}
                             <span className="absolute inset-0" />
-                          </button>
-                        </div>
+                          </div>
+                        </button>
                       );
                     })}
                 </div>
