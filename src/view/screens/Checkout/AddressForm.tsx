@@ -96,6 +96,21 @@ export function AddressForm() {
           <span className="text-red-500 text-sm">Este campo é obrigatório</span>
         )}
       </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+          UF
+        </label>
+        <input
+          type="text"
+          {...register('address.uf', { required: true })}
+          className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+          disabled={loading}
+        />
+        {errors.address?.uf && (
+          <span className="text-red-500 text-sm">Este campo é obrigatório</span>
+        )}
+      </div>
     </div>
   );
 }
