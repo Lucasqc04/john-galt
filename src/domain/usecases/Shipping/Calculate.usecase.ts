@@ -1,3 +1,4 @@
+import { CalculatedShippingModel } from '../../../data/model/Shipping.model';
 import { ShippingRepository } from '../../../data/repositories/Shipping,repository';
 import { DefaultResultError, Result } from '../../../utils/Result';
 import { UseCase } from '../../../utils/UseCase';
@@ -33,8 +34,32 @@ export class CalculateShippingUseCaseImpl implements CalculateShippingUseCase {
       }
     }
 
+    const shippingOptions = result.data;
+
+    const cheapestOption = shippingOptions.reduce((prev, curr) =>
+      parseFloat(curr.price) < parseFloat(prev.price) ? curr : prev,
+    );
+
+    const fastestOption = shippingOptions.reduce((prev, curr) =>
+      curr.deliveryTime < prev.deliveryTime ? curr : prev,
+    );
+
+    const correiosOption = shippingOptions.find(
+      (option) =>
+        option.name.toLowerCase().includes('correios') ||
+        option.name.toLowerCase().includes('sedex'),
+    );
+
+    const filteredOptions = [
+      cheapestOption,
+      fastestOption,
+      correiosOption,
+    ].filter((option, index, self) => option && self.indexOf(option) === index);
+
     return Result.Success(
-      result.data.map((item) => CalculatedShipping.fromModel(item)),
+      filteredOptions
+        .filter((item): item is CalculatedShippingModel => item !== undefined)
+        .map((item) => CalculatedShipping.fromModel(item)),
     );
   }
 }
