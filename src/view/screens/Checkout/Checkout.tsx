@@ -130,12 +130,18 @@ export function Checkout() {
                   className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600"
                 />
                 <button
+                  type="button"
                   onClick={applyCoupon}
                   className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
                 >
                   Aplicar
                 </button>
               </div>
+              {form.errors.coupon && (
+                <span className="text-red-500 text-sm mt-1">
+                  {form.errors.coupon.message}
+                </span>
+              )}
             </div>
 
             <div className="flex flex-col p-4 gap-y-2 border-t border-b border-gray-300 dark:border-gray-600">
