@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import { AcceptedLanguages, useLanguage } from '../../domain/locales/Language';
 import { Loader } from '../components/Loader';
+import ScrollToTop from '../components/ScrollToTop';
 import { DefaultLayout } from '../layout/DefaultyLayout';
 import { About } from '../screens/About';
 import { BlogPost } from '../screens/BlogPost';
@@ -23,6 +24,7 @@ export function BrowserRouter() {
 
   return (
     <Router>
+      <ScrollToTop />
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route

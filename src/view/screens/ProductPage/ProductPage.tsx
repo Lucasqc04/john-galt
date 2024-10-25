@@ -104,7 +104,7 @@ export function ProductPage() {
                 <form className="flex items-center mb-6">
                   <input
                     type="text"
-                    placeholder="Digite seu CEP"
+                    placeholder={t(LanguageTexts.shipping.enterZip)}
                     {...register('postalCode')}
                     onChange={(e) => {
                       const onlyNumbers = e.target.value.replace(/\D/g, '');
@@ -117,7 +117,9 @@ export function ProductPage() {
                     className="bg-[#F6911D] text-white p-2 rounded-md ml-2"
                     disabled={loading}
                   >
-                    {loading ? 'Calculando...' : 'Calcular Frete'}
+                    {loading
+                      ? t(LanguageTexts.shipping.loading)
+                      : t(LanguageTexts.shipping.calculateButton)}
                   </button>
                 </form>
               </FormProvider>
@@ -126,7 +128,7 @@ export function ProductPage() {
                 <div className="flex items-center mb-4">
                   <FaTruckFast className="text-lg md:text-2xl text-black dark:text-white mr-2" />
                   <span className="text-lg md:text-2xl font-bold dark:text-white">
-                    Opções de Envio:
+                    {t(LanguageTexts.shipping.options)}:
                   </span>
                 </div>
 
@@ -146,8 +148,9 @@ export function ProductPage() {
                           <strong>{option.name}</strong>: R${' '}
                           {option.price && (
                             <>
-                              {parseFloat(option.price).toFixed(2)}. Entrega em
-                              <strong> {option.deliveryTime} dias</strong>
+                              {parseFloat(option.price).toFixed(2)}.{' '}
+                              {t(LanguageTexts.shipping.deliveryIn)}{' '}
+                              <strong>{option.deliveryTime} dias</strong>
                             </>
                           )}
                         </div>
@@ -156,7 +159,7 @@ export function ProductPage() {
                   </ul>
                 ) : (
                   <span className="ml-2 text-lg md:text-2xl dark:text-white">
-                    Informe o CEP
+                    {t(LanguageTexts.shipping.noOptions)}
                   </span>
                 )}
               </div>

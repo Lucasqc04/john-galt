@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaRegCircle } from 'react-icons/fa';
 import { blogData } from '../../blogContent/blogPosts';
@@ -8,9 +8,8 @@ import { useCurrentLang } from '../utils/useCurrentLang';
 export function BlogPost() {
   const { t } = useTranslation();
   const { currentLang } = useCurrentLang();
-
+  const [isRefsReady, setIsRefsReady] = useState(false); // Novo estado para controlar as refs
   const post = blogData['krux'];
-
   const refSections = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
@@ -18,6 +17,7 @@ export function BlogPost() {
       refSections.current = new Array(
         post.translations[currentLang]?.sections.length,
       ).fill(null);
+      setIsRefsReady(true); // Atualiza após configurar refSections
     }
   }, [post, currentLang]);
 
@@ -34,7 +34,6 @@ export function BlogPost() {
       const offset = window.innerHeight * 0.25;
       const sectionTop = section.getBoundingClientRect().top + window.scrollY;
       const scrollTo = sectionTop - offset;
-
       window.scrollTo({ top: scrollTo, behavior: 'smooth' });
     }
   };
@@ -56,7 +55,7 @@ export function BlogPost() {
             <li
               key={index}
               className="text-xl text-[#F6911D] dark:text-[#F6911D] font-medium cursor-pointer hover:underline"
-              onClick={() => scrollToSection(index)}
+              onClick={() => isRefsReady && scrollToSection(index)} // Só permite scroll se as refs estiverem prontas
             >
               <span className="flex items-center">
                 <FaRegCircle className="text-[#F6911D] mr-2" />

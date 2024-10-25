@@ -72,6 +72,16 @@ export const LanguageTexts = {
     total: 'cart.total',
     checkout: 'cart.checkout',
   },
+  shipping: {
+    title: 'shipping.title',
+    calculateButton: 'shipping.calculateButton',
+    options: 'shipping.options',
+    noOptions: 'shipping.noOptions',
+    enterZip: 'shipping.enterZip',
+    loading: 'shipping.loading',
+    calculate: 'shipping.calculate',
+    deliveryIn: 'shipping.deliveryIn',
+  },
 };
 
 export enum AcceptedLanguages {

@@ -1,10 +1,6 @@
 {
   "header": {
-    "links": [
-      "Products",
-      "About Us",
-      "Blogs"
-    ]
+    "links": ["Products", "About Us", "Blogs"]
   },
   "hero": {
     "title": "Offline Bitcoin Protection with Web3 Security",
@@ -93,7 +89,7 @@
     "clearCart": "Clear Cart",
     "total": "Total",
     "checkout": "Go to Checkout"
-},
+  },
   "blogs": {
     "title": "BLOG DIY"
   },
@@ -106,12 +102,7 @@
     }
   },
   "footer": {
-    "links": [
-      "About",
-      "Privacy Policy",
-      "Licensing",
-      "Contact"
-    ],
+    "links": ["About", "Privacy Policy", "Licensing", "Contact"],
     "allRightsReserved": "All Rights Reserved."
   },
   "about": {
@@ -122,6 +113,16 @@
       "We know that true freedom is only possible with security. That is why we advocate for the offline storage of cryptocurrencies, where the user is the sole guardian of their assets. Our commitment is to facilitate this process, making it accessible for everyone to protect their funds independently and securely, away from digital threats.",
       "Bitcoin paves the way for a future where power returns to the hands of the people. At DIY Sec Lab, our mission is to support this journey by providing the tools and knowledge necessary for each individual to live this sovereignty with confidence, simplicity, and responsibility. We believe that Bitcoin is the key to true autonomy, and we are here to help open that door."
     ]
+  },
+  "shipping": {
+    "title": "Shipping",
+    "calculateButton": "Calculate Shipping",
+    "options": "Shipping Options",
+    "noOptions": "No shipping options available.",
+    "enterZip": "Enter your ZIP code:",
+    "loading": "Loading shipping options...",
+    "calculate": "Calculate",
+    "deliveryIn": "Delivery in"
   },
   "post": {
     "notFound": "Post Not Found!"
