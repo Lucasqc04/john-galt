@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { LanguageTexts } from '../../../domain/locales/Language';
 import LogoWhite from '../../assets/logo-white.svg';
 import Logo from '../../assets/logo.svg';
+import { ROUTES } from '../../routes/Routes';
 import { useFooter } from './useFooter';
 
 export function Footer() {
@@ -25,14 +26,14 @@ export function Footer() {
       <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
           <div className="flex lg:flex-1 justify-center lg:justify-start mb-4 sm:mb-0">
-            <a href="/">
+            <Link to={ROUTES.home.call()}>
               <img
                 src={theme.isDarkTheme ? LogoWhite : Logo}
                 alt="Logo"
                 className="w-24 h-22"
               />
               <span className="sr-only">DIY LAB</span>
-            </a>
+            </Link>
           </div>
           <ul className="flex flex-col sm:flex-row flex-wrap items-center text-center sm:text-left mb-6 text-sm font-medium sm:mb-0 dark:text-gray-400">
             {links.map((link, idx) => (
@@ -58,7 +59,6 @@ export function Footer() {
           </ul>
 
           <div className="flex items-center justify-center sm:justify-between space-x-4">
-            {/* Botão do Instagram */}
             <div className="group relative inline-block">
               <a
                 href="https://www.instagram.com/diyseclab.io/"
