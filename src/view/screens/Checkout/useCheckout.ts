@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import {
   GetCheckout,
+  PaymentItems,
   PaymentMethod,
 } from '../../../domain/entities/payment.entity';
 import { CalculatedShipping } from '../../../domain/entities/Shipping.entity';
@@ -92,6 +93,17 @@ export function useCheckout() {
   };
 
   const onSubmit = async (data: GetCheckout) => {
+    const shippingItem: PaymentItems = {
+      id: 'FRETE',
+      name: 'Frete',
+      price: shipping,
+      quantity: 1,
+      imageUrl: '',
+      category_id: 'FRETE',
+    };
+
+    const itemsWithShipping = [...items, shippingItem];
+
     const { result } = await UseCases.payment.create.execute({
       coupon: data.coupon,
       identification: data.identification,
@@ -100,7 +112,7 @@ export function useCheckout() {
       method: PaymentMethod.MP,
       name: data.name,
       surname: data.surname,
-      items,
+      items: itemsWithShipping,
     });
 
     if (result.type === 'ERROR') {
