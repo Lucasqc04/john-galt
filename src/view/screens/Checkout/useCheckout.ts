@@ -41,6 +41,7 @@ export function useCheckout() {
     handleSubmit,
     getValues,
     watch,
+    setError,
     formState: { errors, isValid },
   } = form;
 
@@ -169,6 +170,12 @@ export function useCheckout() {
       switch (result.error.code) {
         case 'SERIALIZATION':
           alert('ERRO DE SERIALIZAÇÃO, POR FAVOR ENTRAR EM CONTATO');
+          return;
+        case 'NOT_FOUND':
+          setError('coupon', {
+            type: 'manual',
+            message: 'Cupom inexistente',
+          });
           return;
         default:
           alert('ERRO AO PROCESSAR CUPOM. ENTRE EM CONTATO.');

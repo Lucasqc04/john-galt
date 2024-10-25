@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { DefaultResultError, Result } from '../../utils/Result';
 import { RemoteDataSource } from '../datasource/Remote.datasource';
 import {
@@ -8,7 +9,10 @@ import {
 export type ValidateReq = ValidateCouponModel;
 
 export type ValidateRes = Promise<
-  Result<ValidatedCouponModel, { code: 'SERIALIZATION' } | DefaultResultError>
+  Result<
+    ValidatedCouponModel,
+    { code: 'NOT_FOUND' } | { code: 'SERIALIZATION' } | DefaultResultError
+  >
 >;
 
 export interface CouponRepository {
@@ -31,7 +35,11 @@ export class CouponRepositoryImpl implements CouponRepository {
       }
 
       return Result.Success(result);
-    } catch {
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
+        return Result.Error({ code: 'NOT_FOUND' });
+      }
+
       return Result.Error({ code: 'UNKNOWN' });
     }
   }

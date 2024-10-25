@@ -6,7 +6,10 @@ import { ValidateCoupon, ValidatedCoupon } from '../../entities/Coupon.entity';
 export type ValidateReq = ValidateCoupon;
 
 export type ValidateRes = Promise<
-  Result<ValidatedCoupon, { code: 'SERIALIZATION' } | DefaultResultError>
+  Result<
+    ValidatedCoupon,
+    { code: 'NOT_FOUND' } | { code: 'SERIALIZATION' } | DefaultResultError
+  >
 >;
 
 export type ValidateCouponUseCase = UseCase<ValidateReq, ValidateRes>;
@@ -21,6 +24,8 @@ export class ValidateCouponUseCaseImpl implements ValidateCouponUseCase {
       switch (result.error.code) {
         case 'SERIALIZATION':
           return Result.Error({ code: 'SERIALIZATION' });
+        case 'NOT_FOUND':
+          return Result.Error({ code: 'NOT_FOUND' });
         default:
           return Result.Error({ code: 'UNKNOWN' });
       }
