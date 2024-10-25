@@ -1,4 +1,4 @@
-import { AiOutlineWhatsApp } from 'react-icons/ai'; // Importando ícone do WhatsApp
+import { AiOutlineWhatsApp } from 'react-icons/ai';
 import { FaInstagram } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { LanguageTexts } from '../../../domain/locales/Language';
