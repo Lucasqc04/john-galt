@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { MdArrowForward } from 'react-icons/md';
 import { useInView } from 'react-intersection-observer';
-import { useNavigate } from 'react-router-dom'; // Importar useNavigate
+import { useNavigate } from 'react-router-dom';
 import { blogData } from '../../../blogContent/blogPosts';
 import Bitkit8 from '../../../blogContent/image1/image1.png';
 import { LanguageTexts } from '../../../domain/locales/Language';
@@ -13,7 +13,7 @@ export function BlogLinks() {
   const { t } = useTranslation();
   const { currentLang } = useCurrentLang();
   const { ref, inView } = useInView({ threshold: 0.1 });
-  const navigate = useNavigate(); // Criar uma instância do hook de navegação
+  const navigate = useNavigate();
 
   const firstPostId = Object.keys(blogData)[0];
   const post = blogData[firstPostId];
