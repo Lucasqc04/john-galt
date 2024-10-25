@@ -16,6 +16,14 @@ import Bitkit4 from '../../assets/Bitkit/Bitkit 4.png';
 import Bitkit5 from '../../assets/Bitkit/Bitkit 5.png';
 import Bitkit6 from '../../assets/Bitkit/Bitkit 6.png';
 import Bitkit7 from '../../assets/Bitkit/Bitkit 7.png';
+import Seedkit1 from '../../assets/seedkit/1.png';
+import Seedkit2 from '../../assets/seedkit/2.png';
+import Seedkit3 from '../../assets/seedkit/3.png';
+import Seedkit4 from '../../assets/seedkit/4.png';
+import Seedkit5 from '../../assets/seedkit/5.png';
+import Seedkit6 from '../../assets/seedkit/6.png';
+import Seedkit7 from '../../assets/seedkit/7.png';
+import Seedkit8 from '../../assets/seedkit/8.png';
 import { useCartContext } from '../../context/CartContext';
 import { ROUTES } from '../../routes/Routes';
 import { useCurrentLang } from '../../utils/useCurrentLang';
@@ -82,7 +90,16 @@ export function useProductPage() {
         price: 150,
         originalPrice: 180,
         description: infos[0].description,
-        images: [Bitkit1, Bitkit2, Bitkit3, Bitkit4, Bitkit5],
+        images: [
+          Seedkit7,
+          Seedkit1,
+          Seedkit2,
+          Seedkit3,
+          Seedkit4,
+          Seedkit5,
+          Seedkit6,
+          Seedkit8,
+        ],
       },
       {
         id: 2,
