@@ -9,6 +9,8 @@ import {
 } from '../../../domain/entities/Shipping.entity';
 import { LanguageTexts } from '../../../domain/locales/Language';
 import { UseCases } from '../../../domain/usecases/UseCases';
+import Bitkit8 from '../../assets/Bitkit/3.png';
+import Bitkit9 from '../../assets/Bitkit/6.png';
 import Bitkit1 from '../../assets/Bitkit/Bitkit 1.png';
 import Bitkit2 from '../../assets/Bitkit/Bitkit 2.png';
 import Bitkit3 from '../../assets/Bitkit/Bitkit 3.png';
@@ -85,8 +87,8 @@ export function useProductPage() {
     const products: Product[] = [
       {
         id: 1,
-        name: 'SEEDKIT',
-        title: infos[0].title,
+        title: 'SEEDKIT',
+        name: infos[0].title,
         price: 150,
         originalPrice: 180,
         description: infos[0].description,
@@ -103,12 +105,22 @@ export function useProductPage() {
       },
       {
         id: 2,
-        name: 'BITKIT',
-        title: infos[1].title,
+        title: 'BITKIT',
+        name: infos[2].title,
         price: 800,
         originalPrice: 850,
-        description: infos[1].description,
-        images: [Bitkit7, Bitkit1, Bitkit2, Bitkit3, Bitkit4, Bitkit5, Bitkit6],
+        description: infos[2].description,
+        images: [
+          Bitkit7,
+          Bitkit1,
+          Bitkit2,
+          Bitkit3,
+          Bitkit4,
+          Bitkit5,
+          Bitkit6,
+          Bitkit8,
+          Bitkit9,
+        ],
       },
     ];
 

@@ -3,8 +3,8 @@
     "links": ["Productos", "Quiénes Somos", "Blogs"]
   },
   "hero": {
-    "title": "Protección de Bitcoin Offline con Seguridad Web3",
-    "description": "Somos una empresa WEB3 que ofrece seguridad y privacidad con tecnología DIY, posibilitando la autocustodia 100% offline.",
+    "title": "Proteja su Bitcoin sin conexión",
+    "description": "Nuestra misión es ofrecer el más alto estándar de seguridad en autocustodia, brindándote métodos 100% efectivos para que almacene tus Bitcoins sin intermediarios.",
     "buttons": {
       "products": "Nuestros Productos",
       "learnMore": "Saber Más"
@@ -40,56 +40,56 @@
       }
     ]
   },
-"products": {
-  "title": "Nuestros productos",
-  "infos": [
-    {
-      "title": "¡Tu Kit Completo para el Mundo del Bitcoin!",
-      "description": "Ten todo lo que necesitas en un solo paquete para maximizar tus inversiones en Bitcoin."
-    },
-    {
-      "title": "¡Protege Tus Claves Privadas con Seguridad!",
-      "description": "Ideal para inversores que priorizan la seguridad y desean garantizar la protección de sus claves privadas."
-    },
-    {
-      "title": "¡Seguridad Elevada para Tus Inversiones!",
-      "description": "Para aquellos que buscan el más alto nivel de protección en sus transacciones financieras."
-    }
-  ],
-  "resourcesTitle": "Recursos Básicos y Avanzados en un Solo Kit",
-  "resources": [
-    "Código Abierto",
-    "Cámara para transacciones completamente desconectadas",
-    "Dispositivo Amnésico",
-    "Conexión USB",
-    "Frase de Contraseña (Passphrase)",
-    "Direcciones Multisig",
-    "Batería Recargable",
-    "Compatibilidad con PSBT",
-    "Creación de Mnemotécnico con Entropía Manual",
-    "6 métodos de Respaldo de Mnemotécnico",
-    "Pantalla Táctil LCD de 2.0 pulgadas",
-    "Compatibilidad con Bip39",
-    "Papel para anotar las 12 o 24 palabras",
-    "Punzonadora automática para marcar en placa de metal",
-    "Placa de Metal",
-    "Compatibilidad con Sparrow Wallet, Specter Desktop, Nunchuk y BlueWallet"
-  ],
-  "buyNowButton": "Comprar ahora",
-  "addToCartButton": "Añadir al carrito",
-  "quantity": "Cantidad",
-  "goToCart": "Ir al carrito"  
-},
-"cart": {
-  "title": "Carrito de Compras",
-  "emptyCart": "Tu carrito está vacío.",
-  "price": "Precio",
-  "quantity": "Cantidad",
-  "remove": "Eliminar",
-  "clearCart": "Limpiar Carrito",
-  "total": "Total",
-  "checkout": "Ir a la Caja"
-},
+  "products": {
+    "title": "Nuestros productos",
+    "infos": [
+      {
+        "title": "¡Tu Kit Completo para el Mundo del Bitcoin!",
+        "description": "Ten todo lo que necesitas en un solo paquete para maximizar tus inversiones en Bitcoin."
+      },
+      {
+        "title": "¡Protege Tus Claves Privadas con Seguridad!",
+        "description": "Ideal para inversores que priorizan la seguridad y desean garantizar la protección de sus claves privadas."
+      },
+      {
+        "title": "¡Seguridad Elevada para Tus Inversiones!",
+        "description": "Para aquellos que buscan el más alto nivel de protección en sus transacciones financieras."
+      }
+    ],
+    "resourcesTitle": "Recursos Básicos y Avanzados en un Solo Kit",
+    "resources": [
+      "Código Abierto",
+      "Cámara para transacciones completamente desconectadas",
+      "Dispositivo Amnésico",
+      "Conexión USB",
+      "Frase de Contraseña (Passphrase)",
+      "Direcciones Multisig",
+      "Batería Recargable",
+      "Compatibilidad con PSBT",
+      "Creación de Mnemotécnico con Entropía Manual",
+      "6 métodos de Respaldo de Mnemotécnico",
+      "Pantalla Táctil LCD de 2.0 pulgadas",
+      "Compatibilidad con Bip39",
+      "Papel para anotar las 12 o 24 palabras",
+      "Punzonadora automática para marcar en placa de metal",
+      "Placa de Metal",
+      "Compatibilidad con Sparrow Wallet, Specter Desktop, Nunchuk y BlueWallet"
+    ],
+    "buyNowButton": "Comprar ahora",
+    "addToCartButton": "Añadir al carrito",
+    "quantity": "Cantidad",
+    "goToCart": "Ir al carrito"
+  },
+  "cart": {
+    "title": "Carrito de Compras",
+    "emptyCart": "Tu carrito está vacío.",
+    "price": "Precio",
+    "quantity": "Cantidad",
+    "remove": "Eliminar",
+    "clearCart": "Limpiar Carrito",
+    "total": "Total",
+    "checkout": "Ir a la Caja"
+  },
   "blogs": {
     "title": "BLOG DIY"
   },
@@ -114,10 +114,19 @@
     "links": ["Acerca de", "Política de Privacidad", "Licencia", "Contacto"],
     "allRightsReserved": "Reservados todos los derechos."
   },
+  "shipping": {
+    "title": "Envío",
+    "calculateButton": "Calcular Envío",
+    "options": "Opciones de Envío",
+    "noOptions": "No hay opciones de envío disponibles.",
+    "enterZip": "Introduce tu código postal:",
+    "loading": "Cargando opciones de envío...",
+    "calculate": "Calcular",
+    "deliveryIn": "Entrega en"
+  },
   "post": {
     "notFound": "Publicación no encontrada!"
   },
-
   "cardNamePlaceholder": "Nombre del titular",
   "cardNumberPlaceholder": "Número de tarjeta",
   "expiryDatePlaceholder": "MM/AA",
@@ -140,7 +149,6 @@
   "CardTitle5": "Almacenamiento Seguro",
   "CardDescription5": "Métodos y herramientas para almacenar tus criptomonedas de forma segura.",
   "ReadMore": "Leer más",
-
   "ServiceTitle": "Servicios",
   "ServiceDescription": "Protege y conquista tu viaje cripto con las mejores herramientas.",
   "CustomizationDescription": "Todo lo que necesitas en un bitkit",

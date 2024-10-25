@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -53,6 +53,7 @@ export function useCheckout() {
   const [shippingOptions, setShippingOptions] = useState<CalculatedShipping[]>(
     [],
   );
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const zipCode = watch('address.zipCode');
@@ -61,75 +62,110 @@ export function useCheckout() {
     setTotal(TotalValue + shipping - discount);
   }, [TotalValue, shipping, discount]);
 
+  const HandleWithPostalCode = useCallback(
+    async (cep: string) => {
+      setLoading(true);
+      try {
+        const { result: ListedAddress } = await UseCases.address.list.execute({
+          postalCode: cep,
+        });
+
+        if (ListedAddress.type === 'ERROR') {
+          switch (ListedAddress.error.code) {
+            case 'SERIALIZATION':
+              alert('ERRO DE SERIALIZAÇÃO!');
+              return;
+            default:
+              alert('ERRO DESCONHECIDO');
+              return;
+          }
+        }
+
+        const { city, complement, state, street } = ListedAddress.data;
+
+        form.setValue('address.city', city);
+        form.setValue('address.street', street);
+        form.setValue('address.state', state);
+        if (complement) {
+          form.setValue('address.number', complement);
+        }
+
+        const { result: CalculatedShipping } =
+          await UseCases.shipping.calculate.execute({
+            postalCode: cep,
+          });
+
+        if (CalculatedShipping.type === 'ERROR') {
+          switch (CalculatedShipping.error.code) {
+            case 'SERIALIZATION':
+              alert('ERRO DE SERIALIZAÇÃO!');
+              return;
+            default:
+              alert('ERRO DESCONHECIDO');
+              return;
+          }
+        }
+
+        setShippingOptions(CalculatedShipping.data);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [form],
+  );
+
   useEffect(() => {
     if (zipCode && zipCode.length === 8) {
-      fetchShippingOptions(zipCode);
+      HandleWithPostalCode(zipCode);
     }
-  }, [zipCode]);
-
-  const fetchShippingOptions = async (cep: string) => {
-    try {
-      const { result } = await UseCases.shipping.calculate.execute({
-        postalCode: cep,
-      });
-
-      if (result.type === 'ERROR') {
-        switch (result.error.code) {
-          case 'SERIALIZATION':
-            alert('ERRO DE SERIALIZAÇÃO!');
-            return;
-          default:
-            alert('ERRO DESCONHECIDO');
-            return;
-        }
-      }
-      setShippingOptions(result.data);
-    } catch {
-      alert('ERRO AO CALCULAR O FRETE');
-    }
-  };
+  }, [zipCode, HandleWithPostalCode]);
 
   const onShippingSelect = (selectedShipping: CalculatedShipping) => {
     setShipping(parseFloat(selectedShipping.price));
   };
 
   const onSubmit = async (data: GetCheckout) => {
-    const shippingItem: PaymentItems = {
-      id: 'FRETE',
-      name: 'Frete',
-      price: shipping,
-      quantity: 1,
-      imageUrl: '',
-      category_id: 'FRETE',
-    };
+    setLoading(true);
+    try {
+      const shippingItem: PaymentItems = {
+        id: 'FRETE',
+        name: 'Frete',
+        price: shipping,
+        quantity: 1,
+        imageUrl: '',
+        category_id: 'FRETE',
+      };
 
-    const itemsWithShipping = [...items, shippingItem];
+      const itemsWithShipping = [...items, shippingItem];
 
-    const { result } = await UseCases.payment.create.execute({
-      coupon: data.coupon,
-      identification: data.identification,
-      address: data.address,
-      email: data.email,
-      method: PaymentMethod.MP,
-      name: data.name,
-      surname: data.surname,
-      items: itemsWithShipping,
-    });
+      const { result } = await UseCases.payment.create.execute({
+        coupon: data.coupon,
+        identification: data.identification,
+        address: data.address,
+        email: data.email,
+        method: PaymentMethod.MP,
+        name: data.name,
+        surname: data.surname,
+        items: itemsWithShipping,
+      });
 
-    if (result.type === 'ERROR') {
-      switch (result.error.code) {
-        case 'SERIALIZATION':
-          alert('ERRO DE SERIALIZAÇÃO. POR FAVOR, ENTRE EM CONTATO');
-          redirectToWhatsApp({ ...data, items });
-          return;
-        default:
-          alert('ERRO AO PROCESSAR PAGAMENTO. POR FAVOR, ENTRE EM CONTATO');
-          redirectToWhatsApp({ ...data, items });
-          return;
+      if (result.type === 'ERROR') {
+        switch (result.error.code) {
+          case 'SERIALIZATION':
+            alert('ERRO DE SERIALIZAÇÃO. POR FAVOR, ENTRE EM CONTATO');
+            redirectToWhatsApp({ ...data, items });
+            return;
+          default:
+            alert('ERRO AO PROCESSAR PAGAMENTO. POR FAVOR, ENTRE EM CONTATO');
+            redirectToWhatsApp({ ...data, items });
+            return;
+        }
       }
-    }
 
-    window.location.href = result.data.paymentLink;
+      window.location.href = result.data.paymentLink;
+    } finally {
+      setLoading(false);
+    }
   };
 
   function redirectToWhatsApp(data: GetCheckout) {
@@ -158,50 +194,56 @@ export function useCheckout() {
   }
 
   const applyCoupon = async () => {
-    const COUPON = {
-      code: getValues('coupon') || '',
-    };
+    setLoading(true);
+    try {
+      const COUPON = {
+        code: getValues('coupon') || '',
+      };
 
-    const { result } = await UseCases.coupon.validate.execute({
-      code: COUPON.code,
-    });
+      const { result } = await UseCases.coupon.validate.execute({
+        code: COUPON.code,
+      });
 
-    if (result.type === 'ERROR') {
-      switch (result.error.code) {
-        case 'SERIALIZATION':
-          alert('ERRO DE SERIALIZAÇÃO, POR FAVOR ENTRAR EM CONTATO');
-          return;
-        case 'NOT_FOUND':
-          setError('coupon', {
-            type: 'manual',
-            message: 'Cupom inexistente',
-          });
-          return;
-        default:
-          alert('ERRO AO PROCESSAR CUPOM. ENTRE EM CONTATO.');
-          return;
+      if (result.type === 'ERROR') {
+        switch (result.error.code) {
+          case 'SERIALIZATION':
+            alert('ERRO DE SERIALIZAÇÃO, POR FAVOR ENTRAR EM CONTATO');
+            return;
+          case 'NOT_FOUND':
+            setError('coupon', {
+              type: 'manual',
+              message: 'Cupom inexistente',
+            });
+            return;
+          default:
+            alert('ERRO AO PROCESSAR CUPOM. ENTRE EM CONTATO.');
+            return;
+        }
       }
-    }
 
-    const isActive = result.data.isActive;
-    const minPurchaseValue = result.data.minPurchaseValue ?? 0;
-    const maxDiscountValue = result.data.maxDiscountValue ?? Infinity;
-    const discountValue = result.data.discountValue ?? 0;
+      const isActive = result.data.isActive;
+      const minPurchaseValue = result.data.minPurchaseValue ?? 0;
+      const maxDiscountValue = result.data.maxDiscountValue ?? Infinity;
+      const discountValue = result.data.discountValue ?? 0;
 
-    if (isActive && TotalValue >= minPurchaseValue) {
-      const calculatedDiscount =
-        result.data.discountType === 'percentage'
-          ? Math.min(
-              (TotalValue + shipping) * (discountValue / 100),
-              maxDiscountValue,
-            )
-          : Math.min(discountValue, maxDiscountValue);
+      if (isActive && TotalValue >= minPurchaseValue) {
+        const calculatedDiscount =
+          result.data.discountType === 'percentage'
+            ? Math.min(
+                (TotalValue + shipping) * (discountValue / 100),
+                maxDiscountValue,
+              )
+            : Math.min(discountValue, maxDiscountValue);
 
-      setDiscount(calculatedDiscount);
+        setDiscount(calculatedDiscount);
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
   return {
+    loading,
     navigate,
     applyCoupon,
     steps: {
