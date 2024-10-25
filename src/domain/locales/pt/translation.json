@@ -1,14 +1,10 @@
 {
   "header": {
-    "links": [
-      "Produtos",
-      "Quem Somos",
-      "Blogs"
-    ]
+    "links": ["Produtos", "Quem Somos", "Blogs"]
   },
   "hero": {
-    "title": "Proteção de Bitcoin Offline com Segurança Web3",
-    "description": "Somos uma empresa WEB3 que oferece segurança e privacidade com tecnologia DIY, possibilitando autocustódia 100% offline.",
+    "title": "Proteja seu Bitcoin Offline",
+    "description": "Nossa missão é oferecer o mais alto padrão de segurança em autocustódia, proporcionando métodos 100% eficazes para você armazenar seus Bitcoins sem intermediários",
     "buttons": {
       "products": "Nossos Produtos",
       "learnMore": "Saiba Mais"
@@ -84,7 +80,7 @@
     "quantity": "Quantidade",
     "goToCart": "Ir para o Carrinho"
   },
-   "cart": {
+  "cart": {
     "title": "Carrinho de Compras",
     "emptyCart": "Seu carrinho está vazio.",
     "price": "Preço",
@@ -93,7 +89,7 @@
     "clearCart": "Limpar Carrinho",
     "total": "Total",
     "checkout": "Ir para Checkout"
-},
+  },
   "blogs": {
     "title": "BLOG DIY"
   },
@@ -106,12 +102,7 @@
     }
   },
   "footer": {
-    "links": [
-      "Sobre",
-      "Política de Privacidade",
-      "Licenciamento",
-      "Contato"
-    ],
+    "links": ["Sobre", "Política de Privacidade", "Licenciamento", "Contato"],
     "allRightsReserved": "Todos os direitos reservados."
   },
   "about": {
@@ -122,6 +113,16 @@
       "Sabemos que a verdadeira liberdade só é possível com segurança. É por isso que defendemos o armazenamento offline das criptomoedas, onde o usuário é o único guardião de seus ativos. Nosso compromisso é facilitar esse processo, tornando acessível a todos a possibilidade de proteger seus fundos de forma independente e segura, longe das ameaças digitais.",
       "O Bitcoin abre caminho para um futuro onde o poder volta às mãos das pessoas. Na DIY Sec Lab, nossa missão é apoiar essa jornada, oferecendo as ferramentas e o conhecimento necessários para que cada indivíduo possa viver essa soberania com confiança, simplicidade e responsabilidade. Acreditamos que o Bitcoin é a chave para a verdadeira autonomia, e estamos aqui para ajudar a abrir essa porta."
     ]
+  },
+  "shipping": {
+    "title": "Frete",
+    "calculateButton": "Calcular Frete",
+    "options": "Opções de Frete",
+    "noOptions": "Nenhuma opção de frete disponível.",
+    "enterZip": "Digite seu CEP:",
+    "loading": "Carregando opções de frete...",
+    "calculate": "Calcular",
+    "deliveryIn": "Entrega em"
   },
   "post": {
     "notFound": "Post Não Encontrado!"
