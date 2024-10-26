@@ -32,6 +32,7 @@ export function useCheckout() {
         city: '',
         state: '',
         zipCode: '',
+        uf: '',
       },
       phone: {
         areaCode: '',
@@ -85,7 +86,7 @@ export function useCheckout() {
           }
         }
 
-        const { city, complement, state, street } = ListedAddress.data;
+        const { city, complement, state, street, uf } = ListedAddress.data;
 
         form.setValue('address.city', city);
         form.setValue('address.street', street);
@@ -93,6 +94,7 @@ export function useCheckout() {
         if (complement) {
           form.setValue('address.number', complement);
         }
+        form.setValue('address.uf', uf);
 
         const { result: CalculatedShipping } =
           await UseCases.shipping.calculate.execute({
