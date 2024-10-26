@@ -188,7 +188,7 @@ export function useCheckout() {
 
     const text = `Olá, meu nome é ${data.firstName} ${data.lastName}. Houve um erro no pagamento via site e gostaria de finalizar meu pedido.
 
-    Endereço: ${data.address.street}, ${data.address.number} - ${data.address.city}/${data.address.state}
+    Endereço: ${data.address.street}, ${data.address.number}, ${data.address.complement} - ${data.address.city}/${data.address.state} - ${data.address.uf}
     Items: ${itemsText}
     Valor de Frete: ${shipping ?? 'não informado'}
     Total: ${total ?? 'não informado'}
