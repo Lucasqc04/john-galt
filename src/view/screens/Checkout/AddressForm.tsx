@@ -5,6 +5,7 @@ import { useCheckout } from './useCheckout';
 export function AddressForm() {
   const {
     register,
+    setValue,
     formState: { errors },
   } = useFormContext<GetCheckout>();
   const { loading } = useCheckout();
@@ -18,6 +19,13 @@ export function AddressForm() {
         <input
           type="text"
           {...register('address.zipCode', { required: true })}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            const sanitizedValue = e.target.value
+              .replace(/\D/g, '')
+              .slice(0, 8);
+
+            setValue('address.zipCode', sanitizedValue);
+          }}
           className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
         />
         {errors.address?.zipCode && (

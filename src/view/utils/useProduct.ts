@@ -72,6 +72,24 @@ export function useProducts() {
         Bitkit9,
       ],
     },
+    {
+      id: '10000',
+      title: infos[0].title,
+      name: 'PRODUTO TESTE',
+      originalPrice: 2,
+      price: 1,
+      description: infos[0].description,
+      images: [
+        Seedkit7,
+        Seedkit1,
+        Seedkit2,
+        Seedkit3,
+        Seedkit4,
+        Seedkit5,
+        Seedkit6,
+        Seedkit8,
+      ],
+    },
   ];
 
   return {

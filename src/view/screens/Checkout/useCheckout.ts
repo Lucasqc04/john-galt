@@ -32,6 +32,7 @@ export function useCheckout() {
         city: '',
         state: '',
         zipCode: '',
+        uf: '',
       },
       phone: {
         areaCode: '',
@@ -85,7 +86,7 @@ export function useCheckout() {
           }
         }
 
-        const { city, complement, state, street } = ListedAddress.data;
+        const { city, complement, state, street, uf } = ListedAddress.data;
 
         form.setValue('address.city', city);
         form.setValue('address.street', street);
@@ -93,6 +94,7 @@ export function useCheckout() {
         if (complement) {
           form.setValue('address.number', complement);
         }
+        form.setValue('address.uf', uf);
 
         const { result: CalculatedShipping } =
           await UseCases.shipping.calculate.execute({
@@ -186,7 +188,7 @@ export function useCheckout() {
 
     const text = `Olá, meu nome é ${data.firstName} ${data.lastName}. Houve um erro no pagamento via site e gostaria de finalizar meu pedido.
 
-    Endereço: ${data.address.street}, ${data.address.number} - ${data.address.city}/${data.address.state}
+    Endereço: ${data.address.street}, ${data.address.number}, ${data.address.complement} - ${data.address.city}/${data.address.state} - ${data.address.uf}
     Items: ${itemsText}
     Valor de Frete: ${shipping ?? 'não informado'}
     Total: ${total ?? 'não informado'}
