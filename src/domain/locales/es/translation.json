@@ -45,7 +45,7 @@
     "infos": [
       {
         "title": "¡Tu Kit Completo para el Mundo del Bitcoin!",
-        "description": "Ten todo lo que necesitas en un solo paquete para maximizar tus inversiones en Bitcoin."
+        "description": "Tenga todo lo que necesita en un solo paquete para maximizar sus inversiones en Bitcoin. 2 placas metálicas, tamaño tarjeta de crédito, estándar Stackbit 1248, 1 Tiny Seed, 1 punzón automático, 2 Paper Seeds para 12 a 24 palabras, 2 SeedQR para 12 y 24 palabras."
       },
       {
         "title": "¡Protege Tus Claves Privadas con Seguridad!",
@@ -53,7 +53,7 @@
       },
       {
         "title": "¡Seguridad Elevada para Tus Inversiones!",
-        "description": "Para aquellos que buscan el más alto nivel de protección en sus transacciones financieras."
+        "description": "Para aquellos que buscan el más alto nivel de protección en sus transacciones financieras. 1 billetera fría, 1 placa metálica, tamaño tarjeta de crédito, estándar Stackbit 1248, 2 Paper Seeds para 12 a 24 palabras, 2 SeedQR para 12 y 24 palabras, 1 punzón automático, 1 Tiny Seed"
       }
     ],
     "resourcesTitle": "Recursos Básicos y Avanzados en un Solo Kit",
@@ -75,6 +75,24 @@
       "Placa de Metal",
       "Compatibilidad con Sparrow Wallet, Specter Desktop, Nunchuk y BlueWallet"
     ],
+    "resourcesSeedkit": [
+      "SeedKit:",
+      "2 placas metálicas, tamaño tarjeta de crédito, estándar Stackbit 1248",
+      "2 Tiny Seeds",
+      "1 punzón automático",
+      "2 Paper Seeds para 12 a 24 palabras",
+      "2 SeedQR para 12 y 24 palabras"
+    ],
+    "resourcesBitkit": [
+      "Bitkit:",
+      "1 billetera fría",
+      "1 placa metálica, tamaño tarjeta de crédito, estándar Stackbit 1248",
+      "2 Paper Seeds para 12 a 24 palabras",
+      "2 SeedQR para 12 y 24 palabras",
+      "1 punzón automático",
+      "1 Tiny Seed"
+    ],
+
     "buyNowButton": "Comprar ahora",
     "addToCartButton": "Añadir al carrito",
     "quantity": "Cantidad",
