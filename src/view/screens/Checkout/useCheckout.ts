@@ -62,10 +62,43 @@ export function useCheckout() {
   const navigate = useNavigate();
 
   const zipCode = watch('address.zipCode');
-
   useEffect(() => {
     setTotal(TotalValue + shipping - discount);
   }, [TotalValue, shipping, discount]);
+
+  useEffect(() => {
+    const recalculateDiscount = async () => {
+      const couponCode = getValues('couponCode');
+      if (couponCode) {
+        const { result } = await UseCases.coupon.validate.execute({
+          code: couponCode,
+        });
+
+        if (result.type === 'SUCCESS') {
+          const minPurchaseValue = result.data.minPurchaseValue ?? 0;
+          const maxDiscountValue = result.data.maxDiscountValue ?? Infinity;
+          const discountValue = result.data.discountValue ?? 0;
+
+          if (TotalValue >= minPurchaseValue) {
+            const recalculatedDiscount =
+              result.data.discountType === 'percentage'
+                ? Math.min(
+                    (TotalValue + shipping) * (discountValue / 100),
+                    maxDiscountValue,
+                  )
+                : Math.min(discountValue, maxDiscountValue);
+
+            setDiscount(recalculatedDiscount);
+          } else {
+            setDiscount(0);
+          }
+        }
+      }
+    };
+
+    recalculateDiscount();
+    setTotal(TotalValue + shipping - discount);
+  }, [TotalValue, shipping]);
 
   const HandleWithPostalCode = useCallback(
     async (cep: string) => {
