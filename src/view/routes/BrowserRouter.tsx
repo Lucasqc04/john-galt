@@ -17,6 +17,7 @@ import { NotFound } from '../screens/NotFound';
 import { Page } from '../screens/Page';
 import { Products } from '../screens/partials/Products';
 import { ProductPage } from '../screens/ProductPage/ProductPage';
+import { TutorialsPage } from '../screens/TutorialsPage'; // Importando a página de tutoriais
 import { ROUTES } from './Routes';
 
 export function BrowserRouter() {
@@ -40,11 +41,15 @@ export function BrowserRouter() {
             <Route path={ROUTES.cart.product.path} element={<ProductPage />} />
             <Route path={ROUTES.about.path} element={<About />} />
             <Route path={ROUTES.cart.path} element={<Cart />} />
+            <Route
+              path={ROUTES.tutorials.path}
+              element={<TutorialsPage />}
+            />{' '}
+            {/* Nova rota para tutoriais */}
           </Route>
           <Route path={ROUTES.lang.call()}>
             <Route path={ROUTES.cart.checkout.path} element={<Checkout />} />
           </Route>
-
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
