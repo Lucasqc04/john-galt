@@ -10,6 +10,10 @@ export const ROUTES = {
     call: (id: string) => `/blog/${id}`,
     callLang: (currentLang: string, id: string) => `/${currentLang}/blog/${id}`,
   },
+  tutorials: {
+    path: 'tutoriais',
+    call: (currentLang: string) => `/${currentLang}/tutoriais`,
+  },
   about: {
     path: 'sobre-nos',
     call: (currentLang: string) => `/${currentLang}/sobre-nos`,
