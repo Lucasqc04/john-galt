@@ -3,6 +3,7 @@ import { FaChevronLeft, FaChevronRight, FaTruckFast } from 'react-icons/fa6';
 import { MdCheck } from 'react-icons/md';
 import { LanguageTexts } from '../../../domain/locales/Language';
 
+import { useEffect, useState } from 'react';
 import { Loader } from '../../components/Loader';
 import { BackgroundAnimatedProduct } from '../../styles/Products/Product.styles';
 import { styleLastWord } from '../../utils/StyleWord';
@@ -14,7 +15,6 @@ export function ProductPage() {
     t,
     cart,
     form,
-    image,
     loading,
     product,
     quantity,
@@ -22,6 +22,34 @@ export function ProductPage() {
     resources,
     register,
   } = useProductPage();
+
+  const [imageIndex, setImageIndex] = useState(0);
+  const [currentImage, setCurrentImage] = useState(product?.images[0] || '');
+
+  useEffect(() => {
+    // Atualiza a imagem atual quando o índice muda
+    if (product) {
+      setCurrentImage(product.images[imageIndex]);
+    }
+  }, [imageIndex, product]);
+
+  const image = {
+    next: () => {
+      setImageIndex(
+        (prevIndex) => (prevIndex + 1) % (product?.images.length || 1),
+      );
+    },
+    prev: () => {
+      setImageIndex(
+        (prevIndex) =>
+          (prevIndex - 1 + (product?.images.length || 1)) %
+          (product?.images.length || 1),
+      );
+    },
+    thumbnail: (index: number) => {
+      setImageIndex(index);
+    },
+  };
 
   if (!product) {
     return <Loader />;
@@ -42,7 +70,7 @@ export function ProductPage() {
                   <FaChevronLeft />
                 </button>
                 <img
-                  src={product.images[image.current]}
+                  src={currentImage}
                   alt={product.name}
                   className="w-[80%] h-auto object-cover rounded-md shadow-lg dark:border-gray-700"
                 />
@@ -55,13 +83,13 @@ export function ProductPage() {
               </div>
 
               <div className="flex mt-4 space-x-2 justify-center">
-                {product.images.map((imageUrl, index) => (
+                {product.images.map((imageUrl: string, index: number) => (
                   <img
                     key={index}
                     src={imageUrl}
                     alt={`Thumbnail ${index}`}
                     className={`w-12 h-12 md:w-16 md:h-16 object-cover cursor-pointer border ${
-                      image.current === index
+                      imageIndex === index
                         ? 'border-[#F6911D]'
                         : 'border-gray-300 dark:border-gray-700'
                     } rounded-md`}
@@ -171,7 +199,7 @@ export function ProductPage() {
               {styleLastWord(t(LanguageTexts.products.resourcesTitle))}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {resources.map((resource, index) => (
+              {resources.map((resource: string, index: number) => (
                 <ul key={index} className="list-none">
                   <li className="flex items-center gap-x-4">
                     <MdCheck size={32} className="text-green-700" />
