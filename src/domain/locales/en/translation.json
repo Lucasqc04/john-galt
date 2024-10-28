@@ -124,6 +124,22 @@
     "calculate": "Calculate",
     "deliveryIn": "Delivery in"
   },
+  "tutorials": {
+    "title": "Tutorials",
+    "description": "Explore our tutorials and learn how to use our products.",
+    "items": {
+      "1": "1st TUTORIAL - CREATE YOUR KEY AND DEPOSIT BITCOIN",
+      "2": "2nd TUTORIAL - HOW TO ADD A PASSWORD AND CREATE A DECOY WALLET",
+      "3": "3rd TUTORIAL - RECOVER YOUR WALLET AND SEND BITCOIN",
+      "4": "4th TUTORIAL - HOW TO DRILL THE METAL PLATE",
+      "5": "5th TUTORIAL - HOW TO IMPORT YOUR WALLET INTO BLUEWALLET",
+      "6": "6th TUTORIAL - HOW TO ASSEMBLE YOUR AUTOMATIC PUNCH",
+      "7": "7th TUTORIAL - VERIFYING THE KRUX CODE",
+      "8": "8th TUTORIAL - HOW TO CREATE YOUR SEEDQR",
+      "9": "9th TUTORIAL - HOW TO BACKUP ON YOUR TINY SEED"
+    },
+    "downloadButton": "Download Tutorial"
+  },
   "post": {
     "notFound": "Post Not Found!"
   },

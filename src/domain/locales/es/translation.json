@@ -124,6 +124,22 @@
     "calculate": "Calcular",
     "deliveryIn": "Entrega en"
   },
+  "tutorials": {
+    "title": "Tutoriales",
+    "description": "Explora nuestros tutoriales y aprende a utilizar nuestros productos.",
+    "items": {
+      "1": "1° TUTORIAL - CREA TU CLAVE Y DEPOSITA BITCOIN",
+      "2": "2° TUTORIAL - CÓMO AGREGAR UNA CONTRASEÑA Y CREAR UNA CARTERA SEÑUELO",
+      "3": "3° TUTORIAL - RECUPERA TU CARTERA Y ENVÍA BITCOIN",
+      "4": "4° TUTORIAL - CÓMO PERFORAR LA PLACA METÁLICA",
+      "5": "5° TUTORIAL - CÓMO IMPORTAR TU CARTERA EN BLUEWALLET",
+      "6": "6° TUTORIAL - CÓMO MONTAR TU PUNZÓN AUTOMÁTICO",
+      "7": "7° TUTORIAL - VERIFICACIÓN DEL CÓDIGO DE KRUX",
+      "8": "8° TUTORIAL - CÓMO CREAR TU SEEDQR",
+      "9": "9° TUTORIAL - CÓMO HACER RESPALDO EN TU TINY SEED"
+    },
+    "downloadButton": "Descargar Tutorial"
+  },
   "post": {
     "notFound": "Publicación no encontrada!"
   },
