@@ -24,7 +24,10 @@ export function BlogLinks() {
     return null;
   }
 
-  const firstImage = post.translations.pt.sections[0].image || Bitkit8;
+  const firstImage =
+    typeof post.translations.pt.sections[0].image === 'string'
+      ? post.translations.pt.sections[0].image
+      : Bitkit8;
 
   const handleCardClick = () => {
     navigate(`blog/1`);

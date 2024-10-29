@@ -172,7 +172,13 @@ export function NavLinks({
                           className="flex items-center gap-x-4 rounded-lg p-4 text-sm leading-6 text-gray-800 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800"
                         >
                           <img
-                            src={post.translations.pt.sections[0].image}
+                            src={
+                              typeof post.translations.pt.sections[0].image ===
+                              'string'
+                                ? post.translations.pt.sections[0].image
+                                : post.translations.pt.sections[0].image?.src ||
+                                  'caminho/para/imagem/padrao.png'
+                            } // Substitua pelo caminho padrão desejado
                             alt={translation.title}
                             className="h-12 w-12 rounded-lg object-cover cursor-pointer"
                           />
