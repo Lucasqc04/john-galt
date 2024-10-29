@@ -1,6 +1,7 @@
 {
   "header": {
-    "links": ["Produtos", "Quem Somos", "Blogs"]
+    "links": ["Produtos", "Quem Somos", "Blogs"],
+    "contact_sales": "Contato comercial"
   },
   "hero": {
     "title": "Proteja seu Bitcoin Offline",

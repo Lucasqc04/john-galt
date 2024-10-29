@@ -9,6 +9,7 @@ import translationPT from './pt/translation.json';
 export const LanguageTexts = {
   header: {
     links: ['header.links.0', 'header.links.1', 'header.links.2'],
+    contact_sales: 'header.contact_sales',
   },
   hero: {
     title: 'hero.title',

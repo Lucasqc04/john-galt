@@ -1,6 +1,7 @@
 {
   "header": {
-    "links": ["Products", "About Us", "Blogs"]
+    "links": ["Products", "About Us", "Blogs"],
+    "contact_sales": "Contact sales"
   },
   "hero": {
     "title": "Protect your Bitcoin Offline",
@@ -92,7 +93,6 @@
       "1 Automatic Punch",
       "1 Tiny Seed"
     ],
-
     "buyNowButton": "Buy Now",
     "addToCartButton": "Add to Cart",
     "quantity": "Quantity",

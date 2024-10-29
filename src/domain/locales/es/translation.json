@@ -1,6 +1,7 @@
 {
   "header": {
-    "links": ["Productos", "Quiénes Somos", "Blogs"]
+    "links": ["Productos", "Quiénes Somos", "Blogs"],
+    "contact_sales": "Contactar ventas"
   },
   "hero": {
     "title": "Proteja su Bitcoin sin conexión",
@@ -92,7 +93,6 @@
       "1 punzón automático",
       "1 Tiny Seed"
     ],
-
     "buyNowButton": "Comprar ahora",
     "addToCartButton": "Añadir al carrito",
     "quantity": "Cantidad",
