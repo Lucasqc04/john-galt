@@ -45,7 +45,7 @@
     "infos": [
       {
         "title": "Seu Kit Completo para o Mundo do Bitcoin!",
-        "description": "Tenha tudo o que precisa em um único pacote para maximizar seus investimentos em Bitcoin."
+        "description": "Tenha tudo o que precisa em um único pacote para maximizar seus investimentos em Bitcoin. 2 Placas metálica tamanho cartão de crédito padrão Stackbit 12482, Tiny Seed, 1 Punção Automático, 2 Paper Seed 12 ao 24, 2 SeedQR 12 e 24"
       },
       {
         "title": "Proteja Suas Chaves Privadas com Segurança!",
@@ -53,10 +53,10 @@
       },
       {
         "title": "Segurança Elevada para Seus Investimentos!",
-        "description": "Para aqueles que buscam o mais alto nível de proteção em suas transações financeiras."
+        "description": "Para aqueles que buscam o mais alto nível de proteção em suas transações financeiras. 1 Cold Wallet, 1 Placa metálica tamanho cartão de crédito padrão Stackbit 1248, 2 Paper Seed 12 ao 24, 2 SeedQR 12 e 24, 1 Punção Automático, 1 Tiny Seed"
       }
     ],
-    "resourcesTitle": "Recursos Básicos e Avançados em um só Kit",
+    "resourcesTitle": "Recursos Básicos e Avançados em um só ",
     "resources": [
       "Open Source",
       "Câmera para transações totalmente air-gapped",
@@ -74,6 +74,23 @@
       "Punção automática para marcação em placa de metal",
       "Placa de metal",
       "Compatibilidade com Sparrow Wallet, Specter Desktop, Nunchuk e BlueWallet"
+    ],
+    "resourcesSeedkit": [
+      "SeedKit:",
+      "2 Placas metálica tamanho cartão de crédito padrão Stackbit 1248",
+      "2 Tiny Seed",
+      "1 Punção Automático",
+      "2 Paper Seed 12 ao 24",
+      "2 SeedQR 12 e 24"
+    ],
+    "resourcesBitkit": [
+      "Bitkit:",
+      "1 Cold Wallet",
+      "1 Placa metálica tamanho cartão de crédito padrão Stackbit 1248",
+      "2 Paper Seed 12 ao 24",
+      "2 SeedQR 12 e 24",
+      "1 Punção Automático",
+      "1 Tiny Seed"
     ],
     "buyNowButton": "Comprar Agora",
     "addToCartButton": "Adicionar ao Carrinho",

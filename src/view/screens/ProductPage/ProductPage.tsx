@@ -196,7 +196,8 @@ export function ProductPage() {
 
           <div>
             <h2 className="text-3xl md:text-4xl font-bold mb-20 mt-36 text-center dark:text-white">
-              {styleLastWord(t(LanguageTexts.products.resourcesTitle))}
+              {styleLastWord(t(LanguageTexts.products.resourcesTitle))}{' '}
+              <span className="text-[#F6911D]">{product.name}</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {resources.map((resource: string, index: number) => (
