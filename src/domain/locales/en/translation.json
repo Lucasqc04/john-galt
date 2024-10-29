@@ -45,7 +45,7 @@
     "infos": [
       {
         "title": "Your Complete Kit for the World of Bitcoin!",
-        "description": "Have everything you need in one package to maximize your Bitcoin investments."
+        "description": "Have everything you need in one package to maximize your investments in Bitcoin. 2 metal plates, credit card size, Stackbit 1248 standard, 1 Tiny Seed, 1 Automatic Punch, 2 Paper Seeds for 12 to 24 words, 2 SeedQR for 12 and 24 words."
       },
       {
         "title": "Protect Your Private Keys with Security!",
@@ -53,7 +53,7 @@
       },
       {
         "title": "Enhanced Security for Your Investments!",
-        "description": "For those seeking the highest level of protection in their financial transactions."
+        "description": "For those seeking the highest level of protection in their financial transactions. 1 Cold Wallet, 1 metal plate, credit card size, Stackbit 1248 standard, 2 Paper Seeds for 12 to 24 words, 2 SeedQR for 12 and 24 words, 1 Automatic Punch, 1 Tiny Seed"
       }
     ],
     "resourcesTitle": "Basic and Advanced Resources in One Kit",
@@ -75,6 +75,24 @@
       "Metal Plate",
       "Compatibility with Sparrow Wallet, Specter Desktop, Nunchuk, and BlueWallet"
     ],
+    "resourcesSeedkit": [
+      "SeedKit:",
+      "2 metal plates, credit card size, Stackbit 1248 standard",
+      "2 Tiny Seeds",
+      "1 Automatic Punch",
+      "2 Paper Seeds for 12 to 24 words",
+      "2 SeedQR for 12 and 24 words"
+    ],
+    "resourcesBitkit": [
+      "Bitkit:",
+      "1 Cold Wallet",
+      "1 metal plate, credit card size, Stackbit 1248 standard",
+      "2 Paper Seeds for 12 to 24 words",
+      "2 SeedQR for 12 and 24 words",
+      "1 Automatic Punch",
+      "1 Tiny Seed"
+    ],
+
     "buyNowButton": "Buy Now",
     "addToCartButton": "Add to Cart",
     "quantity": "Quantity",
