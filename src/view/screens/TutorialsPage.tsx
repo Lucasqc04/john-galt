@@ -1,9 +1,6 @@
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import tutorial4 from '../assets/tutorial/4° TUTORIAL - COMO PERFURAR A PLACA METALICA.pdf';
-import tutorial7 from '../assets/tutorial/7° TUTORIAL -  VERIFICANDO O CÓDIGO DA KRUX.pdf';
-
 export function TutorialsPage() {
   const { t } = useTranslation();
   const refSections = useRef<(HTMLDivElement | null)[]>([]);
@@ -12,39 +9,47 @@ export function TutorialsPage() {
     {
       id: 1,
       title: t('tutorials.items.1'),
-      file: '/src/view/assets/tutorial/1° TUTORIAL - CRIE SUA CHAVE E DEPOSITE BITCOIN.pdf',
+      file: '/tutorial/1° TUTORIAL - CRIE SUA CHAVE E DEPOSITE BITCOIN.pdf',
     },
     {
       id: 2,
       title: t('tutorials.items.2'),
-      file: '/src/view/assets/tutorial/2° TUTORIAL - COMO ADICIONAR UMA SENHA E CRIAR A CARTEIRA ISCA.pdf',
+      file: '/tutorial/2° TUTORIAL - COMO ADICIONAR UMA SENHA E CRIAR A CARTEIRA ISCA.pdf',
     },
     {
       id: 3,
       title: t('tutorials.items.3'),
-      file: '/src/view/assets/tutorial/3° TUTORIAL - RECUPERE SUA CARTEIRA E ENVIE BITCOIN.pdf',
+      file: '/tutorial/3° TUTORIAL - RECUPERE SUA CARTEIRA E ENVIE BITCOIN.pdf',
     },
-    { id: 4, title: t('tutorials.items.4'), file: tutorial4 },
+    {
+      id: 4,
+      title: t('tutorials.items.4'),
+      file: '/tutorial/4° TUTORIAL - COMO PERFURAR A PLACA METALICA.pdf',
+    },
     {
       id: 5,
       title: t('tutorials.items.5'),
-      file: '/src/view/assets/tutorial/5° TUTORIAL - COMO IMPORTAR SUA CARTEIRA NA BLUEWALLET.pdf',
+      file: '/tutorial/5° TUTORIAL - COMO IMPORTAR SUA CARTEIRA NA BLUEWALLET.pdf',
     },
     {
       id: 6,
       title: t('tutorials.items.6'),
-      file: '/src/view/assets/tutorial/6° TUTORIAL - COMO MONTAR SEU PUNÇÃO AUTOMÁTICO.pdf',
+      file: '/tutorial/6° TUTORIAL - COMO MONTAR SEU PUNÇÃO AUTOMÁTICO.pdf',
     },
-    { id: 7, title: t('tutorials.items.7'), file: tutorial7 },
+    {
+      id: 7,
+      title: t('tutorials.items.7'),
+      file: '/tutorial/7° TUTORIAL -  VERIFICANDO O CÓDIGO DA KRUX.pdf',
+    },
     {
       id: 8,
       title: t('tutorials.items.8'),
-      file: '/src/view/assets/tutorial/8° TUTORIAL - COMO CRIAR SUA SEEDQR.pdf',
+      file: '/tutorial/8° TUTORIAL - COMO CRIAR SUA SEEDQR.pdf',
     },
     {
       id: 9,
       title: t('tutorials.items.9'),
-      file: '/src/view/assets/tutorial/9° TUTORIAL - COMO FAZER O BACKUP NA SUA TINY SEED.pdf',
+      file: '/tutorial/9° TUTORIAL - COMO FAZER O BACKUP NA SUA TINY SEED.pdf',
     },
   ];
 
@@ -64,7 +69,7 @@ export function TutorialsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F0F4F8] dark:bg-gray-900 pt-[15%] md:pt-[10%] pt-16 px-4">
+    <div className="min-h-screen bg-[#F0F4F8] dark:bg-gray-900 pt-[15%] md:pt-[10%] px-4">
       <h1 className="text-3xl md:text-4xl font-bold text-center mb-8 text-[#F6911D] dark:text-white">
         {t('tutorials.title')}
       </h1>
