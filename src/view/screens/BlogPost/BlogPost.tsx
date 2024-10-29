@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { FaRegCircle } from 'react-icons/fa';
+import image7 from '../../../blogContent/7.png';
 import { LanguageTexts } from '../../../domain/locales/Language';
 import { useBlogPost } from './useBlogPost';
 
@@ -51,11 +52,27 @@ export function BlogPost() {
         >
           {section.image && (
             <div className="lg:w-1/2 mb-8 lg:mb-0">
-              <img
-                src={section.image}
-                alt={section.title}
-                className="w-full h-auto rounded-lg shadow-lg"
-              />
+              {typeof section.image === 'string' ? (
+                <img
+                  src={section.image}
+                  alt={section.title}
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                  }}
+                  className="rounded-lg shadow-lg"
+                />
+              ) : (
+                <img
+                  src={section.image.src}
+                  alt={section.title}
+                  style={{
+                    width: section.image.width || '100%',
+                    height: section.image.height || 'auto',
+                  }}
+                  className="rounded-lg shadow-lg"
+                />
+              )}
             </div>
           )}
           <div className={`lg:w-1/2 ${section.image ? 'lg:px-10' : ''}`}>
@@ -71,6 +88,20 @@ export function BlogPost() {
           </div>
         </div>
       ))}
+
+      <div className="mb-16 flex flex-col items-center">
+        <div className="lg:w-1/2 mb-8 lg:mb-0">
+          <img
+            src={image7}
+            alt="Descrição da imagem 7"
+            style={{
+              width: '80%',
+              height: 'auto',
+            }}
+            className="rounded-lg shadow-lg"
+          />
+        </div>
+      </div>
     </div>
   );
 }
