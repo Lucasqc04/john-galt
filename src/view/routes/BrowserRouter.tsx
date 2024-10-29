@@ -6,6 +6,7 @@ import {
   Routes,
 } from 'react-router-dom';
 import { AcceptedLanguages, useLanguage } from '../../domain/locales/Language';
+import WhatsAppButton from '../components/ButtonWhatsApp/buttonWhatsApp';
 import { Loader } from '../components/Loader';
 import ScrollToTop from '../components/ScrollToTop';
 import { DefaultLayout } from '../layout/DefaultyLayout';
@@ -52,6 +53,7 @@ export function BrowserRouter() {
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <WhatsAppButton />
       </Suspense>
     </Router>
   );
