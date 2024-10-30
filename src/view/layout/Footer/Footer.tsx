@@ -1,20 +1,22 @@
 import { AiOutlineWhatsApp } from 'react-icons/ai';
 import { FaInstagram } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 import { LanguageTexts } from '../../../domain/locales/Language';
 import LogoWhite from '../../assets/logo-white.svg';
 import Logo from '../../assets/logo.svg';
 import { ROUTES } from '../../routes/Routes';
+import { useCurrentLang } from '../../utils/useCurrentLang';
 import { useFooter } from './useFooter';
 
 export function Footer() {
   const { t, theme } = useFooter();
+  const { currentLang } = useCurrentLang();
 
   const redirects = [
-    '#statistics',
-    '/:currentLang/politica-de-privacidade',
-    '/:currentLang/licenciamento',
-    '/:currentLang/contact',
+    ROUTES.about.call(currentLang),
+    `/${currentLang}/politica-de-privacidade`,
+    'mailto:diylabweb3@gmail.com',
   ];
 
   const links = t(LanguageTexts.footer.links, {
@@ -38,7 +40,7 @@ export function Footer() {
           <ul className="flex flex-col sm:flex-row flex-wrap items-center text-center sm:text-left mb-6 text-sm font-medium sm:mb-0 dark:text-gray-400">
             {links.map((link, idx) => (
               <li key={idx}>
-                {idx === 0 && (
+                {idx === link.length && (
                   <a
                     href={redirects[idx]}
                     className="hover:underline mb-2 sm:mb-0 sm:me-6"
@@ -46,7 +48,7 @@ export function Footer() {
                     {t(link)}
                   </a>
                 )}
-                {idx > 0 && (
+                {idx !== link.length && (
                   <Link
                     to={redirects[idx]}
                     className="hover:underline mb-2 sm:mb-0 sm:me-6"
@@ -90,6 +92,23 @@ export function Footer() {
               </a>
               <span className="absolute -top-14 left-1/2 transform -translate-x-1/2 z-20 px-4 py-2 text-sm font-bold text-white bg-gray-900 rounded-lg shadow-lg transition-transform duration-300 ease-in-out scale-0 group-hover:scale-100">
                 WhatsApp
+              </span>
+            </div>
+
+            <div className="group relative inline-block">
+              <a
+                href="https://x.com/diyseclab"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus:outline-none"
+              >
+                <FaXTwitter
+                  className="transform transition-transform duration-300 hover:scale-125 text-gray-700 dark:text-white hover:text-[#F6911D]"
+                  size={40}
+                />
+              </a>
+              <span className="absolute -top-14 left-1/2 transform -translate-x-1/2 z-20 px-4 py-2 text-sm font-bold text-white bg-gray-900 rounded-lg shadow-lg transition-transform duration-300 ease-in-out scale-0 group-hover:scale-100">
+                X
               </span>
             </div>
           </div>

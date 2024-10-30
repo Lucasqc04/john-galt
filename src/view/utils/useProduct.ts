@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Product } from '../../domain/entities/Product.entity';
+import { Item, Product } from '../../domain/entities/Product.entity';
 import { LanguageTexts } from '../../domain/locales/Language';
 import Bitkit8 from '../assets/Bitkit/3.png';
 import Bitkit9 from '../assets/Bitkit/6.png';
@@ -21,8 +21,11 @@ import Seedkit7 from '../assets/seedkit/7.png';
 import Seedkit8 from '../assets/seedkit/8.png';
 
 type Infos = {
+  name: string;
   title: string;
   description: string;
+  items?: Item[];
+  resources: string[];
 };
 
 export function useProducts() {
@@ -33,12 +36,11 @@ export function useProducts() {
       returnObjects: true,
     }) as Infos[];
   }, [t]);
-
   const products: Product[] = [
     {
       id: '1',
       title: infos[0].title,
-      name: 'SEEDKIT',
+      name: infos[0].name,
       originalPrice: 180,
       price: 150,
       description: infos[0].description,
@@ -52,14 +54,16 @@ export function useProducts() {
         Seedkit6,
         Seedkit8,
       ],
+      items: infos[0].items,
+      resources: infos[0].resources,
     },
     {
       id: '2',
-      title: infos[2].title,
-      name: 'BITKIT',
+      title: infos[1].title,
+      name: infos[0].name,
       originalPrice: 850,
       price: 800,
-      description: infos[2].description,
+      description: infos[1].description,
       images: [
         Bitkit7,
         Bitkit1,
@@ -71,6 +75,8 @@ export function useProducts() {
         Bitkit8,
         Bitkit9,
       ],
+      items: infos[1].items,
+      resources: infos[1].resources,
     },
     {
       id: '10000',
@@ -89,6 +95,7 @@ export function useProducts() {
         Seedkit6,
         Seedkit8,
       ],
+      resources: infos[0].resources,
     },
   ];
 

@@ -55,7 +55,7 @@ export function NavLinks({
 
   const callsToAction = [
     {
-      name: 'Contact sales',
+      name: t(LanguageTexts.header.contact_sales),
       href: 'https://api.whatsapp.com/send?phone=+5511994458337&text=Ol%C3%A1,%20Tudo%20bem?%0A%0AEu%20gostaria%20de%20saber%20mais%20sobre%20os%20produtos%20da%20DIY%20LAB...',
       icon: PhoneIcon,
     },
@@ -178,7 +178,7 @@ export function NavLinks({
                                 ? post.translations.pt.sections[0].image
                                 : post.translations.pt.sections[0].image?.src ||
                                   'caminho/para/imagem/padrao.png'
-                            } // Substitua pelo caminho padrão desejado
+                            }
                             alt={translation.title}
                             className="h-12 w-12 rounded-lg object-cover cursor-pointer"
                           />
@@ -192,6 +192,15 @@ export function NavLinks({
                 </div>
               </PopoverPanel>
             </Popover>
+
+            <button
+              onClick={() =>
+                handleOnLink(ROUTES.tutorials.call(currentLang), LinkCallBack)
+              }
+              className="text-2xl lg:text-sm font-semibold leading-6 text-black dark:text-white hover:text-[#F6911D]"
+            >
+              {t(LanguageTexts.header.links[3])}
+            </button>
 
             <LanguageSwitcher className="text-xl flex items-center justify-center gap-x-2 lg:text-sm font-semibold leading-6 hover:text-[#F6911D]" />
 
