@@ -98,7 +98,7 @@ export function useCheckout() {
 
     recalculateDiscount();
     setTotal(TotalValue + shipping - discount);
-  }, [TotalValue, shipping]);
+  }, [TotalValue, shipping, discount, getValues]);
 
   const HandleWithPostalCode = useCallback(
     async (cep: string) => {
@@ -166,6 +166,11 @@ export function useCheckout() {
   const onSubmit = async (data: GetCheckout) => {
     setLoading(true);
     try {
+      if (shipping === 0) {
+        alert('ESCOLHA UMA OPÇÃO DE FRETE');
+        return;
+      }
+
       const shippingItem: Items = {
         id: 'FRETE',
         name: 'Frete',
@@ -177,6 +182,13 @@ export function useCheckout() {
       };
 
       const itemsWithShipping = [...items, shippingItem];
+
+      const preValidationResult = GetCheckout.safeParse(itemsWithShipping);
+
+      if (!preValidationResult.success) {
+        alert('PREENCHA TODAS AS INFORMAÇOES ANTES DE ENVIAR');
+        return;
+      }
 
       const { result } = await UseCases.payment.create.execute({
         couponCode: data.couponCode,
