@@ -27,7 +27,6 @@ export function ProductPage() {
   const [currentImage, setCurrentImage] = useState(product?.images[0] || '');
 
   useEffect(() => {
-    // Atualiza a imagem atual quando o índice muda
     if (product) {
       setCurrentImage(product.images[imageIndex]);
     }
@@ -113,6 +112,13 @@ export function ProductPage() {
                 R${product.price.toFixed(2)}
               </div>
               <p className="dark:text-gray-300 mb-6">{product.description}</p>
+              <ul className="pb-6 list-disc pl-6">
+                {product.items?.map((item) => (
+                  <li>
+                    {item.quantity} {item.description}
+                  </li>
+                ))}
+              </ul>
               <div className="flex items-center mb-6">
                 <input
                   type="number"

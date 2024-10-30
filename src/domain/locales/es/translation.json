@@ -46,15 +46,59 @@
     "infos": [
       {
         "title": "¡Tu Kit Completo para el Mundo del Bitcoin!",
-        "description": "Tenga todo lo que necesita en un solo paquete para maximizar sus inversiones en Bitcoin. 2 placas metálicas, tamaño tarjeta de crédito, estándar Stackbit 1248, 1 Tiny Seed, 1 punzón automático, 2 Paper Seeds para 12 a 24 palabras, 2 SeedQR para 12 y 24 palabras."
-      },
-      {
-        "title": "¡Protege Tus Claves Privadas con Seguridad!",
-        "description": "Ideal para inversores que priorizan la seguridad y desean garantizar la protección de sus claves privadas."
+        "description": "Tenga todo lo que necesita en un solo paquete para maximizar sus inversiones en Bitcoin.",
+        "items": [
+          {
+            "quantity": 2,
+            "description": "Placas metálicas tamaño tarjeta de crédito estándar Stackbit 12482"
+          },
+          {
+            "quantity": 2,
+            "description": "Tiny Seed"
+          },
+          {
+            "quantity": 1,
+            "description": "Punzón Automático"
+          },
+          {
+            "quantity": 2,
+            "description": "Paper Seed 12 a 24"
+          },
+          {
+            "quantity": 2,
+            "description": "SeedQR 12 y 24"
+          }
+        ]
       },
       {
         "title": "¡Seguridad Elevada para Tus Inversiones!",
-        "description": "Para aquellos que buscan el más alto nivel de protección en sus transacciones financieras. 1 billetera fría, 1 placa metálica, tamaño tarjeta de crédito, estándar Stackbit 1248, 2 Paper Seeds para 12 a 24 palabras, 2 SeedQR para 12 y 24 palabras, 1 punzón automático, 1 Tiny Seed"
+        "description": "Para aquellos que buscan el más alto nivel de protección en sus transacciones financieras.",
+        "items": [
+          {
+            "quantity": 1,
+            "description": "Cold Wallet Krux"
+          },
+          {
+            "quantity": 1,
+            "description": "Placa metálica tamaño tarjeta de crédito estándar Stackbit 1248"
+          },
+          {
+            "quantity": 1,
+            "description": "Tiny Seed"
+          },
+          {
+            "quantity": 1,
+            "description": "Punzón Automático"
+          },
+          {
+            "quantity": 2,
+            "description": "Paper Seed 12 a 24"
+          },
+          {
+            "quantity": 2,
+            "description": "SeedQR 12 y 24"
+          }
+        ]
       }
     ],
     "resourcesTitle": "Recursos Básicos y Avanzados en un Solo Kit",

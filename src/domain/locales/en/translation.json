@@ -46,15 +46,59 @@
     "infos": [
       {
         "title": "Your Complete Kit for the World of Bitcoin!",
-        "description": "Have everything you need in one package to maximize your investments in Bitcoin. 2 metal plates, credit card size, Stackbit 1248 standard, 1 Tiny Seed, 1 Automatic Punch, 2 Paper Seeds for 12 to 24 words, 2 SeedQR for 12 and 24 words."
-      },
-      {
-        "title": "Protect Your Private Keys with Security!",
-        "description": "Ideal for investors who prioritize security and want to ensure the protection of their private keys."
+        "description": "Have everything you need in one package to maximize your investments in Bitcoin.",
+        "items": [
+          {
+            "quantity": 2,
+            "description": "Credit card-sized metal plates, Stackbit standard 12482"
+          },
+          {
+            "quantity": 2,
+            "description": "Tiny Seed"
+          },
+          {
+            "quantity": 1,
+            "description": "Automatic Punch"
+          },
+          {
+            "quantity": 2,
+            "description": "Paper Seed 12 to 24"
+          },
+          {
+            "quantity": 2,
+            "description": "SeedQR 12 and 24"
+          }
+        ]
       },
       {
         "title": "Enhanced Security for Your Investments!",
-        "description": "For those seeking the highest level of protection in their financial transactions. 1 Cold Wallet, 1 metal plate, credit card size, Stackbit 1248 standard, 2 Paper Seeds for 12 to 24 words, 2 SeedQR for 12 and 24 words, 1 Automatic Punch, 1 Tiny Seed"
+        "description": "For those seeking the highest level of protection in their financial transactions.",
+        "items": [
+          {
+            "quantity": 1,
+            "description": "Cold Wallet Krux"
+          },
+          {
+            "quantity": 1,
+            "description": "Credit card-sized metal plate, Stackbit standard 1248"
+          },
+          {
+            "quantity": 1,
+            "description": "Tiny Seed"
+          },
+          {
+            "quantity": 1,
+            "description": "Automatic Punch"
+          },
+          {
+            "quantity": 2,
+            "description": "Paper Seed 12 to 24"
+          },
+          {
+            "quantity": 2,
+            "description": "SeedQR 12 and 24"
+          }
+        ]
       }
     ],
     "resourcesTitle": "Basic and Advanced Resources in One Kit",

@@ -46,15 +46,59 @@
     "infos": [
       {
         "title": "Seu Kit Completo para o Mundo do Bitcoin!",
-        "description": "Tenha tudo o que precisa em um único pacote para maximizar seus investimentos em Bitcoin. 2 Placas metálica tamanho cartão de crédito padrão Stackbit 12482, Tiny Seed, 1 Punção Automático, 2 Paper Seed 12 ao 24, 2 SeedQR 12 e 24"
-      },
-      {
-        "title": "Proteja Suas Chaves Privadas com Segurança!",
-        "description": "Ideal para investidores que priorizam a segurança e desejam garantir a proteção de suas chaves privadas."
+        "description": "Tenha tudo o que precisa em um único pacote para maximizar seus investimentos em Bitcoin.",
+        "items": [
+          {
+            "quantity": 2,
+            "description": "Placas metálica tamanho cartão de crédito padrão Stackbit 12482"
+          },
+          {
+            "quantity": 2,
+            "description": "Tiny Seed"
+          },
+          {
+            "quantity": 1,
+            "description": "Punção Automático"
+          },
+          {
+            "quantity": 2,
+            "description": "Paper Seed 12 ao 24"
+          },
+          {
+            "quantity": 2,
+            "description": "SeedQR 12 e 24"
+          }
+        ]
       },
       {
         "title": "Segurança Elevada para Seus Investimentos!",
-        "description": "Para aqueles que buscam o mais alto nível de proteção em suas transações financeiras. 1 Cold Wallet, 1 Placa metálica tamanho cartão de crédito padrão Stackbit 1248, 2 Paper Seed 12 ao 24, 2 SeedQR 12 e 24, 1 Punção Automático, 1 Tiny Seed"
+        "description": "Para aqueles que buscam o mais alto nível de proteção em suas transações financeiras.",
+        "items": [
+          {
+            "quantity": 1,
+            "description": "Cold Wallet Krux"
+          },
+          {
+            "quantity": 1,
+            "description": "Placa metálica tamanho cartão de crédito padrão Stackbit 1248"
+          },
+          {
+            "quantity": 1,
+            "description": "Tiny Seed"
+          },
+          {
+            "quantity": 1,
+            "description": "Punção Automático"
+          },
+          {
+            "quantity": 2,
+            "description": "Paper Seed 12 ao 24"
+          },
+          {
+            "quantity": 2,
+            "description": "SeedQR 12 e 24"
+          }
+        ]
       }
     ],
     "resourcesTitle": "Recursos Básicos e Avançados em um só ",
