@@ -76,6 +76,7 @@ export const LanguageTexts = {
     clearCart: 'cart.clearCart',
     total: 'cart.total',
     checkout: 'cart.checkout',
+    quantityTitle: 'cart.quantityTitle',
   },
   shipping: {
     title: 'shipping.title',

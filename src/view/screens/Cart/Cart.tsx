@@ -32,7 +32,7 @@ export function Cart() {
         </div>
         <div className="w-full pt-4 flex flex-col gap-y-6">
           <p className="font-semibold">
-            Você tem {cart.items.length} itens no carrinho
+            {t(LanguageTexts.cart.quantityTitle)}: {cart.items.length}
           </p>
           <ul>
             {cart.items.map((item) => (

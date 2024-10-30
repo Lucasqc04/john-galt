@@ -140,7 +140,8 @@
     "remove": "Remover",
     "clearCart": "Limpar Carrinho",
     "total": "Total",
-    "checkout": "Ir para Checkout"
+    "checkout": "Ir para Checkout",
+    "quantityTitle": "Quantidade de itens no carrinho"
   },
   "blogs": {
     "title": "BLOG DIY"
