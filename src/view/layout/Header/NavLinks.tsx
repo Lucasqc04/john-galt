@@ -178,7 +178,7 @@ export function NavLinks({
                                 ? post.translations.pt.sections[0].image
                                 : post.translations.pt.sections[0].image?.src ||
                                   'caminho/para/imagem/padrao.png'
-                            } // Substitua pelo caminho padrão desejado
+                            }
                             alt={translation.title}
                             className="h-12 w-12 rounded-lg object-cover cursor-pointer"
                           />
@@ -192,6 +192,15 @@ export function NavLinks({
                 </div>
               </PopoverPanel>
             </Popover>
+
+            <button
+              onClick={() =>
+                handleOnLink(ROUTES.tutorials.call(currentLang), LinkCallBack)
+              }
+              className="text-2xl lg:text-sm font-semibold leading-6 text-black dark:text-white hover:text-[#F6911D]"
+            >
+              {t(LanguageTexts.header.links[3])}
+            </button>
 
             <LanguageSwitcher className="text-xl flex items-center justify-center gap-x-2 lg:text-sm font-semibold leading-6 hover:text-[#F6911D]" />
 
