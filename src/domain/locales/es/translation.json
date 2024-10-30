@@ -129,7 +129,7 @@
     ]
   },
   "footer": {
-    "links": ["Acerca de", "Política de Privacidad", "Licencia", "Contacto"],
+    "links": ["Acerca de", "Política de Privacidad", "Contacto"],
     "allRightsReserved": "Reservados todos los derechos."
   },
   "shipping": {

@@ -120,7 +120,7 @@
     }
   },
   "footer": {
-    "links": ["About", "Privacy Policy", "Licensing", "Contact"],
+    "links": ["About", "Privacy Policy", "Contact"],
     "allRightsReserved": "All Rights Reserved."
   },
   "about": {

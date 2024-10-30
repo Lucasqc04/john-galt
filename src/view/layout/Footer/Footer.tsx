@@ -14,9 +14,8 @@ export function Footer() {
   const { currentLang } = useCurrentLang();
 
   const redirects = [
-    `/${currentLang}/sobre-nos`,
+    ROUTES.about.call(currentLang),
     `/${currentLang}/politica-de-privacidade`,
-    `/${currentLang}/licenciamento`,
     'mailto:diylabweb3@gmail.com',
   ];
 
@@ -41,12 +40,22 @@ export function Footer() {
           <ul className="flex flex-col sm:flex-row flex-wrap items-center text-center sm:text-left mb-6 text-sm font-medium sm:mb-0 dark:text-gray-400">
             {links.map((link, idx) => (
               <li key={idx}>
-                <Link
-                  to={redirects[idx]}
-                  className="hover:underline mb-2 sm:mb-0 sm:me-6"
-                >
-                  {t(link)}
-                </Link>
+                {idx === link.length && (
+                  <a
+                    href={redirects[idx]}
+                    className="hover:underline mb-2 sm:mb-0 sm:me-6"
+                  >
+                    {t(link)}
+                  </a>
+                )}
+                {idx !== link.length && (
+                  <Link
+                    to={redirects[idx]}
+                    className="hover:underline mb-2 sm:mb-0 sm:me-6"
+                  >
+                    {t(link)}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
