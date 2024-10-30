@@ -1,6 +1,7 @@
 {
   "header": {
-    "links": ["Products", "About Us", "Blogs"]
+    "links": ["Products", "About Us", "Blogs", "Tutorials"],
+    "contact_sales": "Contact sales"
   },
   "hero": {
     "title": "Protect your Bitcoin Offline",
@@ -44,55 +45,88 @@
     "title": "Our Products",
     "infos": [
       {
+        "name": "SEEDKIT",
         "title": "Your Complete Kit for the World of Bitcoin!",
-        "description": "Have everything you need in one package to maximize your investments in Bitcoin. 2 metal plates, credit card size, Stackbit 1248 standard, 1 Tiny Seed, 1 Automatic Punch, 2 Paper Seeds for 12 to 24 words, 2 SeedQR for 12 and 24 words."
+        "description": "Have everything you need in one package to maximize your investments in Bitcoin.",
+        "items": [
+          {
+            "quantity": 2,
+            "description": "Credit card-sized metal plates, Stackbit standard 12482"
+          },
+          {
+            "quantity": 2,
+            "description": "Tiny Seed"
+          },
+          {
+            "quantity": 1,
+            "description": "Automatic Punch"
+          },
+          {
+            "quantity": 2,
+            "description": "Paper Seed 12 to 24"
+          },
+          {
+            "quantity": 2,
+            "description": "SeedQR 12 and 24"
+          }
+        ],
+        "resources": [
+          "Paper for noting down 12 or 24 words",
+          "Automatic Punch for marking on metal plate",
+          "Metal Plate"
+        ]
       },
       {
-        "title": "Protect Your Private Keys with Security!",
-        "description": "Ideal for investors who prioritize security and want to ensure the protection of their private keys."
-      },
-      {
+        "name": "BITKIT",
         "title": "Enhanced Security for Your Investments!",
-        "description": "For those seeking the highest level of protection in their financial transactions. 1 Cold Wallet, 1 metal plate, credit card size, Stackbit 1248 standard, 2 Paper Seeds for 12 to 24 words, 2 SeedQR for 12 and 24 words, 1 Automatic Punch, 1 Tiny Seed"
+        "description": "For those seeking the highest level of protection in their financial transactions.",
+        "items": [
+          {
+            "quantity": 1,
+            "description": "Cold Wallet Krux"
+          },
+          {
+            "quantity": 1,
+            "description": "Credit card-sized metal plate, Stackbit standard 1248"
+          },
+          {
+            "quantity": 1,
+            "description": "Tiny Seed"
+          },
+          {
+            "quantity": 1,
+            "description": "Automatic Punch"
+          },
+          {
+            "quantity": 2,
+            "description": "Paper Seed 12 to 24"
+          },
+          {
+            "quantity": 2,
+            "description": "SeedQR 12 and 24"
+          }
+        ],
+        "resources": [
+          "Open Source",
+          "Camera for fully air-gapped transactions",
+          "Amnesic Device",
+          "USB Connection",
+          "Passphrase",
+          "Multisig Addresses",
+          "Rechargeable Battery",
+          "PSBT Support",
+          "Mnemonic Creation with Manual Entropy",
+          "6 Mnemonic Backup Methods",
+          "2.0-inch Touchscreen LCD",
+          "Bip39 Compatibility",
+          "Paper for noting down 12 or 24 words",
+          "Automatic Punch for marking on metal plate",
+          "Metal Plate",
+          "Compatibility with Sparrow Wallet, Specter Desktop, Nunchuk, and BlueWallet"
+        ]
       }
     ],
     "resourcesTitle": "Basic and Advanced Resources in One Kit",
-    "resources": [
-      "Open Source",
-      "Camera for fully air-gapped transactions",
-      "Amnesic Device",
-      "USB Connection",
-      "Passphrase",
-      "Multisig Addresses",
-      "Rechargeable Battery",
-      "PSBT Support",
-      "Mnemonic Creation with Manual Entropy",
-      "6 Mnemonic Backup Methods",
-      "2.0-inch Touchscreen LCD",
-      "Bip39 Compatibility",
-      "Paper for noting down 12 or 24 words",
-      "Automatic Punch for marking on metal plate",
-      "Metal Plate",
-      "Compatibility with Sparrow Wallet, Specter Desktop, Nunchuk, and BlueWallet"
-    ],
-    "resourcesSeedkit": [
-      "SeedKit:",
-      "2 metal plates, credit card size, Stackbit 1248 standard",
-      "2 Tiny Seeds",
-      "1 Automatic Punch",
-      "2 Paper Seeds for 12 to 24 words",
-      "2 SeedQR for 12 and 24 words"
-    ],
-    "resourcesBitkit": [
-      "Bitkit:",
-      "1 Cold Wallet",
-      "1 metal plate, credit card size, Stackbit 1248 standard",
-      "2 Paper Seeds for 12 to 24 words",
-      "2 SeedQR for 12 and 24 words",
-      "1 Automatic Punch",
-      "1 Tiny Seed"
-    ],
-
     "buyNowButton": "Buy Now",
     "addToCartButton": "Add to Cart",
     "quantity": "Quantity",
@@ -120,7 +154,7 @@
     }
   },
   "footer": {
-    "links": ["About", "Privacy Policy", "Licensing", "Contact"],
+    "links": ["About", "Privacy Policy", "Contact"],
     "allRightsReserved": "All Rights Reserved."
   },
   "about": {

@@ -7,7 +7,7 @@ import {
   LanguageTexts,
   useLanguage,
 } from '../../../domain/locales/Language';
-import HeroImage from '../../assets/images/hero-image.png';
+import HeroImage from '../../assets/images/hero-image1.png';
 import { BackgroundAnimated } from '../../components/BackgroundAnimated';
 import { ROUTES } from '../../routes/Routes';
 import { styleFirstWord } from '../../utils/StyleWord';

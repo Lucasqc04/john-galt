@@ -22,8 +22,8 @@ export function Statistics() {
   }, [scaleFactor]);
 
   const negativeMarginTop =
-    width < 640
-      ? '-mt-32'
+    width <= 1200
+      ? 'mt-0'
       : scaleFactor === 1
         ? '-mt-64'
         : `${-Math.min(128 * scaleFactor, 128)}px`;
@@ -44,10 +44,10 @@ export function Statistics() {
           <article className="flex flex-wrap justify-around gap-y-4 pb-32 md:pb-0">
             {infos.map((info, index) => (
               <div key={index}>
-                <h4 className="text-center text-white text-sm font-bold">
+                <h4 className="text-center text-white font-bold text-[1.3rem]">
                   {info.title}
                 </h4>
-                <p className="text-center text-white text-sm">
+                <p className="text-center text-white text-[1.3rem]">
                   {info.description}
                 </p>
               </div>
