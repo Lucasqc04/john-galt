@@ -61,8 +61,8 @@ export function useProducts() {
       id: '2',
       title: infos[1].title,
       name: infos[0].name,
-      originalPrice: 850,
-      price: 800,
+      originalPrice: 950,
+      price: 900,
       description: infos[1].description,
       images: [
         Bitkit7,
