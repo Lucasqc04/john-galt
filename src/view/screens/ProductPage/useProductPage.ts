@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
@@ -8,7 +8,6 @@ import {
   CalculatedShipping,
   CalculateShipping,
 } from '../../../domain/entities/Shipping.entity';
-import { LanguageTexts } from '../../../domain/locales/Language';
 import { UseCases } from '../../../domain/usecases/UseCases';
 
 import { Product } from '../../../domain/entities/Product.entity';
@@ -34,12 +33,6 @@ export function useProductPage() {
     [],
   );
   const [, setError] = useState<string | null>(null);
-
-  const resources = useMemo(() => {
-    return t(LanguageTexts.products.resources, {
-      returnObjects: true,
-    }) as string[];
-  }, [t]);
 
   useEffect(() => {
     const selectedProduct = products.find((p) => p.id === id);
@@ -140,7 +133,6 @@ export function useProductPage() {
     form,
     product,
     loading,
-    resources,
     currentLang,
     register,
     cart: {

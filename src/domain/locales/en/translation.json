@@ -45,6 +45,7 @@
     "title": "Our Products",
     "infos": [
       {
+        "name": "SEEDKIT",
         "title": "Your Complete Kit for the World of Bitcoin!",
         "description": "Have everything you need in one package to maximize your investments in Bitcoin.",
         "items": [
@@ -68,9 +69,15 @@
             "quantity": 2,
             "description": "SeedQR 12 and 24"
           }
+        ],
+        "resources": [
+          "Paper for noting down 12 or 24 words",
+          "Automatic Punch for marking on metal plate",
+          "Metal Plate"
         ]
       },
       {
+        "name": "BITKIT",
         "title": "Enhanced Security for Your Investments!",
         "description": "For those seeking the highest level of protection in their financial transactions.",
         "items": [
@@ -98,45 +105,28 @@
             "quantity": 2,
             "description": "SeedQR 12 and 24"
           }
+        ],
+        "resources": [
+          "Open Source",
+          "Camera for fully air-gapped transactions",
+          "Amnesic Device",
+          "USB Connection",
+          "Passphrase",
+          "Multisig Addresses",
+          "Rechargeable Battery",
+          "PSBT Support",
+          "Mnemonic Creation with Manual Entropy",
+          "6 Mnemonic Backup Methods",
+          "2.0-inch Touchscreen LCD",
+          "Bip39 Compatibility",
+          "Paper for noting down 12 or 24 words",
+          "Automatic Punch for marking on metal plate",
+          "Metal Plate",
+          "Compatibility with Sparrow Wallet, Specter Desktop, Nunchuk, and BlueWallet"
         ]
       }
     ],
     "resourcesTitle": "Basic and Advanced Resources in One Kit",
-    "resources": [
-      "Open Source",
-      "Camera for fully air-gapped transactions",
-      "Amnesic Device",
-      "USB Connection",
-      "Passphrase",
-      "Multisig Addresses",
-      "Rechargeable Battery",
-      "PSBT Support",
-      "Mnemonic Creation with Manual Entropy",
-      "6 Mnemonic Backup Methods",
-      "2.0-inch Touchscreen LCD",
-      "Bip39 Compatibility",
-      "Paper for noting down 12 or 24 words",
-      "Automatic Punch for marking on metal plate",
-      "Metal Plate",
-      "Compatibility with Sparrow Wallet, Specter Desktop, Nunchuk, and BlueWallet"
-    ],
-    "resourcesSeedkit": [
-      "SeedKit:",
-      "2 metal plates, credit card size, Stackbit 1248 standard",
-      "2 Tiny Seeds",
-      "1 Automatic Punch",
-      "2 Paper Seeds for 12 to 24 words",
-      "2 SeedQR for 12 and 24 words"
-    ],
-    "resourcesBitkit": [
-      "Bitkit:",
-      "1 Cold Wallet",
-      "1 metal plate, credit card size, Stackbit 1248 standard",
-      "2 Paper Seeds for 12 to 24 words",
-      "2 SeedQR for 12 and 24 words",
-      "1 Automatic Punch",
-      "1 Tiny Seed"
-    ],
     "buyNowButton": "Buy Now",
     "addToCartButton": "Add to Cart",
     "quantity": "Quantity",

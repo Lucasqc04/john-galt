@@ -45,6 +45,7 @@
     "title": "Nossos produtos",
     "infos": [
       {
+        "name": "SEEDKIT",
         "title": "Seu Kit Completo para o Mundo do Bitcoin!",
         "description": "Tenha tudo o que precisa em um único pacote para maximizar seus investimentos em Bitcoin.",
         "items": [
@@ -68,9 +69,15 @@
             "quantity": 2,
             "description": "SeedQR 12 e 24"
           }
+        ],
+        "resources": [
+          "Papel para anotação das 12 ou 24 palavras",
+          "Punção automática para marcação em placa de metal",
+          "Placa de metal"
         ]
       },
       {
+        "name": "BITKIT",
         "title": "Segurança Elevada para Seus Investimentos!",
         "description": "Para aqueles que buscam o mais alto nível de proteção em suas transações financeiras.",
         "items": [
@@ -98,45 +105,28 @@
             "quantity": 2,
             "description": "SeedQR 12 e 24"
           }
+        ],
+        "resources": [
+          "Open Source",
+          "Câmera para transações totalmente air-gapped",
+          "Dispositivo Amnésico",
+          "Conexão USB",
+          "Passphrase",
+          "Endereços Multisig",
+          "Bateria Carregável",
+          "Suporte a PSBT",
+          "Criação de Mnemônico com Entropia Manual",
+          "6 métodos de Backup de Mnemônico",
+          "Tela sensível ao toque LCD de 2,0 polegadas",
+          "Compatibilidade com Bip39",
+          "Papel para anotação das 12 ou 24 palavras",
+          "Punção automática para marcação em placa de metal",
+          "Placa de metal",
+          "Compatibilidade com Sparrow Wallet, Specter Desktop, Nunchuk e BlueWallet"
         ]
       }
     ],
     "resourcesTitle": "Recursos Básicos e Avançados em um só ",
-    "resources": [
-      "Open Source",
-      "Câmera para transações totalmente air-gapped",
-      "Dispositivo Amnésico",
-      "Conexão USB",
-      "Passphrase",
-      "Endereços Multisig",
-      "Bateria Carregável",
-      "Suporte a PSBT",
-      "Criação de Mnemônico com Entropia Manual",
-      "6 métodos de Backup de Mnemônico",
-      "Tela sensível ao toque LCD de 2,0 polegadas",
-      "Compatibilidade com Bip39",
-      "Papel para anotação das 12 ou 24 palavras",
-      "Punção automática para marcação em placa de metal",
-      "Placa de metal",
-      "Compatibilidade com Sparrow Wallet, Specter Desktop, Nunchuk e BlueWallet"
-    ],
-    "resourcesSeedkit": [
-      "SeedKit:",
-      "2 Placas metálica tamanho cartão de crédito padrão Stackbit 1248",
-      "2 Tiny Seed",
-      "1 Punção Automático",
-      "2 Paper Seed 12 ao 24",
-      "2 SeedQR 12 e 24"
-    ],
-    "resourcesBitkit": [
-      "Bitkit:",
-      "1 Cold Wallet",
-      "1 Placa metálica tamanho cartão de crédito padrão Stackbit 1248",
-      "2 Paper Seed 12 ao 24",
-      "2 SeedQR 12 e 24",
-      "1 Punção Automático",
-      "1 Tiny Seed"
-    ],
     "buyNowButton": "Comprar Agora",
     "addToCartButton": "Adicionar ao Carrinho",
     "quantity": "Quantidade",

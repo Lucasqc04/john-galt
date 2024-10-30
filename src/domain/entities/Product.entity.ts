@@ -12,4 +12,5 @@ export class Product {
   price!: number;
   images!: string[];
   items?: Item[];
+  resources!: string[];
 }

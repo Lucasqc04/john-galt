@@ -11,17 +11,8 @@ import { BlogLinks } from '../partials/BlogLinks';
 import { useProductPage } from './useProductPage';
 
 export function ProductPage() {
-  const {
-    t,
-    cart,
-    form,
-    loading,
-    product,
-    quantity,
-    shipping,
-    resources,
-    register,
-  } = useProductPage();
+  const { t, cart, form, loading, product, quantity, shipping, register } =
+    useProductPage();
 
   const [imageIndex, setImageIndex] = useState(0);
   const [currentImage, setCurrentImage] = useState(product?.images[0] || '');
@@ -202,11 +193,11 @@ export function ProductPage() {
 
           <div>
             <h2 className="text-3xl md:text-4xl font-bold mb-20 mt-36 text-center dark:text-white">
-              {styleLastWord(t(LanguageTexts.products.resourcesTitle))}{' '}
+              {styleLastWord(t(LanguageTexts.products.resourcesTitle))}
               <span className="text-[#F6911D]">{product.name}</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {resources.map((resource: string, index: number) => (
+              {product.resources.map((resource: string, index: number) => (
                 <ul key={index} className="list-none">
                   <li className="flex items-center gap-x-4">
                     <MdCheck size={32} className="text-green-700" />
