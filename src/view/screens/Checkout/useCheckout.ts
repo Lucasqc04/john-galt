@@ -183,14 +183,7 @@ export function useCheckout() {
 
       const itemsWithShipping = [...items, shippingItem];
 
-      const preValidationResult = GetCheckout.safeParse(itemsWithShipping);
-
-      if (!preValidationResult.success) {
-        alert('PREENCHA TODAS AS INFORMAÇOES ANTES DE ENVIAR');
-        return;
-      }
-
-      const { result } = await UseCases.payment.create.execute({
+      const req = {
         couponCode: data.couponCode,
         identification: data.identification,
         address: data.address,
@@ -200,7 +193,16 @@ export function useCheckout() {
         lastName: data.lastName,
         items: itemsWithShipping,
         phone: data.phone,
-      });
+      };
+
+      const preValidationResult = GetCheckout.safeParse(req);
+
+      if (!preValidationResult.success) {
+        alert('PREENCHA TODAS AS INFORMAÇOES ANTES DE ENVIAR');
+        return;
+      }
+
+      const { result } = await UseCases.payment.create.execute(req);
 
       if (result.type === 'ERROR') {
         switch (result.error.code) {
