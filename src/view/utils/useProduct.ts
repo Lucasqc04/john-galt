@@ -60,7 +60,7 @@ export function useProducts() {
     {
       id: '2',
       title: infos[1].title,
-      name: infos[0].name,
+      name: infos[1].name,
       originalPrice: 950,
       price: 900,
       description: infos[1].description,
