@@ -88,6 +88,10 @@ export const LanguageTexts = {
     calculate: 'shipping.calculate',
     deliveryIn: 'shipping.deliveryIn',
   },
+  privacyPolicy: {
+    title: 'privacyPolicy.title',
+    text: 'privacyPolicy.text',
+  },
 };
 
 export enum AcceptedLanguages {
