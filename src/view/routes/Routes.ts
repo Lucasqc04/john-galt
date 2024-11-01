@@ -45,4 +45,8 @@ export const ROUTES = {
   products: {
     call: (currentLang: string) => `/${currentLang}/produtos`,
   },
+  policyPrivacy: {
+    path: 'politica-de-privacidade',
+    call: (currentLang: string) => `/${currentLang}/politica-de-privacidade`,
+  },
 };

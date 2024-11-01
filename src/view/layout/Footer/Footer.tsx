@@ -15,7 +15,7 @@ export function Footer() {
 
   const redirects = [
     ROUTES.about.call(currentLang),
-    `/${currentLang}/politica-de-privacidade`,
+    ROUTES.policyPrivacy.call(currentLang),
     'mailto:diylabweb3@gmail.com',
   ];
 

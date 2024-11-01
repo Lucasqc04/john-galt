@@ -196,6 +196,18 @@
   "post": {
     "notFound": "Post Not Found!"
   },
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "text": [
+      "Your privacy is essential to us. It is the policy of DIY Security Lab to respect your privacy regarding any information we may collect on the site https://www.diyseclab.io and other sites we operate.",
+      "We collect personal information only when we truly need it to provide a service. We do so fairly and legally, with your knowledge and consent. We also inform you of the purpose for which we are collecting this information and how it will be used.",
+      "We retain the collected information only for as long as necessary to provide the requested service. When we store data, we use commercially acceptable means to prevent loss, theft, unauthorized access, disclosure, copying, use, or modification.",
+      "We do not publicly disclose personally identifiable information or share it with third parties, except as required by law.",
+      "Our site may contain links to external sites that are not operated by us. Be aware that we have no control over the content and practices of these sites and cannot assume responsibility for their respective privacy policies.",
+      "You are free to decline our request for personal information, understanding that we may not be able to provide some of the desired services if you do.",
+      "Continued use of our site will be considered acceptance of our privacy practices and handling of personal information. If you have any questions about how we handle user data and personal information, please contact us."
+    ]
+  },
   "cardNamePlaceholder": "Cardholder's Name",
   "cardNumberPlaceholder": "Card Number",
   "expiryDatePlaceholder": "MM/YY",

@@ -196,6 +196,18 @@
   "post": {
     "notFound": "Publicación no encontrada!"
   },
+  "privacyPolicy": {
+    "title": "Política de Privacidad",
+    "text": [
+      "Su privacidad es esencial para nosotros. Es política de DIY Security Lab respetar su privacidad con respecto a cualquier información que podamos recopilar en el sitio https://www.diyseclab.io y en otros sitios que operamos.",
+      "Recopilamos información personal solo cuando realmente la necesitamos para proporcionar un servicio. Lo hacemos de manera justa y legal, con su conocimiento y consentimiento. También le informamos el motivo por el cual estamos recopilando esta información y cómo será utilizada.",
+      "Retenemos la información recopilada solo durante el tiempo necesario para ofrecer el servicio solicitado. Cuando almacenamos datos, utilizamos métodos comercialmente aceptables para evitar pérdidas, robos, accesos, divulgaciones, copias, usos o modificaciones no autorizadas.",
+      "No divulgamos información de identificación personal públicamente ni a terceros, excepto cuando la ley lo exige.",
+      "Nuestro sitio puede contener enlaces a sitios externos que no son operados por nosotros. Tenga en cuenta que no tenemos control sobre el contenido y las prácticas de esos sitios y no podemos asumir responsabilidad por sus respectivas políticas de privacidad.",
+      "Usted tiene la libertad de rechazar nuestra solicitud de información personal, entendiendo que en ese caso, quizás no podamos ofrecer algunos de los servicios deseados.",
+      "El uso continuo de nuestro sitio será considerado como aceptación de nuestras prácticas relacionadas con la privacidad y el manejo de información personal. Si tiene alguna pregunta sobre cómo manejamos los datos de los usuarios e información personal, contáctenos."
+    ]
+  },
   "cardNamePlaceholder": "Nombre del titular",
   "cardNumberPlaceholder": "Número de tarjeta",
   "expiryDatePlaceholder": "MM/AA",
