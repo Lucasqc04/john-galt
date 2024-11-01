@@ -17,8 +17,9 @@ import { Checkout } from '../screens/Checkout/Checkout';
 import { NotFound } from '../screens/NotFound';
 import { Page } from '../screens/Page';
 import { Products } from '../screens/partials/Products';
+import { PrivacyPolicy } from '../screens/PrivacyPolicy';
 import { ProductPage } from '../screens/ProductPage/ProductPage';
-import { TutorialsPage } from '../screens/TutorialsPage'; // Importando a página de tutoriais
+import { TutorialsPage } from '../screens/TutorialsPage';
 import { ROUTES } from './Routes';
 
 export function BrowserRouter() {
@@ -42,11 +43,11 @@ export function BrowserRouter() {
             <Route path={ROUTES.cart.product.path} element={<ProductPage />} />
             <Route path={ROUTES.about.path} element={<About />} />
             <Route path={ROUTES.cart.path} element={<Cart />} />
+            <Route path={ROUTES.tutorials.path} element={<TutorialsPage />} />
             <Route
-              path={ROUTES.tutorials.path}
-              element={<TutorialsPage />}
-            />{' '}
-            {/* Nova rota para tutoriais */}
+              path={ROUTES.policyPrivacy.path}
+              element={<PrivacyPolicy />}
+            />
           </Route>
           <Route path={ROUTES.lang.call()}>
             <Route path={ROUTES.cart.checkout.path} element={<Checkout />} />
