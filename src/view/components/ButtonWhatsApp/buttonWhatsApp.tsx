@@ -5,7 +5,7 @@ function WhatsAppButton() {
     <button
       onClick={() =>
         window.open(
-          'https://api.whatsapp.com/send?phone=+5511994458337&text=Ol%C3%A1,%20Tudo%20bem?%0A%0AEu%20gostaria%20de%20saber%20mais%20sobre%20os%20produtos%20da%20DIY%20LAB...',
+          'https://api.whatsapp.com/send?phone=+5511993439032&text=Ol%C3%A1,%20Tudo%20bem?%0A%0AEu%20gostaria%20de%20saber%20mais%20sobre%20os%20produtos%20da%20DIY%20LAB...',
           '_blank',
         )
       }
