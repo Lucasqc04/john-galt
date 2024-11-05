@@ -37,6 +37,23 @@ export class GetCheckoutModel {
   address!: Address;
   items!: PaymentItemsModel[];
   phone!: PhoneModel;
+  cardName!: string;
+  cardNumber!: string;
+  expirationMonth!: string;
+  expirationYear!: string;
+  cvv!: string;
+  brand!:
+    | 'elo'
+    | 'visa'
+    | 'amex'
+    | 'mastercard'
+    | 'hipercard'
+    | 'undefined'
+    | 'unsupported';
+  installments!: InstallmentModel[];
+  selectInstallments!: string;
+  total!: number;
+  birthday!: string;
 }
 
 export const CreatedCheckoutModel = z.object({
@@ -51,10 +68,10 @@ export class ListInstallmentsModel {
 
 export class InstallmentModel {
   installment!: number;
-  has_interest!: boolean;
+  has_interest?: boolean;
   value!: number;
   currency!: string;
-  interest_percentage!: number;
+  interest_percentage?: number;
 }
 
 export class InstallmentsResponseModel {

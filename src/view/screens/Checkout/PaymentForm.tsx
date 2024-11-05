@@ -24,6 +24,20 @@ export function PaymentForm() {
   const total = watch('total');
   const cvv = watch('cvv');
 
+  const handleExpiryDateChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      let value = event.target.value.replace(/\D/g, '');
+
+      if (value.length >= 3) {
+        value = `${value.slice(0, 2)}/${value.slice(2, 4)}`;
+      }
+
+      event.target.value = value.slice(0, 5);
+      setValue('expiryDate', event.target.value);
+    },
+    [setValue],
+  );
+
   const HandleWithInstallments = useCallback(async () => {
     setLoading(true);
     try {
@@ -191,6 +205,7 @@ export function PaymentForm() {
               type="text"
               className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
               {...register('expiryDate', { required: true, maxLength: 5 })}
+              onChange={handleExpiryDateChange}
             />
             {errors.expiryDate && (
               <span className="text-red-500 text-xs">Campo Obrigatório</span>

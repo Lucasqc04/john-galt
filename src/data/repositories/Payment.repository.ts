@@ -35,7 +35,6 @@ export interface PaymentRepository {
   create(req: CreateReq, method: PaymentMethod): CreateRes;
   identifyBrand(req: IdentifyBrandReq): IdentifyBrandRes;
   listInstallments(req: ListInstallmentsReq): ListInstallmentsRes;
-  generatePaymentToken(req: GeneratePaymentTokenReq): GeneratePaymentTokenRes;
 }
 
 export class PaymentRepositoryImpl implements PaymentRepository {
@@ -45,6 +44,21 @@ export class PaymentRepositoryImpl implements PaymentRepository {
   ) {}
 
   async create(req: CreateReq, method: PaymentMethod): CreateRes {
+    if (method === 'EFI') {
+      const { result: GeneratedToken } = await this.generatePaymentToken({
+        brand: req.brand,
+        cvv: req.cvv,
+        expirationMonth: req.expirationMonth,
+        expirationYear: req.expirationYear,
+        number: req.cardNumber,
+        reuse: false,
+      });
+
+      if (GeneratedToken.type === 'ERROR') {
+        return Result.Error({ code: 'UNKNOWN' });
+      }
+    }
+
     try {
       const result = await this.api.post({
         url: `/create-payment/${method}`,
@@ -86,7 +100,7 @@ export class PaymentRepositoryImpl implements PaymentRepository {
     return Result.Success(result.data);
   }
 
-  async generatePaymentToken(
+  private async generatePaymentToken(
     req: GeneratePaymentTokenReq,
   ): GeneratePaymentTokenRes {
     try {

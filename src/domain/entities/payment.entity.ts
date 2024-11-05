@@ -84,6 +84,7 @@ export const GetCheckout = z.object({
   installments: Installments,
   selectInstallments: z.string(),
   total: z.number(),
+  birthday: z.string(),
 });
 export type GetCheckout = z.infer<typeof GetCheckout>;
 
@@ -149,6 +150,18 @@ export class Installment {
   installment!: number;
   value!: number;
   currency!: string;
+
+  public static toModel(entity: Installment): InstallmentModel {
+    const model = new InstallmentModel();
+
+    model.currency = entity.currency;
+
+    model.value = entity.value;
+
+    model.installment = entity.installment;
+
+    return model;
+  }
 
   public static fromModel(model: InstallmentModel): Installment {
     const entity = new Installment();

@@ -210,6 +210,7 @@ export function useCheckout() {
         installments: data.installments,
         total: data.total,
         selectInstallments: data.selectInstallments,
+        birthday: data.birthday,
       };
 
       const preValidationResult = GetCheckout.safeParse(req);
