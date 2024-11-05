@@ -122,10 +122,7 @@ export function useProductPage() {
   };
 
   useEffect(() => {
-    const storedCart = localStorage.getItem('cartItems');
-    if (storedCart) {
-      console.log('Carrinho carregado:', JSON.parse(storedCart));
-    }
+    localStorage.getItem('cartItems');
   }, []);
 
   return {
