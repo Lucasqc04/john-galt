@@ -1,11 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import {
-  GetCheckout,
-  Items,
-  PaymentMethod,
-} from '../../../domain/entities/payment.entity';
+import { GetCheckout, Items } from '../../../domain/entities/payment.entity';
 import { CalculatedShipping } from '../../../domain/entities/Shipping.entity';
 import { UseCases } from '../../../domain/usecases/UseCases';
 import { useCartContext } from '../../context/CartContext';
@@ -38,12 +34,22 @@ export function useCheckout() {
         areaCode: '',
         number: '',
       },
+      brand: 'undefined',
+      method: 'EFI',
+      cardName: '',
+      cardNumber: '',
+      cvv: '',
+      expiryDate: '',
+      installments: [],
+      items: [],
+      total: 0,
     },
   });
 
   const {
     register,
     handleSubmit,
+    setValue,
     getValues,
     watch,
     setError,
@@ -64,7 +70,8 @@ export function useCheckout() {
   const zipCode = watch('address.zipCode');
   useEffect(() => {
     setTotal(TotalValue + shipping - discount);
-  }, [TotalValue, shipping, discount]);
+    setValue('total', TotalValue + shipping - discount);
+  }, [TotalValue, shipping, discount, setValue]);
 
   useEffect(() => {
     const recalculateDiscount = async () => {
@@ -98,7 +105,8 @@ export function useCheckout() {
 
     recalculateDiscount();
     setTotal(TotalValue + shipping - discount);
-  }, [TotalValue, shipping, discount, getValues]);
+    setValue('total', TotalValue + shipping - discount);
+  }, [TotalValue, shipping, discount, getValues, setValue]);
 
   const HandleWithPostalCode = useCallback(
     async (cep: string) => {
@@ -183,16 +191,23 @@ export function useCheckout() {
 
       const itemsWithShipping = [...items, shippingItem];
 
-      const req = {
+      const req: GetCheckout = {
         couponCode: data.couponCode,
         identification: data.identification,
         address: data.address,
         payerEmail: data.payerEmail,
-        method: PaymentMethod.MP,
+        method: data.method,
         firstName: data.firstName,
         lastName: data.lastName,
         items: itemsWithShipping,
         phone: data.phone,
+        brand: data.brand,
+        cardName: data.cardName,
+        cardNumber: data.cardNumber,
+        cvv: data.cvv,
+        expiryDate: data.expiryDate,
+        installments: data.installments,
+        total: data.total,
       };
 
       const preValidationResult = GetCheckout.safeParse(req);
@@ -308,6 +323,7 @@ export function useCheckout() {
     form: {
       provider: form,
       errors,
+      watch,
       register,
       submit: handleSubmit(onSubmit),
     },

@@ -4,6 +4,7 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
 import { Loader } from '../../components/Loader';
 import { AddressForm } from './AddressForm';
+import { PaymentForm } from './PaymentForm';
 import { PersonForm } from './PersonForm';
 import { StepIndicator } from './StepIndicator';
 import { useCheckout } from './useCheckout';
@@ -29,7 +30,11 @@ export function Checkout() {
         </header>
         <StepIndicator
           currentStep={steps.current}
-          steps={[{ title: 'Infos' }, { title: 'Endereço' }]}
+          steps={[
+            { title: 'Infos' },
+            { title: 'Endereço' },
+            { title: 'Pagamento' },
+          ]}
         />
         <FormProvider {...form.provider}>
           <form
@@ -40,6 +45,7 @@ export function Checkout() {
               <div className="flex flex-col gap-y-2 pt-4">
                 {steps.current === 1 && <PersonForm />}
                 {steps.current === 2 && <AddressForm />}
+                {steps.current === 3 && <PaymentForm />}
               </div>
 
               <div className="w-full flex justify-between py-4">
@@ -61,6 +67,21 @@ export function Checkout() {
                     Próximo
                   </button>
                 )}
+                {steps.current === 2 &&
+                  cart.shippingOptions.length > 0 &&
+                  form.watch('method') === 'EFI' && (
+                    <>
+                      {
+                        <button
+                          type="button"
+                          onClick={steps.next}
+                          className="w-48 bg-blue-500 text-white p-2 rounded-md font-semibold hover:bg-blue-600 transition-colors"
+                        >
+                          Próximo
+                        </button>
+                      }
+                    </>
+                  )}
               </div>
             </article>
             <aside className="w-full lg:w-1/3 p-4 bg-gray-50 dark:bg-gray-800 rounded-md shadow-lg">
@@ -128,7 +149,7 @@ export function Checkout() {
                 ))}
               </ul>
 
-              <div className="py-6">
+              <div className="py-4">
                 <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
                   Código do Cupom
                 </label>
@@ -151,6 +172,32 @@ export function Checkout() {
                     {form.errors.couponCode.message}
                   </span>
                 )}
+              </div>
+
+              <div className="py-4 px-2">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  Escolha uma opção de frete
+                </h3>
+                <ul>
+                  {cart.shippingOptions.map((option) => (
+                    <li
+                      key={option.id}
+                      className="text-gray-900 dark:text-white"
+                    >
+                      <label>
+                        <input
+                          type="radio"
+                          name="shippingOption"
+                          value={option.id}
+                          onChange={() => cart.onShippingSelect(option)}
+                          className="mr-2"
+                        />
+                        {option.name} - R$ {parseFloat(option.price).toFixed(2)}{' '}
+                        - {option.deliveryTime} dias
+                      </label>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
               <div className="flex flex-col p-4 gap-y-2 border-t border-b border-gray-300 dark:border-gray-600">
@@ -190,38 +237,28 @@ export function Checkout() {
                 </span>
               </div>
 
-              {steps.current === 2 && cart.shippingOptions.length > 0 && (
+              {steps.current === 2 &&
+                cart.shippingOptions.length > 0 &&
+                form.watch('method') !== 'EFI' && (
+                  <>
+                    <button
+                      type="submit"
+                      className={`w-full p-2 text-lg font-semibold text-white rounded-md transition-colors ${
+                        isValid
+                          ? 'bg-blue-500 hover:bg-blue-600'
+                          : 'bg-gray-400 cursor-not-allowed'
+                      }`}
+                      disabled={!isValid}
+                    >
+                      Finalizar Pagamento
+                    </button>
+                  </>
+                )}
+              {steps.current === 3 && cart.shippingOptions.length > 0 && (
                 <>
-                  <div className="py-4">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                      Escolha uma opção de frete
-                    </h3>
-                    <ul>
-                      {cart.shippingOptions.map((option) => (
-                        <li
-                          key={option.id}
-                          className="text-gray-900 dark:text-white"
-                        >
-                          <label>
-                            <input
-                              type="radio"
-                              name="shippingOption"
-                              value={option.id}
-                              onChange={() => cart.onShippingSelect(option)}
-                              className="mr-2"
-                            />
-                            {option.name} - R${' '}
-                            {parseFloat(option.price).toFixed(2)} -{' '}
-                            {option.deliveryTime} dias
-                          </label>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
                   <button
                     type="submit"
-                    disabled={!isValid}
-                    className="w-full bg-blue-500 text-white p-2 mt-6 rounded-md font-semibold hover:bg-blue-600 transition-colors"
+                    className={`w-full p-2 text-lg font-semibold text-white rounded-md transition-colors ${'bg-blue-500 hover:bg-blue-600'}`}
                   >
                     Finalizar Pagamento
                   </button>
