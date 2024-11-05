@@ -196,6 +196,16 @@
   "post": {
     "notFound": "Post Not Found!"
   },
+  "paymentFailure": {
+    "title": "Payment Failed",
+    "description": "There was an error processing the payment, you will be redirected to secure payment with our support via WhatsApp in {{countdown}} seconds.",
+    "redirectButton": "Go to payment via WhatsApp"
+  },
+  "paymentSuccess": {
+    "title": "Thank You for Your Payment!",
+    "description": "Your payment was successful. We appreciate your trust in DiySecLab, and you're now safer with our products!",
+    "redirectButton": "Go to Homepage"
+  },
   "privacyPolicy": {
     "title": "Privacy Policy",
     "text": [
