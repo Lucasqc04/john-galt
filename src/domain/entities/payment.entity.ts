@@ -82,6 +82,7 @@ export const GetCheckout = z.object({
   cvv: z.string(),
   brand: Brand,
   installments: Installments,
+  selectInstallments: z.string(),
   total: z.number(),
 });
 export type GetCheckout = z.infer<typeof GetCheckout>;

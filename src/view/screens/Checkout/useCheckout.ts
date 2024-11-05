@@ -5,6 +5,7 @@ import { GetCheckout, Items } from '../../../domain/entities/payment.entity';
 import { CalculatedShipping } from '../../../domain/entities/Shipping.entity';
 import { UseCases } from '../../../domain/usecases/UseCases';
 import { useCartContext } from '../../context/CartContext';
+import { redirectToWhatsApp } from '../../utils/RedirectToWhatsapp';
 
 export function useCheckout() {
   const { items, TotalValue, updateItemQuantity, remove, clear } =
@@ -208,6 +209,7 @@ export function useCheckout() {
         expiryDate: data.expiryDate,
         installments: data.installments,
         total: data.total,
+        selectInstallments: data.selectInstallments,
       };
 
       const preValidationResult = GetCheckout.safeParse(req);
@@ -223,11 +225,11 @@ export function useCheckout() {
         switch (result.error.code) {
           case 'SERIALIZATION':
             alert('ERRO DE SERIALIZAÇÃO. POR FAVOR, ENTRE EM CONTATO');
-            redirectToWhatsApp({ ...data, items });
+            redirectToWhatsApp({ ...data, items }, shipping, total);
             return;
           default:
             alert('ERRO AO PROCESSAR PAGAMENTO. POR FAVOR, ENTRE EM CONTATO');
-            redirectToWhatsApp({ ...data, items });
+            redirectToWhatsApp({ ...data, items }, shipping, total);
             return;
         }
       }
@@ -237,30 +239,6 @@ export function useCheckout() {
       setLoading(false);
     }
   };
-
-  function redirectToWhatsApp(data: GetCheckout) {
-    const phoneNumber = '5511994458337';
-
-    const itemsText =
-      data.items && Array.isArray(data.items)
-        ? data.items
-            .map((item) => `${item.name}, na quantidade de ${item.quantity}`)
-            .join('\n')
-        : 'Nenhum item encontrado';
-
-    const text = `Olá, meu nome é ${data.firstName} ${data.lastName}. Houve um erro no pagamento via site e gostaria de finalizar meu pedido.
-
-    Endereço: ${data.address.street}, ${data.address.number}, ${data.address.complement} - ${data.address.city}/${data.address.state} - ${data.address.uf}
-    Items: ${itemsText}
-    Valor de Frete: ${shipping ?? 'não informado'}
-    Total: ${total ?? 'não informado'}
-    Cupom: ${data.couponCode ?? 'não informado'}`;
-
-    const encodedText = encodeURIComponent(text);
-    const whatsappURL = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedText}`;
-
-    window.location.href = whatsappURL;
-  }
 
   const applyCoupon = async () => {
     setLoading(true);
