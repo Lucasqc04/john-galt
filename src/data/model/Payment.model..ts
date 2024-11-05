@@ -43,3 +43,40 @@ export const CreatedCheckoutModel = z.object({
   initPoint: z.string().min(1),
 });
 export type CreatedCheckoutModel = z.infer<typeof CreatedCheckoutModel>;
+
+export class ListInstallmentsModel {
+  brand!: string;
+  total!: number;
+}
+
+export class InstallmentModel {
+  installment!: number;
+  has_interest!: boolean;
+  value!: number;
+  currency!: string;
+  interest_percentage!: number;
+}
+
+export class InstallmentsResponseModel {
+  rate!: number;
+  name!: string;
+  installments!: InstallmentModel[];
+}
+
+export class IdentifyBrandModel {
+  cardNumber!: string;
+}
+
+export class GeneratePaymentTokenModel {
+  brand!: string;
+  number!: string;
+  cvv!: string;
+  expirationMonth!: string;
+  expirationYear!: string;
+  reuse!: boolean;
+}
+
+export class GeneratedPaymentTokenModel {
+  payment_token!: string;
+  card_mask!: string;
+}
