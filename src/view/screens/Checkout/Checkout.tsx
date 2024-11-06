@@ -140,6 +140,7 @@ export function Checkout() {
                       </p>
                     </div>
                     <button
+                      type="button"
                       onClick={() => cart.remove(item.id)}
                       className="bg-red-500 text-white px-3 py-2 rounded-md hover:bg-red-600 transition-colors"
                     >
