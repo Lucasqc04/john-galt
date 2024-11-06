@@ -55,7 +55,7 @@ export const ROUTES = {
       call: (currentLang: string) => `/${currentLang}/failure`,
     },
     success: {
-      path: 'sucess',
+      path: 'success',
       call: (currentLang: string) => `/${currentLang}/success`,
     },
   },
