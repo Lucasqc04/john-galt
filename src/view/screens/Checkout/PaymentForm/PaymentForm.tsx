@@ -149,18 +149,27 @@ export function PaymentForm() {
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Parcelamento
             </label>
-            <select
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              onFocus={HandleWithInstallments}
-              {...form.register('selectInstallments')}
-            >
-              {installment &&
-                installment.map((option, idx) => (
+            {!installment && (
+              <button
+                type="button"
+                onClick={HandleWithInstallments}
+                className="w-48 bg-blue-500 text-white p-2 rounded-md font-semibold hover:bg-blue-600 transition-colors"
+              >
+                Calcular Parcelas
+              </button>
+            )}
+            {installment && (
+              <select
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                {...form.register('selectInstallments')}
+              >
+                {installment.map((option, idx) => (
                   <option value={option.installment} selected={idx === 0}>
                     {option.installment}x {option.currency}
                   </option>
                 ))}
-            </select>
+              </select>
+            )}
           </div>
         </div>
       )}
