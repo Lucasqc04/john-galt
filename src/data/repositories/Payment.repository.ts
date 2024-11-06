@@ -1,4 +1,5 @@
 import { PaymentMethod } from '../../domain/entities/payment.entity';
+import { ExceptionHandler } from '../../utils/ExceptionHandler';
 import { DefaultResultError, Result } from '../../utils/Result';
 import { EfiDatasource } from '../datasource/Efi.datasource';
 import { RemoteDataSource } from '../datasource/Remote.datasource';
@@ -50,6 +51,7 @@ export class PaymentRepositoryImpl implements PaymentRepository {
     private efiDatasource: EfiDatasource,
   ) {}
 
+  @ExceptionHandler()
   async create(req: CreateReq, method: PaymentMethod): CreateRes {
     let paymentToken: string | undefined;
 
@@ -72,49 +74,39 @@ export class PaymentRepositoryImpl implements PaymentRepository {
 
     const modelToValidate = this.getModelToValidate(method);
 
-    try {
-      const result = await this.api.post({
-        url: `/create-payment/${method}`,
-        model: modelToValidate,
-        body: {
-          payerEmail: req.payerEmail,
-          firstName: req.firstName,
-          lastName: req.lastName,
-          identification: req.identification,
-          couponCode: req.couponCode,
-          address: req.address,
-          items: req.items,
-          phone: req.phone,
-          selectInstallments: req.selectInstallments,
-          birthday: req.birthday,
-          paymentToken: paymentToken,
-        },
-      });
+    const result = await this.api.post({
+      url: `/create-payment/${method}`,
+      model: modelToValidate,
+      body: {
+        payerEmail: req.payerEmail,
+        firstName: req.firstName,
+        lastName: req.lastName,
+        identification: req.identification,
+        couponCode: req.couponCode,
+        address: req.address,
+        items: req.items,
+        phone: req.phone,
+        selectInstallments: req.selectInstallments,
+        birthday: req.birthday,
+        paymentToken: paymentToken,
+      },
+    });
 
-      if (!result) {
-        return Result.Error({ code: 'SERIALIZATION' });
-      }
-
-      return Result.Success(result);
-    } catch (error) {
-      console.error(error);
-      return Result.Error({ code: 'UNKNOWN' });
+    if (!result) {
+      return Result.Error({ code: 'SERIALIZATION' });
     }
+
+    return Result.Success(result);
   }
 
   async identifyBrand(req: IdentifyBrandReq): IdentifyBrandRes {
-    try {
-      const { result } = await this.efiDatasource.identifyBrand(req);
+    const { result } = await this.efiDatasource.identifyBrand(req);
 
-      if (result.type == 'ERROR') {
-        return Result.Error({ code: 'UNKNOWN' });
-      }
-
-      return Result.Success(result.data);
-    } catch (error) {
-      console.error(error);
+    if (result.type == 'ERROR') {
       return Result.Error({ code: 'UNKNOWN' });
     }
+
+    return Result.Success(result.data);
   }
 
   async listInstallments(req: ListInstallmentsReq): ListInstallmentsRes {
