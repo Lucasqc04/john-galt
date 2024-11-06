@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { LanguageTexts, useLanguage } from '../../../domain/locales/Language';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
+import { ROUTES } from '../../routes/Routes';
 import { styleFirstWord } from '../../utils/StyleWord';
 import { useProducts } from '../../utils/useProduct';
 
@@ -11,7 +12,6 @@ export function Products() {
   const { t } = useTranslation();
   const { products } = useProducts();
   const { currentLang } = useLanguage();
-  const navigate = useNavigate();
 
   const [currentImageIndexes, setCurrentImageIndexes] = useState<number[]>(
     Array(products.length).fill(0),
@@ -37,10 +37,6 @@ export function Products() {
           : newIndexes[productIndex] - 1;
       return newIndexes;
     });
-  };
-
-  const handleButton = (productId: number | string) => {
-    navigate(`/${currentLang || 'pt'}/produto/${productId}`);
   };
 
   return (
@@ -86,12 +82,12 @@ export function Products() {
                     <p className="dark:text-white my-4 text-gray-700 mb-4 text-center">
                       {product.description}
                     </p>
-                    <button
-                      onClick={() => handleButton(product.id)}
+                    <Link
+                      to={ROUTES.product.call(currentLang, product.id)}
                       className="w-full font-bold bg-[#F6911D] text-white dark:text-white py-2 rounded-md hover:bg-orange-600 transition-colors"
                     >
                       {t(LanguageTexts.products.buyNowButton)}
-                    </button>
+                    </Link>
                   </div>
                 )}
               </>
