@@ -22,6 +22,7 @@ export function usePaymentForm() {
   const method = watch('method');
   const total = watch('total');
   const cvv = watch('cvv');
+  const cardNumber = watch('cardNumber');
 
   const handleExpiryDateChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,6 +39,8 @@ export function usePaymentForm() {
   );
 
   const HandleWithInstallments = useCallback(async () => {
+    if (!brand || brand === 'undefined') return;
+
     setLoading(true);
     try {
       const { result } = await UseCases.payment.listInstallments.execute({
@@ -56,12 +59,6 @@ export function usePaymentForm() {
     }
   }, [total, brand, setValue]);
 
-  useEffect(() => {
-    if (cvv && cvv.length === 3) {
-      HandleWithInstallments();
-    }
-  }, [cvv, HandleWithInstallments]);
-
   const identifyBrand = useCallback(
     async (cardNumber: string) => {
       const { result } = await UseCases.payment.indentifyBrand.execute({
@@ -69,7 +66,7 @@ export function usePaymentForm() {
       });
 
       if (result.type === 'ERROR') {
-        alert('ERRO AO INDENTIFICAR BANDEIRA');
+        alert('ERRO AO IDENTIFICAR BANDEIRA');
         return;
       }
 
@@ -79,19 +76,24 @@ export function usePaymentForm() {
       }
 
       setBrand(result.data);
-      setValue('brand', brand);
+      setValue('brand', result.data);
     },
-    [brand, setValue],
+    [setValue],
   );
 
-  const cardNumber = watch('cardNumber');
   useEffect(() => {
     if (cardNumber && cardNumber.length === 16) {
       identifyBrand(cardNumber);
     } else {
       setBrand('unsupported');
     }
-  }, [cardNumber, identifyBrand, installment]);
+  }, [cardNumber, identifyBrand]);
+
+  useEffect(() => {
+    if (cvv && cvv.length === 3) {
+      HandleWithInstallments();
+    }
+  }, [cvv, brand, HandleWithInstallments]);
 
   return {
     t,
@@ -99,7 +101,6 @@ export function usePaymentForm() {
     method,
     loading,
     installment,
-    HandleWithInstallments,
     handleExpiryDateChange,
     form: {
       register,
