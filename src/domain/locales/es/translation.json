@@ -196,6 +196,16 @@
   "post": {
     "notFound": "Publicación no encontrada!"
   },
+  "paymentFailure": {
+    "title": "Pago Fallido",
+    "description": "Hubo un error al procesar el pago, serás redirigido a un pago seguro con nuestro soporte a través de WhatsApp en {{countdown}} segundos.",
+    "redirectButton": "Ir al pago vía WhatsApp"
+  },
+  "paymentSuccess": {
+    "title": "¡Gracias por Tu Pago!",
+    "description": "Tu pago fue exitoso. Agradecemos tu confianza en DiySecLab, y ahora estás más seguro con nuestros productos!",
+    "redirectButton": "Ir a la Página Principal"
+  },
   "privacyPolicy": {
     "title": "Política de Privacidad",
     "text": [
