@@ -27,7 +27,10 @@ type IdentifyBrandRes = Promise<Result<string, DefaultResultError>>;
 
 type ListInstallmentsReq = ListInstallmentsModel;
 type ListInstallmentsRes = Promise<
-  Result<InstallmentsResponseModel, DefaultResultError>
+  Result<
+    InstallmentsResponseModel,
+    { code: 'VALUE_TOO_LOW' } | DefaultResultError
+  >
 >;
 
 type GeneratePaymentTokenReq = GeneratePaymentTokenModel;
@@ -114,7 +117,12 @@ export class PaymentRepositoryImpl implements PaymentRepository {
     const { result } = await this.efiDatasource.listInstallments(req);
 
     if (result.type == 'ERROR') {
-      return Result.Error({ code: 'UNKNOWN' });
+      switch (result.error.code) {
+        case 'VALUE_TOO_LOW':
+          return Result.Error({ code: 'VALUE_TOO_LOW' });
+        default:
+          return Result.Error({ code: 'UNKNOWN' });
+      }
     }
 
     return Result.Success(result.data);

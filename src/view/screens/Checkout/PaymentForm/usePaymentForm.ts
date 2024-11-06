@@ -27,11 +27,9 @@ export function usePaymentForm() {
   const handleExpiryDateChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       let value = event.target.value.replace(/\D/g, '');
-
       if (value.length >= 3) {
         value = `${value.slice(0, 2)}/${value.slice(2, 4)}`;
       }
-
       event.target.value = value.slice(0, 5);
       setValue('expiryDate', event.target.value);
     },
@@ -39,17 +37,32 @@ export function usePaymentForm() {
   );
 
   const HandleWithInstallments = useCallback(async () => {
-    if (!brand || brand === 'undefined') return;
+    if (
+      !cardNumber ||
+      !total ||
+      !cvv ||
+      brand === 'undefined' ||
+      method !== 'EFI'
+    ) {
+      return;
+    }
 
     setLoading(true);
     try {
       const { result } = await UseCases.payment.listInstallments.execute({
         brand,
-        total: Math.round(total * 100),
+        total: total,
       });
 
       if (result.type === 'ERROR') {
-        return;
+        switch (result.error.code) {
+          case 'VALUE_TOO_LOW':
+            alert('VALOR MUITO BAIXO');
+            return;
+          default:
+            alert('ERRO AO BUSCAR PARCELAS');
+            return;
+        }
       }
 
       setInstallment(result.data);
@@ -57,7 +70,7 @@ export function usePaymentForm() {
     } finally {
       setLoading(false);
     }
-  }, [total, brand, setValue]);
+  }, [cardNumber, total, cvv, brand, method, setValue]);
 
   const identifyBrand = useCallback(
     async (cardNumber: string) => {
@@ -90,10 +103,16 @@ export function usePaymentForm() {
   }, [cardNumber, identifyBrand]);
 
   useEffect(() => {
-    if (cvv && cvv.length === 3) {
+    if (
+      cardNumber &&
+      total &&
+      cvv &&
+      brand !== 'undefined' &&
+      method === 'EFI'
+    ) {
       HandleWithInstallments();
     }
-  }, [cvv, brand, HandleWithInstallments]);
+  }, [cardNumber, total, cvv, brand, method, HandleWithInstallments]);
 
   return {
     t,

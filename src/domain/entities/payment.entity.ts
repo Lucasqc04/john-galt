@@ -170,7 +170,7 @@ export class ListInstallments {
 
     model.brand = entity.brand;
 
-    model.total = entity.total;
+    model.total = Math.round(entity.total * 100);
 
     return model;
   }
