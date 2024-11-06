@@ -1,4 +1,3 @@
-import { ChangeEvent } from 'react';
 import Amex from '../../../assets/images/logocard/amex-logo.svg';
 import Elo from '../../../assets/images/logocard/elo-logo.png';
 import Hipercard from '../../../assets/images/logocard/hipercard-logo.png';
@@ -15,6 +14,7 @@ export function PaymentForm() {
     form,
     loading,
     installment,
+    HandleWithInstallments,
     handleExpiryDateChange,
   } = usePaymentForm();
 
@@ -131,32 +131,29 @@ export function PaymentForm() {
               type="text"
               className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
               {...form.register('cvv', { required: true, maxLength: 3 })}
-              maxLength={3}
-              onInput={(e: ChangeEvent<HTMLInputElement>) => {
-                e.target.value = e.target.value.slice(0, 3);
-              }}
             />
             {form.errors.cvv && (
               <span className="text-red-500 text-xs">Campo Obrigatório</span>
             )}
           </div>
-          {installment && installment.length > 0 && (
-            <div className="col-span-12">
-              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                Parcelamento
-              </label>
-              <select
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                {...form.register('selectInstallments')}
-              >
-                {installment.map((option, idx) => (
+
+          <div className="col-span-12">
+            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              Parcelamento
+            </label>
+            <select
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              onFocus={HandleWithInstallments}
+              {...form.register('selectInstallments')}
+            >
+              {installment &&
+                installment.map((option, idx) => (
                   <option value={option.installment} selected={idx === 0}>
                     {option.installment}x {option.currency}
                   </option>
                 ))}
-              </select>
-            </div>
-          )}
+            </select>
+          </div>
         </div>
       )}
     </>

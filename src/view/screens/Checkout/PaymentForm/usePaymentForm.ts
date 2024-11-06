@@ -42,7 +42,7 @@ export function usePaymentForm() {
     try {
       const { result } = await UseCases.payment.listInstallments.execute({
         brand,
-        total: total * 100,
+        total: Math.round(total * 100),
       });
 
       if (result.type === 'ERROR') {
@@ -99,6 +99,7 @@ export function usePaymentForm() {
     method,
     loading,
     installment,
+    HandleWithInstallments,
     handleExpiryDateChange,
     form: {
       register,
