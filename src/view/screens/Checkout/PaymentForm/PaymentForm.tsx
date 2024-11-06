@@ -1,4 +1,9 @@
 import { ChangeEvent } from 'react';
+import Amex from '../../../assets/images/logocard/amex-logo.svg';
+import Elo from '../../../assets/images/logocard/elo-logo.png';
+import Hipercard from '../../../assets/images/logocard/hipercard-logo.png';
+import MasterCard from '../../../assets/images/logocard/mastercard-logo.png';
+import Visa from '../../../assets/images/logocard/visa-logo.png';
 import { Loader } from '../../../components/Loader';
 import { usePaymentForm } from './usePaymentForm';
 
@@ -86,40 +91,19 @@ export function PaymentForm() {
             </div>
             <div className="w-14 h-10 flex items-center justify-center bg-gray-700 border border-gray-600 rounded">
               {brand === 'visa' && (
-                <img
-                  src="src/view/assets/images/logocard/visa-logo.png"
-                  alt={t('visa')}
-                  className="h-7"
-                />
+                <img src={Visa} alt="Visa Logo" className="h-7" />
               )}
               {brand === 'mastercard' && (
-                <img
-                  src="src/view/assets/images/logocard/mastercard-logo.png"
-                  alt={t('mastercard')}
-                  className="h-7"
-                />
+                <img src={MasterCard} alt="MasterCard Logo" className="h-7" />
               )}
-              {brand === 'unsupported' && (
-                <svg
-                  className="text-gray-400 fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 48 48"
-                >
-                  <path
-                    fill="#ff9800"
-                    d="M32 10A14 14 0 1 0 32 38A14 14 0 1 0 32 10Z"
-                  ></path>
-                  <path
-                    fill="#d50000"
-                    d="M16 10A14 14 0 1 0 16 38A14 14 0 1 0 16 10Z"
-                  ></path>
-                  <path
-                    fill="#ff3d00"
-                    d="M18,24c0,4.755,2.376,8.95,6,11.48c3.624-2.53,6-6.725,6-11.48s-2.376-8.95-6-11.48 C20.376,15.05,18,19.245,18,24z"
-                  ></path>
-                </svg>
+              {brand === 'amex' && (
+                <img src={Amex} alt="Amex Logo" className="h-7" />
+              )}
+              {brand === 'elo' && (
+                <img src={Elo} alt="Elo Logo" className="h-7" />
+              )}
+              {brand === 'hipercard' && (
+                <img src={Hipercard} alt="Hipercard Logo" className="h-7" />
               )}
             </div>
           </div>

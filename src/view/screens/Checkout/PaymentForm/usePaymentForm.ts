@@ -73,6 +73,11 @@ export function usePaymentForm() {
         return;
       }
 
+      if (result.data === 'unsupported') {
+        alert('CARTÃO INVÁLIDO OU NÃO SUPORTADO.');
+        return;
+      }
+
       setBrand(result.data);
       setValue('brand', brand);
     },
