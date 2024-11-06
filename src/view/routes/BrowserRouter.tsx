@@ -47,7 +47,7 @@ export function BrowserRouter() {
             <Route path={ROUTES.cart.path} element={<Cart />} />
             <Route path={ROUTES.tutorials.path} element={<TutorialsPage />} />
             <Route
-              path={ROUTES.PaymentStatus.Sucess.path}
+              path={ROUTES.paymentStatus.success.path}
               element={<PaymentSuccess />}
             />
             <Route
@@ -57,7 +57,7 @@ export function BrowserRouter() {
           </Route>
           <Route path={ROUTES.lang.call()}>
             <Route
-              path={ROUTES.PaymentStatus.Failure.path}
+              path={ROUTES.paymentStatus.failure.path}
               element={<PaymentFailure />}
             />
             <Route path={ROUTES.cart.checkout.path} element={<Checkout />} />

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { Items } from '../../../domain/entities/payment.entity';
 import {
@@ -18,6 +18,7 @@ import { useProducts } from '../../utils/useProduct';
 
 export function useProductPage() {
   const [loading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const { products, infos } = useProducts();
   const { currentLang } = useCurrentLang();
@@ -113,19 +114,16 @@ export function useProductPage() {
         cancelButtonText: t('products.goToCart'),
       }).then((result) => {
         if (result.isConfirmed) {
-          window.location.reload();
+          navigate(ROUTES.products.call(currentLang));
         } else if (result.isDismissed) {
-          window.location.href = ROUTES.cart.call(currentLang);
+          navigate(ROUTES.cart.call(currentLang));
         }
       });
     }
   };
 
   useEffect(() => {
-    const storedCart = localStorage.getItem('cartItems');
-    if (storedCart) {
-      console.log('Carrinho carregado:', JSON.parse(storedCart));
-    }
+    localStorage.getItem('cartItems');
   }, []);
 
   return {

@@ -1,18 +1,23 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import {
-  GetCheckout,
-  Items,
-  PaymentMethod,
-} from '../../../domain/entities/payment.entity';
+import { GetCheckout, Items } from '../../../domain/entities/payment.entity';
 import { CalculatedShipping } from '../../../domain/entities/Shipping.entity';
 import { UseCases } from '../../../domain/usecases/UseCases';
 import { useCartContext } from '../../context/CartContext';
+import { ROUTES } from '../../routes/Routes';
+import { redirectToWhatsApp } from '../../utils/RedirectToWhatsapp';
+import { useCurrentLang } from '../../utils/useCurrentLang';
 
 export function useCheckout() {
-  const { items, TotalValue, updateItemQuantity, remove, clear } =
-    useCartContext();
+  const { currentLang } = useCurrentLang();
+  const {
+    items,
+    TotalValue,
+    updateItemQuantity,
+    remove,
+    clear: clearCart,
+  } = useCartContext();
 
   const form = useForm<GetCheckout>({
     mode: 'onChange',
@@ -33,17 +38,28 @@ export function useCheckout() {
         state: '',
         zipCode: '',
         uf: '',
+        neighborhood: '',
       },
       phone: {
         areaCode: '',
         number: '',
       },
+      brand: 'undefined',
+      method: 'EFI',
+      cardName: '',
+      cardNumber: '',
+      cvv: '',
+      expiryDate: '',
+      installments: [],
+      items: [],
+      total: 0,
     },
   });
 
   const {
     register,
     handleSubmit,
+    setValue,
     getValues,
     watch,
     setError,
@@ -62,9 +78,17 @@ export function useCheckout() {
   const navigate = useNavigate();
 
   const zipCode = watch('address.zipCode');
+
+  useEffect(() => {
+    if (items.length === 0) {
+      navigate(ROUTES.cart.call(currentLang));
+    }
+  }, [items, currentLang, navigate]);
+
   useEffect(() => {
     setTotal(TotalValue + shipping - discount);
-  }, [TotalValue, shipping, discount]);
+    setValue('total', TotalValue + shipping - discount);
+  }, [TotalValue, shipping, discount, setValue]);
 
   useEffect(() => {
     const recalculateDiscount = async () => {
@@ -98,7 +122,8 @@ export function useCheckout() {
 
     recalculateDiscount();
     setTotal(TotalValue + shipping - discount);
-  }, [TotalValue, shipping, discount, getValues]);
+    setValue('total', TotalValue + shipping - discount);
+  }, [TotalValue, shipping, discount, getValues, setValue]);
 
   const HandleWithPostalCode = useCallback(
     async (cep: string) => {
@@ -119,13 +144,15 @@ export function useCheckout() {
           }
         }
 
-        const { city, state, street, uf } = ListedAddress.data;
+        const { city, state, complement, street, uf, neighborhood } =
+          ListedAddress.data;
 
         form.setValue('address.city', city);
         form.setValue('address.street', street);
         form.setValue('address.state', state);
         form.setValue('address.uf', uf);
-        form.setValue('address.number', '');
+        form.setValue('address.neighborhood', neighborhood);
+        form.setValue('address.number', complement ?? '');
 
         const { result: CalculatedShipping } =
           await UseCases.shipping.calculate.execute({
@@ -181,16 +208,25 @@ export function useCheckout() {
 
       const itemsWithShipping = [...items, shippingItem];
 
-      const req = {
+      const req: GetCheckout = {
         couponCode: data.couponCode,
         identification: data.identification,
         address: data.address,
         payerEmail: data.payerEmail,
-        method: PaymentMethod.MP,
+        method: data.method,
         firstName: data.firstName,
         lastName: data.lastName,
         items: itemsWithShipping,
         phone: data.phone,
+        brand: data.brand,
+        cardName: data.cardName,
+        cardNumber: data.cardNumber,
+        cvv: data.cvv,
+        expiryDate: data.expiryDate,
+        installments: data.installments,
+        total: data.total,
+        selectInstallments: data.selectInstallments,
+        birthday: data.birthday,
       };
 
       const preValidationResult = GetCheckout.safeParse(req);
@@ -200,63 +236,36 @@ export function useCheckout() {
         return;
       }
 
-      CreateWhatsAppUrl({ ...data, items });
-
       const { result } = await UseCases.payment.create.execute(req);
 
       if (result.type === 'ERROR') {
         switch (result.error.code) {
           case 'SERIALIZATION':
             alert('ERRO DE SERIALIZAÇÃO. POR FAVOR, ENTRE EM CONTATO');
-            redirectToWhatsApp();
+            redirectToWhatsApp({ ...data, items }, shipping, total);
             return;
           default:
             alert('ERRO AO PROCESSAR PAGAMENTO. POR FAVOR, ENTRE EM CONTATO');
-            redirectToWhatsApp();
+            redirectToWhatsApp({ ...data, items }, shipping, total);
             return;
         }
       }
 
-      window.location.href = result.data.paymentLink;
+      if ('paymentLink' in result.data) {
+        window.location.href = result.data.paymentLink;
+        return;
+      }
+
+      if (result.data.data.status === 'approved') {
+        clearCart();
+        navigate(ROUTES.paymentStatus.success.call(currentLang));
+      } else {
+        navigate(ROUTES.paymentStatus.failure.call(currentLang));
+      }
     } finally {
       setLoading(false);
     }
   };
-
-  function CreateWhatsAppUrl(data: GetCheckout) {
-    const phoneNumber = '5511994458337';
-
-    const itemsText =
-      data.items && Array.isArray(data.items)
-        ? data.items
-            .map((item) => `${item.name}, na quantidade de ${item.quantity}`)
-            .join('\n')
-        : 'Nenhum item encontrado';
-
-    const text = `Olá, meu nome é ${data.firstName} ${data.lastName}. Houve um erro no pagamento via site e gostaria de finalizar meu pedido.
-
-    Endereço: ${data.address.street}, ${data.address.number}, ${data.address.complement} - ${data.address.city}/${data.address.state} - ${data.address.uf}
-    Items: ${itemsText}
-    Valor de Frete: ${shipping ?? 'não informado'}
-    Total: ${total ?? 'não informado'}
-    Cupom: ${data.couponCode ?? 'não informado'}`;
-
-    const encodedText = encodeURIComponent(text);
-    const whatsappURL = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedText}`;
-
-    localStorage.setItem('whatsappUrl', whatsappURL);
-  }
-
-  function redirectToWhatsApp() {
-    const whatsappURL = localStorage.getItem('whatsappUrl');
-    const Language = localStorage.getItem('language');
-
-    if (whatsappURL) {
-      window.location.href = `/${Language}/failure`;
-    } else {
-      console.error('WhatsApp URL not found in localStorage.');
-    }
-  }
 
   const applyCoupon = async () => {
     setLoading(true);
@@ -319,6 +328,7 @@ export function useCheckout() {
     form: {
       provider: form,
       errors,
+      watch,
       register,
       submit: handleSubmit(onSubmit),
     },
@@ -330,7 +340,6 @@ export function useCheckout() {
       total,
       items,
       subtotal: TotalValue,
-      clear,
       remove,
       updateItemQuantity,
       discount: {
