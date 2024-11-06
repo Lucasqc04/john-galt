@@ -5,8 +5,12 @@ import { GetCheckout, Items } from '../../../domain/entities/payment.entity';
 import { CalculatedShipping } from '../../../domain/entities/Shipping.entity';
 import { UseCases } from '../../../domain/usecases/UseCases';
 import { useCartContext } from '../../context/CartContext';
+import { ROUTES } from '../../routes/Routes';
+import { redirectToWhatsApp } from '../../utils/RedirectToWhatsapp';
+import { useCurrentLang } from '../../utils/useCurrentLang';
 
 export function useCheckout() {
+  const { currentLang } = useCurrentLang();
   const { items, TotalValue, updateItemQuantity, remove, clear } =
     useCartContext();
 
@@ -128,13 +132,15 @@ export function useCheckout() {
           }
         }
 
-        const { city, state, street, uf, neighborhood } = ListedAddress.data;
+        const { city, state, complement, street, uf, neighborhood } =
+          ListedAddress.data;
 
         form.setValue('address.city', city);
         form.setValue('address.street', street);
         form.setValue('address.state', state);
         form.setValue('address.uf', uf);
         form.setValue('address.neighborhood', neighborhood);
+        form.setValue('address.number', complement ?? '');
 
         const { result: CalculatedShipping } =
           await UseCases.shipping.calculate.execute({
@@ -218,19 +224,17 @@ export function useCheckout() {
         return;
       }
 
-      CreateWhatsAppUrl({ ...data, items });
-
       const { result } = await UseCases.payment.create.execute(req);
 
       if (result.type === 'ERROR') {
         switch (result.error.code) {
           case 'SERIALIZATION':
             alert('ERRO DE SERIALIZAÇÃO. POR FAVOR, ENTRE EM CONTATO');
-            // redirectToWhatsApp({ ...data, items }, shipping, total);
+            redirectToWhatsApp({ ...data, items }, shipping, total);
             return;
           default:
             alert('ERRO AO PROCESSAR PAGAMENTO. POR FAVOR, ENTRE EM CONTATO');
-            // redirectToWhatsApp({ ...data, items }, shipping, total);
+            redirectToWhatsApp({ ...data, items }, shipping, total);
             return;
         }
       }
@@ -241,9 +245,9 @@ export function useCheckout() {
       }
 
       if (result.data.data.status === 'approved') {
-        navigate('/pt/success');
+        navigate(ROUTES.paymentStatus.success.call(currentLang));
       } else {
-        navigate('/pt/failure');
+        navigate(ROUTES.paymentStatus.failure.call(currentLang));
       }
     } finally {
       setLoading(false);
