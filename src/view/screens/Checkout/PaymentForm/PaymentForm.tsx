@@ -30,16 +30,16 @@ export function PaymentForm() {
               label: 'Cartão de Crédito',
               value: 'EFI',
             },
-            // {
-            //   label: 'Cartão de Crédito - Mercado Pago',
-            //   value: 'MP',
-            // },
-            // { label: 'Pix', value: 'MP' },
-            // {
-            //   label: 'Conta Mercado Pago',
-            //   value: 'MP',
-            // },
-            // { label: 'Outros', value: 'MP' },
+            {
+              label: 'Cartão de Crédito - Mercado Pago',
+              value: 'MP',
+            },
+            { label: 'Pix', value: 'MP' },
+            {
+              label: 'Conta Mercado Pago',
+              value: 'MP',
+            },
+            { label: 'Outros', value: 'MP' },
           ].map((method, idx) => (
             <label
               key={idx}
