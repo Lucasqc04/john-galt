@@ -31,11 +31,6 @@ export function PaymentForm() {
               value: 'EFI',
             },
             { label: 'Pix', value: 'MP' },
-            {
-              label: 'Conta Mercado Pago',
-              value: 'MP',
-            },
-            { label: 'Outros', value: 'MP' },
           ].map((method, idx) => (
             <label
               key={idx}
