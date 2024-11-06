@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { LanguageTexts, useLanguage } from '../../../domain/locales/Language';
-import { BackgroundAnimatedProduct } from '../../styles/Products/Product.styles';
+import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import { styleFirstWord } from '../../utils/StyleWord';
 import { useProducts } from '../../utils/useProduct';
 

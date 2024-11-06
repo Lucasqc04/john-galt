@@ -4,8 +4,8 @@ import { MdCheck } from 'react-icons/md';
 import { LanguageTexts } from '../../../domain/locales/Language';
 
 import { useEffect, useState } from 'react';
+import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import { Loader } from '../../components/Loader';
-import { BackgroundAnimatedProduct } from '../../styles/Products/Product.styles';
 import { styleLastWord } from '../../utils/StyleWord';
 import { BlogLinks } from '../partials/BlogLinks';
 import { useProductPage } from './useProductPage';
