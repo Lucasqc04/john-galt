@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import axios from 'axios';
-import { DefaultResultError, Result } from './Result';
+import { isAxiosError } from 'axios';
+import { RemoteDataSource } from '../data/datasource/Remote.datasource';
+import { Http } from '../domain/http';
+import { Result } from './Result';
 
 export function ExceptionHandler() {
   return function (
@@ -14,28 +16,22 @@ export function ExceptionHandler() {
       try {
         return await originalMethod.apply(this, args);
       } catch (error) {
-        if (
-          error instanceof Error &&
-          'code' in error &&
-          error.code === 'EAI_AGAIN'
-        ) {
-          return Result.Error({ code: 'NETWORK_ERROR' });
+        if (error instanceof Error) {
+          Http.checkError(error);
+          if (
+            error.message.includes('O valor [100] é inferior ao limite mínimo')
+          ) {
+            return Result.Error({ code: 'VALUE_TOO_LOW' });
+          }
         }
 
-        if (
-          error instanceof Error &&
-          error.message.includes('O valor [100] é inferior ao limite mínimo')
-        ) {
-          return Result.Error({ code: 'VALUE_TOO_LOW' });
-        }
-
-        if (axios.isAxiosError(error) && error.response?.status === 404) {
-          return Result.Error({ code: 'NOT_FOUND' });
+        if (isAxiosError(error)) {
+          RemoteDataSource.checkError(error);
         }
 
         console.error(error);
 
-        return Result.Error({ code: 'UNKNOWN' } as DefaultResultError);
+        return Result.Error({ code: 'UNKNOWN' });
       }
     };
 
