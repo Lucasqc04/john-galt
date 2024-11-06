@@ -36,7 +36,7 @@ export function ProductPage() {
               <div className="flex items-center justify-center space-x-4">
                 <button
                   onClick={image.prev}
-                  className="bg-[#F6911D] text-white p-2 rounded-full"
+                  className="bg-orange-primary text-white p-2 rounded-full"
                 >
                   <FaChevronLeft />
                 </button>
@@ -47,7 +47,7 @@ export function ProductPage() {
                 />
                 <button
                   onClick={image.next}
-                  className="bg-[#F6911D] text-white p-2 rounded-full"
+                  className="bg-orange-primary text-white p-2 rounded-full"
                 >
                   <FaChevronRight />
                 </button>
@@ -61,7 +61,7 @@ export function ProductPage() {
                     alt={`Thumbnail ${index}`}
                     className={`w-12 h-12 md:w-16 md:h-16 object-cover cursor-pointer border ${
                       image.index === index
-                        ? 'border-[#F6911D]'
+                        ? 'border-orange-primary'
                         : 'border-gray-300 dark:border-gray-700'
                     } rounded-md`}
                     onClick={() => image.thumbnail(index)}
@@ -101,7 +101,7 @@ export function ProductPage() {
                 />
                 <button
                   onClick={cart.add}
-                  className="bg-[#F6911D] text-white p-2 rounded-md ml-2"
+                  className="bg-orange-primary text-white p-2 rounded-md ml-2"
                 >
                   {t(LanguageTexts.products.addToCartButton)}
                 </button>
@@ -120,7 +120,7 @@ export function ProductPage() {
                   />
                   <button
                     onClick={shipping.calculate}
-                    className="bg-[#F6911D] text-white p-2 rounded-md ml-2"
+                    className="bg-orange-primary text-white p-2 rounded-md ml-2"
                     disabled={loading}
                   >
                     {loading
@@ -175,7 +175,7 @@ export function ProductPage() {
           <div>
             <h2 className="text-3xl md:text-4xl font-bold mb-20 mt-36 text-center dark:text-white">
               {styleLastWord(t(LanguageTexts.products.resourcesTitle))}
-              <span className="text-[#F6911D]">{product.name}</span>
+              <span className="text-orange-primary">{product.name}</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {product.resources.map((resource: string, index: number) => (

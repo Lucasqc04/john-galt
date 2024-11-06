@@ -15,7 +15,7 @@ export function BlogPost() {
   return (
     <div className="min-h-screen pt-[15%] md:pt-[10%] dark:bg-gray-900 px-8">
       <header className="text-center mb-14 mt-16">
-        <h1 className="text-5xl font-bold text-[#F6911D] dark:text-[#F6911D]">
+        <h1 className="text-5xl font-bold text-orange-primary">
           {selectedPost.title}
         </h1>
         <h2 className="text-2xl mt-4 text-gray-600 dark:text-gray-300">
@@ -28,11 +28,11 @@ export function BlogPost() {
           {selectedPost.sections.map((section, index) => (
             <li
               key={index}
-              className="text-xl text-[#F6911D] dark:text-[#F6911D] font-medium cursor-pointer hover:underline"
+              className="text-xl text-orange-primary font-medium cursor-pointer hover:underline"
               onClick={() => isRefsReady && scrollToSection(index)}
             >
               <span className="flex items-center">
-                <FaRegCircle className="text-[#F6911D] mr-2" />
+                <FaRegCircle className="text-orange-primary mr-2" />
                 {index + 1}. {section.title}
               </span>
             </li>
