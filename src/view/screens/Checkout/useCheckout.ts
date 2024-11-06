@@ -119,15 +119,13 @@ export function useCheckout() {
           }
         }
 
-        const { city, complement, state, street, uf } = ListedAddress.data;
+        const { city, state, street, uf } = ListedAddress.data;
 
         form.setValue('address.city', city);
         form.setValue('address.street', street);
         form.setValue('address.state', state);
-        if (complement) {
-          form.setValue('address.number', complement);
-        }
         form.setValue('address.uf', uf);
+        form.setValue('address.number', '');
 
         const { result: CalculatedShipping } =
           await UseCases.shipping.calculate.execute({
@@ -202,17 +200,19 @@ export function useCheckout() {
         return;
       }
 
+      CreateWhatsAppUrl({ ...data, items });
+
       const { result } = await UseCases.payment.create.execute(req);
 
       if (result.type === 'ERROR') {
         switch (result.error.code) {
           case 'SERIALIZATION':
             alert('ERRO DE SERIALIZAÇÃO. POR FAVOR, ENTRE EM CONTATO');
-            redirectToWhatsApp({ ...data, items });
+            redirectToWhatsApp();
             return;
           default:
             alert('ERRO AO PROCESSAR PAGAMENTO. POR FAVOR, ENTRE EM CONTATO');
-            redirectToWhatsApp({ ...data, items });
+            redirectToWhatsApp();
             return;
         }
       }
@@ -223,7 +223,7 @@ export function useCheckout() {
     }
   };
 
-  function redirectToWhatsApp(data: GetCheckout) {
+  function CreateWhatsAppUrl(data: GetCheckout) {
     const phoneNumber = '5511994458337';
 
     const itemsText =
@@ -244,7 +244,18 @@ export function useCheckout() {
     const encodedText = encodeURIComponent(text);
     const whatsappURL = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedText}`;
 
-    window.location.href = whatsappURL;
+    localStorage.setItem('whatsappUrl', whatsappURL);
+  }
+
+  function redirectToWhatsApp() {
+    const whatsappURL = localStorage.getItem('whatsappUrl');
+    const Language = localStorage.getItem('language');
+
+    if (whatsappURL) {
+      window.location.href = `/${Language}/failure`;
+    } else {
+      console.error('WhatsApp URL not found in localStorage.');
+    }
   }
 
   const applyCoupon = async () => {
