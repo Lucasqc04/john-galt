@@ -25,7 +25,7 @@ type ListInstallmentsReq = {
   total: number;
 };
 type ListInstallmentsRes = Promise<
-  Result<InstallmentsResponse, DefaultResultError>
+  Result<InstallmentsResponse, { code: 'VALUE_TOO_LOW' } | DefaultResultError>
 >;
 
 type GeneratePaymentTokenReq = {
@@ -91,9 +91,16 @@ export class EfiDatasourceImpl implements EfiDatasource {
       ) {
         return Result.Success(installments);
       } else {
+        console.log('erro no else');
         return Result.Error({ code: 'UNKNOWN' });
       }
-    } catch {
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        error.message.includes('O valor [100] é inferior ao limite mínimo')
+      ) {
+        return Result.Error({ code: 'VALUE_TOO_LOW' });
+      }
       return Result.Error({ code: 'UNKNOWN' });
     }
   }
