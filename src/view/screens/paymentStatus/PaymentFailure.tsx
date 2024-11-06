@@ -25,11 +25,11 @@ export function PaymentFailure() {
   }, [whatsappUrl]);
 
   return (
-    <div className="min-h-screen bg-[#F0F4F8] dark:bg-gray-900 pt-[15%] md:pt-[10%] px-4 text-center">
+    <div className="min-h-screen bg-primary-light dark:bg-primary-dark pt-[15%] md:pt-[10%] px-4 text-center">
       <div className="flex justify-center mb-6">
         <LanguageSwitcher className="transform scale-110" />
       </div>
-      <h1 className="text-3xl md:text-4xl font-bold text-[#F6911D] dark:text-white">
+      <h1 className="text-3xl md:text-4xl font-bold text-orange-primary dark:text-white">
         {t('paymentFailure.title')}
       </h1>
       <p className="text-lg md:text-xl mt-6 text-gray-700 dark:text-gray-300">
@@ -38,7 +38,7 @@ export function PaymentFailure() {
       {whatsappUrl && (
         <a
           href={whatsappUrl}
-          className="mt-8 inline-block bg-[#F6911D] text-white px-6 py-2 rounded-md font-medium hover:bg-orange-600 transition-colors"
+          className="mt-8 inline-block bg-orange-primary text-white px-6 py-2 rounded-md font-medium hover:bg-orange-600 transition-colors"
           target="_blank"
           rel="noopener noreferrer"
         >

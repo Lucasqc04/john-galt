@@ -18,6 +18,9 @@ export const ROUTES = {
     path: 'sobre-nos',
     call: (currentLang: string) => `/${currentLang}/sobre-nos`,
   },
+  product: {
+    call: (currentLang: string, id: string) => `/${currentLang}/produto/${id}`,
+  },
   cart: {
     path: 'carrinho',
     call: (currentLang: string) => `/${currentLang}/carrinho`,
@@ -37,7 +40,7 @@ export const ROUTES = {
           `/${currentLang}/produto/${id}`,
       },
       SEEDKIT: {
-        call: (currentLang: string, id: string = '3') =>
+        call: (currentLang: string, id: string = '2') =>
           `/${currentLang}/produto/${id}`,
       },
     },
