@@ -6,7 +6,7 @@ import { Installment, ListInstallments } from '../../entities/payment.entity';
 export type ListInstallmentsReq = ListInstallments;
 
 export type ListInstallmentsRes = Promise<
-  Result<Installment[], DefaultResultError>
+  Result<Installment[], { code: 'VALUE_TOO_LOW' } | DefaultResultError>
 >;
 
 export type ListInstallmentsUseCase = UseCase<
@@ -23,7 +23,12 @@ export class ListInstallmentsUseCaseImpl implements ListInstallmentsUseCase {
     );
 
     if (result.type === 'ERROR') {
-      return Result.Error({ code: 'UNKNOWN' });
+      switch (result.error.code) {
+        case 'VALUE_TOO_LOW':
+          return Result.Error({ code: 'VALUE_TOO_LOW' });
+        default:
+          return Result.Error({ code: 'UNKNOWN' });
+      }
     }
 
     return Result.Success(

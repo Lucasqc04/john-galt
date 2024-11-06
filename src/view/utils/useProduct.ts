@@ -82,8 +82,8 @@ export function useProducts() {
       id: '10000',
       title: infos[0].title,
       name: 'PRODUTO TESTE',
-      originalPrice: 2,
-      price: 1,
+      originalPrice: 5,
+      price: 3,
       description: infos[0].description,
       images: [
         Seedkit7,
