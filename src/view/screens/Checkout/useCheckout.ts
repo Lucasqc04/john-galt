@@ -11,8 +11,13 @@ import { useCurrentLang } from '../../utils/useCurrentLang';
 
 export function useCheckout() {
   const { currentLang } = useCurrentLang();
-  const { items, TotalValue, updateItemQuantity, remove, clear } =
-    useCartContext();
+  const {
+    items,
+    TotalValue,
+    updateItemQuantity,
+    remove,
+    clear: clearCart,
+  } = useCartContext();
 
   const form = useForm<GetCheckout>({
     mode: 'onChange',
@@ -252,6 +257,7 @@ export function useCheckout() {
       }
 
       if (result.data.data.status === 'approved') {
+        clearCart();
         navigate(ROUTES.paymentStatus.success.call(currentLang));
       } else {
         navigate(ROUTES.paymentStatus.failure.call(currentLang));
@@ -334,7 +340,6 @@ export function useCheckout() {
       total,
       items,
       subtotal: TotalValue,
-      clear,
       remove,
       updateItemQuantity,
       discount: {
