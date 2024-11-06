@@ -40,6 +40,7 @@ export class CouponRepositoryImpl implements CouponRepository {
         return Result.Error({ code: 'NOT_FOUND' });
       }
 
+      console.error(error);
       return Result.Error({ code: 'UNKNOWN' });
     }
   }

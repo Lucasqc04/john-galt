@@ -71,7 +71,8 @@ export class EfiDatasourceImpl implements EfiDatasource {
       ).verifyCardBrand();
 
       return Result.Success(brand);
-    } catch {
+    } catch (error) {
+      console.error(error);
       return Result.Error({ code: 'UNKNOWN' });
     }
   }
@@ -101,6 +102,8 @@ export class EfiDatasourceImpl implements EfiDatasource {
       ) {
         return Result.Error({ code: 'VALUE_TOO_LOW' });
       }
+
+      console.error(error);
       return Result.Error({ code: 'UNKNOWN' });
     }
   }
@@ -126,7 +129,8 @@ export class EfiDatasourceImpl implements EfiDatasource {
       } else {
         return Result.Error({ code: 'UNKNOWN' });
       }
-    } catch {
+    } catch (error) {
+      console.error(error);
       return Result.Error({ code: 'UNKNOWN' });
     }
   }

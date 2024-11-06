@@ -94,7 +94,8 @@ export class PaymentRepositoryImpl implements PaymentRepository {
       }
 
       return Result.Success(result);
-    } catch {
+    } catch (error) {
+      console.error(error);
       return Result.Error({ code: 'UNKNOWN' });
     }
   }
@@ -108,7 +109,8 @@ export class PaymentRepositoryImpl implements PaymentRepository {
       }
 
       return Result.Success(result.data);
-    } catch {
+    } catch (error) {
+      console.error(error);
       return Result.Error({ code: 'UNKNOWN' });
     }
   }
@@ -139,7 +141,8 @@ export class PaymentRepositoryImpl implements PaymentRepository {
       }
 
       return Result.Success(result.data);
-    } catch {
+    } catch (error) {
+      console.error(error);
       return Result.Error({ code: 'UNKNOWN' });
     }
   }

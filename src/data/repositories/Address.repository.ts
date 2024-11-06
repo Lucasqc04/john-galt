@@ -28,7 +28,9 @@ export class AddressRepositoryImpl implements AddressRepository {
       }
 
       return Result.Success(result);
-    } catch {
+    } catch (error) {
+      console.error(error);
+
       return Result.Error({ code: 'UNKNOWN' });
     }
   }
