@@ -4,7 +4,7 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
 import { Loader } from '../../components/Loader';
 import { AddressForm } from './AddressForm';
-import { PaymentForm } from './PaymentForm';
+import { PaymentForm } from './PaymentForm/PaymentForm';
 import { PersonForm } from './PersonForm';
 import { StepIndicator } from './StepIndicator';
 import { useCheckout } from './useCheckout';

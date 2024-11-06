@@ -1,93 +1,17 @@
-import { useCallback, useEffect, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
-import {
-  Brand,
-  GetCheckout,
-  Installment,
-} from '../../../domain/entities/payment.entity';
-import { UseCases } from '../../../domain/usecases/UseCases';
-import { Loader } from '../../components/Loader';
+import { ChangeEvent } from 'react';
+import { Loader } from '../../../components/Loader';
+import { usePaymentForm } from './usePaymentForm';
 
 export function PaymentForm() {
-  const { t } = useTranslation();
-  const [loading, setLoading] = useState<boolean>(false);
   const {
-    register,
-    watch,
-    setValue,
-    formState: { errors },
-  } = useFormContext<GetCheckout>();
-  const [brand, setBrand] = useState<Brand>('undefined');
-  const [installment, setInstallment] = useState<Installment[]>();
-  const method = watch('method');
-  const total = watch('total');
-  const cvv = watch('cvv');
-
-  const handleExpiryDateChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      let value = event.target.value.replace(/\D/g, '');
-
-      if (value.length >= 3) {
-        value = `${value.slice(0, 2)}/${value.slice(2, 4)}`;
-      }
-
-      event.target.value = value.slice(0, 5);
-      setValue('expiryDate', event.target.value);
-    },
-    [setValue],
-  );
-
-  const HandleWithInstallments = useCallback(async () => {
-    setLoading(true);
-    try {
-      const { result } = await UseCases.payment.listInstallments.execute({
-        brand,
-        total: total * 100,
-      });
-
-      if (result.type === 'ERROR') {
-        return;
-      }
-
-      setInstallment(result.data);
-      setValue('installments', result.data);
-    } finally {
-      setLoading(false);
-    }
-  }, [total, brand, setValue]);
-
-  useEffect(() => {
-    if (cvv && cvv.length === 3) {
-      HandleWithInstallments();
-    }
-  }, [cvv, HandleWithInstallments]);
-
-  const identifyBrand = useCallback(
-    async (cardNumber: string) => {
-      const { result } = await UseCases.payment.indentifyBrand.execute({
-        cardNumber,
-      });
-
-      if (result.type === 'ERROR') {
-        alert('ERRO AO INDENTIFICAR BANDEIRA');
-        return;
-      }
-
-      setBrand(result.data);
-      setValue('brand', brand);
-    },
-    [brand, setValue],
-  );
-
-  const cardNumber = watch('cardNumber');
-  useEffect(() => {
-    if (cardNumber && cardNumber.length === 16) {
-      identifyBrand(cardNumber);
-    } else {
-      setBrand('unsupported');
-    }
-  }, [cardNumber, identifyBrand, installment]);
+    t,
+    brand,
+    method,
+    form,
+    loading,
+    installment,
+    handleExpiryDateChange,
+  } = usePaymentForm();
 
   return (
     <>
@@ -111,7 +35,7 @@ export function PaymentForm() {
             >
               <input
                 type="radio"
-                {...register('method')}
+                {...form.register('method')}
                 value={method.value}
                 className="hidden peer"
               />
@@ -134,9 +58,9 @@ export function PaymentForm() {
             <input
               type="text"
               className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-              {...register('cardName', { required: true })}
+              {...form.register('cardName', { required: true })}
             />
-            {errors.cardName && (
+            {form.errors.cardName && (
               <span className="text-red-500 text-xs">{t('requiredField')}</span>
             )}
           </div>
@@ -149,9 +73,12 @@ export function PaymentForm() {
               <input
                 type="text"
                 className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                {...register('cardNumber', { required: true, maxLength: 16 })}
+                {...form.register('cardNumber', {
+                  required: true,
+                  maxLength: 16,
+                })}
               />
-              {errors.cardNumber && (
+              {form.errors.cardNumber && (
                 <span className="text-red-500 text-xs">
                   {t('requiredField')}
                 </span>
@@ -204,10 +131,10 @@ export function PaymentForm() {
             <input
               type="text"
               className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-              {...register('expiryDate', { required: true, maxLength: 5 })}
+              {...form.register('expiryDate', { required: true, maxLength: 5 })}
               onChange={handleExpiryDateChange}
             />
-            {errors.expiryDate && (
+            {form.errors.expiryDate && (
               <span className="text-red-500 text-xs">Campo Obrigatório</span>
             )}
           </div>
@@ -219,9 +146,13 @@ export function PaymentForm() {
             <input
               type="text"
               className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-              {...register('cvv', { required: true, maxLength: 3 })}
+              {...form.register('cvv', { required: true, maxLength: 3 })}
+              maxLength={3}
+              onInput={(e: ChangeEvent<HTMLInputElement>) => {
+                e.target.value = e.target.value.slice(0, 3);
+              }}
             />
-            {errors.cvv && (
+            {form.errors.cvv && (
               <span className="text-red-500 text-xs">Campo Obrigatório</span>
             )}
           </div>
@@ -232,7 +163,7 @@ export function PaymentForm() {
               </label>
               <select
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                {...register('selectInstallments')}
+                {...form.register('selectInstallments')}
               >
                 {installment.map((option, idx) => (
                   <option value={option.installment} selected={idx === 0}>
