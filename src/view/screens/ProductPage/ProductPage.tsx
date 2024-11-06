@@ -3,7 +3,6 @@ import { FaChevronLeft, FaChevronRight, FaTruckFast } from 'react-icons/fa6';
 import { MdCheck } from 'react-icons/md';
 import { LanguageTexts } from '../../../domain/locales/Language';
 
-import { useEffect, useState } from 'react';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import { Loader } from '../../components/Loader';
 import { styleLastWord } from '../../utils/StyleWord';
@@ -11,35 +10,17 @@ import { BlogLinks } from '../partials/BlogLinks';
 import { useProductPage } from './useProductPage';
 
 export function ProductPage() {
-  const { t, cart, form, loading, product, quantity, shipping, register } =
-    useProductPage();
-
-  const [imageIndex, setImageIndex] = useState(0);
-  const [currentImage, setCurrentImage] = useState(product?.images[0] || '');
-
-  useEffect(() => {
-    if (product) {
-      setCurrentImage(product.images[imageIndex]);
-    }
-  }, [imageIndex, product]);
-
-  const image = {
-    next: () => {
-      setImageIndex(
-        (prevIndex) => (prevIndex + 1) % (product?.images.length || 1),
-      );
-    },
-    prev: () => {
-      setImageIndex(
-        (prevIndex) =>
-          (prevIndex - 1 + (product?.images.length || 1)) %
-          (product?.images.length || 1),
-      );
-    },
-    thumbnail: (index: number) => {
-      setImageIndex(index);
-    },
-  };
+  const {
+    t,
+    cart,
+    form,
+    image,
+    loading,
+    product,
+    quantity,
+    shipping,
+    register,
+  } = useProductPage();
 
   if (!product) {
     return <Loader />;
@@ -60,7 +41,7 @@ export function ProductPage() {
                   <FaChevronLeft />
                 </button>
                 <img
-                  src={currentImage}
+                  src={image.current}
                   alt={product.name}
                   className="w-[80%] h-auto object-cover rounded-md shadow-lg dark:border-gray-700"
                 />
@@ -79,7 +60,7 @@ export function ProductPage() {
                     src={imageUrl}
                     alt={`Thumbnail ${index}`}
                     className={`w-12 h-12 md:w-16 md:h-16 object-cover cursor-pointer border ${
-                      imageIndex === index
+                      image.index === index
                         ? 'border-[#F6911D]'
                         : 'border-gray-300 dark:border-gray-700'
                     } rounded-md`}
