@@ -7,6 +7,18 @@ export function PersonForm() {
     formState: { errors },
   } = useFormContext<GetCheckout>();
 
+  const handleBirthdayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/\D/g, '');
+
+    if (value.length > 2) {
+      value = value.slice(0, 2) + '/' + value.slice(2);
+    }
+    if (value.length > 5) {
+      value = value.slice(0, 5) + '/' + value.slice(5, 9);
+    }
+    e.target.value = value;
+  };
+
   return (
     <>
       <div>
@@ -47,6 +59,21 @@ export function PersonForm() {
           className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
         />
         {errors.lastName && (
+          <span className="text-red-500 text-sm">Este campo é obrigatório</span>
+        )}
+      </div>
+
+      <div>
+        <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+          Data de Nascimento
+        </label>
+        <input
+          type="text"
+          {...register('birthday', { required: true })}
+          onChange={handleBirthdayChange}
+          className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+        />
+        {errors.birthday && (
           <span className="text-red-500 text-sm">Este campo é obrigatório</span>
         )}
       </div>

@@ -21,7 +21,7 @@ interface CheckoutForm {
   lastName: string;
   identification: Identification;
   couponCode?: string;
-  orderID: string; // A ordem ID será gerada automaticamente
+  orderID: string;
 }
 
 export function Checkout() {
@@ -49,7 +49,6 @@ export function Checkout() {
       description: item.name,
     }));
 
-    // Gera um orderID único, usando timestamp e random
     const orderID = `ORDER-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
 
     const requestData = {
@@ -62,7 +61,7 @@ export function Checkout() {
         type: data.identification.type,
         number: data.identification.number,
       },
-      orderID, // Usa o orderID gerado automaticamente
+      orderID,
     };
 
     try {
