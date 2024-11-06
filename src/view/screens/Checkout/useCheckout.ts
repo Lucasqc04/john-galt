@@ -73,6 +73,13 @@ export function useCheckout() {
   const navigate = useNavigate();
 
   const zipCode = watch('address.zipCode');
+
+  useEffect(() => {
+    if (items.length === 0) {
+      navigate(ROUTES.cart.call(currentLang));
+    }
+  }, [items, currentLang, navigate]);
+
   useEffect(() => {
     setTotal(TotalValue + shipping - discount);
     setValue('total', TotalValue + shipping - discount);
