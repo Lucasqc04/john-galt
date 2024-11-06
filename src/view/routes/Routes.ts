@@ -49,4 +49,14 @@ export const ROUTES = {
     path: 'politica-de-privacidade',
     call: (currentLang: string) => `/${currentLang}/politica-de-privacidade`,
   },
+  PaymentStatus: {
+    Failure: {
+      path: 'failure',
+      call: (currentLang: string) => `/${currentLang}/failure`,
+    },
+    Sucess: {
+      path: 'sucess',
+      call: (currentLang: string) => `/${currentLang}/sucess`,
+    },
+  },
 };

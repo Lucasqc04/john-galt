@@ -128,15 +128,11 @@ export function useCheckout() {
           }
         }
 
-        const { city, complement, state, street, uf, neighborhood } =
-          ListedAddress.data;
+        const { city, state, street, uf, neighborhood } = ListedAddress.data;
 
         form.setValue('address.city', city);
         form.setValue('address.street', street);
         form.setValue('address.state', state);
-        if (complement) {
-          form.setValue('address.number', complement);
-        }
         form.setValue('address.uf', uf);
         form.setValue('address.neighborhood', neighborhood);
 
@@ -221,6 +217,8 @@ export function useCheckout() {
         alert('PREENCHA TODAS AS INFORMAÇOES ANTES DE ENVIAR');
         return;
       }
+
+      CreateWhatsAppUrl({ ...data, items });
 
       const { result } = await UseCases.payment.create.execute(req);
 

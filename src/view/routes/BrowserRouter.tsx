@@ -17,6 +17,8 @@ import { Checkout } from '../screens/Checkout/Checkout';
 import { NotFound } from '../screens/NotFound';
 import { Page } from '../screens/Page';
 import { Products } from '../screens/partials/Products';
+import { PaymentFailure } from '../screens/paymentStatus/PaymentFailure';
+import { PaymentSuccess } from '../screens/paymentStatus/PaymentSucess';
 import { PrivacyPolicy } from '../screens/PrivacyPolicy';
 import { ProductPage } from '../screens/ProductPage/ProductPage';
 import { TutorialsPage } from '../screens/TutorialsPage';
@@ -45,11 +47,19 @@ export function BrowserRouter() {
             <Route path={ROUTES.cart.path} element={<Cart />} />
             <Route path={ROUTES.tutorials.path} element={<TutorialsPage />} />
             <Route
+              path={ROUTES.PaymentStatus.Sucess.path}
+              element={<PaymentSuccess />}
+            />
+            <Route
               path={ROUTES.policyPrivacy.path}
               element={<PrivacyPolicy />}
             />
           </Route>
           <Route path={ROUTES.lang.call()}>
+            <Route
+              path={ROUTES.PaymentStatus.Failure.path}
+              element={<PaymentFailure />}
+            />
             <Route path={ROUTES.cart.checkout.path} element={<Checkout />} />
           </Route>
           <Route path="*" element={<NotFound />} />
