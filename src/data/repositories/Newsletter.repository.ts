@@ -34,7 +34,8 @@ export class NewsletterRepositoryImpl implements NewsletterRepository {
       }
 
       return Result.Success(result);
-    } catch {
+    } catch (error) {
+      console.error(error);
       return Result.Error({ code: 'UNKNOWN' });
     }
   }
