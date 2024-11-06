@@ -7,46 +7,8 @@ import PositivePoints1 from '../../assets/images/positive-points/positive-points
 import PositivePoints2 from '../../assets/images/positive-points/positive-points-2.png';
 import PositivePoints3 from '../../assets/images/positive-points/positive-points-3.png';
 import PositivePoints4 from '../../assets/images/positive-points/positive-points-4.png';
+import { styleThreeWordsAfterFourth } from '../../utils/StyleWord';
 import { useWindowSize } from '../../utils/useWindowSize';
-
-function styleThreeWordsAfterFourth(text: string): string | JSX.Element {
-  const words = text.split(' ');
-
-  if (words.length > 4) {
-    const firstPart = words.slice(0, 4).join(' ');
-    const styledWords = words.slice(4, 7).join(' ');
-    const remainingPart = words.slice(7).join(' ');
-
-    return (
-      <>
-        {firstPart}
-        <span className="text-[#F6911D]"> {styledWords} </span>
-        {remainingPart}
-      </>
-    );
-  }
-
-  return text;
-}
-
-const positivePoints = [
-  {
-    image: PositivePoints1,
-    titleKey: LanguageTexts.positivePoints.cards.mentality,
-  },
-  {
-    image: PositivePoints2,
-    titleKey: LanguageTexts.positivePoints.cards.protocols,
-  },
-  {
-    image: PositivePoints3,
-    titleKey: LanguageTexts.positivePoints.cards.transparency,
-  },
-  {
-    image: PositivePoints4,
-    titleKey: LanguageTexts.positivePoints.cards.security,
-  },
-];
 
 export function PositivePoints() {
   const { t } = useTranslation();
@@ -89,7 +51,24 @@ export function PositivePoints() {
       </article>
 
       <article className="w-full sm:pt-32 flex flex-wrap justify-around gap-y-4 md:p-14">
-        {positivePoints.map((item, idx) => (
+        {[
+          {
+            image: PositivePoints1,
+            titleKey: LanguageTexts.positivePoints.cards.mentality,
+          },
+          {
+            image: PositivePoints2,
+            titleKey: LanguageTexts.positivePoints.cards.protocols,
+          },
+          {
+            image: PositivePoints3,
+            titleKey: LanguageTexts.positivePoints.cards.transparency,
+          },
+          {
+            image: PositivePoints4,
+            titleKey: LanguageTexts.positivePoints.cards.security,
+          },
+        ].map((item, idx) => (
           <div
             key={idx}
             className={classNames(

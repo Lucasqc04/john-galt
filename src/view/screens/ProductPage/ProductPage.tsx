@@ -3,43 +3,24 @@ import { FaChevronLeft, FaChevronRight, FaTruckFast } from 'react-icons/fa6';
 import { MdCheck } from 'react-icons/md';
 import { LanguageTexts } from '../../../domain/locales/Language';
 
-import { useEffect, useState } from 'react';
+import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import { Loader } from '../../components/Loader';
-import { BackgroundAnimatedProduct } from '../../styles/Products/Product.styles';
 import { styleLastWord } from '../../utils/StyleWord';
 import { BlogLinks } from '../partials/BlogLinks';
 import { useProductPage } from './useProductPage';
 
 export function ProductPage() {
-  const { t, cart, form, loading, product, quantity, shipping, register } =
-    useProductPage();
-
-  const [imageIndex, setImageIndex] = useState(0);
-  const [currentImage, setCurrentImage] = useState(product?.images[0] || '');
-
-  useEffect(() => {
-    if (product) {
-      setCurrentImage(product.images[imageIndex]);
-    }
-  }, [imageIndex, product]);
-
-  const image = {
-    next: () => {
-      setImageIndex(
-        (prevIndex) => (prevIndex + 1) % (product?.images.length || 1),
-      );
-    },
-    prev: () => {
-      setImageIndex(
-        (prevIndex) =>
-          (prevIndex - 1 + (product?.images.length || 1)) %
-          (product?.images.length || 1),
-      );
-    },
-    thumbnail: (index: number) => {
-      setImageIndex(index);
-    },
-  };
+  const {
+    t,
+    cart,
+    form,
+    image,
+    loading,
+    product,
+    quantity,
+    shipping,
+    register,
+  } = useProductPage();
 
   if (!product) {
     return <Loader />;
@@ -55,18 +36,18 @@ export function ProductPage() {
               <div className="flex items-center justify-center space-x-4">
                 <button
                   onClick={image.prev}
-                  className="bg-[#F6911D] text-white p-2 rounded-full"
+                  className="bg-orange-primary text-white p-2 rounded-full"
                 >
                   <FaChevronLeft />
                 </button>
                 <img
-                  src={currentImage}
+                  src={image.current}
                   alt={product.name}
                   className="w-[80%] h-auto object-cover rounded-md shadow-lg dark:border-gray-700"
                 />
                 <button
                   onClick={image.next}
-                  className="bg-[#F6911D] text-white p-2 rounded-full"
+                  className="bg-orange-primary text-white p-2 rounded-full"
                 >
                   <FaChevronRight />
                 </button>
@@ -79,8 +60,8 @@ export function ProductPage() {
                     src={imageUrl}
                     alt={`Thumbnail ${index}`}
                     className={`w-12 h-12 md:w-16 md:h-16 object-cover cursor-pointer border ${
-                      imageIndex === index
-                        ? 'border-[#F6911D]'
+                      image.index === index
+                        ? 'border-orange-primary'
                         : 'border-gray-300 dark:border-gray-700'
                     } rounded-md`}
                     onClick={() => image.thumbnail(index)}
@@ -120,7 +101,7 @@ export function ProductPage() {
                 />
                 <button
                   onClick={cart.add}
-                  className="bg-[#F6911D] text-white p-2 rounded-md ml-2"
+                  className="bg-orange-primary text-white p-2 rounded-md ml-2"
                 >
                   {t(LanguageTexts.products.addToCartButton)}
                 </button>
@@ -139,7 +120,7 @@ export function ProductPage() {
                   />
                   <button
                     onClick={shipping.calculate}
-                    className="bg-[#F6911D] text-white p-2 rounded-md ml-2"
+                    className="bg-orange-primary text-white p-2 rounded-md ml-2"
                     disabled={loading}
                   >
                     {loading
@@ -194,7 +175,7 @@ export function ProductPage() {
           <div>
             <h2 className="text-3xl md:text-4xl font-bold mb-20 mt-36 text-center dark:text-white">
               {styleLastWord(t(LanguageTexts.products.resourcesTitle))}
-              <span className="text-[#F6911D]">{product.name}</span>
+              <span className="text-orange-primary">{product.name}</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {product.resources.map((resource: string, index: number) => (

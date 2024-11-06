@@ -1,4 +1,5 @@
 import EfiPay from 'payment-token-efi';
+import { ExceptionHandler } from '../../utils/ExceptionHandler';
 import { DefaultResultError, Result } from '../../utils/Result';
 
 type Installment = {
@@ -64,73 +65,54 @@ export class EfiDatasourceImpl implements EfiDatasource {
         : 'production';
   }
 
+  @ExceptionHandler()
   async identifyBrand(req: IdentifyBrandReq): IdentifyBrandRes {
-    try {
-      const brand = await EfiPay.CreditCard.setCardNumber(
-        req.cardNumber,
-      ).verifyCardBrand();
+    const brand = await EfiPay.CreditCard.setCardNumber(
+      req.cardNumber,
+    ).verifyCardBrand();
 
-      return Result.Success(brand);
-    } catch (error) {
-      console.error(error);
-      return Result.Error({ code: 'UNKNOWN' });
-    }
+    return Result.Success(brand);
   }
 
+  @ExceptionHandler()
   async listInstallments(req: ListInstallmentsReq): ListInstallmentsRes {
-    try {
-      const installments = await EfiPay.CreditCard.setAccount(this.accountId)
-        .setEnvironment(this.env)
-        .setBrand(req.brand)
-        .setTotal(req.total)
-        .getInstallments();
+    const installments = await EfiPay.CreditCard.setAccount(this.accountId)
+      .setEnvironment(this.env)
+      .setBrand(req.brand)
+      .setTotal(req.total)
+      .getInstallments();
 
-      if (
-        'rate' in installments &&
-        'name' in installments &&
-        'installments' in installments
-      ) {
-        return Result.Success(installments);
-      } else {
-        console.log('erro no else');
-        return Result.Error({ code: 'UNKNOWN' });
-      }
-    } catch (error) {
-      if (
-        error instanceof Error &&
-        error.message.includes('O valor [100] é inferior ao limite mínimo')
-      ) {
-        return Result.Error({ code: 'VALUE_TOO_LOW' });
-      }
-
-      console.error(error);
+    if (
+      'rate' in installments &&
+      'name' in installments &&
+      'installments' in installments
+    ) {
+      return Result.Success(installments);
+    } else {
+      console.log('erro no else');
       return Result.Error({ code: 'UNKNOWN' });
     }
   }
 
+  @ExceptionHandler()
   async generatePaymentToken(
     req: GeneratePaymentTokenReq,
   ): GeneratePaymentTokenRes {
-    try {
-      const result = await EfiPay.CreditCard.setAccount(this.accountId)
-        .setEnvironment(this.env)
-        .setCreditCardData({
-          brand: req.brand,
-          number: req.number,
-          cvv: req.cvv,
-          expirationMonth: req.expirationMonth,
-          expirationYear: req.expirationYear,
-          reuse: req.reuse,
-        })
-        .getPaymentToken();
+    const result = await EfiPay.CreditCard.setAccount(this.accountId)
+      .setEnvironment(this.env)
+      .setCreditCardData({
+        brand: req.brand,
+        number: req.number,
+        cvv: req.cvv,
+        expirationMonth: req.expirationMonth,
+        expirationYear: req.expirationYear,
+        reuse: req.reuse,
+      })
+      .getPaymentToken();
 
-      if ('payment_token' in result && 'card_mask' in result) {
-        return Result.Success(result);
-      } else {
-        return Result.Error({ code: 'UNKNOWN' });
-      }
-    } catch (error) {
-      console.error(error);
+    if ('payment_token' in result && 'card_mask' in result) {
+      return Result.Success(result);
+    } else {
       return Result.Error({ code: 'UNKNOWN' });
     }
   }

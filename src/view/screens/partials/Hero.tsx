@@ -34,13 +34,13 @@ export function Hero() {
           <div className="w-full flex flex-col md:flex-row gap-y-4 md:gap-y-0 gap-x-4">
             <Link
               to={ROUTES.products.call(currentLang || AcceptedLanguages.pt)}
-              className="w-full py-2 bg-[#F6911D] text-white text-center font-semibold rounded-sm transition-colors duration-300 hover:bg-orange-600 shadow-md"
+              className="w-full py-2 bg-orange-primary text-white text-center font-semibold rounded-sm transition-colors duration-300 hover:bg-orange-600 shadow-md"
             >
               {t(LanguageTexts.hero.buttons.products)}
             </Link>
             <a
               href="#statistics"
-              className="w-full py-2 text-center border border-solid border-[#F6911D] font-semibold rounded-sm transition-all duration-500 hover:bg-[#F6911D] hover:text-white shadow-md"
+              className="w-full py-2 text-center border border-solid border-orange-primary font-semibold rounded-sm transition-all duration-500 hover:bg-orange-600 hover:text-white shadow-md"
             >
               {t(LanguageTexts.hero.buttons.learnMore)}
             </a>
