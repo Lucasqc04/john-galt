@@ -6,12 +6,16 @@ import {
   CreatedCheckout,
   GetCheckout,
   Installment,
+  PaymentApiResponse,
 } from '../../entities/payment.entity';
 
 export type CreateReq = GetCheckout;
 
 export type CreateRes = Promise<
-  Result<CreatedCheckout, { code: 'SERIALIZATION' } | DefaultResultError>
+  Result<
+    CreatedCheckout | PaymentApiResponse,
+    { code: 'SERIALIZATION' } | DefaultResultError
+  >
 >;
 
 export type CreatePaymentUseCase = UseCase<CreateReq, CreateRes>;
@@ -78,6 +82,10 @@ export class CreatePaymentUseCaseImpl implements CreatePaymentUseCase {
       }
     }
 
-    return Result.Success(CreatedCheckout.fromModel(result.data));
+    if ('initPoint' in result.data) {
+      return Result.Success(CreatedCheckout.fromModel(result.data));
+    }
+
+    return Result.Success(result.data);
   }
 }

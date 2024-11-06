@@ -15,6 +15,7 @@ const Address = z.object({
   zipCode: z.string().min(1).max(9),
   complement: z.string().optional(),
   uf: z.string().min(2).max(2),
+  neighborhood: z.string().min(1),
 });
 type Address = z.infer<typeof Address>;
 
@@ -99,6 +100,35 @@ export class CreatedCheckout {
     return entity;
   }
 }
+
+class Refusal {
+  reason!: string;
+  retry!: boolean;
+}
+
+class Charged {
+  installments!: number;
+  installment_value!: number;
+  charge_id!: number;
+  total!: number;
+  payment!: 'credit_card';
+}
+
+export class ApprovedCharge extends Charged {
+  status!: 'approved';
+}
+
+export class UnpaidCharge extends Charged {
+  status!: 'unpaid';
+  refusal!: Refusal;
+}
+
+interface ApiResponse<T> {
+  code: number;
+  data: T;
+}
+
+export type PaymentApiResponse = ApiResponse<ApprovedCharge | UnpaidCharge>;
 
 class CouponData {
   discountType!: DiscountType;

@@ -10,12 +10,16 @@ import {
   IdentifyBrandModel,
   InstallmentsResponseModel,
   ListInstallmentsModel,
+  PaymentAPIResponse,
 } from '../model/Payment.model.';
 
 export type CreateReq = GetCheckoutModel;
 
 export type CreateRes = Promise<
-  Result<CreatedCheckoutModel, { code: 'SERIALIZATION' } | DefaultResultError>
+  Result<
+    CreatedCheckoutModel | PaymentAPIResponse,
+    { code: 'SERIALIZATION' } | DefaultResultError
+  >
 >;
 
 type IdentifyBrandReq = IdentifyBrandModel;
@@ -44,6 +48,8 @@ export class PaymentRepositoryImpl implements PaymentRepository {
   ) {}
 
   async create(req: CreateReq, method: PaymentMethod): CreateRes {
+    let paymentToken: string | undefined;
+
     if (method === 'EFI') {
       const { result: GeneratedToken } = await this.generatePaymentToken({
         brand: req.brand,
@@ -57,13 +63,27 @@ export class PaymentRepositoryImpl implements PaymentRepository {
       if (GeneratedToken.type === 'ERROR') {
         return Result.Error({ code: 'UNKNOWN' });
       }
+
+      paymentToken = GeneratedToken.data.payment_token;
     }
 
     try {
       const result = await this.api.post({
         url: `/create-payment/${method}`,
-        model: CreatedCheckoutModel,
-        body: req,
+        model: PaymentAPIResponse,
+        body: {
+          payerEmail: req.payerEmail,
+          firstName: req.firstName,
+          lastName: req.lastName,
+          identification: req.identification,
+          couponCode: req.couponCode,
+          address: req.address,
+          items: req.items,
+          phone: req.phone,
+          selectInstallments: req.selectInstallments,
+          birthday: req.birthday,
+          paymentToken: paymentToken,
+        },
       });
 
       if (!result) {

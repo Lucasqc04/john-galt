@@ -5,7 +5,6 @@ import { GetCheckout, Items } from '../../../domain/entities/payment.entity';
 import { CalculatedShipping } from '../../../domain/entities/Shipping.entity';
 import { UseCases } from '../../../domain/usecases/UseCases';
 import { useCartContext } from '../../context/CartContext';
-import { redirectToWhatsApp } from '../../utils/RedirectToWhatsapp';
 
 export function useCheckout() {
   const { items, TotalValue, updateItemQuantity, remove, clear } =
@@ -30,6 +29,7 @@ export function useCheckout() {
         state: '',
         zipCode: '',
         uf: '',
+        neighborhood: '',
       },
       phone: {
         areaCode: '',
@@ -128,7 +128,8 @@ export function useCheckout() {
           }
         }
 
-        const { city, complement, state, street, uf } = ListedAddress.data;
+        const { city, complement, state, street, uf, neighborhood } =
+          ListedAddress.data;
 
         form.setValue('address.city', city);
         form.setValue('address.street', street);
@@ -137,6 +138,7 @@ export function useCheckout() {
           form.setValue('address.number', complement);
         }
         form.setValue('address.uf', uf);
+        form.setValue('address.neighborhood', neighborhood);
 
         const { result: CalculatedShipping } =
           await UseCases.shipping.calculate.execute({
@@ -226,16 +228,25 @@ export function useCheckout() {
         switch (result.error.code) {
           case 'SERIALIZATION':
             alert('ERRO DE SERIALIZAÇÃO. POR FAVOR, ENTRE EM CONTATO');
-            redirectToWhatsApp({ ...data, items }, shipping, total);
+            // redirectToWhatsApp({ ...data, items }, shipping, total);
             return;
           default:
             alert('ERRO AO PROCESSAR PAGAMENTO. POR FAVOR, ENTRE EM CONTATO');
-            redirectToWhatsApp({ ...data, items }, shipping, total);
+            // redirectToWhatsApp({ ...data, items }, shipping, total);
             return;
         }
       }
 
-      window.location.href = result.data.paymentLink;
+      if ('paymentLink' in result.data) {
+        window.location.href = result.data.paymentLink;
+        return;
+      }
+
+      if (result.data.data.status === 'approved') {
+        navigate('/pt/success');
+      } else {
+        navigate('/pt/failure');
+      }
     } finally {
       setLoading(false);
     }

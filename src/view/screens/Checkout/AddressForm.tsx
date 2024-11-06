@@ -92,15 +92,15 @@ export function AddressForm() {
 
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-          Estado
+          Bairro
         </label>
         <input
           type="text"
-          {...register('address.state', { required: true })}
+          {...register('address.neighborhood', { required: true })}
           className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
           disabled={loading}
         />
-        {errors.address?.state && (
+        {errors.address?.neighborhood && (
           <span className="text-red-500 text-sm">Este campo é obrigatório</span>
         )}
       </div>

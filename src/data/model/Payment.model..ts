@@ -7,6 +7,7 @@ class Address {
   city!: string;
   state!: string;
   zipCode!: string;
+  neighborhood!: string;
 }
 
 class Identification {
@@ -60,6 +61,37 @@ export const CreatedCheckoutModel = z.object({
   initPoint: z.string().min(1),
 });
 export type CreatedCheckoutModel = z.infer<typeof CreatedCheckoutModel>;
+
+const ChargedModel = z.object({
+  installments: z.number(),
+  installment_value: z.number(),
+  charge_id: z.number(),
+  total: z.number(),
+  payment: z.literal('credit_card'),
+});
+
+const ApprovedChargeModel = ChargedModel.extend({
+  status: z.literal('approved'),
+});
+
+const UnpaidChargeModel = ChargedModel.extend({
+  status: z.literal('unpaid'),
+  refusal: z.object({
+    reason: z.string(),
+    retry: z.boolean(),
+  }),
+});
+
+const ApiResponse = <T extends z.ZodTypeAny>(dataSchema: T) =>
+  z.object({
+    code: z.number(),
+    data: dataSchema,
+  });
+
+export const PaymentAPIResponse = ApiResponse(
+  z.union([ApprovedChargeModel, UnpaidChargeModel]),
+);
+export type PaymentAPIResponse = z.infer<typeof PaymentAPIResponse>;
 
 export class ListInstallmentsModel {
   brand!: string;
