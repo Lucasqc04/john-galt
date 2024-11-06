@@ -51,7 +51,7 @@ export function useCheckout() {
       cvv: '',
       expiryDate: '',
       installments: [],
-      birthday: '2004-01-01',
+      birthday: '',
       selectInstallments: '1',
       items: [],
       total: 0,
