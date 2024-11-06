@@ -70,10 +70,12 @@ export class PaymentRepositoryImpl implements PaymentRepository {
       paymentToken = GeneratedToken.data.payment_token;
     }
 
+    const modelToValidate = this.getModelToValidate(method);
+
     try {
       const result = await this.api.post({
         url: `/create-payment/${method}`,
-        model: PaymentAPIResponse,
+        model: modelToValidate,
         body: {
           payerEmail: req.payerEmail,
           firstName: req.firstName,
@@ -144,6 +146,19 @@ export class PaymentRepositoryImpl implements PaymentRepository {
     } catch (error) {
       console.error(error);
       return Result.Error({ code: 'UNKNOWN' });
+    }
+  }
+
+  private getModelToValidate(method: PaymentMethod) {
+    switch (method) {
+      case 'MP':
+        return CreatedCheckoutModel;
+      case 'EFI':
+        return PaymentAPIResponse;
+      case 'BTC':
+        throw new Error('Método de pagamento não suportado');
+      default:
+        throw new Error('Método de pagamento não suportado');
     }
   }
 }
