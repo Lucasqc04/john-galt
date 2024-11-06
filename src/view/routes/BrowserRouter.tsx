@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { Suspense, lazy } from 'react';
 import {
   Navigate,
   Route,
@@ -10,20 +10,68 @@ import WhatsAppButton from '../components/ButtonWhatsApp/buttonWhatsApp';
 import { Loader } from '../components/Loader';
 import ScrollToTop from '../components/ScrollToTop';
 import { DefaultLayout } from '../layout/DefaultyLayout';
-import { About } from '../screens/About';
-import { BlogPost } from '../screens/BlogPost/BlogPost';
-import { Cart } from '../screens/Cart/Cart';
-import { Checkout } from '../screens/Checkout/Checkout';
-import { NotFound } from '../screens/NotFound';
-import { Page } from '../screens/Page';
-import { Products } from '../screens/partials/Products';
-import { PaymentFailure } from '../screens/paymentStatus/PaymentFailure';
-import { PaymentSuccess } from '../screens/paymentStatus/PaymentSucess';
-import { PrivacyPolicy } from '../screens/PrivacyPolicy';
-import { ProductPage } from '../screens/ProductPage/ProductPage';
-import { TutorialsPage } from '../screens/TutorialsPage';
 import { ROUTES } from './Routes';
 
+const About = lazy(() =>
+  import('../screens/About').then((module) => ({
+    default: module.About,
+  })),
+);
+const BlogPost = lazy(() =>
+  import('../screens/BlogPost/BlogPost').then((module) => ({
+    default: module.BlogPost,
+  })),
+);
+const Cart = lazy(() =>
+  import('../screens/Cart/Cart').then((module) => ({
+    default: module.Cart,
+  })),
+);
+const Checkout = lazy(() =>
+  import('../screens/Checkout/Checkout').then((module) => ({
+    default: module.Checkout,
+  })),
+);
+const NotFound = lazy(() =>
+  import('../screens/NotFound').then((module) => ({
+    default: module.NotFound,
+  })),
+);
+const Page = lazy(() =>
+  import('../screens/Page').then((module) => ({
+    default: module.Page,
+  })),
+);
+const Products = lazy(() =>
+  import('../screens/partials/Products').then((module) => ({
+    default: module.Products,
+  })),
+);
+const PaymentFailure = lazy(() =>
+  import('../screens/paymentStatus/PaymentFailure').then((module) => ({
+    default: module.PaymentFailure,
+  })),
+);
+const PaymentSuccess = lazy(() =>
+  import('../screens/paymentStatus/PaymentSucess').then((module) => ({
+    default: module.PaymentSuccess,
+  })),
+);
+const PrivacyPolicy = lazy(() =>
+  import('../screens/PrivacyPolicy').then((module) => ({
+    default: module.PrivacyPolicy,
+  })),
+);
+const ProductPage = lazy(() =>
+  import('../screens/ProductPage/ProductPage').then((module) => ({
+    default: module.ProductPage,
+  })),
+);
+const TutorialsPage = lazy(() =>
+  import('../screens/TutorialsPage').then((module) => ({
+    default: module.TutorialsPage,
+  })),
+);
 export function BrowserRouter() {
   const { currentLang } = useLanguage();
 
