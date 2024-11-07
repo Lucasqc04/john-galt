@@ -53,7 +53,7 @@ export function Products() {
                 {Number(product.id) !== 10000 && (
                   <div
                     key={product.id}
-                    className="bg-white dark:bg-slate-700 p-8 rounded-lg shadow-xl flex flex-col"
+                    className="bg-primary-light dark:bg-slate-700 p-8 rounded-lg shadow-xl flex flex-col justify-between"
                   >
                     <h2 className="text-center pb-2 font-bold text-xl">
                       {product.title}
@@ -61,7 +61,7 @@ export function Products() {
                     <div className="flex items-center justify-center relative">
                       <button
                         onClick={() => handlePrevImage(idx)}
-                        className="bg-[#F6911D] text-white p-2 rounded-full absolute left-0 transform -translate-x-1/2"
+                        className="bg-orange-primary text-white p-2 rounded-full absolute left-0 transform -translate-x-1/2"
                       >
                         <FaChevronLeft />
                       </button>
@@ -74,7 +74,7 @@ export function Products() {
 
                       <button
                         onClick={() => handleNextImage(idx)}
-                        className="bg-[#F6911D] text-white p-2 rounded-full absolute right-0 transform translate-x-1/2"
+                        className="bg-orange-primary text-white p-2 rounded-full absolute right-0 transform translate-x-1/2"
                       >
                         <FaChevronRight />
                       </button>
@@ -84,7 +84,7 @@ export function Products() {
                     </p>
                     <Link
                       to={ROUTES.product.call(currentLang, product.id)}
-                      className="w-full font-bold bg-[#F6911D] text-white dark:text-white py-2 rounded-md hover:bg-orange-600 transition-colors"
+                      className="w-full font-bold bg-orange-primary text-white text-center py-2 rounded-md hover:bg-orange-600 transition-colors"
                     >
                       {t(LanguageTexts.products.buyNowButton)}
                     </Link>
