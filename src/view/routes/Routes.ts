@@ -18,6 +18,9 @@ export const ROUTES = {
     path: 'sobre-nos',
     call: (currentLang: string) => `/${currentLang}/sobre-nos`,
   },
+  product: {
+    call: (currentLang: string, id: string) => `/${currentLang}/produto/${id}`,
+  },
   cart: {
     path: 'carrinho',
     call: (currentLang: string) => `/${currentLang}/carrinho`,
@@ -37,7 +40,7 @@ export const ROUTES = {
           `/${currentLang}/produto/${id}`,
       },
       SEEDKIT: {
-        call: (currentLang: string, id: string = '3') =>
+        call: (currentLang: string, id: string = '2') =>
           `/${currentLang}/produto/${id}`,
       },
     },
@@ -49,14 +52,14 @@ export const ROUTES = {
     path: 'politica-de-privacidade',
     call: (currentLang: string) => `/${currentLang}/politica-de-privacidade`,
   },
-  PaymentStatus: {
-    Failure: {
+  paymentStatus: {
+    failure: {
       path: 'failure',
       call: (currentLang: string) => `/${currentLang}/failure`,
     },
-    Sucess: {
-      path: 'sucess',
-      call: (currentLang: string) => `/${currentLang}/sucess`,
+    success: {
+      path: 'success',
+      call: (currentLang: string) => `/${currentLang}/success`,
     },
   },
 };

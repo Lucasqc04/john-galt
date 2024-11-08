@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { Items } from '../../../domain/entities/payment.entity';
 import {
@@ -17,52 +17,62 @@ import { useCurrentLang } from '../../utils/useCurrentLang';
 import { useProducts } from '../../utils/useProduct';
 
 export function useProductPage() {
+  const [imageIndex, setImageIndex] = useState(0);
   const [loading, setLoading] = useState<boolean>(false);
-  const { t } = useTranslation();
-  const { products, infos } = useProducts();
-  const { currentLang } = useCurrentLang();
-  const { add } = useCartContext();
-
-  const form = useForm<CalculateShipping>();
-  const { register, handleSubmit } = form;
-
   const [product, setProduct] = useState<Product | null>(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const { id } = useParams<{ id: string }>();
+  const [currentImage, setCurrentImage] = useState(product?.images[0] || '');
   const [shippingOptions, setShippingOptions] = useState<CalculatedShipping[]>(
     [],
   );
-  const [, setError] = useState<string | null>(null);
+
+  const { t } = useTranslation();
+  const { add } = useCartContext();
+  const { currentLang } = useCurrentLang();
+  const { products, infos } = useProducts();
+  const { id } = useParams<{ id: string }>();
+
+  const navigate = useNavigate();
+  const form = useForm<CalculateShipping>();
+
+  const { register, handleSubmit } = form;
+
+  useEffect(() => {
+    localStorage.getItem('cartItems');
+  }, []);
+
+  useEffect(() => {
+    if (product) {
+      setCurrentImage(product.images[imageIndex]);
+    }
+  }, [imageIndex, product]);
 
   useEffect(() => {
     const selectedProduct = products.find((p) => p.id === id);
     setProduct(selectedProduct || null);
-    setCurrentImageIndex(0);
   }, [id, infos, products]);
 
-  const handleNextImage = () => {
-    if (product) {
-      setCurrentImageIndex((prevIndex) =>
-        prevIndex === product.images.length - 1 ? 0 : prevIndex + 1,
+  const image = {
+    index: imageIndex,
+    current: currentImage,
+    next: () => {
+      setImageIndex(
+        (prevIndex) => (prevIndex + 1) % (product?.images.length || 1),
       );
-    }
-  };
-
-  const handlePrevImage = () => {
-    if (product) {
-      setCurrentImageIndex((prevIndex) =>
-        prevIndex === 0 ? product.images.length - 1 : prevIndex - 1,
+    },
+    prev: () => {
+      setImageIndex(
+        (prevIndex) =>
+          (prevIndex - 1 + (product?.images.length || 1)) %
+          (product?.images.length || 1),
       );
-    }
-  };
-
-  const handleThumbnailClick = (index: number) => {
-    setCurrentImageIndex(index);
+    },
+    thumbnail: (index: number) => {
+      setImageIndex(index);
+    },
   };
 
   const onSubmit: SubmitHandler<CalculateShipping> = async (data) => {
     setLoading(true);
-    setError(null);
     try {
       if (data.postalCode.length < 8) {
         return;
@@ -74,11 +84,9 @@ export function useProductPage() {
         switch (result.error.code) {
           case 'SERIALIZATION':
             alert('ERRO DE SERIALIZAÇÃO!');
-            setError('Erro ao calcular o frete. Tente novamente.');
             return;
           default:
             alert('ERRO DESCONHECIDO');
-            setError('Erro ao calcular o frete. Tente novamente.');
             return;
         }
       }
@@ -113,36 +121,23 @@ export function useProductPage() {
         cancelButtonText: t('products.goToCart'),
       }).then((result) => {
         if (result.isConfirmed) {
-          window.location.reload();
+          navigate(ROUTES.products.call(currentLang));
         } else if (result.isDismissed) {
-          window.location.href = ROUTES.cart.call(currentLang);
+          navigate(ROUTES.cart.call(currentLang));
         }
       });
     }
   };
 
-  useEffect(() => {
-    const storedCart = localStorage.getItem('cartItems');
-    if (storedCart) {
-      console.log('Carrinho carregado:', JSON.parse(storedCart));
-    }
-  }, []);
-
   return {
     t,
     form,
+    image,
     product,
     loading,
-    currentLang,
     register,
     cart: {
       add: handleAddToCart,
-    },
-    image: {
-      next: handleNextImage,
-      prev: handlePrevImage,
-      current: currentImageIndex,
-      thumbnail: handleThumbnailClick,
     },
     quantity: {
       value: quantity,

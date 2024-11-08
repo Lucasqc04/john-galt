@@ -1,12 +1,21 @@
+import { format, getYear, parse } from 'date-fns';
 import { PaymentRepository } from '../../../data/repositories/Payment.repository';
 import { DefaultResultError, Result } from '../../../utils/Result';
 import { UseCase } from '../../../utils/UseCase';
-import { CreatedCheckout, GetCheckout } from '../../entities/payment.entity';
+import {
+  CreatedCheckout,
+  GetCheckout,
+  Installment,
+  PaymentApiResponse,
+} from '../../entities/payment.entity';
 
 export type CreateReq = GetCheckout;
 
 export type CreateRes = Promise<
-  Result<CreatedCheckout, { code: 'SERIALIZATION' } | DefaultResultError>
+  Result<
+    CreatedCheckout | PaymentApiResponse,
+    { code: 'SERIALIZATION' } | DefaultResultError
+  >
 >;
 
 export type CreatePaymentUseCase = UseCase<CreateReq, CreateRes>;
@@ -23,6 +32,23 @@ export class CreatePaymentUseCaseImpl implements CreatePaymentUseCase {
 
     const parsedResult = validationResult.data;
 
+    const parsedInstallments = parsedResult.installments.map((item) =>
+      Installment.toModel(item),
+    );
+
+    const expiryDate = parsedResult.expiryDate;
+
+    const [expirationMonth, expirationYear] = expiryDate.split('/');
+
+    const currentYear = getYear(new Date());
+    const currentCentury = Math.floor(currentYear / 100);
+
+    const fullExpirationYear = `${currentCentury}${expirationYear}`;
+
+    const parsedDate = parse(parsedResult.birthday, 'dd/MM/yyyy', new Date());
+
+    const parsedBirthday = format(parsedDate, 'yyyy-MM-dd');
+
     const { result } = await this.repository.create(
       {
         address: parsedResult.address,
@@ -33,6 +59,16 @@ export class CreatePaymentUseCaseImpl implements CreatePaymentUseCase {
         payerEmail: parsedResult.payerEmail,
         phone: parsedResult.phone,
         couponCode: parsedResult.couponCode,
+        brand: parsedResult.brand,
+        cardName: parsedResult.cardName,
+        cardNumber: parsedResult.cardNumber,
+        cvv: parsedResult.cvv,
+        installments: parsedInstallments,
+        selectInstallments: parsedResult.selectInstallments,
+        total: parsedResult.total,
+        expirationMonth,
+        expirationYear: fullExpirationYear,
+        birthday: parsedBirthday,
       },
       req.method,
     );
@@ -46,6 +82,10 @@ export class CreatePaymentUseCaseImpl implements CreatePaymentUseCase {
       }
     }
 
-    return Result.Success(CreatedCheckout.fromModel(result.data));
+    if ('initPoint' in result.data) {
+      return Result.Success(CreatedCheckout.fromModel(result.data));
+    }
+
+    return Result.Success(result.data);
   }
 }

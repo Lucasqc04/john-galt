@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { ExceptionHandler } from '../../utils/ExceptionHandler';
 import { DefaultResultError, Result } from '../../utils/Result';
 import { RemoteDataSource } from '../datasource/Remote.datasource';
 import {
@@ -22,21 +23,18 @@ export interface ShippingRepository {
 export class ShippingRepositoryImpl implements ShippingRepository {
   constructor(private api: RemoteDataSource) {}
 
+  @ExceptionHandler()
   async calculate(req: CalculateReq): CalculateRes {
-    try {
-      const result = await this.api.post({
-        url: `/shipping/calculate`,
-        model: z.array(CalculatedShippingModel),
-        body: req,
-      });
+    const result = await this.api.post({
+      url: `/shipping/calculate`,
+      model: z.array(CalculatedShippingModel),
+      body: req,
+    });
 
-      if (!result) {
-        return Result.Error({ code: 'SERIALIZATION' });
-      }
-
-      return Result.Success(result);
-    } catch {
-      return Result.Error({ code: 'UNKNOWN' });
+    if (!result) {
+      return Result.Error({ code: 'SERIALIZATION' });
     }
+
+    return Result.Success(result);
   }
 }

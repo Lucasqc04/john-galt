@@ -6,6 +6,7 @@ import axios, {
   HttpStatusCode,
 } from 'axios';
 import { z } from 'zod';
+import { Result } from '../../utils/Result';
 
 export type SerializeSchemas =
   | z.ZodObject<any>
@@ -27,8 +28,6 @@ export type RemotePostReq<Response extends SerializeSchemas> = {
 type RemoteRequestRes<Response extends SerializeSchemas> = Promise<
   Response['_type'] | null
 >;
-
-export type HttpStatus = 'UNAUTHORIZED' | 'UNKNOWN';
 
 export type HeaderValues =
   | 'Accept'
@@ -83,7 +82,7 @@ export class RemoteDataSource {
     body,
   }: RemotePostReq<Response>): RemoteRequestRes<Response> {
     const { data } = await this.api.post<Response>(url, body, {
-      timeout: 10000,
+      timeout: 100000,
     });
 
     const serialized = model.safeParse(data);
@@ -95,11 +94,12 @@ export class RemoteDataSource {
     return serialized.data;
   }
 
-  public checkStatus(err: AxiosError): HttpStatus {
-    if (err?.response?.status === HttpStatusCode.Unauthorized) {
-      return 'UNAUTHORIZED';
+  public static checkError(err: AxiosError) {
+    switch (err?.response?.status) {
+      case HttpStatusCode.Unauthorized:
+        return Result.Error({ code: 'UNAUTHORIZED' });
+      case HttpStatusCode.NotFound:
+        return Result.Error({ code: 'NOT_FOUND' });
     }
-
-    return 'UNKNOWN';
   }
 }

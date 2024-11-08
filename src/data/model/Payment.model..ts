@@ -7,6 +7,7 @@ class Address {
   city!: string;
   state!: string;
   zipCode!: string;
+  neighborhood!: string;
 }
 
 class Identification {
@@ -37,9 +38,94 @@ export class GetCheckoutModel {
   address!: Address;
   items!: PaymentItemsModel[];
   phone!: PhoneModel;
+  cardName!: string;
+  cardNumber!: string;
+  expirationMonth!: string;
+  expirationYear!: string;
+  cvv!: string;
+  brand!:
+    | 'elo'
+    | 'visa'
+    | 'amex'
+    | 'mastercard'
+    | 'hipercard'
+    | 'undefined'
+    | 'unsupported';
+  installments!: InstallmentModel[];
+  selectInstallments!: string;
+  total!: number;
+  birthday!: string;
 }
 
 export const CreatedCheckoutModel = z.object({
   initPoint: z.string().min(1),
 });
 export type CreatedCheckoutModel = z.infer<typeof CreatedCheckoutModel>;
+
+const ChargedModel = z.object({
+  installments: z.number(),
+  installment_value: z.number(),
+  charge_id: z.number(),
+  total: z.number(),
+  payment: z.literal('credit_card'),
+});
+
+const ApprovedChargeModel = ChargedModel.extend({
+  status: z.literal('approved'),
+});
+
+const UnpaidChargeModel = ChargedModel.extend({
+  status: z.literal('unpaid'),
+  refusal: z.object({
+    reason: z.string(),
+    retry: z.boolean(),
+  }),
+});
+
+const ApiResponse = <T extends z.ZodTypeAny>(dataSchema: T) =>
+  z.object({
+    code: z.number(),
+    data: dataSchema,
+  });
+
+export const PaymentAPIResponse = ApiResponse(
+  z.union([ApprovedChargeModel, UnpaidChargeModel]),
+);
+export type PaymentAPIResponse = z.infer<typeof PaymentAPIResponse>;
+
+export class ListInstallmentsModel {
+  brand!: string;
+  total!: number;
+}
+
+export class InstallmentModel {
+  installment!: number;
+  has_interest?: boolean;
+  value!: number;
+  currency!: string;
+  interest_percentage?: number;
+}
+
+export class InstallmentsResponseModel {
+  rate!: number;
+  name!: string;
+  installments!: InstallmentModel[];
+}
+
+export class IdentifyBrandModel {
+  cardNumber!: string;
+}
+
+export class GeneratePaymentTokenModel {
+  brand!: string;
+  number!: string;
+  cvv!: string;
+  expirationMonth!: string;
+  expirationYear!: string;
+  reuse!: boolean;
+}
+
+export class GeneratedPaymentTokenModel {
+  payment_token!: string;
+  card_mask!: string;
+}

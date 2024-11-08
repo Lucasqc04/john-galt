@@ -1,3 +1,4 @@
+import { ExceptionHandler } from '../../utils/ExceptionHandler';
 import { DefaultResultError, Result } from '../../utils/Result';
 import { RemoteDataSource } from '../datasource/Remote.datasource';
 import {
@@ -21,21 +22,18 @@ export interface NewsletterRepository {
 export class NewsletterRepositoryImpl implements NewsletterRepository {
   constructor(private api: RemoteDataSource) {}
 
+  @ExceptionHandler()
   async insert(req: InsertReq): InsertRes {
-    try {
-      const result = await this.api.post({
-        url: `/newsletter/create`,
-        model: InsertedNewsletterModel,
-        body: req,
-      });
+    const result = await this.api.post({
+      url: `/newsletter/create`,
+      model: InsertedNewsletterModel,
+      body: req,
+    });
 
-      if (!result) {
-        return Result.Error({ code: 'SERIALIZATION' });
-      }
-
-      return Result.Success(result);
-    } catch {
-      return Result.Error({ code: 'UNKNOWN' });
+    if (!result) {
+      return Result.Error({ code: 'SERIALIZATION' });
     }
+
+    return Result.Success(result);
   }
 }
