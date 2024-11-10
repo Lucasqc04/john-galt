@@ -167,6 +167,33 @@
       "Bitcoin paves the way for a future where power returns to the hands of the people. At DIY Sec Lab, our mission is to support this journey by providing the tools and knowledge necessary for each individual to live this sovereignty with confidence, simplicity, and responsibility. We believe that Bitcoin is the key to true autonomy, and we are here to help open that door."
     ]
   },
+  "personForm": {
+    "email": "Email",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "birthday": "Date of Birth",
+    "document": "Document",
+    "documentOptions": {
+      "CPF": "CPF",
+      "CNPJ": "CNPJ"
+    },
+    "idNumber": "Identification Number",
+    "phone": "Phone",
+    "areaCode": "Area Code",
+    "number": "Number",
+    "requiredField": "This field is required",
+    "internationalSupport": "Not living in Brazil? Contact us here for international purchases with our support",
+    "internationalSupportMessage": "Hello, I would like to make an international purchase"
+  },
+  "addressForm": {
+    "zipCode": "Zip Code",
+    "street": "Street",
+    "number": "Number",
+    "complement": "Complement",
+    "city": "City",
+    "neighborhood": "Neighborhood",
+    "requiredField": "This field is required"
+  },
   "shipping": {
     "title": "Shipping",
     "calculateButton": "Calculate Shipping",
@@ -217,6 +244,36 @@
       "You are free to decline our request for personal information, understanding that we may not be able to provide some of the desired services if you do.",
       "Continued use of our site will be considered acceptance of our privacy practices and handling of personal information. If you have any questions about how we handle user data and personal information, please contact us."
     ]
+  },
+  "paymentForm": {
+    "choosePaymentMethod": "Choose Payment Method",
+    "creditCard": "Credit Card",
+    "pix": "Pix",
+    "cardNamePlaceholder": "Cardholder's Name",
+    "cardNumberPlaceholder": "Card Number",
+    "expiryDatePlaceholder": "Expiration Date",
+    "cvvPlaceholder": "CVV",
+    "installment": "Installments",
+    "requiredField": "This field is required"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "stepInfos": "Information",
+    "stepAddress": "Address",
+    "stepPayment": "Payment",
+    "prev": "Back",
+    "next": "Next",
+    "cartItems": "Cart Items",
+    "price": "R$ {{price}}",
+    "couponCode": "Coupon Code",
+    "apply": "Apply",
+    "shippingOptions": "Choose a shipping option",
+    "days": "days",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "discount": "Discount",
+    "total": "Total",
+    "finalizePayment": "Finalize Payment"
   },
   "cardNamePlaceholder": "Cardholder's Name",
   "cardNumberPlaceholder": "Card Number",

@@ -49,7 +49,7 @@ export function Cart() {
                   <div>
                     <p className="font-semibold dark:text-white">{item.name}</p>
                     <p className="dark:text-gray-300">
-                      {t(LanguageTexts.cart.price)}: ${item.price.toFixed(2)}
+                      {t(LanguageTexts.cart.price)}: R${item.price.toFixed(2)}
                     </p>
                   </div>
                 </div>
@@ -100,7 +100,7 @@ export function Cart() {
             </Link>
           </div>
           <div className="font-bold text-lg dark:text-white">
-            {t('cart.total')}: ${cart.total.toFixed(2)}{' '}
+            {t('cart.total')}: R${cart.total.toFixed(2)}{' '}
           </div>
         </div>
       </div>
