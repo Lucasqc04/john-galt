@@ -21,7 +21,7 @@ export function PersonForm() {
     e.target.value = value;
   };
 
-  const phoneNumber = '5511994458337'; // Número de WhatsApp
+  const phoneNumber = '5511919050416';
   const message = t('personForm.internationalSupportMessage');
   const whatsappLink = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
 
