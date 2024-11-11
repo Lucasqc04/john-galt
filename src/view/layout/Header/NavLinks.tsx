@@ -56,7 +56,7 @@ export function NavLinks({
   const callsToAction = [
     {
       name: t(LanguageTexts.header.contact_sales),
-      href: 'https://api.whatsapp.com/send?phone=+5511993439032&text=Ol%C3%A1,%20Tudo%20bem?%0A%0AEu%20gostaria%20de%20saber%20mais%20sobre%20os%20produtos%20da%20DIY%20LAB...',
+      href: 'https://api.whatsapp.com/send?phone=+5511919050416&text=Ol%C3%A1,%20Tudo%20bem?%0A%0AEu%20gostaria%20de%20saber%20mais%20sobre%20os%20produtos%20da%20DIY%20LAB...',
       icon: PhoneIcon,
     },
   ];
@@ -72,7 +72,7 @@ export function NavLinks({
           )}
           <PopoverGroup className="flex flex-col items-center justify-center gap-y-10 lg:gap-x-12 lg:flex-row lg:gap-y-0">
             <Popover className="relative">
-              <PopoverButton className="text-2xl flex items-center justify-center gap-x-1 lg:text-sm font-semibold leading-6 text-black dark:text-white hover:text-[#F6911D]">
+              <PopoverButton className="text-2xl flex items-center justify-center gap-x-1 lg:text-xl font-semibold leading-6 text-black dark:text-white hover:text-[#F6911D]">
                 {t(LanguageTexts.header.links[0])}
                 <MdKeyboardArrowDown
                   aria-hidden="true"
@@ -128,13 +128,13 @@ export function NavLinks({
               onClick={() =>
                 handleOnLink(ROUTES.about.call(currentLang), LinkCallBack)
               }
-              className="text-2xl lg:text-sm font-semibold leading-6 text-black dark:text-white hover:text-[#F6911D]"
+              className="text-2xl lg:text-xl font-semibold leading-6 text-black dark:text-white hover:text-[#F6911D]"
             >
               {t(LanguageTexts.header.links[1])}
             </button>
 
             <Popover className="relative">
-              <PopoverButton className="text-2xl flex items-center justify-center gap-x-1 lg:text-sm font-semibold leading-6 text-black dark:text-white hover:text-[#F6911D]">
+              <PopoverButton className="text-2xl flex items-center justify-center gap-x-1 lg:text-xl font-semibold leading-6 text-black dark:text-white hover:text-[#F6911D]">
                 {t(LanguageTexts.header.links[2])}
                 <MdKeyboardArrowDown
                   aria-hidden="true"
@@ -196,12 +196,12 @@ export function NavLinks({
               onClick={() =>
                 handleOnLink(ROUTES.tutorials.call(currentLang), LinkCallBack)
               }
-              className="text-2xl lg:text-sm font-semibold leading-6 text-black dark:text-white hover:text-[#F6911D]"
+              className="text-2xl lg:text-xl font-semibold leading-6 text-black dark:text-white hover:text-[#F6911D]"
             >
               {t(LanguageTexts.header.links[3])}
             </button>
 
-            <LanguageSwitcher className="text-xl flex items-center justify-center gap-x-2 lg:text-sm font-semibold leading-6 hover:text-[#F6911D]" />
+            <LanguageSwitcher className="text-xl flex items-center justify-center gap-x-2 lg:text-xl font-semibold leading-6 hover:text-[#F6911D]" />
 
             <button
               onClick={() =>
