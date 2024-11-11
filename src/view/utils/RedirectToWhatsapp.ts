@@ -5,7 +5,7 @@ export function redirectToWhatsApp(
   shipping: number,
   total: number,
 ) {
-  const phoneNumber = '5511994458337';
+  const phoneNumber = '5511919050416';
 
   const itemsText =
     data.items && Array.isArray(data.items)
