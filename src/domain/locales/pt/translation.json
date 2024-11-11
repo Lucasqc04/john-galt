@@ -167,6 +167,33 @@
       "O Bitcoin abre caminho para um futuro onde o poder volta às mãos das pessoas. Na DIY Sec Lab, nossa missão é apoiar essa jornada, oferecendo as ferramentas e o conhecimento necessários para que cada indivíduo possa viver essa soberania com confiança, simplicidade e responsabilidade. Acreditamos que o Bitcoin é a chave para a verdadeira autonomia, e estamos aqui para ajudar a abrir essa porta."
     ]
   },
+  "personForm": {
+    "email": "Email",
+    "firstName": "Nome",
+    "lastName": "Sobrenome",
+    "birthday": "Data de Nascimento",
+    "document": "Documento",
+    "documentOptions": {
+      "CPF": "CPF",
+      "CNPJ": "CNPJ"
+    },
+    "idNumber": "Número de Identificação",
+    "phone": "Telefone",
+    "areaCode": "DDD",
+    "number": "Número",
+    "requiredField": "Este campo é obrigatório",
+    "internationalSupport": "Não mora no Brasil? Nos chame aqui para compra internacional com nosso suporte",
+    "internationalSupportMessage": "Olá, gostaria de realizar uma compra internacional"
+  },
+  "addressForm": {
+    "zipCode": "CEP",
+    "street": "Rua",
+    "number": "Número",
+    "complement": "Complemento",
+    "city": "Cidade",
+    "neighborhood": "Bairro",
+    "requiredField": "Este campo é obrigatório"
+  },
   "shipping": {
     "title": "Frete",
     "calculateButton": "Calcular Frete",
@@ -217,6 +244,36 @@
       "Você tem a liberdade de recusar nossa solicitação de informações pessoais, entendendo que, nesse caso, talvez não possamos oferecer alguns dos serviços desejados.",
       "O uso contínuo de nosso site será considerado como aceitação de nossas práticas relacionadas à privacidade e ao tratamento de informações pessoais. Se você tiver qualquer dúvida sobre como lidamos com os dados dos usuários e informações pessoais, entre em contato conosco."
     ]
+  },
+  "paymentForm": {
+    "choosePaymentMethod": "Escolha a Forma de Pagamento",
+    "creditCard": "Cartão de Crédito",
+    "pix": "Pix",
+    "cardNamePlaceholder": "Nome do Titular",
+    "cardNumberPlaceholder": "Número do Cartão",
+    "expiryDatePlaceholder": "Data de Validade",
+    "cvvPlaceholder": "CVV",
+    "installment": "Parcelamento",
+    "requiredField": "Campo Obrigatório"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "stepInfos": "Informações",
+    "stepAddress": "Endereço",
+    "stepPayment": "Pagamento",
+    "prev": "Voltar",
+    "next": "Próximo",
+    "cartItems": "Itens no Carrinho",
+    "price": "R$ {{price}}",
+    "couponCode": "Código do Cupom",
+    "apply": "Aplicar",
+    "shippingOptions": "Escolha uma opção de frete",
+    "days": "dias",
+    "subtotal": "Subtotal",
+    "shipping": "Frete",
+    "discount": "Desconto",
+    "total": "Total",
+    "finalizePayment": "Finalizar Pagamento"
   },
   "cardNamePlaceholder": "Nome no cartão",
   "cardNumberPlaceholder": "Número do cartão",

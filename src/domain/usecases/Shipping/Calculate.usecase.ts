@@ -34,7 +34,13 @@ export class CalculateShippingUseCaseImpl implements CalculateShippingUseCase {
       }
     }
 
-    const shippingOptions = result.data;
+    const shippingOptions = result.data.filter(
+      (option) =>
+        !(
+          option.name.toLowerCase() === 'express' &&
+          option.company.name.toLowerCase() === 'loggi'
+        ),
+    );
 
     const cheapestOption = shippingOptions.reduce((prev, curr) =>
       parseFloat(curr.price) < parseFloat(prev.price) ? curr : prev,

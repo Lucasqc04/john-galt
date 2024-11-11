@@ -1,4 +1,5 @@
 import { FormProvider } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { FaTrash } from 'react-icons/fa';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
@@ -12,6 +13,7 @@ import { useCheckout } from './useCheckout';
 export function Checkout() {
   const { loading, form, cart, navigate, steps, applyCoupon, isValid } =
     useCheckout();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -25,15 +27,15 @@ export function Checkout() {
             />
           </button>
           <h1 className="text-4xl font-semibold text-gray-900 dark:text-white">
-            Checkout
+            {t('checkout.title')}
           </h1>
         </header>
         <StepIndicator
           currentStep={steps.current}
           steps={[
-            { title: 'Infos' },
-            { title: 'Endereço' },
-            { title: 'Pagamento' },
+            { title: t('checkout.stepInfos') },
+            { title: t('checkout.stepAddress') },
+            { title: t('checkout.stepPayment') },
           ]}
         />
         <FormProvider {...form.provider}>
@@ -55,7 +57,7 @@ export function Checkout() {
                     onClick={steps.prev}
                     className="w-48 bg-gray-500 text-white p-2 rounded-md font-semibold dark:bg-gray-700 dark:hover:bg-gray-600"
                   >
-                    Voltar
+                    {t('checkout.prev')}
                   </button>
                 )}
                 {steps.current < 2 && (
@@ -64,29 +66,25 @@ export function Checkout() {
                     onClick={steps.next}
                     className="w-48 bg-blue-500 text-white p-2 rounded-md font-semibold hover:bg-blue-600 transition-colors"
                   >
-                    Próximo
+                    {t('checkout.next')}
                   </button>
                 )}
                 {steps.current === 2 &&
                   cart.shippingOptions.length > 0 &&
                   form.watch('method') === 'EFI' && (
-                    <>
-                      {
-                        <button
-                          type="button"
-                          onClick={steps.next}
-                          className="w-48 bg-blue-500 text-white p-2 rounded-md font-semibold hover:bg-blue-600 transition-colors"
-                        >
-                          Próximo
-                        </button>
-                      }
-                    </>
+                    <button
+                      type="button"
+                      onClick={steps.next}
+                      className="w-48 bg-blue-500 text-white p-2 rounded-md font-semibold hover:bg-blue-600 transition-colors"
+                    >
+                      {t('checkout.next')}
+                    </button>
                   )}
               </div>
             </article>
             <aside className="w-full lg:w-1/3 p-4 bg-gray-50 dark:bg-gray-800 rounded-md shadow-lg">
               <h2 className="text-lg font-bold text-gray-900 dark:text-white">
-                Itens no Carrinho
+                {t('checkout.cartItems')}
               </h2>
               <ul className="flex flex-col gap-y-4 pt-4">
                 {cart.items.map((item) => (
@@ -105,7 +103,9 @@ export function Checkout() {
                           {item.name}
                         </p>
                         <p className="text-gray-500 dark:text-gray-300">
-                          R$ {item.price.toFixed(2)}
+                          {t('checkout.price', {
+                            price: item.price.toFixed(2),
+                          })}
                         </p>
                       </div>
                     </div>
@@ -152,7 +152,7 @@ export function Checkout() {
 
               <div className="py-4">
                 <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Código do Cupom
+                  {t('checkout.couponCode')}
                 </label>
                 <div className="flex gap-x-2 mt-2">
                   <input
@@ -165,7 +165,7 @@ export function Checkout() {
                     onClick={applyCoupon}
                     className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
                   >
-                    Aplicar
+                    {t('checkout.apply')}
                   </button>
                 </div>
                 {form.errors.couponCode && (
@@ -177,7 +177,7 @@ export function Checkout() {
 
               <div className="py-4 px-2">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  Escolha uma opção de frete
+                  {t('checkout.shippingOptions')}
                 </h3>
                 <ul>
                   {cart.shippingOptions.map((option) => (
@@ -194,7 +194,7 @@ export function Checkout() {
                           className="mr-2"
                         />
                         {option.name} - R$ {parseFloat(option.price).toFixed(2)}{' '}
-                        - {option.deliveryTime} dias
+                        - {option.deliveryTime} {t('checkout.days')}
                       </label>
                     </li>
                   ))}
@@ -204,7 +204,7 @@ export function Checkout() {
               <div className="flex flex-col p-4 gap-y-2 border-t border-b border-gray-300 dark:border-gray-600">
                 <div className="w-full flex justify-between">
                   <span className="text-lg font-semibold text-gray-900 dark:text-white">
-                    Subtotal
+                    {t('checkout.subtotal')}
                   </span>
                   <span className="text-lg font-semibold text-gray-900 dark:text-white">
                     R$ {cart.subtotal.toFixed(2)}
@@ -212,7 +212,7 @@ export function Checkout() {
                 </div>
                 <div className="w-full flex justify-between ">
                   <span className="text-lg font-semibold text-gray-900 dark:text-white">
-                    Frete
+                    {t('checkout.shipping')}
                   </span>
                   <span className="text-lg font-semibold text-gray-900 dark:text-white">
                     R$ {cart.shipping.value.toFixed(2)}
@@ -221,7 +221,7 @@ export function Checkout() {
                 {cart.discount.value > 0 && (
                   <div className="w-full flex justify-between ">
                     <span className="text-lg font-semibold text-gray-900 dark:text-white">
-                      Desconto
+                      {t('checkout.discount')}
                     </span>
                     <span className="text-lg font-semibold text-gray-900 dark:text-white">
                       -R$ {cart.discount.value.toFixed(2)}
@@ -231,7 +231,7 @@ export function Checkout() {
               </div>
               <div className="w-full flex justify-between p-4">
                 <span className="text-xl font-semibold text-gray-900 dark:text-white">
-                  Total
+                  {t('checkout.total')}
                 </span>
                 <span className="text-xl font-semibold text-gray-900 dark:text-white">
                   R$ {cart.total.toFixed(2)}
@@ -241,29 +241,25 @@ export function Checkout() {
               {steps.current === 2 &&
                 cart.shippingOptions.length > 0 &&
                 form.watch('method') !== 'EFI' && (
-                  <>
-                    <button
-                      type="submit"
-                      className={`w-full p-2 text-lg font-semibold text-white rounded-md transition-colors ${
-                        isValid
-                          ? 'bg-blue-500 hover:bg-blue-600'
-                          : 'bg-gray-400 cursor-not-allowed'
-                      }`}
-                      disabled={!isValid}
-                    >
-                      Finalizar Pagamento
-                    </button>
-                  </>
-                )}
-              {steps.current === 3 && cart.shippingOptions.length > 0 && (
-                <>
                   <button
                     type="submit"
-                    className={`w-full p-2 text-lg font-semibold text-white rounded-md transition-colors ${'bg-blue-500 hover:bg-blue-600'}`}
+                    className={`w-full p-2 text-lg font-semibold text-white rounded-md transition-colors ${
+                      isValid
+                        ? 'bg-blue-500 hover:bg-blue-600'
+                        : 'bg-gray-400 cursor-not-allowed'
+                    }`}
+                    disabled={!isValid}
                   >
-                    Finalizar Pagamento
+                    {t('checkout.finalizePayment')}
                   </button>
-                </>
+                )}
+              {steps.current === 3 && cart.shippingOptions.length > 0 && (
+                <button
+                  type="submit"
+                  className={`w-full p-2 text-lg font-semibold text-white rounded-md transition-colors ${'bg-blue-500 hover:bg-blue-600'}`}
+                >
+                  {t('checkout.finalizePayment')}
+                </button>
               )}
             </aside>
           </form>

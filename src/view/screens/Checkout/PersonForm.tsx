@@ -1,4 +1,5 @@
 import { useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { GetCheckout } from '../../../domain/entities/payment.entity';
 
 export function PersonForm() {
@@ -6,6 +7,7 @@ export function PersonForm() {
     register,
     formState: { errors },
   } = useFormContext<GetCheckout>();
+  const { t } = useTranslation();
 
   const handleBirthdayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value.replace(/\D/g, '');
@@ -19,11 +21,15 @@ export function PersonForm() {
     e.target.value = value;
   };
 
+  const phoneNumber = '5511919050416';
+  const message = t('personForm.internationalSupportMessage');
+  const whatsappLink = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+
   return (
     <>
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-          Email
+          {t('personForm.email')}
         </label>
         <input
           type="email"
@@ -31,13 +37,15 @@ export function PersonForm() {
           className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
         />
         {errors.payerEmail && (
-          <span className="text-red-500 text-sm">Este campo é obrigatório</span>
+          <span className="text-red-500 text-sm">
+            {t('personForm.requiredField')}
+          </span>
         )}
       </div>
 
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-          Nome
+          {t('personForm.firstName')}
         </label>
         <input
           type="text"
@@ -45,13 +53,15 @@ export function PersonForm() {
           className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
         />
         {errors.firstName && (
-          <span className="text-red-500 text-sm">Este campo é obrigatório</span>
+          <span className="text-red-500 text-sm">
+            {t('personForm.requiredField')}
+          </span>
         )}
       </div>
 
       <div>
         <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-          Sobrenome
+          {t('personForm.lastName')}
         </label>
         <input
           type="text"
@@ -59,13 +69,15 @@ export function PersonForm() {
           className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
         />
         {errors.lastName && (
-          <span className="text-red-500 text-sm">Este campo é obrigatório</span>
+          <span className="text-red-500 text-sm">
+            {t('personForm.requiredField')}
+          </span>
         )}
       </div>
 
       <div>
         <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-          Data de Nascimento
+          {t('personForm.birthday')}
         </label>
         <input
           type="text"
@@ -74,29 +86,33 @@ export function PersonForm() {
           className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
         />
         {errors.birthday && (
-          <span className="text-red-500 text-sm">Este campo é obrigatório</span>
+          <span className="text-red-500 text-sm">
+            {t('personForm.requiredField')}
+          </span>
         )}
       </div>
 
       <div>
         <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-          Documento
+          {t('personForm.document')}
         </label>
         <select
           {...register('identification.type', { required: true })}
           className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
         >
-          <option value="CPF">CPF</option>
-          <option value="CNPJ">CNPJ</option>
+          <option value="CPF">{t('personForm.documentOptions.CPF')}</option>
+          <option value="CNPJ">{t('personForm.documentOptions.CNPJ')}</option>
         </select>
         {errors.identification?.type && (
-          <span className="text-red-500 text-sm">Este campo é obrigatório</span>
+          <span className="text-red-500 text-sm">
+            {t('personForm.requiredField')}
+          </span>
         )}
       </div>
 
       <div>
         <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-          Número de Identificação
+          {t('personForm.idNumber')}
         </label>
         <input
           type="text"
@@ -104,26 +120,28 @@ export function PersonForm() {
           className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
         />
         {errors.identification?.number && (
-          <span className="text-red-500 text-sm">Este campo é obrigatório</span>
+          <span className="text-red-500 text-sm">
+            {t('personForm.requiredField')}
+          </span>
         )}
       </div>
 
       <div>
         <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-          Telefone
+          {t('personForm.phone')}
         </label>
         <div className="flex gap-x-4">
           <input
             type="text"
             {...register('phone.areaCode', { required: true })}
-            placeholder="DDD"
+            placeholder={t('personForm.areaCode')}
             maxLength={2}
             className="w-1/4 p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
           />
           <input
             type="text"
             {...register('phone.number', { required: true })}
-            placeholder="Número"
+            placeholder={t('personForm.number')}
             className="w-3/4 p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             onInput={(e) => {
               const target = e.target as HTMLInputElement;
@@ -132,11 +150,26 @@ export function PersonForm() {
           />
         </div>
         {errors.phone?.areaCode && (
-          <span className="text-red-500 text-sm">Este campo é obrigatório</span>
+          <span className="text-red-500 text-sm">
+            {t('personForm.requiredField')}
+          </span>
         )}
         {errors.phone?.number && (
-          <span className="text-red-500 text-sm">Este campo é obrigatório</span>
+          <span className="text-red-500 text-sm">
+            {t('personForm.requiredField')}
+          </span>
         )}
+      </div>
+
+      <div className="mt-6">
+        <a
+          href={whatsappLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center px-2 py-1 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 transition-colors duration-300"
+        >
+          {t('personForm.internationalSupport')}
+        </a>
       </div>
     </>
   );

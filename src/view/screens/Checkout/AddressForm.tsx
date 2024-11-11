@@ -1,4 +1,5 @@
 import { useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { GetCheckout } from '../../../domain/entities/payment.entity';
 import { useCheckout } from './useCheckout';
 
@@ -9,12 +10,13 @@ export function AddressForm() {
     formState: { errors },
   } = useFormContext<GetCheckout>();
   const { loading } = useCheckout();
+  const { t } = useTranslation();
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <div className="sm:col-span-2">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-          CEP
+          {t('addressForm.zipCode')}
         </label>
         <input
           type="text"
@@ -28,13 +30,15 @@ export function AddressForm() {
           className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
         />
         {errors.address?.zipCode && (
-          <span className="text-red-500 text-sm">Este campo é obrigatório</span>
+          <span className="text-red-500 text-sm">
+            {t('addressForm.requiredField')}
+          </span>
         )}
       </div>
 
       <div className="sm:col-span-2">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-          Logradouro
+          {t('addressForm.street')}
         </label>
         <input
           type="text"
@@ -43,13 +47,15 @@ export function AddressForm() {
           disabled={loading}
         />
         {errors.address?.street && (
-          <span className="text-red-500 text-sm">Este campo é obrigatório</span>
+          <span className="text-red-500 text-sm">
+            {t('addressForm.requiredField')}
+          </span>
         )}
       </div>
 
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-          Número
+          {t('addressForm.number')}
         </label>
         <input
           type="text"
@@ -58,13 +64,15 @@ export function AddressForm() {
           disabled={loading}
         />
         {errors.address?.number && (
-          <span className="text-red-500 text-sm">Este campo é obrigatório</span>
+          <span className="text-red-500 text-sm">
+            {t('addressForm.requiredField')}
+          </span>
         )}
       </div>
 
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-          Complemento
+          {t('addressForm.complement')}
         </label>
         <input
           type="text"
@@ -76,7 +84,7 @@ export function AddressForm() {
 
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-          Cidade
+          {t('addressForm.city')}
         </label>
         <input
           type="text"
@@ -85,13 +93,15 @@ export function AddressForm() {
           disabled={loading}
         />
         {errors.address?.city && (
-          <span className="text-red-500 text-sm">Este campo é obrigatório</span>
+          <span className="text-red-500 text-sm">
+            {t('addressForm.requiredField')}
+          </span>
         )}
       </div>
 
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-          Bairro
+          {t('addressForm.neighborhood')}
         </label>
         <input
           type="text"
@@ -100,7 +110,9 @@ export function AddressForm() {
           disabled={loading}
         />
         {errors.address?.neighborhood && (
-          <span className="text-red-500 text-sm">Este campo é obrigatório</span>
+          <span className="text-red-500 text-sm">
+            {t('addressForm.requiredField')}
+          </span>
         )}
       </div>
 
