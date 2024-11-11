@@ -167,6 +167,33 @@
     "links": ["Acerca de", "Política de Privacidad", "Contacto"],
     "allRightsReserved": "Reservados todos los derechos."
   },
+  "personForm": {
+    "email": "Correo electrónico",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "birthday": "Fecha de Nacimiento",
+    "document": "Documento",
+    "documentOptions": {
+      "CPF": "CPF",
+      "CNPJ": "CNPJ"
+    },
+    "idNumber": "Número de Identificación",
+    "phone": "Teléfono",
+    "areaCode": "Código de Área",
+    "number": "Número",
+    "requiredField": "Este campo es obligatorio",
+    "internationalSupport": "¿No vives en Brasil? Contáctanos aquí para compras internacionales con nuestro soporte",
+    "internationalSupportMessage": "Hola, me gustaría realizar una compra internacional"
+  },
+  "addressForm": {
+    "zipCode": "Código Postal",
+    "street": "Calle",
+    "number": "Número",
+    "complement": "Complemento",
+    "city": "Ciudad",
+    "neighborhood": "Barrio",
+    "requiredField": "Este campo es obligatorio"
+  },
   "shipping": {
     "title": "Envío",
     "calculateButton": "Calcular Envío",
@@ -217,6 +244,36 @@
       "Usted tiene la libertad de rechazar nuestra solicitud de información personal, entendiendo que en ese caso, quizás no podamos ofrecer algunos de los servicios deseados.",
       "El uso continuo de nuestro sitio será considerado como aceptación de nuestras prácticas relacionadas con la privacidad y el manejo de información personal. Si tiene alguna pregunta sobre cómo manejamos los datos de los usuarios e información personal, contáctenos."
     ]
+  },
+  "paymentForm": {
+    "choosePaymentMethod": "Elija el Método de Pago",
+    "creditCard": "Tarjeta de Crédito",
+    "pix": "Pix",
+    "cardNamePlaceholder": "Nombre del Titular",
+    "cardNumberPlaceholder": "Número de la Tarjeta",
+    "expiryDatePlaceholder": "Fecha de Vencimiento",
+    "cvvPlaceholder": "CVV",
+    "installment": "Cuotas",
+    "requiredField": "Este campo es obligatorio"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "stepInfos": "Información",
+    "stepAddress": "Dirección",
+    "stepPayment": "Pago",
+    "prev": "Atrás",
+    "next": "Siguiente",
+    "cartItems": "Artículos en el Carrito",
+    "price": "R$ {{price}}",
+    "couponCode": "Código de Cupón",
+    "apply": "Aplicar",
+    "shippingOptions": "Elige una opción de envío",
+    "days": "días",
+    "subtotal": "Subtotal",
+    "shipping": "Envío",
+    "discount": "Descuento",
+    "total": "Total",
+    "finalizePayment": "Finalizar Pago"
   },
   "cardNamePlaceholder": "Nombre del titular",
   "cardNumberPlaceholder": "Número de tarjeta",
