@@ -244,11 +244,15 @@ export function useCheckout() {
         switch (result.error.code) {
           case 'SERIALIZATION':
             alert('ERRO DE SERIALIZAÇÃO. POR FAVOR, ENTRE EM CONTATO');
-            redirectToWhatsApp({ ...data, items }, shipping, total);
+            if (import.meta.env.VITE_NODE_ENV !== 'development') {
+              redirectToWhatsApp({ ...data, items }, shipping, total);
+            }
             return;
           default:
             alert('ERRO AO PROCESSAR PAGAMENTO. POR FAVOR, ENTRE EM CONTATO');
-            redirectToWhatsApp({ ...data, items }, shipping, total);
+            if (import.meta.env.VITE_NODE_ENV !== 'development') {
+              redirectToWhatsApp({ ...data, items }, shipping, total);
+            }
             return;
         }
       }
