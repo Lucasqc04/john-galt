@@ -1,6 +1,13 @@
 import { useTranslation } from 'react-i18next';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.css';
 import { LanguageTexts } from '../../domain/locales/Language';
 import { BackgroundAnimated } from '../components/BackgroundAnimated';
+
+import { Navigation, Pagination } from 'swiper/modules';
+
+import image2 from '../assets/images/about/IMG_2721.jpg';
+import image1 from '../assets/images/about/IMG_2724.jpg';
 
 export function About() {
   const { t } = useTranslation();
@@ -8,6 +15,8 @@ export function About() {
   const manifest = t(LanguageTexts.about.manifest, {
     returnObjects: true,
   }) as string[];
+
+  const images = [{ src: image1 }, { src: image2 }];
 
   return (
     <>
@@ -27,7 +36,31 @@ export function About() {
               {paragraph}
             </p>
           ))}
+          <p className="text-center font-semibold text-base md:text-lg mt-8">
+            {t(LanguageTexts.about.signature)}
+          </p>
         </article>
+      </section>
+      <BackgroundAnimated />
+      <section className="px-8 md:px-16 py-8 relative max-w-4xl mx-auto">
+        <Swiper
+          modules={[Navigation, Pagination]}
+          navigation
+          pagination={{ clickable: true }}
+          loop
+          className="relative rounded-lg shadow-lg"
+        >
+          {images.map((image, idx) => (
+            <SwiperSlide key={idx}>
+              <img
+                src={image.src}
+                className="w-full h-72 object-cover rounded-lg"
+                style={{ aspectRatio: '16/9' }}
+              />
+              <div className="text-center text-white mt-2"></div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </section>
     </>
   );
