@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { GetCheckout } from '../../../domain/entities/payment.entity';
@@ -5,9 +6,21 @@ import { GetCheckout } from '../../../domain/entities/payment.entity';
 export function PersonForm() {
   const {
     register,
+    setValue,
     formState: { errors },
   } = useFormContext<GetCheckout>();
   const { t } = useTranslation();
+
+  useEffect(() => {
+    const savedFormData = localStorage.getItem('checkoutFormData');
+    if (savedFormData) {
+      const formData = JSON.parse(savedFormData);
+
+      Object.keys(formData).forEach((key) => {
+        setValue(key as keyof GetCheckout, formData[key]);
+      });
+    }
+  }, [setValue]);
 
   const handleBirthdayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value.replace(/\D/g, '');
