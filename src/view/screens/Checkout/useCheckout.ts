@@ -9,6 +9,8 @@ import { ROUTES } from '../../routes/Routes';
 import { redirectToWhatsApp } from '../../utils/RedirectToWhatsapp';
 import { useCurrentLang } from '../../utils/useCurrentLang';
 
+const LOCAL_STORAGE_KEY = 'checkoutFormState';
+
 export function useCheckout() {
   const { currentLang } = useCurrentLang();
   const {
@@ -21,14 +23,13 @@ export function useCheckout() {
 
   const form = useForm<GetCheckout>({
     mode: 'onChange',
-    defaultValues: {
+    defaultValues: JSON.parse(
+      localStorage.getItem(LOCAL_STORAGE_KEY) || '{}',
+    ) || {
       payerEmail: '',
       firstName: '',
       lastName: '',
-      identification: {
-        type: 'CPF',
-        number: '',
-      },
+      identification: { type: 'CPF', number: '' },
       couponCode: '',
       address: {
         street: '',
@@ -40,10 +41,7 @@ export function useCheckout() {
         uf: '',
         neighborhood: '',
       },
-      phone: {
-        areaCode: '',
-        number: '',
-      },
+      phone: { areaCode: '', number: '' },
       brand: 'undefined',
       method: 'EFI',
       cardName: '',
@@ -80,6 +78,13 @@ export function useCheckout() {
   const navigate = useNavigate();
 
   const zipCode = watch('address.zipCode');
+
+  useEffect(() => {
+    const subscription = watch((value) => {
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(value));
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
   useEffect(() => {
     if (items.length === 0) {
@@ -244,11 +249,15 @@ export function useCheckout() {
         switch (result.error.code) {
           case 'SERIALIZATION':
             alert('ERRO DE SERIALIZAÇÃO. POR FAVOR, ENTRE EM CONTATO');
-            redirectToWhatsApp({ ...data, items }, shipping, total);
+            if (import.meta.env.VITE_NODE_ENV !== 'development') {
+              redirectToWhatsApp({ ...data, items }, shipping, total);
+            }
             return;
           default:
             alert('ERRO AO PROCESSAR PAGAMENTO. POR FAVOR, ENTRE EM CONTATO');
-            redirectToWhatsApp({ ...data, items }, shipping, total);
+            if (import.meta.env.VITE_NODE_ENV !== 'development') {
+              redirectToWhatsApp({ ...data, items }, shipping, total);
+            }
             return;
         }
       }
