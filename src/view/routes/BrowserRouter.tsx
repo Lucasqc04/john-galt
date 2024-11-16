@@ -10,6 +10,7 @@ import WhatsAppButton from '../components/buttonWhatsApp';
 import { Loader } from '../components/Loader';
 import ScrollToTop from '../components/ScrollToTop';
 import { DefaultLayout } from '../layout/DefaultyLayout';
+import BuyBitcoin from '../screens/BuyBitcoin/BuyBitcoin';
 import { ROUTES } from './Routes';
 
 const About = lazy(() =>
@@ -109,6 +110,7 @@ export function BrowserRouter() {
               element={<PaymentFailure />}
             />
             <Route path={ROUTES.cart.checkout.path} element={<Checkout />} />
+            <Route path={ROUTES.buyBitcoin.path} element={<BuyBitcoin />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
