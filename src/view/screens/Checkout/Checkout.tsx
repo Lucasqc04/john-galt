@@ -69,17 +69,15 @@ export function Checkout() {
                     {t('checkout.next')}
                   </button>
                 )}
-                {steps.current === 2 &&
-                  cart.shippingOptions.length > 0 &&
-                  form.watch('method') === 'EFI' && (
-                    <button
-                      type="button"
-                      onClick={steps.next}
-                      className="w-48 bg-blue-500 text-white p-2 rounded-md font-semibold hover:bg-blue-600 transition-colors"
-                    >
-                      {t('checkout.next')}
-                    </button>
-                  )}
+                {steps.current === 2 && cart.shippingOptions.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={steps.next}
+                    className="w-48 bg-blue-500 text-white p-2 rounded-md font-semibold hover:bg-blue-600 transition-colors"
+                  >
+                    {t('checkout.next')}
+                  </button>
+                )}
               </div>
             </article>
             <aside className="w-full lg:w-1/3 p-4 bg-gray-50 dark:bg-gray-800 rounded-md shadow-lg">

@@ -4,6 +4,7 @@ import { DefaultResultError, Result } from '../../utils/Result';
 import { EfiDatasource } from '../datasource/Efi.datasource';
 import { RemoteDataSource } from '../datasource/Remote.datasource';
 import {
+  ChargedPIXModel,
   CreatedCheckoutModel,
   GeneratedPaymentTokenModel,
   GeneratePaymentTokenModel,
@@ -18,7 +19,7 @@ export type CreateReq = GetCheckoutModel;
 
 export type CreateRes = Promise<
   Result<
-    CreatedCheckoutModel | PaymentAPIResponse,
+    CreatedCheckoutModel | PaymentAPIResponse | ChargedPIXModel,
     { code: 'SERIALIZATION' } | DefaultResultError
   >
 >;
@@ -55,7 +56,7 @@ export class PaymentRepositoryImpl implements PaymentRepository {
   async create(req: CreateReq, method: PaymentMethod): CreateRes {
     let paymentToken: string | undefined;
 
-    if (method === 'EFI') {
+    if (method === 'EFI' && req.paymentOption === 'creditCard') {
       const { result: GeneratedToken } = await this.generatePaymentToken({
         brand: req.brand,
         cvv: req.cvv,
@@ -72,7 +73,7 @@ export class PaymentRepositoryImpl implements PaymentRepository {
       paymentToken = GeneratedToken.data.payment_token;
     }
 
-    const modelToValidate = this.getModelToValidate(method);
+    const modelToValidate = this.getModelToValidate(method, req.paymentOption);
 
     const result = await this.api.post({
       url: `/create-payment/${method}`,
@@ -89,6 +90,7 @@ export class PaymentRepositoryImpl implements PaymentRepository {
         selectInstallments: req.selectInstallments,
         birthday: req.birthday,
         paymentToken: paymentToken,
+        paymentOption: req.paymentOption,
       },
     });
 
@@ -141,12 +143,18 @@ export class PaymentRepositoryImpl implements PaymentRepository {
     }
   }
 
-  private getModelToValidate(method: PaymentMethod) {
+  private getModelToValidate(
+    method: PaymentMethod,
+    paymentOption?: 'creditCard' | 'pix',
+  ) {
     switch (method) {
       case 'MP':
         return CreatedCheckoutModel;
       case 'EFI':
-        return PaymentAPIResponse;
+        if (paymentOption === 'creditCard') {
+          return PaymentAPIResponse;
+        }
+        return ChargedPIXModel;
       case 'BTC':
         throw new Error('Método de pagamento não suportado');
       default:

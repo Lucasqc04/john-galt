@@ -10,6 +10,23 @@ export const ROUTES = {
     call: (id: string) => `/blog/${id}`,
     callLang: (currentLang: string, id: string) => `/${currentLang}/blog/${id}`,
   },
+  buyBitcoin: {
+    path: 'buy-bitcoin',
+    call: (currentLang: string) => `/${currentLang}/buy-bitcoin`,
+  },
+  aboutBitcoin: {
+    path: 'about-buy-bitcoin',
+    call: (currentLang: string) => `/${currentLang}/about-buy-bitcoin`,
+  },
+  fee: {
+    path: 'fee',
+    call: (currentLang: string) => `/${currentLang}/fee`,
+  },
+  term: {
+    path: 'terms',
+    call: (currentLang: string) => `/${currentLang}/terms`,
+  },
+
   tutorials: {
     path: 'tutoriais',
     call: (currentLang: string) => `/${currentLang}/tutoriais`,
@@ -27,6 +44,10 @@ export const ROUTES = {
     checkout: {
       path: 'checkout',
       call: (currentLang: string) => `/${currentLang}/checkout`,
+    },
+    pixPayment: {
+      path: 'pixPayment',
+      call: (currentLang: string) => `/${currentLang}/pixPayment`,
     },
     product: {
       path: 'produto/:id',

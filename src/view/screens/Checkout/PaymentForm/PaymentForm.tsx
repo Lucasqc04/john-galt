@@ -8,8 +8,15 @@ import { Loader } from '../../../components/Loader';
 import { usePaymentForm } from './usePaymentForm';
 
 export function PaymentForm() {
-  const { brand, method, form, loading, installment, handleExpiryDateChange } =
-    usePaymentForm();
+  const {
+    brand,
+    method,
+    form,
+    loading,
+    installment,
+    paymentOption,
+    handleExpiryDateChange,
+  } = usePaymentForm();
   const { t } = useTranslation();
 
   return (
@@ -22,7 +29,8 @@ export function PaymentForm() {
         <div className="flex flex-col gap-y-4 pt-2">
           {[
             { label: t('paymentForm.creditCard'), value: 'EFI' },
-            { label: t('paymentForm.pix'), value: 'MP' },
+            { label: t('paymentForm.pix'), value: 'EFI' },
+            { label: `${t('paymentForm.pix')} - MP`, value: 'MP' },
           ].map((methodOption, idx) => (
             <label
               key={idx}
@@ -33,6 +41,19 @@ export function PaymentForm() {
                 {...form.register('method')}
                 value={methodOption.value}
                 className="hidden peer"
+                onClick={() => {
+                  const selectedMethod = form.getValues('method');
+                  if (selectedMethod === 'EFI') {
+                    form.setValue(
+                      'paymentOption',
+                      methodOption.label === t('paymentForm.creditCard')
+                        ? 'creditCard'
+                        : 'pix',
+                    );
+                  } else {
+                    form.setValue('paymentOption', 'pix');
+                  }
+                }}
               />
               <span className="w-5 h-5 rounded-full border border-gray-400 dark:border-gray-600 flex items-center justify-center peer-checked:bg-blue-500 dark:peer-checked:bg-blue-400">
                 <span className="w-3 h-3 rounded-full bg-transparent peer-checked:bg-white"></span>
@@ -44,7 +65,8 @@ export function PaymentForm() {
           ))}
         </div>
       </div>
-      {method === 'EFI' && (
+
+      {method === 'EFI' && paymentOption === 'creditCard' && (
         <div className="w-full grid grid-cols-12 gap-x-4 gap-y-2">
           <div className="col-span-12">
             <label className="block text-gray-400 font-semibold mb-1">

@@ -11,13 +11,11 @@ export function PersonForm() {
   } = useFormContext<GetCheckout>();
   const { t } = useTranslation();
 
-  // Recuperar dados do localStorage ao carregar o componente
   useEffect(() => {
     const savedFormData = localStorage.getItem('checkoutFormData');
     if (savedFormData) {
       const formData = JSON.parse(savedFormData);
 
-      // Atualizar os valores no formulário
       Object.keys(formData).forEach((key) => {
         setValue(key as keyof GetCheckout, formData[key]);
       });

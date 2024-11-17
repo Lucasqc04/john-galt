@@ -16,10 +16,12 @@ export function usePaymentForm() {
     watch,
     setValue,
     formState: { errors },
+    getValues,
   } = useFormContext<GetCheckout>();
   const [brand, setBrand] = useState<Brand>('undefined');
   const [installment, setInstallment] = useState<Installment[]>();
   const method = watch('method');
+  const paymentOption = watch('paymentOption');
   const total = watch('total');
   const cvv = watch('cvv');
   const cardNumber = watch('cardNumber');
@@ -120,8 +122,11 @@ export function usePaymentForm() {
     method,
     loading,
     installment,
+    paymentOption,
     handleExpiryDateChange,
     form: {
+      getValues,
+      setValue,
       register,
       errors,
     },

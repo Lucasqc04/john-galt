@@ -23,37 +23,7 @@ export function useCheckout() {
 
   const form = useForm<GetCheckout>({
     mode: 'onChange',
-    defaultValues: JSON.parse(
-      localStorage.getItem(LOCAL_STORAGE_KEY) || '{}',
-    ) || {
-      payerEmail: '',
-      firstName: '',
-      lastName: '',
-      identification: { type: 'CPF', number: '' },
-      couponCode: '',
-      address: {
-        street: '',
-        number: '',
-        complement: '',
-        city: '',
-        state: '',
-        zipCode: '',
-        uf: '',
-        neighborhood: '',
-      },
-      phone: { areaCode: '', number: '' },
-      brand: 'undefined',
-      method: 'EFI',
-      cardName: '',
-      cardNumber: '',
-      cvv: '',
-      expiryDate: '',
-      installments: [],
-      birthday: '',
-      selectInstallments: '1',
-      items: [],
-      total: 0,
-    },
+    defaultValues: JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '{}'),
   });
 
   const {
@@ -225,21 +195,23 @@ export function useCheckout() {
         lastName: data.lastName,
         items: itemsWithShipping,
         phone: data.phone,
-        brand: data.brand,
-        cardName: data.cardName,
-        cardNumber: data.cardNumber,
-        cvv: data.cvv,
-        expiryDate: data.expiryDate,
-        installments: data.installments,
+        brand: data.brand ?? 'visa',
+        cardName: data.cardName ?? '',
+        cardNumber: data.cardNumber ?? '',
+        cvv: data.cvv ?? '',
+        expiryDate: data.expiryDate ?? '',
+        installments: data.installments ?? [],
         total: data.total,
-        selectInstallments: data.selectInstallments,
+        selectInstallments: data.selectInstallments ?? '1',
         birthday: data.birthday,
+        paymentOption: data.paymentOption ?? 'creditCard',
       };
 
       const preValidationResult = GetCheckout.safeParse(req);
 
       if (!preValidationResult.success) {
         alert('PREENCHA TODAS AS INFORMAÇOES ANTES DE ENVIAR');
+        console.log(preValidationResult.error.errors);
         return;
       }
 
@@ -264,6 +236,19 @@ export function useCheckout() {
 
       if ('paymentLink' in result.data) {
         window.location.href = result.data.paymentLink;
+        return;
+      }
+
+      if ('location' in result.data) {
+        navigate(ROUTES.cart.pixPayment.call(currentLang), {
+          state: {
+            total: total,
+            creation: result.data.calendary.creation,
+            expiration: result.data.calendary.expiration,
+            qrCodeURL: result.data.location,
+            pixCopyAndPaste: result.data.pixCopyAndPaste,
+          },
+        });
         return;
       }
 

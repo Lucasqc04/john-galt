@@ -1,5 +1,5 @@
 import { AiOutlineWhatsApp } from 'react-icons/ai';
-import { FaInstagram, FaLinkedinIn } from 'react-icons/fa'; // Adicionando o ícone do LinkedIn
+import { FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 import { LanguageTexts } from '../../../domain/locales/Language';
@@ -80,7 +80,7 @@ export function Footer() {
 
             <div className="group relative inline-block">
               <a
-                href="https://api.whatsapp.com/send?phone=+5511994458337&text=Ol%C3%A1,%20Tudo%20bem?%0A%0AEu%20gostaria%20de%20saber%20mais%20sobre%20os%20produtos%20da%20DIY%20LAB..."
+                href="https://api.whatsapp.com/send?phone=+5511919050416&text=Ol%C3%A1,%20Tudo%20bem?%0A%0AEu%20gostaria%20de%20saber%20mais%20sobre%20os%20produtos%20da%20DIY%20LAB..."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="focus:outline-none"
