@@ -45,6 +45,10 @@ export const ROUTES = {
       path: 'checkout',
       call: (currentLang: string) => `/${currentLang}/checkout`,
     },
+    pixPayment: {
+      path: 'pixPayment',
+      call: (currentLang: string) => `/${currentLang}/pixPayment`,
+    },
     product: {
       path: 'produto/:id',
       call: (currentLang: string, id: string = '1') =>

@@ -14,6 +14,7 @@ import { AboutBuyBitcoin } from '../screens/BuyBitcoin/AboutBuyBitcoin';
 import BuyBitcoin from '../screens/BuyBitcoin/BuyBitcoin';
 import { Fees } from '../screens/BuyBitcoin/RateBitcoin';
 import { TermsOfUse } from '../screens/BuyBitcoin/TermsUse';
+import { PixPayment } from '../screens/Checkout/PixPayment';
 import { ROUTES } from './Routes';
 
 const About = lazy(() =>
@@ -120,6 +121,10 @@ export function BrowserRouter() {
               element={<AboutBuyBitcoin />}
             />
             <Route path={ROUTES.term.path} element={<TermsOfUse />} />
+            <Route
+              path={ROUTES.cart.pixPayment.path}
+              element={<PixPayment />}
+            />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

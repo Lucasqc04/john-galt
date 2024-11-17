@@ -3,6 +3,7 @@ import { PaymentRepository } from '../../../data/repositories/Payment.repository
 import { DefaultResultError, Result } from '../../../utils/Result';
 import { UseCase } from '../../../utils/UseCase';
 import {
+  ChargedPIX,
   CreatedCheckout,
   GetCheckout,
   Installment,
@@ -13,7 +14,7 @@ export type CreateReq = GetCheckout;
 
 export type CreateRes = Promise<
   Result<
-    CreatedCheckout | PaymentApiResponse,
+    CreatedCheckout | PaymentApiResponse | ChargedPIX,
     { code: 'SERIALIZATION' } | DefaultResultError
   >
 >;
@@ -69,6 +70,7 @@ export class CreatePaymentUseCaseImpl implements CreatePaymentUseCase {
         expirationMonth,
         expirationYear: fullExpirationYear,
         birthday: parsedBirthday,
+        paymentOption: parsedResult.paymentOption,
       },
       req.method,
     );
