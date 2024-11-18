@@ -197,7 +197,7 @@
   },
   "shipping": {
     "title": "Frete",
-    "calculateButton": "Calcular Frete",
+    "calculateButton": "Calcular",
     "options": "Opções de Frete",
     "noOptions": "Nenhuma opção de frete disponível.",
     "enterZip": "Digite seu CEP:",

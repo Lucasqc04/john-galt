@@ -197,7 +197,7 @@
   },
   "shipping": {
     "title": "Shipping",
-    "calculateButton": "Calculate Shipping",
+    "calculateButton": "Calculate",
     "options": "Shipping Options",
     "noOptions": "No shipping options available.",
     "enterZip": "Enter your ZIP code:",
