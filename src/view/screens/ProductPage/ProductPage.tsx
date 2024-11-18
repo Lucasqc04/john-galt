@@ -98,7 +98,7 @@ export function ProductPage() {
                 min={1}
               />
             </div>
-            <div className="pt-4 flex justify-between">
+            <div className="pt-4 flex gap-x-4 justify-between">
               <button
                 onClick={cart.buy}
                 className="bg-orange-primary text-white p-2 rounded-md text-sm w-36 h-12"
