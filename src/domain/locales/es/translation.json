@@ -197,7 +197,7 @@
   },
   "shipping": {
     "title": "Envío",
-    "calculateButton": "Calcular Envío",
+    "calculateButton": "Calcular",
     "options": "Opciones de Envío",
     "noOptions": "No hay opciones de envío disponibles.",
     "enterZip": "Introduce tu código postal:",

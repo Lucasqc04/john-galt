@@ -1,201 +1,211 @@
+import classNames from 'classnames';
+import { useState } from 'react';
 import { FormProvider } from 'react-hook-form';
-import { FaChevronLeft, FaChevronRight, FaTruckFast } from 'react-icons/fa6';
 import { MdCheck } from 'react-icons/md';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
 import { LanguageTexts } from '../../../domain/locales/Language';
-
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import { Loader } from '../../components/Loader';
 import { styleLastWord } from '../../utils/StyleWord';
-import { BlogLinks } from '../partials/BlogLinks';
+import { useWindowSize } from '../../utils/useWindowSize';
+import './product-page.css';
 import { useProductPage } from './useProductPage';
 
 export function ProductPage() {
-  const {
-    t,
-    cart,
-    form,
-    image,
-    loading,
-    product,
-    quantity,
-    shipping,
-    register,
-  } = useProductPage();
+  const { t, cart, form, loading, product, quantity, shipping, register } =
+    useProductPage();
+  const { width } = useWindowSize();
+
+  const [mainImage, setMainImage] = useState(product?.images[0]);
+
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   if (!product) {
     return <Loader />;
   }
 
+  const handleImageClick = (index: number) => {
+    setMainImage(product.images[index]);
+    setCurrentIndex(index);
+  };
+
+  const getVisibleImages = () => {
+    const visibleImages = [];
+    for (let i = 0; i < 5; i++) {
+      const index = (currentIndex + i) % product.images.length;
+      visibleImages.push(product.images[index]);
+    }
+    return visibleImages;
+  };
+
   return (
     <>
       <BackgroundAnimatedProduct />
-      <div className="min-h-screen pt-[35%] md:pt-[15%] lg:pt-[10%]">
-        <div className="max-w-7xl mx-auto p-4">
-          <div className="lg:flex lg:gap-12">
-            <div className="lg:w-1/2 mb-6 lg:mb-0 relative">
-              <div className="flex items-center justify-center space-x-4">
-                <button
-                  onClick={image.prev}
-                  className="bg-orange-primary text-white p-2 rounded-full"
-                >
-                  <FaChevronLeft />
-                </button>
+      <section className="min-h-screen px-10 pt-32 sm:grid sm:grid-cols-12 sm:px-8">
+        <article className="sm:hidden">
+          <h2 className="text-2xl leading-9 text-[#1E1E1E] font-bold">
+            {product.name}
+          </h2>
+          <Slider
+            infinite={true}
+            speed={500}
+            slidesToShow={1}
+            slidesToScroll={1}
+            draggable={true}
+            arrows={false}
+            dots={true}
+            className="pt-4"
+          >
+            {product.images.map((image, idx) => (
+              <div key={idx}>
                 <img
-                  src={image.current}
-                  alt={product.name}
-                  className="w-[80%] h-auto object-cover rounded-md shadow-lg dark:border-gray-700"
+                  src={image}
+                  alt={`Imagem do Produto ${idx + 1}`}
+                  className="w-full"
                 />
-                <button
-                  onClick={image.next}
-                  className="bg-orange-primary text-white p-2 rounded-full"
-                >
-                  <FaChevronRight />
-                </button>
               </div>
+            ))}
+          </Slider>
+        </article>
 
-              <div className="flex mt-4 space-x-2 justify-center">
-                {product.images.map((imageUrl: string, index: number) => (
-                  <img
-                    key={index}
-                    src={imageUrl}
-                    alt={`Thumbnail ${index}`}
-                    className={`w-12 h-12 md:w-16 md:h-16 object-cover cursor-pointer border ${
-                      image.index === index
-                        ? 'border-orange-primary'
-                        : 'border-gray-300 dark:border-gray-700'
-                    } rounded-md`}
-                    onClick={() => image.thumbnail(index)}
-                  />
-                ))}
-              </div>
-            </div>
-
-            <div className="lg:w-1/2">
-              <h1 className="text-2xl md:text-3xl font-bold dark:text-white mb-4">
-                {product.name}
-              </h1>
-              <h4 className="text-xl md:text-2xl font-bold dark:text-white mb-3">
-                {product.title}
-              </h4>
-              <div className="text-lg dark:text-gray-400 line-through">
-                R${product.originalPrice.toFixed(2)}
-              </div>
-              <div className="text-3xl md:text-4xl font-bold dark:text-white mb-4">
-                R${product.price.toFixed(2)}
-              </div>
-              <p className="dark:text-gray-300 mb-6">{product.description}</p>
-              <ul className="pb-6 list-disc pl-6">
-                {product.items?.map((item) => (
-                  <li>
-                    {item.quantity} {item.description}
-                  </li>
-                ))}
-              </ul>
-              <div className="flex items-center mb-6">
-                <input
-                  type="number"
-                  value={quantity.value}
-                  onChange={(e) => quantity.set(Number(e.target.value))}
-                  min={1}
-                  className="w-16 p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                />
-                <button
-                  onClick={cart.add}
-                  className="bg-orange-primary text-white p-2 rounded-md ml-2"
-                >
-                  {t(LanguageTexts.products.addToCartButton)}
-                </button>
-              </div>
-              <FormProvider {...form}>
-                <form className="flex items-center mb-6">
-                  <input
-                    type="text"
-                    placeholder={t(LanguageTexts.shipping.enterZip)}
-                    {...register('postalCode')}
-                    onChange={(e) => {
-                      const onlyNumbers = e.target.value.replace(/\D/g, '');
-                      e.target.value = onlyNumbers.slice(0, 8);
-                    }}
-                    className="p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600"
-                  />
-                  <button
-                    onClick={shipping.calculate}
-                    className="bg-orange-primary text-white p-2 rounded-md ml-2"
-                    disabled={loading}
-                  >
-                    {loading
-                      ? t(LanguageTexts.shipping.loading)
-                      : t(LanguageTexts.shipping.calculateButton)}
-                  </button>
-                </form>
-              </FormProvider>
-
-              <div>
-                <div className="flex items-center mb-4">
-                  <FaTruckFast className="text-lg md:text-2xl text-black dark:text-white mr-2" />
-                  <span className="text-lg md:text-2xl font-bold dark:text-white">
-                    {t(LanguageTexts.shipping.options)}:
-                  </span>
-                </div>
-
-                {shipping.options.length > 0 ? (
-                  <ul className="ml-4 flex flex-col gap-y-2">
-                    {shipping.options.map((option) => (
-                      <li
-                        key={option.id}
-                        className="flex items-center dark:text-white gap-x-2"
-                      >
-                        <img
-                          src={option.company.picture}
-                          alt={option.company.name}
-                          className="w-16"
-                        />
-                        <div>
-                          <strong>{option.name}</strong>: R${' '}
-                          {option.price && (
-                            <>
-                              {parseFloat(option.price).toFixed(2)}.{' '}
-                              {t(LanguageTexts.shipping.deliveryIn)}{' '}
-                              <strong>{option.deliveryTime} dias</strong>
-                            </>
-                          )}
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <span className="ml-2 text-lg md:text-2xl dark:text-white">
-                    {t(LanguageTexts.shipping.noOptions)}
-                  </span>
-                )}
-              </div>
-            </div>
+        <article
+          className={classNames(
+            'hidden sm:col-span-8 sm:row-span-2 sm:flex ',
+            width > 843 ? 'sm:justify-center' : 'sm:justify-around',
+          )}
+        >
+          <div className="flex flex-col h-full justify-between">
+            {getVisibleImages().map((image, index) => (
+              <img
+                key={index}
+                src={image}
+                alt={`Imagem do Produto ${index + 1}`}
+                className="w-28 cursor-pointer border border-solid border-black rounded-md"
+                onClick={() =>
+                  handleImageClick(
+                    (currentIndex + index) % product.images.length,
+                  )
+                }
+              />
+            ))}
           </div>
+          <img
+            src={mainImage ?? product.images[0]}
+            alt={`Imagem do Produto Principal`}
+            className={classNames(
+              'w-[360px]',
+              width > 843 && 'w-[800px] pl-32',
+            )}
+          />
+        </article>
 
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-20 mt-36 text-center dark:text-white">
-              {styleLastWord(t(LanguageTexts.products.resourcesTitle))}
-              <span className="text-orange-primary">{product.name}</span>
+        <article className="flex flex-col gap-y-2 sm:col-span-4">
+          <h2 className="hidden sm:block text-2xl leading-9 text-[#1E1E1E] font-bold">
+            {product.name}
+          </h2>
+          <div className="pt-12 sm:pt-4 flex items-start">
+            <span className="text-xl leading-5">R$</span>
+            <h2 className="text-4xl font-bold leading-5">
+              {product.price.toFixed(2)}
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {product.resources.map((resource: string, index: number) => (
-                <ul key={index} className="list-none">
-                  <li className="flex items-center gap-x-4">
-                    <MdCheck size={32} className="text-green-700" />
-                    <span className="dark:text-white font-medium text-lg md:text-xl">
-                      {resource}
-                    </span>
-                  </li>
-                </ul>
-              ))}
-            </div>
           </div>
+          <div className="flex flex-col gap-y-2 pt-2">
+            <span className="text-sm">Disponível para parcelamento</span>
+            <span className="text-[#4133FF] text-sm">
+              Ver os métodos de pagamento
+            </span>
+          </div>
+        </article>
 
-          <div className="mt-24 mb-44 mr-auto ml-auto">
-            <BlogLinks />
+        <FormProvider {...form}>
+          <form className="flex flex-col gap-y-2 pt-6 col-span-4">
+            <div
+              className={classNames(
+                'flex items-end gap-x-4',
+                width <= 360 && 'flex-col gap-y-2 items-center',
+                width >= 768 && width <= 843 && 'flex-col gap-y-2 items-center',
+              )}
+            >
+              <div className="w-full flex flex-col">
+                <label htmlFor="postalCode">Calcular Frete</label>
+                <input
+                  type="text"
+                  placeholder={t(LanguageTexts.shipping.enterZip)}
+                  {...register('postalCode')}
+                  onChange={(e) => {
+                    const onlyNumbers = e.target.value.replace(/\D/g, '');
+                    e.target.value = onlyNumbers.slice(0, 8);
+                  }}
+                  className="bg-[#EDEDED] p-3 rounded-md"
+                />
+              </div>
+              <button
+                onClick={shipping.calculate}
+                className="bg-[#EDEDED] p-2 rounded-md w-full h-12 text-center text-sm"
+                disabled={loading}
+              >
+                {loading
+                  ? t(LanguageTexts.shipping.loading)
+                  : t(LanguageTexts.shipping.calculateButton)}
+              </button>
+            </div>
+            <div className="flex items-center bg-[#D9D9D9] h-12 px-2 py-5 rounded-md gap-x-1">
+              <label htmlFor="shippingCalculate" className="uppercase text-sm">
+                Quantidade:
+              </label>
+              <input
+                type="number"
+                id="shippingCalculate"
+                value={quantity.value}
+                className="bg-transparent text-sm outline-none"
+                onChange={(e) => quantity.set(Number(e.target.value))}
+                min={1}
+              />
+            </div>
+            <div className="pt-4 flex gap-x-4 justify-between sm:flex-col sm:h-32 sm:gap-y-2">
+              <button
+                onClick={cart.buy}
+                className="bg-orange-primary text-white p-2 rounded-md text-sm w-36 sm:w-full sm:gap-y-4 h-14"
+              >
+                Comprar Agora
+              </button>
+              <button
+                onClick={cart.add}
+                className=" text-white p-2 rounded-md text-sm h-14 bg-[#242F3F]"
+              >
+                {t(LanguageTexts.products.addToCartButton)}
+              </button>
+            </div>
+          </form>
+        </FormProvider>
+
+        <div className="py-16 flex flex-col gap-y-6 sm:col-span-12 sm:row-span-12">
+          <h2 className="text-3xl font-bold text-center dark:text-white">
+            {styleLastWord(t(LanguageTexts.products.resourcesTitle))}
+            <span className="text-orange-primary">{product.name}</span>
+          </h2>
+          <div className="grid grid-cols-12 gap-6">
+            {product.resources.map((resource: string, index: number) => (
+              <ul
+                key={index}
+                className={classNames(
+                  'list-none col-span-12',
+                  width > 843 && 'sm:flex sm:flex-col sm:items-center',
+                )}
+              >
+                <li className="flex items-center gap-x-4">
+                  <MdCheck size={32} className="text-green-700" />
+                  <span className="dark:text-white font-medium text-sm">
+                    {resource}
+                  </span>
+                </li>
+              </ul>
+            ))}
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }
