@@ -70,7 +70,12 @@ export function ProductPage() {
           </Slider>
         </article>
 
-        <article className="hidden sm:col-span-8 sm:row-span-2 sm:flex sm:justify-around">
+        <article
+          className={classNames(
+            'hidden sm:col-span-8 sm:row-span-2 sm:flex ',
+            width > 843 ? 'sm:justify-center' : 'sm:justify-around',
+          )}
+        >
           <div className="flex flex-col h-full justify-between">
             {getVisibleImages().map((image, index) => (
               <img
@@ -89,7 +94,10 @@ export function ProductPage() {
           <img
             src={mainImage ?? product.images[0]}
             alt={`Imagem do Produto Principal`}
-            className="w-[360px]"
+            className={classNames(
+              'w-[360px]',
+              width > 843 && 'w-[800px] pl-32',
+            )}
           />
         </article>
 
@@ -180,7 +188,13 @@ export function ProductPage() {
           </h2>
           <div className="grid grid-cols-12 gap-6">
             {product.resources.map((resource: string, index: number) => (
-              <ul key={index} className="list-none col-span-12">
+              <ul
+                key={index}
+                className={classNames(
+                  'list-none col-span-12',
+                  width > 843 && 'sm:flex sm:flex-col sm:items-center',
+                )}
+              >
                 <li className="flex items-center gap-x-4">
                   <MdCheck size={32} className="text-green-700" />
                   <span className="dark:text-white font-medium text-sm">
