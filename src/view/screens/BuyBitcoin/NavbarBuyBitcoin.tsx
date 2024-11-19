@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaBars, FaMoon, FaSun, FaTimes } from 'react-icons/fa'; // Importando o ícone de "X"
+import { FaBars, FaMoon, FaSun, FaTimes } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { useHeader } from '../../layout/Header/useHeader';
 import { ROUTES } from '../../routes/Routes';
@@ -10,7 +10,7 @@ export function NavBarBuyBitcoin() {
   const navigate = useNavigate();
   const { currentLang } = useCurrentLang();
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // Estado para controlar o menu
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleOnLink = (path: string, callback?: () => void) => {
     if (callback) {
@@ -21,16 +21,13 @@ export function NavBarBuyBitcoin() {
 
   return (
     <div className="relative flex justify-between items-center pt-8 px-4 sm:px-6 md:px-8">
-      {/* Botão de menu hamburguer ou "X" para telas pequenas */}
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
         className="lg:hidden text-3xl text-black dark:text-white"
       >
         {isMenuOpen ? <FaTimes /> : <FaBars />}
-        {/* Exibe o "X" se o menu estiver aberto */}
       </button>
 
-      {/* Navbar principal */}
       <div
         className={`flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 w-full ${isMenuOpen ? 'block' : 'hidden'} lg:flex lg:justify-center`}
       >
