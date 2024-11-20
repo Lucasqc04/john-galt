@@ -1,6 +1,7 @@
 import { FormProvider } from 'react-hook-form';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { MdCreditCard, MdHome, MdPerson } from 'react-icons/md';
+import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import { LanguageSwitcher } from '../../components/LanguageSwitcher/LanguageSwitcher';
 import { Loader } from '../../components/Loader';
 import { AddressForm } from './AddressForm/AddressForm';
@@ -18,7 +19,8 @@ export function Checkout() {
   return (
     <>
       {loading && <Loader />}
-      <main className="px-4 py-8 grid grid-cols-12 gap-y-4 dark:bg-primary-dark">
+      <BackgroundAnimatedProduct />
+      <main className="px-4 py-6 grid grid-cols-12 gap-y-2">
         <header className="col-span-12 flex items-start justify-between dark:text-white">
           <div className="flex items-center gap-x-4">
             <button onClick={() => navigate(-1)}>

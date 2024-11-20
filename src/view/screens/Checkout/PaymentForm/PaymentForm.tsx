@@ -135,9 +135,9 @@ export function PaymentForm() {
       )}
 
       {paymentOption !== 'creditCard' && (
-        <h2>
+        <h2 className="dark:text-white">
           Método de Pagamento Selecionado:{' '}
-          <b className="uppercase">{paymentOption}</b>
+          <b className="uppercase dark:text-white">{paymentOption}</b>
         </h2>
       )}
     </>
