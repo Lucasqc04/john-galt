@@ -43,7 +43,7 @@ export function ProductPage() {
   return (
     <>
       <BackgroundAnimatedProduct />
-      <section className="min-h-screen px-10 pt-32 sm:grid sm:grid-cols-12 sm:px-8 dark:bg-[#1E1E1E]">
+      <section className="min-h-screen px-10 pt-32 sm:grid sm:grid-cols-12 sm:px-8">
         <article className="sm:hidden">
           <h2 className="text-2xl leading-9 text-[#1E1E1E] font-bold dark:text-white">
             {product.name}
@@ -115,7 +115,7 @@ export function ProductPage() {
             <span className="text-sm dark:text-white">
               Disponível para parcelamento
             </span>
-            <span className="text-[#4133FF] text-sm dark:text-[#4133FF]">
+            <span className="text-[#4133FF] text-sm dark:text-[#dad9e6]">
               Ver os métodos de pagamento
             </span>
           </div>
@@ -155,7 +155,7 @@ export function ProductPage() {
                   : t(LanguageTexts.shipping.calculateButton)}
               </button>
             </div>
-            <div className="flex items-center bg-[#D9D9D9] h-12 px-2 py-5 rounded-md gap-x-1 dark:bg-[#333333] dark:text-white">
+            <div className="flex items-center bg-[#D9D9D9] h-12 px-2 py-5 rounded-md gap-x-1 dark:bg-[#242F3F] dark:text-white">
               <label htmlFor="shippingCalculate" className="uppercase text-sm">
                 Quantidade:
               </label>
@@ -163,7 +163,7 @@ export function ProductPage() {
                 type="number"
                 id="shippingCalculate"
                 value={quantity.value}
-                className="bg-transparent text-sm outline-none dark:bg-[#333333] dark:text-white dark:border-white"
+                className="bg-transparent text-sm outline-none dark:bg-[#242F3F] dark:text-white dark:border-white"
                 onChange={(e) => quantity.set(Number(e.target.value))}
                 min={1}
               />
