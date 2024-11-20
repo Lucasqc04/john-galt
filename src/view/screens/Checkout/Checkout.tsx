@@ -1,56 +1,75 @@
 import { FormProvider } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
-import { FaTrash } from 'react-icons/fa';
 import { IoMdArrowRoundBack } from 'react-icons/io';
-import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
+import { MdCreditCard, MdHome, MdPerson } from 'react-icons/md';
+import { LanguageSwitcher } from '../../components/LanguageSwitcher/LanguageSwitcher';
 import { Loader } from '../../components/Loader';
-import { AddressForm } from './AddressForm';
+import { AddressForm } from './AddressForm/AddressForm';
+import { ConfirmInfos } from './ConfirmInfos/ConfirmInfos';
 import { PaymentForm } from './PaymentForm/PaymentForm';
-import { PersonForm } from './PersonForm';
+import { PaymentOptions } from './PaymentOption/PaymentOption';
+import { PersonForm } from './PersonForm/PersonForm';
+import { ShippingForm } from './ShippingForm/ShippingForm';
 import { StepIndicator } from './StepIndicator';
 import { useCheckout } from './useCheckout';
 
 export function Checkout() {
-  const { loading, form, cart, navigate, steps, applyCoupon, isValid } =
-    useCheckout();
-  const { t } = useTranslation();
+  const { t, form, steps, loading, navigate } = useCheckout();
 
   return (
     <>
       {loading && <Loader />}
-      <main className="min-h-screen flex flex-col px-4 py-8 bg-white dark:bg-gray-900">
-        <header className="flex gap-x-4 items-center">
-          <button onClick={() => navigate(-1)}>
-            <IoMdArrowRoundBack
-              size={28}
-              className="text-gray-900 dark:text-white"
-            />
-          </button>
-          <h1 className="text-4xl font-semibold text-gray-900 dark:text-white">
-            {t('checkout.title')}
-          </h1>
+      <main className="px-4 py-8 grid grid-cols-12 gap-y-4">
+        <header className="col-span-12 flex items-start justify-between">
+          <div className="flex items-center gap-x-4">
+            <button onClick={() => navigate(-1)}>
+              <IoMdArrowRoundBack
+                size={28}
+                className="text-gray-900 dark:text-white"
+              />
+            </button>
+            <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
+              {t('checkout.title')}
+            </h1>
+          </div>
+          <LanguageSwitcher />
         </header>
-        <StepIndicator
-          currentStep={steps.current}
-          steps={[
-            { title: t('checkout.stepInfos') },
-            { title: t('checkout.stepAddress') },
-            { title: t('checkout.stepPayment') },
-          ]}
-        />
-        <FormProvider {...form.provider}>
-          <form
-            onSubmit={form.submit}
-            className="w-full flex flex-col lg:flex-row gap-x-4"
-          >
-            <article className="w-full lg:w-2/3">
+        <article className="col-span-12 w-full">
+          <div className="w-full max-w-3xl">
+            <StepIndicator
+              currentStep={steps.current}
+              stepRanges={{
+                1: [1],
+                2: [2, 3],
+                3: [4, 5, 6],
+              }}
+              steps={[
+                { icon: <MdPerson size={18} /> },
+                { icon: <MdHome size={18} /> },
+                { icon: <MdCreditCard size={18} /> },
+              ]}
+            />
+          </div>
+        </article>
+        <article className="col-span-12">
+          <h3 className="text-xl border-b border-solid border-black leading-9">
+            {steps.current === 1 && t('checkout.stepInfos')}
+            {steps.current === 2 && t('checkout.stepAddress')}
+            {steps.current === 3 && t('checkout.stepShipping')}
+            {steps.current === 4 && t('checkout.choosePaymentMethod')}
+            {steps.current === 5 && t('checkout.stepPayment')}
+            {steps.current === 6 && t('checkout.confirmInfos')}
+          </h3>
+          <FormProvider {...form}>
+            <form>
               <div className="flex flex-col gap-y-2 pt-4">
                 {steps.current === 1 && <PersonForm />}
                 {steps.current === 2 && <AddressForm />}
-                {steps.current === 3 && <PaymentForm />}
+                {steps.current === 3 && <ShippingForm />}
+                {steps.current === 4 && <PaymentOptions />}
+                {steps.current === 5 && <PaymentForm />}
+                {steps.current === 6 && <ConfirmInfos />}
               </div>
-
-              <div className="w-full flex justify-between py-4">
+              <div className="w-full flex justify-between py-4 gap-x-2">
                 {steps.current > 1 && (
                   <button
                     type="button"
@@ -60,208 +79,27 @@ export function Checkout() {
                     {t('checkout.prev')}
                   </button>
                 )}
-                {steps.current < 2 && (
+                {steps.current < 6 && (
                   <button
                     type="button"
                     onClick={steps.next}
-                    className="w-48 bg-blue-500 text-white p-2 rounded-md font-semibold hover:bg-blue-600 transition-colors"
+                    className="w-full bg-orange-primary text-white p-2 rounded-md font-semibold hover:bg-orange-500 transition-colors"
                   >
                     {t('checkout.next')}
                   </button>
                 )}
-                {steps.current === 2 && cart.shippingOptions.length > 0 && (
-                  <button
-                    type="button"
-                    onClick={steps.next}
-                    className="w-48 bg-blue-500 text-white p-2 rounded-md font-semibold hover:bg-blue-600 transition-colors"
-                  >
-                    {t('checkout.next')}
-                  </button>
-                )}
-              </div>
-            </article>
-            <aside className="w-full lg:w-1/3 p-4 bg-gray-50 dark:bg-gray-800 rounded-md shadow-lg">
-              <h2 className="text-lg font-bold text-gray-900 dark:text-white">
-                {t('checkout.cartItems')}
-              </h2>
-              <ul className="flex flex-col gap-y-4 pt-4">
-                {cart.items.map((item) => (
-                  <li
-                    key={item.id}
-                    className="flex items-center justify-between border-b border-gray-300 pb-4 dark:border-gray-700"
-                  >
-                    <div className="flex items-center gap-x-4">
-                      <img
-                        src={item.imageUrl}
-                        alt={item.name}
-                        className="w-16 h-16 object-cover rounded-md"
-                      />
-                      <div>
-                        <p className="font-semibold text-gray-900 dark:text-white">
-                          {item.name}
-                        </p>
-                        <p className="text-gray-500 dark:text-gray-300">
-                          {t('checkout.price', {
-                            price: item.price.toFixed(2),
-                          })}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-x-2">
-                      <div className="flex flex-col items-center">
-                        <button
-                          type="button"
-                          onClick={() =>
-                            cart.updateItemQuantity(item.id, item.quantity + 1)
-                          }
-                          className="text-gray-700 dark:text-white hover:text-blue-500 dark:hover:text-blue-300"
-                        >
-                          <TiArrowSortedUp size={24} />
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            if (item.quantity > 1) {
-                              cart.updateItemQuantity(
-                                item.id,
-                                item.quantity - 1,
-                              );
-                            }
-                          }}
-                          className="text-gray-700 dark:text-white hover:text-blue-500 dark:hover:text-blue-300"
-                        >
-                          <TiArrowSortedDown size={24} />
-                        </button>
-                      </div>
-                      <p className="text-xl font-semibold text-gray-900 dark:text-gray-300">
-                        {item.quantity}
-                      </p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => cart.remove(item.id)}
-                      className="bg-red-500 text-white px-3 py-2 rounded-md hover:bg-red-600 transition-colors"
-                    >
-                      <FaTrash />
-                    </button>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="py-4">
-                <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {t('checkout.couponCode')}
-                </label>
-                <div className="flex gap-x-2 mt-2">
-                  <input
-                    type="text"
-                    {...form.register('couponCode')}
-                    className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600"
-                  />
-                  <button
-                    type="button"
-                    onClick={applyCoupon}
-                    className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
-                  >
-                    {t('checkout.apply')}
-                  </button>
-                </div>
-                {form.errors.couponCode && (
-                  <span className="text-red-500 text-sm mt-1">
-                    {form.errors.couponCode.message}
-                  </span>
-                )}
-              </div>
-
-              <div className="py-4 px-2">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  {t('checkout.shippingOptions')}
-                </h3>
-                <ul>
-                  {cart.shippingOptions.map((option) => (
-                    <li
-                      key={option.id}
-                      className="text-gray-900 dark:text-white"
-                    >
-                      <label>
-                        <input
-                          type="radio"
-                          name="shippingOption"
-                          value={option.id}
-                          onChange={() => cart.onShippingSelect(option)}
-                          className="mr-2"
-                        />
-                        {option.name} - R$ {parseFloat(option.price).toFixed(2)}{' '}
-                        - {option.deliveryTime} {t('checkout.days')}
-                      </label>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="flex flex-col p-4 gap-y-2 border-t border-b border-gray-300 dark:border-gray-600">
-                <div className="w-full flex justify-between">
-                  <span className="text-lg font-semibold text-gray-900 dark:text-white">
-                    {t('checkout.subtotal')}
-                  </span>
-                  <span className="text-lg font-semibold text-gray-900 dark:text-white">
-                    R$ {cart.subtotal.toFixed(2)}
-                  </span>
-                </div>
-                <div className="w-full flex justify-between ">
-                  <span className="text-lg font-semibold text-gray-900 dark:text-white">
-                    {t('checkout.shipping')}
-                  </span>
-                  <span className="text-lg font-semibold text-gray-900 dark:text-white">
-                    R$ {cart.shipping.value.toFixed(2)}
-                  </span>
-                </div>
-                {cart.discount.value > 0 && (
-                  <div className="w-full flex justify-between ">
-                    <span className="text-lg font-semibold text-gray-900 dark:text-white">
-                      {t('checkout.discount')}
-                    </span>
-                    <span className="text-lg font-semibold text-gray-900 dark:text-white">
-                      -R$ {cart.discount.value.toFixed(2)}
-                    </span>
-                  </div>
-                )}
-              </div>
-              <div className="w-full flex justify-between p-4">
-                <span className="text-xl font-semibold text-gray-900 dark:text-white">
-                  {t('checkout.total')}
-                </span>
-                <span className="text-xl font-semibold text-gray-900 dark:text-white">
-                  R$ {cart.total.toFixed(2)}
-                </span>
-              </div>
-
-              {steps.current === 2 &&
-                cart.shippingOptions.length > 0 &&
-                form.watch('method') !== 'EFI' && (
+                {steps.current === 6 && (
                   <button
                     type="submit"
-                    className={`w-full p-2 text-lg font-semibold text-white rounded-md transition-colors ${
-                      isValid
-                        ? 'bg-blue-500 hover:bg-blue-600'
-                        : 'bg-gray-400 cursor-not-allowed'
-                    }`}
-                    disabled={!isValid}
+                    className={`w-full p-2 text-lg font-semibold text-white rounded-md transition-colors ${'bg-blue-500 hover:bg-blue-600'}`}
                   >
                     {t('checkout.finalizePayment')}
                   </button>
                 )}
-              {steps.current === 3 && cart.shippingOptions.length > 0 && (
-                <button
-                  type="submit"
-                  className={`w-full p-2 text-lg font-semibold text-white rounded-md transition-colors ${'bg-blue-500 hover:bg-blue-600'}`}
-                >
-                  {t('checkout.finalizePayment')}
-                </button>
-              )}
-            </aside>
-          </form>
-        </FormProvider>
+              </div>
+            </form>
+          </FormProvider>
+        </article>
       </main>
     </>
   );

@@ -247,7 +247,6 @@
     ]
   },
   "paymentForm": {
-    "choosePaymentMethod": "Escolha a Forma de Pagamento",
     "creditCard": "Cartão de Crédito",
     "pix": "Pix",
     "cardNamePlaceholder": "Nome do Titular",
@@ -259,9 +258,12 @@
   },
   "checkout": {
     "title": "Checkout",
-    "stepInfos": "Informações",
+    "confirmInfos": "Confirme suas Informações",
+    "stepInfos": "Dados Pessoais",
     "stepAddress": "Endereço",
+    "stepShipping": "Selecione o método de entrega",
     "stepPayment": "Pagamento",
+    "choosePaymentMethod": "Escolha a Forma de Pagamento",
     "prev": "Voltar",
     "next": "Próximo",
     "cartItems": "Itens no Carrinho",

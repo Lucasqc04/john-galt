@@ -247,7 +247,6 @@
     ]
   },
   "paymentForm": {
-    "choosePaymentMethod": "Choose Payment Method",
     "creditCard": "Credit Card",
     "pix": "Pix",
     "cardNamePlaceholder": "Cardholder's Name",
@@ -259,8 +258,11 @@
   },
   "checkout": {
     "title": "Checkout",
-    "stepInfos": "Information",
+    "choosePaymentMethod": "Choose Payment Method",
+    "confirmInfos": "Confirm your Information",
+    "stepInfos": "Personal Data",
     "stepAddress": "Address",
+    "stepShipping": "Select delivery method",
     "stepPayment": "Payment",
     "prev": "Back",
     "next": "Next",

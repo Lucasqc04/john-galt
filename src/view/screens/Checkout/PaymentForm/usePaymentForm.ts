@@ -1,30 +1,17 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import {
-  Brand,
-  GetCheckout,
-  Installment,
-} from '../../../../domain/entities/payment.entity';
+import { Brand, GetCheckout } from '../../../../domain/entities/payment.entity';
 import { UseCases } from '../../../../domain/usecases/UseCases';
 
 export function usePaymentForm() {
   const { t } = useTranslation();
   const [loading, setLoading] = useState<boolean>(false);
-  const {
-    register,
-    watch,
-    setValue,
-    formState: { errors },
-    getValues,
-  } = useFormContext<GetCheckout>();
+  const form = useFormContext<GetCheckout>();
   const [brand, setBrand] = useState<Brand>('undefined');
-  const [installment, setInstallment] = useState<Installment[]>();
-  const method = watch('method');
-  const paymentOption = watch('paymentOption');
-  const total = watch('total');
-  const cvv = watch('cvv');
-  const cardNumber = watch('cardNumber');
+  const method = form.watch('method');
+  const paymentOption = form.watch('paymentOption');
+  const cardNumber = form.watch('cardNumber');
 
   const handleExpiryDateChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,67 +20,38 @@ export function usePaymentForm() {
         value = `${value.slice(0, 2)}/${value.slice(2, 4)}`;
       }
       event.target.value = value.slice(0, 5);
-      setValue('expiryDate', event.target.value);
+      form.setValue('expiryDate', event.target.value);
     },
-    [setValue],
+    [form],
   );
-
-  const HandleWithInstallments = useCallback(async () => {
-    if (
-      !cardNumber ||
-      !total ||
-      !cvv ||
-      brand === 'undefined' ||
-      method !== 'EFI'
-    ) {
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const { result } = await UseCases.payment.listInstallments.execute({
-        brand,
-        total: total,
-      });
-
-      if (result.type === 'ERROR') {
-        switch (result.error.code) {
-          case 'VALUE_TOO_LOW':
-            alert('VALOR MUITO BAIXO');
-            return;
-          default:
-            alert('ERRO AO BUSCAR PARCELAS');
-            return;
-        }
-      }
-
-      setInstallment(result.data);
-      setValue('installments', result.data);
-    } finally {
-      setLoading(false);
-    }
-  }, [cardNumber, total, cvv, brand, method, setValue]);
 
   const identifyBrand = useCallback(
     async (cardNumber: string) => {
-      const { result } = await UseCases.payment.indentifyBrand.execute({
-        cardNumber,
-      });
+      setLoading(true);
+      try {
+        console.log('Identificando bandeira do cartão:', cardNumber);
+        const { result } = await UseCases.payment.indentifyBrand.execute({
+          cardNumber,
+        });
 
-      if (result.type === 'ERROR') {
-        alert('ERRO AO IDENTIFICAR BANDEIRA');
-        return;
+        if (result.type === 'ERROR') {
+          alert('Erro ao identificar bandeira');
+          return;
+        }
+
+        if (result.data === 'unsupported') {
+          alert('Cartão inválido ou não suportado.');
+          setBrand('unsupported');
+          return;
+        }
+
+        setBrand(result.data);
+        form.setValue('brand', result.data);
+      } finally {
+        setLoading(false);
       }
-
-      if (result.data === 'unsupported') {
-        alert('CARTÃO INVÁLIDO OU NÃO SUPORTADO.');
-        return;
-      }
-
-      setBrand(result.data);
-      setValue('brand', result.data);
     },
-    [setValue],
+    [form],
   );
 
   useEffect(() => {
@@ -104,31 +62,13 @@ export function usePaymentForm() {
     }
   }, [cardNumber, identifyBrand]);
 
-  useEffect(() => {
-    if (
-      cardNumber &&
-      total &&
-      cvv &&
-      brand !== 'undefined' &&
-      method === 'EFI'
-    ) {
-      HandleWithInstallments();
-    }
-  }, [cardNumber, total, cvv, brand, method, HandleWithInstallments]);
-
   return {
     t,
     brand,
     method,
     loading,
-    installment,
     paymentOption,
     handleExpiryDateChange,
-    form: {
-      getValues,
-      setValue,
-      register,
-      errors,
-    },
+    form,
   };
 }
