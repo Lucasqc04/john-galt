@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import image1 from '../assets/images/tutorial/tutorial-1.png';
@@ -10,10 +9,10 @@ import image6 from '../assets/images/tutorial/tutorial-6.png';
 import image7 from '../assets/images/tutorial/tutorial-7.png';
 import image8 from '../assets/images/tutorial/tutorial-8.png';
 import image9 from '../assets/images/tutorial/tutorial-9.png';
+import { BackgroundAnimatedProduct } from '../components/BackgroundAnimatedProduct';
 
 export function TutorialsPage() {
   const { t } = useTranslation();
-  const refSections = useRef<(HTMLDivElement | null)[]>([]);
 
   const tutorials = [
     {
@@ -81,117 +80,52 @@ export function TutorialsPage() {
     },
   ];
 
-  const scrollToSection = (index: number) => {
-    const section = refSections.current[index];
-    if (section) {
-      const headerOffset = 115;
-      const elementPosition =
-        section.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = elementPosition - headerOffset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-[#F0F4F8] dark:bg-gray-900 pt-[15%] md:pt-[10%] px-4">
-      <h1 className="text-3xl md:text-4xl font-bold text-center mb-8 text-[#F6911D] dark:text-white">
-        {t('tutorials.title')}
-      </h1>
-      <p className="text-lg md:text-xl text-center mb-12 text-gray-700 dark:text-gray-300">
-        {t('tutorials.description')}
-      </p>
-
-      {/* Links de navegação */}
-      <div className="mb-8 text-center">
-        <div className="flex flex-wrap justify-center space-x-4">
-          {tutorials.map((tutorial, index) => (
-            <a
-              key={tutorial.id}
-              onClick={() => scrollToSection(index)}
-              className="text-[#F6911D] hover:text-orange-600 transition-colors mb-2 cursor-pointer text-sm md:text-base"
-            >
-              {tutorial.title}
-            </a>
-          ))}
-        </div>
-      </div>
-
-      {/* Grid responsivo de tutoriais */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {tutorials.map((tutorial, index) => (
-          <div
-            key={tutorial.id}
-            ref={(el) => (refSections.current[index] = el)}
-            className="flex flex-col items-center bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 h-[500px]" // Altura fixa para os cards
-          >
-            {/* Imagem do tutorial */}
+    <>
+      <BackgroundAnimatedProduct />
+      <div className="min-h-screen pt-20 px-8">
+        <article className="py-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-center mb-8 text-orange-primary dark:text-white">
+            {t('tutorials.title')}
+          </h1>
+          <p className="text-lg md:text-xl text-center uppercase text-gray-700 dark:text-gray-300">
+            {t('tutorials.description')}
+          </p>
+        </article>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {tutorials.map((tutorial) => (
             <div
-              className="relative w-full"
-              style={{ height: '180px', marginBottom: '15px' }}
+              key={tutorial.id}
+              className="flex flex-col items-center bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 h-[500px]"
             >
               <img
                 src={tutorial.image}
                 alt={`Tutorial ${tutorial.id}`}
-                className="w-full h-full object-cover rounded-lg"
+                className="object-cover rounded-lg relative w-full h-[180px]"
               />
+              <h2 className="text-text-primary-light dark:text-text-primary-dark font-semibold text-lg text-center pt-4">
+                {tutorial.title}
+              </h2>
+              <p
+                className="text-gray-700 dark:text-gray-300 text-sm text-center font-medium flex-grow pt-4"
+                style={{
+                  fontSize: 'clamp(14px, 4vw, 16px)',
+                }}
+              >
+                {tutorial.description}
+              </p>
+              <a
+                href={tutorial.file}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full h-10 bg-orange-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-orange-600 transition-colors text-center"
+              >
+                {t('tutorials.downloadButton')}
+              </a>
             </div>
-
-            {/* Título */}
-            <h2
-              className="text-[#333] dark:text-white text-lg font-semibold"
-              style={{
-                fontFamily: 'SF UI Display',
-                fontWeight: 600,
-                fontSize: '18px',
-                lineHeight: '22px',
-              }}
-            >
-              {tutorial.title}
-            </h2>
-
-            {/* Descrição breve */}
-            <p
-              className="text-gray-700 dark:text-gray-300 text-sm text-center"
-              style={{
-                fontFamily: 'SF UI Display',
-                fontWeight: 500,
-                fontSize: 'clamp(14px, 4vw, 16px)', // Usando clamp para controlar o tamanho da fonte
-                lineHeight: '1.5em', // Ajuste de line-height
-                marginBottom: '15px',
-                flexGrow: 1, // Flex para ocupar o espaço restante
-                textAlign: 'center', // Centralizando o texto
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              {tutorial.description}
-            </p>
-
-            {/* Botão de download */}
-            <a
-              href={tutorial.file}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-[#F6911D] text-white px-4 py-2 rounded-md font-medium hover:bg-orange-600 transition-colors"
-              style={{
-                width: '100%',
-                height: '40px', // Altura fixa para todos os botões
-                borderRadius: '12px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              {t('tutorials.downloadButton')}
-            </a>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
