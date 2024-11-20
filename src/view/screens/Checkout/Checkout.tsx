@@ -18,7 +18,7 @@ export function Checkout() {
   return (
     <>
       {loading && <Loader />}
-      <main className="px-4 py-8 grid grid-cols-12 gap-y-4 dark:bg-gray-800">
+      <main className="px-4 py-8 grid grid-cols-12 gap-y-4 dark:bg-primary-dark">
         <header className="col-span-12 flex items-start justify-between dark:text-white">
           <div className="flex items-center gap-x-4">
             <button onClick={() => navigate(-1)}>
@@ -72,7 +72,7 @@ export function Checkout() {
           </div>
         </article>
         <article className="col-span-12">
-          <h3 className="text-xl border-b border-solid border-black leading-9 dark:border-gray-600 dark:text-white">
+          <h3 className="text-xl border-b border-solid border-black leading-9 dark:text-white dark:border-white">
             {steps.current === 1 && t('checkout.stepInfos')}
             {steps.current === 2 && t('checkout.stepAddress')}
             {steps.current === 3 && t('checkout.stepShipping')}
@@ -104,7 +104,11 @@ export function Checkout() {
                   <button
                     type="button"
                     onClick={steps.next}
-                    className="w-full bg-orange-primary text-white p-2 rounded-md font-semibold hover:bg-orange-500 transition-colors dark:bg-orange-700 dark:hover:bg-orange-600"
+                    className="w-full bg-orange-primary text-white p-2 rounded-md font-semibold hover:bg-orange-500 transition-colors "
+                    disabled={
+                      steps.current === 2 &&
+                      form.getValues('address.zipCode').length !== 8
+                    }
                   >
                     {t('checkout.next')}
                   </button>
