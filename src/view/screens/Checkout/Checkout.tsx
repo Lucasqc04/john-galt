@@ -18,8 +18,8 @@ export function Checkout() {
   return (
     <>
       {loading && <Loader />}
-      <main className="px-4 py-8 grid grid-cols-12 gap-y-4">
-        <header className="col-span-12 flex items-start justify-between">
+      <main className="px-4 py-8 grid grid-cols-12 gap-y-4 dark:bg-gray-800">
+        <header className="col-span-12 flex items-start justify-between dark:text-white">
           <div className="flex items-center gap-x-4">
             <button onClick={() => navigate(-1)}>
               <IoMdArrowRoundBack
@@ -43,15 +43,36 @@ export function Checkout() {
                 3: [4, 5, 6],
               }}
               steps={[
-                { icon: <MdPerson size={18} /> },
-                { icon: <MdHome size={18} /> },
-                { icon: <MdCreditCard size={18} /> },
+                {
+                  icon: (
+                    <MdPerson
+                      size={18}
+                      className="text-gray-900 dark:text-white"
+                    />
+                  ),
+                },
+                {
+                  icon: (
+                    <MdHome
+                      size={18}
+                      className="text-gray-900 dark:text-white"
+                    />
+                  ),
+                },
+                {
+                  icon: (
+                    <MdCreditCard
+                      size={18}
+                      className="text-gray-900 dark:text-white"
+                    />
+                  ),
+                },
               ]}
             />
           </div>
         </article>
         <article className="col-span-12">
-          <h3 className="text-xl border-b border-solid border-black leading-9">
+          <h3 className="text-xl border-b border-solid border-black leading-9 dark:border-gray-600 dark:text-white">
             {steps.current === 1 && t('checkout.stepInfos')}
             {steps.current === 2 && t('checkout.stepAddress')}
             {steps.current === 3 && t('checkout.stepShipping')}
@@ -83,7 +104,7 @@ export function Checkout() {
                   <button
                     type="button"
                     onClick={steps.next}
-                    className="w-full bg-orange-primary text-white p-2 rounded-md font-semibold hover:bg-orange-500 transition-colors"
+                    className="w-full bg-orange-primary text-white p-2 rounded-md font-semibold hover:bg-orange-500 transition-colors dark:bg-orange-700 dark:hover:bg-orange-600"
                   >
                     {t('checkout.next')}
                   </button>
@@ -91,7 +112,7 @@ export function Checkout() {
                 {steps.current === 6 && (
                   <button
                     type="submit"
-                    className={`w-full p-2 text-lg font-semibold text-white rounded-md transition-colors ${'bg-blue-500 hover:bg-blue-600'}`}
+                    className={`w-full p-2 text-lg font-semibold text-white rounded-md transition-colors bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700`}
                   >
                     {t('checkout.finalizePayment')}
                   </button>
