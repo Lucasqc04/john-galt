@@ -88,6 +88,18 @@ export const GetCheckout = z.object({
   total: z.number(),
   birthday: z.string(),
   paymentOption: z.enum(['creditCard', 'pix']),
+  shipping: z.object({
+    id: z.number(),
+    name: z.string(),
+    price: z.string(),
+    company: z.object({
+      id: z.number(),
+      name: z.string(),
+      picture: z.string(),
+    }),
+    deliveryTime: z.number(),
+  }),
+  selectedPaymentLabel: z.string(),
 });
 export type GetCheckout = z.infer<typeof GetCheckout>;
 

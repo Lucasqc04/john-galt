@@ -13,7 +13,6 @@ export function PaymentForm() {
     method,
     form,
     loading,
-    installment,
     paymentOption,
     handleExpiryDateChange,
   } = usePaymentForm();
@@ -22,50 +21,6 @@ export function PaymentForm() {
   return (
     <>
       {loading && <Loader />}
-      <div className="py-4">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-          {t('paymentForm.choosePaymentMethod')}
-        </h3>
-        <div className="flex flex-col gap-y-4 pt-2">
-          {[
-            { label: t('paymentForm.creditCard'), value: 'EFI' },
-            { label: t('paymentForm.pix'), value: 'EFI' },
-            { label: `${t('paymentForm.pix')} - MP`, value: 'MP' },
-          ].map((methodOption, idx) => (
-            <label
-              key={idx}
-              className="flex items-center gap-x-3 cursor-pointer"
-            >
-              <input
-                type="radio"
-                {...form.register('method')}
-                value={methodOption.value}
-                className="hidden peer"
-                onClick={() => {
-                  const selectedMethod = form.getValues('method');
-                  if (selectedMethod === 'EFI') {
-                    form.setValue(
-                      'paymentOption',
-                      methodOption.label === t('paymentForm.creditCard')
-                        ? 'creditCard'
-                        : 'pix',
-                    );
-                  } else {
-                    form.setValue('paymentOption', 'pix');
-                  }
-                }}
-              />
-              <span className="w-5 h-5 rounded-full border border-gray-400 dark:border-gray-600 flex items-center justify-center peer-checked:bg-blue-500 dark:peer-checked:bg-blue-400">
-                <span className="w-3 h-3 rounded-full bg-transparent peer-checked:bg-white"></span>
-              </span>
-              <span className="text-gray-900 dark:text-white">
-                {methodOption.label}
-              </span>
-            </label>
-          ))}
-        </div>
-      </div>
-
       {method === 'EFI' && paymentOption === 'creditCard' && (
         <div className="w-full grid grid-cols-12 gap-x-4 gap-y-2">
           <div className="col-span-12">
@@ -74,10 +29,10 @@ export function PaymentForm() {
             </label>
             <input
               type="text"
-              className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              className="w-full p-2 border border-gray-300 rounded-md dark:text-white"
               {...form.register('cardName', { required: true })}
             />
-            {form.errors.cardName && (
+            {form.formState.errors.cardName && (
               <span className="text-red-500 text-xs">
                 {t('paymentForm.requiredField')}
               </span>
@@ -91,19 +46,19 @@ export function PaymentForm() {
               </label>
               <input
                 type="text"
-                className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                className="w-full p-2 border border-gray-300 rounded-md"
                 {...form.register('cardNumber', {
                   required: true,
                   maxLength: 16,
                 })}
               />
-              {form.errors.cardNumber && (
+              {form.formState.errors.cardNumber && (
                 <span className="text-red-500 text-xs">
                   {t('paymentForm.requiredField')}
                 </span>
               )}
             </div>
-            <div className="w-14 h-10 flex items-center justify-center bg-gray-700 border border-gray-600 rounded">
+            <div className="w-14 h-10 flex items-center justify-center border border-gray-300 rounded">
               {brand === 'visa' && (
                 <img src={Visa} alt="Visa Logo" className="h-7" />
               )}
@@ -128,11 +83,11 @@ export function PaymentForm() {
             </label>
             <input
               type="text"
-              className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              className="w-full p-2 border border-gray-300 rounded-md dark:text-white"
               {...form.register('expiryDate', { required: true, maxLength: 5 })}
               onChange={handleExpiryDateChange}
             />
-            {form.errors.expiryDate && (
+            {form.formState.errors.expiryDate && (
               <span className="text-red-500 text-xs">
                 {t('paymentForm.requiredField')}
               </span>
@@ -145,19 +100,19 @@ export function PaymentForm() {
             </label>
             <input
               type="text"
-              className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              className="w-full p-2 border border-gray-300 rounded-md "
               {...form.register('cvv', { required: true, maxLength: 3 })}
             />
-            {form.errors.cvv && (
+            {form.formState.errors.cvv && (
               <span className="text-red-500 text-xs">
                 {t('paymentForm.requiredField')}
               </span>
             )}
           </div>
 
-          {installment && (
+          {/* {installment && (
             <div className="col-span-12">
-              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              <label className="block mb-2 text-sm font-medium text-gray-900 d">
                 {t('paymentForm.installment')}
               </label>
               <select
@@ -175,8 +130,15 @@ export function PaymentForm() {
                 ))}
               </select>
             </div>
-          )}
+          )} */}
         </div>
+      )}
+
+      {paymentOption !== 'creditCard' && (
+        <h2>
+          Método de Pagamento Selecionado:{' '}
+          <b className="uppercase">{paymentOption}</b>
+        </h2>
       )}
     </>
   );
