@@ -22,22 +22,21 @@ export function useCheckout() {
   });
   const navigate = useNavigate();
   const { t } = useTranslation();
-
-  const [shippingPrice, setShippingPrice] = useState<number>(0);
+  const shippingPrice = form.watch('shipping.price');
 
   const updateTotal = useCallback(() => {
     const itemsTotal = items.reduce(
       (total, item) => total + item.price * item.quantity,
       0,
     );
-    const total = itemsTotal + shippingPrice;
+    const total = itemsTotal + Number(shippingPrice);
     form.setValue('total', total);
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(form.getValues()));
   }, [form, items, shippingPrice]);
 
   useEffect(() => {
     updateTotal();
-  }, [items, shippingPrice, updateTotal]);
+  }, [updateTotal]);
 
   async function onSubmit(data: GetCheckout) {
     setLoading(true);
@@ -159,6 +158,5 @@ export function useCheckout() {
       next: () => setCurrentStep(currentStep + 1),
       prev: () => setCurrentStep(currentStep - 1),
     },
-    addShippingPrice: (price: number) => setShippingPrice(price),
   };
 }
