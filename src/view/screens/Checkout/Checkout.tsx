@@ -44,28 +44,13 @@ export function Checkout() {
               }}
               steps={[
                 {
-                  icon: (
-                    <MdPerson
-                      size={18}
-                      className="text-gray-900 dark:text-white"
-                    />
-                  ),
+                  icon: <MdPerson size={18} className="text-white" />,
                 },
                 {
-                  icon: (
-                    <MdHome
-                      size={18}
-                      className="text-gray-900 dark:text-white"
-                    />
-                  ),
+                  icon: <MdHome size={18} className="text-white" />,
                 },
                 {
-                  icon: (
-                    <MdCreditCard
-                      size={18}
-                      className="text-gray-900 dark:text-white"
-                    />
-                  ),
+                  icon: <MdCreditCard size={18} className="text-white" />,
                 },
               ]}
             />
