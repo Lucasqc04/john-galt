@@ -142,12 +142,12 @@ export function PersonForm() {
         )}
       </div>
 
-      <div className="col-span-12">
+      <div className="col-span-12 md:flex md:justify-center">
         <a
           href={whatsappLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center px-2 py-1 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 transition-colors duration-300 text-center"
+          className="w-full px-2 py-1 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 transition-colors duration-300 text-center"
         >
           {t('personForm.internationalSupport')}
         </a>
