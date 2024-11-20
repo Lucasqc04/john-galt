@@ -14,7 +14,7 @@ import { StepIndicator } from './StepIndicator';
 import { useCheckout } from './useCheckout';
 
 export function Checkout() {
-  const { t, form, steps, loading, navigate } = useCheckout();
+  const { t, form, steps, loading, onsubmit, navigate } = useCheckout();
 
   return (
     <>
@@ -68,7 +68,7 @@ export function Checkout() {
             {steps.current === 6 && t('checkout.confirmInfos')}
           </h3>
           <FormProvider {...form}>
-            <form>
+            <form onSubmit={onsubmit}>
               <div className="flex flex-col gap-y-2 pt-4">
                 {steps.current === 1 && <PersonForm />}
                 {steps.current === 2 && <AddressForm />}
@@ -94,7 +94,7 @@ export function Checkout() {
                     className="w-full bg-orange-primary text-white p-2 rounded-md font-semibold hover:bg-orange-500 transition-colors "
                     disabled={
                       steps.current === 2 &&
-                      form.getValues('address.zipCode').length !== 8
+                      form.getValues('address.zipCode')?.length !== 8
                     }
                   >
                     {t('checkout.next')}
