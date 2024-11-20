@@ -22,9 +22,9 @@ export function Hero() {
       <BackgroundAnimated />
       <section
         ref={ref}
-        className="grid grid-cols-12 px-6 sm:px-4 md:px-8 h-screen"
+        className="grid grid-cols-12 px-4 sm:px-4 md:px-8 h-screen"
       >
-        <article className="h-full col-span-12 md:col-span-6 flex flex-col gap-y-4 justify-center items-center">
+        <article className="h-full col-span-12 md:col-span-6 flex flex-col gap-y-4 justify-center items-center mt-16 md:mt-0">
           <h1 className="max-w-2xl text-4xl md:text-6xl text-center font-bold whitespace-pre-wrap break-words animate-fade-right animate-once animate-duration-500 animate-delay-300">
             {styleFirstWord(t(LanguageTexts.hero.title))}
           </h1>
@@ -57,6 +57,13 @@ export function Hero() {
             )}
           />
         </article>
+        <div className="flex md:hidden col-span-12 justify-center mt-4">
+          <img
+            src={HeroImage}
+            alt="NFT/Crypto Image"
+            className="max-w-xs aspect-auto transition-all duration-500"
+          />
+        </div>
       </section>
     </>
   );
