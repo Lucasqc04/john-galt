@@ -103,11 +103,11 @@ export function TutorialsPage() {
                 alt={`Tutorial ${tutorial.id}`}
                 className="object-cover rounded-lg relative w-full h-[180px]"
               />
-              <h2 className="text-text-primary-light dark:text-text-primary-dark font-semibold text-lg text-center pt-4">
+              <h2 className="text-text-primary-light dark:text-text-primary-dark font-semibold text-lg sm:text-base text-center pt-4">
                 {tutorial.title}
               </h2>
               <p
-                className="text-gray-700 dark:text-gray-300 text-sm text-center font-medium flex-grow pt-4"
+                className="text-gray-700 dark:text-gray-300 text-sm sm:text-xs text-center font-medium flex-grow pt-4"
                 style={{
                   fontSize: 'clamp(14px, 4vw, 16px)',
                 }}
