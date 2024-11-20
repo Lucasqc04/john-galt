@@ -14,10 +14,16 @@ export function Cart() {
 
   if (cart.items.length === 0) {
     return (
-      <div className="min-h-screen flex items-center justify-center dark:bg-primary-dark">
-        <h1 className="text-4xl font-bold dark:text-white">
+      <div className="min-h-screen flex flex-col items-center gap-y-4 justify-center dark:bg-primary-dark">
+        <h1 className="text-4xl text-center font-bold dark:text-white">
           {t(LanguageTexts.cart.emptyCart)}
         </h1>
+        <Link
+          to={ROUTES.products.call(currentLang)}
+          className="bg-orange-primary px-4 py-2 rounded-md font-bold"
+        >
+          VEJA NOSSOS PRODUTOS
+        </Link>
       </div>
     );
   }
