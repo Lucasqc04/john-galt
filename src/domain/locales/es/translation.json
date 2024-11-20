@@ -207,19 +207,46 @@
   },
   "tutorials": {
     "title": "Tutoriales",
-    "description": "Explora nuestros tutoriales y aprende a utilizar nuestros productos.",
+    "description": "DESCARGA AQUÍ ARCHIVOS GRATUITOS QUE HEMOS PREPARADO ESPECIALMENTE PARA TI QUE ESTÁS EMPEZANDO",
     "items": {
-      "1": "1° TUTORIAL - CREA TU CLAVE Y DEPOSITA BITCOIN",
-      "2": "2° TUTORIAL - CÓMO AGREGAR UNA CONTRASEÑA Y CREAR UNA CARTERA SEÑUELO",
-      "3": "3° TUTORIAL - RECUPERA TU CARTERA Y ENVÍA BITCOIN",
-      "4": "4° TUTORIAL - CÓMO PERFORAR LA PLACA METÁLICA",
-      "5": "5° TUTORIAL - CÓMO IMPORTAR TU CARTERA EN BLUEWALLET",
-      "6": "6° TUTORIAL - CÓMO MONTAR TU PUNZÓN AUTOMÁTICO",
-      "7": "7° TUTORIAL - VERIFICACIÓN DEL CÓDIGO DE KRUX",
-      "8": "8° TUTORIAL - CÓMO CREAR TU SEEDQR",
-      "9": "9° TUTORIAL - CÓMO HACER RESPALDO EN TU TINY SEED"
+      "1": {
+        "title": "CREA TU CLAVE Y DEPOSITA BITCOIN",
+        "description": "Aprende a crear tu clave y depositar Bitcoin con seguridad. Este tutorial es esencial para comenzar tu viaje en el mundo de las criptomonedas."
+      },
+      "2": {
+        "title": "CÓMO AÑADIR UNA CONTRASEÑA Y CREAR LA CARTERA ISCA",
+        "description": "Añade una contraseña segura a tu cartera y mantén tus Bitcoins a salvo. Tutorial esencial para proteger tus activos digitales."
+      },
+      "3": {
+        "title": "RECUPERA TU CARTERA Y ENVÍA BITCOIN",
+        "description": "Aprende a recuperar tu cartera y enviar Bitcoin fácilmente, manteniendo el control total de tus fondos."
+      },
+      "4": {
+        "title": "CÓMO PERFORAR UNA PLACA METÁLICA",
+        "description": "Aprende a perforar placas metálicas de forma segura y eficiente, una guía importante para quienes trabajan con materiales manuales."
+      },
+      "5": {
+        "title": "CÓMO IMPORTAR TU CARTERA A BLUEWALLET",
+        "description": "Importa tu cartera a BlueWallet fácilmente y accede a tus Bitcoins de forma práctica y segura."
+      },
+      "6": {
+        "title": "CÓMO MONTAR TU PUNZÓN AUTOMÁTICO",
+        "description": "Montar un punzón automático para optimizar tu trabajo y aumentar la precisión de tus procesos."
+      },
+      "7": {
+        "title": "VERIFICANDO EL CÓDIGO DE KRUX",
+        "description": "Aprende a verificar el código de Krux para garantizar la seguridad de tus transacciones digitales."
+      },
+      "8": {
+        "title": "CÓMO CREAR TU SEEDQR",
+        "description": "Crea tu SeedQR de forma segura para proteger tus datos y criptomonedas."
+      },
+      "9": {
+        "title": "CÓMO HACER UNA COPIA DE SEGURIDAD EN TU TINY SEED",
+        "description": "Haz una copia de seguridad segura de tus datos en Tiny Seed y nunca pierdas tu información importante."
+      }
     },
-    "downloadButton": "Descargar Tutorial"
+    "downloadButton": "PDF gratuito"
   },
   "post": {
     "notFound": "Publicación no encontrada!"
