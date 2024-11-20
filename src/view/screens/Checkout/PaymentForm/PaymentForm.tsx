@@ -10,9 +10,10 @@ import { usePaymentForm } from './usePaymentForm';
 export function PaymentForm() {
   const {
     brand,
-    method,
     form,
+    method,
     loading,
+    installment,
     paymentOption,
     handleExpiryDateChange,
   } = usePaymentForm();
@@ -24,12 +25,12 @@ export function PaymentForm() {
       {method === 'EFI' && paymentOption === 'creditCard' && (
         <div className="w-full grid grid-cols-12 gap-x-4 gap-y-2">
           <div className="col-span-12">
-            <label className="block text-gray-400 font-semibold mb-1">
+            <label className="block text-gray-400 font-semibold mb-1 dark:text-white">
               {t('paymentForm.cardNamePlaceholder')}
             </label>
             <input
               type="text"
-              className="w-full p-2 border border-gray-300 rounded-md dark:text-white"
+              className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               {...form.register('cardName', { required: true })}
             />
             {form.formState.errors.cardName && (
@@ -41,12 +42,12 @@ export function PaymentForm() {
 
           <div className="col-span-12 flex items-end gap-x-2">
             <div className="flex-grow">
-              <label className="block text-gray-400 font-semibold mb-1">
+              <label className="block text-gray-400 font-semibold mb-1 dark:text-white">
                 {t('paymentForm.cardNumberPlaceholder')}
               </label>
               <input
                 type="text"
-                className="w-full p-2 border border-gray-300 rounded-md"
+                className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                 {...form.register('cardNumber', {
                   required: true,
                   maxLength: 16,
@@ -58,7 +59,7 @@ export function PaymentForm() {
                 </span>
               )}
             </div>
-            <div className="w-14 h-10 flex items-center justify-center border border-gray-300 rounded">
+            <div className="w-14 h-10 flex items-center justify-center border border-gray-300 rounded dark:border-gray-600">
               {brand === 'visa' && (
                 <img src={Visa} alt="Visa Logo" className="h-7" />
               )}
@@ -78,12 +79,12 @@ export function PaymentForm() {
           </div>
 
           <div className="col-span-6">
-            <label className="block text-gray-400 font-semibold mb-1">
+            <label className="block text-gray-400 font-semibold mb-1 dark:text-white">
               {t('paymentForm.expiryDatePlaceholder')}
             </label>
             <input
               type="text"
-              className="w-full p-2 border border-gray-300 rounded-md dark:text-white"
+              className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               {...form.register('expiryDate', { required: true, maxLength: 5 })}
               onChange={handleExpiryDateChange}
             />
@@ -95,12 +96,12 @@ export function PaymentForm() {
           </div>
 
           <div className="col-span-6">
-            <label className="block text-gray-400 font-semibold mb-1">
+            <label className="block text-gray-400 font-semibold mb-1 dark:text-white">
               {t('paymentForm.cvvPlaceholder')}
             </label>
             <input
               type="text"
-              className="w-full p-2 border border-gray-300 rounded-md "
+              className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               {...form.register('cvv', { required: true, maxLength: 3 })}
             />
             {form.formState.errors.cvv && (
@@ -110,7 +111,7 @@ export function PaymentForm() {
             )}
           </div>
 
-          {/* {installment && (
+          {installment && (
             <div className="col-span-12">
               <label className="block mb-2 text-sm font-medium text-gray-900 d">
                 {t('paymentForm.installment')}
@@ -130,7 +131,7 @@ export function PaymentForm() {
                 ))}
               </select>
             </div>
-          )} */}
+          )}
         </div>
       )}
 
