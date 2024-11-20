@@ -47,15 +47,22 @@ export function ConfirmInfos() {
         </span>
       </div>
       <div className="flex flex-col border-b border-solid border-black dark:border-white py-4">
-        <span className="dark:text-white">
-          Valor Total: R$ {formatCurrency(infos.total)}
-        </span>
         {infos.shipping && (
           <span className="dark:text-white">
-            {infos.shipping.name}: R$ {formatCurrency(infos.shipping.price)}.
-            Entrega em: {infos.shipping.deliveryTime} dias
+            Subtotal - R${' '}
+            {formatCurrency(infos.total - Number(infos.shipping.price))}
           </span>
         )}
+        {infos.shipping && (
+          <span className="dark:text-white">
+            FRETE - {infos.shipping.name}: R${' '}
+            {formatCurrency(infos.shipping.price)}. Entrega em:{' '}
+            {infos.shipping.deliveryTime} dias
+          </span>
+        )}
+        <span className="dark:text-white">
+          Total: R$ {formatCurrency(infos.total)}
+        </span>
         <span className="dark:text-white">
           Pagamento: {infos.selectedPaymentLabel}{' '}
           {infos.paymentOption === 'creditCard' &&
