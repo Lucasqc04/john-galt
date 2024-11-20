@@ -43,9 +43,9 @@ export function ProductPage() {
   return (
     <>
       <BackgroundAnimatedProduct />
-      <section className="min-h-screen px-10 pt-32 sm:grid sm:grid-cols-12 sm:px-8">
+      <section className="min-h-screen px-10 pt-32 sm:grid sm:grid-cols-12 sm:px-8 dark:bg-[#1E1E1E]">
         <article className="sm:hidden">
-          <h2 className="text-2xl leading-9 text-[#1E1E1E] font-bold">
+          <h2 className="text-2xl leading-9 text-[#1E1E1E] font-bold dark:text-white">
             {product.name}
           </h2>
           <Slider
@@ -72,7 +72,7 @@ export function ProductPage() {
 
         <article
           className={classNames(
-            'hidden sm:col-span-8 sm:row-span-2 sm:flex ',
+            'hidden sm:col-span-8 sm:row-span-2 sm:flex',
             width > 843 ? 'sm:justify-center' : 'sm:justify-around',
           )}
         >
@@ -82,7 +82,7 @@ export function ProductPage() {
                 key={index}
                 src={image}
                 alt={`Imagem do Produto ${index + 1}`}
-                className="w-28 cursor-pointer border border-solid border-black rounded-md"
+                className="w-28 cursor-pointer border border-solid border-black rounded-md dark:border-white"
                 onClick={() =>
                   handleImageClick(
                     (currentIndex + index) % product.images.length,
@@ -102,18 +102,20 @@ export function ProductPage() {
         </article>
 
         <article className="flex flex-col gap-y-2 sm:col-span-4">
-          <h2 className="hidden sm:block text-2xl leading-9 text-[#1E1E1E] font-bold">
+          <h2 className="hidden sm:block text-2xl leading-9 text-[#1E1E1E] font-bold dark:text-white">
             {product.name}
           </h2>
           <div className="pt-12 sm:pt-4 flex items-start">
-            <span className="text-xl leading-5">R$</span>
-            <h2 className="text-4xl font-bold leading-5">
+            <span className="text-xl leading-5 dark:text-white">R$</span>
+            <h2 className="text-4xl font-bold leading-5 dark:text-white">
               {product.price.toFixed(2)}
             </h2>
           </div>
           <div className="flex flex-col gap-y-2 pt-2">
-            <span className="text-sm">Disponível para parcelamento</span>
-            <span className="text-[#4133FF] text-sm">
+            <span className="text-sm dark:text-white">
+              Disponível para parcelamento
+            </span>
+            <span className="text-[#4133FF] text-sm dark:text-[#4133FF]">
               Ver os métodos de pagamento
             </span>
           </div>
@@ -129,7 +131,9 @@ export function ProductPage() {
               )}
             >
               <div className="w-full flex flex-col">
-                <label htmlFor="postalCode">Calcular Frete</label>
+                <label htmlFor="postalCode" className="dark:text-white">
+                  Calcular Frete
+                </label>
                 <input
                   type="text"
                   placeholder={t(LanguageTexts.shipping.enterZip)}
@@ -138,12 +142,12 @@ export function ProductPage() {
                     const onlyNumbers = e.target.value.replace(/\D/g, '');
                     e.target.value = onlyNumbers.slice(0, 8);
                   }}
-                  className="bg-[#EDEDED] p-3 rounded-md"
+                  className="bg-[#EDEDED] p-3 rounded-md dark:bg-[#242F3F] dark:text-white dark:placeholder-white"
                 />
               </div>
               <button
                 onClick={shipping.calculate}
-                className="bg-[#EDEDED] p-2 rounded-md w-full h-12 text-center text-sm"
+                className="bg-[#EDEDED] p-2 rounded-md w-full h-12 text-center text-sm dark:bg-[#242F3F] dark:text-white"
                 disabled={loading}
               >
                 {loading
@@ -151,7 +155,7 @@ export function ProductPage() {
                   : t(LanguageTexts.shipping.calculateButton)}
               </button>
             </div>
-            <div className="flex items-center bg-[#D9D9D9] h-12 px-2 py-5 rounded-md gap-x-1">
+            <div className="flex items-center bg-[#D9D9D9] h-12 px-2 py-5 rounded-md gap-x-1 dark:bg-[#333333] dark:text-white">
               <label htmlFor="shippingCalculate" className="uppercase text-sm">
                 Quantidade:
               </label>
@@ -159,7 +163,7 @@ export function ProductPage() {
                 type="number"
                 id="shippingCalculate"
                 value={quantity.value}
-                className="bg-transparent text-sm outline-none"
+                className="bg-transparent text-sm outline-none dark:bg-[#333333] dark:text-white dark:border-white"
                 onChange={(e) => quantity.set(Number(e.target.value))}
                 min={1}
               />
@@ -173,7 +177,7 @@ export function ProductPage() {
               </button>
               <button
                 onClick={cart.add}
-                className=" text-white p-2 rounded-md text-sm h-14 bg-[#242F3F]"
+                className=" text-white p-2 rounded-md text-sm h-14 bg-[#242F3F] dark:bg-[#4A5568]"
               >
                 {t(LanguageTexts.products.addToCartButton)}
               </button>
@@ -181,7 +185,7 @@ export function ProductPage() {
           </form>
         </FormProvider>
 
-        <div className="py-16 flex flex-col gap-y-6 sm:col-span-12 sm:row-span-12">
+        <div className="py-16 flex flex-col gap-y-6 sm:col-span-12 sm:row-span-12 dark:text-white">
           <h2 className="text-3xl font-bold text-center dark:text-white">
             {styleLastWord(t(LanguageTexts.products.resourcesTitle))}
             <span className="text-orange-primary">{product.name}</span>
@@ -197,7 +201,7 @@ export function ProductPage() {
               >
                 <li className="flex items-center gap-x-4">
                   <MdCheck size={32} className="text-green-700" />
-                  <span className="dark:text-white font-medium text-sm">
+                  <span className="font-medium text-sm dark:text-white">
                     {resource}
                   </span>
                 </li>
