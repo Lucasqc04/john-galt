@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { CiCreditCard1 } from 'react-icons/ci';
 import { FaBarcode, FaPix } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
-import Liquid from '../../assets/lbtc.svg';
+// import Liquid from '../../assets/lbtc.svg';
 import Lightning from '../../assets/lightning.svg';
-import Onchain from '../../assets/onchain.svg';
+// import Onchain from '../../assets/onchain.svg';
+import { SiBitcoincash } from 'react-icons/si';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import { ROUTES } from '../../routes/Routes';
 import { useCurrentLang } from '../../utils/useCurrentLang';
@@ -42,8 +43,8 @@ export default function BuyCheckout() {
 
   const networks = [
     { name: 'Lightning', icon: Lightning },
-    { name: 'Onchain', icon: Onchain },
-    { name: 'Liquid', icon: Liquid },
+    // { name: 'Onchain', icon: Onchain },
+    // { name: 'Liquid', icon: Liquid },
   ];
 
   const handleOnLink = (path: string, callback?: () => void) => {
@@ -57,13 +58,9 @@ export default function BuyCheckout() {
     <div>
       <BackgroundAnimatedProduct />
       <NavBarBuyBitcoin />
-      <div className="pt-5 pb-9 flex justify-center">
-        <h1 className="text-black dark:text-white font-black text-7xl text-center">
-          <span>DIY</span>
-          <br />
-          <span>SEC</span>
-          <br />
-          <span>LAB</span>
+      <div className="pt-[10%] pb-[10%] flex justify-center">
+        <h1 className="text-[#F6911D] dark:text-[#F6911D] font-black text-7xl flex items-center">
+          <SiBitcoincash className="mr-2" /> ALFRED
         </h1>
       </div>
       <div className="flex justify-center">
