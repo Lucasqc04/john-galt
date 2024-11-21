@@ -1,107 +1,80 @@
-import axios from 'axios';
-import React, { SetStateAction, useEffect, useState } from 'react';
+import { useState } from 'react';
+import { SiBitcoincash } from 'react-icons/si';
+import { useNavigate } from 'react-router-dom';
 import Btc from '../../assets/bitcoin.svg';
 import Brl from '../../assets/brl.svg';
 import Usd from '../../assets/usd.svg';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
+import { ROUTES } from '../../routes/Routes';
+import { useCurrentLang } from '../../utils/useCurrentLang';
 import { NavBarBuyBitcoin } from './NavbarBuyBitcoin';
 
-interface Rates {
-  BRL: number;
-  USD: number;
-  BTC: number;
-}
-
 export default function BuyBitcoin() {
-  const [action, setAction] = useState('Comprar');
-  const [currency, setCurrency] = useState('BRL');
+  const { currentLang } = useCurrentLang();
+  const navigate = useNavigate();
+  // const [action, setAction] = useState<'Comprar' | 'Vender'>('Comprar');
+  const [currency, setCurrency] = useState<'BRL' | 'USD' | 'BTC'>('BRL');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [inputValue, setInputValue] = useState<number | string>('');
-  const [convertedValue, setConvertedValue] = useState<number | string>('');
-  const [rates, setRates] = useState<Rates | null>(null);
 
-  useEffect(() => {
-    const fetchRates = async () => {
-      try {
-        const response = await axios.get(
-          'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,brl',
-        );
-        const { brl, usd } = response.data.bitcoin;
-        setRates({ BRL: brl, USD: usd, BTC: 1 });
-      } catch (error) {
-        console.error('Erro ao buscar taxas de câmbio:', error);
-      }
-    };
-    fetchRates();
-  }, []);
-
-  useEffect(() => {
-    if (rates && inputValue) {
-      const rate = rates[currency as keyof Rates];
-      setConvertedValue((Number(inputValue) * rate).toFixed(2));
-    }
-  }, [currency, inputValue, rates]);
-
-  const toggleAction = () => {
-    setAction(action === 'Comprar' ? 'Vender' : 'Comprar');
-  };
+  // const toggleAction = () => {
+  //   setAction((prevAction) =>
+  //     prevAction === 'Comprar' ? 'Vender' : 'Comprar',
+  //   );
+  // };
 
   const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+    setIsDropdownOpen((prevState) => !prevState);
   };
 
-  const selectCurrency = (currencyCode: SetStateAction<string>) => {
+  const selectCurrency = (currencyCode: 'BRL' | 'USD' | 'BTC') => {
     setCurrency(currencyCode);
     setIsDropdownOpen(false);
   };
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
+  const handleOnLink = (path: string, callback?: () => void) => {
+    if (callback) {
+      callback();
+    }
+    navigate(path);
   };
 
   return (
     <div>
       <BackgroundAnimatedProduct />
       <NavBarBuyBitcoin />
-      <div className="pt-5 pb-9 flex justify-center">
-        <h1 className="text-black dark:text-white font-black text-7xl text-center">
-          <span>DIY</span>
-          <br />
-          <span>SEC</span>
-          <br />
-          <span>LAB</span>
+      <div className="pt-[10%] pb-[10%] flex justify-center">
+        <h1 className="text-[#F6911D] dark:text-[#F6911D] font-black text-7xl flex items-center">
+          <SiBitcoincash className="mr-2" /> ALFRED
         </h1>
       </div>
+
       <div className="flex justify-center">
         <div>
           <div className="flex justify-center items-center space-x-4">
             <div className="relative">
-              <button
+              {/* <button
                 onClick={toggleAction}
                 className={`font-bold absolute left-2 top-1/2 transform -translate-y-1/2 px-4 py-2 rounded-3xl text-black dark:text-white ${
                   action === 'Comprar' ? 'bg-green-500' : 'bg-red-500'
                 }`}
               >
                 {action}
-              </button>
+              </button> */}
               <input
-                type="number"
-                value={inputValue}
-                onChange={handleInputChange}
+                id="1"
+                type="text"
                 placeholder="0000"
                 className="border pl-28 pr-4 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700"
               />
               <button className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white px-4 rounded-full">
-                <img src={Btc} alt="BRL" className="w-8 h-8" />
+                <img src={Btc} alt="Bitcoin" className="w-8 h-8" />
               </button>
             </div>
           </div>
           <div className="flex justify-center items-center pt-4">
             <div className="relative">
               <input
+                id="2"
                 type="text"
-                value={convertedValue}
-                readOnly
                 placeholder="0000"
                 className="border pl-28 pr-4 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700"
               />
@@ -111,8 +84,10 @@ export default function BuyBitcoin() {
               >
                 {currency === 'BRL' ? (
                   <img src={Brl} alt="BRL" className="w-8 h-8" />
-                ) : (
+                ) : currency === 'USD' ? (
                   <img src={Usd} alt="USD" className="w-8 h-8" />
+                ) : (
+                  <img src={Btc} alt="BTC" className="w-8 h-8" />
                 )}
               </button>
               {isDropdownOpen && (
@@ -125,13 +100,13 @@ export default function BuyBitcoin() {
                       BRL
                       <img src={Brl} alt="BRL" className="w-8 h-8 ml-1" />
                     </li>
-                    <li
+                    {/* <li
                       onClick={() => selectCurrency('USD')}
                       className="flex items-center px-3 py-2 hover:bg-gray-100 cursor-pointer"
                     >
                       USD
                       <img src={Usd} alt="USD" className="w-8 h-8 ml-1" />
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
               )}
@@ -139,6 +114,7 @@ export default function BuyBitcoin() {
           </div>
           <div className="flex justify-center items-center pt-4">
             <button
+              onClick={() => handleOnLink(ROUTES.buyCheckout.call(currentLang))}
               type="button"
               className="w-[100%] h-12 bg-[#F6911D] text-black dark:text-white rounded-3xl font-bold"
             >
