@@ -7,22 +7,19 @@ import {
   Installment,
 } from '../../../../domain/entities/payment.entity';
 import { UseCases } from '../../../../domain/usecases/UseCases';
+import { useCartContext } from '../../../context/CartContext';
 
 export function usePaymentForm() {
+  const { items } = useCartContext();
   const { t } = useTranslation();
   const [loading, setLoading] = useState<boolean>(false);
-  const {
-    register,
-    watch,
-    setValue,
-    formState: { errors },
-  } = useFormContext<GetCheckout>();
-  const [brand, setBrand] = useState<Brand>('undefined');
   const [installment, setInstallment] = useState<Installment[]>();
-  const method = watch('method');
-  const total = watch('total');
-  const cvv = watch('cvv');
-  const cardNumber = watch('cardNumber');
+  const form = useFormContext<GetCheckout>();
+  const [brand, setBrand] = useState<Brand>('undefined');
+  const method = form.watch('method');
+  const paymentOption = form.watch('paymentOption');
+  const cardNumber = form.watch('cardNumber');
+  const total = form.watch('total');
 
   const handleExpiryDateChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,19 +28,13 @@ export function usePaymentForm() {
         value = `${value.slice(0, 2)}/${value.slice(2, 4)}`;
       }
       event.target.value = value.slice(0, 5);
-      setValue('expiryDate', event.target.value);
+      form.setValue('expiryDate', event.target.value);
     },
-    [setValue],
+    [form],
   );
 
   const HandleWithInstallments = useCallback(async () => {
-    if (
-      !cardNumber ||
-      !total ||
-      !cvv ||
-      brand === 'undefined' ||
-      method !== 'EFI'
-    ) {
+    if (paymentOption !== 'creditCard') {
       return;
     }
 
@@ -65,33 +56,97 @@ export function usePaymentForm() {
         }
       }
 
+      form.setValue('installments', result.data);
       setInstallment(result.data);
-      setValue('installments', result.data);
     } finally {
       setLoading(false);
     }
-  }, [cardNumber, total, cvv, brand, method, setValue]);
+  }, [brand, total, form, paymentOption]);
 
-  const identifyBrand = useCallback(
-    async (cardNumber: string) => {
-      const { result } = await UseCases.payment.indentifyBrand.execute({
-        cardNumber,
+  const applyCoupon = async () => {
+    const subtotal = items.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0,
+    );
+
+    const shipping = form.getValues('shipping');
+
+    setLoading(true);
+    try {
+      const COUPON = {
+        code: form.getValues('couponCode') || '',
+      };
+
+      const { result } = await UseCases.coupon.validate.execute({
+        code: COUPON.code,
       });
 
       if (result.type === 'ERROR') {
-        alert('ERRO AO IDENTIFICAR BANDEIRA');
-        return;
+        switch (result.error.code) {
+          case 'SERIALIZATION':
+            alert('ERRO DE SERIALIZAÇÃO, POR FAVOR ENTRAR EM CONTATO');
+            return;
+          case 'NOT_FOUND':
+            form.setError('couponCode', {
+              type: 'manual',
+              message: 'Cupom inexistente',
+            });
+            return;
+          default:
+            alert('ERRO AO PROCESSAR CUPOM. ENTRE EM CONTATO.');
+            return;
+        }
       }
 
-      if (result.data === 'unsupported') {
-        alert('CARTÃO INVÁLIDO OU NÃO SUPORTADO.');
-        return;
-      }
+      const isActive = result.data.isActive;
+      const minPurchaseValue = result.data.minPurchaseValue ?? 0;
+      const maxDiscountValue = result.data.maxDiscountValue ?? Infinity;
+      const discountValue = result.data.discountValue ?? 0;
 
-      setBrand(result.data);
-      setValue('brand', result.data);
+      if (isActive && subtotal >= minPurchaseValue) {
+        const calculatedDiscount =
+          result.data.discountType === 'percentage'
+            ? Math.min(
+                (subtotal + Number(shipping.price)) * (discountValue / 100),
+                maxDiscountValue,
+              )
+            : Math.min(discountValue, maxDiscountValue);
+
+        form.setValue('discount', calculatedDiscount);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const identifyBrand = useCallback(
+    async (cardNumber: string) => {
+      setLoading(true);
+      try {
+        const { result } = await UseCases.payment.indentifyBrand.execute({
+          cardNumber,
+        });
+
+        if (result.type === 'ERROR') {
+          alert('Erro ao identificar bandeira');
+          return;
+        }
+
+        if (result.data === 'unsupported') {
+          alert('Cartão inválido ou não suportado.');
+          setBrand('unsupported');
+          return;
+        }
+
+        setBrand(result.data);
+        form.setValue('brand', result.data);
+
+        HandleWithInstallments();
+      } finally {
+        setLoading(false);
+      }
     },
-    [setValue],
+    [form, HandleWithInstallments],
   );
 
   useEffect(() => {
@@ -102,28 +157,15 @@ export function usePaymentForm() {
     }
   }, [cardNumber, identifyBrand]);
 
-  useEffect(() => {
-    if (
-      cardNumber &&
-      total &&
-      cvv &&
-      brand !== 'undefined' &&
-      method === 'EFI'
-    ) {
-      HandleWithInstallments();
-    }
-  }, [cardNumber, total, cvv, brand, method, HandleWithInstallments]);
-
   return {
     t,
+    form,
     brand,
     method,
     loading,
     installment,
+    paymentOption,
+    applyCoupon,
     handleExpiryDateChange,
-    form: {
-      register,
-      errors,
-    },
   };
 }

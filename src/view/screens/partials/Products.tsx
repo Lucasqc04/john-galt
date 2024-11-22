@@ -42,7 +42,7 @@ export function Products() {
   return (
     <>
       <BackgroundAnimatedProduct />
-      <section className="w-full min-h-screen flex flex-col justify-center items-center py-10">
+      <section className="w-full min-h-screen flex flex-col justify-center items-center pt-24 pb-10 sm:py-10">
         <div className="container p-4 sm:p-8 ">
           <h2 className="text-4xl text-center font-bold dark:text-white mb-8">
             {styleFirstWord(t(LanguageTexts.products.title))}

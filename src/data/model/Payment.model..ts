@@ -55,6 +55,7 @@ export class GetCheckoutModel {
   selectInstallments!: string;
   total!: number;
   birthday!: string;
+  paymentOption!: 'creditCard' | 'pix';
 }
 
 export const CreatedCheckoutModel = z.object({
@@ -92,6 +93,16 @@ export const PaymentAPIResponse = ApiResponse(
   z.union([ApprovedChargeModel, UnpaidChargeModel]),
 );
 export type PaymentAPIResponse = z.infer<typeof PaymentAPIResponse>;
+
+export const ChargedPIXModel = z.object({
+  calendary: z.object({
+    creation: z.string().min(1),
+    expiration: z.number().min(1),
+  }),
+  location: z.string().min(1),
+  pixCopyAndPaste: z.string().min(1),
+});
+export type ChargedPIXModel = z.infer<typeof ChargedPIXModel>;
 
 export class ListInstallmentsModel {
   brand!: string;

@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import {
+  ChargedPIXModel,
   CreatedCheckoutModel,
   IdentifyBrandModel,
   InstallmentModel,
@@ -86,6 +87,20 @@ export const GetCheckout = z.object({
   selectInstallments: z.string(),
   total: z.number(),
   birthday: z.string(),
+  paymentOption: z.enum(['creditCard', 'pix']),
+  shipping: z.object({
+    id: z.number(),
+    name: z.string(),
+    price: z.string(),
+    company: z.object({
+      id: z.number(),
+      name: z.string(),
+      picture: z.string(),
+    }),
+    deliveryTime: z.number(),
+  }),
+  selectedPaymentLabel: z.string(),
+  discount: z.number(),
 });
 export type GetCheckout = z.infer<typeof GetCheckout>;
 
@@ -201,6 +216,30 @@ export class Installment {
     entity.value = model.value;
 
     entity.installment = model.installment;
+
+    return entity;
+  }
+}
+
+export class ChargedPIX {
+  calendary!: {
+    creation: string;
+    expiration: number;
+  };
+  location!: string;
+  pixCopyAndPaste!: string;
+
+  static fromModel(model: ChargedPIXModel): ChargedPIX {
+    const entity = new ChargedPIX();
+
+    entity.location = model.location;
+
+    entity.pixCopyAndPaste = model.pixCopyAndPaste;
+
+    entity.calendary = {
+      creation: model.calendary.creation,
+      expiration: model.calendary.expiration,
+    };
 
     return entity;
   }

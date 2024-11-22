@@ -1,32 +1,41 @@
+import classNames from 'classnames';
 import { FaTrash } from 'react-icons/fa';
 import { IoArrowBack } from 'react-icons/io5';
 import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
 import { Link } from 'react-router-dom';
 import { LanguageTexts } from '../../../domain/locales/Language';
 import { ROUTES } from '../../routes/Routes';
+import { useWindowSize } from '../../utils/useWindowSize';
 import { useCart } from './useCart';
 
 export function Cart() {
   const { t, currentLang, cart, navigate } = useCart();
+  const { width } = useWindowSize();
 
   if (cart.items.length === 0) {
     return (
-      <div className="min-h-screen flex items-center justify-center dark:bg-gray-900">
-        <h1 className="text-4xl font-bold dark:text-white">
+      <div className="min-h-screen flex flex-col items-center gap-y-4 justify-center dark:bg-primary-dark">
+        <h1 className="text-4xl text-center font-bold dark:text-white">
           {t(LanguageTexts.cart.emptyCart)}
         </h1>
+        <Link
+          to={ROUTES.products.call(currentLang)}
+          className="bg-orange-primary px-4 py-2 rounded-md font-bold"
+        >
+          VEJA NOSSOS PRODUTOS
+        </Link>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen pt-[15%] md:pt-[10%] dark:bg-gray-900">
+    <div className="min-h-screen pt-20 sm:pt-24 md:pt-28 dark:bg-primary-dark">
       <div className="max-w-7xl mx-auto p-4">
         <div className="flex items-center gap-x-4 border-b pb-2">
           <button onClick={() => navigate(-1)}>
             <IoArrowBack size={24} />
           </button>
-          <h2 className="text-3xl font-bold dark:text-white">
+          <h2 className="text-2xl font-bold dark:text-white">
             {t(LanguageTexts.cart.title)}
           </h2>
         </div>
@@ -84,22 +93,35 @@ export function Cart() {
             ))}
           </ul>
         </div>
-        <div className="flex justify-between">
+        <div
+          className={classNames(
+            'flex justify-between',
+            width < 360 && 'flex-col',
+          )}
+        >
           <div className="flex flex-col gap-y-2">
             <button
               onClick={cart.clear}
-              className="bg-[#F6911D] text-white px-4 py-2 rounded"
+              className="bg-orange-primary text-white px-4 py-2 rounded"
             >
               {t(LanguageTexts.cart.clearCart)}
             </button>
             <Link
               to={ROUTES.cart.checkout.call(currentLang)}
-              className="bg-blue-500 text-white px-4 py-2 rounded"
+              className={classNames(
+                'bg-blue-500 text-white px-4 py-2 rounded',
+                width < 360 && 'text-center',
+              )}
             >
               {t(LanguageTexts.cart.checkout)}
             </Link>
           </div>
-          <div className="font-bold text-lg dark:text-white">
+          <div
+            className={classNames(
+              'font-bold text-lg dark:text-white',
+              width < 360 && 'text-center pt-4',
+            )}
+          >
             {t('cart.total')}: R${cart.total.toFixed(2)}{' '}
           </div>
         </div>

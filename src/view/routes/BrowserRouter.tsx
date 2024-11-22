@@ -6,10 +6,16 @@ import {
   Routes,
 } from 'react-router-dom';
 import { AcceptedLanguages, useLanguage } from '../../domain/locales/Language';
-import WhatsAppButton from '../components/buttonWhatsApp';
 import { Loader } from '../components/Loader';
 import ScrollToTop from '../components/ScrollToTop';
 import { DefaultLayout } from '../layout/DefaultyLayout';
+import { AboutBuyBitcoin } from '../screens/BuyBitcoin/AboutBuyBitcoin';
+import BuyBitcoin from '../screens/BuyBitcoin/BuyBitcoin';
+import BuyCheckout from '../screens/BuyBitcoin/BuyCheckout';
+import CopyCode from '../screens/BuyBitcoin/CopyCode';
+import { Fees } from '../screens/BuyBitcoin/RateBitcoin';
+import { TermsOfUse } from '../screens/BuyBitcoin/TermsUse';
+import { PixPayment } from '../screens/Checkout/PixPayment';
 import { ROUTES } from './Routes';
 
 const About = lazy(() =>
@@ -109,10 +115,22 @@ export function BrowserRouter() {
               element={<PaymentFailure />}
             />
             <Route path={ROUTES.cart.checkout.path} element={<Checkout />} />
+            <Route path={ROUTES.buyBitcoin.path} element={<BuyBitcoin />} />
+            <Route path={ROUTES.fee.path} element={<Fees />} />
+            <Route path={ROUTES.buyCheckout.path} element={<BuyCheckout />} />
+            <Route path={ROUTES.copyCode.path} element={<CopyCode />} />
+            <Route
+              path={ROUTES.aboutBitcoin.path}
+              element={<AboutBuyBitcoin />}
+            />
+            <Route path={ROUTES.term.path} element={<TermsOfUse />} />
+            <Route
+              path={ROUTES.cart.pixPayment.path}
+              element={<PixPayment />}
+            />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <WhatsAppButton />
       </Suspense>
     </Router>
   );

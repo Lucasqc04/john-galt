@@ -197,7 +197,7 @@
   },
   "shipping": {
     "title": "Frete",
-    "calculateButton": "Calcular Frete",
+    "calculateButton": "Calcular",
     "options": "Opções de Frete",
     "noOptions": "Nenhuma opção de frete disponível.",
     "enterZip": "Digite seu CEP:",
@@ -207,19 +207,46 @@
   },
   "tutorials": {
     "title": "Tutoriais",
-    "description": "Explore nossos tutoriais e aprenda a usar nossos produtos.",
+    "description": "BAIXE AQUI ARQUIVOS GRATUITOS QUE PREPARAMOS ESPECIALMENTE PARA VOCE QUE ESTA INICIANDO",
     "items": {
-      "1": "1° TUTORIAL - CRIE SUA CHAVE E DEPOSITE BITCOIN",
-      "2": "2° TUTORIAL - COMO ADICIONAR UMA SENHA E CRIAR A CARTEIRA ISCA",
-      "3": "3° TUTORIAL - RECUPERE SUA CARTEIRA E ENVIE BITCOIN",
-      "4": "4° TUTORIAL - COMO PERFURAR A PLACA METÁLICA",
-      "5": "5° TUTORIAL - COMO IMPORTAR SUA CARTEIRA NA BLUEWALLET",
-      "6": "6° TUTORIAL - COMO MONTAR SEU PUNÇÃO AUTOMÁTICO",
-      "7": "7° TUTORIAL - VERIFICANDO O CÓDIGO DA KRUX",
-      "8": "8° TUTORIAL - COMO CRIAR SUA SEEDQR",
-      "9": "9° TUTORIAL - COMO FAZER O BACKUP NA SUA TINY SEED"
+      "1": {
+        "title": "CRIE SUA CHAVE E DEPOSITE BITCOIN",
+        "description": "Aprenda a criar sua chave e depositar Bitcoin com segurança. Este tutorial é essencial para começar sua jornada no mundo das criptomoedas."
+      },
+      "2": {
+        "title": "COMO ADICIONAR UMA SENHA E CRIAR A CARTEIRA ISCA",
+        "description": "Adicione uma senha forte à sua carteira e mantenha seus Bitcoins seguros. Tutorial essencial para proteger seus ativos digitais."
+      },
+      "3": {
+        "title": "RECUPERE SUA CARTEIRA E ENVIE BITCOIN",
+        "description": "Saiba como recuperar sua carteira e enviar Bitcoin facilmente, mantendo o controle total de seus fundos."
+      },
+      "4": {
+        "title": "COMO PERFURAR A PLACA METÁLICA",
+        "description": "Aprenda a perfurar placas metálicas com segurança e eficiência, um guia importante para quem trabalha com materiais manuais."
+      },
+      "5": {
+        "title": "COMO IMPORTAR SUA CARTEIRA NA BLUEWALLET",
+        "description": "Importe sua carteira para a BlueWallet com facilidade e acesse seus Bitcoins de forma prática e segura."
+      },
+      "6": {
+        "title": "COMO MONTAR SEU PUNÇÃO AUTOMÁTICO",
+        "description": "Monte um punção automático para otimizar seu trabalho e aumentar a precisão dos seus processos."
+      },
+      "7": {
+        "title": "VERIFICANDO O CÓDIGO DA KRUX",
+        "description": "Aprenda a verificar o código da Krux para garantir a segurança de suas transações digitais."
+      },
+      "8": {
+        "title": "COMO CRIAR SUA SEEDQR",
+        "description": "Crie sua SeedQR de maneira segura para proteger seus dados e criptomoedas."
+      },
+      "9": {
+        "title": "COMO FAZER O BACKUP NA SUA TINY SEED",
+        "description": "Faça backup seguro de seus dados na Tiny Seed e nunca perca suas informações importantes."
+      }
     },
-    "downloadButton": "Baixar Tutorial"
+    "downloadButton": "PDF gratuito"
   },
   "post": {
     "notFound": "Post Não Encontrado!"
@@ -247,7 +274,6 @@
     ]
   },
   "paymentForm": {
-    "choosePaymentMethod": "Escolha a Forma de Pagamento",
     "creditCard": "Cartão de Crédito",
     "pix": "Pix",
     "cardNamePlaceholder": "Nome do Titular",
@@ -259,9 +285,12 @@
   },
   "checkout": {
     "title": "Checkout",
-    "stepInfos": "Informações",
+    "confirmInfos": "Confirme suas Informações",
+    "stepInfos": "Dados Pessoais",
     "stepAddress": "Endereço",
+    "stepShipping": "Selecione o método de entrega",
     "stepPayment": "Pagamento",
+    "choosePaymentMethod": "Escolha a Forma de Pagamento",
     "prev": "Voltar",
     "next": "Próximo",
     "cartItems": "Itens no Carrinho",

@@ -1,51 +1,51 @@
-import { LanguageSwitcher } from '../../components/LanguageSwitcher/LanguageSwitcher';
+import classNames from 'classnames';
+import { ReactNode } from 'react';
 
 type Step = {
-  title: string;
+  icon: ReactNode;
 };
 
 type StepIndicatorProps = {
   currentStep: number;
   steps: Step[];
+  stepRanges: { [key: number]: number[] };
 };
 
-export function StepIndicator({ currentStep, steps }: StepIndicatorProps) {
+export function StepIndicator({
+  currentStep,
+  steps,
+  stepRanges,
+}: StepIndicatorProps) {
   return (
-    <div className="w-full flex items-center py-4 relative">
-      <div className="flex items-center w-full">
-        {steps.map((step, index) => (
-          <div key={index} className="flex items-center w-full justify-between">
-            <div className="flex flex-col items-center justify-end gap-y-1 px-2">
-              <div
-                className={`w-8 h-8 flex items-center justify-center rounded-full border-2 ${
-                  index + 1 === currentStep
-                    ? 'bg-blue-500 text-white'
-                    : 'bg-white text-blue-500 border-blue-500 dark:bg-gray-700 dark:text-blue-300 dark:border-blue-300'
-                }`}
-              >
-                {index + 1}
-              </div>
-              <span className="text-sm text-center max-w-24 dark:text-gray-300">
-                {step.title}
-              </span>
-            </div>
+    <div className="flex items-center justify-between w-full">
+      {steps.map((step, index) => {
+        const isActive = stepRanges[index + 1]?.includes(currentStep);
 
-            {index < steps.length - 1 && (
+        return (
+          <>
+            <div key={index} className="flex items-center">
               <div
-                className={`flex-grow h-1 ${
-                  index + 1 < currentStep
-                    ? 'bg-blue-500'
-                    : 'bg-gray-100 dark:bg-gray-600'
-                }`}
+                className={classNames(
+                  'w-12 h-12 flex items-center justify-center rounded-full border-2',
+                  isActive
+                    ? 'bg-orange-primary text-white'
+                    : 'bg-primary-dark text-white',
+                )}
+              >
+                {step.icon}
+              </div>
+            </div>
+            {index !== steps.length - 1 && (
+              <hr
+                className={classNames(
+                  'w-full mx-2',
+                  isActive ? 'bg-gray-300' : 'bg-gray-100',
+                )}
               />
             )}
-          </div>
-        ))}
-      </div>
-
-      <div className="flex w-1/4 justify-end pr-8">
-        <LanguageSwitcher />
-      </div>
+          </>
+        );
+      })}
     </div>
   );
 }
