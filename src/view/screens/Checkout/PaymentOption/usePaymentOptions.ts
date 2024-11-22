@@ -22,7 +22,15 @@ export function usePaymentOptions() {
         );
         break;
       case 'MP':
-        form.setValue('paymentOption', 'pix');
+        form.setValue(
+          'paymentOption',
+          label === `${t('paymentForm.creditCard')} - MP`
+            ? 'creditCard'
+            : 'pix',
+        );
+        break;
+      case 'BTC':
+        form.setValue('paymentOption', 'BTC');
         break;
     }
   };

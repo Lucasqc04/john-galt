@@ -55,7 +55,7 @@ export class GetCheckoutModel {
   selectInstallments!: string;
   total!: number;
   birthday!: string;
-  paymentOption!: 'creditCard' | 'pix';
+  paymentOption!: 'creditCard' | 'pix' | 'BTC';
 }
 
 export const CreatedCheckoutModel = z.object({
@@ -103,6 +103,11 @@ export const ChargedPIXModel = z.object({
   pixCopyAndPaste: z.string().min(1),
 });
 export type ChargedPIXModel = z.infer<typeof ChargedPIXModel>;
+
+export const ChargedBTCModel = z.object({
+  qrCodeUrl: z.string().url(),
+});
+export type ChargedBTCModel = z.infer<typeof ChargedBTCModel>;
 
 export class ListInstallmentsModel {
   brand!: string;

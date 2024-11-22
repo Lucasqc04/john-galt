@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { t } from 'i18next';
 import { ReactNode } from 'react';
-import { FaRegCreditCard } from 'react-icons/fa';
+import { FaRegCreditCard } from 'react-icons/fa'; // Importando o ícone do Bitcoin do react-icons
 import Pix from '../../../assets/Pix.svg';
 import { usePaymentOptions } from './usePaymentOptions';
 
@@ -12,21 +12,31 @@ type Option = {
 };
 
 const options: Option[] = [
-  {
-    label: t('paymentForm.creditCard'),
-    value: 'EFI',
-    icon: <FaRegCreditCard size={32} />,
-  },
-  {
-    label: t('paymentForm.pix'),
-    value: 'EFI',
-    icon: <img src={Pix} alt="Pix" className="w-8" />,
-  },
+  // {
+  //   label: t('paymentForm.creditCard'),
+  //   value: 'EFI',
+  //   icon: <FaRegCreditCard size={32} />,
+  // },
+  // {
+  //   label: t('paymentForm.pix'),
+  //   value: 'EFI',
+  //   icon: <img src={Pix} alt="Pix" className="w-8" />,
+  // },
   {
     label: `${t('paymentForm.pix')} - MP`,
     value: 'MP',
     icon: <img src={Pix} alt="Pix" className="w-8" />,
   },
+  {
+    label: `${t('paymentForm.creditCard')} - MP`,
+    value: 'MP',
+    icon: <FaRegCreditCard size={32} />,
+  },
+  // {
+  //   label: 'Bitcoin',
+  //   value: 'BTC',
+  //   icon: <FaBitcoin size={32} />,
+  // },
 ];
 
 export function PaymentOptions() {

@@ -66,7 +66,7 @@ export function ConfirmInfos() {
         <span className="dark:text-white">
           Pagamento: {infos.selectedPaymentLabel}{' '}
           {infos.paymentOption === 'creditCard' &&
-            `- ${infos.selectInstallments}X`}
+            `- ${infos.selectInstallments ?? 'Consultar parcelamento '}X`}
         </span>
       </div>
     </div>

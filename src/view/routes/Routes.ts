@@ -57,6 +57,10 @@ export const ROUTES = {
       path: 'pixPayment',
       call: (currentLang: string) => `/${currentLang}/pixPayment`,
     },
+    BTCPayment: {
+      path: 'BTCPayment',
+      call: (currentLang: string) => `/${currentLang}/BTCPayment`,
+    },
     product: {
       path: 'produto/:id',
       call: (currentLang: string, id: string = '1') =>

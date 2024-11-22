@@ -15,6 +15,7 @@ import BuyCheckout from '../screens/BuyBitcoin/BuyCheckout';
 import CopyCode from '../screens/BuyBitcoin/CopyCode';
 import { Fees } from '../screens/BuyBitcoin/RateBitcoin';
 import { TermsOfUse } from '../screens/BuyBitcoin/TermsUse';
+import { BitcoinPayment } from '../screens/Checkout/BitcoinPayment';
 import { PixPayment } from '../screens/Checkout/PixPayment';
 import { ROUTES } from './Routes';
 
@@ -127,6 +128,10 @@ export function BrowserRouter() {
             <Route
               path={ROUTES.cart.pixPayment.path}
               element={<PixPayment />}
+            />
+            <Route
+              path={ROUTES.cart.pixPayment.path}
+              element={<BitcoinPayment />}
             />
           </Route>
           <Route path="*" element={<NotFound />} />

@@ -129,7 +129,7 @@ export function useCheckout() {
         paymentOption: data.paymentOption,
         selectedPaymentLabel: data.selectedPaymentLabel,
         shipping: data.shipping,
-        discount: data.discount,
+        discount: data.discount ?? 0,
       };
 
       const preValidationResult = GetCheckout.safeParse(req);
@@ -169,6 +169,12 @@ export function useCheckout() {
 
       if ('paymentLink' in result.data) {
         window.location.href = result.data.paymentLink;
+        return;
+      }
+
+      if ('qrCodeUrl' in result.data) {
+        const qrCodeUrl = result.data.qrCodeUrl as string;
+        window.location.href = qrCodeUrl;
         return;
       }
 
