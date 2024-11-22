@@ -100,6 +100,7 @@ export const GetCheckout = z.object({
     deliveryTime: z.number(),
   }),
   selectedPaymentLabel: z.string(),
+  discount: z.number(),
 });
 export type GetCheckout = z.infer<typeof GetCheckout>;
 

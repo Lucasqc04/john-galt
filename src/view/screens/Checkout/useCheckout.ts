@@ -12,31 +12,79 @@ import { useCurrentLang } from '../../utils/useCurrentLang';
 const LOCAL_STORAGE_KEY = 'checkoutFormState';
 
 export function useCheckout() {
-  const { items, clear: clearCart } = useCartContext();
-  const { currentLang } = useCurrentLang();
-  const [loading, setLoading] = useState<boolean>(false);
   const [currentStep, setCurrentStep] = useState(1);
+  const [subtotal, setSubtotal] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const { t } = useTranslation();
+  const { currentLang } = useCurrentLang();
+  const {
+    items,
+    clear: clearCart,
+    updateItemQuantity,
+    remove: removeCartItem,
+  } = useCartContext();
+
   const form = useForm<GetCheckout>({
     mode: 'onChange',
     defaultValues: JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '{}'),
   });
   const navigate = useNavigate();
-  const { t } = useTranslation();
+
   const shippingPrice = form.watch('shipping.price');
+  const discount = form.watch('discount');
 
   const updateTotal = useCallback(() => {
-    const itemsTotal = items.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0,
-    );
-    const total = itemsTotal + Number(shippingPrice);
-    form.setValue('total', total);
+    const total = subtotal + Number(shippingPrice ?? 0) - (discount ?? 0);
+    const totalRounded = Math.round(total * 100) / 100;
+
+    form.setValue('total', totalRounded);
+
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(form.getValues()));
-  }, [form, items, shippingPrice]);
+  }, [form, shippingPrice, subtotal, discount]);
 
   useEffect(() => {
     updateTotal();
   }, [updateTotal]);
+
+  useEffect(() => {
+    setSubtotal(
+      items.reduce((total, item) => total + item.price * item.quantity, 0),
+    );
+
+    const recalculateDiscount = async () => {
+      const couponCode = form.getValues('couponCode');
+      const shipping = form.getValues('shipping');
+
+      if (couponCode) {
+        const { result } = await UseCases.coupon.validate.execute({
+          code: couponCode,
+        });
+
+        if (result.type === 'SUCCESS') {
+          const minPurchaseValue = result.data.minPurchaseValue ?? 0;
+          const maxDiscountValue = result.data.maxDiscountValue ?? Infinity;
+          const discountValue = result.data.discountValue ?? 0;
+
+          if (subtotal >= minPurchaseValue) {
+            const recalculatedDiscount =
+              result.data.discountType === 'percentage'
+                ? Math.min(
+                    (subtotal + Number(shipping.price)) * (discountValue / 100),
+                    maxDiscountValue,
+                  )
+                : Math.min(discountValue, maxDiscountValue);
+
+            form.setValue('discount', recalculatedDiscount);
+          } else {
+            form.setValue('discount', 0);
+          }
+        }
+      }
+    };
+
+    recalculateDiscount();
+  }, [items, form, subtotal]);
 
   async function onSubmit(data: GetCheckout) {
     setLoading(true);
@@ -81,6 +129,7 @@ export function useCheckout() {
         paymentOption: data.paymentOption,
         selectedPaymentLabel: data.selectedPaymentLabel,
         shipping: data.shipping,
+        discount: data.discount ?? 0,
       };
 
       const preValidationResult = GetCheckout.safeParse(req);
@@ -150,9 +199,14 @@ export function useCheckout() {
   return {
     t,
     form,
-    onsubmit: form.handleSubmit(onSubmit),
+    items,
     loading,
+    subtotal,
+    shippingPrice,
     navigate,
+    removeCartItem,
+    updateItemQuantity,
+    onsubmit: form.handleSubmit(onSubmit),
     steps: {
       current: currentStep,
       next: () => setCurrentStep(currentStep + 1),
