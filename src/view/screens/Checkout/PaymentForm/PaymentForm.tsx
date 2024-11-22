@@ -11,8 +11,10 @@ export function PaymentForm() {
   const {
     brand,
     form,
+    items,
     method,
     loading,
+    subtotal,
     installment,
     paymentOption,
     applyCoupon,
@@ -171,6 +173,80 @@ export function PaymentForm() {
           </span>
         )}
       </div>
+
+      <article className="flex lg:hidden lg:pl-32">
+        <aside className="w-full p-4 bg-gray-50 dark:bg-gray-800 rounded-md shadow-lg">
+          <h2 className="text-lg font-bold text-gray-900 dark:text-white">
+            {t('checkout.cartItems')}
+          </h2>
+          <ul className="flex flex-col gap-y-4 pt-4">
+            {items.map((item) => (
+              <li
+                key={item.id}
+                className="flex items-center justify-between border-b border-gray-300 pb-4 dark:border-gray-700"
+              >
+                <div className="flex items-center gap-x-4">
+                  <img
+                    src={item.imageUrl}
+                    alt={item.name}
+                    className="w-16 h-16 object-cover rounded-md"
+                  />
+                  <div>
+                    <p className="font-semibold text-gray-900 dark:text-white">
+                      {item.name}
+                    </p>
+                    <p className="text-gray-500 dark:text-gray-300">
+                      {t('checkout.price', {
+                        price: item.price.toFixed(2),
+                      })}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-x-2">
+                  <p className="text-xl font-semibold text-gray-900 dark:text-gray-300">
+                    {item.quantity} x
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          <div className="flex flex-col p-4 gap-y-2 border-t border-b border-gray-300 dark:border-gray-600">
+            <div className="w-full flex justify-between">
+              <span className="text-lg font-semibold text-gray-900 dark:text-white">
+                {t('checkout.subtotal')}
+              </span>
+              <span className="text-lg font-semibold text-gray-900 dark:text-white">
+                R$ {(subtotal ?? 0).toFixed(2)}
+              </span>
+            </div>
+            <div className="w-full flex justify-between ">
+              <span className="text-lg font-semibold text-gray-900 dark:text-white">
+                {t('checkout.shipping')}
+              </span>
+              <span className="text-lg font-semibold text-gray-900 dark:text-white">
+                R$ {Number(form.watch('shipping.price') ?? 0).toFixed(2)}
+              </span>
+            </div>
+            <div className="w-full flex justify-between ">
+              <span className="text-lg font-semibold text-gray-900 dark:text-white">
+                {t('checkout.discount')}
+              </span>
+              <span className="text-lg font-semibold text-gray-900 dark:text-white">
+                -R$ {Number(form.watch('discount') ?? 0).toFixed(2)}
+              </span>
+            </div>
+          </div>
+          <div className="w-full flex justify-between p-4">
+            <span className="text-xl font-semibold text-gray-900 dark:text-white">
+              {t('checkout.total')}
+            </span>
+            <span className="text-xl font-semibold text-gray-900 dark:text-white">
+              R$ {Number(form.watch('total') ?? 0).toFixed(2)}
+            </span>
+          </div>
+        </aside>
+      </article>
     </>
   );
 }
