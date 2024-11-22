@@ -25,6 +25,7 @@ export function ShippingForm() {
                 option.id === shippingOptions.value.id &&
                 'bg-gray-300 dark:bg-slate-500 dark:hover:bg-slate-600',
               'md:w-3/4',
+              'lg:w-full',
             )}
             onClick={() => shippingOptions.set(option)}
           >

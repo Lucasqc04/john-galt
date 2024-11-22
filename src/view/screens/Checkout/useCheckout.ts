@@ -23,16 +23,19 @@ export function useCheckout() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const shippingPrice = form.watch('shipping.price');
+  const [subtotal, setSubtotal] = useState<number>(0);
+
+  useEffect(() => {
+    setSubtotal(
+      items.reduce((total, item) => total + item.price * item.quantity, 0),
+    );
+  }, [items]);
 
   const updateTotal = useCallback(() => {
-    const itemsTotal = items.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0,
-    );
-    const total = itemsTotal + Number(shippingPrice);
+    const total = subtotal + Number(shippingPrice);
     form.setValue('total', total);
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(form.getValues()));
-  }, [form, items, shippingPrice]);
+  }, [form, shippingPrice, subtotal]);
 
   useEffect(() => {
     updateTotal();
@@ -149,6 +152,9 @@ export function useCheckout() {
 
   return {
     t,
+    items,
+    subtotal,
+    shippingPrice,
     form,
     onsubmit: form.handleSubmit(onSubmit),
     loading,

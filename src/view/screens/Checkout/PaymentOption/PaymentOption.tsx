@@ -50,6 +50,7 @@ export function PaymentOptions() {
               selectedPaymentLabel === methodOption.label &&
                 'bg-blue-100 dark:bg-blue-200',
               'md:w-3/4',
+              'lg:w-full',
             )}
           >
             <span>{methodOption.icon}</span>
