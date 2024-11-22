@@ -136,10 +136,14 @@ export function PaymentForm() {
         </div>
       )}
 
-      {paymentOption !== 'creditCard' && (
+      {!(method === 'EFI' && paymentOption === 'creditCard') && (
         <h2 className="dark:text-white">
           Método de Pagamento Selecionado:{' '}
-          <b className="uppercase dark:text-white">{paymentOption}</b>
+          <b className="uppercase dark:text-white">
+            {paymentOption === 'creditCard'
+              ? t('paymentForm.creditCard')
+              : 'PIX'}
+          </b>
         </h2>
       )}
 

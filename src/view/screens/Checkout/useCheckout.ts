@@ -129,7 +129,7 @@ export function useCheckout() {
         paymentOption: data.paymentOption,
         selectedPaymentLabel: data.selectedPaymentLabel,
         shipping: data.shipping,
-        discount: data.discount,
+        discount: data.discount ?? 0,
       };
 
       const preValidationResult = GetCheckout.safeParse(req);
