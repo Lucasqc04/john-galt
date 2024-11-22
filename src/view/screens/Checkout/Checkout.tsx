@@ -216,7 +216,7 @@ export function Checkout() {
                   {t('checkout.discount')}
                 </span>
                 <span className="text-lg font-semibold text-gray-900 dark:text-white">
-                  -R$ {form.watch('discount') ?? '0.00'}
+                  -R$ {form.watch('discount').toFixed(2) ?? '0.00'}
                 </span>
               </div>
             </div>

@@ -15,6 +15,7 @@ export function PaymentForm() {
     loading,
     installment,
     paymentOption,
+    applyCoupon,
     handleExpiryDateChange,
   } = usePaymentForm();
   const { t } = useTranslation();
@@ -141,6 +142,31 @@ export function PaymentForm() {
           <b className="uppercase dark:text-white">{paymentOption}</b>
         </h2>
       )}
+
+      <div className="py-4">
+        <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+          {t('checkout.couponCode')}
+        </label>
+        <div className="flex gap-x-2 mt-2">
+          <input
+            type="text"
+            {...form.register('couponCode')}
+            className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600"
+          />
+          <button
+            type="button"
+            onClick={applyCoupon}
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
+          >
+            {t('checkout.apply')}
+          </button>
+        </div>
+        {form.formState.errors.couponCode && (
+          <span className="text-red-500 text-sm mt-1">
+            {form.formState.errors.couponCode.message}
+          </span>
+        )}
+      </div>
     </>
   );
 }

@@ -32,12 +32,16 @@ export function useCheckout() {
   const navigate = useNavigate();
 
   const shippingPrice = form.watch('shipping.price');
+  const discount = form.watch('discount');
 
   const updateTotal = useCallback(() => {
-    const total = subtotal + Number(shippingPrice);
-    form.setValue('total', total);
+    const total = subtotal + Number(shippingPrice) - discount;
+    const totalRounded = Math.round(total * 100) / 100;
+
+    form.setValue('total', totalRounded);
+
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(form.getValues()));
-  }, [form, shippingPrice, subtotal]);
+  }, [form, shippingPrice, subtotal, discount]);
 
   useEffect(() => {
     updateTotal();
@@ -47,7 +51,40 @@ export function useCheckout() {
     setSubtotal(
       items.reduce((total, item) => total + item.price * item.quantity, 0),
     );
-  }, [items]);
+
+    const recalculateDiscount = async () => {
+      const couponCode = form.getValues('couponCode');
+      const shipping = form.getValues('shipping');
+
+      if (couponCode) {
+        const { result } = await UseCases.coupon.validate.execute({
+          code: couponCode,
+        });
+
+        if (result.type === 'SUCCESS') {
+          const minPurchaseValue = result.data.minPurchaseValue ?? 0;
+          const maxDiscountValue = result.data.maxDiscountValue ?? Infinity;
+          const discountValue = result.data.discountValue ?? 0;
+
+          if (subtotal >= minPurchaseValue) {
+            const recalculatedDiscount =
+              result.data.discountType === 'percentage'
+                ? Math.min(
+                    (subtotal + Number(shipping.price)) * (discountValue / 100),
+                    maxDiscountValue,
+                  )
+                : Math.min(discountValue, maxDiscountValue);
+
+            form.setValue('discount', recalculatedDiscount);
+          } else {
+            form.setValue('discount', 0);
+          }
+        }
+      }
+    };
+
+    recalculateDiscount();
+  }, [items, form, subtotal]);
 
   async function onSubmit(data: GetCheckout) {
     setLoading(true);
