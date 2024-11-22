@@ -22,12 +22,14 @@ export function Checkout() {
     t,
     form,
     items,
-    subtotal,
-    shippingPrice,
     steps,
     loading,
+    subtotal,
+    shippingPrice,
     onsubmit,
     navigate,
+    removeCartItem,
+    updateItemQuantity,
   } = useCheckout();
 
   return (
@@ -159,12 +161,20 @@ export function Checkout() {
                       <button
                         type="button"
                         className="text-gray-700 dark:text-white hover:text-blue-500 dark:hover:text-blue-300"
+                        onClick={() =>
+                          updateItemQuantity(item.id, item.quantity + 1)
+                        }
                       >
                         <TiArrowSortedUp size={24} />
                       </button>
                       <button
                         type="button"
                         className="text-gray-700 dark:text-white hover:text-blue-500 dark:hover:text-blue-300"
+                        onClick={() => {
+                          if (item.quantity > 1) {
+                            updateItemQuantity(item.id, item.quantity - 1);
+                          }
+                        }}
                       >
                         <TiArrowSortedDown size={24} />
                       </button>
@@ -176,6 +186,7 @@ export function Checkout() {
                   <button
                     type="button"
                     className="bg-red-500 text-white px-3 py-2 rounded-md hover:bg-red-600 transition-colors"
+                    onClick={() => removeCartItem(item.id)}
                   >
                     <FaTrash />
                   </button>
@@ -205,7 +216,7 @@ export function Checkout() {
                   {t('checkout.discount')}
                 </span>
                 <span className="text-lg font-semibold text-gray-900 dark:text-white">
-                  -R$ 00,00
+                  -R$ {form.watch('discount') ?? '0.00'}
                 </span>
               </div>
             </div>

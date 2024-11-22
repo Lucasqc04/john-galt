@@ -12,24 +12,26 @@ import { useCurrentLang } from '../../utils/useCurrentLang';
 const LOCAL_STORAGE_KEY = 'checkoutFormState';
 
 export function useCheckout() {
-  const { items, clear: clearCart } = useCartContext();
-  const { currentLang } = useCurrentLang();
-  const [loading, setLoading] = useState<boolean>(false);
   const [currentStep, setCurrentStep] = useState(1);
+  const [subtotal, setSubtotal] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const { t } = useTranslation();
+  const { currentLang } = useCurrentLang();
+  const {
+    items,
+    clear: clearCart,
+    updateItemQuantity,
+    remove: removeCartItem,
+  } = useCartContext();
+
   const form = useForm<GetCheckout>({
     mode: 'onChange',
     defaultValues: JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '{}'),
   });
   const navigate = useNavigate();
-  const { t } = useTranslation();
-  const shippingPrice = form.watch('shipping.price');
-  const [subtotal, setSubtotal] = useState<number>(0);
 
-  useEffect(() => {
-    setSubtotal(
-      items.reduce((total, item) => total + item.price * item.quantity, 0),
-    );
-  }, [items]);
+  const shippingPrice = form.watch('shipping.price');
 
   const updateTotal = useCallback(() => {
     const total = subtotal + Number(shippingPrice);
@@ -40,6 +42,12 @@ export function useCheckout() {
   useEffect(() => {
     updateTotal();
   }, [updateTotal]);
+
+  useEffect(() => {
+    setSubtotal(
+      items.reduce((total, item) => total + item.price * item.quantity, 0),
+    );
+  }, [items]);
 
   async function onSubmit(data: GetCheckout) {
     setLoading(true);
@@ -84,6 +92,7 @@ export function useCheckout() {
         paymentOption: data.paymentOption,
         selectedPaymentLabel: data.selectedPaymentLabel,
         shipping: data.shipping,
+        discount: data.discount,
       };
 
       const preValidationResult = GetCheckout.safeParse(req);
@@ -152,13 +161,15 @@ export function useCheckout() {
 
   return {
     t,
+    form,
     items,
+    loading,
     subtotal,
     shippingPrice,
-    form,
-    onsubmit: form.handleSubmit(onSubmit),
-    loading,
     navigate,
+    removeCartItem,
+    updateItemQuantity,
+    onsubmit: form.handleSubmit(onSubmit),
     steps: {
       current: currentStep,
       next: () => setCurrentStep(currentStep + 1),
