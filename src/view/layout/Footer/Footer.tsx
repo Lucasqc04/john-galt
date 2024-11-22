@@ -67,6 +67,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="focus:outline-none"
+                title="Instagram - DIY SEC LAB"
               >
                 <FaInstagram
                   className="transform transition-transform duration-300 hover:scale-125 text-gray-700 dark:text-white hover:text-[#F6911D]"
@@ -84,6 +85,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="focus:outline-none"
+                title="Whatsapp - DIY SEC LAB"
               >
                 <AiOutlineWhatsApp
                   className="transform transition-transform duration-300 hover:scale-125 text-gray-700 dark:text-white hover:text-[#F6911D]"
@@ -101,6 +103,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="focus:outline-none"
+                title="Twitter - DIY SEC LAB"
               >
                 <FaXTwitter
                   className="transform transition-transform duration-300 hover:scale-125 text-gray-700 dark:text-white hover:text-[#F6911D]"
@@ -117,6 +120,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="focus:outline-none"
+                title="LinkedIn - DIY SEC LAB"
               >
                 <FaLinkedinIn
                   className="transform transition-transform duration-300 hover:scale-125 text-gray-700 dark:text-white hover:text-[#F6911D]"

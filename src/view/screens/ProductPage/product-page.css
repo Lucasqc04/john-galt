@@ -6,3 +6,11 @@ ul.slick-dots {
 ul.slick-dots li button:before {
   font-size: 16px;
 }
+
+.slick-dots li.slick-active button:before {
+  @apply dark:text-white;
+}
+
+.slick-dots li button:before {
+  @apply dark:text-white;
+}

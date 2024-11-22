@@ -34,7 +34,7 @@ export function PaymentOptions() {
 
   return (
     <div className="w-full">
-      <div className="flex flex-col gap-y-4 pt-2">
+      <div className="flex flex-col items-center gap-y-4 pt-2">
         {options.map((methodOption, idx) => (
           <button
             type="button"
@@ -46,14 +46,15 @@ export function PaymentOptions() {
               'w-full flex items-center justify-between rounded-md border border-solid px-4 py-3 transition-all duration-300 ease-in-out',
               'cursor-pointer',
               'border-gray-400 dark:border-gray-600',
-              'bg-white dark:bg-gray-800',
-              'hover:bg-gray-100 dark:hover:bg-gray-700',
+              'bg-white hover:bg-gray-100 dark:hover:bg-gray-300',
               selectedPaymentLabel === methodOption.label &&
-                'bg-blue-100 dark:bg-blue-600',
+                'bg-blue-100 dark:bg-blue-200',
+              'md:w-3/4',
+              'lg:w-full',
             )}
           >
             <span>{methodOption.icon}</span>
-            <span className="w-full text-xl text-gray-900 dark:text-white">
+            <span className="w-full text-xl text-gray-900">
               {methodOption.label}
             </span>
           </button>

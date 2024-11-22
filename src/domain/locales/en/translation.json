@@ -207,19 +207,46 @@
   },
   "tutorials": {
     "title": "Tutorials",
-    "description": "Explore our tutorials and learn how to use our products.",
+    "description": "DOWNLOAD FREE FILES WE’VE PREPARED JUST FOR YOU, WHETHER YOU'RE STARTING OUT OR WANT TO LEARN MORE",
     "items": {
-      "1": "1st TUTORIAL - CREATE YOUR KEY AND DEPOSIT BITCOIN",
-      "2": "2nd TUTORIAL - HOW TO ADD A PASSWORD AND CREATE A DECOY WALLET",
-      "3": "3rd TUTORIAL - RECOVER YOUR WALLET AND SEND BITCOIN",
-      "4": "4th TUTORIAL - HOW TO DRILL THE METAL PLATE",
-      "5": "5th TUTORIAL - HOW TO IMPORT YOUR WALLET INTO BLUEWALLET",
-      "6": "6th TUTORIAL - HOW TO ASSEMBLE YOUR AUTOMATIC PUNCH",
-      "7": "7th TUTORIAL - VERIFYING THE KRUX CODE",
-      "8": "8th TUTORIAL - HOW TO CREATE YOUR SEEDQR",
-      "9": "9th TUTORIAL - HOW TO BACKUP ON YOUR TINY SEED"
+      "1": {
+        "title": "CREATE YOUR KEY AND DEPOSIT BITCOIN",
+        "description": "Learn how to create your key and deposit Bitcoin securely. This tutorial is essential for starting your cryptocurrency journey."
+      },
+      "2": {
+        "title": "HOW TO ADD A PASSWORD AND CREATE THE ISCA WALLET",
+        "description": "Add a strong password to your wallet and keep your Bitcoins secure. An essential tutorial to protect your digital assets."
+      },
+      "3": {
+        "title": "RECOVER YOUR WALLET AND SEND BITCOIN",
+        "description": "Learn how to recover your wallet and send Bitcoin easily, while keeping full control of your funds."
+      },
+      "4": {
+        "title": "HOW TO DRILL A METAL PLATE",
+        "description": "Learn how to drill metal plates safely and efficiently, an important guide for anyone working with manual materials."
+      },
+      "5": {
+        "title": "HOW TO IMPORT YOUR WALLET INTO BLUEWALLET",
+        "description": "Import your wallet into BlueWallet easily and access your Bitcoins securely and conveniently."
+      },
+      "6": {
+        "title": "HOW TO ASSEMBLE YOUR AUTOMATIC PUNCH",
+        "description": "Assemble an automatic punch to optimize your work and increase the precision of your processes."
+      },
+      "7": {
+        "title": "VERIFYING KRUX CODE",
+        "description": "Learn how to verify the Krux code to ensure the security of your digital transactions."
+      },
+      "8": {
+        "title": "HOW TO CREATE YOUR SEEDQR",
+        "description": "Create your SeedQR securely to protect your data and cryptocurrencies."
+      },
+      "9": {
+        "title": "HOW TO BACK UP YOUR TINY SEED",
+        "description": "Safely back up your data on Tiny Seed and never lose your important information."
+      }
     },
-    "downloadButton": "Download Tutorial"
+    "downloadButton": "Free PDF"
   },
   "post": {
     "notFound": "Post Not Found!"
