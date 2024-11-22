@@ -14,12 +14,19 @@ export function usePaymentForm() {
   const { t } = useTranslation();
   const [loading, setLoading] = useState<boolean>(false);
   const [installment, setInstallment] = useState<Installment[]>();
+  const [subtotal, setSubtotal] = useState<number>(0);
   const form = useFormContext<GetCheckout>();
   const [brand, setBrand] = useState<Brand>('undefined');
   const method = form.watch('method');
   const paymentOption = form.watch('paymentOption');
   const cardNumber = form.watch('cardNumber');
   const total = form.watch('total');
+
+  useEffect(() => {
+    setSubtotal(
+      items.reduce((total, item) => total + item.price * item.quantity, 0),
+    );
+  }, [items]);
 
   const handleExpiryDateChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -159,10 +166,12 @@ export function usePaymentForm() {
 
   return {
     t,
+    items,
     form,
     brand,
     method,
     loading,
+    subtotal,
     installment,
     paymentOption,
     applyCoupon,
