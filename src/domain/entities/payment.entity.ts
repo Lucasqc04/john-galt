@@ -87,7 +87,7 @@ export const GetCheckout = z.object({
   selectInstallments: z.string(),
   total: z.number(),
   birthday: z.string(),
-  paymentOption: z.enum(['creditCard', 'pix']),
+  paymentOption: z.enum(['creditCard', 'pix', 'BTC']),
   shipping: z.object({
     id: z.number(),
     name: z.string(),

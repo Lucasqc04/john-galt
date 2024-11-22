@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { t } from 'i18next';
 import { ReactNode } from 'react';
-import { FaRegCreditCard } from 'react-icons/fa';
+import { FaRegCreditCard } from 'react-icons/fa'; // Importando o ícone do Bitcoin do react-icons
 import Pix from '../../../assets/Pix.svg';
 import { usePaymentOptions } from './usePaymentOptions';
 
@@ -12,16 +12,16 @@ type Option = {
 };
 
 const options: Option[] = [
-  {
-    label: t('paymentForm.creditCard'),
-    value: 'EFI',
-    icon: <FaRegCreditCard size={32} />,
-  },
-  {
-    label: t('paymentForm.pix'),
-    value: 'EFI',
-    icon: <img src={Pix} alt="Pix" className="w-8" />,
-  },
+  // {
+  //   label: t('paymentForm.creditCard'),
+  //   value: 'EFI',
+  //   icon: <FaRegCreditCard size={32} />,
+  // },
+  // {
+  //   label: t('paymentForm.pix'),
+  //   value: 'EFI',
+  //   icon: <img src={Pix} alt="Pix" className="w-8" />,
+  // },
   {
     label: `${t('paymentForm.pix')} - MP`,
     value: 'MP',
@@ -32,6 +32,11 @@ const options: Option[] = [
     value: 'MP',
     icon: <FaRegCreditCard size={32} />,
   },
+  // {
+  //   label: 'Bitcoin',
+  //   value: 'BTC',
+  //   icon: <FaBitcoin size={32} />,
+  // },
 ];
 
 export function PaymentOptions() {
@@ -44,13 +49,9 @@ export function PaymentOptions() {
           <button
             type="button"
             key={idx}
-            onClick={() => {
-              if (methodOption.label === t('paymentForm.creditCard')) {
-                alert('Método fora do ar, selecione outro, por favor!');
-                return;
-              }
-              handlePaymentSelection(methodOption.value, methodOption.label);
-            }}
+            onClick={() =>
+              handlePaymentSelection(methodOption.value, methodOption.label)
+            }
             className={classNames(
               'w-full flex items-center justify-between rounded-md border border-solid px-4 py-3 transition-all duration-300 ease-in-out',
               'cursor-pointer',

@@ -172,6 +172,12 @@ export function useCheckout() {
         return;
       }
 
+      if ('qrCodeUrl' in result.data) {
+        const qrCodeUrl = result.data.qrCodeUrl as string;
+        window.location.href = qrCodeUrl;
+        return;
+      }
+
       if ('location' in result.data) {
         navigate(ROUTES.cart.pixPayment.call(currentLang), {
           state: {

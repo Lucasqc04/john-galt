@@ -1,4 +1,5 @@
 import { format, getYear, parse } from 'date-fns';
+import { ChargedBTCModel } from '../../../data/model/Payment.model.';
 import { PaymentRepository } from '../../../data/repositories/Payment.repository';
 import { DefaultResultError, Result } from '../../../utils/Result';
 import { UseCase } from '../../../utils/UseCase';
@@ -14,7 +15,7 @@ export type CreateReq = GetCheckout;
 
 export type CreateRes = Promise<
   Result<
-    CreatedCheckout | PaymentApiResponse | ChargedPIX,
+    CreatedCheckout | PaymentApiResponse | ChargedPIX | ChargedBTCModel,
     { code: 'SERIALIZATION' } | DefaultResultError
   >
 >;
