@@ -35,7 +35,7 @@ export function useCheckout() {
   const discount = form.watch('discount');
 
   const updateTotal = useCallback(() => {
-    const total = subtotal + Number(shippingPrice) - discount;
+    const total = subtotal + Number(shippingPrice ?? 0) - (discount ?? 0);
     const totalRounded = Math.round(total * 100) / 100;
 
     form.setValue('total', totalRounded);
