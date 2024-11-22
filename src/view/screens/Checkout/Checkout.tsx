@@ -200,7 +200,7 @@ export function Checkout() {
                   {t('checkout.subtotal')}
                 </span>
                 <span className="text-lg font-semibold text-gray-900 dark:text-white">
-                  R$ {subtotal.toFixed(2)}
+                  R$ {(subtotal ?? 0).toFixed(2)}
                 </span>
               </div>
               <div className="w-full flex justify-between ">
@@ -208,7 +208,7 @@ export function Checkout() {
                   {t('checkout.shipping')}
                 </span>
                 <span className="text-lg font-semibold text-gray-900 dark:text-white">
-                  R$ {Number(shippingPrice).toFixed(2)}
+                  R$ {Number(shippingPrice ?? 0).toFixed(2)}
                 </span>
               </div>
               <div className="w-full flex justify-between ">
@@ -216,7 +216,7 @@ export function Checkout() {
                   {t('checkout.discount')}
                 </span>
                 <span className="text-lg font-semibold text-gray-900 dark:text-white">
-                  -R$ {form.watch('discount').toFixed(2) ?? '0.00'}
+                  -R$ {Number(form.watch('discount') ?? 0).toFixed(2)}
                 </span>
               </div>
             </div>
@@ -225,7 +225,7 @@ export function Checkout() {
                 {t('checkout.total')}
               </span>
               <span className="text-xl font-semibold text-gray-900 dark:text-white">
-                R$ {form.watch('total')}
+                R$ {Number(form.watch('total') ?? 0).toFixed(2)}
               </span>
             </div>
           </aside>
