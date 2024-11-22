@@ -4,6 +4,7 @@ import { DefaultResultError, Result } from '../../utils/Result';
 import { EfiDatasource } from '../datasource/Efi.datasource';
 import { RemoteDataSource } from '../datasource/Remote.datasource';
 import {
+  ChargedBTCModel,
   ChargedPIXModel,
   CreatedCheckoutModel,
   GeneratedPaymentTokenModel,
@@ -19,7 +20,10 @@ export type CreateReq = GetCheckoutModel;
 
 export type CreateRes = Promise<
   Result<
-    CreatedCheckoutModel | PaymentAPIResponse | ChargedPIXModel,
+    | CreatedCheckoutModel
+    | PaymentAPIResponse
+    | ChargedPIXModel
+    | ChargedBTCModel,
     { code: 'SERIALIZATION' } | DefaultResultError
   >
 >;
@@ -98,6 +102,12 @@ export class PaymentRepositoryImpl implements PaymentRepository {
       return Result.Error({ code: 'SERIALIZATION' });
     }
 
+    if (method === 'BTC') {
+      if (!('qrCodeUrl' in result)) {
+        return Result.Error({ code: 'UNKNOWN' });
+      }
+    }
+
     return Result.Success(result);
   }
 
@@ -143,9 +153,10 @@ export class PaymentRepositoryImpl implements PaymentRepository {
     }
   }
 
+  // Atualizando a função getModelToValidate para suportar 'BTC'
   private getModelToValidate(
     method: PaymentMethod,
-    paymentOption?: 'creditCard' | 'pix',
+    paymentOption?: 'creditCard' | 'pix' | 'BTC',
   ) {
     switch (method) {
       case 'MP':
@@ -154,9 +165,12 @@ export class PaymentRepositoryImpl implements PaymentRepository {
         if (paymentOption === 'creditCard') {
           return PaymentAPIResponse;
         }
+        if (paymentOption === 'BTC') {
+          return ChargedBTCModel;
+        }
         return ChargedPIXModel;
       case 'BTC':
-        throw new Error('Método de pagamento não suportado');
+        return ChargedBTCModel;
       default:
         throw new Error('Método de pagamento não suportado');
     }

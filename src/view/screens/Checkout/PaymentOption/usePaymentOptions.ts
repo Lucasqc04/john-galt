@@ -29,6 +29,9 @@ export function usePaymentOptions() {
             : 'pix',
         );
         break;
+      case 'BTC':
+        form.setValue('paymentOption', 'BTC');
+        break;
     }
   };
 

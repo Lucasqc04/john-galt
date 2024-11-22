@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { t } from 'i18next';
 import { ReactNode } from 'react';
-import { FaRegCreditCard } from 'react-icons/fa';
+import { FaBitcoin, FaRegCreditCard } from 'react-icons/fa'; // Importando o ícone do Bitcoin do react-icons
 import Pix from '../../../assets/Pix.svg';
 import { usePaymentOptions } from './usePaymentOptions';
 
@@ -31,6 +31,12 @@ const options: Option[] = [
     label: `${t('paymentForm.creditCard')} - MP`,
     value: 'MP',
     icon: <FaRegCreditCard size={32} />,
+  },
+
+  {
+    label: 'Bitcoin',
+    value: 'BTC',
+    icon: <FaBitcoin size={32} />,
   },
 ];
 
