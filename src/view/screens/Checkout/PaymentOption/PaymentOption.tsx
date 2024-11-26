@@ -56,9 +56,9 @@ export function PaymentOptions() {
               'w-full flex items-center justify-between rounded-md border border-solid px-4 py-3 transition-all duration-300 ease-in-out',
               'cursor-pointer',
               'border-gray-400 dark:border-gray-600',
-              'bg-white hover:bg-gray-100 dark:hover:bg-gray-300',
+              'bg-white hover:bg-orange-primary dark:hover:bg-orange-500',
               selectedPaymentLabel === methodOption.label &&
-                'bg-blue-100 dark:bg-blue-200',
+                'bg-orange-primary dark:bg-orange-primary',
               'md:w-3/4',
               'lg:w-full',
             )}

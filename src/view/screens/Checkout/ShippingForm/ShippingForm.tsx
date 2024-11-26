@@ -20,10 +20,10 @@ export function ShippingForm() {
             type="button"
             className={classNames(
               'w-full flex items-center justify-around rounded-md border border-solid border-gray-400 px-4 py-2',
-              'transition-colors duration-300 ease-in-out hover:bg-gray-200 dark:bg-gray-100 dark:border-black dark:hover:bg-slate-500',
+              'transition-colors duration-300 ease-in-out hover:bg-orange-500 dark:bg-gray-100 dark:border-black',
               shippingOptions.value &&
                 option.id === shippingOptions.value.id &&
-                'bg-gray-300 dark:bg-slate-500 dark:hover:bg-slate-600',
+                'bg-orange-primary dark:bg-orange-primary dark:hover:bg-orange-600',
               'md:w-3/4',
               'lg:w-full',
             )}
