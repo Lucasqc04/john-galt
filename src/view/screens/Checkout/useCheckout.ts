@@ -40,7 +40,13 @@ export function useCheckout() {
 
     form.setValue('total', totalRounded);
 
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(form.getValues()));
+    localStorage.setItem(
+      LOCAL_STORAGE_KEY,
+      JSON.stringify({
+        ...form.getValues(),
+        couponCode: '',
+      }),
+    );
   }, [form, shippingPrice, subtotal, discount]);
 
   useEffect(() => {
