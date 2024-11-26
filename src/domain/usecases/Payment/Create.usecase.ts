@@ -1,9 +1,9 @@
 import { format, getYear, parse } from 'date-fns';
-import { ChargedBTCModel } from '../../../data/model/Payment.model.';
 import { PaymentRepository } from '../../../data/repositories/Payment.repository';
 import { DefaultResultError, Result } from '../../../utils/Result';
 import { UseCase } from '../../../utils/UseCase';
 import {
+  ChargedBTC,
   ChargedPIX,
   CreatedCheckout,
   GetCheckout,
@@ -15,7 +15,7 @@ export type CreateReq = GetCheckout;
 
 export type CreateRes = Promise<
   Result<
-    CreatedCheckout | PaymentApiResponse | ChargedPIX | ChargedBTCModel,
+    CreatedCheckout | PaymentApiResponse | ChargedPIX | ChargedBTC,
     { code: 'SERIALIZATION' } | DefaultResultError
   >
 >;
@@ -87,6 +87,10 @@ export class CreatePaymentUseCaseImpl implements CreatePaymentUseCase {
 
     if ('initPoint' in result.data) {
       return Result.Success(CreatedCheckout.fromModel(result.data));
+    }
+
+    if ('checkoutLink' in result.data) {
+      return Result.Success(ChargedBTC.fromModel(result.data));
     }
 
     return Result.Success(result.data);

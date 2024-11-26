@@ -178,9 +178,9 @@ export function useCheckout() {
         return;
       }
 
-      if ('qrCodeUrl' in result.data) {
-        const qrCodeUrl = result.data.qrCodeUrl as string;
-        window.location.href = qrCodeUrl;
+      if ('checkoutLink' in result.data) {
+        const linkToRedirect = result.data.checkoutLink;
+        window.location.href = linkToRedirect;
         return;
       }
 

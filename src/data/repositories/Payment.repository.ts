@@ -102,12 +102,6 @@ export class PaymentRepositoryImpl implements PaymentRepository {
       return Result.Error({ code: 'SERIALIZATION' });
     }
 
-    if (method === 'BTC') {
-      if (!('qrCodeUrl' in result)) {
-        return Result.Error({ code: 'UNKNOWN' });
-      }
-    }
-
     return Result.Success(result);
   }
 
@@ -153,7 +147,6 @@ export class PaymentRepositoryImpl implements PaymentRepository {
     }
   }
 
-  // Atualizando a função getModelToValidate para suportar 'BTC'
   private getModelToValidate(
     method: PaymentMethod,
     paymentOption?: 'creditCard' | 'pix' | 'BTC',
