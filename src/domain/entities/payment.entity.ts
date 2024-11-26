@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import {
+  ChargedBTCModel,
   ChargedPIXModel,
   CreatedCheckoutModel,
   IdentifyBrandModel,
@@ -240,6 +241,18 @@ export class ChargedPIX {
       creation: model.calendary.creation,
       expiration: model.calendary.expiration,
     };
+
+    return entity;
+  }
+}
+
+export class ChargedBTC {
+  checkoutLink!: string;
+
+  public static fromModel(model: ChargedBTCModel): ChargedBTC {
+    const entity = new ChargedBTC();
+
+    entity.checkoutLink = model.checkoutLink;
 
     return entity;
   }
