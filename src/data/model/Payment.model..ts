@@ -105,7 +105,12 @@ export const ChargedPIXModel = z.object({
 export type ChargedPIXModel = z.infer<typeof ChargedPIXModel>;
 
 export const ChargedBTCModel = z.object({
-  qrCodeUrl: z.string().url(),
+  id: z.string(),
+  checkoutLink: z.string(),
+  metadata: z.object({
+    email: z.string().email(),
+    orderID: z.string().optional(),
+  }),
 });
 export type ChargedBTCModel = z.infer<typeof ChargedBTCModel>;
 

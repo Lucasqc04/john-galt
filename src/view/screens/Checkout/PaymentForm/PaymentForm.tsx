@@ -142,9 +142,9 @@ export function PaymentForm() {
         <h2 className="dark:text-white">
           Método de Pagamento Selecionado:{' '}
           <b className="uppercase dark:text-white">
-            {paymentOption === 'creditCard'
-              ? t('paymentForm.creditCard')
-              : 'PIX'}
+            {paymentOption === 'creditCard' && t('paymentForm.creditCard')}
+            {paymentOption === 'pix' && 'PIX'}
+            {paymentOption === 'BTC' && 'Bitcoin'}
           </b>
         </h2>
       )}
