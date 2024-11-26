@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { SiBitcoincash } from 'react-icons/si';
 import { useNavigate } from 'react-router-dom';
 import Btc from '../../assets/bitcoin.svg';
 import Brl from '../../assets/brl.svg';
+import Alfred from '../../assets/image-alfred-removebg-preview.png';
 import Usd from '../../assets/usd.svg';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import { ROUTES } from '../../routes/Routes';
@@ -43,8 +43,9 @@ export default function BuyBitcoin() {
       <NavBarBuyBitcoin />
       <div className="pt-[10%] pb-[10%] flex justify-center">
         <h1 className="text-[#F6911D] dark:text-[#F6911D] font-black text-7xl flex items-center">
-          <SiBitcoincash className="mr-2" /> ALFRED
+          ALFRED
         </h1>
+        <img src={Alfred} alt="logo-alfred" className="w-[7%]" />
       </div>
 
       <div className="flex justify-center">
