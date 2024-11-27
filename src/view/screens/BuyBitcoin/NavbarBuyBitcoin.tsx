@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { FaBars, FaMoon, FaSun, FaTimes } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
-import LogoWhite from '../../assets/logo-white.svg';
-import Logo from '../../assets/logo.svg';
+import Logo from '../../assets/logo/logo-complete-black.png';
+import LogoWhite from '../../assets/logo/logo-complete-white.png';
 import { useHeader } from '../../layout/Header/useHeader';
 import { ROUTES } from '../../routes/Routes';
 import { useCurrentLang } from '../../utils/useCurrentLang';

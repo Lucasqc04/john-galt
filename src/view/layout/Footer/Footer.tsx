@@ -3,8 +3,8 @@ import { FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 import { LanguageTexts } from '../../../domain/locales/Language';
-import LogoWhite from '../../assets/logo-white.svg';
-import Logo from '../../assets/logo.svg';
+import Logo from '../../assets/logo/logo-complete-black.png';
+import LogoWhite from '../../assets/logo/logo-complete-white.png';
 import { ROUTES } from '../../routes/Routes';
 import { useCurrentLang } from '../../utils/useCurrentLang';
 import { useFooter } from './useFooter';
@@ -32,7 +32,7 @@ export function Footer() {
               <img
                 src={theme.isDarkTheme ? LogoWhite : Logo}
                 alt="Logo"
-                className="w-24 h-22"
+                className="w-26 h-24"
               />
               <span className="sr-only">DIY LAB</span>
             </Link>

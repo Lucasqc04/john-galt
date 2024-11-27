@@ -74,6 +74,11 @@ const ProductPage = lazy(() =>
     default: module.ProductPage,
   })),
 );
+const SupportPage = lazy(() =>
+  import('../screens/support').then((module) => ({
+    default: module.Support,
+  })),
+);
 const TutorialsPage = lazy(() =>
   import('../screens/TutorialsPage').then((module) => ({
     default: module.TutorialsPage,
@@ -99,6 +104,7 @@ export function BrowserRouter() {
             <Route path={ROUTES.blog.path} element={<BlogPost />} />
             <Route path={ROUTES.cart.product.path} element={<ProductPage />} />
             <Route path={ROUTES.about.path} element={<About />} />
+            <Route path={ROUTES.Support.path} element={<SupportPage />} />
             <Route path={ROUTES.cart.path} element={<Cart />} />
             <Route path={ROUTES.tutorials.path} element={<TutorialsPage />} />
             <Route
