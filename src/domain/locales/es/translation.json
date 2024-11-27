@@ -164,6 +164,16 @@
     ],
     "signature": "Atentamente, equipo DIY Security Lab"
   },
+  "support": {
+    "sendMessage": "Envía un mensaje",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "email": "Correo electrónico",
+    "message": "Mensaje",
+    "send": "Enviar",
+    "successMessage": "¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.",
+    "errorMessage": "Ocurrió un error al enviar el mensaje. Por favor, inténtalo de nuevo más tarde."
+  },
   "footer": {
     "links": ["Acerca de", "Política de Privacidad", "Contacto"],
     "allRightsReserved": "Reservados todos los derechos."

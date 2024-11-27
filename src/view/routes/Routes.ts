@@ -43,6 +43,10 @@ export const ROUTES = {
     path: 'sobre-nos',
     call: (currentLang: string) => `/${currentLang}/sobre-nos`,
   },
+  Support: {
+    path: 'suporte',
+    call: (currentLang: string) => `/${currentLang}/suporte`,
+  },
   product: {
     call: (currentLang: string, id: string) => `/${currentLang}/produto/${id}`,
   },
