@@ -42,62 +42,60 @@ export function Products() {
   return (
     <>
       <BackgroundAnimatedProduct />
-      <section className="w-full min-h-screen flex flex-col justify-center items-center pt-24 pb-10 sm:py-10">
-        <div className="container p-4 sm:p-8 ">
-          <h2 className="text-4xl text-center font-bold dark:text-white mb-8">
-            {styleFirstWord(t(LanguageTexts.products.title))}
-          </h2>
-          <article className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-16 gap-y-4">
-            {products.map((product, idx) => (
-              <>
-                {Number(product.id) !== 10000 && (
-                  <div
-                    key={product.id}
-                    className="bg-primary-light dark:bg-slate-700 p-8 rounded-lg shadow-xl flex flex-col justify-between"
-                  >
-                    <h2 className="text-center pb-2 font-bold text-xl">
-                      {product.title}
-                    </h2>
-                    <div className="flex items-center justify-center relative">
-                      <button
-                        onClick={() => handlePrevImage(idx)}
-                        className="bg-orange-primary text-white p-2 rounded-full absolute left-0 transform -translate-x-1/2"
-                      >
-                        <FaChevronLeft />
-                      </button>
-
-                      <img
-                        src={product.images[currentImageIndexes[idx]]}
-                        alt={product.name}
-                        className="w-96 h-72 object-contain rounded-md"
-                      />
-
-                      <button
-                        onClick={() => handleNextImage(idx)}
-                        className="bg-orange-primary text-white p-2 rounded-full absolute right-0 transform translate-x-1/2"
-                      >
-                        <FaChevronRight />
-                      </button>
-                    </div>
-                    <p className="dark:text-white my-4 text-gray-700 mb-4 text-center">
-                      {product.description}
-                    </p>
-                    <Link
-                      to={ROUTES.cart.product.call(
-                        currentLang,
-                        product.name,
-                        product.id,
-                      )}
-                      className="w-full font-bold bg-orange-primary text-white text-center py-2 rounded-md hover:bg-orange-600 transition-colors"
+      <section className="w-full min-h-screen flex flex-col justify-center items-center gap-y-8 pt-24 pb-10 sm:py-10 p-4 sm:p-16">
+        <h2 className="text-4xl text-center font-bold dark:text-white">
+          {styleFirstWord(t(LanguageTexts.products.title))}
+        </h2>
+        <article className="flex items-center justify-around gap-16 gap-y-4">
+          {products.map((product, idx) => (
+            <>
+              {Number(product.id) !== 10000 && (
+                <div
+                  key={product.id}
+                  className="bg-primary-light dark:bg-slate-700 p-8 rounded-lg shadow-xl flex flex-col justify-between"
+                >
+                  <h2 className="text-center pb-2 font-bold text-xl">
+                    {product.title}
+                  </h2>
+                  <div className="flex items-center justify-center relative">
+                    <button
+                      onClick={() => handlePrevImage(idx)}
+                      className="bg-orange-primary text-white p-2 rounded-full absolute left-0 transform -translate-x-1/2"
                     >
-                      {t(LanguageTexts.products.buyNowButton)}
-                    </Link>
+                      <FaChevronLeft />
+                    </button>
+
+                    <img
+                      src={product.images[currentImageIndexes[idx]]}
+                      alt={product.name}
+                      className="w-96 h-72 object-contain rounded-md"
+                    />
+
+                    <button
+                      onClick={() => handleNextImage(idx)}
+                      className="bg-orange-primary text-white p-2 rounded-full absolute right-0 transform translate-x-1/2"
+                    >
+                      <FaChevronRight />
+                    </button>
                   </div>
-                )}
-              </>
-            ))}
-          </article>
-        </div>
+                  <p className="dark:text-white my-4 text-gray-700 mb-4 text-center">
+                    {product.description}
+                  </p>
+                  <Link
+                    to={ROUTES.cart.product.call(
+                      currentLang,
+                      product.name,
+                      product.id,
+                    )}
+                    className="w-full font-bold bg-orange-primary text-white text-center py-2 rounded-md hover:bg-orange-600 transition-colors"
+                  >
+                    {t(LanguageTexts.products.buyNowButton)}
+                  </Link>
+                </div>
+              )}
+            </>
+          ))}
+        </article>
       </section>
     </>
   );
