@@ -157,11 +157,13 @@ export function PaymentForm() {
           <input
             type="text"
             {...form.register('couponCode')}
+            disabled={form.getValues('discount') ? true : false}
             className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600"
           />
           <button
             type="button"
             onClick={applyCoupon}
+            disabled={form.getValues('discount') ? true : false}
             className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
           >
             {t('checkout.apply')}

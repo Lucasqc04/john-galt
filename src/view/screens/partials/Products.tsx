@@ -83,7 +83,11 @@ export function Products() {
                       {product.description}
                     </p>
                     <Link
-                      to={ROUTES.product.call(currentLang, product.id)}
+                      to={ROUTES.cart.product.call(
+                        currentLang,
+                        product.name,
+                        product.id,
+                      )}
                       className="w-full font-bold bg-orange-primary text-white text-center py-2 rounded-md hover:bg-orange-600 transition-colors"
                     >
                       {t(LanguageTexts.products.buyNowButton)}

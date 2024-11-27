@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Items } from '../../../domain/entities/payment.entity';
 import {
   CalculatedShipping,
@@ -26,7 +26,10 @@ export function useProductPage() {
   const { add } = useCartContext();
   const { currentLang } = useCurrentLang();
   const { products, infos } = useProducts();
-  const { id } = useParams<{ id: string }>();
+  const location = useLocation();
+
+  const queryParams = new URLSearchParams(location.search);
+  const id = queryParams.get('id');
 
   const navigate = useNavigate();
   const form = useForm<CalculateShipping>();

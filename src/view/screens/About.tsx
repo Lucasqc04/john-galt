@@ -22,7 +22,6 @@ export function About() {
     <>
       <BackgroundAnimatedProduct />
       <section className="grid grid-cols-1 md:grid-cols-12 px-8 md:px-16 min-h-screen pt-36 md:pt-0">
-        {/* Título e Imagens */}
         <article className="h-full col-span-full md:col-span-6 flex flex-col gap-y-6 items-center md:items-start justify-center px-12 md:px-0">
           <h3 className="text-center md:text-left font-bold text-lg md:text-3xl">
             {t(LanguageTexts.about.title)}
@@ -59,11 +58,10 @@ export function About() {
           </div>
         </article>
 
-        {/* Texto */}
         <article className="h-full col-span-full md:col-span-6 flex flex-col gap-y-4 items-center md:items-start justify-center py-6 md:px-4">
           <div className="w-full max-w-prose">
             {manifest.map((paragraph, idx) => (
-              <p key={idx} className="text-justify text-base md:text-lg">
+              <p key={idx} className="text-justify text-base lg:text-lg">
                 {paragraph}
               </p>
             ))}
