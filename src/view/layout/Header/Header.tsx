@@ -3,8 +3,8 @@ import { createPortal } from 'react-dom';
 import { FaBars, FaMoon, FaSun } from 'react-icons/fa';
 import { MdClose } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-import LogoWhite from '../../assets/logo-white.svg';
-import Logo from '../../assets/logo.svg';
+import Logo from '../../assets/logo/logo-complete-black.png';
+import LogoWhite from '../../assets/logo/logo-complete-white.png';
 import { ROUTES } from '../../routes/Routes';
 import { NavLinks } from './NavLinks';
 import { useHeader } from './useHeader';
@@ -15,7 +15,7 @@ export default function Header() {
   return (
     <header
       className={classNames(
-        'fixed z-50 top-0 left-0 pt-0 md:p-4 flex items-center justify-between w-full max-w-[100vw] transition-all duration-300',
+        'fixed z-50 top-0 left-0 pt-0 md:p-2 flex items-center justify-between w-full max-w-[100vw] transition-all duration-300',
         isScrolled && 'shadow-sm bg-primary-light dark:bg-primary-dark',
       )}
     >
@@ -28,7 +28,7 @@ export default function Header() {
             <img
               src={theme.isDarkTheme ? LogoWhite : Logo}
               alt="DIY LAB Logo"
-              className="w-24 h-22"
+              className="w-26 h-24"
             />
             <span className="sr-only">DIY LAB</span>
           </Link>

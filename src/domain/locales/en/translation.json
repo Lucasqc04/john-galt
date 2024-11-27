@@ -168,6 +168,16 @@
     ],
     "signature": "Sincerely, DIY Security Lab Team"
   },
+  "support": {
+    "sendMessage": "Send a message",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send",
+    "successMessage": "Message sent successfully! We will contact you soon.",
+    "errorMessage": "An error occurred while sending the message. Please try again later."
+  },
   "personForm": {
     "email": "Email",
     "firstName": "First Name",

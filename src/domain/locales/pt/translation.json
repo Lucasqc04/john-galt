@@ -168,6 +168,16 @@
     ],
     "signature": "Atenciosamente, equipe DIY Security Lab"
   },
+  "support": {
+    "sendMessage": "Envie uma mensagem",
+    "firstName": "Nome",
+    "lastName": "Sobrenome",
+    "email": "E-mail",
+    "message": "Mensagem",
+    "send": "Enviar",
+    "successMessage": "Mensagem enviada com sucesso! Entraremos em contato em breve.",
+    "errorMessage": "Ocorreu um erro ao enviar a mensagem. Por favor, tente novamente mais tarde."
+  },
   "personForm": {
     "email": "Email",
     "firstName": "Nome",
