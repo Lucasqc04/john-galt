@@ -45,6 +45,7 @@ export function useCheckout() {
       JSON.stringify({
         ...form.getValues(),
         couponCode: '',
+        discount: 0,
       }),
     );
   }, [form, shippingPrice, subtotal, discount]);
