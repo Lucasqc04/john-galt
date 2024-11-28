@@ -19,7 +19,6 @@ export function ProductPage() {
   const { width } = useWindowSize();
 
   const [mainImage, setMainImage] = useState(product?.images[0]);
-
   const [currentIndex, setCurrentIndex] = useState(0);
 
   if (!product) {
@@ -171,6 +170,52 @@ export function ProductPage() {
                   : t(LanguageTexts.shipping.calculateButton)}
               </button>
             </div>
+            <div className="pt-6">
+              {shipping.options.length > 0 ? (
+                <div>
+                  <h3 className="font-bold text-lg dark:text-gray-200">
+                    Opções de Frete:
+                  </h3>
+                  {shipping.options.map((option, index) => (
+                    <div
+                      key={index}
+                      className={classNames(
+                        'w-full flex items-center justify-between rounded-md border border-solid border-gray-400 px-4 py-3',
+                        'transition-colors duration-300 ease-in-out hover:bg-orange-500 dark:bg-gray-100 dark:border-black',
+                        'md:w-3/4',
+                        'lg:w-2/3', // Responsivo
+                      )}
+                    >
+                      <img
+                        src={option.company.picture}
+                        alt={`Logo da empresa ${option.name}`}
+                        className="w-10 h-10 object-contain"
+                      />
+                      <div className="w-full flex flex-col items-start justify-center text-left">
+                        <h4 className="text-sm font-semibold text-black">
+                          {option.name}
+                        </h4>
+
+                        <h5 className="text-sm font-semibold text-black">
+                          R${' '}
+                          {parseFloat(option.price).toLocaleString('pt-BR', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })}
+                        </h5>
+
+                        <span className="text-sm text-black">
+                          {option.deliveryTime} {t('checkout.days')}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p>Não foi possível calcular as opções de frete.</p>
+              )}
+            </div>
+
             <div className="flex items-center bg-[#D9D9D9] h-12 px-2 py-5 rounded-md gap-x-1 dark:bg-[#242F3F] dark:text-white">
               <label htmlFor="shippingCalculate" className="uppercase text-sm">
                 Quantidade:
@@ -184,6 +229,7 @@ export function ProductPage() {
                 min={1}
               />
             </div>
+
             <div className="pt-4 flex gap-x-4 justify-between sm:flex-col sm:h-32 sm:gap-y-2">
               <button
                 onClick={cart.buy}

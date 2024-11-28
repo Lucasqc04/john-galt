@@ -1,6 +1,6 @@
 {
   "header": {
-    "links": ["Products", "About Us", "Blogs", "Tutorials"],
+    "links": ["Products", "About Us", "Blogs", "Tutorials", "Support"],
     "contact_sales": "Contact sales"
   },
   "hero": {
