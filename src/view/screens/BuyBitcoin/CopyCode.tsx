@@ -5,25 +5,18 @@ import { NavBarBuyBitcoin } from './NavbarBuyBitcoin';
 export default function CopyCode() {
   const [code, setCode] = useState('');
 
-  const fetchCodeFromAPI = async () => {
-    try {
-      const fakeApiCode = '1234-5678-ABCD';
-      setCode(fakeApiCode);
-    } catch (error) {
-      console.error('Erro ao buscar o código da API:', error);
-      alert('Falha ao obter o código. Tente novamente.');
-    }
-  };
-
   useEffect(() => {
-    fetchCodeFromAPI();
+    const storedOrderId = localStorage.getItem('orderId');
+    if (storedOrderId) {
+      setCode(storedOrderId);
+    }
   }, []);
 
   const copyToClipboard = () => {
     if (code) {
       navigator.clipboard.writeText(code);
       alert(
-        'Código copiado para a área de transferência! Cole esse codigo na conversa',
+        'Código copiado para a área de transferência! Cole esse código na conversa',
       );
     } else {
       alert('Nenhum código disponível para copiar.');
