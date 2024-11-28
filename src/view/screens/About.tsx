@@ -57,9 +57,8 @@ export function About() {
             </Swiper>
           </div>
         </article>
-
-        <article className="h-full col-span-full md:col-span-6 flex flex-col gap-y-4 items-center md:items-start justify-center py-6 md:px-4">
-          <div className="w-full max-w-prose">
+        <article className="h-full col-span-full md:col-span-6 flex flex-col gap-y-4 items-center md:items-start justify-center py-6 md:px-6">
+          <div className="w-full max-w-4xl">
             {manifest.map((paragraph, idx) => (
               <p key={idx} className="text-justify text-base lg:text-lg">
                 {paragraph}
