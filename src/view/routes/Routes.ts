@@ -66,9 +66,9 @@ export const ROUTES = {
       call: (currentLang: string) => `/${currentLang}/BTCPayment`,
     },
     product: {
-      path: 'produto/:id',
-      call: (currentLang: string, id: string = '1') =>
-        `/${currentLang}/produto/${id}`,
+      path: 'produto/:name',
+      call: (currentLang: string, name: string, id: string = '1') =>
+        `/${currentLang}/produto/${name}?id=${id}`,
     },
     products: {
       path: 'produtos',
