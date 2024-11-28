@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
@@ -13,6 +13,12 @@ export function Support() {
   const currentTheme = localStorage.getItem('theme');
   const { theme } = useHeader();
 
+  const [isLoading, setIsLoading] = useState(false); // Estado para o loading
+  const [responseMessage, setResponseMessage] = useState<string | null>(null); // Estado para a mensagem de resposta
+  const [responseType, setResponseType] = useState<'success' | 'error' | null>(
+    null,
+  ); // Estado para o tipo da mensagem
+
   useEffect(() => {
     document.documentElement.classList.toggle(
       ThemeMode.dark,
@@ -20,8 +26,10 @@ export function Support() {
     );
   }, [currentTheme]);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setIsLoading(true);
+    setResponseMessage(null); // Limpa mensagens anteriores
     const formData = new FormData(event.currentTarget);
     const data = {
       firstName: formData.get('firstName'),
@@ -30,19 +38,30 @@ export function Support() {
       message: formData.get('message'),
     };
 
-    fetch('/api/support', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then(() => {
-        alert(t('support.successMessage'));
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-        alert(t('support.errorMessage'));
+    try {
+      const response = await fetch(import.meta.env.VITE_API_URL + '/support', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
       });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setResponseType('success');
+        setResponseMessage(t('support.successMessage'));
+      } else {
+        console.error('Error:', result.error);
+        setResponseType('error');
+        setResponseMessage(t('support.errorMessage'));
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setResponseType('error');
+      setResponseMessage(t('support.errorMessage'));
+    } finally {
+      setIsLoading(false); // Finaliza o loading
+    }
   };
 
   return (
@@ -64,7 +83,7 @@ export function Support() {
               {/* Redes Sociais */}
               <div className="flex flex-col gap-6 w-full max-w-[368px]">
                 <a
-                  href="https://api.whatsapp.com/send?phone=+5511919050416&text=Ol%C3%A1,%20Tudo%20bem?%0A%0AEu%20gostaria%20de%20ajuda%20do%20suporte%20da%20DIY%20SECURITY%20LAB..."
+                  href="https://chat.whatsapp.com/HtFSC2xozFhLEFxaDf5Psx"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 p-4 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-[24px] shadow-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition"
@@ -112,6 +131,18 @@ export function Support() {
                   {t('support.sendMessage')}
                 </h3>
 
+                {responseMessage && (
+                  <p
+                    className={`text-center font-medium ${
+                      responseType === 'success'
+                        ? 'text-green-600'
+                        : 'text-red-600'
+                    }`}
+                  >
+                    {responseMessage}
+                  </p>
+                )}
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                   <input
                     type="text"
@@ -144,9 +175,14 @@ export function Support() {
 
                 <button
                   type="submit"
-                  className="w-full py-3 rounded-lg font-bold transition bg-black hover:bg-gray-800 text-white dark:bg-gray-900 dark:hover:bg-blue-800"
+                  className="w-full py-3 rounded-lg font-bold transition bg-black hover:bg-gray-800 text-white dark:bg-gray-900 dark:hover:bg-blue-800 flex items-center justify-center"
+                  disabled={isLoading}
                 >
-                  {t('support.send')}
+                  {isLoading ? (
+                    <span className="loader border-t-transparent border-4 border-white rounded-full w-6 h-6 animate-spin"></span>
+                  ) : (
+                    t('support.send')
+                  )}
                 </button>
               </form>
             </article>

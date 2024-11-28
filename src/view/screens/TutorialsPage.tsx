@@ -39,7 +39,7 @@ export function TutorialsPage() {
     {
       id: 4,
       title: t('tutorials.items.4.title'),
-      file: '/tutorial/4° TUTORIAL - COMO PERFURAR A PLACA METÁLICA.pdf',
+      file: '/tutorial/4° TUTORIAL - COMO PERFURAR A PLACA METALICA.pdf',
       image: image4,
       description: t('tutorials.items.4.description'),
     },
