@@ -201,6 +201,15 @@ export function NavLinks({
               {t(LanguageTexts.header.links[3])}
             </button>
 
+            <button
+              onClick={() =>
+                handleOnLink(ROUTES.Support.call(currentLang), LinkCallBack)
+              }
+              className="text-2xl lg:text-xl font-semibold leading-6 text-black dark:text-white hover:text-[#F6911D]"
+            >
+              {t(LanguageTexts.header.links[4])}
+            </button>
+
             <LanguageSwitcher className="text-xl flex items-center justify-center gap-x-2 lg:text-xl font-semibold leading-6 hover:text-[#F6911D]" />
 
             <button
