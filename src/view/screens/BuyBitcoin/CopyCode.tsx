@@ -55,7 +55,7 @@ export default function CopyCode() {
           <button
             onClick={() =>
               window.open(
-                'https://api.whatsapp.com/send?phone=+5511919050416&text=Ol%C3%A1,%20Tudo%20bem?%0A%0AEu%20quero%20fazer%20uma%20transa%C3%A7%C3%A3o%20P2P%20com%20Bitcoin...',
+                'https://web.telegram.org/k/#@diyseclab_alfred_bot',
                 '_blank',
               )
             }

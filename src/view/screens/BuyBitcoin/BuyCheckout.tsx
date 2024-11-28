@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import { CiCreditCard1 } from 'react-icons/ci';
 import { FaBarcode, FaPix } from 'react-icons/fa6';
-import { useNavigate } from 'react-router-dom';
-// import Liquid from '../../assets/lbtc.svg';
-import Lightning from '../../assets/lightning.svg';
-// import Onchain from '../../assets/onchain.svg';
 import { SiBitcoincash } from 'react-icons/si';
+import { useNavigate } from 'react-router-dom';
+import Lightning from '../../assets/lightning.svg';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import { ROUTES } from '../../routes/Routes';
 import { useCurrentLang } from '../../utils/useCurrentLang';
@@ -34,18 +32,12 @@ export default function BuyCheckout() {
     setIsDropdownOpenMethod((prevState) => !prevState);
   };
 
-  const selectPaymentMethod = (
-    method: 'PIX' | 'Cartão de Crédito' | 'Boleto Bancário',
-  ) => {
+  const selectPaymentMethod = (method: 'PIX') => {
     setPaymentMethod(method);
     setIsDropdownOpenMethod(false);
   };
 
-  const networks = [
-    { name: 'Lightning', icon: Lightning },
-    // { name: 'Onchain', icon: Onchain },
-    // { name: 'Liquid', icon: Liquid },
-  ];
+  const networks = [{ name: 'Lightning', icon: Lightning }];
 
   const handleOnLink = (path: string, callback?: () => void) => {
     if (callback) {
@@ -141,20 +133,6 @@ export default function BuyCheckout() {
                     >
                       PIX
                       <FaPix />
-                    </li>
-                    <li
-                      onClick={() => selectPaymentMethod('Cartão de Crédito')}
-                      className="flex items-center px-3 py-2 hover:bg-gray-100 cursor-pointer"
-                    >
-                      Cartão de Crédito
-                      <CiCreditCard1 />
-                    </li>
-                    <li
-                      onClick={() => selectPaymentMethod('Boleto Bancário')}
-                      className="flex items-center px-3 py-2 hover:bg-gray-100 cursor-pointer"
-                    >
-                      Boleto Bancário
-                      <FaBarcode />
                     </li>
                   </ul>
                 </div>

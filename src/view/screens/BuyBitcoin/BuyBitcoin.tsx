@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Btc from '../../assets/bitcoin.svg';
 import Brl from '../../assets/brl.svg';
 import Alfred from '../../assets/image-alfred-removebg-preview.png';
-import Usd from '../../assets/usd.svg';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import { ROUTES } from '../../routes/Routes';
 import { useCurrentLang } from '../../utils/useCurrentLang';
@@ -12,24 +11,49 @@ import { NavBarBuyBitcoin } from './NavbarBuyBitcoin';
 export default function BuyBitcoin() {
   const { currentLang } = useCurrentLang();
   const navigate = useNavigate();
-  // const [action, setAction] = useState<'Comprar' | 'Vender'>('Comprar');
-  const [currency, setCurrency] = useState<'BRL' | 'USD' | 'BTC'>('BRL');
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  // const toggleAction = () => {
-  //   setAction((prevAction) =>
-  //     prevAction === 'Comprar' ? 'Vender' : 'Comprar',
-  //   );
-  // };
+  const [brlAmount, setBrlAmount] = useState('');
+  const [btcAmount, setBtcAmount] = useState('');
+  const [btcRate, setBtcRate] = useState(0);
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen((prevState) => !prevState);
+  // Fetch Bitcoin rate from CoinGecko
+  useEffect(() => {
+    const fetchBitcoinRate = async () => {
+      try {
+        const response = await fetch(
+          'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=brl',
+        );
+        const data = await response.json();
+        setBtcRate(data.bitcoin.brl);
+      } catch (error) {
+        console.error('Error fetching Bitcoin rate:', error);
+      }
+    };
+
+    fetchBitcoinRate();
+  }, []);
+
+  // Format value in BRL
+  const formatBrl = (value: string): string => {
+    const numericValue = value.replace(/\D/g, ''); // Remove non-numeric characters
+    const formattedValue = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    }).format(parseFloat(numericValue) / 100);
+    return numericValue ? formattedValue : '';
   };
 
-  const selectCurrency = (currencyCode: 'BRL' | 'USD' | 'BTC') => {
-    setCurrency(currencyCode);
-    setIsDropdownOpen(false);
+  const handleBrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const formattedValue = formatBrl(value);
+    setBrlAmount(formattedValue);
+
+    if (btcRate > 0) {
+      const numericValue = parseFloat(value.replace(/\D/g, '')) / 100;
+      setBtcAmount((numericValue / btcRate).toFixed(8));
+    }
   };
+
   const handleOnLink = (path: string, callback?: () => void) => {
     if (callback) {
       callback();
@@ -52,19 +76,24 @@ export default function BuyBitcoin() {
         <div>
           <div className="flex justify-center items-center space-x-4">
             <div className="relative">
-              {/* <button
-                onClick={toggleAction}
-                className={`font-bold absolute left-2 top-1/2 transform -translate-y-1/2 px-4 py-2 rounded-3xl text-black dark:text-white ${
-                  action === 'Comprar' ? 'bg-green-500' : 'bg-red-500'
-                }`}
-              >
-                {action}
-              </button> */}
               <input
-                id="1"
-                type="text"
-                placeholder="0000"
-                className="border pl-28 pr-4 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700"
+                value={brlAmount}
+                onChange={handleBrlChange}
+                placeholder="Digite o valor em BRL"
+                className="border pl-20 pr-20  py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 text-center no-arrows"
+              />
+              <button className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white px-4 rounded-full">
+                <img src={Brl} alt="BRL" className="w-8 h-8" />
+              </button>
+            </div>
+          </div>
+          <div className="flex justify-center items-center pt-4">
+            <div className="relative">
+              <input
+                value={btcAmount}
+                readOnly
+                placeholder="Valor em BTC"
+                className="border pl-20 pr-20  py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 text-center no-arrows"
               />
               <button className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white px-4 rounded-full">
                 <img src={Btc} alt="Bitcoin" className="w-8 h-8" />
@@ -72,50 +101,16 @@ export default function BuyBitcoin() {
             </div>
           </div>
           <div className="flex justify-center items-center pt-4">
-            <div className="relative">
-              <input
-                id="2"
-                type="text"
-                placeholder="0000"
-                className="border pl-28 pr-4 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700"
-              />
-              <button
-                onClick={toggleDropdown}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white px-4 rounded-full"
-              >
-                {currency === 'BRL' ? (
-                  <img src={Brl} alt="BRL" className="w-8 h-8" />
-                ) : currency === 'USD' ? (
-                  <img src={Usd} alt="USD" className="w-8 h-8" />
-                ) : (
-                  <img src={Btc} alt="BTC" className="w-8 h-8" />
-                )}
-              </button>
-              {isDropdownOpen && (
-                <div className="absolute right-2 top-full mt-2 w-24 bg-white border border-gray-300 rounded-lg shadow-lg">
-                  <ul>
-                    <li
-                      onClick={() => selectCurrency('BRL')}
-                      className="flex items-center px-3 py-2 hover:bg-gray-100 cursor-pointer"
-                    >
-                      BRL
-                      <img src={Brl} alt="BRL" className="w-8 h-8 ml-1" />
-                    </li>
-                    {/* <li
-                      onClick={() => selectCurrency('USD')}
-                      className="flex items-center px-3 py-2 hover:bg-gray-100 cursor-pointer"
-                    >
-                      USD
-                      <img src={Usd} alt="USD" className="w-8 h-8 ml-1" />
-                    </li> */}
-                  </ul>
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="flex justify-center items-center pt-4">
             <button
-              onClick={() => handleOnLink(ROUTES.buyCheckout.call(currentLang))}
+              onClick={() => {
+                const numericValue =
+                  parseFloat(brlAmount.replace(/\D/g, '')) / 100;
+                if (numericValue >= 500) {
+                  handleOnLink(ROUTES.buyCheckout.call(currentLang));
+                } else {
+                  alert('O valor deve ser maior que R$500 para prosseguir.');
+                }
+              }}
               type="button"
               className="w-[100%] h-12 bg-[#F6911D] text-black dark:text-white rounded-3xl font-bold"
             >
