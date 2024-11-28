@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DIY Security Lab | Proteção offline de Bitcoin</title>
 
-    <!-- Favicon em SVG (preferencial para navegadores modernos) -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Favicon em SVG, a ser alternado dinamicamente -->
+    <link
+      id="favicon"
+      rel="icon"
+      type="image/svg+xml"
+      href="/favicon-black.svg"
+    />
 
-    <!-- Favicon em ICO (fallback universal para navegadores antigos) -->
+    <!-- Outros favicons como fallback -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-
-    <!-- Favicon em PNG (fallback para navegadores que não suportam SVG) -->
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
     <link
       rel="icon"
@@ -51,7 +54,7 @@
     <meta name="title" content="DIY SEC LAB | Proteção offline de Bitcoin" />
     <meta
       name="description"
-      content="Descubra como proteger seu Bitcoin offline com a DIY LAB, líder em segurança Web3. Oferecemos soluções inovadoras de autocustódia e privacidade, eliminando intermediários e empoderando usuários. Acesse nossos produtos e invista com confiança no mundo cripto."
+      content="Descubra como proteger seu Bitcoin offline..."
     />
 
     <!-- Open Graph / Facebook -->
@@ -63,7 +66,7 @@
     />
     <meta
       property="og:description"
-      content="Descubra como proteger seu Bitcoin offline com a DIY LAB, líder em segurança Web3. Oferecemos soluções inovadoras de autocustódia e privacidade, eliminando intermediários e empoderando usuários. Acesse nossos produtos e invista com confiança no mundo cripto."
+      content="Descubra como proteger seu Bitcoin offline..."
     />
     <meta property="og:image" content="https://i.imgur.com/iNBjYEC.png" />
 
@@ -76,20 +79,36 @@
     />
     <meta
       property="twitter:description"
-      content="Descubra como proteger seu Bitcoin offline com a DIY LAB, líder em segurança Web3. Oferecemos soluções inovadoras de autocustódia e privacidade, eliminando intermediários e empoderando usuários. Acesse nossos produtos e invista com confiança no mundo cripto."
+      content="Descubra como proteger seu Bitcoin offline..."
     />
     <meta property="twitter:image" content="https://i.imgur.com/iNBjYEC.png" />
 
     <!-- Meta Keywords -->
-    <meta
-      name="keywords"
-      content="Carteira de Bitcoin,KRUX,DIY SEC LAB,Carteira Metálica de Bitcoin,Hardware,Wallet,Cold Wallet,Bitkit,autocustódia,entropia,amnésica,bip39,offline,Bitcoin,Segurança,Liberal,Anarco,Alta Infinita,Stackbit 1248,Tiny Seed,Placa Metalica Bitcoin,SeedKit,Tudo o que você precisa em um BitKit,Carteira de BitcoinKRUX,DIY SEC LAB,Hardware Wallet,Cold Wallet,Bitkit,Proteção Offline de Bitcoin,Autocustódia,Melhor Carteira de Bitcoin,Como guardar meus Bitcoins,SegWit,Transação Offline de Bitcoin,Como deixa o Bitcoin irrastreável,Bitcoin Wallet,Carteira Fria de Criptomoedas,Hard Wallet,Wallet,Bitcoin,diyseclab,DIYSECLAB, DIY Security LAB, bitkit, bitmaster, seedkit, bit kit, seed kit, bit master, carteira de autocustódia"
-    />
+    <meta name="keywords" content="Carteira de Bitcoin,KRUX,DIY SEC LAB..." />
     <meta name="robots" content="index, follow" />
   </head>
 
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <script>
+      function updateFavicon() {
+        const favicon = document.getElementById('favicon');
+        const darkMode = window.matchMedia(
+          '(prefers-color-scheme: dark)',
+        ).matches;
+        favicon.setAttribute(
+          'href',
+          darkMode ? '/favicon-white.svg' : '/favicon-black.svg',
+        );
+      }
+
+      updateFavicon();
+
+      window
+        .matchMedia('(prefers-color-scheme: dark)')
+        .addEventListener('change', updateFavicon);
+    </script>
   </body>
 </html>
