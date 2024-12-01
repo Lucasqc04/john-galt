@@ -5,25 +5,18 @@ import { NavBarBuyBitcoin } from './NavbarBuyBitcoin';
 export default function CopyCode() {
   const [code, setCode] = useState('');
 
-  const fetchCodeFromAPI = async () => {
-    try {
-      const fakeApiCode = '1234-5678-ABCD';
-      setCode(fakeApiCode);
-    } catch (error) {
-      console.error('Erro ao buscar o código da API:', error);
-      alert('Falha ao obter o código. Tente novamente.');
-    }
-  };
-
   useEffect(() => {
-    fetchCodeFromAPI();
+    const storedOrderId = localStorage.getItem('orderId');
+    if (storedOrderId) {
+      setCode(storedOrderId);
+    }
   }, []);
 
   const copyToClipboard = () => {
     if (code) {
       navigator.clipboard.writeText(code);
       alert(
-        'Código copiado para a área de transferência! Cole esse codigo na conversa',
+        'Código copiado para a área de transferência! Cole esse código na conversa',
       );
     } else {
       alert('Nenhum código disponível para copiar.');
@@ -54,10 +47,7 @@ export default function CopyCode() {
         <div className="flex justify-center mt-6 w-full px-4 sm:w-auto">
           <button
             onClick={() =>
-              window.open(
-                'https://api.whatsapp.com/send?phone=+5511919050416&text=Ol%C3%A1,%20Tudo%20bem?%0A%0AEu%20quero%20fazer%20uma%20transa%C3%A7%C3%A3o%20P2P%20com%20Bitcoin...',
-                '_blank',
-              )
+              window.open('https://t.me/diyseclab_alfred_bot', '_blank')
             }
             className="w-full sm:w-48 lg:w-56 h-12 bg-[#F6911D] text-black dark:text-white rounded-3xl font-bold hover:bg-orange-400"
           >
