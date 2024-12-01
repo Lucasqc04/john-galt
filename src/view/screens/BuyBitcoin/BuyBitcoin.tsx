@@ -99,24 +99,31 @@ export default function BuyBitcoinAndCheckout() {
   };
 
   const networks = [{ name: 'Lightning', icon: Lightning }];
+  String(import.meta.env.VITE_NODE_ENV);
 
   const handleFinalizarCompra = async () => {
+    // Converte os valores para números
+    const amountBrl = parseFloat(brlAmount.replace(/\D/g, '')) / 100; // Remove caracteres não numéricos
     const amountBtc = parseFloat(btcAmount);
 
+    // Prepara os dados para envio
     const data = {
-      amountBtc,
       paymentMethod,
-      network: 'lightning',
+      network: 'lightning', // Ajuste o valor conforme necessário
+      amountBrl, // Valor em BRL
+      amountBtc, // Valor em BTC
     };
 
     try {
-      // Enviando dados para a API com axios
+      // Faz a requisição para a API
       const response = await axios.post(
-        'https://automatic-halibut-rj9w96r756wcp6p9-3000.app.github.dev/orders/create-order',
+        `${import.meta.env.VITE_API_URL}/orders/create-order`,
         data,
       );
 
-      // Salva o ID no localStorage
+      console.log(response);
+
+      // Armazena o ID do pedido e redireciona
       const orderId = response.data.order.id;
       localStorage.setItem('orderId', orderId);
 

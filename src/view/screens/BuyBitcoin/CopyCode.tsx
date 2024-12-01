@@ -47,10 +47,7 @@ export default function CopyCode() {
         <div className="flex justify-center mt-6 w-full px-4 sm:w-auto">
           <button
             onClick={() =>
-              window.open(
-                'https://web.telegram.org/k/#@diyseclab_alfred_bot',
-                '_blank',
-              )
+              window.open('https://t.me/diyseclab_alfred_bot', '_blank')
             }
             className="w-full sm:w-48 lg:w-56 h-12 bg-[#F6911D] text-black dark:text-white rounded-3xl font-bold hover:bg-orange-400"
           >
