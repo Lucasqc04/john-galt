@@ -1,25 +1,32 @@
 import axios from 'axios';
 import { QRCodeSVG } from 'qrcode.react'; // Importa a biblioteca qrcode.react
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { CiCreditCard1 } from 'react-icons/ci';
 import { FaBarcode, FaPix } from 'react-icons/fa6';
 import { SiBitcoincash } from 'react-icons/si';
+import { useNavigate } from 'react-router-dom';
 import Lightning from '../../assets/lightning.svg';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
+import { ROUTES } from '../../routes/Routes';
+import { useCurrentLang } from '../../utils/useCurrentLang';
 import { NavBarBuyBitcoin } from './NavbarBuyBitcoin';
 
 export default function BuyCheckout() {
   const [network, setNetwork] = useState<string>('Rede do BTC');
+  const [coldWallet, setColdWallet] = useState<string>('');
+  const [transactionNumber, setTransactionNumber] = useState<string>('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpenMethod, setIsDropdownOpenMethod] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<
     'PIX' | 'Cartão de Crédito' | 'Boleto Bancário'
   >('PIX');
-  const [pixKey, setPixKey] = useState<string | null>(null); // Estado para armazenar a chave PIX
-  const [isLoading, setIsLoading] = useState(false); // Estado de loading
+  const [pixKey, setPixKey] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [brlAmount, setBrlAmount] = useState('');
   const [btcAmount, setBtcAmount] = useState('');
-  const [, setIsWaitingForPayment] = useState(false); // Estado para monitorar o pagamento
+  const [, setIsWaitingForPayment] = useState(false);
+  const navigate = useNavigate();
+  const { currentLang } = useCurrentLang();
 
   useEffect(() => {
     const storedBrl = localStorage.getItem('brlAmount');
@@ -34,6 +41,12 @@ export default function BuyCheckout() {
     setIsDropdownOpen((prevState) => !prevState);
   };
 
+  const handlesColdWallet = (event: ChangeEvent<HTMLInputElement>) => {
+    setColdWallet(event.target.value);
+  };
+  const handlesTransactionNumbe = (event: ChangeEvent<HTMLInputElement>) => {
+    setTransactionNumber(event.target.value);
+  };
   const selectNetwork = (networkName: string) => {
     setNetwork(networkName);
     setIsDropdownOpen(false);
@@ -61,16 +74,16 @@ export default function BuyCheckout() {
           amountBtc: parseFloat(btcAmount),
           paymentMethod,
           network: network.toLowerCase(),
+          coldWallet,
+          transactionNumber,
         },
       );
 
-      // Captura a chave PIX retornada
       const pixKey = response.data.order.pixKey;
       setPixKey(pixKey);
 
       setIsLoading(false);
 
-      // Após gerar a chave PIX, realiza a verificação do pagamento uma única vez
       verifyPaymentStatus(response.data.order.id);
     } catch (error) {
       console.error('Erro ao processar pagamento:', error);
@@ -101,8 +114,10 @@ export default function BuyCheckout() {
 
       if (response.data === 'confirmed') {
         alert('Pagamento confirmado!');
+        navigate(ROUTES.paymentStatus.success.call(currentLang));
       } else {
         alert('Pagamento ainda não confirmado. Tente novamente.');
+        navigate(ROUTES.paymentStatus.failure.call(currentLang));
       }
     } catch (error) {
       console.error('Erro ao verificar o status do pagamento:', error);
@@ -123,14 +138,15 @@ export default function BuyCheckout() {
       </div>
       <div className="flex justify-center">
         <div>
-          <p className="text-lg text-center">
-            Valor: {brlAmount} BRL / {btcAmount} BTC
+          <p className="text-xl text-center text-black dark:text-white">
+            Valor: {brlAmount} BRL
+            <br /> Valor: {btcAmount} BTC
           </p>
 
           {/* Se a chave PIX foi gerada, mostramos o QR code e o botão para copiar a chave PIX */}
           {pixKey ? (
             <div className="flex flex-col items-center pt-4">
-              <p className="text-lg mb-4">
+              <p className="text-xl text-center text-black dark:text-white mb-4">
                 Escaneie o QR Code ou copie a chave PIX abaixo:
               </p>
 
@@ -141,7 +157,7 @@ export default function BuyCheckout() {
                 value={pixKey}
                 readOnly
                 className="border px-4 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 w-full mt-4"
-                rows={4}
+                rows={6}
               />
 
               <button
@@ -234,6 +250,26 @@ export default function BuyCheckout() {
                       </ul>
                     </div>
                   )}
+                </div>
+              </div>
+              <div className="flex justify-center items-center pt-4">
+                <div className="relative">
+                  <input
+                    value={coldWallet}
+                    onChange={handlesColdWallet}
+                    placeholder="Endereço de Bitcoin"
+                    className="border pl-28 pr-6 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 cursor-pointer"
+                  />
+                </div>
+              </div>
+              <div className="flex justify-center items-center pt-4">
+                <div className="relative">
+                  <input
+                    value={transactionNumber}
+                    onChange={handlesTransactionNumbe}
+                    placeholder="Telefone"
+                    className="border pl-28 pr-4 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 cursor-pointer"
+                  />
                 </div>
               </div>
 
