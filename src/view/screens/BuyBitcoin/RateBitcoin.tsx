@@ -59,7 +59,7 @@ export function Fees() {
             privacidade e anonimato.
           </p>
           <p className="text-black dark:text-white mt-4">
-            Comece a negociar agora a partir de <strong>500 BRL</strong>.
+            Comece a negociar agora a partir de <strong>700 BRL</strong>.
           </p>
         </section>
       </div>
