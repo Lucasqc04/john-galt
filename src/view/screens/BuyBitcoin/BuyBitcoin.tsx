@@ -1,10 +1,8 @@
-import axios from 'axios'; // Importando o axios
 import { useEffect, useState } from 'react';
 import { SiBitcoincash } from 'react-icons/si';
 import { useNavigate } from 'react-router-dom';
 import Btc from '../../assets/bitcoin.svg';
 import Brl from '../../assets/brl.svg';
-import Lightning from '../../assets/lightning.svg';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import { ROUTES } from '../../routes/Routes';
 import { useCurrentLang } from '../../utils/useCurrentLang';
@@ -13,25 +11,10 @@ import { NavBarBuyBitcoin } from './NavbarBuyBitcoin';
 export default function BuyBitcoinAndCheckout() {
   const navigate = useNavigate();
   const { currentLang } = useCurrentLang();
-  const handleOnLink = (path: string, callback?: () => void) => {
-    if (callback) {
-      callback();
-    }
-    navigate(path);
-  };
-
-  const [currentStep, setCurrentStep] = useState<'buyBitcoin' | 'buyCheckout'>(
-    'buyBitcoin',
-  );
 
   const [brlAmount, setBrlAmount] = useState('');
   const [btcAmount, setBtcAmount] = useState('');
   const [btcRate, setBtcRate] = useState(0);
-
-  const [network, setNetwork] = useState<string>('Rede do BTC');
-  const [paymentMethod, setPaymentMethod] = useState<
-    'PIX' | 'Cartão de Crédito' | 'Boleto Bancário'
-  >('PIX');
 
   useEffect(() => {
     const fetchBitcoinRate = async () => {
@@ -46,10 +29,8 @@ export default function BuyBitcoinAndCheckout() {
       }
     };
 
-    if (currentStep === 'buyBitcoin') {
-      fetchBitcoinRate();
-    }
-  }, [currentStep]);
+    fetchBitcoinRate();
+  }, []);
 
   const formatBrl = (value: string): string => {
     const numericValue = value.replace(/\D/g, '');
@@ -74,66 +55,11 @@ export default function BuyBitcoinAndCheckout() {
   const handleNextStep = () => {
     const numericValue = parseFloat(brlAmount.replace(/\D/g, '')) / 100;
     if (numericValue >= 500) {
-      setCurrentStep('buyCheckout');
+      localStorage.setItem('brlAmount', brlAmount);
+      localStorage.setItem('btcAmount', btcAmount);
+      navigate(ROUTES.buyCheckout.call(currentLang));
     } else {
       alert('O valor deve ser maior que R$500 para prosseguir.');
-    }
-  };
-
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
-
-  const selectNetwork = (networkName: string) => {
-    setNetwork(networkName);
-    setIsDropdownOpen(false);
-  };
-
-  const [isDropdownOpenMethod, setIsDropdownOpenMethod] = useState(false);
-  const toggleDropdownMethod = () => setIsDropdownOpenMethod((prev) => !prev);
-
-  const selectPaymentMethod = (
-    method: 'PIX' | 'Cartão de Crédito' | 'Boleto Bancário',
-  ) => {
-    setPaymentMethod(method);
-    setIsDropdownOpenMethod(false);
-  };
-
-  const networks = [{ name: 'Lightning', icon: Lightning }];
-  String(import.meta.env.VITE_NODE_ENV);
-
-  const handleFinalizarCompra = async () => {
-    // Converte os valores para números
-    const amountBrl = parseFloat(brlAmount.replace(/\D/g, '')) / 100; // Remove caracteres não numéricos
-    const amountBtc = parseFloat(btcAmount);
-
-    // Prepara os dados para envio
-    const data = {
-      paymentMethod,
-      network: 'lightning', // Ajuste o valor conforme necessário
-      amountBrl, // Valor em BRL
-      amountBtc, // Valor em BTC
-    };
-
-    try {
-      // Faz a requisição para a API
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/orders/create-order`,
-        data,
-      );
-
-      console.log(response);
-
-      // Armazena o ID do pedido e redireciona
-      const orderId = response.data.order.id;
-      localStorage.setItem('orderId', orderId);
-
-      alert('Compra finalizada com sucesso!');
-      console.log(response.data);
-
-      handleOnLink(ROUTES.copyCode.call(currentLang));
-    } catch (error) {
-      console.error('Erro ao finalizar a compra:', error);
-      alert('Ocorreu um erro ao finalizar a compra.');
     }
   };
 
@@ -147,136 +73,45 @@ export default function BuyBitcoinAndCheckout() {
         </h1>
       </div>
 
-      {currentStep === 'buyBitcoin' && (
-        <div className="flex justify-center">
-          <div>
-            <div className="flex justify-center items-center space-x-4">
-              <div className="relative">
-                <input
-                  value={brlAmount}
-                  onChange={handleBrlChange}
-                  placeholder="Digite o valor em BRL"
-                  className="border pl-20 pr-20 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 text-center no-arrows"
-                />
-                <button className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white px-4 rounded-full">
-                  <img src={Brl} alt="BRL" className="w-8 h-8" />
-                </button>
-              </div>
-            </div>
-            <div className="flex justify-center items-center pt-4">
-              <div className="relative">
-                <input
-                  value={btcAmount}
-                  readOnly
-                  placeholder="Valor em BTC"
-                  className="border pl-20 pr-20 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 text-center no-arrows"
-                />
-                <button className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white px-4 rounded-full">
-                  <img src={Btc} alt="Bitcoin" className="w-8 h-8" />
-                </button>
-              </div>
-            </div>
-            <div className="flex justify-center items-center pt-4">
-              <button
-                onClick={handleNextStep}
-                type="button"
-                className="w-full h-12 bg-[#F6911D] text-black dark:text-white rounded-3xl font-bold"
-              >
-                Prosseguir
+      <div className="flex justify-center">
+        <div>
+          <div className="flex justify-center items-center space-x-4">
+            <div className="relative">
+              <input
+                value={brlAmount}
+                onChange={handleBrlChange}
+                placeholder="Digite o valor em BRL"
+                className="border pl-20 pr-20 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 text-center no-arrows"
+              />
+              <button className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white px-4 rounded-full">
+                <img src={Brl} alt="BRL" className="w-8 h-8" />
               </button>
             </div>
           </div>
-        </div>
-      )}
-
-      {currentStep === 'buyCheckout' && (
-        <div className="flex justify-center">
-          <div>
-            <div className="flex justify-center items-center pt-4">
-              <div className="relative">
-                <input
-                  type="text"
-                  value={network}
-                  readOnly
-                  placeholder="Selecione uma rede"
-                  className="border pl-28 pr-4 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 cursor-pointer"
-                  onClick={toggleDropdown}
-                />
-                <button
-                  onClick={toggleDropdown}
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white px-4 rounded-full"
-                >
-                  {networks.find((net) => net.name === network)?.icon && (
-                    <img
-                      src={networks.find((net) => net.name === network)?.icon}
-                      alt={network}
-                      className="w-8 h-8"
-                    />
-                  )}
-                </button>
-                {isDropdownOpen && (
-                  <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
-                    <ul>
-                      {networks.map((net) => (
-                        <li
-                          key={net.name}
-                          onClick={() => selectNetwork(net.name)}
-                          className="flex items-center px-3 py-2 hover:bg-gray-100 cursor-pointer"
-                        >
-                          {net.name}
-                          <img
-                            src={net.icon}
-                            alt={net.name}
-                            className="w-8 h-8 ml-2"
-                          />
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            </div>
-            <div className="flex justify-center items-center pt-4">
-              <div className="relative">
-                <input
-                  type="text"
-                  value={paymentMethod}
-                  readOnly
-                  placeholder="Selecione o método de pagamento"
-                  className="border pl-28 pr-4 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 cursor-pointer"
-                  onClick={toggleDropdownMethod}
-                />
-                <button
-                  onClick={toggleDropdownMethod}
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white px-4 rounded-full"
-                ></button>
-                {isDropdownOpenMethod && (
-                  <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
-                    <ul>
-                      <li
-                        onClick={() => selectPaymentMethod('PIX')}
-                        className="px-3 py-2 cursor-pointer hover:bg-gray-100"
-                      >
-                        PIX
-                      </li>
-                    </ul>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <div className="flex justify-center items-center pt-4">
-              <button
-                onClick={handleFinalizarCompra}
-                type="button"
-                className="w-full h-12 bg-[#F6911D] text-black dark:text-white rounded-3xl font-bold"
-              >
-                Finalizar Compra
+          <div className="flex justify-center items-center pt-4">
+            <div className="relative">
+              <input
+                value={btcAmount}
+                readOnly
+                placeholder="Valor em BTC"
+                className="border pl-20 pr-20 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 text-center no-arrows"
+              />
+              <button className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white px-4 rounded-full">
+                <img src={Btc} alt="Bitcoin" className="w-8 h-8" />
               </button>
             </div>
           </div>
+          <div className="flex justify-center items-center pt-4">
+            <button
+              onClick={handleNextStep}
+              type="button"
+              className="w-full h-12 bg-[#F6911D] text-black dark:text-white rounded-3xl font-bold"
+            >
+              Prosseguir
+            </button>
+          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }

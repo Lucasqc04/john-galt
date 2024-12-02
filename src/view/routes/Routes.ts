@@ -14,10 +14,6 @@ export const ROUTES = {
     path: 'buy-bitcoin',
     call: (currentLang: string) => `/${currentLang}/buy-bitcoin`,
   },
-  copyCode: {
-    path: 'copy-Code',
-    call: (currentLang: string) => `/${currentLang}/copy-code`,
-  },
   buyCheckout: {
     path: 'buy-checkout',
     call: (currentLang: string) => `/${currentLang}/buy-checkout`,
