@@ -12,7 +12,6 @@ import { DefaultLayout } from '../layout/DefaultyLayout';
 import { AboutBuyBitcoin } from '../screens/BuyBitcoin/AboutBuyBitcoin';
 import BuyBitcoin from '../screens/BuyBitcoin/BuyBitcoin';
 import BuyCheckout from '../screens/BuyBitcoin/BuyCheckout';
-import CopyCode from '../screens/BuyBitcoin/CopyCode';
 import { Fees } from '../screens/BuyBitcoin/RateBitcoin';
 import { TermsOfUse } from '../screens/BuyBitcoin/TermsUse';
 import { BitcoinPayment } from '../screens/Checkout/BitcoinPayment';
@@ -125,7 +124,6 @@ export function BrowserRouter() {
             <Route path={ROUTES.buyBitcoin.path} element={<BuyBitcoin />} />
             <Route path={ROUTES.fee.path} element={<Fees />} />
             <Route path={ROUTES.buyCheckout.path} element={<BuyCheckout />} />
-            <Route path={ROUTES.copyCode.path} element={<CopyCode />} />
             <Route
               path={ROUTES.aboutBitcoin.path}
               element={<AboutBuyBitcoin />}
