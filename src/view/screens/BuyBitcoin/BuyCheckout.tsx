@@ -139,9 +139,9 @@ export default function BuyCheckout() {
     <div>
       <BackgroundAnimatedProduct />
       <NavBarBuyBitcoin />
-      <div className="pt-[10%] pb-[10%] flex justify-center">
-        <h1 className="text-[#F6911D] dark:text-[#F6911D] font-black text-7xl flex items-center">
-          <SiBitcoincash className="mr-2" /> ALFRED
+      <div className="pt-[10%] pb-[10%] lg:pt-8 lg:pb-8 flex items-center justify-center">
+        <h1 className="text-[#F6911D] dark:text-[#F6911D] font-black text-7xl flex items-center gap-x-4">
+          <SiBitcoincash /> ALFRED
         </h1>
       </div>
       <div className="flex justify-center">
