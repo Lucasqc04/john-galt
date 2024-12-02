@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { QRCodeSVG } from 'qrcode.react'; // Importa a biblioteca qrcode.react
+import classNames from 'classnames';
+import { QRCodeSVG } from 'qrcode.react';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { CiCreditCard1 } from 'react-icons/ci';
 import { FaBarcode, FaPix } from 'react-icons/fa6';
@@ -25,6 +26,8 @@ export default function BuyCheckout() {
   const [brlAmount, setBrlAmount] = useState('');
   const [btcAmount, setBtcAmount] = useState('');
   const [, setIsWaitingForPayment] = useState(false);
+  const [acceptFees, setAcceptFees] = useState(false);
+  const [acceptTerms, setAcceptTerms] = useState(false);
   const navigate = useNavigate();
   const { currentLang } = useCurrentLang();
 
@@ -64,6 +67,11 @@ export default function BuyCheckout() {
   const networks = [{ name: 'Lightning', icon: Lightning }];
 
   const handleProcessPayment = async () => {
+    if (!acceptFees || !acceptTerms) {
+      alert('Você precisa aceitar as taxas e os termos de uso.');
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -143,14 +151,12 @@ export default function BuyCheckout() {
             <br /> Valor: {btcAmount} BTC
           </p>
 
-          {/* Se a chave PIX foi gerada, mostramos o QR code e o botão para copiar a chave PIX */}
           {pixKey ? (
             <div className="flex flex-col items-center pt-4">
               <p className="text-xl text-center text-black dark:text-white mb-4">
                 Escaneie o QR Code ou copie a chave PIX abaixo:
               </p>
 
-              {/* Exibe o QR code gerado com a chave PIX */}
               <QRCodeSVG value={pixKey} size={256} />
 
               <textarea
@@ -169,7 +175,6 @@ export default function BuyCheckout() {
             </div>
           ) : (
             <>
-              {/* Se a chave PIX não foi gerada, exibe a seleção de rede e método de pagamento */}
               <div className="flex justify-center items-center pt-4">
                 <div className="relative">
                   <input
@@ -238,7 +243,7 @@ export default function BuyCheckout() {
                     )}
                   </button>
                   {isDropdownOpenMethod && (
-                    <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg">
+                    <div className="absolute z-50 right-0 top-full mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg">
                       <ul>
                         <li
                           onClick={() => selectPaymentMethod('PIX')}
@@ -273,6 +278,27 @@ export default function BuyCheckout() {
                 </div>
               </div>
 
+              <div className="flex flex-col justify-center items-start pt-4">
+                <label className="flex items-center dark:text-white">
+                  <input
+                    type="checkbox"
+                    checked={acceptFees}
+                    onChange={() => setAcceptFees(!acceptFees)}
+                    className="mr-2"
+                  />
+                  ACEITO AS TAXAS
+                </label>
+                <label className="flex items-center dark:text-white">
+                  <input
+                    type="checkbox"
+                    checked={acceptTerms}
+                    onChange={() => setAcceptTerms(!acceptTerms)}
+                    className="mr-2"
+                  />
+                  ACEITO OS TERMOS DE USO
+                </label>
+              </div>
+
               <div className="flex justify-center items-center pt-4">
                 {isLoading ? (
                   <p className="text-lg font-bold text-[#F6911D]">
@@ -282,7 +308,11 @@ export default function BuyCheckout() {
                   <button
                     onClick={handleProcessPayment}
                     type="button"
-                    className="w-full h-12 bg-[#F6911D] text-black dark:text-white rounded-3xl font-bold"
+                    disabled={!acceptFees || !acceptTerms}
+                    className={classNames(
+                      'w-full h-12 bg-[#F6911D] text-black dark:text-white rounded-3xl font-bold',
+                      (!acceptFees || !acceptTerms) && 'opacity-50',
+                    )}
                   >
                     Obter Chave PIX
                   </button>
