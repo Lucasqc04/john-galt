@@ -43,23 +43,30 @@ export default function BuyBitcoinAndCheckout() {
 
   const handleBrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+    const numericValue = parseFloat(value.replace(/\D/g, '')) / 100;
+
+    if (numericValue > 5000) {
+      return;
+    }
+
     const formattedValue = formatBrl(value);
     setBrlAmount(formattedValue);
 
-    if (btcRate > 0) {
-      const numericValue = parseFloat(value.replace(/\D/g, '')) / 100;
+    if (btcRate > 0 && numericValue >= 0) {
       setBtcAmount((numericValue / btcRate).toFixed(8));
     }
   };
 
   const handleNextStep = () => {
     const numericValue = parseFloat(brlAmount.replace(/\D/g, '')) / 100;
-    if (numericValue >= 500) {
+    if (numericValue >= 700 && numericValue <= 5000) {
       localStorage.setItem('brlAmount', brlAmount);
       localStorage.setItem('btcAmount', btcAmount);
       navigate(ROUTES.buyCheckout.call(currentLang));
     } else {
-      alert('O valor deve ser maior que R$500 para prosseguir.');
+      alert(
+        'O valor deve ser maior que R$700 e menor que R$5000 para prosseguir.',
+      );
     }
   };
 
