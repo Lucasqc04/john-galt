@@ -1,4 +1,5 @@
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
+import WhatsAppButton from '../../components/buttonWhatsApp';
 import HeaderAlfred from './HeaderAlfred';
 
 export function AboutBuyBitcoin() {
@@ -48,6 +49,7 @@ export function AboutBuyBitcoin() {
             em criar a melhor experiência para você.
           </p>
         </div>
+        <WhatsAppButton />
       </div>
     </>
   );

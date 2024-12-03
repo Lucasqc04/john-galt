@@ -1,4 +1,5 @@
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
+import WhatsAppButton from '../../components/buttonWhatsApp';
 import HeaderAlfred from './HeaderAlfred';
 
 export function TermsOfUse() {
@@ -165,6 +166,7 @@ export function TermsOfUse() {
           </p>
         </footer>
       </div>
+      <WhatsAppButton />
     </>
   );
 }

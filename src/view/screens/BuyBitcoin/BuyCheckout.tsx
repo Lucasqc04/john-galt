@@ -10,6 +10,7 @@ import Liquid from '../../assets/lbtc.svg';
 import Lightning from '../../assets/lightning.svg';
 import Onchain from '../../assets/onchain.svg';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
+import WhatsAppButton from '../../components/buttonWhatsApp';
 import { ROUTES } from '../../routes/Routes';
 import { useCurrentLang } from '../../utils/useCurrentLang';
 import HeaderAlfred from './HeaderAlfred';
@@ -188,7 +189,7 @@ export default function BuyCheckout() {
                     value={network}
                     readOnly
                     placeholder="Selecione uma rede"
-                    className="border pl-28 pr-4 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 cursor-pointer"
+                    className="border pl-4 w-96 pr-4 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 cursor-pointer"
                     onClick={toggleDropdown}
                   />
                   <button
@@ -233,12 +234,12 @@ export default function BuyCheckout() {
                     value={paymentMethod}
                     readOnly
                     placeholder="Selecione o método de pagamento"
-                    className="border pl-28 pr-4 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 cursor-pointer"
+                    className="border pl-4 w-96 pr-4 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 cursor-pointer"
                     onClick={toggleDropdownMethod}
                   />
                   <button
                     onClick={toggleDropdownMethod}
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white px-4 rounded-full"
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 text-black dark:text-white px-4 rounded-full"
                   >
                     {paymentMethod === 'PIX' ? (
                       <FaPix className="w-8 h-8" />
@@ -268,8 +269,8 @@ export default function BuyCheckout() {
                   <input
                     value={coldWallet}
                     onChange={handlesColdWallet}
-                    placeholder="Endereço de Bitcoin"
-                    className="border pl-28 pr-6 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 cursor-pointer"
+                    placeholder="Endereço da cateira de Bitcoin (wallet)"
+                    className="border pl-4 w-96 pr-6 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 cursor-pointer"
                   />
                 </div>
               </div>
@@ -278,8 +279,8 @@ export default function BuyCheckout() {
                   <input
                     value={transactionNumber}
                     onChange={handlesTransactionNumbe}
-                    placeholder="Telefone"
-                    className="border pl-28 pr-4 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 cursor-pointer"
+                    placeholder="Telefone para contato (WhatsApp)"
+                    className="border pl-4 w-96 pr-4 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 cursor-pointer"
                   />
                 </div>
               </div>
@@ -338,6 +339,7 @@ export default function BuyCheckout() {
           )}
         </div>
       </div>
+      <WhatsAppButton />
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import WhatsAppButton from '../../components/buttonWhatsApp';
 import HeaderAlfred from './HeaderAlfred';
 
 export function Sobre() {
@@ -48,6 +49,7 @@ export function Sobre() {
           criar a melhor experiência para você.
         </p>
       </div>
+      <WhatsAppButton />
     </div>
   );
 }
