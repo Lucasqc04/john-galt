@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { SiBitcoincash } from 'react-icons/si';
 import { useNavigate } from 'react-router-dom';
 import Btc from '../../assets/bitcoin.svg';
 import Brl from '../../assets/brl.svg';
+import Alfred from '../../assets/image-alfred-removebg-preview.png';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import { ROUTES } from '../../routes/Routes';
 import { useCurrentLang } from '../../utils/useCurrentLang';
-import { NavBarBuyBitcoin } from './NavbarBuyBitcoin';
+import HeaderAlfred from './HeaderAlfred';
 
 export default function BuyBitcoinAndCheckout() {
   const navigate = useNavigate();
@@ -73,10 +73,15 @@ export default function BuyBitcoinAndCheckout() {
   return (
     <div>
       <BackgroundAnimatedProduct />
-      <NavBarBuyBitcoin />
-      <div className="pt-[10%] pb-[10%] flex justify-center">
+      <HeaderAlfred />
+      <div className=" pt-[10%] pb-[10%] flex items-center justify-center mt-[10%] sm:mt-[0%] ">
         <h1 className="text-[#F6911D] dark:text-[#F6911D] font-black text-7xl flex items-center">
-          <SiBitcoincash className="mr-2" /> ALFRED
+          <img
+            src={Alfred}
+            alt="Image-alfred"
+            className="mr-2 w-[20%] max-w-[100px]"
+          />
+          ALFRED
         </h1>
       </div>
 

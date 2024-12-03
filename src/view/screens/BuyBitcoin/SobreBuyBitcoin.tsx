@@ -1,6 +1,9 @@
+import HeaderAlfred from './HeaderAlfred';
+
 export function Sobre() {
   return (
     <div>
+      <HeaderAlfred />
       <div>
         <h1>Sobre</h1>
       </div>
