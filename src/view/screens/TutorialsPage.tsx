@@ -60,7 +60,7 @@ export function TutorialsPage() {
     {
       id: 7,
       title: t('tutorials.items.7.title'),
-      file: '/tutorial/7° TUTORIAL - VERIFICANDO O CÓDIGO DA KRUX.pdf',
+      file: '/tutorial/7° TUTORIAL -  VERIFICANDO O CÓDIGO DA KRUX.pdf',
       image: image7,
       description: t('tutorials.items.7.description'),
     },
