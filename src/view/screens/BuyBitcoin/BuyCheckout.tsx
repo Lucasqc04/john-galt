@@ -10,6 +10,7 @@ import Liquid from '../../assets/lbtc.svg';
 import Lightning from '../../assets/lightning.svg';
 import Onchain from '../../assets/onchain.svg';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
+import WhatsAppButton from '../../components/buttonWhatsApp';
 import { ROUTES } from '../../routes/Routes';
 import { useCurrentLang } from '../../utils/useCurrentLang';
 import HeaderAlfred from './HeaderAlfred';
@@ -338,6 +339,7 @@ export default function BuyCheckout() {
           )}
         </div>
       </div>
+      <WhatsAppButton />
     </div>
   );
 }

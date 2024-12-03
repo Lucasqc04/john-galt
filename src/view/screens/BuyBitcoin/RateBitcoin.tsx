@@ -1,4 +1,5 @@
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
+import WhatsAppButton from '../../components/buttonWhatsApp';
 import HeaderAlfred from './HeaderAlfred';
 
 export function Fees() {
@@ -63,6 +64,7 @@ export function Fees() {
           </p>
         </section>
       </div>
+      <WhatsAppButton />
     </>
   );
 }
