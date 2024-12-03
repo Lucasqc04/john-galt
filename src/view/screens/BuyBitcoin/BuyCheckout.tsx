@@ -6,11 +6,13 @@ import { CiCreditCard1 } from 'react-icons/ci';
 import { FaBarcode, FaPix } from 'react-icons/fa6';
 import { SiBitcoincash } from 'react-icons/si';
 import { useNavigate } from 'react-router-dom';
+import Liquid from '../../assets/lbtc.svg';
 import Lightning from '../../assets/lightning.svg';
+import Onchain from '../../assets/onchain.svg';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import { ROUTES } from '../../routes/Routes';
 import { useCurrentLang } from '../../utils/useCurrentLang';
-import { NavBarBuyBitcoin } from './NavbarBuyBitcoin';
+import HeaderAlfred from './HeaderAlfred';
 
 export default function BuyCheckout() {
   const [network, setNetwork] = useState<string>('Rede do BTC');
@@ -64,7 +66,11 @@ export default function BuyCheckout() {
     setIsDropdownOpenMethod(false);
   };
 
-  const networks = [{ name: 'Lightning', icon: Lightning }];
+  const networks = [
+    { name: 'Lightning', icon: Lightning },
+    { name: 'Onchain', icon: Onchain },
+    { name: 'Liquid', icon: Liquid },
+  ];
 
   const handleProcessPayment = async () => {
     if (!acceptFees || !acceptTerms) {
@@ -138,8 +144,8 @@ export default function BuyCheckout() {
   return (
     <div>
       <BackgroundAnimatedProduct />
-      <NavBarBuyBitcoin />
-      <div className="pt-[10%] pb-[10%] lg:pt-8 lg:pb-8 flex items-center justify-center">
+      <HeaderAlfred />
+      <div className="pt-[10%] pb-[10%] lg:pt-8 lg:pb-8 flex items-center justify-center mt-[20%] sm:mt-[10%]">
         <h1 className="text-[#F6911D] dark:text-[#F6911D] font-black text-7xl flex items-center gap-x-4">
           <SiBitcoincash /> ALFRED
         </h1>
@@ -286,7 +292,12 @@ export default function BuyCheckout() {
                     onChange={() => setAcceptFees(!acceptFees)}
                     className="mr-2"
                   />
-                  ACEITO AS TAXAS
+                  <span
+                    onClick={() => navigate(ROUTES.fee.call(currentLang))}
+                    className="cursor-pointer text-blue-500 hover:underline"
+                  >
+                    ACEITO AS TAXAS
+                  </span>
                 </label>
                 <label className="flex items-center dark:text-white">
                   <input
@@ -295,7 +306,12 @@ export default function BuyCheckout() {
                     onChange={() => setAcceptTerms(!acceptTerms)}
                     className="mr-2"
                   />
-                  ACEITO OS TERMOS DE USO
+                  <span
+                    onClick={() => navigate(ROUTES.term.call(currentLang))}
+                    className="cursor-pointer text-blue-500 hover:underline"
+                  >
+                    ACEITO OS TERMOS DE USO
+                  </span>
                 </label>
               </div>
 

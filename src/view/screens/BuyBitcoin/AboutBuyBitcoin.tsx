@@ -1,12 +1,12 @@
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
-import { NavBarBuyBitcoin } from './NavbarBuyBitcoin';
+import HeaderAlfred from './HeaderAlfred';
 
 export function AboutBuyBitcoin() {
   return (
     <>
       <BackgroundAnimatedProduct />
-      <NavBarBuyBitcoin />
-      <div className="container mx-auto p-6">
+      <HeaderAlfred />
+      <div className="container mx-auto p-6 mt-[20%] sm:mt-[10%]">
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold text-black dark:text-white">
             Sobre
