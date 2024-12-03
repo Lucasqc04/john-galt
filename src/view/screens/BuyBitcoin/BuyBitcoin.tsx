@@ -35,45 +35,48 @@ export default function BuyBitcoinAndCheckout() {
 
   const formatBrl = (value: string): string => {
     const numericValue = value.replace(/\D/g, '');
-    return numericValue ? parseInt(numericValue, 10).toString() : '';
+    const formattedValue = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    }).format(parseFloat(numericValue) / 100);
+    return numericValue ? formattedValue : '';
   };
 
   const handleBrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+    const numericValue = parseFloat(value.replace(/\D/g, '')) / 100;
+    console.log(numericValue);
 
-    if (/^\d+$/.test(value) || value === '') {
-      const numericValue = parseInt(value, 10);
-      setBrlAmount(formatBrl(value));
+    if (numericValue > 5000) {
+      return;
+    }
 
-      if (btcRate > 0 && numericValue >= 0) {
-        setBtcAmount((numericValue / btcRate).toFixed(8));
-      }
-    } else {
-      e.preventDefault();
+    const formattedValue = formatBrl(value);
+    setBrlAmount(formattedValue);
+
+    if (btcRate > 0 && numericValue >= 0) {
+      setBtcAmount((numericValue / btcRate).toFixed(8));
     }
   };
-
   const handleNextStep = () => {
-    const numericValue = parseInt(brlAmount, 10);
-
+    const numericValue = parseFloat(brlAmount.replace(/\D/g, '')) / 100;
     if (numericValue >= 700 && numericValue <= 5000) {
       localStorage.setItem('brlAmount', brlAmount);
       localStorage.setItem('btcAmount', btcAmount);
       navigate(ROUTES.buyCheckout.call(currentLang));
-    } else if (numericValue >= 5000) {
-      alert('O valor é maior que R$5000.Insira um valor abaixo de R$5000.');
     } else {
       alert(
         'O valor deve ser maior que R$700 e menor que R$5000 para prosseguir.',
       );
     }
   };
+  console.log(brlAmount);
 
   return (
     <div>
       <BackgroundAnimatedProduct />
       <HeaderAlfred />
-      <div className="pt-[10%] pb-[10%] flex items-center justify-center mt-[10%] sm:mt-[0%]">
+      <div className=" pt-[10%] pb-[10%] flex items-center justify-center mt-[10%] sm:mt-[0%] ">
         <h1 className="text-[#F6911D] dark:text-[#F6911D] font-black text-7xl flex items-center">
           <img
             src={Alfred}
@@ -86,7 +89,6 @@ export default function BuyBitcoinAndCheckout() {
 
       <div className="flex justify-center">
         <div>
-          {/* Input para valor em BRL */}
           <div className="flex justify-center items-center space-x-4">
             <div className="relative">
               <input
@@ -100,8 +102,6 @@ export default function BuyBitcoinAndCheckout() {
               </button>
             </div>
           </div>
-
-          {/* Input para valor em BTC */}
           <div className="flex justify-center items-center pt-4">
             <div className="relative">
               <input
@@ -115,8 +115,6 @@ export default function BuyBitcoinAndCheckout() {
               </button>
             </div>
           </div>
-
-          {/* Botão de prosseguir */}
           <div className="flex justify-center items-center pt-4">
             <button
               onClick={handleNextStep}
@@ -127,8 +125,8 @@ export default function BuyBitcoinAndCheckout() {
             </button>
           </div>
         </div>
-        <WhatsAppButton />
       </div>
+      <WhatsAppButton />
     </div>
   );
 }
