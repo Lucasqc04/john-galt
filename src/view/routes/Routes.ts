@@ -11,24 +11,24 @@ export const ROUTES = {
     callLang: (currentLang: string, id: string) => `/${currentLang}/blog/${id}`,
   },
   buyBitcoin: {
-    path: '',
-    call: (currentLang: string) => `/${currentLang}`,
+    path: 'buy-bitcoin',
+    call: (currentLang: string) => `/${currentLang}/buy-bitcoin`,
   },
   buyCheckout: {
     path: 'buy-checkout',
-    call: (currentLang: string) => `/${currentLang}`,
+    call: (currentLang: string) => `/${currentLang}/buy-checkout`,
   },
   aboutBitcoin: {
     path: 'about-buy-bitcoin',
-    call: (currentLang: string) => `/${currentLang}`,
+    call: (currentLang: string) => `/${currentLang}/about-buy-bitcoin`,
   },
   fee: {
     path: 'fee',
-    call: (currentLang: string) => `/${currentLang}`,
+    call: (currentLang: string) => `/${currentLang}/fee`,
   },
   term: {
     path: 'terms',
-    call: (currentLang: string) => `/${currentLang}`,
+    call: (currentLang: string) => `/${currentLang}/terms`,
   },
 
   tutorials: {
