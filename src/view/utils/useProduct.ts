@@ -2,15 +2,15 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Item, Product } from '../../domain/entities/Product.entity';
 import { LanguageTexts } from '../../domain/locales/Language';
-// import Bitkit8 from '../assets/Bitkit/3.png';
-// import Bitkit9 from '../assets/Bitkit/6.png';
-// import Bitkit1 from '../assets/Bitkit/Bitkit 1.png';
-// import Bitkit2 from '../assets/Bitkit/Bitkit 2.png';
-// import Bitkit3 from '../assets/Bitkit/Bitkit 3.png';
-// import Bitkit4 from '../assets/Bitkit/Bitkit 4.png';
-// import Bitkit5 from '../assets/Bitkit/Bitkit 5.png';
-// import Bitkit6 from '../assets/Bitkit/Bitkit 6.png';
-// import Bitkit7 from '../assets/Bitkit/Bitkit 7.png';
+import Bitkit8 from '../assets/Bitkit/3.png';
+import Bitkit9 from '../assets/Bitkit/6.png';
+import Bitkit1 from '../assets/Bitkit/Bitkit 1.png';
+import Bitkit2 from '../assets/Bitkit/Bitkit 2.png';
+import Bitkit3 from '../assets/Bitkit/Bitkit 3.png';
+import Bitkit4 from '../assets/Bitkit/Bitkit 4.png';
+import Bitkit5 from '../assets/Bitkit/Bitkit 5.png';
+import Bitkit6 from '../assets/Bitkit/Bitkit 6.png';
+import Bitkit7 from '../assets/Bitkit/Bitkit 7.png';
 import Seedkit1 from '../assets/seedkit/1.png';
 import Seedkit2 from '../assets/seedkit/2.png';
 import Seedkit3 from '../assets/seedkit/3.png';
@@ -57,27 +57,27 @@ export function useProducts() {
       items: infos[0].items,
       resources: infos[0].resources,
     },
-    // {
-    //   id: '2',
-    //   title: infos[1].title,
-    //   name: infos[1].name,
-    //   originalPrice: 950,
-    //   price: 900,
-    //   description: infos[1].description,
-    //   images: [
-    //     Bitkit7,
-    //     Bitkit1,
-    //     Bitkit2,
-    //     Bitkit3,
-    //     Bitkit4,
-    //     Bitkit5,
-    //     Bitkit6,
-    //     Bitkit8,
-    //     Bitkit9,
-    //   ],
-    //   items: infos[1].items,
-    //   resources: infos[1].resources,
-    // },
+    {
+      id: '2',
+      title: infos[1].title,
+      name: infos[1].name,
+      originalPrice: 950,
+      price: 900,
+      description: infos[1].description,
+      images: [
+        Bitkit7,
+        Bitkit1,
+        Bitkit2,
+        Bitkit3,
+        Bitkit4,
+        Bitkit5,
+        Bitkit6,
+        Bitkit8,
+        Bitkit9,
+      ],
+      items: infos[1].items,
+      resources: infos[1].resources,
+    },
     {
       id: '10000',
       title: infos[0].title,
