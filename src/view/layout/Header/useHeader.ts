@@ -42,11 +42,11 @@ export function useHeader() {
       href: ROUTES.cart.product.call(currentLang, 'SEEDKIT', '1'),
       icon: MdTouchApp,
     },
-    // {
-    //   name: 'BITKIT',
-    //   href: ROUTES.cart.product.call(currentLang, 'BITKIT', '2'),
-    //   icon: MdTouchApp,
-    // },
+    {
+      name: 'BITKIT',
+      href: ROUTES.cart.product.call(currentLang, 'BITKIT', '2'),
+      icon: MdTouchApp,
+    },
   ];
 
   return {
