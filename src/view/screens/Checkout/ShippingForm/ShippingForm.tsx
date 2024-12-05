@@ -44,7 +44,7 @@ export function ShippingForm() {
                 })}
               </h5>
               <span className="text-base font-semibold">
-                {option.deliveryTime} {t('checkout.days')}
+                {option.deliveryTime + 30} {t('checkout.days')}
               </span>
             </div>
           </button>
