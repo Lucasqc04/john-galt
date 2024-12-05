@@ -205,7 +205,7 @@ export function ProductPage() {
                         </h5>
 
                         <span className="text-sm text-black">
-                          {option.deliveryTime} {t('checkout.days')}
+                          {option.deliveryTime + 30} {t('checkout.days')}
                         </span>
                       </div>
                     </div>
