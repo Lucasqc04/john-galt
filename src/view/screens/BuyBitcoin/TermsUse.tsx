@@ -17,9 +17,8 @@ export function TermsOfUse() {
             1. Sobre a plataforma
           </h2>
           <p className="text-black dark:text-white">
-            Esta é uma plataforma P2P para negociação privada de bitcoin (BTC) e
-            Tether (USDT), não sendo uma exchange convencional com transações
-            instantâneas.
+            Esta é uma plataforma P2P para negociação privada de bitcoin (BTC)
+            não sendo uma exchange convencional com transações instantâneas.
           </p>
           <p className="text-black dark:text-white mt-4">
             O modelo de funcionamento garante que as transações sejam realizadas
