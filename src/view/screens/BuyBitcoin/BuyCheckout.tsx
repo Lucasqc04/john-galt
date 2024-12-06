@@ -86,12 +86,12 @@ export default function BuyCheckout() {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/orders/create-order`,
         {
-          amountBrl: parseFloat(brlAmount.replace(/\D/g, '')) / 100,
-          amountBtc: parseFloat(btcAmount),
-          paymentMethod,
-          network: network.toLowerCase(),
-          coldWallet,
-          transactionNumber,
+          realValue: parseFloat(brlAmount.replace(/\D/g, '')) / 100,
+          bitcoinValue: parseFloat(btcAmount),
+          paymentMethod: 'PIX',
+          network: network,
+          phone: transactionNumber,
+          coldWalletId: coldWallet,
         },
       );
 
