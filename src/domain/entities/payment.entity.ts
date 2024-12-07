@@ -45,7 +45,7 @@ export const Items = z.object({
 });
 export type Items = z.infer<typeof Items>;
 
-export const PaymentMethod = z.enum(['MP', 'EFI', 'BTC']);
+export const PaymentMethod = z.enum(['MP', 'EFI', 'BTC', 'OTHER']);
 export type PaymentMethod = z.infer<typeof PaymentMethod>;
 
 export const Brand = z.enum([

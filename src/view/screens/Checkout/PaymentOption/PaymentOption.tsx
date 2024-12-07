@@ -7,7 +7,7 @@ import { usePaymentOptions } from './usePaymentOptions';
 
 type Option = {
   label: string;
-  value: 'MP' | 'EFI' | 'BTC';
+  value: 'MP' | 'EFI' | 'BTC' | 'OTHER';
   icon: ReactNode;
 };
 
@@ -27,9 +27,14 @@ const options: Option[] = [
     value: 'MP',
     icon: <img src={Pix} alt="Pix" className="w-8" />,
   },
+  // {
+  //   label: `${t('paymentForm.creditCard')} - MP`,
+  //   value: 'MP',
+  //   icon: <FaRegCreditCard size={32} />,
+  // },
   {
-    label: `${t('paymentForm.creditCard')} - MP`,
-    value: 'MP',
+    label: `${t('paymentForm.creditCard')}`,
+    value: 'OTHER',
     icon: <FaRegCreditCard size={32} />,
   },
   {

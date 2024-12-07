@@ -87,6 +87,9 @@ export function useProductPage() {
 
       add(productToAdd);
     }
+
+    alert('PRODUTO ADICIONADO COM SUCESSO!');
+    return;
   };
 
   function BuyNow() {

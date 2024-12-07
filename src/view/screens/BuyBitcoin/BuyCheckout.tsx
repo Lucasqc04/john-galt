@@ -4,13 +4,14 @@ import { QRCodeSVG } from 'qrcode.react';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { CiCreditCard1 } from 'react-icons/ci';
 import { FaBarcode, FaPix } from 'react-icons/fa6';
-import { SiBitcoincash } from 'react-icons/si';
 import { useNavigate } from 'react-router-dom';
+import Alfred from '../../assets/image-alfred-removebg-preview.png';
 import Liquid from '../../assets/lbtc.svg';
 import Lightning from '../../assets/lightning.svg';
 import Onchain from '../../assets/onchain.svg';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import WhatsAppButton from '../../components/buttonWhatsApp';
+import { Loader } from '../../components/Loader';
 import { ROUTES } from '../../routes/Routes';
 import { useCurrentLang } from '../../utils/useCurrentLang';
 import HeaderAlfred from './HeaderAlfred';
@@ -85,12 +86,12 @@ export default function BuyCheckout() {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/orders/create-order`,
         {
-          amountBrl: parseFloat(brlAmount.replace(/\D/g, '')) / 100,
-          amountBtc: parseFloat(btcAmount),
-          paymentMethod,
-          network: network.toLowerCase(),
-          coldWallet,
-          transactionNumber,
+          realValue: parseFloat(brlAmount.replace(/\D/g, '')) / 100,
+          bitcoinValue: parseFloat(btcAmount),
+          paymentMethod: 'PIX',
+          network: network,
+          phone: transactionNumber,
+          coldWalletId: coldWallet,
         },
       );
 
@@ -147,8 +148,13 @@ export default function BuyCheckout() {
       <BackgroundAnimatedProduct />
       <HeaderAlfred />
       <div className="pt-[10%] pb-[10%] lg:pt-8 lg:pb-8 flex items-center justify-center mt-[20%] sm:mt-[10%]">
-        <h1 className="text-[#F6911D] dark:text-[#F6911D] font-black text-7xl flex items-center gap-x-4">
-          <SiBitcoincash /> ALFRED
+        <h1 className="text-[#F6911D] dark:text-[#F6911D] font-black text-7xl flex items-center">
+          <img
+            src={Alfred}
+            alt="Image-alfred"
+            className="mr-2 w-[20%] max-w-[100px]"
+          />
+          ALFRED
         </h1>
       </div>
       <div className="flex justify-center">
@@ -294,7 +300,13 @@ export default function BuyCheckout() {
                     className="mr-2"
                   />
                   <span
-                    onClick={() => navigate(ROUTES.fee.call(currentLang))}
+                    onClick={() =>
+                      window.open(
+                        ROUTES.fee.call(currentLang),
+                        '_blank',
+                        'noopener,noreferrer',
+                      )
+                    }
                     className="cursor-pointer text-blue-500 hover:underline"
                   >
                     ACEITO AS TAXAS
@@ -308,7 +320,13 @@ export default function BuyCheckout() {
                     className="mr-2"
                   />
                   <span
-                    onClick={() => navigate(ROUTES.term.call(currentLang))}
+                    onClick={() =>
+                      window.open(
+                        ROUTES.term.call(currentLang),
+                        '_blank',
+                        'noopener,noreferrer',
+                      )
+                    }
                     className="cursor-pointer text-blue-500 hover:underline"
                   >
                     ACEITO OS TERMOS DE USO
@@ -318,9 +336,7 @@ export default function BuyCheckout() {
 
               <div className="flex justify-center items-center pt-4">
                 {isLoading ? (
-                  <p className="text-lg font-bold text-[#F6911D]">
-                    Carregando...
-                  </p>
+                  <Loader />
                 ) : (
                   <button
                     onClick={handleProcessPayment}
