@@ -6,7 +6,10 @@ import { GetCheckout, Items } from '../../../domain/entities/payment.entity';
 import { UseCases } from '../../../domain/usecases/UseCases';
 import { useCartContext } from '../../context/CartContext';
 import { ROUTES } from '../../routes/Routes';
-import { redirectToWhatsApp } from '../../utils/RedirectToWhatsapp';
+import {
+  redirectToWhatsAppCreditCard,
+  redirectToWhatsAppError,
+} from '../../utils/RedirectToWhatsapp';
 import { useCurrentLang } from '../../utils/useCurrentLang';
 
 const LOCAL_STORAGE_KEY = 'checkoutFormState';
@@ -147,6 +150,14 @@ export function useCheckout() {
         return;
       }
 
+      if (data.method === 'OTHER' && data.paymentOption === 'creditCard') {
+        redirectToWhatsAppCreditCard(
+          { ...data, items },
+          Number(shipping.price),
+          form.getValues('total'),
+        );
+        return;
+      }
       const { result } = await UseCases.payment.create.execute(req);
 
       if (result.type === 'ERROR') {
@@ -154,7 +165,7 @@ export function useCheckout() {
           case 'SERIALIZATION':
             alert('ERRO DE SERIALIZAÇÃO. POR FAVOR, ENTRE EM CONTATO');
             if (import.meta.env.VITE_NODE_ENV !== 'development') {
-              redirectToWhatsApp(
+              redirectToWhatsAppError(
                 { ...data, items },
                 Number(shipping.price),
                 form.getValues('total'),
@@ -164,7 +175,7 @@ export function useCheckout() {
           default:
             alert('ERRO AO PROCESSAR PAGAMENTO. POR FAVOR, ENTRE EM CONTATO');
             if (import.meta.env.VITE_NODE_ENV !== 'development') {
-              redirectToWhatsApp(
+              redirectToWhatsAppError(
                 { ...data, items },
                 Number(shipping.price),
                 form.getValues('total'),

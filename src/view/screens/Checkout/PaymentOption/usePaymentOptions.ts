@@ -8,7 +8,7 @@ export function usePaymentOptions() {
   const selectedPaymentLabel = form.watch('selectedPaymentLabel');
 
   const handlePaymentSelection = (
-    method: 'MP' | 'EFI' | 'BTC',
+    method: 'MP' | 'EFI' | 'BTC' | 'OTHER',
     label: string,
   ) => {
     form.setValue('method', method);
@@ -27,6 +27,12 @@ export function usePaymentOptions() {
           label === `${t('paymentForm.creditCard')} - MP`
             ? 'creditCard'
             : 'pix',
+        );
+        break;
+      case 'OTHER':
+        form.setValue(
+          'paymentOption',
+          label === `${t('paymentForm.creditCard')}` ? 'creditCard' : 'pix',
         );
         break;
       case 'BTC':
