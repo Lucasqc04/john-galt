@@ -137,7 +137,10 @@ export function ProductPage() {
         </article>
 
         <FormProvider {...form}>
-          <form className="flex flex-col gap-y-2 pt-6 col-span-4">
+          <form
+            className="flex flex-col gap-y-2 pt-6 col-span-4"
+            onSubmit={shipping.calculate}
+          >
             <div
               className={classNames(
                 'flex items-end gap-x-4',
@@ -161,7 +164,7 @@ export function ProductPage() {
                 />
               </div>
               <button
-                onClick={shipping.calculate}
+                type="submit"
                 className="bg-[#EDEDED] p-2 rounded-md w-full h-12 text-center text-sm dark:bg-[#242F3F] dark:text-white"
                 disabled={loading}
               >
@@ -183,7 +186,7 @@ export function ProductPage() {
                         'w-full flex items-center justify-between rounded-md border border-solid border-gray-400 px-4 py-3',
                         'transition-colors duration-300 ease-in-out hover:bg-orange-500 dark:bg-gray-100 dark:border-black',
                         'md:w-3/4',
-                        'lg:w-2/3', // Responsivo
+                        'lg:w-2/3',
                       )}
                     >
                       <img
@@ -233,6 +236,7 @@ export function ProductPage() {
             <div className="pt-4 flex gap-x-4 justify-between sm:flex-col sm:h-32 sm:gap-y-2">
               <button
                 onClick={cart.buy}
+                type="button"
                 className="bg-orange-primary text-white p-2 rounded-md text-sm w-36 sm:w-full sm:gap-y-4 h-14"
               >
                 Comprar Agora
