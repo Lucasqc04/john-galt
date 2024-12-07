@@ -8,6 +8,7 @@ import 'slick-carousel/slick/slick.css';
 import { LanguageTexts } from '../../../domain/locales/Language';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import { Loader } from '../../components/Loader';
+import { useCartContext } from '../../context/CartContext';
 import { styleLastWord } from '../../utils/StyleWord';
 import { useWindowSize } from '../../utils/useWindowSize';
 import './product-page.css';
@@ -16,6 +17,7 @@ import { useProductPage } from './useProductPage';
 export function ProductPage() {
   const { t, cart, form, loading, product, quantity, shipping, register } =
     useProductPage();
+  const { items } = useCartContext();
   const { width } = useWindowSize();
 
   const [mainImage, setMainImage] = useState(product?.images[0]);
@@ -38,7 +40,6 @@ export function ProductPage() {
     }
     return visibleImages;
   };
-
   return (
     <>
       <BackgroundAnimatedProduct />
@@ -179,40 +180,50 @@ export function ProductPage() {
                   <h3 className="font-bold text-lg dark:text-gray-200">
                     Opções de Frete:
                   </h3>
-                  {shipping.options.map((option, index) => (
-                    <div
-                      key={index}
-                      className={classNames(
-                        'w-full flex items-center justify-between rounded-md border border-solid border-gray-400 px-4 py-3',
-                        'transition-colors duration-300 ease-in-out hover:bg-orange-500 dark:bg-gray-100 dark:border-black',
-                        'md:w-3/4',
-                        'lg:w-2/3',
-                      )}
-                    >
-                      <img
-                        src={option.company.picture}
-                        alt={`Logo da empresa ${option.name}`}
-                        className="w-10 h-10 object-contain"
-                      />
-                      <div className="w-full flex flex-col items-start justify-center text-left">
-                        <h4 className="text-sm font-semibold text-black">
-                          {option.name}
-                        </h4>
+                  {shipping.options.map((option, index) => {
+                    const foundProduct = items.find(
+                      (produto) => produto.id !== '1',
+                    );
 
-                        <h5 className="text-sm font-semibold text-black">
-                          R${' '}
-                          {parseFloat(option.price).toLocaleString('pt-BR', {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                          })}
-                        </h5>
+                    const deliveryTime = foundProduct
+                      ? option.deliveryTime + 30
+                      : option.deliveryTime;
 
-                        <span className="text-sm text-black">
-                          {option.deliveryTime + 30} {t('checkout.days')}
-                        </span>
+                    return (
+                      <div
+                        key={index}
+                        className={classNames(
+                          'w-full flex items-center justify-between rounded-md border border-solid border-gray-400 px-4 py-3',
+                          'transition-colors duration-300 ease-in-out hover:bg-orange-500 dark:bg-gray-100 dark:border-black',
+                          'md:w-3/4',
+                          'lg:w-2/3',
+                        )}
+                      >
+                        <img
+                          src={option.company.picture}
+                          alt={`Logo da empresa ${option.name}`}
+                          className="w-10 h-10 object-contain"
+                        />
+                        <div className="w-full flex flex-col items-start justify-center text-left">
+                          <h4 className="text-sm font-semibold text-black">
+                            {option.name}
+                          </h4>
+
+                          <h5 className="text-sm font-semibold text-black">
+                            R${' '}
+                            {parseFloat(option.price).toLocaleString('pt-BR', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2,
+                            })}
+                          </h5>
+
+                          <span className="text-sm text-black">
+                            {deliveryTime} {t('checkout.days')}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               ) : (
                 <p>Não foi possível calcular as opções de frete.</p>
