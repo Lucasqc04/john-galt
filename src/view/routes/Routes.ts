@@ -30,10 +30,13 @@ export const ROUTES = {
     path: 'terms',
     call: (currentLang: string) => `/${currentLang}/terms`,
   },
-
   tutorials: {
     path: 'tutoriais',
     call: (currentLang: string) => `/${currentLang}/tutoriais`,
+  },
+  videos: {
+    path: 'videos',
+    call: (currentLang: string) => `/${currentLang}/videos`,
   },
   about: {
     path: 'sobre-nos',
