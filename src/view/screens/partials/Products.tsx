@@ -46,7 +46,7 @@ export function Products() {
         <h2 className="text-4xl text-center font-bold dark:text-white">
           {styleFirstWord(t(LanguageTexts.products.title))}
         </h2>
-        <article className="flex items-center justify-around gap-16 gap-y-4">
+        <article className="flex flex-col sm:flex-row items-center justify-around gap-16 gap-y-4">
           {products.map((product, idx) => (
             <>
               {Number(product.id) !== 10000 && (
