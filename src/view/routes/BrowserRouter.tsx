@@ -83,6 +83,12 @@ const TutorialsPage = lazy(() =>
     default: module.TutorialsPage,
   })),
 );
+const VideosPage = lazy(() =>
+  import('../screens/Videos').then((module) => ({
+    default: module.VideosPage,
+  })),
+);
+
 export function BrowserRouter() {
   const { currentLang } = useLanguage();
 
@@ -106,6 +112,7 @@ export function BrowserRouter() {
             <Route path={ROUTES.Support.path} element={<SupportPage />} />
             <Route path={ROUTES.cart.path} element={<Cart />} />
             <Route path={ROUTES.tutorials.path} element={<TutorialsPage />} />
+            <Route path={ROUTES.videos.path} element={<VideosPage />} />
             <Route
               path={ROUTES.paymentStatus.success.path}
               element={<PaymentSuccess />}
