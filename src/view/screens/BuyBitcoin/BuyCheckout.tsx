@@ -86,7 +86,7 @@ export default function BuyCheckout() {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/orders/create-order`,
         {
-          realValue: parseFloat(brlAmount.replace(/\D/g, '')) / 100,
+          realValue: parseFloat(brlAmount.replace(/\D/g, '')),
           bitcoinValue: parseFloat(btcAmount),
           paymentMethod: 'PIX',
           network: network,
@@ -129,15 +129,14 @@ export default function BuyCheckout() {
       console.log(response);
 
       if (response.data === 'confirmed') {
-        alert('Pagamento confirmado!');
         navigate(ROUTES.paymentStatus.success.call(currentLang));
       } else {
         alert('Pagamento ainda não confirmado. Tente novamente.');
-        navigate(ROUTES.paymentStatus.failure.call(currentLang));
       }
     } catch (error) {
       console.error('Erro ao verificar o status do pagamento:', error);
       alert('Erro ao verificar o status do pagamento.');
+      navigate(ROUTES.paymentStatus.failure.call(currentLang));
     } finally {
       setIsWaitingForPayment(false);
     }
