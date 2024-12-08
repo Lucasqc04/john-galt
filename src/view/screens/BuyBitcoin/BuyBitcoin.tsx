@@ -33,33 +33,35 @@ export default function BuyBitcoinAndCheckout() {
     fetchBitcoinRate();
   }, []);
 
-  const formatBrl = (value: string): string => {
-    const numericValue = value.replace(/\D/g, '');
-    const formattedValue = new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(parseFloat(numericValue) / 100);
-    return numericValue ? formattedValue : '';
-  };
-
   const handleBrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const numericValue = parseFloat(value.replace(/\D/g, '')) / 100;
-    console.log(numericValue);
+    const value = e.target.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+    const numericValue = parseInt(value, 10); // Converte para inteiro
+
+    if (isNaN(numericValue)) {
+      setBrlAmount('');
+      setBtcAmount('');
+      return;
+    }
 
     if (numericValue > 5000) {
       return;
     }
 
-    const formattedValue = formatBrl(value);
+    const formattedValue = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+      minimumFractionDigits: 0, // Sem casas decimais
+    }).format(numericValue);
+
     setBrlAmount(formattedValue);
 
     if (btcRate > 0 && numericValue >= 0) {
       setBtcAmount((numericValue / btcRate).toFixed(8));
     }
   };
+
   const handleNextStep = () => {
-    const numericValue = parseFloat(brlAmount.replace(/\D/g, '')) / 100;
+    const numericValue = parseInt(brlAmount.replace(/\D/g, ''), 10);
     if (numericValue >= 700 && numericValue <= 5000) {
       localStorage.setItem('brlAmount', brlAmount);
       localStorage.setItem('btcAmount', btcAmount);
@@ -70,13 +72,12 @@ export default function BuyBitcoinAndCheckout() {
       );
     }
   };
-  console.log(brlAmount);
 
   return (
     <div>
       <BackgroundAnimatedProduct />
       <HeaderAlfred />
-      <div className=" pt-[10%] pb-[10%] flex items-center justify-center mt-[10%] sm:mt-[0%] ">
+      <div className="pt-[10%] pb-[10%] flex items-center justify-center mt-[10%] sm:mt-[0%]">
         <h1 className="text-[#F6911D] dark:text-[#F6911D] font-black text-7xl flex items-center">
           <img
             src={Alfred}

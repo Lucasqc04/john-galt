@@ -1,6 +1,13 @@
 {
   "header": {
-    "links": ["Products", "About Us", "Blogs", "Tutorials", "Support"],
+    "links": [
+      "Products",
+      "About Us",
+      "Blogs",
+      "Tutorials",
+      "Support",
+      "Buy Bitcoin"
+    ],
     "contact_sales": "Contact sales"
   },
   "hero": {

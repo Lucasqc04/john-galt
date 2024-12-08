@@ -13,6 +13,7 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { blogData } from '../../../blogContent/blogPosts';
 import { LanguageTexts } from '../../../domain/locales/Language';
+import Alfred from '../../assets/image-alfred-removebg-preview.png';
 import { LanguageSwitcher } from '../../components/LanguageSwitcher/LanguageSwitcher';
 import { useCartContext } from '../../context/CartContext';
 import { ROUTES } from '../../routes/Routes';
@@ -72,7 +73,7 @@ export function NavLinks({
           )}
           <PopoverGroup className="flex flex-col items-center justify-center gap-y-10 lg:gap-x-12 lg:flex-row lg:gap-y-0">
             <Popover className="relative">
-              <PopoverButton className="text-2xl flex items-center justify-center gap-x-1 lg:text-xl font-semibold leading-6 text-black dark:text-white hover:text-[#F6911D]">
+              <PopoverButton className=" hover:text-[#F6911D] text-2xl flex items-center justify-center gap-x-1 lg:text-xl font-semibold leading-6 text-black dark:text-white ">
                 {t(LanguageTexts.header.links[0])}
                 <MdKeyboardArrowDown
                   aria-hidden="true"
@@ -224,6 +225,22 @@ export function NavLinks({
                   {totalItems}
                 </span>
               )}
+            </button>
+
+            <button
+              onClick={() =>
+                handleOnLink(ROUTES.buyBitcoin.call(currentLang), LinkCallBack)
+              }
+              className="flex items-center text-2xl lg:text-xl font-semibold leading-6 text-black dark:text-white hover:text-[#F6911D]"
+            >
+              <span className="hover:text-[#F6911D]">
+                {t(LanguageTexts.header.links[5])}
+              </span>
+              <img
+                src={Alfred}
+                alt="Image-alfred"
+                className=" w-[15%] max-w-[100px]"
+              />
             </button>
           </PopoverGroup>
         </>
