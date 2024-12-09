@@ -47,6 +47,11 @@ export function useHeader() {
       href: ROUTES.cart.product.call(currentLang, 'BITKIT', '2'),
       icon: MdTouchApp,
     },
+    {
+      name: 'ALFRED',
+      href: ROUTES.buyBitcoin.call(currentLang),
+      icon: MdTouchApp,
+    },
   ];
 
   return {

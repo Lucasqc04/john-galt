@@ -14,6 +14,7 @@ export const LanguageTexts = {
       'header.links.2',
       'header.links.3',
       'header.links.4',
+      'header.links.5',
     ],
     contact_sales: 'header.contact_sales',
   },
