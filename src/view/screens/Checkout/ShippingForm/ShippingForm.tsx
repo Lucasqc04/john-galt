@@ -20,7 +20,7 @@ export function ShippingForm() {
           const foundProduct = items.find((produto) => produto.id !== '1');
 
           const deliveryTime = foundProduct
-            ? option.deliveryTime + 30
+            ? option.deliveryTime + 15
             : option.deliveryTime;
 
           return (
