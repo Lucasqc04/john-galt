@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Btc from '../../assets/bitcoin.svg';
 import Brl from '../../assets/brl.svg';
-import Alfred from '../../assets/image-alfred-removebg-preview.png';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import WhatsAppButton from '../../components/buttonWhatsApp';
 import { ROUTES } from '../../routes/Routes';
@@ -79,11 +78,6 @@ export default function BuyBitcoinAndCheckout() {
       <HeaderAlfred />
       <div className="pt-[10%] pb-[10%] flex items-center justify-center mt-[10%] sm:mt-[0%]">
         <h1 className="text-[#F6911D] dark:text-[#F6911D] font-black text-7xl flex items-center">
-          <img
-            src={Alfred}
-            alt="Image-alfred"
-            className="mr-2 w-[20%] max-w-[100px]"
-          />
           ALFRED
         </h1>
       </div>

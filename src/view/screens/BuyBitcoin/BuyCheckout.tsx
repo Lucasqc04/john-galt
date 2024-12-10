@@ -5,7 +5,6 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { CiCreditCard1 } from 'react-icons/ci';
 import { FaBarcode, FaPix } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
-import Alfred from '../../assets/image-alfred-removebg-preview.png';
 import Liquid from '../../assets/lbtc.svg';
 import Lightning from '../../assets/lightning.svg';
 import Onchain from '../../assets/onchain.svg';
@@ -171,11 +170,6 @@ export default function BuyCheckout() {
       <HeaderAlfred />
       <div className="pt-[10%] pb-[10%] lg:pt-8 lg:pb-8 flex items-center justify-center mt-[20%] sm:mt-[10%]">
         <h1 className="text-[#F6911D] dark:text-[#F6911D] font-black text-7xl flex items-center">
-          <img
-            src={Alfred}
-            alt="Image-alfred"
-            className="mr-2 w-[20%] max-w-[100px]"
-          />
           ALFRED
         </h1>
       </div>
