@@ -5,7 +5,6 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { CiCreditCard1 } from 'react-icons/ci';
 import { FaBarcode, FaPix } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
-import Alfred from '../../assets/image-alfred-removebg-preview.png';
 import Liquid from '../../assets/lbtc.svg';
 import Lightning from '../../assets/lightning.svg';
 import Onchain from '../../assets/onchain.svg';
@@ -17,7 +16,7 @@ import { useCurrentLang } from '../../utils/useCurrentLang';
 import HeaderAlfred from './HeaderAlfred';
 
 export default function BuyCheckout() {
-  const [network, setNetwork] = useState<string>('Rede do BTC');
+  const [network, setNetwork] = useState<string>('');
   const [coldWallet, setColdWallet] = useState<string>('');
   const [transactionNumber, setTransactionNumber] = useState<string>('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -27,6 +26,7 @@ export default function BuyCheckout() {
   >('PIX');
   const [pixKey, setPixKey] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [brlAmount, setBrlAmount] = useState('');
   const [btcAmount, setBtcAmount] = useState('');
   const [, setIsWaitingForPayment] = useState(false);
@@ -48,12 +48,6 @@ export default function BuyCheckout() {
     setIsDropdownOpen((prevState) => !prevState);
   };
 
-  const handlesColdWallet = (event: ChangeEvent<HTMLInputElement>) => {
-    setColdWallet(event.target.value);
-  };
-  const handlesTransactionNumbe = (event: ChangeEvent<HTMLInputElement>) => {
-    setTransactionNumber(event.target.value);
-  };
   const selectNetwork = (networkName: string) => {
     setNetwork(networkName);
     setIsDropdownOpen(false);
@@ -68,6 +62,30 @@ export default function BuyCheckout() {
     setIsDropdownOpenMethod(false);
   };
 
+  const validateFields = () => {
+    const newErrors: Record<string, string> = {};
+
+    if (!coldWallet) {
+      newErrors.coldWallet = 'O endereço da carteira não pode estar vazio.';
+    } else if (
+      !/^(1|3)[a-km-zA-HJ-NP-Z0-9]{25,34}$|^bc1[a-zA-HJ-NP-Z0-9]{39,59}$/.test(
+        coldWallet,
+      )
+    ) {
+      newErrors.coldWallet = 'Endereço da carteira inválido.';
+    }
+
+    if (!transactionNumber) {
+      newErrors.transactionNumber = 'O número de telefone é obrigatório.';
+    } else if (!/^\d{9,15}$/.test(transactionNumber)) {
+      newErrors.transactionNumber =
+        'Insira um número de telefone válido (9 a 15 dígitos).';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const networks = [
     { name: 'Lightning', icon: Lightning },
     { name: 'Onchain', icon: Onchain },
@@ -77,6 +95,10 @@ export default function BuyCheckout() {
   const handleProcessPayment = async () => {
     if (!acceptFees || !acceptTerms) {
       alert('Você precisa aceitar as taxas e os termos de uso.');
+      return;
+    }
+
+    if (!validateFields()) {
       return;
     }
 
@@ -148,11 +170,6 @@ export default function BuyCheckout() {
       <HeaderAlfred />
       <div className="pt-[10%] pb-[10%] lg:pt-8 lg:pb-8 flex items-center justify-center mt-[20%] sm:mt-[10%]">
         <h1 className="text-[#F6911D] dark:text-[#F6911D] font-black text-7xl flex items-center">
-          <img
-            src={Alfred}
-            alt="Image-alfred"
-            className="mr-2 w-[20%] max-w-[100px]"
-          />
           ALFRED
         </h1>
       </div>
@@ -273,20 +290,32 @@ export default function BuyCheckout() {
                 <div className="relative">
                   <input
                     value={coldWallet}
-                    onChange={handlesColdWallet}
-                    placeholder="Endereço da cateira de Bitcoin (wallet)"
-                    className="border pl-4 w-96 pr-6 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 cursor-pointer"
+                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                      setColdWallet(e.target.value)
+                    }
+                    placeholder="Endereço da carteira Bitcoin (wallet)"
+                    className="border pl-4 w-96 pr-6 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700"
                   />
+                  {errors.coldWallet && (
+                    <p className="text-red-500 text-sm">{errors.coldWallet}</p>
+                  )}
                 </div>
               </div>
               <div className="flex justify-center items-center pt-4">
                 <div className="relative">
                   <input
                     value={transactionNumber}
-                    onChange={handlesTransactionNumbe}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                      setTransactionNumber(e.target.value)
+                    }
                     placeholder="Telefone para contato (WhatsApp)"
-                    className="border pl-4 w-96 pr-4 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 cursor-pointer"
+                    className="border pl-4 w-96 pr-4 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700"
                   />
+                  {errors.transactionNumber && (
+                    <p className="text-red-500 text-sm">
+                      {errors.transactionNumber}
+                    </p>
+                  )}
                 </div>
               </div>
 
