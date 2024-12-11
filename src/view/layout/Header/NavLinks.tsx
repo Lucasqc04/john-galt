@@ -13,7 +13,6 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { blogData } from '../../../blogContent/blogPosts';
 import { LanguageTexts } from '../../../domain/locales/Language';
-import Alfred from '../../assets/image-alfred-removebg-preview.png';
 import { LanguageSwitcher } from '../../components/LanguageSwitcher/LanguageSwitcher';
 import { useCartContext } from '../../context/CartContext';
 import { ROUTES } from '../../routes/Routes';
@@ -245,11 +244,6 @@ export function NavLinks({
               <span className="hover:text-[#F6911D]">
                 {t(LanguageTexts.header.links[5])}
               </span>
-              <img
-                src={Alfred}
-                alt="Image-alfred"
-                className=" w-[15%] max-w-[100px]"
-              />
             </button>
           </PopoverGroup>
         </>
