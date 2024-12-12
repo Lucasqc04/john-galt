@@ -38,26 +38,15 @@ export function TermsOfUse() {
           <ol className="list-decimal pl-5 text-black dark:text-white">
             <li>Crie um pedido no site.</li>
             <li>
-              Permita que a plataforma carregue o aplicativo Telegram e cole o
-              ID da ordem gerado automaticamente.
-            </li>
-            <li>
-              Se for sua primeira transação, aceite os termos de uso para
+              Sempre lembrar de aceitar as termos de uso e as taxas para
               prosseguir.
             </li>
+            <li>Esteja atento às instruções fornecidas.</li>
             <li>
-              Esteja atento às instruções fornecidas e aguarde pelo atendimento
-              de um provedor.
-            </li>
-            <li>
-              A transação começará quando um provedor aceitar o pedido e
-              solicitar as informações necessárias.
+              A transação começará quando um provedor aceitar o pedido de sua
+              solicitação de compra.
             </li>
           </ol>
-          <p className="text-black dark:text-white mt-4">
-            A conclusão do pedido acontecerá com o envio dos detalhes finais da
-            ordem e a hash da transação.
-          </p>
         </section>
 
         <section className="mb-8">
@@ -65,7 +54,7 @@ export function TermsOfUse() {
             3. Duração da transação
           </h2>
           <p className="text-black dark:text-white">
-            Uma transação normal pode variar de 30 minutos a 72 horas,
+            Uma transação normal pode variar de 30 minutos a 24 horas,
             dependendo de fatores como processamento bancário, apresentação de
             comprovantes e congestionamento de redes.
           </p>
@@ -113,7 +102,9 @@ export function TermsOfUse() {
             6. Disputas e resoluções
           </h2>
           <ul className="list-disc pl-5 text-black dark:text-white">
-            <li>Abra uma disputa chamando no Telegram o suporte designado.</li>
+            <li>
+              Abra uma solicitação no suporte ou entre em contato no WhatsApp.
+            </li>
             <li>
               Penalidades financeiras serão aplicadas em casos de desonestidade.
             </li>
