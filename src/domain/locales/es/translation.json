@@ -15,7 +15,8 @@
     "description": "Nuestra misión es ofrecer el más alto estándar de seguridad en autocustodia, brindándote métodos 100% efectivos para que almacene tus Bitcoins sin intermediarios.",
     "buttons": {
       "products": "Nuestros Productos",
-      "learnMore": "Saber Más"
+      "learnMore": "Saber Más",
+      "buybitcoin": "Compra Bitcoin"
     }
   },
   "positivePoints": {

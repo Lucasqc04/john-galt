@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
-import { MdTouchApp } from 'react-icons/md';
+import { useTranslation } from 'react-i18next';
+import { MdHelp, MdSchool, MdTouchApp, MdVideoLibrary } from 'react-icons/md'; // Ícones novos
 import { ThemeMode } from '../../../domain/entities/theme.entity';
+import { LanguageTexts } from '../../../domain/locales/Language';
 import { ROUTES } from '../../routes/Routes';
 import { useTheme } from '../../screens/useTheme';
 import { useCurrentLang } from '../../utils/useCurrentLang';
@@ -13,6 +15,7 @@ export function useHeader() {
   const [isDarkTheme, setIsDarkTheme] = useState(
     currentTheme === ThemeMode.dark,
   );
+  const { t } = useTranslation();
   const { currentLang } = useCurrentLang();
 
   const [isScrolled, setIsScrolled] = useState(false);
@@ -54,6 +57,24 @@ export function useHeader() {
     },
   ];
 
+  const supportlink = [
+    {
+      name: t(LanguageTexts.header.links[4]),
+      href: ROUTES.Support.call(currentLang),
+      icon: MdHelp,
+    },
+    {
+      name: t(LanguageTexts.header.links[3]),
+      href: ROUTES.tutorials.call(currentLang),
+      icon: MdSchool,
+    },
+    {
+      name: 'Videos',
+      href: ROUTES.videos.call(currentLang),
+      icon: MdVideoLibrary,
+    },
+  ];
+
   return {
     menu: {
       isOpen: mobileMenuOpen,
@@ -65,6 +86,7 @@ export function useHeader() {
       isDarkTheme,
     },
     products,
+    supportlink,
     isLargeScreen,
     isScrolled,
   };

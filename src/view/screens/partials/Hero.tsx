@@ -38,11 +38,21 @@ export function Hero() {
             >
               {t(LanguageTexts.hero.buttons.products)}
             </Link>
-            <a
-              href="#statistics"
-              className="w-full py-2 text-center border border-solid border-orange-primary font-semibold rounded-sm transition-all duration-500 hover:bg-orange-600 hover:text-white shadow-md"
+
+            <Link
+              to="#statistics"
+              className="w-full py-2 bg-orange-primary text-white text-center font-semibold rounded-sm transition-colors duration-300 hover:bg-orange-600 shadow-md"
             >
               {t(LanguageTexts.hero.buttons.learnMore)}
+            </Link>
+          </div>
+
+          <div className="w-full flex justify-center mt-4">
+            <a
+              href={ROUTES.buyBitcoin.call(currentLang || AcceptedLanguages.pt)}
+              className="w-full py-2 text-center border border-solid border-orange-primary font-semibold rounded-sm transition-all duration-500 hover:bg-orange-600 hover:text-white shadow-md"
+            >
+              {t(LanguageTexts.hero.buttons.buybitcoin)}
             </a>
           </div>
         </article>

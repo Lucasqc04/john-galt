@@ -24,6 +24,7 @@ export const LanguageTexts = {
     buttons: {
       products: 'hero.buttons.products',
       learnMore: 'hero.buttons.learnMore',
+      buybitcoin: 'hero.buttons.buybitcoin',
     },
   },
   positivePoints: {
