@@ -6,7 +6,7 @@ import { CiCreditCard1 } from 'react-icons/ci';
 import { FaBarcode, FaPix } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 import Liquid from '../../assets/lbtc.svg';
-import Lightning from '../../assets/lightning.svg';
+// import Lightning from '../../assets/lightning.svg';
 import Onchain from '../../assets/onchain.svg';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import WhatsAppButton from '../../components/buttonWhatsApp';
@@ -87,7 +87,7 @@ export default function BuyCheckout() {
   };
 
   const networks = [
-    { name: 'Lightning', icon: Lightning },
+    // { name: 'Lightning', icon: Lightning },
     { name: 'Onchain', icon: Onchain },
     { name: 'Liquid', icon: Liquid },
   ];
@@ -95,6 +95,10 @@ export default function BuyCheckout() {
   const handleProcessPayment = async () => {
     if (!acceptFees || !acceptTerms) {
       alert('Você precisa aceitar as taxas e os termos de uso.');
+      return;
+    }
+    if (!network) {
+      alert('Você precisa selecionar uma rede de Bitcoin antes de prosseguir.');
       return;
     }
 

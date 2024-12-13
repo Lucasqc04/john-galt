@@ -33,8 +33,8 @@ export default function BuyBitcoinAndCheckout() {
   }, []);
 
   const handleBrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
-    const numericValue = parseInt(value, 10); // Converte para inteiro
+    const value = e.target.value.replace(/\D/g, '');
+    const numericValue = parseInt(value, 10);
 
     if (isNaN(numericValue)) {
       setBrlAmount('');
@@ -49,7 +49,7 @@ export default function BuyBitcoinAndCheckout() {
     const formattedValue = new Intl.NumberFormat('pt-BR', {
       style: 'currency',
       currency: 'BRL',
-      minimumFractionDigits: 0, // Sem casas decimais
+      minimumFractionDigits: 0,
     }).format(numericValue);
 
     setBrlAmount(formattedValue);

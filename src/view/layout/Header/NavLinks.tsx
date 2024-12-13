@@ -26,6 +26,7 @@ type Products = {
 
 type NavLinksProps = {
   products: Products[];
+  supportlink: Products[];
   isVisible: boolean;
   closeButton?: ReactNode;
   isLargeScreen: boolean;
@@ -34,6 +35,7 @@ type NavLinksProps = {
 
 export function NavLinks({
   products,
+  supportlink,
   closeButton,
   isVisible,
   isLargeScreen,
@@ -192,34 +194,54 @@ export function NavLinks({
               </PopoverPanel>
             </Popover>
 
-            <button
-              onClick={() =>
-                handleOnLink(ROUTES.tutorials.call(currentLang), LinkCallBack)
-              }
-              className="text-2xl lg:text-xl font-semibold leading-6 text-black dark:text-white hover:text-[#F6911D]"
-            >
-              {t(LanguageTexts.header.links[3])}
-            </button>
+            <Popover className="relative">
+              <PopoverButton className=" hover:text-[#F6911D] text-2xl flex items-center justify-center gap-x-1 lg:text-xl font-semibold leading-6 text-black dark:text-white ">
+                {t(LanguageTexts.header.links[4])}
+                <MdKeyboardArrowDown
+                  aria-hidden="true"
+                  size={isLargeScreen ? 24 : 28}
+                  className="flex-none text-gray-500 dark:text-white"
+                />
+              </PopoverButton>
 
-            <button
-              onClick={() =>
-                handleOnLink(ROUTES.Support.call(currentLang), LinkCallBack)
-              }
-              className="text-2xl lg:text-xl font-semibold leading-6 text-black dark:text-white hover:text-[#F6911D]"
-            >
-              {t(LanguageTexts.header.links[4])}
-            </button>
-
-            <button
-              onClick={() =>
-                handleOnLink(ROUTES.videos.call(currentLang), LinkCallBack)
-              }
-              className="text-2xl lg:text-xl font-semibold leading-6 text-black dark:text-white hover:text-[#F6911D]"
-            >
-              Videos
-            </button>
+              <PopoverPanel
+                transition
+                className="absolute -left-32 lg:-left-8 top-full z-10 w-screen max-w-md overflow-hidden rounded-3xl bg-white dark:bg-gray-800 dark:text-white shadow-lg ring-1 ring-gray-900/5 transition"
+              >
+                <div className="p-4">
+                  {supportlink.map((item) => (
+                    <button
+                      key={item.name}
+                      onClick={() => handleOnLink(item.href, LinkCallBack)}
+                      className="w-full group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:text-[#F6911D] hover:bg-gray-50 dark:hover:bg-gray-700"
+                    >
+                      <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg group-hover:bg-white dark:group-hover:bg-gray-700">
+                        <item.icon
+                          aria-hidden="true"
+                          className="h-6 w-6 dark:text-white hover:text-[#F6911D]"
+                        />
+                      </div>
+                      <span className="font-semibold hover:text-[#F6911D]">
+                        {item.name}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </PopoverPanel>
+            </Popover>
 
             <LanguageSwitcher className="text-xl flex items-center justify-center gap-x-2 lg:text-xl font-semibold leading-6 hover:text-[#F6911D]" />
+
+            <button
+              onClick={() =>
+                handleOnLink(ROUTES.buyBitcoin.call(currentLang), LinkCallBack)
+              }
+              className="flex items-center text-2xl lg:text-xl font-semibold leading-6 text-black dark:text-white hover:text-[#F6911D]"
+            >
+              <span className="hover:text-[#F6911D]">
+                {t(LanguageTexts.header.links[5])}
+              </span>
+            </button>
 
             <button
               onClick={() =>
@@ -233,17 +255,6 @@ export function NavLinks({
                   {totalItems}
                 </span>
               )}
-            </button>
-
-            <button
-              onClick={() =>
-                handleOnLink(ROUTES.buyBitcoin.call(currentLang), LinkCallBack)
-              }
-              className="flex items-center text-2xl lg:text-xl font-semibold leading-6 text-black dark:text-white hover:text-[#F6911D]"
-            >
-              <span className="hover:text-[#F6911D]">
-                {t(LanguageTexts.header.links[5])}
-              </span>
             </button>
           </PopoverGroup>
         </>

@@ -15,7 +15,8 @@
     "description": "Our mission is to offer the highest standard of security in self-custody, providing 100% effective methods for you to store your Bitcoins without intermediaries",
     "buttons": {
       "products": "Our Products",
-      "learnMore": "Learn More"
+      "learnMore": "Learn More",
+      "buybitcoin": "Buy Bitcoin"
     }
   },
   "positivePoints": {
