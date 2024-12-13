@@ -1,7 +1,7 @@
 import axios from 'axios';
 import classNames from 'classnames';
 import { QRCodeSVG } from 'qrcode.react';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { CiCreditCard1 } from 'react-icons/ci';
 import { FaBarcode, FaPix } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
@@ -17,6 +17,9 @@ import HeaderAlfred from './HeaderAlfred';
 
 export default function BuyCheckout() {
   const [network, setNetwork] = useState<string>('');
+  const [timeLeft, setTimeLeft] = useState(240); // 240 segundos = 4 minutos
+  const [isTransactionTimedOut, setIsTransactionTimedOut] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [coldWallet, setColdWallet] = useState<string>('');
   const [transactionNumber, setTransactionNumber] = useState<string>('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -108,6 +111,13 @@ export default function BuyCheckout() {
 
     setIsLoading(true);
 
+    timeoutRef.current = setTimeout(
+      () => {
+        setIsTransactionTimedOut(true);
+        setIsLoading(false);
+      },
+      4 * 60 * 1000,
+    );
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/orders/create-order`,
@@ -120,9 +130,12 @@ export default function BuyCheckout() {
           coldWalletId: coldWallet,
         },
       );
+      if (isTransactionTimedOut) return;
 
       const pixKey = response.data.order.pixKey;
       setPixKey(pixKey);
+
+      setTimeLeft(240);
 
       setIsLoading(false);
 
@@ -142,31 +155,44 @@ export default function BuyCheckout() {
   };
 
   const verifyPaymentStatus = async (orderId: string) => {
-    setIsWaitingForPayment(true);
-
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/orders/confirm-payment`,
-        {
-          orderId,
-        },
+        { orderId },
       );
-
-      console.log(response);
 
       if (response.data === 'confirmed') {
         navigate(ROUTES.paymentStatus.success.call(currentLang));
       } else {
-        alert('Pagamento ainda não confirmado. Tente novamente.');
+        console.warn('Pagamento ainda não confirmado. Tente novamente.');
+        setIsWaitingForPayment(false);
       }
     } catch (error) {
       console.error('Erro ao verificar o status do pagamento:', error);
-      alert('Erro ao verificar o status do pagamento.');
-      navigate(ROUTES.paymentStatus.failure.call(currentLang));
-    } finally {
       setIsWaitingForPayment(false);
     }
   };
+
+  useEffect(() => {
+    if (timeLeft <= 0) {
+      setIsTransactionTimedOut(true);
+      navigate(ROUTES.paymentStatus.failure.call(currentLang));
+      return;
+    }
+
+    const timer = setTimeout(
+      () => setTimeLeft((prevTime) => prevTime - 1),
+      1000,
+    );
+
+    return () => clearTimeout(timer);
+  }, [timeLeft, navigate, currentLang]);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   return (
     <div>
@@ -186,6 +212,12 @@ export default function BuyCheckout() {
 
           {pixKey ? (
             <div className="flex flex-col items-center pt-4">
+              <p className="text-center text-red-600">
+                Tempo restante para pagamento: {Math.floor(timeLeft / 60)}:
+                {timeLeft % 60 < 10 ? '0' : ''}
+                {timeLeft % 60} minutos
+              </p>
+
               <p className="text-xl text-center text-black dark:text-white mb-4">
                 Escaneie o QR Code ou copie a chave PIX abaixo:
               </p>

@@ -12,6 +12,8 @@ import { DefaultLayout } from '../layout/DefaultyLayout';
 import { AboutBuyBitcoin } from '../screens/BuyBitcoin/AboutBuyBitcoin';
 import BuyBitcoin from '../screens/BuyBitcoin/BuyBitcoin';
 import BuyCheckout from '../screens/BuyBitcoin/BuyCheckout';
+import { PaymentAlfredFailure } from '../screens/BuyBitcoin/pageFailure';
+import { PaymentAlfredSuccess } from '../screens/BuyBitcoin/pageSucces';
 import { Fees } from '../screens/BuyBitcoin/RateBitcoin';
 import { TermsOfUse } from '../screens/BuyBitcoin/TermsUse';
 import { BitcoinPayment } from '../screens/Checkout/BitcoinPayment';
@@ -131,6 +133,14 @@ export function BrowserRouter() {
             <Route path={ROUTES.buyBitcoin.path} element={<BuyBitcoin />} />
             <Route path={ROUTES.fee.path} element={<Fees />} />
             <Route path={ROUTES.buyCheckout.path} element={<BuyCheckout />} />
+            <Route
+              path={ROUTES.paymentAlfredStatus.success.path}
+              element={<PaymentAlfredSuccess />}
+            />
+            <Route
+              path={ROUTES.paymentAlfredStatus.failure.path}
+              element={<PaymentAlfredFailure />}
+            />
             <Route
               path={ROUTES.aboutBitcoin.path}
               element={<AboutBuyBitcoin />}
