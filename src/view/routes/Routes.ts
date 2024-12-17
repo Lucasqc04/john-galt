@@ -98,4 +98,14 @@ export const ROUTES = {
       call: (currentLang: string) => `/${currentLang}/success`,
     },
   },
+  paymentAlfredStatus: {
+    failure: {
+      path: 'failure-alfred',
+      call: (currentLang: string) => `/${currentLang}/failure-alfred`,
+    },
+    success: {
+      path: 'success-alfred',
+      call: (currentLang: string) => `/${currentLang}/success-alfred`,
+    },
+  },
 };
