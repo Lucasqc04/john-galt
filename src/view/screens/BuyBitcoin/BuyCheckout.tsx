@@ -7,7 +7,7 @@ import { FaBarcode, FaPix } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 import Liquid from '../../assets/lbtc.svg';
 // import Lightning from '../../assets/lightning.svg';
-import Onchain from '../../assets/onchain.svg';
+import Onchain from '../../assets/bitcoin.svg';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import WhatsAppButton from '../../components/buttonWhatsApp';
 import { Loader } from '../../components/Loader';
@@ -17,7 +17,7 @@ import HeaderAlfred from './HeaderAlfred';
 
 export default function BuyCheckout() {
   const [network, setNetwork] = useState<string>('');
-  const [timeLeft, setTimeLeft] = useState(240); // 240 segundos = 4 minutos
+  const [timeLeft, setTimeLeft] = useState(240);
   const [isTransactionTimedOut, setIsTransactionTimedOut] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [coldWallet, setColdWallet] = useState<string>('');
@@ -174,9 +174,13 @@ export default function BuyCheckout() {
   };
 
   useEffect(() => {
+    if (!pixKey) {
+      console.log(pixKey);
+      return;
+    }
     if (timeLeft <= 0) {
       setIsTransactionTimedOut(true);
-      navigate(ROUTES.paymentStatus.failure.call(currentLang));
+      navigate(ROUTES.paymentAlfredStatus.failure.call(currentLang));
       return;
     }
 
@@ -186,7 +190,7 @@ export default function BuyCheckout() {
     );
 
     return () => clearTimeout(timer);
-  }, [timeLeft, navigate, currentLang]);
+  }, [timeLeft, navigate, currentLang, pixKey]);
 
   useEffect(() => {
     return () => {
