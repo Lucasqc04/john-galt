@@ -76,45 +76,51 @@ export default function BuyBitcoinAndCheckout() {
     <div>
       <BackgroundAnimatedProduct />
       <HeaderAlfred />
-      <div className="pt-[10%] pb-[10%] flex items-center justify-center mt-[10%] sm:mt-[0%]">
-        <h1 className="text-[#F6911D] dark:text-[#F6911D] font-black text-7xl flex items-center">
+      <div className="lg:pt-[5%] lg:pb-[3%]  pt-[20%] pb-[3%] flex items-center justify-center mt-[10%] sm:mt-[5%] lg:mt-[2%]">
+        <h1 className="text-[#F6911D] dark:text-[#F6911D] font-black text-5xl sm:text-6xl lg:text-7xl flex items-center">
           ALFRED
         </h1>
       </div>
 
-      <div className="flex justify-center">
-        <div>
+      <div className="flex justify-center px-4 sm:px-8 lg:px-0">
+        <div className="w-full max-w-lg">
           <div className="flex justify-center items-center space-x-4">
-            <div className="relative">
+            <div className="relative w-full">
               <input
                 value={brlAmount}
                 onChange={handleBrlChange}
                 placeholder="Digite o valor em BRL"
-                className="border pl-20 pr-20 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 text-center no-arrows"
+                className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 text-center w-full"
               />
-              <button className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white px-4 rounded-full">
-                <img src={Brl} alt="BRL" className="w-8 h-8" />
+              <button className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white">
+                <img src={Brl} alt="BRL" className="w-6 h-6 sm:w-8 sm:h-8" />
               </button>
             </div>
           </div>
+
           <div className="flex justify-center items-center pt-4">
-            <div className="relative">
+            <div className="relative w-full">
               <input
                 value={btcAmount}
                 readOnly
                 placeholder="Valor em BTC"
-                className="border pl-20 pr-20 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 text-center no-arrows"
+                className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 text-center w-full"
               />
-              <button className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white px-4 rounded-full">
-                <img src={Btc} alt="Bitcoin" className="w-8 h-8" />
+              <button className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white">
+                <img
+                  src={Btc}
+                  alt="Bitcoin"
+                  className="w-6 h-6 sm:w-8 sm:h-8"
+                />
               </button>
             </div>
           </div>
+
           <div className="flex justify-center items-center pt-4">
             <button
               onClick={handleNextStep}
               type="button"
-              className="w-full h-12 bg-[#F6911D] text-black dark:text-white rounded-3xl font-bold"
+              className="w-full h-10 sm:h-12 bg-[#F6911D] text-black dark:text-white rounded-3xl font-bold text-sm sm:text-base"
             >
               Prosseguir
             </button>
