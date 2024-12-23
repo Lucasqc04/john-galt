@@ -7,40 +7,30 @@ import { usePaymentOptions } from './usePaymentOptions';
 
 type Option = {
   label: string;
-  value: 'MP' | 'EFI' | 'BTC' | 'OTHER';
+  value: 'MP' | 'EFI' | 'BTC' | 'YAMPI' | 'OTHER';
   icon: ReactNode;
 };
 
 const options: Option[] = [
-  // {
-  //   label: t('paymentForm.creditCard'),
-  //   value: 'EFI',
-  //   icon: <FaRegCreditCard size={32} />,
-  // },
-  // {
-  //   label: t('paymentForm.pix'),
-  //   value: 'EFI',
-  //   icon: <img src={Pix} alt="Pix" className="w-8" />,
-  // },
   {
     label: `${t('paymentForm.pix')} - MP`,
     value: 'MP',
     icon: <img src={Pix} alt="Pix" className="w-8" />,
   },
   // {
-  //   label: `${t('paymentForm.creditCard')} - MP`,
-  //   value: 'MP',
-  //   icon: <FaRegCreditCard size={32} />,
-  // },
-  {
-    label: `${t('paymentForm.creditCard')}`,
-    value: 'OTHER',
-    icon: <FaRegCreditCard size={32} />,
-  },
+  //  label: `${t('paymentForm.creditCard')}`,
+  //   value: 'OTHER',
+  //  icon: <FaRegCreditCard size={32} />,
+  //  },
   {
     label: 'Bitcoin',
     value: 'BTC',
     icon: <FaBitcoin size={32} />,
+  },
+  {
+    label: `${t('paymentForm.creditCard')}`,
+    value: 'YAMPI',
+    icon: <FaRegCreditCard size={32} />,
   },
 ];
 

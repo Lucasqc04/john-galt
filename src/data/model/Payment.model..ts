@@ -55,7 +55,7 @@ export class GetCheckoutModel {
   selectInstallments!: string;
   total!: number;
   birthday!: string;
-  paymentOption!: 'creditCard' | 'pix' | 'BTC';
+  paymentOption!: 'creditCard' | 'pix' | 'BTC' | 'YAMPI';
 }
 
 export const CreatedCheckoutModel = z.object({

@@ -42,10 +42,13 @@ export const Items = z.object({
   imageUrl: z.string(),
   categoryId: z.string().min(1),
   description: z.string().min(1),
+  sku: z.string().optional(),
+  sku_id: z.number().optional(),
+  Yampi_Product_id: z.number().optional(),
 });
 export type Items = z.infer<typeof Items>;
 
-export const PaymentMethod = z.enum(['MP', 'EFI', 'BTC', 'OTHER']);
+export const PaymentMethod = z.enum(['MP', 'EFI', 'BTC', 'OTHER', 'YAMPI']);
 export type PaymentMethod = z.infer<typeof PaymentMethod>;
 
 export const Brand = z.enum([
@@ -88,7 +91,7 @@ export const GetCheckout = z.object({
   selectInstallments: z.string(),
   total: z.number(),
   birthday: z.string(),
-  paymentOption: z.enum(['creditCard', 'pix', 'BTC']),
+  paymentOption: z.enum(['creditCard', 'pix', 'BTC', 'YAMPI']),
   shipping: z.object({
     id: z.number(),
     name: z.string(),

@@ -185,6 +185,12 @@ export function useCheckout() {
         }
       }
 
+      if (req.method === 'YAMPI' && 'reorder_url' in result.data) {
+        const yampiData = result.data as { reorder_url: string };
+        window.location.href = yampiData.reorder_url;
+        return;
+      }
+
       if ('paymentLink' in result.data) {
         window.location.href = result.data.paymentLink;
         return;

@@ -1,3 +1,4 @@
+import { z } from 'zod';
 import { PaymentMethod } from '../../domain/entities/payment.entity';
 import { ExceptionHandler } from '../../utils/ExceptionHandler';
 import { DefaultResultError, Result } from '../../utils/Result';
@@ -23,7 +24,8 @@ export type CreateRes = Promise<
     | CreatedCheckoutModel
     | PaymentAPIResponse
     | ChargedPIXModel
-    | ChargedBTCModel,
+    | ChargedBTCModel
+    | { reorder_url: string }, // Adicionado o tipo de resposta YAMPI
     { code: 'SERIALIZATION' } | DefaultResultError
   >
 >;
@@ -149,7 +151,7 @@ export class PaymentRepositoryImpl implements PaymentRepository {
 
   private getModelToValidate(
     method: PaymentMethod,
-    paymentOption?: 'creditCard' | 'pix' | 'BTC',
+    paymentOption?: 'creditCard' | 'pix' | 'BTC' | 'YAMPI',
   ) {
     switch (method) {
       case 'MP':
@@ -164,6 +166,8 @@ export class PaymentRepositoryImpl implements PaymentRepository {
         return ChargedPIXModel;
       case 'BTC':
         return ChargedBTCModel;
+      case 'YAMPI':
+        return z.object({ reorder_url: z.string().url() });
       default:
         throw new Error('Método de pagamento não suportado');
     }
