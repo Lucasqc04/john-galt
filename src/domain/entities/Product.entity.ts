@@ -13,4 +13,7 @@ export class Product {
   images!: string[];
   items?: Item[];
   resources!: string[];
+  sku?: string;
+  sku_id?: number;
+  Yampi_Product_id?: number;
 }

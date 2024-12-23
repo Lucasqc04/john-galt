@@ -68,6 +68,14 @@ export function ConfirmInfos() {
           {infos.paymentOption === 'creditCard' &&
             `- ${infos.selectInstallments ?? 'Consultar parcelamento '}X`}
         </span>
+        {/* Mensagem para YAMPI */}
+        {infos.paymentOption === 'YAMPI' && (
+          <span className="text-red-500 font-semibold mt-2">
+            Atenção: Por favor, preencha os mesmos dados inseridos em nosso site
+            na plataforma de pagamento. Você será redirecionado para concluir o
+            pagamento com maior segurança e controle.
+          </span>
+        )}
       </div>
     </div>
   );

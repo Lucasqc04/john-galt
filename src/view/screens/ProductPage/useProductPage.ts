@@ -83,6 +83,9 @@ export function useProductPage() {
         imageUrl: product.images[0],
         categoryId: product.name,
         description: product.description,
+        Yampi_Product_id: product.Yampi_Product_id,
+        sku: product.sku,
+        sku_id: product.sku_id,
       };
 
       add(productToAdd);
