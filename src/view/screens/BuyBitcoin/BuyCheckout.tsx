@@ -22,6 +22,7 @@ export default function BuyCheckout() {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [coldWallet, setColdWallet] = useState<string>('');
   const [transactionNumber, setTransactionNumber] = useState<string>('');
+  // const [cupom, setCupom] = useState<string>('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpenMethod, setIsDropdownOpenMethod] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<
@@ -37,6 +38,7 @@ export default function BuyCheckout() {
   const [acceptTerms, setAcceptTerms] = useState(false);
   const navigate = useNavigate();
   const { currentLang } = useCurrentLang();
+  // const cupomValue = cupom.toUpperCase;
 
   useEffect(() => {
     const storedBrl = localStorage.getItem('brlAmount');
@@ -118,6 +120,7 @@ export default function BuyCheckout() {
       },
       4 * 60 * 1000,
     );
+
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/orders/create-order`,
@@ -128,6 +131,7 @@ export default function BuyCheckout() {
           network: network,
           phone: transactionNumber,
           coldWalletId: coldWallet,
+          // cupom: cupom,
         },
       );
       if (isTransactionTimedOut) return;
@@ -244,180 +248,203 @@ export default function BuyCheckout() {
             </div>
           ) : (
             <>
-              <div className="flex justify-center items-center pt-4">
-                <div className="relative">
-                  <input
-                    type="text"
-                    value={network}
-                    readOnly
-                    placeholder="Selecione uma rede"
-                    className="border pl-4 w-96 pr-4 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 cursor-pointer"
-                    onClick={toggleDropdown}
-                  />
-                  <button
-                    onClick={toggleDropdown}
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white px-4 rounded-full"
-                  >
-                    {networks.find((net) => net.name === network)?.icon && (
-                      <img
-                        src={networks.find((net) => net.name === network)?.icon}
-                        alt={network}
-                        className="w-8 h-8"
+              <div className="flex justify-center px-4 sm:px-8 lg:px-0">
+                <div className="w-full max-w-lg">
+                  <div className="flex justify-center items-center space-x-4">
+                    <div className="relative w-full">
+                      <input
+                        type="text"
+                        value={network}
+                        readOnly
+                        placeholder="Selecione uma rede"
+                        className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 text-center w-full"
+                        onClick={toggleDropdown}
                       />
-                    )}
-                  </button>
-                  {isDropdownOpen && (
-                    <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
-                      <ul>
-                        {networks.map((net) => (
-                          <li
-                            key={net.name}
-                            onClick={() => selectNetwork(net.name)}
-                            className="flex items-center px-3 py-2 hover:bg-gray-100 cursor-pointer"
-                          >
-                            {net.name}
-                            <img
-                              src={net.icon}
-                              alt={net.name}
-                              className="w-8 h-8 ml-2"
-                            />
-                          </li>
-                        ))}
-                      </ul>
+                      <button
+                        onClick={toggleDropdown}
+                        className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white"
+                      >
+                        {networks.find((net) => net.name === network)?.icon && (
+                          <img
+                            src={
+                              networks.find((net) => net.name === network)?.icon
+                            }
+                            alt={network}
+                            className="w-8 h-8 sm:w-10 sm:h-10"
+                          />
+                        )}
+                      </button>
+                      {isDropdownOpen && (
+                        <div className="absolute right-0 top-full mt-2 w-full sm:w-48 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+                          <ul>
+                            {networks.map((net) => (
+                              <li
+                                key={net.name}
+                                onClick={() => selectNetwork(net.name)}
+                                className="flex items-center px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                              >
+                                {net.name}
+                                <img
+                                  src={net.icon}
+                                  alt={net.name}
+                                  className="w-8 h-8 ml-2 sm:w-10 sm:h-10"
+                                />
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-              </div>
+                  </div>
 
-              <div className="flex justify-center items-center pt-4">
-                <div className="relative">
-                  <input
-                    type="text"
-                    value={paymentMethod}
-                    readOnly
-                    placeholder="Selecione o método de pagamento"
-                    className="border pl-4 w-96 pr-4 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 cursor-pointer"
-                    onClick={toggleDropdownMethod}
-                  />
-                  <button
-                    onClick={toggleDropdownMethod}
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 text-black dark:text-white px-4 rounded-full"
-                  >
-                    {paymentMethod === 'PIX' ? (
-                      <FaPix className="w-8 h-8" />
-                    ) : paymentMethod === 'Cartão de Crédito' ? (
-                      <CiCreditCard1 className="w-8 h-8" />
+                  <div className="flex justify-center items-center pt-4">
+                    <div className="relative w-full">
+                      <input
+                        type="text"
+                        value={paymentMethod}
+                        readOnly
+                        placeholder="Selecione o método de pagamento"
+                        className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 cursor-pointer w-full"
+                        onClick={toggleDropdownMethod}
+                      />
+                      <button
+                        onClick={toggleDropdownMethod}
+                        className="absolute right-4 top-1/2 transform -translate-y-1/2 text-black dark:text-white"
+                      >
+                        {paymentMethod === 'PIX' ? (
+                          <FaPix className="w-8 h-8 sm:w-10 sm:h-10" />
+                        ) : paymentMethod === 'Cartão de Crédito' ? (
+                          <CiCreditCard1 className="w-8 h-8 sm:w-10 sm:h-10" />
+                        ) : (
+                          <FaBarcode className="w-8 h-8 sm:w-10 sm:h-10" />
+                        )}
+                      </button>
+                      {isDropdownOpenMethod && (
+                        <div className="absolute z-50 right-0 top-full mt-2 w-full sm:w-48 bg-white border border-gray-300 rounded-lg shadow-lg">
+                          <ul>
+                            <li
+                              onClick={() => selectPaymentMethod('PIX')}
+                              className="flex items-center px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                            >
+                              PIX
+                              <FaPix className="w-8 h-8 sm:w-10 sm:h-10" />
+                            </li>
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="flex justify-center items-center pt-4">
+                    <div className="relative w-full">
+                      <input
+                        value={coldWallet}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                          setColdWallet(e.target.value)
+                        }
+                        placeholder="Endereço da carteira Bitcoin (wallet)"
+                        className="border pl-4 pr-6 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 w-full"
+                      />
+                      {errors.coldWallet && (
+                        <p className="text-red-500 text-sm">
+                          {errors.coldWallet}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="flex justify-center items-center pt-4">
+                    <div className="relative w-full">
+                      <input
+                        value={transactionNumber}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                          setTransactionNumber(e.target.value)
+                        }
+                        placeholder="Telefone para contato (WhatsApp)"
+                        className="border pl-4 pr-6 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 w-full"
+                      />
+                      {errors.transactionNumber && (
+                        <p className="text-red-500 text-sm">
+                          {errors.transactionNumber}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* <div className="flex justify-center items-center pt-4">
+                    <div className="relative w-full">
+                      <input
+                        value={cupom}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                          setCupom(e.target.value)
+                        }
+                        placeholder="Cupom"
+                        className="border pl-4 pr-6 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 w-full"
+                      />
+                    </div>
+                  </div> */}
+
+                  <div className="flex flex-col justify-center items-start pt-4">
+                    <label className="flex items-center dark:text-white">
+                      <input
+                        type="checkbox"
+                        checked={acceptFees}
+                        onChange={() => setAcceptFees(!acceptFees)}
+                        className="mr-2"
+                      />
+                      <span
+                        onClick={() =>
+                          window.open(
+                            ROUTES.fee.call(currentLang),
+                            '_blank',
+                            'noopener,noreferrer',
+                          )
+                        }
+                        className="cursor-pointer text-blue-500 hover:underline"
+                      >
+                        ACEITO AS TAXAS
+                      </span>
+                    </label>
+                    <label className="flex items-center dark:text-white">
+                      <input
+                        type="checkbox"
+                        checked={acceptTerms}
+                        onChange={() => setAcceptTerms(!acceptTerms)}
+                        className="mr-2"
+                      />
+                      <span
+                        onClick={() =>
+                          window.open(
+                            ROUTES.term.call(currentLang),
+                            '_blank',
+                            'noopener,noreferrer',
+                          )
+                        }
+                        className="cursor-pointer text-blue-500 hover:underline"
+                      >
+                        ACEITO OS TERMOS DE USO
+                      </span>
+                    </label>
+                  </div>
+
+                  <div className="flex justify-center items-center pt-4">
+                    {isLoading ? (
+                      <Loader />
                     ) : (
-                      <FaBarcode className="w-8 h-8" />
+                      <button
+                        onClick={handleProcessPayment}
+                        type="button"
+                        disabled={!acceptFees || !acceptTerms}
+                        className={classNames(
+                          'w-full h-12 sm:h-14 bg-[#F6911D] text-black dark:text-white rounded-3xl font-bold text-sm sm:text-base mb-4',
+                          (!acceptFees || !acceptTerms) && 'opacity-50',
+                        )}
+                      >
+                        Obter Chave PIX
+                      </button>
                     )}
-                  </button>
-                  {isDropdownOpenMethod && (
-                    <div className="absolute z-50 right-0 top-full mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg">
-                      <ul>
-                        <li
-                          onClick={() => selectPaymentMethod('PIX')}
-                          className="flex items-center px-3 py-2 hover:bg-gray-100 cursor-pointer"
-                        >
-                          PIX
-                          <FaPix />
-                        </li>
-                      </ul>
-                    </div>
-                  )}
+                  </div>
                 </div>
-              </div>
-              <div className="flex justify-center items-center pt-4">
-                <div className="relative">
-                  <input
-                    value={coldWallet}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                      setColdWallet(e.target.value)
-                    }
-                    placeholder="Endereço da carteira Bitcoin (wallet)"
-                    className="border pl-4 w-96 pr-6 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700"
-                  />
-                  {errors.coldWallet && (
-                    <p className="text-red-500 text-sm">{errors.coldWallet}</p>
-                  )}
-                </div>
-              </div>
-              <div className="flex justify-center items-center pt-4">
-                <div className="relative">
-                  <input
-                    value={transactionNumber}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                      setTransactionNumber(e.target.value)
-                    }
-                    placeholder="Telefone para contato (WhatsApp)"
-                    className="border pl-4 w-96 pr-4 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700"
-                  />
-                  {errors.transactionNumber && (
-                    <p className="text-red-500 text-sm">
-                      {errors.transactionNumber}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              <div className="flex flex-col justify-center items-start pt-4">
-                <label className="flex items-center dark:text-white">
-                  <input
-                    type="checkbox"
-                    checked={acceptFees}
-                    onChange={() => setAcceptFees(!acceptFees)}
-                    className="mr-2"
-                  />
-                  <span
-                    onClick={() =>
-                      window.open(
-                        ROUTES.fee.call(currentLang),
-                        '_blank',
-                        'noopener,noreferrer',
-                      )
-                    }
-                    className="cursor-pointer text-blue-500 hover:underline"
-                  >
-                    ACEITO AS TAXAS
-                  </span>
-                </label>
-                <label className="flex items-center dark:text-white">
-                  <input
-                    type="checkbox"
-                    checked={acceptTerms}
-                    onChange={() => setAcceptTerms(!acceptTerms)}
-                    className="mr-2"
-                  />
-                  <span
-                    onClick={() =>
-                      window.open(
-                        ROUTES.term.call(currentLang),
-                        '_blank',
-                        'noopener,noreferrer',
-                      )
-                    }
-                    className="cursor-pointer text-blue-500 hover:underline"
-                  >
-                    ACEITO OS TERMOS DE USO
-                  </span>
-                </label>
-              </div>
-
-              <div className="flex justify-center items-center pt-4">
-                {isLoading ? (
-                  <Loader />
-                ) : (
-                  <button
-                    onClick={handleProcessPayment}
-                    type="button"
-                    disabled={!acceptFees || !acceptTerms}
-                    className={classNames(
-                      'w-full h-12 bg-[#F6911D] text-black dark:text-white rounded-3xl font-bold',
-                      (!acceptFees || !acceptTerms) && 'opacity-50',
-                    )}
-                  >
-                    Obter Chave PIX
-                  </button>
-                )}
               </div>
             </>
           )}
