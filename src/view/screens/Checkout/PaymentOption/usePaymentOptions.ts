@@ -8,7 +8,7 @@ export function usePaymentOptions() {
   const selectedPaymentLabel = form.watch('selectedPaymentLabel');
 
   const handlePaymentSelection = (
-    method: 'MP' | 'EFI' | 'BTC' | 'OTHER',
+    method: 'MP' | 'EFI' | 'BTC' | 'YAMPI' | 'OTHER',
     label: string,
   ) => {
     form.setValue('method', method);
@@ -37,6 +37,12 @@ export function usePaymentOptions() {
         break;
       case 'BTC':
         form.setValue('paymentOption', 'BTC');
+        break;
+      case 'YAMPI':
+        form.setValue('paymentOption', 'YAMPI');
+        break;
+      default:
+        console.warn('Método de pagamento desconhecido:', method);
         break;
     }
   };

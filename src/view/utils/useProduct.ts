@@ -56,6 +56,9 @@ export function useProducts() {
       ],
       items: infos[0].items,
       resources: infos[0].resources,
+      Yampi_Product_id: 37615989,
+      sku: 'EBJF7U6H7',
+      sku_id: 253054601,
     },
     {
       id: '2',
@@ -77,6 +80,9 @@ export function useProducts() {
       ],
       items: infos[1].items,
       resources: infos[1].resources,
+      Yampi_Product_id: 37616063,
+      sku: 'NE4PUR9NF',
+      sku_id: 253055425,
     },
     {
       id: '10000',
@@ -96,6 +102,9 @@ export function useProducts() {
         Seedkit8,
       ],
       resources: infos[0].resources,
+      Yampi_Product_id: 37809174,
+      sku: 'ANVJ5V3FA',
+      sku_id: 254405963,
     },
   ];
 
