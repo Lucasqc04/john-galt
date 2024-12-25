@@ -228,19 +228,19 @@
     "description": "BAIXE AQUI ARQUIVOS GRATUITOS QUE PREPARAMOS ESPECIALMENTE PARA VOCE QUE ESTA INICIANDO",
     "items": {
       "1": {
-        "title": "CRIE SUA CHAVE E DEPOSITE BITCOIN",
+        "title": "CRIE SUA CHAVE PRIVADA E GUARDE SEUS BITCOINS",
         "description": "Aprenda a criar sua chave e depositar Bitcoin com segurança. Este tutorial é essencial para começar sua jornada no mundo das criptomoedas."
       },
       "2": {
-        "title": "COMO ADICIONAR UMA SENHA E CRIAR A CARTEIRA ISCA",
+        "title": "ADICIONE UMA SENHA (PASSPHRASE)",
         "description": "Adicione uma senha forte à sua carteira e mantenha seus Bitcoins seguros. Tutorial essencial para proteger seus ativos digitais."
       },
       "3": {
-        "title": "RECUPERE SUA CARTEIRA E ENVIE BITCOIN",
+        "title": "COMO ACESSAR SUA CARTEIRA E TRANSFERIR BITCOINS",
         "description": "Saiba como recuperar sua carteira e enviar Bitcoin facilmente, mantendo o controle total de seus fundos."
       },
       "4": {
-        "title": "COMO PERFURAR A PLACA METÁLICA",
+        "title": "COMO RECUPERAR SUA CONTA SEM O DISPOSITIVO KRUX (COLD WALLET)",
         "description": "Aprenda a perfurar placas metálicas com segurança e eficiência, um guia importante para quem trabalha com materiais manuais."
       },
       "5": {
@@ -252,15 +252,15 @@
         "description": "Monte um punção automático para otimizar seu trabalho e aumentar a precisão dos seus processos."
       },
       "7": {
-        "title": "VERIFICANDO O CÓDIGO DA KRUX",
+        "title": "VALIDE O CÓDIGO INSTALADO NA SUA CARTEIRA",
         "description": "Aprenda a verificar o código da Krux para garantir a segurança de suas transações digitais."
       },
       "8": {
-        "title": "COMO CRIAR SUA SEEDQR",
+        "title": "COMO REALIZAR O BACKUP DA SUA CHAVE PRIVADA (SEEDQR)",
         "description": "Crie sua SeedQR de maneira segura para proteger seus dados e criptomoedas."
       },
       "9": {
-        "title": "COMO FAZER O BACKUP NA SUA TINY SEED",
+        "title": "COMO REALIZAR O BACKUP DA SUA CHAVE PRIVADA (TINY SEED)",
         "description": "Faça backup seguro de seus dados na Tiny Seed e nunca perca suas informações importantes."
       }
     },

@@ -1,14 +1,14 @@
 import { useTranslation } from 'react-i18next';
 
-import image1 from '../assets/images/tutorial/tutorial-1.png';
-import image2 from '../assets/images/tutorial/tutorial-2.png';
-import image3 from '../assets/images/tutorial/tutorial-3.png';
-import image4 from '../assets/images/tutorial/tutorial-4.png';
+import como_acessar_sua_carteira_e_transferir_bitcoins from '../assets/images/tutorial/como_acessar_sua_carteira_e_transferir_bitcoins.png';
+import como_adicionar_uma_senha_passphrase from '../assets/images/tutorial/como_adicionar_uma_senha_passphrase.png';
+import como_montar_seu_puncao_automatico from '../assets/images/tutorial/como_montar_seu_puncao_automatico.png';
+import como_realizar_o_backup_da_sua_chave_privada_seedqr from '../assets/images/tutorial/como_realizar_o_backup_da_sua_chave_privada_seedqr.png';
+import como_realizar_o_backup_da_sua_chave_privada_tiniyseed from '../assets/images/tutorial/como_realizar_o_backup_da_sua_chave_privada_tiniyseed.png';
+import como_recuperar_sua_conta_sem_o_dispositivo_krux from '../assets/images/tutorial/como_recuperar_sua_conta_sem_o_dispositivo_krux.png';
+import crie_sua_chave_privada_e_guarde_seus_bitcoins from '../assets/images/tutorial/crie_sua_chave_privada_e_guarde_seus_bitcoins.png';
 import image5 from '../assets/images/tutorial/tutorial-5.png';
-import image6 from '../assets/images/tutorial/tutorial-6.png';
-import image7 from '../assets/images/tutorial/tutorial-7.png';
-import image8 from '../assets/images/tutorial/tutorial-8.png';
-import image9 from '../assets/images/tutorial/tutorial-9.png';
+import valide_o_codigo_instalado_na_sua_carteira from '../assets/images/tutorial/valide_o_codigo_instalado_na_sua_carteira.png';
 import { BackgroundAnimatedProduct } from '../components/BackgroundAnimatedProduct';
 
 export function TutorialsPage() {
@@ -16,31 +16,38 @@ export function TutorialsPage() {
 
   const tutorials = [
     {
+      id: 7,
+      title: t('tutorials.items.7.title'),
+      file: '/tutorial/valide_o_codigo_instalado_na_sua_carteira.pdf',
+      image: valide_o_codigo_instalado_na_sua_carteira,
+      description: t('tutorials.items.7.description'),
+    },
+    {
       id: 1,
       title: t('tutorials.items.1.title'),
-      file: '/tutorial/1° TUTORIAL - CRIE SUA CHAVE E DEPOSITE BITCOIN.pdf',
-      image: image1,
+      file: '/tutorial/crie_sua_chave_privada_e_guarde_seus_bitcoins.pdf',
+      image: crie_sua_chave_privada_e_guarde_seus_bitcoins,
       description: t('tutorials.items.1.description'),
     },
     {
       id: 2,
       title: t('tutorials.items.2.title'),
-      file: '/tutorial/2° TUTORIAL - COMO ADICIONAR UMA SENHA E CRIAR A CARTEIRA ISCA.pdf',
-      image: image2,
+      file: '/tutorial/como_adicionar_uma_senha_passphrase.pdf',
+      image: como_adicionar_uma_senha_passphrase,
       description: t('tutorials.items.2.description'),
     },
     {
       id: 3,
       title: t('tutorials.items.3.title'),
-      file: '/tutorial/3° TUTORIAL - RECUPERE SUA CARTEIRA E ENVIE BITCOIN.pdf',
-      image: image3,
+      file: '/tutorial/como_acessar_sua_carteira_e_transferir_bitcoins.pdf',
+      image: como_acessar_sua_carteira_e_transferir_bitcoins,
       description: t('tutorials.items.3.description'),
     },
     {
       id: 4,
       title: t('tutorials.items.4.title'),
-      file: '/tutorial/4° TUTORIAL - COMO PERFURAR A PLACA METALICA.pdf',
-      image: image4,
+      file: '/tutorial/como_recuperar_sua_conta_sem_o_dispositivo_krux.pdf',
+      image: como_recuperar_sua_conta_sem_o_dispositivo_krux,
       description: t('tutorials.items.4.description'),
     },
     {
@@ -53,30 +60,23 @@ export function TutorialsPage() {
     {
       id: 6,
       title: t('tutorials.items.6.title'),
-      file: '/tutorial/6° TUTORIAL - COMO MONTAR SEU PUNÇÃO AUTOMÁTICO.pdf',
-      image: image6,
+      file: '/tutorial/como_montar_seu_puncao_automatico.pdf',
+      image: como_montar_seu_puncao_automatico,
       description: t('tutorials.items.6.description'),
-    },
-    {
-      id: 7,
-      title: t('tutorials.items.7.title'),
-      file: '/tutorial/7° TUTORIAL -  VERIFICANDO O CÓDIGO DA KRUX.pdf',
-      image: image7,
-      description: t('tutorials.items.7.description'),
-    },
-    {
-      id: 8,
-      title: t('tutorials.items.8.title'),
-      file: '/tutorial/8° TUTORIAL - COMO CRIAR SUA SEEDQR.pdf',
-      image: image8,
-      description: t('tutorials.items.8.description'),
     },
     {
       id: 9,
       title: t('tutorials.items.9.title'),
-      file: '/tutorial/9° TUTORIAL - COMO FAZER O BACKUP NA SUA TINY SEED.pdf',
-      image: image9,
+      file: '/tutorial/como_realizar_o_backup_da_sua_chave_privada_tiniyseed.pdf',
+      image: como_realizar_o_backup_da_sua_chave_privada_tiniyseed,
       description: t('tutorials.items.9.description'),
+    },
+    {
+      id: 8,
+      title: t('tutorials.items.8.title'),
+      file: '/tutorial/como_realizar_o_backup_da_sua_chave_privada_seedqr.pdf',
+      image: como_realizar_o_backup_da_sua_chave_privada_seedqr,
+      description: t('tutorials.items.8.description'),
     },
   ];
 

@@ -8,13 +8,10 @@ import { PhoneIcon } from '@heroicons/react/20/solid';
 import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IconType } from 'react-icons';
-import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { blogData } from '../../../blogContent/blogPosts';
 import { LanguageTexts } from '../../../domain/locales/Language';
-import { LanguageSwitcher } from '../../components/LanguageSwitcher/LanguageSwitcher';
-import { useCartContext } from '../../context/CartContext';
 import { ROUTES } from '../../routes/Routes';
 import { useCurrentLang } from '../../utils/useCurrentLang';
 
@@ -44,16 +41,6 @@ export function NavLinks({
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { currentLang } = useCurrentLang();
-  const { items } = useCartContext();
-
-  const totalItems = items.reduce((total, item) => total + item.quantity, 0);
-
-  const handleOnLink = (path: string, callback?: () => void) => {
-    if (callback) {
-      callback();
-    }
-    navigate(path);
-  };
 
   const callsToAction = [
     {
@@ -62,6 +49,13 @@ export function NavLinks({
       icon: PhoneIcon,
     },
   ];
+
+  const handleOnLink = (path: string, callback?: () => void) => {
+    if (callback) {
+      callback();
+    }
+    navigate(path);
+  };
 
   return (
     <>
@@ -230,8 +224,6 @@ export function NavLinks({
               </PopoverPanel>
             </Popover>
 
-            <LanguageSwitcher className="text-xl flex items-center justify-center gap-x-2 lg:text-xl font-semibold leading-6 hover:text-[#F6911D]" />
-
             <button
               onClick={() =>
                 handleOnLink(ROUTES.buyBitcoin.call(currentLang), LinkCallBack)
@@ -241,20 +233,6 @@ export function NavLinks({
               <span className="hover:text-[#F6911D]">
                 {t(LanguageTexts.header.links[5])}
               </span>
-            </button>
-
-            <button
-              onClick={() =>
-                handleOnLink(ROUTES.cart.call(currentLang), LinkCallBack)
-              }
-              className="relative ml-4 flex items-center"
-            >
-              <AiOutlineShoppingCart className="h-6 w-6 text-gray-700 dark:text-white" />
-              {totalItems > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-semibold rounded-full px-1">
-                  {totalItems}
-                </span>
-              )}
             </button>
           </PopoverGroup>
         </>
