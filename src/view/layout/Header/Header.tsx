@@ -1,17 +1,34 @@
 import classNames from 'classnames';
 import { createPortal } from 'react-dom';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { FaBars, FaMoon, FaSun } from 'react-icons/fa';
 import { MdClose } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../assets/logo/logo-complete-black.png';
 import LogoWhite from '../../assets/logo/logo-complete-white.png';
+import { LanguageSwitcher } from '../../components/LanguageSwitcher/LanguageSwitcher';
+import { useCartContext } from '../../context/CartContext';
 import { ROUTES } from '../../routes/Routes';
+import { useCurrentLang } from '../../utils/useCurrentLang';
 import { NavLinks } from './NavLinks';
 import { useHeader } from './useHeader';
 
 export default function Header() {
   const { isLargeScreen, menu, theme, products, isScrolled, supportlink } =
     useHeader();
+
+  const navigate = useNavigate();
+  const { currentLang } = useCurrentLang();
+  const { items } = useCartContext();
+
+  const handleOnLink = (path: string, callback?: () => void) => {
+    if (callback) {
+      callback();
+    }
+    navigate(path);
+  };
+
+  const totalItems = items.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <header
@@ -35,20 +52,36 @@ export default function Header() {
           </Link>
         </div>
 
-        <div className="flex lg:hidden items-center">
-          <label className="inline-flex items-center relative cursor-pointer mr-4">
-            <input
-              className="peer hidden"
-              id="toggle-mobile"
-              type="checkbox"
-              checked={theme.isDarkTheme}
-              onClick={theme.toggle}
-              onChange={() => {}}
-            />
-            <div className="relative w-[80px] h-[35px] bg-white peer-checked:bg-zinc-500 rounded-full after:absolute after:content-[''] after:w-[30px] after:h-[30px] after:bg-gradient-to-r from-orange-500 to-yellow-400 peer-checked:after:from-zinc-900 peer-checked:after:to-zinc-900 after:rounded-full after:top-[2.5px] after:left-[2.5px] active:after:w-[40px] peer-checked:after:left-[75px] peer-checked:after:translate-x-[-100%] shadow-sm duration-300 after:duration-300 after:shadow-md"></div>
-            <FaSun className="fill-white peer-checked:opacity-60 absolute w-4 h-4 left-[10px]" />
-            <FaMoon className="fill-black opacity-60 peer-checked:opacity-70 peer-checked:fill-white absolute w-4 h-4 right-[10px]" />
-          </label>
+        <div className="flex lg:hidden items-center ">
+          <div className="flex items-center gap-x-6 pr-2">
+            <button
+              onClick={() =>
+                handleOnLink(ROUTES.cart.call(currentLang), () => menu.close())
+              }
+              className="relative flex items-center"
+            >
+              <AiOutlineShoppingCart className="h-6 w-6 text-gray-700 dark:text-white" />
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-semibold rounded-full px-1">
+                  {totalItems}
+                </span>
+              )}
+            </button>
+            <LanguageSwitcher className="text-xl flex items-center justify-center gap-x-2 lg:text-xl font-semibold leading-6 hover:text-[#F6911D]" />
+            <label className="inline-flex items-center relative cursor-pointer">
+              <input
+                className="peer hidden"
+                id="toggle-mobile"
+                type="checkbox"
+                checked={theme.isDarkTheme}
+                onClick={theme.toggle}
+                onChange={() => {}}
+              />
+              <div className="relative w-[80px] h-[35px] bg-white peer-checked:bg-zinc-500 rounded-full after:absolute after:content-[''] after:w-[30px] after:h-[30px] after:bg-gradient-to-r from-orange-500 to-yellow-400 peer-checked:after:from-zinc-900 peer-checked:after:to-zinc-900 after:rounded-full after:top-[2.5px] after:left-[2.5px] active:after:w-[40px] peer-checked:after:left-[75px] peer-checked:after:translate-x-[-100%] shadow-sm duration-300 after:duration-300 after:shadow-md"></div>
+              <FaSun className="fill-white peer-checked:opacity-60 absolute w-4 h-4 left-[10px]" />
+              <FaMoon className="fill-black opacity-60 peer-checked:opacity-70 peer-checked:fill-white absolute w-4 h-4 right-[10px]" />
+            </label>
+          </div>
 
           <button
             type="button"
@@ -68,7 +101,21 @@ export default function Header() {
         />
 
         <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center">
-          <div className="flex items-center">
+          <div className="flex items-center gap-x-6">
+            <button
+              onClick={() =>
+                handleOnLink(ROUTES.cart.call(currentLang), () => menu.close())
+              }
+              className="relative flex items-center"
+            >
+              <AiOutlineShoppingCart className="h-6 w-6 text-gray-700 dark:text-white" />
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-semibold rounded-full px-1">
+                  {totalItems}
+                </span>
+              )}
+            </button>
+            <LanguageSwitcher className="text-xl flex items-center justify-center gap-x-2 lg:text-xl font-semibold leading-6 hover:text-[#F6911D]" />
             <label className="inline-flex items-center relative cursor-pointer ml-4">
               <input
                 className="peer hidden"
@@ -109,7 +156,6 @@ export default function Header() {
                   isVisible
                   isLargeScreen={isLargeScreen}
                   closeButton={null}
-                  LinkCallBack={() => menu.close()}
                 />
               </div>
             </div>,
