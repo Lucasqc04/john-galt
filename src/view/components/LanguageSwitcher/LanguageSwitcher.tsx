@@ -15,23 +15,23 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
   return (
     <div className="flex gap-2">
       <Popover className="relative">
-        <PopoverButton className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900 dark:text-white">
+        <PopoverButton className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900 dark:text-white focus:ring-0 focus:outline-none">
           {language.current === AcceptedLanguages.pt && (
             <>
               <img src={brasil} alt="Português" className="h-5 w-5" />
-              <span className={className}>Português</span>
+              <span className={className}>BR</span>
             </>
           )}
           {language.current === AcceptedLanguages.en && (
             <>
               <img src={estadosUnidos} alt="English" className="h-5 w-5" />
-              <span className={className}>English</span>
+              <span className={className}>EN</span>
             </>
           )}
           {language.current === AcceptedLanguages.es && (
             <>
               <img src={espanha} alt="Español" className="h-5 w-5" />
-              <span className={className}>Español</span>
+              <span className={className}>ES</span>
             </>
           )}
           <ChevronDownIcon
