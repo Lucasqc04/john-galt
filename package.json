@@ -19,6 +19,7 @@
     "axios": "^1.7.7",
     "classnames": "^2.5.1",
     "date-fns": "^4.1.0",
+    "date-fns-tz": "^3.2.0",
     "i18next": "^23.15.1",
     "payment-token-efi": "^3.0.3",
     "qrcode.react": "^4.1.0",
