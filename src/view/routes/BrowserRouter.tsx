@@ -17,21 +17,12 @@ import { Fees } from '../screens/BuyBitcoin/RateBitcoin';
 import { TermsOfUse } from '../screens/BuyBitcoin/TermsUse';
 import { ROUTES } from './Routes';
 
-const Checkout = lazy(() =>
-  import('../screens/Checkout/Checkout').then((module) => ({
-    default: module.Checkout,
-  })),
-);
 const NotFound = lazy(() =>
   import('../screens/NotFound').then((module) => ({
     default: module.NotFound,
   })),
 );
-const Page = lazy(() =>
-  import('../screens/Page').then((module) => ({
-    default: module.Page,
-  })),
-);
+
 const SupportPage = lazy(() =>
   import('../screens/support').then((module) => ({
     default: module.Support,
@@ -52,11 +43,8 @@ export function BrowserRouter() {
               <Navigate to={`/${currentLang || AcceptedLanguages.pt}`} />
             }
           />
-          <Route path={ROUTES.lang.call()} element={<BuyBitcoin />}>
-            <Route index element={<Page />} />
-          </Route>
+          <Route path={ROUTES.lang.call()} element={<BuyBitcoin />}></Route>
           <Route path={ROUTES.lang.call()}>
-            <Route path={ROUTES.cart.checkout.path} element={<Checkout />} />
             <Route path={ROUTES.buyBitcoin.path} element={<BuyBitcoin />} />
             <Route path={ROUTES.fee.path} element={<Fees />} />
             <Route path={ROUTES.buyCheckout.path} element={<BuyCheckout />} />
