@@ -5,11 +5,6 @@ export const ROUTES = {
   home: {
     call: () => '/',
   },
-  blog: {
-    path: 'blog/:id',
-    call: (id: string) => `/blog/${id}`,
-    callLang: (currentLang: string, id: string) => `/${currentLang}/blog/${id}`,
-  },
   buyBitcoin: {
     path: 'buy-bitcoin',
     call: (currentLang: string) => `/${currentLang}/buy-bitcoin`,
@@ -38,17 +33,11 @@ export const ROUTES = {
     path: 'videos',
     call: (currentLang: string) => `/${currentLang}/videos`,
   },
-  about: {
-    path: 'sobre-nos',
-    call: (currentLang: string) => `/${currentLang}/sobre-nos`,
-  },
   Support: {
     path: 'suporte',
     call: (currentLang: string) => `/${currentLang}/suporte`,
   },
-  product: {
-    call: (currentLang: string, id: string) => `/${currentLang}/produto/${id}`,
-  },
+
   cart: {
     path: 'carrinho',
     call: (currentLang: string) => `/${currentLang}/carrinho`,
@@ -69,35 +58,8 @@ export const ROUTES = {
       call: (currentLang: string, name: string, id: string = '1') =>
         `/${currentLang}/produto/${name}?id=${id}`,
     },
-    products: {
-      path: 'produtos',
-      BITKIT: {
-        call: (currentLang: string, id: string = '1') =>
-          `/${currentLang}/produto/${id}`,
-      },
-      SEEDKIT: {
-        call: (currentLang: string, id: string = '2') =>
-          `/${currentLang}/produto/${id}`,
-      },
-    },
   },
-  products: {
-    call: (currentLang: string) => `/${currentLang}/produtos`,
-  },
-  policyPrivacy: {
-    path: 'politica-de-privacidade',
-    call: (currentLang: string) => `/${currentLang}/politica-de-privacidade`,
-  },
-  paymentStatus: {
-    failure: {
-      path: 'failure',
-      call: (currentLang: string) => `/${currentLang}/failure`,
-    },
-    success: {
-      path: 'success',
-      call: (currentLang: string) => `/${currentLang}/success`,
-    },
-  },
+
   paymentAlfredStatus: {
     failure: {
       path: 'failure-alfred',

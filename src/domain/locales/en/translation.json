@@ -228,19 +228,19 @@
     "description": "DOWNLOAD FREE FILES WE’VE PREPARED JUST FOR YOU, WHETHER YOU'RE STARTING OUT OR WANT TO LEARN MORE",
     "items": {
       "1": {
-        "title": "CREATE YOUR KEY AND DEPOSIT BITCOIN",
+        "title": "CREATE YOUR PRIVATE KEY AND SAVE YOUR BITCOINS",
         "description": "Learn how to create your key and deposit Bitcoin securely. This tutorial is essential for starting your cryptocurrency journey."
       },
       "2": {
-        "title": "HOW TO ADD A PASSWORD AND CREATE THE ISCA WALLET",
+        "title": "ADD A PASSWORD (PASSPHRASE)",
         "description": "Add a strong password to your wallet and keep your Bitcoins secure. An essential tutorial to protect your digital assets."
       },
       "3": {
-        "title": "RECOVER YOUR WALLET AND SEND BITCOIN",
+        "title": "HOW TO ACCESS YOUR WALLET AND TRANSFER BITCOINS",
         "description": "Learn how to recover your wallet and send Bitcoin easily, while keeping full control of your funds."
       },
       "4": {
-        "title": "HOW TO DRILL A METAL PLATE",
+        "title": "HOW TO RECOVER YOUR ACCOUNT WITHOUT THE KRUX DEVICE (COLD WALLET)",
         "description": "Learn how to drill metal plates safely and efficiently, an important guide for anyone working with manual materials."
       },
       "5": {
@@ -252,15 +252,15 @@
         "description": "Assemble an automatic punch to optimize your work and increase the precision of your processes."
       },
       "7": {
-        "title": "VERIFYING KRUX CODE",
+        "title": "VALIDATE THE CODE INSTALLED IN YOUR WALLET",
         "description": "Learn how to verify the Krux code to ensure the security of your digital transactions."
       },
       "8": {
-        "title": "HOW TO CREATE YOUR SEEDQR",
+        "title": "HOW TO BACKUP YOUR PRIVATE KEY (SEEDQR)",
         "description": "Create your SeedQR securely to protect your data and cryptocurrencies."
       },
       "9": {
-        "title": "HOW TO BACK UP YOUR TINY SEED",
+        "title": "HOW TO BACKUP YOUR PRIVATE KEY (TINY SEED)",
         "description": "Safely back up your data on Tiny Seed and never lose your important information."
       }
     },

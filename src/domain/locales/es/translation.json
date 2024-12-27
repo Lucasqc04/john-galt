@@ -228,19 +228,19 @@
     "description": "DESCARGA AQUÍ ARCHIVOS GRATUITOS QUE HEMOS PREPARADO ESPECIALMENTE PARA TI QUE ESTÁS EMPEZANDO",
     "items": {
       "1": {
-        "title": "CREA TU CLAVE Y DEPOSITA BITCOIN",
+        "title": "CREA TU CLAVE PRIVADA Y AHORRA TUS BITCOINS",
         "description": "Aprende a crear tu clave y depositar Bitcoin con seguridad. Este tutorial es esencial para comenzar tu viaje en el mundo de las criptomonedas."
       },
       "2": {
-        "title": "CÓMO AÑADIR UNA CONTRASEÑA Y CREAR LA CARTERA ISCA",
+        "title": "AÑADIR UNA CONTRASEÑA (PASSPHASE)",
         "description": "Añade una contraseña segura a tu cartera y mantén tus Bitcoins a salvo. Tutorial esencial para proteger tus activos digitales."
       },
       "3": {
-        "title": "RECUPERA TU CARTERA Y ENVÍA BITCOIN",
+        "title": "CÓMO ACCEDER A TU MONEDERO Y TRANSFERIR BITCOINS",
         "description": "Aprende a recuperar tu cartera y enviar Bitcoin fácilmente, manteniendo el control total de tus fondos."
       },
       "4": {
-        "title": "CÓMO PERFORAR UNA PLACA METÁLICA",
+        "title": "CÓMO RECUPERAR TU CUENTA SIN EL DISPOSITIVO KRUX (COLD WALLET)",
         "description": "Aprende a perforar placas metálicas de forma segura y eficiente, una guía importante para quienes trabajan con materiales manuales."
       },
       "5": {
@@ -252,15 +252,15 @@
         "description": "Montar un punzón automático para optimizar tu trabajo y aumentar la precisión de tus procesos."
       },
       "7": {
-        "title": "VERIFICANDO EL CÓDIGO DE KRUX",
+        "title": "VALIDA EL CÓDIGO INSTALADO EN TU MONEDERO",
         "description": "Aprende a verificar el código de Krux para garantizar la seguridad de tus transacciones digitales."
       },
       "8": {
-        "title": "CÓMO CREAR TU SEEDQR",
+        "title": "CÓMO HACER UNA COPIA DE SEGURIDAD DE SU CLAVE PRIVADA (SEEDQR)",
         "description": "Crea tu SeedQR de forma segura para proteger tus datos y criptomonedas."
       },
       "9": {
-        "title": "CÓMO HACER UNA COPIA DE SEGURIDAD EN TU TINY SEED",
+        "title": "CÓMO HACER UNA COPIA DE SEGURIDAD DE SU CLAVE PRIVADA (TINY SEED)",
         "description": "Haz una copia de seguridad segura de tus datos en Tiny Seed y nunca pierdas tu información importante."
       }
     },

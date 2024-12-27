@@ -7,6 +7,7 @@ import logoBlack from '../assets/logo/logo-complete-black.png';
 import logoWhite from '../assets/logo/logo-complete-white.png';
 import { BackgroundAnimatedProduct } from '../components/BackgroundAnimatedProduct';
 import { useHeader } from '../layout/Header/useHeader';
+import HeaderAlfred from './BuyBitcoin/HeaderAlfred';
 
 export function Support() {
   const { t } = useTranslation();
@@ -67,6 +68,7 @@ export function Support() {
   return (
     <>
       <BackgroundAnimatedProduct />
+      <HeaderAlfred />
       <section className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
         <div className="w-full max-w-4xl bg-white dark:bg-gray-800 p-8 rounded-lg shadow-xl">
           {/* Container Central */}
