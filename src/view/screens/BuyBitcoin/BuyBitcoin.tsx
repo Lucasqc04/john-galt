@@ -1,3 +1,4 @@
+import { toZonedTime } from 'date-fns-tz';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Btc from '../../assets/bitcoin.svg';
@@ -15,6 +16,7 @@ export default function BuyBitcoinAndCheckout() {
   const [brlAmount, setBrlAmount] = useState('');
   const [btcAmount, setBtcAmount] = useState('');
   const [btcRate, setBtcRate] = useState(0);
+  const [isTransactionAllowed, setIsTransactionAllowed] = useState(true);
 
   useEffect(() => {
     const fetchBitcoinRate = async () => {
@@ -30,6 +32,15 @@ export default function BuyBitcoinAndCheckout() {
     };
 
     fetchBitcoinRate();
+
+    const timeZone = 'America/Sao_Paulo';
+    const now = new Date();
+    const zonedTime = toZonedTime(now, timeZone);
+    const currentHour = zonedTime.getHours();
+
+    if (currentHour < 8 || currentHour >= 20) {
+      setIsTransactionAllowed(false);
+    }
   }, []);
 
   const handleBrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,6 +71,13 @@ export default function BuyBitcoinAndCheckout() {
   };
 
   const handleNextStep = () => {
+    if (!isTransactionAllowed) {
+      alert(
+        'Transações só são permitidas todos os dias, das 8h às 20h no horário de Brasília.',
+      );
+      return;
+    }
+
     const numericValue = parseInt(brlAmount.replace(/\D/g, ''), 10);
     if (numericValue >= 700 && numericValue <= 5000) {
       localStorage.setItem('brlAmount', brlAmount);
@@ -81,6 +99,13 @@ export default function BuyBitcoinAndCheckout() {
           ALFRED
         </h1>
       </div>
+
+      {!isTransactionAllowed && (
+        <div className="text-red-500 text-center font-bold">
+          Transações só são permitidas todos os dias, das 8h às 20h no horário
+          de Brasília.
+        </div>
+      )}
 
       <div className="flex justify-center px-4 sm:px-8 lg:px-0">
         <div className="w-full max-w-lg">
