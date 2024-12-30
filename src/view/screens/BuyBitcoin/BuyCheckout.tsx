@@ -166,7 +166,7 @@ export default function BuyCheckout() {
       );
 
       if (response.data === 'confirmed') {
-        navigate(ROUTES.paymentStatus.success.call(currentLang));
+        navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
       } else {
         console.warn('Pagamento ainda não confirmado. Tente novamente.');
         setIsWaitingForPayment(false);
