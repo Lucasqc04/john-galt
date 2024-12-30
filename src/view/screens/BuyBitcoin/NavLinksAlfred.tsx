@@ -48,9 +48,7 @@ export function NavLinks({
           )}
           <PopoverGroup className="flex flex-col items-center justify-center gap-y-10 lg:gap-x-12 lg:flex-row lg:gap-y-0">
             <button
-              onClick={() =>
-                handleOnLink(ROUTES.buyBitcoin.call(currentLang), LinkCallBack)
-              }
+              onClick={() => handleOnLink(ROUTES.home.call(), LinkCallBack)}
               className="text-2xl lg:text-xl font-semibold leading-6 text-black dark:text-white hover:text-[#F6911D]"
             >
               Inicio
