@@ -22,7 +22,7 @@ export default function BuyCheckout() {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [coldWallet, setColdWallet] = useState<string>('');
   const [transactionNumber, setTransactionNumber] = useState<string>('');
-  // const [cupom, setCupom] = useState<string>('');
+  const [cupom, setCupom] = useState<string>('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpenMethod, setIsDropdownOpenMethod] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<
@@ -131,7 +131,7 @@ export default function BuyCheckout() {
           network: network,
           phone: transactionNumber,
           coldWalletId: coldWallet,
-          // cupom: cupom,
+          cupom: cupom,
         },
       );
       if (isTransactionTimedOut) return;
@@ -166,7 +166,7 @@ export default function BuyCheckout() {
       );
 
       if (response.data === 'confirmed') {
-        navigate(ROUTES.paymentStatus.success.call(currentLang));
+        navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
       } else {
         console.warn('Pagamento ainda não confirmado. Tente novamente.');
         setIsWaitingForPayment(false);
@@ -371,7 +371,7 @@ export default function BuyCheckout() {
                     </div>
                   </div>
 
-                  {/* <div className="flex justify-center items-center pt-4">
+                  <div className="flex justify-center items-center pt-4">
                     <div className="relative w-full">
                       <input
                         value={cupom}
@@ -382,7 +382,7 @@ export default function BuyCheckout() {
                         className="border pl-4 pr-6 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 w-full"
                       />
                     </div>
-                  </div> */}
+                  </div>
 
                   <div className="flex flex-col justify-center items-start pt-4">
                     <label className="flex items-center dark:text-white">

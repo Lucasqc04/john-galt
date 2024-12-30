@@ -19,6 +19,13 @@ export default function BuyBitcoinAndCheckout() {
   const [isTransactionAllowed, setIsTransactionAllowed] = useState(true);
 
   useEffect(() => {
+    const fetchData = async () => {
+      await fetch(import.meta.env.VITE_API_URL);
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
     const fetchBitcoinRate = async () => {
       try {
         const response = await fetch(
