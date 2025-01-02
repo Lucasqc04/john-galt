@@ -102,7 +102,7 @@ export default function BuyBitcoinAndCheckout() {
       <BackgroundAnimatedProduct />
       <HeaderAlfred />
       <div className="lg:pt-[5%] lg:pb-[3%]  pt-[20%] pb-[3%] flex items-center justify-center mt-[10%] sm:mt-[5%] lg:mt-[2%]">
-        <h1 className="text-[#F6911D] dark:text-[#F6911D] font-black text-5xl sm:text-6xl lg:text-7xl flex items-center">
+        <h1 className="text-[#F39200] dark:text-[#F39200] font-black text-5xl sm:text-6xl lg:text-7xl flex items-center">
           ALFRED
         </h1>
       </div>
@@ -152,7 +152,7 @@ export default function BuyBitcoinAndCheckout() {
             <button
               onClick={handleNextStep}
               type="button"
-              className="w-full h-10 sm:h-12 bg-[#F6911D] text-black dark:text-white rounded-3xl font-bold text-sm sm:text-base"
+              className="w-full h-10 sm:h-12 bg-[#F39200] text-black dark:text-white rounded-3xl font-bold text-sm sm:text-base"
             >
               Prosseguir
             </button>

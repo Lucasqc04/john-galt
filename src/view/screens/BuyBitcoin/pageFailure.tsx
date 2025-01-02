@@ -13,12 +13,12 @@ export function PaymentAlfredFailure() {
       <div className="flex justify-center">
         <LanguageSwitcher className="transform scale-110" />
       </div>
-      <h1 className="text-3xl md:text-4xl font-bold text-orange-primary dark:text-white">
+      <h1 className="text-3xl md:text-4xl font-bold text-[#F39200] dark:text-white">
         {t('paymentFailure.title')}
       </h1>
       <Link
         to={ROUTES.buyBitcoin.call(currentLang)}
-        className="bg-orange-primary text-white font-bold px-4 py-2 rounded-sm w-64"
+        className="bg-[#F39200] text-white font-bold px-4 py-2 rounded-sm w-64"
       >
         VOLTAR PARA O SITE
       </Link>
