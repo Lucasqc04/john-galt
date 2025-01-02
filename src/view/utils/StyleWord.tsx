@@ -7,7 +7,7 @@ export function styleFirstWord(text: string): string | JSX.Element {
 
     return (
       <>
-        <span className="text-orange-primary">{firstWord}</span> {remainingText}
+        <span className="text-[#F39200]">{firstWord}</span> {remainingText}
       </>
     );
   }
@@ -24,7 +24,7 @@ export function styleLastWord(text: string): string | JSX.Element {
 
     return (
       <>
-        {remainingText} <span className="text-orange-primary">{lastWord}</span>
+        {remainingText} <span className="text-[#F39200]">{lastWord}</span>
       </>
     );
   }
@@ -43,7 +43,7 @@ export function styleThreeWordsAfterFourth(text: string): string | JSX.Element {
     return (
       <>
         {firstPart}
-        <span className="text-orange-primary"> {styledWords} </span>
+        <span className="text-[#F39200]"> {styledWords} </span>
         {remainingPart}
       </>
     );

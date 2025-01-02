@@ -14,8 +14,8 @@ export function Support() {
   const currentTheme = localStorage.getItem('theme');
   const { theme } = useHeader();
 
-  const [isLoading, setIsLoading] = useState(false); // Estado para o loading
-  const [responseMessage, setResponseMessage] = useState<string | null>(null); // Estado para a mensagem de resposta
+  const [isLoading, setIsLoading] = useState(false);
+  const [responseMessage, setResponseMessage] = useState<string | null>(null);
   const [responseType, setResponseType] = useState<'success' | 'error' | null>(
     null,
   ); // Estado para o tipo da mensagem
@@ -30,7 +30,7 @@ export function Support() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
-    setResponseMessage(null); // Limpa mensagens anteriores
+    setResponseMessage(null);
     const formData = new FormData(event.currentTarget);
     const data = {
       firstName: formData.get('firstName'),
@@ -61,7 +61,7 @@ export function Support() {
       setResponseType('error');
       setResponseMessage(t('support.errorMessage'));
     } finally {
-      setIsLoading(false); // Finaliza o loading
+      setIsLoading(false);
     }
   };
 
@@ -71,18 +71,14 @@ export function Support() {
       <HeaderAlfred />
       <section className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
         <div className="w-full max-w-4xl bg-white dark:bg-gray-800 p-8 rounded-lg shadow-xl">
-          {/* Container Central */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-            {/* Redes Sociais */}
             <aside className="col-span-full md:col-span-6 flex flex-col items-center">
-              {/* Logo */}
               <img
                 src={theme.isDarkTheme ? logoWhite : logoBlack}
                 alt="Logo"
                 className="w-[150px] h-auto mb-8"
               />
 
-              {/* Redes Sociais */}
               <div className="flex flex-col gap-6 w-full max-w-[368px]">
                 <a
                   href="https://chat.whatsapp.com/HtFSC2xozFhLEFxaDf5Psx"
@@ -123,7 +119,6 @@ export function Support() {
               </div>
             </aside>
 
-            {/* Formulário */}
             <article className="col-span-full md:col-span-6 flex items-center justify-center">
               <form
                 onSubmit={handleSubmit}
@@ -177,7 +172,7 @@ export function Support() {
 
                 <button
                   type="submit"
-                  className="w-full py-3 rounded-lg font-bold transition bg-black hover:bg-gray-800 text-white dark:bg-gray-900 dark:hover:bg-blue-800 flex items-center justify-center"
+                  className="w-full py-3 rounded-lg font-bold transition bg-black hover:bg-gray-800 text-white dark:bg-gray-900 dark:hover:bg-[#003566] flex items-center justify-center"
                   disabled={isLoading}
                 >
                   {isLoading ? (

@@ -207,7 +207,7 @@ export default function BuyCheckout() {
       <BackgroundAnimatedProduct />
       <HeaderAlfred />
       <div className="pt-[10%] pb-[10%] lg:pt-8 lg:pb-8 flex items-center justify-center mt-[20%] sm:mt-[10%]">
-        <h1 className="text-[#F6911D] dark:text-[#F6911D] font-black text-7xl flex items-center">
+        <h1 className="text-[#F39200] dark:text-[#F39200] font-black text-7xl flex items-center">
           ALFRED
         </h1>
       </div>
@@ -241,7 +241,7 @@ export default function BuyCheckout() {
 
               <button
                 onClick={copyToClipboard}
-                className="mt-4 px-6 py-3 bg-[#F6911D] text-white rounded-3xl font-bold"
+                className="mt-4 px-6 py-3 bg-[#F39200] text-white rounded-3xl font-bold"
               >
                 Copiar Chave PIX
               </button>
@@ -436,7 +436,7 @@ export default function BuyCheckout() {
                         type="button"
                         disabled={!acceptFees || !acceptTerms}
                         className={classNames(
-                          'w-full h-12 sm:h-14 bg-[#F6911D] text-black dark:text-white rounded-3xl font-bold text-sm sm:text-base mb-4',
+                          'w-full h-12 sm:h-14 bg-[#F39200] text-black dark:text-white rounded-3xl font-bold text-sm sm:text-base mb-4',
                           (!acceptFees || !acceptTerms) && 'opacity-50',
                         )}
                       >
