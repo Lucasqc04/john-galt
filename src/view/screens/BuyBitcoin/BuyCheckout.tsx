@@ -1,4 +1,3 @@
-import axios from 'axios';
 import classNames from 'classnames';
 import { QRCodeSVG } from 'qrcode.react';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
@@ -7,6 +6,7 @@ import { FaBarcode, FaPix } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 import Liquid from '../../assets/lbtc.svg';
 // import Lightning from '../../assets/lightning.svg';
+import axios from 'axios';
 import Onchain from '../../assets/bitcoin.svg';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import WhatsAppButton from '../../components/buttonWhatsApp';
@@ -201,6 +201,42 @@ export default function BuyCheckout() {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, []);
+  const checkCouponValidity = async () => {
+    try {
+      setIsLoading(true);
+
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/coupons/is-valid`,
+        { code: cupom.trim() },
+      );
+
+      const coupon = response.data;
+
+      if (!coupon.isActive) {
+        alert('O cupom não está ativo.');
+        return;
+      }
+
+      const currentDate = new Date();
+      const validUntilDate = new Date(coupon.validUntil);
+      if (currentDate > validUntilDate) {
+        alert('O cupom expirou.');
+        return;
+      }
+
+      if (coupon.usedCount >= coupon.usageLimit) {
+        alert('O cupom atingiu o limite de uso.');
+        return;
+      }
+
+      alert('O cupom é válido!');
+    } catch (error) {
+      console.error('Erro ao verificar o cupom:', error);
+      alert('Houve um erro ao verificar o cupom.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div>
@@ -235,7 +271,7 @@ export default function BuyCheckout() {
               <textarea
                 value={pixKey}
                 readOnly
-                className="border px-4 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 w-full mt-4"
+                className="border px-4 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-[#B9B8B8] w-full mt-4"
                 rows={6}
               />
 
@@ -257,7 +293,7 @@ export default function BuyCheckout() {
                         value={network}
                         readOnly
                         placeholder="Selecione uma rede"
-                        className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 text-center w-full"
+                        className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-[#B9B8B8] text-center w-full"
                         onClick={toggleDropdown}
                       />
                       <button
@@ -304,7 +340,7 @@ export default function BuyCheckout() {
                         value={paymentMethod}
                         readOnly
                         placeholder="Selecione o método de pagamento"
-                        className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 cursor-pointer w-full"
+                        className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-[#B9B8B8] cursor-pointer w-full"
                         onClick={toggleDropdownMethod}
                       />
                       <button
@@ -343,7 +379,7 @@ export default function BuyCheckout() {
                           setColdWallet(e.target.value)
                         }
                         placeholder="Endereço da carteira Bitcoin (wallet)"
-                        className="border pl-4 pr-6 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 w-full"
+                        className="border pl-4 pr-6 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-[#B9B8B8] w-full"
                       />
                       {errors.coldWallet && (
                         <p className="text-red-500 text-sm">
@@ -361,7 +397,7 @@ export default function BuyCheckout() {
                           setTransactionNumber(e.target.value)
                         }
                         placeholder="Telefone para contato (WhatsApp)"
-                        className="border pl-4 pr-6 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 w-full"
+                        className="border pl-4 pr-6 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-[#B9B8B8] w-full"
                       />
                       {errors.transactionNumber && (
                         <p className="text-red-500 text-sm">
@@ -371,17 +407,20 @@ export default function BuyCheckout() {
                     </div>
                   </div>
 
-                  <div className="flex justify-center items-center pt-4">
-                    <div className="relative w-full">
-                      <input
-                        value={cupom}
-                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                          setCupom(e.target.value)
-                        }
-                        placeholder="Cupom"
-                        className="border pl-4 pr-6 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 w-full"
-                      />
-                    </div>
+                  <div className="flex items-center justify-center mt-4">
+                    <input
+                      type="text"
+                      value={cupom}
+                      onChange={(e) => setCupom(e.target.value)}
+                      placeholder="Digite o cupom"
+                      className="border px-4 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-[#B9B8B8] w-full"
+                    />
+                    <button
+                      onClick={checkCouponValidity}
+                      className="ml-4 px-6 py-3 bg-[#F39200] text-white rounded-3xl font-bold"
+                    >
+                      Aplicar
+                    </button>
                   </div>
 
                   <div className="flex flex-col justify-center items-start pt-4">

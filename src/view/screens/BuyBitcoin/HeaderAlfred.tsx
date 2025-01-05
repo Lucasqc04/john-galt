@@ -16,7 +16,7 @@ export default function HeaderAlfred() {
     <header
       className={classNames(
         'fixed z-50 top-0 left-0 pt-0 md:p-2 flex items-center justify-between w-full max-w-[100vw] transition-all duration-300',
-        isScrolled && 'shadow-sm bg-primary-light dark:bg-primary-dark',
+        isScrolled && 'shadow-sm bg-[#B9B8B8] dark:bg-[#606060]',
       )}
     >
       <nav

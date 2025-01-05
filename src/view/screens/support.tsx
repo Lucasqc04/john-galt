@@ -69,8 +69,8 @@ export function Support() {
     <>
       <BackgroundAnimatedProduct />
       <HeaderAlfred />
-      <section className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
-        <div className="w-full max-w-4xl bg-white dark:bg-gray-800 p-8 rounded-lg shadow-xl">
+      <section className="min-h-screen flex items-center justify-center">
+        <div className="w-full max-w-4xl bg-[#B9B8B8] dark:bg-[#606060] p-8 rounded-lg shadow-xl">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
             <aside className="col-span-full md:col-span-6 flex flex-col items-center">
               <img
@@ -84,10 +84,10 @@ export function Support() {
                   href="https://chat.whatsapp.com/HtFSC2xozFhLEFxaDf5Psx"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-[24px] shadow-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                  className="flex items-center gap-4 p-4 bg-[#B9B8B8] dark:bg-[#606060] border border-gray-300 dark:border-[#B9B8B8] rounded-[24px] shadow-sm hover:bg-gray-200 dark:hover:bg-[#B9B8B8] transition"
                 >
                   <FaWhatsapp size={32} className="text-green-500" />
-                  <span className="font-semibold text-lg text-gray-900 dark:text-gray-100">
+                  <span className="font-semibold text-lg text-[#606060] dark:text-white ">
                     WhatsApp
                   </span>
                 </a>
@@ -95,10 +95,10 @@ export function Support() {
                   href="https://www.instagram.com/diyseclab.io/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-[24px] shadow-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                  className="flex items-center gap-4 p-4 bg-[#B9B8B8] dark:bg-[#606060] border border-gray-300 dark:border-[#B9B8B8] rounded-[24px] shadow-sm hover:bg-gray-200 dark:hover:bg-[#B9B8B8] transition"
                 >
                   <FaInstagram size={32} className="text-pink-500" />
-                  <span className="font-semibold text-lg text-gray-900 dark:text-gray-100">
+                  <span className="font-semibold text-lg text-[#606060] dark:text-white">
                     Instagram
                   </span>
                 </a>
@@ -106,13 +106,13 @@ export function Support() {
                   href="https://x.com/diyseclab"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-[24px] shadow-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                  className="flex items-center gap-4 p-4 bg-[#B9B8B8] dark:bg-[#606060] border border-gray-300 dark:border-[#B9B8B8] rounded-[24px] shadow-sm hover:bg-gray-200 dark:hover:bg-[#B9B8B8] transition"
                 >
                   <FaXTwitter
                     size={32}
                     className="text-black dark:text-white"
                   />
-                  <span className="font-semibold text-lg text-gray-900 dark:text-gray-100">
+                  <span className="font-semibold text-lg text-[#606060] dark:text-white">
                     X
                   </span>
                 </a>
@@ -122,9 +122,9 @@ export function Support() {
             <article className="col-span-full md:col-span-6 flex items-center justify-center">
               <form
                 onSubmit={handleSubmit}
-                className="w-full max-w-[370px] bg-white dark:bg-gray-800 p-8 rounded-lg flex flex-col gap-y-6"
+                className="w-full max-w-[370px] bg-[#B9B8B8] dark:bg-[#606060] p-8 rounded-lg flex flex-col gap-y-6"
               >
-                <h3 className="font-bold text-lg md:text-2xl text-center text-gray-900 dark:text-gray-100">
+                <h3 className="font-bold text-lg md:text-2xl text-center text-[#606060] dark:text-white">
                   {t('support.sendMessage')}
                 </h3>
 
@@ -146,14 +146,14 @@ export function Support() {
                     name="firstName"
                     placeholder={t('support.firstName')}
                     required
-                    className="p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                    className="p-3 border border-gray-300 dark:border-[#B9B8B8] rounded-lg focus:outline-none bg-[#B9B8B8] dark:bg-[#606060] text-[#606060] dark:text-white"
                   />
                   <input
                     type="text"
                     name="lastName"
                     placeholder={t('support.lastName')}
                     required
-                    className="p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                    className="p-3 border border-gray-300 dark:border-[#B9B8B8] rounded-lg focus:outline-none bg-[#B9B8B8] dark:bg-[#606060] text-[#606060] dark:text-white"
                   />
                 </div>
                 <input
@@ -161,18 +161,18 @@ export function Support() {
                   name="email"
                   placeholder={t('support.email')}
                   required
-                  className="p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                  className="p-3 border border-gray-300 dark:border-[#B9B8B8] rounded-lg focus:outline-none bg-[#B9B8B8] dark:bg-[#606060] text-[#606060] dark:text-white"
                 />
                 <textarea
                   name="message"
                   placeholder={t('support.message')}
                   required
-                  className="p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                  className="p-3 border border-gray-300 dark:border-[#B9B8B8] rounded-lg focus:outline-none bg-[#B9B8B8] dark:bg-[#606060] text-[#606060] dark:text-white"
                 ></textarea>
 
                 <button
                   type="submit"
-                  className="w-full py-3 rounded-lg font-bold transition bg-black hover:bg-gray-800 text-white dark:bg-gray-900 dark:hover:bg-[#003566] flex items-center justify-center"
+                  className="w-full py-3 rounded-lg font-bold transition bg-black hover:bg-[#606060] text-white dark:bg-[#] dark:hover:bg-[#B9B8B8] flex items-center justify-center"
                   disabled={isLoading}
                 >
                   {isLoading ? (
