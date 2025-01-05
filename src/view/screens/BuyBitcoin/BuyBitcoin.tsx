@@ -122,7 +122,7 @@ export default function BuyBitcoinAndCheckout() {
                 value={brlAmount}
                 onChange={handleBrlChange}
                 placeholder="Digite o valor em BRL"
-                className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 text-center w-full"
+                className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-[#B9B8B8] text-center w-full"
               />
               <button className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white">
                 <img src={Brl} alt="BRL" className="w-6 h-6 sm:w-8 sm:h-8" />
@@ -136,7 +136,7 @@ export default function BuyBitcoinAndCheckout() {
                 value={btcAmount}
                 readOnly
                 placeholder="Valor em BTC"
-                className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-slate-700 text-center w-full"
+                className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-[#B9B8B8] text-center w-full"
               />
               <button className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white">
                 <img
