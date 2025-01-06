@@ -5,6 +5,7 @@ import { MdClose } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/logo/logo-complete-black.png';
 import LogoWhite from '../../assets/logo/logo-complete-white.png';
+import { LanguageSwitcher } from '../../components/LanguageSwitcher/LanguageSwitcher';
 import { ROUTES } from '../../routes/Routes';
 import { NavLinks } from './NavLinksAlfred';
 import { useHeaderAlfred } from './useHeaderAlfred';
@@ -33,8 +34,8 @@ export default function HeaderAlfred() {
             <span className="sr-only">DIY LAB</span>
           </Link>
         </div>
-
         <div className="flex lg:hidden items-center">
+          <LanguageSwitcher className="text-xl flex items-center justify-center gap-x-2 lg:text-xl font-semibold leading-6 hover:text-[#F6911D]" />
           <label className="inline-flex items-center relative cursor-pointer mr-4">
             <input
               className="peer hidden"

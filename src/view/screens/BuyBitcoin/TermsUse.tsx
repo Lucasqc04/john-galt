@@ -1,159 +1,118 @@
+import { useTranslation } from 'react-i18next';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import WhatsAppButton from '../../components/buttonWhatsApp';
 import HeaderAlfred from './HeaderAlfred';
 
 export function TermsOfUse() {
+  const { t } = useTranslation();
+
   return (
     <>
       <BackgroundAnimatedProduct />
       <HeaderAlfred />
       <div className="container mx-auto p-6 mt-[20%] sm:mt-[10%]">
         <h1 className="text-2xl font-bold mb-6 text-black dark:text-white">
-          Termos de Uso
+          {t('termsOfUse.title')}
         </h1>
 
         <section className="mb-8">
           <h2 className="text-xl font-semibold mb-4 text-black dark:text-white">
-            1. Sobre a plataforma
+            1. {t('termsOfUse.platformTitle')}
           </h2>
           <p className="text-black dark:text-white">
-            Esta é uma plataforma P2P para negociação privada de bitcoin (BTC)
-            não sendo uma exchange convencional com transações instantâneas.
+            {t('termsOfUse.platformDescription1')}
           </p>
           <p className="text-black dark:text-white mt-4">
-            O modelo de funcionamento garante que as transações sejam realizadas
-            com segurança entre os usuários, sejam provedores de liquidez ou
-            criadores de ordens.
+            {t('termsOfUse.platformDescription2')}
           </p>
           <p className="text-black dark:text-white mt-4">
-            Todos os provedores realizam um depósito em BTC que fica travado na
-            plataforma, garantindo a efetividade das transações.
+            {t('termsOfUse.platformDescription3')}
           </p>
         </section>
 
         <section className="mb-8">
           <h2 className="text-xl font-semibold mb-4 text-black dark:text-white">
-            2. Como as transações funcionam
+            2. {t('termsOfUse.transactionsTitle')}
           </h2>
           <ol className="list-decimal pl-5 text-black dark:text-white">
-            <li>Crie um pedido no site.</li>
-            <li>
-              Sempre lembrar de aceitar as termos de uso e as taxas para
-              prosseguir.
-            </li>
-            <li>Esteja atento às instruções fornecidas.</li>
-            <li>
-              A transação começará quando um provedor aceitar o pedido de sua
-              solicitação de compra.
-            </li>
+            <li>{t('termsOfUse.transactionsStep1')}</li>
+            <li>{t('termsOfUse.transactionsStep2')}</li>
+            <li>{t('termsOfUse.transactionsStep3')}</li>
+            <li>{t('termsOfUse.transactionsStep4')}</li>
           </ol>
         </section>
 
         <section className="mb-8">
           <h2 className="text-xl font-semibold mb-4 text-black dark:text-white">
-            3. Duração da transação
+            3. {t('termsOfUse.transactionDurationTitle')}
           </h2>
           <p className="text-black dark:text-white">
-            Uma transação normal pode variar de 30 minutos a 24 horas,
-            dependendo de fatores como processamento bancário, apresentação de
-            comprovantes e congestionamento de redes.
+            {t('termsOfUse.transactionDurationDescription1')}
           </p>
           <p className="text-black dark:text-white mt-4">
-            Podem ocorrer atrasos adicionais dependendo das decisões do usuário
-            frente às flutuações do mercado.
+            {t('termsOfUse.transactionDurationDescription2')}
           </p>
         </section>
 
         <section className="mb-8">
           <h2 className="text-xl font-semibold mb-4 text-black dark:text-white">
-            4. Políticas de KYC e responsabilidade
+            4. {t('termsOfUse.kycPoliciesTitle')}
           </h2>
           <p className="text-black dark:text-white">
-            Não exigimos KYC para o uso da plataforma. A responsabilidade sobre
-            a verificação de identidade é dos bancos que permitem aos seus
-            clientes utilizar uma conta.
+            {t('termsOfUse.kycPoliciesDescription1')}
           </p>
           <p className="text-black dark:text-white mt-4">
-            Nosso papel é assegurar que as negociações sejam realizadas
-            adequadamente, atuando como um marketplace de troca de valores.
+            {t('termsOfUse.kycPoliciesDescription2')}
           </p>
         </section>
 
         <section className="mb-8">
           <h2 className="text-xl font-semibold mb-4 text-black dark:text-white">
-            5. Alcance global e métodos de pagamento
+            5. {t('termsOfUse.globalReachTitle')}
           </h2>
           <p className="text-black dark:text-white">
-            A operação é realizada globalmente, oferecendo diversas opções de
-            pagamento.
+            {t('termsOfUse.globalReachDescription1')}
           </p>
           <p className="text-black dark:text-white mt-4">
-            Os provedores operam de forma independente, sem vínculos específicos
-            com bancos ou entidades reguladoras.
+            {t('termsOfUse.globalReachDescription2')}
           </p>
           <p className="text-black dark:text-white mt-4">
-            O uso da plataforma implica automaticamente na aceitação integral
-            dos termos de uso.
+            {t('termsOfUse.globalReachDescription3')}
           </p>
         </section>
 
         <section className="mb-8">
           <h2 className="text-xl font-semibold mb-4 text-black dark:text-white">
-            6. Disputas e resoluções
+            6. {t('termsOfUse.disputesTitle')}
           </h2>
           <ul className="list-disc pl-5 text-black dark:text-white">
-            <li>
-              Abra uma solicitação no suporte ou entre em contato no WhatsApp.
-            </li>
-            <li>
-              Penalidades financeiras serão aplicadas em casos de desonestidade.
-            </li>
-            <li>
-              Disputas infundadas estarão sujeitas a penalidades de 10% do valor
-              da ordem.
-            </li>
-            <li>
-              A resolução normal pode levar de 7 a 30 dias, podendo se estender
-              dependendo do tempo de análise de bancos.
-            </li>
+            <li>{t('termsOfUse.disputesStep1')}</li>
+            <li>{t('termsOfUse.disputesStep2')}</li>
+            <li>{t('termsOfUse.disputesStep3')}</li>
+            <li>{t('termsOfUse.disputesStep4')}</li>
           </ul>
         </section>
 
         <section className="mb-8">
           <h2 className="text-xl font-semibold mb-4 text-black dark:text-white">
-            7. Conduta e compromisso
+            7. {t('termsOfUse.conductTitle')}
           </h2>
           <p className="text-black dark:text-white">
-            Nosso compromisso é com um ambiente seguro e respeitoso, alinhado
-            aos princípios libertários do Bitcoin.
+            {t('termsOfUse.conductDescription1')}
           </p>
           <ul className="list-disc pl-5 mt-4 text-black dark:text-white">
-            <li>
-              <strong>10%:</strong> Difamação sem tentativa prévia de resolução.
-            </li>
-            <li>
-              <strong>20%:</strong> Difamação durante a análise de uma
-              arbitragem.
-            </li>
-            <li>
-              <strong>100%:</strong> Tentativas de fraude ou negociações com
-              fundos ilícitos.
-            </li>
-            <li>
-              <strong>125%:</strong> Má-fé por parte do provedor ou não envio
-              dos fundos à contraparte após o recebimento.
-            </li>
+            <li>{t('termsOfUse.conductPenalty1')}</li>
+            <li>{t('termsOfUse.conductPenalty2')}</li>
+            <li>{t('termsOfUse.conductPenalty3')}</li>
+            <li>{t('termsOfUse.conductPenalty4')}</li>
           </ul>
           <p className="text-black dark:text-white mt-4">
-            Usuários com comportamento inadequado serão banidos permanentemente.
+            {t('termsOfUse.conductDescription2')}
           </p>
         </section>
 
         <footer className="mt-8">
-          <p className="text-black dark:text-white">
-            Agradecemos por escolher nossa plataforma. O compromisso é com sua
-            liberdade e privacidade.
-          </p>
+          <p className="text-black dark:text-white">{t('termsOfUse.footer')}</p>
         </footer>
       </div>
       <WhatsAppButton />
