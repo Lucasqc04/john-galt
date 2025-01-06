@@ -209,7 +209,9 @@ export default function BuyCheckout() {
       alert(t('buycheckout.couponValid'));
     } catch (error) {
       console.error('Erro ao verificar o cupom:', error);
+
       alert(t('buycheckout.couponCheckError'));
+
     } finally {
       setIsLoading(false);
     }
@@ -269,8 +271,10 @@ export default function BuyCheckout() {
                         type="text"
                         value={network}
                         readOnly
+
                         placeholder={t('buycheckout.selectNetwork')}
-                        className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-[#B9B8B8] text-center w-full"
+                        className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:placeholder-white placeholder-[#606060]  bg-slate-100 dark:bg-[#B9B8B8] text-center w-full"
+
                         onClick={toggleDropdown}
                       />
                       <button
@@ -316,8 +320,10 @@ export default function BuyCheckout() {
                         type="text"
                         value={paymentMethod}
                         readOnly
+
                         placeholder={t('buycheckout.selectPaymentMethod')}
-                        className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-[#B9B8B8] cursor-pointer w-full"
+                        className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg dark:text-white text-black dark:placeholder-white placeholder-[#606060]  bg-slate-100 dark:bg-[#B9B8B8] cursor-pointer w-full"
+
                         onClick={toggleDropdownMethod}
                       />
                       <button
@@ -355,8 +361,12 @@ export default function BuyCheckout() {
                         onChange={(e: ChangeEvent<HTMLInputElement>) =>
                           setColdWallet(e.target.value)
                         }
+
+                        placeholder="Endereço da carteira Bitcoin (wallet)"
+
+
                         placeholder={t('buycheckout.bitcoinWallet')}
-                        className="border pl-4 pr-6 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-[#B9B8B8] w-full"
+                        className="border pl-4 pr-6 py-3 rounded-3xl text-base sm:text-lg text-black dark:placeholder-white placeholder-[#606060]  bg-slate-100 dark:bg-[#B9B8B8] text-center w-full"
                       />
                       {errors.coldWallet && (
                         <p className="text-red-500 text-sm">
@@ -373,8 +383,9 @@ export default function BuyCheckout() {
                         onChange={(e: ChangeEvent<HTMLInputElement>) =>
                           setTransactionNumber(e.target.value)
                         }
+
                         placeholder={t('buycheckout.contactNumber')}
-                        className="border pl-4 pr-6 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-[#B9B8B8] w-full"
+                        className="border pl-4 pr-6 py-3 rounded-3xl text-base sm:text-lg text-black dark:placeholder-white placeholder-[#606060]  bg-slate-100 dark:bg-[#B9B8B8] text-center w-full"
                       />
                       {errors.transactionNumber && (
                         <p className="text-red-500 text-sm">
@@ -389,9 +400,15 @@ export default function BuyCheckout() {
                       type="text"
                       value={cupom}
                       onChange={(e) => setCupom(e.target.value)}
+
+                      placeholder="Digite o cupom"
+                      
+
                       placeholder={t('buycheckout.couponPlaceholder')}
-                      className="border px-4 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-[#B9B8B8] w-full"
+                      className="border px-4 py-3 rounded-3xl text-lgtext-black dark:placeholder-white placeholder-[#606060]  bg-slate-100 dark:bg-[#B9B8B8] w-full"
+
                     />
+
                     <button
                       onClick={checkCouponValidity}
                       className="ml-4 px-6 py-3 bg-[#F39200] text-white rounded-3xl font-bold"

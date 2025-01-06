@@ -118,9 +118,12 @@ export default function BuyBitcoinAndCheckout() {
               <input
                 value={brlAmount}
                 onChange={handleBrlChange}
+
                 placeholder={t('checkout.brl_placeholder')}
-                className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-[#B9B8B8] text-center w-full"
+                className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:placeholder-white placeholder-[#606060]  bg-slate-100 dark:bg-[#B9B8B8] text-center w-full"
+
               />
+
               <button className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white">
                 <img
                   src={Brl}
@@ -136,9 +139,11 @@ export default function BuyBitcoinAndCheckout() {
               <input
                 value={btcAmount}
                 readOnly
+
                 placeholder={t('checkout.btc_placeholder')}
-                className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-[#B9B8B8] text-center w-full"
+                className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:placeholder-white placeholder-[#606060]  bg-slate-100 dark:bg-[#B9B8B8] text-center w-full"
               />
+
               <button className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white">
                 <img
                   src={Btc}
@@ -153,7 +158,7 @@ export default function BuyBitcoinAndCheckout() {
             <button
               onClick={handleNextStep}
               type="button"
-              className="w-full h-10 sm:h-12 bg-[#F39200] text-black dark:text-white rounded-3xl font-bold text-sm sm:text-base"
+              className="w-full h-10 sm:h-12 bg-[#F39200] text-white rounded-3xl font-bold text-sm sm:text-base"
             >
               {t('checkout.proceed_button')}
             </button>
