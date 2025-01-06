@@ -29,7 +29,6 @@ export function NavLinks({
     }
     navigate(path);
   };
-
   //   const callsToAction = [
   //     {
   //       name: t(LanguageTexts.header.contact_sales),
@@ -37,7 +36,6 @@ export function NavLinks({
   //       icon: PhoneIcon,
   //     },
   //   ];
-
   return (
     <>
       {isVisible && (
@@ -52,7 +50,7 @@ export function NavLinks({
               onClick={() => handleOnLink(ROUTES.home.call(), LinkCallBack)}
               className="text-2xl lg:text-xl font-semibold leading-6 text-black dark:text-white hover:text-[#F39200] dark:hover:text-[#F39200]"
             >
-              Inicio
+              {t(LanguageTexts.header.links[0])}
             </button>
             <button
               onClick={() =>
@@ -63,7 +61,7 @@ export function NavLinks({
               }
               className="text-2xl lg:text-xl font-semibold leading-6 text-black dark:text-white hover:text-[#F39200] dark:hover:text-[#F39200]"
             >
-              Sobre
+              {t(LanguageTexts.header.links[1])}
             </button>
 
             <button
@@ -72,7 +70,7 @@ export function NavLinks({
               }
               className="text-2xl lg:text-xl font-semibold leading-6 text-black dark:text-white hover:text-[#F39200] dark:hover:text-[#F39200]"
             >
-              Taxas
+              {t(LanguageTexts.header.links[2])}
             </button>
 
             <button
@@ -81,7 +79,7 @@ export function NavLinks({
               }
               className="text-2xl lg:text-xl font-semibold leading-6 text-black dark:text-white hover:text-[#F39200] dark:hover:text-[#F39200]"
             >
-              Termos
+              {t(LanguageTexts.header.links[3])}
             </button>
 
             <button
@@ -93,7 +91,9 @@ export function NavLinks({
               {t(LanguageTexts.header.links[4])}
             </button>
 
-            <LanguageSwitcher className="text-xl flex items-center justify-center gap-x-2 lg:text-xl font-semibold leading-6 hover:text-[#F39200] dark:hover:text-[#F39200]" />
+
+             <LanguageSwitcher className="text-xl flex items-center justify-center gap-x-2 lg:text-xl font-semibold leading-6 hover:text-[#F39200] dark:hover:text-[#F39200]" />
+
           </PopoverGroup>
         </>
       )}

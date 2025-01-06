@@ -1,5 +1,6 @@
 import { toZonedTime } from 'date-fns-tz';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import Btc from '../../assets/bitcoin.svg';
 import Brl from '../../assets/brl.svg';
@@ -11,6 +12,7 @@ import HeaderAlfred from './HeaderAlfred';
 
 export default function BuyBitcoinAndCheckout() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { currentLang } = useCurrentLang();
 
   const [brlAmount, setBrlAmount] = useState('');
@@ -79,9 +81,7 @@ export default function BuyBitcoinAndCheckout() {
 
   const handleNextStep = () => {
     if (!isTransactionAllowed) {
-      alert(
-        'Transações só são permitidas todos os dias, das 8h às 20h no horário de Brasília.',
-      );
+      alert(t('checkout.transaction_error'));
       return;
     }
 
@@ -91,9 +91,7 @@ export default function BuyBitcoinAndCheckout() {
       localStorage.setItem('btcAmount', btcAmount);
       navigate(ROUTES.buyCheckout.call(currentLang));
     } else {
-      alert(
-        'O valor deve ser maior que R$700 e menor que R$5000 para prosseguir.',
-      );
+      alert(t('checkout.amount_error'));
     }
   };
 
@@ -101,7 +99,7 @@ export default function BuyBitcoinAndCheckout() {
     <div>
       <BackgroundAnimatedProduct />
       <HeaderAlfred />
-      <div className="lg:pt-[5%] lg:pb-[3%]  pt-[20%] pb-[3%] flex items-center justify-center mt-[10%] sm:mt-[5%] lg:mt-[2%]">
+      <div className="lg:pt-[5%] lg:pb-[3%] pt-[20%] pb-[3%] flex items-center justify-center mt-[10%] sm:mt-[5%] lg:mt-[2%]">
         <h1 className="text-[#F39200] dark:text-[#F39200] font-black text-5xl sm:text-6xl lg:text-7xl flex items-center">
           ALFRED
         </h1>
@@ -109,8 +107,7 @@ export default function BuyBitcoinAndCheckout() {
 
       {!isTransactionAllowed && (
         <div className="text-red-500 text-center font-bold">
-          Transações só são permitidas todos os dias, das 8h às 20h no horário
-          de Brasília.
+          {t('checkout.transaction_error')}
         </div>
       )}
 
@@ -121,12 +118,18 @@ export default function BuyBitcoinAndCheckout() {
               <input
                 value={brlAmount}
                 onChange={handleBrlChange}
-                placeholder="Digite o valor em BRL"
+
+                placeholder={t('checkout.brl_placeholder')}
                 className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:placeholder-white placeholder-[#606060]  bg-slate-100 dark:bg-[#B9B8B8] text-center w-full"
+
               />
 
               <button className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white">
-                <img src={Brl} alt="BRL" className="w-6 h-6 sm:w-8 sm:h-8" />
+                <img
+                  src={Brl}
+                  alt={t('checkout.brl_label')}
+                  className="w-6 h-6 sm:w-8 sm:h-8"
+                />
               </button>
             </div>
           </div>
@@ -136,14 +139,15 @@ export default function BuyBitcoinAndCheckout() {
               <input
                 value={btcAmount}
                 readOnly
-                placeholder="Valor em BTC"
+
+                placeholder={t('checkout.btc_placeholder')}
                 className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:placeholder-white placeholder-[#606060]  bg-slate-100 dark:bg-[#B9B8B8] text-center w-full"
               />
 
               <button className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white">
                 <img
                   src={Btc}
-                  alt="Bitcoin"
+                  alt={t('checkout.btc_label')}
                   className="w-6 h-6 sm:w-8 sm:h-8"
                 />
               </button>
@@ -156,7 +160,7 @@ export default function BuyBitcoinAndCheckout() {
               type="button"
               className="w-full h-10 sm:h-12 bg-[#F39200] text-white rounded-3xl font-bold text-sm sm:text-base"
             >
-              Prosseguir
+              {t('checkout.proceed_button')}
             </button>
           </div>
         </div>

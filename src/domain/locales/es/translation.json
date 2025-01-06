@@ -1,176 +1,87 @@
 {
   "header": {
-    "links": [
-      "Productos",
-      "Quiénes Somos",
-      "Blogs",
-      "Tutoriales",
-      "Soporte",
-      "Comprar bitcoins"
-    ],
-    "contact_sales": "Contactar ventas"
-  },
-  "hero": {
-    "title": "Proteja su Bitcoin sin conexión",
-    "description": "Nuestra misión es ofrecer el más alto estándar de seguridad en autocustodia, brindándote métodos 100% efectivos para que almacene tus Bitcoins sin intermediarios.",
-    "buttons": {
-      "products": "Nuestros Productos",
-      "learnMore": "Saber Más",
-      "buybitcoin": "Compra Bitcoin"
-    }
-  },
-  "positivePoints": {
-    "title": "Mantente al tanto de todo lo que necesitas para invertir con seguridad",
-    "cards": [
-      "Mentalidad Soberana",
-      "Protocolos de Código Abierto",
-      "Transparencia Total",
-      "Seguridad y Privacidad"
-    ]
-  },
-  "statistics": {
-    "title": "DIY LAB está revolucionando la soberanía cripto en Brasil - más opciones",
-    "infos": [
-      {
-        "title": "+ 2 Mil",
-        "description": "Bitcoiners en las comunidades DIY"
-      },
-      {
-        "title": "+ WEB3",
-        "description": "Eliminando Intermediarios y Empoderando a los Usuarios"
-      },
-      {
-        "title": "+ 20 Mil",
-        "description": "Personas siguiéndonos en las redes"
-      },
-      {
-        "title": "Global",
-        "description": "Ten control cripto desde cualquier lugar"
-      }
-    ]
-  },
-  "products": {
-    "title": "Nuestros productos",
-    "infos": [
-      {
-        "name": "SEEDKIT",
-        "title": "¡Tu Kit Completo para el Mundo del Bitcoin!",
-        "description": "Tenga todo lo que necesita en un solo paquete para maximizar sus inversiones en Bitcoin.",
-        "items": [
-          {
-            "quantity": 2,
-            "description": "Placas metálicas tamaño tarjeta de crédito estándar Stackbit 1248"
-          },
-          {
-            "quantity": 1,
-            "description": "Tiny Seed"
-          },
-          {
-            "quantity": 1,
-            "description": "Punzón Automático"
-          },
-          {
-            "quantity": 2,
-            "description": "Paper Seed 12 a 24"
-          },
-          {
-            "quantity": 2,
-            "description": "SeedQR 12 y 24"
-          }
-        ],
-        "resources": [
-          "Papel para anotar las 12 o 24 palabras",
-          "Punzonadora automática para marcar en placa de metal",
-          "Placa de Metal"
-        ]
-      },
-      {
-        "name": "BITKIT",
-        "title": "¡Seguridad Elevada para Tus Inversiones!",
-        "description": "Para aquellos que buscan el más alto nivel de protección en sus transacciones financieras.",
-        "items": [
-          {
-            "quantity": 1,
-            "description": "Cold Wallet Krux"
-          },
-          {
-            "quantity": 1,
-            "description": "Placa metálica tamaño tarjeta de crédito estándar Stackbit 1248"
-          },
-          {
-            "quantity": 1,
-            "description": "Tiny Seed"
-          },
-          {
-            "quantity": 1,
-            "description": "Punzón Automático"
-          },
-          {
-            "quantity": 2,
-            "description": "Paper Seed 12 a 24"
-          },
-          {
-            "quantity": 2,
-            "description": "SeedQR 12 y 24"
-          }
-        ],
-        "resources": [
-          "Código Abierto",
-          "Cámara para transacciones completamente desconectadas",
-          "Dispositivo Amnésico",
-          "Conexión USB",
-          "Frase de Contraseña (Passphrase)",
-          "Direcciones Multisig",
-          "Batería Recargable",
-          "Compatibilidad con PSBT",
-          "Creación de Mnemotécnico con Entropía Manual",
-          "6 métodos de Respaldo de Mnemotécnico",
-          "Pantalla Táctil LCD de 2.0 pulgadas",
-          "Compatibilidad con Bip39",
-          "Papel para anotar las 12 o 24 palabras",
-          "Punzonadora automática para marcar en placa de metal",
-          "Placa de Metal",
-          "Compatibilidad con Sparrow Wallet, Specter Desktop, Nunchuk y BlueWallet"
-        ]
-      }
-    ],
-    "resourcesTitle": "Recursos Básicos y Avanzados en un Solo Kit",
-    "buyNowButton": "Comprar ahora",
-    "addToCartButton": "Añadir al carrito",
-    "quantity": "Cantidad",
-    "goToCart": "Ir al carrito"
-  },
-  "cart": {
-    "title": "Carrito de Compras",
-    "emptyCart": "Tu carrito está vacío.",
-    "price": "Precio",
-    "quantity": "Cantidad",
-    "remove": "Eliminar",
-    "clearCart": "Limpiar Carrito",
-    "total": "Total",
-    "checkout": "Ir a la Caja",
-    "quantityTitle": "Número de artículos en el carrito"
-  },
-  "blogs": {
-    "title": "BLOG DIY"
-  },
-  "newsletter": {
-    "title": "Suscríbete a Nuestro Boletín",
-    "description": "Suscríbete a nuestro boletín y mantente al día con las últimas noticias, actualizaciones y ofertas exclusivas. Obtén información valiosa. ¡Únete a nuestra comunidad hoy!",
-    "form": {
-      "email": "Ingresa tu correo electrónico",
-      "submitButton": "Enviar"
-    }
+    "links": ["Inicio", "Sobre", "Tarifas", "Términos", "Soporte"]
   },
   "about": {
-    "title": "Manifiesto del DIY Security Lab",
-    "subtitle": "Bitcoin, Libertad y Soberanía",
-    "manifest": [
-      "En DIY Sec Lab, creemos profundamente en Bitcoin como una herramienta de emancipación individual. No es solo una moneda digital, sino un símbolo de libertad y soberanía, permitiendo que cada persona tome el control de su propio destino, sin depender de intermediarios o instituciones centralizadas.",
-      "Sabemos que la verdadera libertad solo es posible con seguridad. Por eso defendemos el almacenamiento offline de las criptomonedas, donde el usuario es el único guardián de sus activos. Nuestro compromiso es facilitar este proceso, haciendo accesible a todos la posibilidad de proteger sus fondos de forma independiente y segura, lejos de las amenazas digitales.",
-      "Bitcoin allana el camino hacia un futuro donde el poder regresa a manos de las personas. En DIY Sec Lab, nuestra misión es apoyar este viaje, ofreciendo las herramientas y el conocimiento necesarios para que cada individuo pueda vivir esta soberanía con confianza, simplicidad y responsabilidad. Creemos que Bitcoin es la clave para la verdadera autonomía, y estamos aquí para ayudar a abrir esa puerta."
-    ],
-    "signature": "Atentamente, equipo DIY Security Lab"
+    "title": "Acerca de",
+    "paragraphs": [
+      "Somos una familia deconstruyendo un ecosistema P2P, sin KYC, para ser utilizado por cualquiera, en cualquier lugar.",
+      "Según la praxeología, la lógica de la acción humana siempre busca el cambio de un estado menos satisfactorio a otro más satisfactorio. Diy Sec Lab permite un mercado libre de vendedores y compradores P2P, de la forma más simple y amigable.",
+      "A diferencia de un intercambio convencional de criptomonedas, conectamos compradores y vendedores en formato P2P, de forma segura y privada. Todos los Bitcoins negociados en Diy Sec Lab están en lista blanca, es decir, no provienen de actividades ilícitas y son totalmente legales.",
+      "Aún puede pensar: “Entonces, ¿para comprar Bitcoin sin KYC y de manera segura, debo confiar en el P2P de Diy Sec Lab?”",
+      "Todos los asistentes de Diy Sec Lab están preseleccionados en el modelo SpikeProvider, dejando un valor en BTC bloqueado en la plataforma como garantía para trabajar con nosotros. Así, si algún asistente de Diy Sec Lab hiciera trampa, automáticamente sería penalizado financieramente en cantidades muy superiores a los intercambios.",
+      "Finalmente, en caso de cualquier problema, el cliente puede contactar al SpikeHelper proporcionando el ID del intercambio. El problema será analizado cuidadosamente hasta su resolución. Estamos comprometidos a crear la mejor experiencia para usted."
+    ]
+  },
+  "checkout": {
+    "title": "Compra de Bitcoin y Checkout",
+    "brl_placeholder": "Ingrese el monto en BRL",
+    "btc_placeholder": "Monto en BTC",
+    "proceed_button": "Continuar",
+    "transaction_error": "Las transacciones solo están permitidas todos los días, de 8 AM a 8 PM en hora de Brasília.",
+    "amount_error": "El monto debe ser mayor a R$700 y menor a R$5000 para continuar.",
+    "brl_label": "BRL",
+    "btc_label": "Bitcoin"
+  },
+  "paymentFailure": {
+    "title": "Fallo en el pago",
+    "returnToSite": "VOLVER AL SITIO",
+    "whatsapp": "WhatsApp"
+  },
+  "paymentSuccess": {
+    "title": "Pago con éxito",
+    "description": "Su transacción ha sido completada con éxito.",
+    "transactionTime": "La transacción puede demorar entre 30 minutos y 24 horas.",
+    "whatsapp": "WhatsApp",
+    "redirectButton": "VOLVER AL SITIO"
+  },
+  "fees": {
+    "title": "Tarifas",
+    "above1000": "Para valores superiores a 1000 BRL.",
+    "below1000": "Para valores inferiores a 1000 BRL.",
+    "reflectionTitle": "Reflexión: Bitcoin como herramienta libertaria",
+    "reflection1": "Si Bitcoin es realmente una herramienta libertaria, ¿por qué los gobiernos permiten que las personas sigan comprando BTC legalmente?",
+    "reflection2": "Básicamente porque quienes todavía compran bitcoin de forma 'convencional' deben proporcionar todos los detalles personales a la corredora, realizando el famoso KYC. De esta forma, el gobierno sabrá cada satoshi que compraste y dónde encontrarlo.",
+    "reflection3": "Es cierto que al comprar bitcoin de esta forma, pagas una pequeña tarifa por cada operación, pero, en el momento de la retirada, además de pagar otra tarifa fija, tu transacción quedará expuesta al Leviatán, y el impuesto será inevitable, pudiendo llegar al 22,5%.",
+    "reflection4": "Sí, tal 'conveniencia' puede resultar mucho más cara al final. Además, nunca sabes cómo pueden manipular tus detalles personales.",
+    "privacyTitle": "Privacidad y Anonimato",
+    "privacy1": "No es tan difícil tomar la decisión correcta. Mejor garantizar tu privacidad y anonimato.",
+    "privacy2": "Comienza a negociar ahora a partir de "
+  },
+  "termsOfUse": {
+    "title": "Términos de Uso",
+    "platformTitle": "Sobre la plataforma",
+    "platformDescription1": "Esta es una plataforma P2P para la negociación privada de bitcoin (BTC) no siendo una exchange convencional con transacciones instantáneas.",
+    "platformDescription2": "El modelo de funcionamiento garantiza que las transacciones se realicen con seguridad entre los usuarios, sean proveedores de liquidez o creadores de órdenes.",
+    "platformDescription3": "Todos los proveedores realizan un depósito en BTC que queda bloqueado en la plataforma, garantizando la efectividad de las transacciones.",
+    "transactionsTitle": "Cómo funcionan las transacciones",
+    "transactionsStep1": "Crea un pedido en el sitio.",
+    "transactionsStep2": "Recuerda siempre aceptar los términos de uso y las tarifas para continuar.",
+    "transactionsStep3": "Esté atento a las instrucciones proporcionadas.",
+    "transactionsStep4": "La transacción comenzará cuando un proveedor acepte el pedido de su solicitud de compra.",
+    "transactionDurationTitle": "Duración de la transacción",
+    "transactionDurationDescription1": "Una transacción normal puede variar de 30 minutos a 24 horas, dependiendo de factores como procesamiento bancario, presentación de comprobantes y congestión de redes.",
+    "transactionDurationDescription2": "Pueden ocurrir retrasos adicionales dependiendo de las decisiones del usuario frente a las fluctuaciones del mercado.",
+    "kycPoliciesTitle": "Políticas de KYC y responsabilidad",
+    "kycPoliciesDescription1": "No exigimos KYC para el uso de la plataforma. La responsabilidad sobre la verificación de identidad es de los bancos que permiten a sus clientes utilizar una cuenta.",
+    "kycPoliciesDescription2": "Nuestro papel es asegurar que las negociaciones se realicen adecuadamente, actuando como un marketplace de intercambio de valores.",
+    "globalReachTitle": "Alcance global y métodos de pago",
+    "globalReachDescription1": "La operación se realiza globalmente, ofreciendo diversas opciones de pago.",
+    "globalReachDescription2": "Los proveedores operan de forma independiente, sin vínculos específicos con bancos o entidades reguladoras.",
+    "globalReachDescription3": "El uso de la plataforma implica automáticamente la aceptación total de los términos de uso.",
+    "disputesTitle": "Disputas y resoluciones",
+    "disputesStep1": "Abra una solicitud en soporte o contacte por WhatsApp.",
+    "disputesStep2": "Se aplicarán sanciones financieras en casos de deshonestidad.",
+    "disputesStep3": "Las disputas infundadas estarán sujetas a sanciones del 10% del valor de la orden.",
+    "disputesStep4": "La resolución normal puede tardar de 7 a 30 días, pudiendo extenderse dependiendo del tiempo de análisis de los bancos.",
+    "conductTitle": "Conducta y compromiso",
+    "conductDescription1": "Nuestro compromiso es con un ambiente seguro y respetuoso, alineado con los principios libertarios del Bitcoin.",
+    "conductPenalty1": "10%: Difamación sin intento previo de resolución.",
+    "conductPenalty2": "20%: Difamación durante el análisis de una arbitraje.",
+    "conductPenalty3": "100%: Intentos de fraude o negociaciones con fondos ilícitos.",
+    "conductPenalty4": "125%: Mala fe por parte del proveedor o no envío de los fondos a la contraparte después de recibirlos.",
+    "conductDescription2": "Usuarios con comportamiento inadecuado serán baneados permanentemente.",
+    "footer": "Gracias por elegir nuestra plataforma. El compromiso es con su libertad y privacidad."
   },
   "support": {
     "sendMessage": "Envía un mensaje",
@@ -179,174 +90,38 @@
     "email": "Correo electrónico",
     "message": "Mensaje",
     "send": "Enviar",
-    "successMessage": "¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.",
-    "errorMessage": "Ocurrió un error al enviar el mensaje. Por favor, inténtalo de nuevo más tarde."
+    "successMessage": "¡Mensaje enviado con éxito!",
+    "errorMessage": "Hubo un error al enviar el mensaje. Por favor, inténtalo nuevamente."
   },
-  "footer": {
-    "links": ["Acerca de", "Política de Privacidad", "Contacto"],
-    "allRightsReserved": "Reservados todos los derechos."
-  },
-  "personForm": {
-    "email": "Correo electrónico",
-    "firstName": "Nombre",
-    "lastName": "Apellido",
-    "birthday": "Fecha de Nacimiento",
-    "document": "Documento",
-    "documentOptions": {
-      "CPF": "CPF",
-      "CNPJ": "CNPJ"
-    },
-    "idNumber": "Número de Identificación",
-    "phone": "Teléfono",
-    "areaCode": "Código de Área",
-    "number": "Número",
-    "requiredField": "Este campo es obligatorio",
-    "internationalSupport": "¿No vives en Brasil? Contáctanos aquí para compras internacionales con nuestro soporte",
-    "internationalSupportMessage": "Hola, me gustaría realizar una compra internacional"
-  },
-  "addressForm": {
-    "zipCode": "Código Postal",
-    "street": "Calle",
-    "number": "Número",
-    "complement": "Complemento",
-    "city": "Ciudad",
-    "neighborhood": "Barrio",
-    "requiredField": "Este campo es obligatorio"
-  },
-  "shipping": {
-    "title": "Envío",
-    "calculateButton": "Calcular",
-    "options": "Opciones de Envío",
-    "noOptions": "No hay opciones de envío disponibles.",
-    "enterZip": "Introduce tu código postal:",
-    "loading": "Cargando opciones de envío...",
-    "calculate": "Calcular",
-    "deliveryIn": "Entrega en"
-  },
-  "tutorials": {
-    "title": "Tutoriales",
-    "description": "DESCARGA AQUÍ ARCHIVOS GRATUITOS QUE HEMOS PREPARADO ESPECIALMENTE PARA TI QUE ESTÁS EMPEZANDO",
-    "items": {
-      "1": {
-        "title": "CREA TU CLAVE PRIVADA Y AHORRA TUS BITCOINS",
-        "description": "Aprende a crear tu clave y depositar Bitcoin con seguridad. Este tutorial es esencial para comenzar tu viaje en el mundo de las criptomonedas."
-      },
-      "2": {
-        "title": "AÑADIR UNA CONTRASEÑA (PASSPHASE)",
-        "description": "Añade una contraseña segura a tu cartera y mantén tus Bitcoins a salvo. Tutorial esencial para proteger tus activos digitales."
-      },
-      "3": {
-        "title": "CÓMO ACCEDER A TU MONEDERO Y TRANSFERIR BITCOINS",
-        "description": "Aprende a recuperar tu cartera y enviar Bitcoin fácilmente, manteniendo el control total de tus fondos."
-      },
-      "4": {
-        "title": "CÓMO RECUPERAR TU CUENTA SIN EL DISPOSITIVO KRUX (COLD WALLET)",
-        "description": "Aprende a perforar placas metálicas de forma segura y eficiente, una guía importante para quienes trabajan con materiales manuales."
-      },
-      "5": {
-        "title": "CÓMO IMPORTAR TU CARTERA A BLUEWALLET",
-        "description": "Importa tu cartera a BlueWallet fácilmente y accede a tus Bitcoins de forma práctica y segura."
-      },
-      "6": {
-        "title": "CÓMO MONTAR TU PUNZÓN AUTOMÁTICO",
-        "description": "Montar un punzón automático para optimizar tu trabajo y aumentar la precisión de tus procesos."
-      },
-      "7": {
-        "title": "VALIDA EL CÓDIGO INSTALADO EN TU MONEDERO",
-        "description": "Aprende a verificar el código de Krux para garantizar la seguridad de tus transacciones digitales."
-      },
-      "8": {
-        "title": "CÓMO HACER UNA COPIA DE SEGURIDAD DE SU CLAVE PRIVADA (SEEDQR)",
-        "description": "Crea tu SeedQR de forma segura para proteger tus datos y criptomonedas."
-      },
-      "9": {
-        "title": "CÓMO HACER UNA COPIA DE SEGURIDAD DE SU CLAVE PRIVADA (TINY SEED)",
-        "description": "Haz una copia de seguridad segura de tus datos en Tiny Seed y nunca pierdas tu información importante."
-      }
-    },
-    "downloadButton": "PDF gratuito"
-  },
-  "post": {
-    "notFound": "Publicación no encontrada!"
-  },
-  "paymentFailure": {
-    "title": "Pago Fallido",
-    "description": "Hubo un error al procesar el pago, serás redirigido a un pago seguro con nuestro soporte a través de WhatsApp en {{countdown}} segundos.",
-    "redirectButton": "Ir al pago vía WhatsApp"
-  },
-  "paymentSuccess": {
-    "title": "¡Gracias por Tu Pago!",
-    "description": "Tu pago fue exitoso. Agradecemos tu confianza en DiySecLab, y ahora estás más seguro con nuestros productos!",
-    "redirectButton": "Ir a la Página Principal"
-  },
-  "privacyPolicy": {
-    "title": "Política de Privacidad",
-    "text": [
-      "Su privacidad es esencial para nosotros. Es política de DIY Security Lab respetar su privacidad con respecto a cualquier información que podamos recopilar en el sitio https://www.diyseclab.io y en otros sitios que operamos.",
-      "Recopilamos información personal solo cuando realmente la necesitamos para proporcionar un servicio. Lo hacemos de manera justa y legal, con su conocimiento y consentimiento. También le informamos el motivo por el cual estamos recopilando esta información y cómo será utilizada.",
-      "Retenemos la información recopilada solo durante el tiempo necesario para ofrecer el servicio solicitado. Cuando almacenamos datos, utilizamos métodos comercialmente aceptables para evitar pérdidas, robos, accesos, divulgaciones, copias, usos o modificaciones no autorizadas.",
-      "No divulgamos información de identificación personal públicamente ni a terceros, excepto cuando la ley lo exige.",
-      "Nuestro sitio puede contener enlaces a sitios externos que no son operados por nosotros. Tenga en cuenta que no tenemos control sobre el contenido y las prácticas de esos sitios y no podemos asumir responsabilidad por sus respectivas políticas de privacidad.",
-      "Usted tiene la libertad de rechazar nuestra solicitud de información personal, entendiendo que en ese caso, quizás no podamos ofrecer algunos de los servicios deseados.",
-      "El uso continuo de nuestro sitio será considerado como aceptación de nuestras prácticas relacionadas con la privacidad y el manejo de información personal. Si tiene alguna pregunta sobre cómo manejamos los datos de los usuarios e información personal, contáctenos."
-    ]
-  },
-  "paymentForm": {
-    "creditCard": "Tarjeta de Crédito",
-    "pix": "Pix",
-    "cardNamePlaceholder": "Nombre del Titular",
-    "cardNumberPlaceholder": "Número de la Tarjeta",
-    "expiryDatePlaceholder": "Fecha de Vencimiento",
-    "cvvPlaceholder": "CVV",
-    "installment": "Cuotas",
-    "requiredField": "Este campo es obligatorio"
-  },
-  "checkout": {
-    "title": "Checkout",
-    "stepInfos": "Datos personales",
-    "confirmInfos": "Confirma tu información",
-    "stepAddress": "Dirección",
-    "stepShipping": "Seleccione el método de entrega",
-    "choosePaymentMethod": "Elija el Método de Pago",
-    "stepPayment": "Pago",
-    "prev": "Atrás",
-    "next": "Siguiente",
-    "cartItems": "Artículos en el Carrito",
-    "price": "R$ {{price}}",
-    "couponCode": "Código de Cupón",
+  "buycheckout": {
+    "coldWalletError": "La dirección de la cartera no puede estar vacía.",
+    "invalidColdWalletError": "Dirección de cartera inválida.",
+    "transactionNumberError": "El número de teléfono es obligatorio.",
+    "invalidTransactionNumberError": "Ingresa un número de teléfono válido (9 a 15 dígitos).",
+    "termsAndFeesAlert": "Debe aceptar las tarifas y los términos de uso.",
+    "networkSelectionAlert": "Debe seleccionar una red de Bitcoin antes de continuar.",
+    "paymentError": "Error al procesar el pago.",
+    "pixKeyCopied": "¡Clave PIX copiada al portapapeles!",
+    "paymentNotConfirmed": "Pago aún no confirmado. Inténtelo nuevamente.",
+    "couponInactive": "El cupón no está activo.",
+    "couponExpired": "El cupón ha caducado.",
+    "couponUsageLimitReached": "El cupón alcanzó el límite de uso.",
+    "couponValid": "¡El cupón es válido!",
+    "couponCheckError": "Hubo un error al verificar el cupón.",
+    "value": "Valor",
+    "valueBTC": "Valor en BTC",
+    "timeRemaining": "Tiempo restante",
+    "minutes": "minutos",
+    "scanQRCode": "Escanear el código QR",
+    "copyPixKey": "Copiar clave PIX",
+    "selectNetwork": "Seleccionar red",
+    "selectPaymentMethod": "Seleccionar método de pago",
+    "bitcoinWallet": "Cartera Bitcoin",
+    "contactNumber": "Número de contacto",
+    "couponPlaceholder": "Introduzca el código del cupón",
     "apply": "Aplicar",
-    "shippingOptions": "Elige una opción de envío",
-    "days": "días",
-    "subtotal": "Subtotal",
-    "shipping": "Envío",
-    "discount": "Descuento",
-    "total": "Total",
-    "finalizePayment": "Finalizar Pago"
-  },
-  "cardNamePlaceholder": "Nombre del titular",
-  "cardNumberPlaceholder": "Número de tarjeta",
-  "expiryDatePlaceholder": "MM/AA",
-  "cvvPlaceholder": "CVV",
-  "visa": "Visa",
-  "mastercard": "MasterCard",
-  "elo": "Elo",
-  "amex": "American Express",
-  "hipercard": "Hipercard",
-  "confirmPaymentButton": "Confirmar Pago",
-  "BlogTitle": "Blog DIY LAB",
-  "CardTitle1": "Crecimiento de Criptomonedas",
-  "CardDescription1": "Descubre cómo las criptomonedas están creciendo y transformando el mercado financiero.",
-  "CardTitle2": "Seguridad en Criptomonedas",
-  "CardDescription2": "Aprende a almacenar tus criptomonedas de forma segura para evitar pérdidas y fraudes.",
-  "CardTitle3": "Invirtiendo en Criptomonedas",
-  "CardDescription3": "Consejos y estrategias para invertir en criptomonedas de manera inteligente.",
-  "CardTitle4": "Futuro de las Criptomonedas",
-  "CardDescription4": "Qué esperar del futuro de las criptomonedas y cómo pueden impactar la economía.",
-  "CardTitle5": "Almacenamiento Seguro",
-  "CardDescription5": "Métodos y herramientas para almacenar tus criptomonedas de forma segura.",
-  "ReadMore": "Leer más",
-  "ServiceTitle": "Servicios",
-  "ServiceDescription": "Protege y conquista tu viaje cripto con las mejores herramientas.",
-  "CustomizationDescription": "Todo lo que necesitas en un bitkit",
-  "ServiceGetInTouchButton": "Comprar"
+    "acceptFees": "Acepto las tarifas",
+    "acceptTerms": "Acepto los términos y condiciones",
+    "getPixKey": "Obtener clave PIX"
+  }
 }
