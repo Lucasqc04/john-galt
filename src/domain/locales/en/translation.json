@@ -1,180 +1,87 @@
 {
   "header": {
-    "links": [
-      "Products",
-      "About Us",
-      "Blogs",
-      "Tutorials",
-      "Support",
-      "Buy Bitcoin"
-    ],
-    "contact_sales": "Contact sales"
-  },
-  "hero": {
-    "title": "Protect your Bitcoin Offline",
-    "description": "Our mission is to offer the highest standard of security in self-custody, providing 100% effective methods for you to store your Bitcoins without intermediaries",
-    "buttons": {
-      "products": "Our Products",
-      "learnMore": "Learn More",
-      "buybitcoin": "Buy Bitcoin"
-    }
-  },
-  "positivePoints": {
-    "title": "Stay informed about everything you need to invest securely",
-    "cards": [
-      "Sovereign Mentality",
-      "Open Source Protocols",
-      "Full Transparency",
-      "Security and Privacy"
-    ]
-  },
-  "statistics": {
-    "title": "DIY LAB is revolutionizing crypto sovereignty in Brazil - more options",
-    "infos": [
-      {
-        "title": "+ 2K",
-        "description": "Bitcoiners in DIY communities"
-      },
-      {
-        "title": "+ WEB3",
-        "description": "Eliminating Intermediaries and Empowering Users"
-      },
-      {
-        "title": "+ 20K",
-        "description": "People following us on social media"
-      },
-      {
-        "title": "Global",
-        "description": "Have crypto control from anywhere"
-      }
-    ]
-  },
-  "products": {
-    "title": "Our Products",
-    "infos": [
-      {
-        "name": "SEEDKIT",
-        "title": "Your Complete Kit for the World of Bitcoin!",
-        "description": "Have everything you need in one package to maximize your investments in Bitcoin.",
-        "items": [
-          {
-            "quantity": 2,
-            "description": "Credit card-sized metal plates, Stackbit standard 1248"
-          },
-          {
-            "quantity": 1,
-            "description": "Tiny Seed"
-          },
-          {
-            "quantity": 1,
-            "description": "Automatic Punch"
-          },
-          {
-            "quantity": 2,
-            "description": "Paper Seed 12 to 24"
-          },
-          {
-            "quantity": 2,
-            "description": "SeedQR 12 and 24"
-          }
-        ],
-        "resources": [
-          "Paper for noting down 12 or 24 words",
-          "Automatic Punch for marking on metal plate",
-          "Metal Plate"
-        ]
-      },
-      {
-        "name": "BITKIT",
-        "title": "Enhanced Security for Your Investments!",
-        "description": "For those seeking the highest level of protection in their financial transactions.",
-        "items": [
-          {
-            "quantity": 1,
-            "description": "Cold Wallet Krux"
-          },
-          {
-            "quantity": 1,
-            "description": "Credit card-sized metal plate, Stackbit standard 1248"
-          },
-          {
-            "quantity": 1,
-            "description": "Tiny Seed"
-          },
-          {
-            "quantity": 1,
-            "description": "Automatic Punch"
-          },
-          {
-            "quantity": 2,
-            "description": "Paper Seed 12 to 24"
-          },
-          {
-            "quantity": 2,
-            "description": "SeedQR 12 and 24"
-          }
-        ],
-        "resources": [
-          "Open Source",
-          "Camera for fully air-gapped transactions",
-          "Amnesic Device",
-          "USB Connection",
-          "Passphrase",
-          "Multisig Addresses",
-          "Rechargeable Battery",
-          "PSBT Support",
-          "Mnemonic Creation with Manual Entropy",
-          "6 Mnemonic Backup Methods",
-          "2.0-inch Touchscreen LCD",
-          "Bip39 Compatibility",
-          "Paper for noting down 12 or 24 words",
-          "Automatic Punch for marking on metal plate",
-          "Metal Plate",
-          "Compatibility with Sparrow Wallet, Specter Desktop, Nunchuk, and BlueWallet"
-        ]
-      }
-    ],
-    "resourcesTitle": "Basic and Advanced Resources in One Kit",
-    "buyNowButton": "Buy Now",
-    "addToCartButton": "Add to Cart",
-    "quantity": "Quantity",
-    "goToCart": "Go to Cart"
-  },
-  "cart": {
-    "title": "Shopping Cart",
-    "emptyCart": "Your cart is empty.",
-    "price": "Price",
-    "quantity": "Quantity",
-    "remove": "Remove",
-    "clearCart": "Clear Cart",
-    "total": "Total",
-    "checkout": "Go to Checkout",
-    "quantityTitle": "Number of items in the cart"
-  },
-  "blogs": {
-    "title": "BLOG DIY"
-  },
-  "newsletter": {
-    "title": "Subscribe to Our Newsletter",
-    "description": "Subscribe to our newsletter and stay up to date with the latest news, updates, and exclusive offers. Get valuable insights. Join our community today!",
-    "form": {
-      "email": "Enter your email",
-      "submitButton": "Submit"
-    }
-  },
-  "footer": {
-    "links": ["About", "Privacy Policy", "Contact"],
-    "allRightsReserved": "All Rights Reserved."
+    "links": ["Home", "About", "Fees", "Terms", "Support"]
   },
   "about": {
-    "title": "DIY Security Lab Manifesto",
-    "subtitle": "Bitcoin, Freedom, and Sovereignty",
-    "manifest": [
-      "At DIY Sec Lab, we deeply believe in Bitcoin as a tool for individual emancipation. It is not just a digital currency, but a symbol of freedom and sovereignty, allowing each person to take control of their own destiny without relying on intermediaries or centralized institutions.",
-      "We know that true freedom is only possible with security. That is why we advocate for the offline storage of cryptocurrencies, where the user is the sole guardian of their assets. Our commitment is to facilitate this process, making it accessible for everyone to protect their funds independently and securely, away from digital threats.",
-      "Bitcoin paves the way for a future where power returns to the hands of the people. At DIY Sec Lab, our mission is to support this journey by providing the tools and knowledge necessary for each individual to live this sovereignty with confidence, simplicity, and responsibility. We believe that Bitcoin is the key to true autonomy, and we are here to help open that door."
-    ],
-    "signature": "Sincerely, DIY Security Lab Team"
+    "title": "About",
+    "paragraphs": [
+      "We are a family deconstructing a P2P ecosystem, without KYC, to be used by anyone, anywhere.",
+      "According to praxeology, the logic of human action always seeks to change from a less satisfactory state to a more satisfactory one. Diy Sec Lab enables a free market of P2P sellers and buyers in the simplest and friendliest way.",
+      "Unlike a conventional cryptocurrency exchange, we connect buyers and sellers in a P2P format, safely and privately. All Bitcoins traded on Diy Sec Lab are whitelisted, meaning they did not come from illicit activities and are fully legal.",
+      "You may still think: “So, to buy Bitcoin without KYC and safely, do I have to trust Diy Sec Lab's P2P?”",
+      "All Diy Sec Lab attendants are pre-selected in the SpikeProvider model, leaving a value in BTC locked on the platform as a guarantee to work with us. Thus, if any Diy Sec Lab attendant cheated, they would automatically be financially penalized in amounts far exceeding the trades.",
+      "Finally, in case of any problem, the client can contact the SpikeHelper by providing the trade ID. The problem will be carefully analyzed until resolved. We are committed to creating the best experience for you."
+    ]
+  },
+  "checkout": {
+    "title": "Bitcoin Purchase and Checkout",
+    "brl_placeholder": "Enter the amount in BRL",
+    "btc_placeholder": "Amount in BTC",
+    "proceed_button": "Proceed",
+    "transaction_error": "Transactions are only allowed daily from 8 AM to 8 PM in Brasília time.",
+    "amount_error": "The amount must be greater than R$700 and less than R$5000 to proceed.",
+    "brl_label": "BRL",
+    "btc_label": "Bitcoin"
+  },
+  "paymentFailure": {
+    "title": "Payment Failure",
+    "returnToSite": "BACK TO SITE",
+    "whatsapp": "WhatsApp"
+  },
+  "paymentSuccess": {
+    "title": "Payment Successful",
+    "description": "Your transaction has been successfully completed.",
+    "transactionTime": "The transaction can take between 30 minutes to 24 hours.",
+    "whatsapp": "WhatsApp",
+    "redirectButton": "BACK TO SITE"
+  },
+  "fees": {
+    "title": "Fees",
+    "above1000": "For amounts above 1000 BRL.",
+    "below1000": "For amounts below 1000 BRL.",
+    "reflectionTitle": "Reflection: Bitcoin as a Libertarian Tool",
+    "reflection1": "If Bitcoin is truly a libertarian tool, why do governments still allow individuals to buy BTC legally?",
+    "reflection2": "Basically because those who still buy bitcoin 'conventionally' need to provide all their personal details to the exchange, doing the famous KYC. This way, the government will know every satoshi you bought and where to find it.",
+    "reflection3": "It is true that when you buy bitcoin this way, you pay a small fee for each trade, but at the time of withdrawal, in addition to paying another fixed fee, your transaction will be exposed to Leviathan, and the tax will be inevitable, potentially reaching 22.5%.",
+    "reflection4": "Yes, that 'convenience' could end up costing much more in the long run. Also, you never know how they might manipulate your personal details.",
+    "privacyTitle": "Privacy and Anonymity",
+    "privacy1": "It's not that hard to make the right choice. Better to ensure your privacy and anonymity.",
+    "privacy2": "Start trading now from "
+  },
+  "termsOfUse": {
+    "title": "Terms of Use",
+    "platformTitle": "About the platform",
+    "platformDescription1": "This is a P2P platform for private bitcoin (BTC) trading, not a conventional exchange with instant transactions.",
+    "platformDescription2": "The operating model ensures that transactions are securely conducted between users, whether liquidity providers or order creators.",
+    "platformDescription3": "All providers make a BTC deposit that is locked on the platform, ensuring the effectiveness of transactions.",
+    "transactionsTitle": "How transactions work",
+    "transactionsStep1": "Create an order on the site.",
+    "transactionsStep2": "Always remember to accept the terms of use and fees to proceed.",
+    "transactionsStep3": "Be attentive to the instructions provided.",
+    "transactionsStep4": "The transaction will begin when a provider accepts your purchase request.",
+    "transactionDurationTitle": "Transaction duration",
+    "transactionDurationDescription1": "A normal transaction can range from 30 minutes to 24 hours, depending on factors such as bank processing, proof submission, and network congestion.",
+    "transactionDurationDescription2": "Additional delays may occur depending on user decisions in response to market fluctuations.",
+    "kycPoliciesTitle": "KYC policies and responsibility",
+    "kycPoliciesDescription1": "We do not require KYC for using the platform. Responsibility for identity verification lies with the banks that allow their customers to use an account.",
+    "kycPoliciesDescription2": "Our role is to ensure that trades are conducted properly, acting as a marketplace for value exchange.",
+    "globalReachTitle": "Global reach and payment methods",
+    "globalReachDescription1": "The operation is conducted globally, offering various payment options.",
+    "globalReachDescription2": "Providers operate independently, with no specific ties to banks or regulatory entities.",
+    "globalReachDescription3": "Using the platform automatically implies full acceptance of the terms of use.",
+    "disputesTitle": "Disputes and resolutions",
+    "disputesStep1": "Open a support request or contact us on WhatsApp.",
+    "disputesStep2": "Financial penalties will apply in cases of dishonesty.",
+    "disputesStep3": "Unfounded disputes will be subject to a 10% penalty of the order value.",
+    "disputesStep4": "Normal resolution can take from 7 to 30 days, possibly extending depending on bank analysis time.",
+    "conductTitle": "Conduct and commitment",
+    "conductDescription1": "Our commitment is to provide a safe and respectful environment, aligned with Bitcoin's libertarian principles.",
+    "conductPenalty1": "10%: Defamation without prior attempt for resolution.",
+    "conductPenalty2": "20%: Defamation during arbitration analysis.",
+    "conductPenalty3": "100%: Fraud attempts or trading with illicit funds.",
+    "conductPenalty4": "125%: Bad faith from the provider or failure to send funds to the counterparty after receiving them.",
+    "conductDescription2": "Users with inappropriate behavior will be permanently banned.",
+    "footer": "Thank you for choosing our platform. Our commitment is to your freedom and privacy."
   },
   "support": {
     "sendMessage": "Send a message",
@@ -183,158 +90,38 @@
     "email": "Email",
     "message": "Message",
     "send": "Send",
-    "successMessage": "Message sent successfully! We will contact you soon.",
-    "errorMessage": "An error occurred while sending the message. Please try again later."
+    "successMessage": "Message sent successfully!",
+    "errorMessage": "There was an error sending the message. Please try again."
   },
-  "personForm": {
-    "email": "Email",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "birthday": "Date of Birth",
-    "document": "Document",
-    "documentOptions": {
-      "CPF": "CPF",
-      "CNPJ": "CNPJ"
-    },
-    "idNumber": "Identification Number",
-    "phone": "Phone",
-    "areaCode": "Area Code",
-    "number": "Number",
-    "requiredField": "This field is required",
-    "internationalSupport": "Not living in Brazil? Contact us here for international purchases with our support",
-    "internationalSupportMessage": "Hello, I would like to make an international purchase"
-  },
-  "addressForm": {
-    "zipCode": "Zip Code",
-    "street": "Street",
-    "number": "Number",
-    "complement": "Complement",
-    "city": "City",
-    "neighborhood": "Neighborhood",
-    "requiredField": "This field is required"
-  },
-  "shipping": {
-    "title": "Shipping",
-    "calculateButton": "Calculate",
-    "options": "Shipping Options",
-    "noOptions": "No shipping options available.",
-    "enterZip": "Enter your ZIP code:",
-    "loading": "Loading shipping options...",
-    "calculate": "Calculate",
-    "deliveryIn": "Delivery in"
-  },
-  "tutorials": {
-    "title": "Tutorials",
-    "description": "DOWNLOAD FREE FILES WE’VE PREPARED JUST FOR YOU, WHETHER YOU'RE STARTING OUT OR WANT TO LEARN MORE",
-    "items": {
-      "1": {
-        "title": "CREATE YOUR PRIVATE KEY AND SAVE YOUR BITCOINS",
-        "description": "Learn how to create your key and deposit Bitcoin securely. This tutorial is essential for starting your cryptocurrency journey."
-      },
-      "2": {
-        "title": "ADD A PASSWORD (PASSPHRASE)",
-        "description": "Add a strong password to your wallet and keep your Bitcoins secure. An essential tutorial to protect your digital assets."
-      },
-      "3": {
-        "title": "HOW TO ACCESS YOUR WALLET AND TRANSFER BITCOINS",
-        "description": "Learn how to recover your wallet and send Bitcoin easily, while keeping full control of your funds."
-      },
-      "4": {
-        "title": "HOW TO RECOVER YOUR ACCOUNT WITHOUT THE KRUX DEVICE (COLD WALLET)",
-        "description": "Learn how to drill metal plates safely and efficiently, an important guide for anyone working with manual materials."
-      },
-      "5": {
-        "title": "HOW TO IMPORT YOUR WALLET INTO BLUEWALLET",
-        "description": "Import your wallet into BlueWallet easily and access your Bitcoins securely and conveniently."
-      },
-      "6": {
-        "title": "HOW TO ASSEMBLE YOUR AUTOMATIC PUNCH",
-        "description": "Assemble an automatic punch to optimize your work and increase the precision of your processes."
-      },
-      "7": {
-        "title": "VALIDATE THE CODE INSTALLED IN YOUR WALLET",
-        "description": "Learn how to verify the Krux code to ensure the security of your digital transactions."
-      },
-      "8": {
-        "title": "HOW TO BACKUP YOUR PRIVATE KEY (SEEDQR)",
-        "description": "Create your SeedQR securely to protect your data and cryptocurrencies."
-      },
-      "9": {
-        "title": "HOW TO BACKUP YOUR PRIVATE KEY (TINY SEED)",
-        "description": "Safely back up your data on Tiny Seed and never lose your important information."
-      }
-    },
-    "downloadButton": "Free PDF"
-  },
-  "post": {
-    "notFound": "Post Not Found!"
-  },
-  "paymentFailure": {
-    "title": "Payment Failed",
-    "description": "There was an error processing the payment, you will be redirected to secure payment with our support via WhatsApp in {{countdown}} seconds.",
-    "redirectButton": "Go to payment via WhatsApp"
-  },
-  "paymentSuccess": {
-    "title": "Thank You for Your Payment!",
-    "description": "Your payment was successful. We appreciate your trust in DiySecLab, and you're now safer with our products!",
-    "redirectButton": "Go to Homepage"
-  },
-  "privacyPolicy": {
-    "title": "Privacy Policy",
-    "text": [
-      "Your privacy is essential to us. It is the policy of DIY Security Lab to respect your privacy regarding any information we may collect on the site https://www.diyseclab.io and other sites we operate.",
-      "We collect personal information only when we truly need it to provide a service. We do so fairly and legally, with your knowledge and consent. We also inform you of the purpose for which we are collecting this information and how it will be used.",
-      "We retain the collected information only for as long as necessary to provide the requested service. When we store data, we use commercially acceptable means to prevent loss, theft, unauthorized access, disclosure, copying, use, or modification.",
-      "We do not publicly disclose personally identifiable information or share it with third parties, except as required by law.",
-      "Our site may contain links to external sites that are not operated by us. Be aware that we have no control over the content and practices of these sites and cannot assume responsibility for their respective privacy policies.",
-      "You are free to decline our request for personal information, understanding that we may not be able to provide some of the desired services if you do.",
-      "Continued use of our site will be considered acceptance of our privacy practices and handling of personal information. If you have any questions about how we handle user data and personal information, please contact us."
-    ]
-  },
-  "paymentForm": {
-    "creditCard": "Credit Card",
-    "pix": "Pix",
-    "cardNamePlaceholder": "Cardholder's Name",
-    "cardNumberPlaceholder": "Card Number",
-    "expiryDatePlaceholder": "Expiration Date",
-    "cvvPlaceholder": "CVV",
-    "installment": "Installments",
-    "requiredField": "This field is required"
-  },
-  "checkout": {
-    "title": "Checkout",
-    "choosePaymentMethod": "Choose Payment Method",
-    "confirmInfos": "Confirm your Information",
-    "stepInfos": "Personal Data",
-    "stepAddress": "Address",
-    "stepShipping": "Select delivery method",
-    "stepPayment": "Payment",
-    "prev": "Back",
-    "next": "Next",
-    "cartItems": "Cart Items",
-    "price": "R$ {{price}}",
-    "couponCode": "Coupon Code",
+  "buycheckout": {
+    "coldWalletError": "The wallet address cannot be empty.",
+    "invalidColdWalletError": "Invalid wallet address.",
+    "transactionNumberError": "The phone number is required.",
+    "invalidTransactionNumberError": "Enter a valid phone number (9 to 15 digits).",
+    "termsAndFeesAlert": "You need to accept the fees and the terms of use.",
+    "networkSelectionAlert": "You need to select a Bitcoin network before proceeding.",
+    "paymentError": "Error processing the payment.",
+    "pixKeyCopied": "PIX key copied to clipboard!",
+    "paymentNotConfirmed": "Payment not confirmed yet. Please try again.",
+    "couponInactive": "The coupon is not active.",
+    "couponExpired": "The coupon has expired.",
+    "couponUsageLimitReached": "The coupon has reached its usage limit.",
+    "couponValid": "The coupon is valid!",
+    "couponCheckError": "There was an error checking the coupon.",
+    "value": "Value",
+    "valueBTC": "Value in BTC",
+    "timeRemaining": "Time remaining",
+    "minutes": "minutes",
+    "scanQRCode": "Scan QR Code",
+    "copyPixKey": "Copy PIX key",
+    "selectNetwork": "Select Network",
+    "selectPaymentMethod": "Select Payment Method",
+    "bitcoinWallet": "Bitcoin Wallet",
+    "contactNumber": "Contact Number",
+    "couponPlaceholder": "Enter coupon code",
     "apply": "Apply",
-    "shippingOptions": "Choose a shipping option",
-    "days": "days",
-    "subtotal": "Subtotal",
-    "shipping": "Shipping",
-    "discount": "Discount",
-    "total": "Total",
-    "finalizePayment": "Finalize Payment"
-  },
-  "cardNamePlaceholder": "Cardholder's Name",
-  "cardNumberPlaceholder": "Card Number",
-  "expiryDatePlaceholder": "MM/YY",
-  "cvvPlaceholder": "CVV",
-  "visa": "Visa",
-  "mastercard": "MasterCard",
-  "elo": "Elo",
-  "amex": "American Express",
-  "hipercard": "Hipercard",
-  "confirmPaymentButton": "Confirm Payment",
-  "ServiceTitle": "Services",
-  "ServiceDescription": "Protect and conquer your crypto journey with the best tools.",
-  "CustomizationDescription": "Everything you need in a bitkit",
-  "ServiceGetInTouchButton": "Buy"
+    "acceptFees": "I accept the fees",
+    "acceptTerms": "I accept the terms and conditions",
+    "getPixKey": "Get PIX key"
+  }
 }
