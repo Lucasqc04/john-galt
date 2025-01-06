@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import Liquid from '../../assets/lbtc.svg';
 // import Lightning from '../../assets/lightning.svg';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 import Onchain from '../../assets/bitcoin.svg';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import WhatsAppButton from '../../components/buttonWhatsApp';
@@ -38,7 +39,7 @@ export default function BuyCheckout() {
   const [acceptTerms, setAcceptTerms] = useState(false);
   const navigate = useNavigate();
   const { currentLang } = useCurrentLang();
-  // const cupomValue = cupom.toUpperCase;
+  const { t } = useTranslation();
 
   useEffect(() => {
     const storedBrl = localStorage.getItem('brlAmount');
@@ -71,20 +72,21 @@ export default function BuyCheckout() {
     const newErrors: Record<string, string> = {};
 
     if (!coldWallet) {
-      newErrors.coldWallet = 'O endereço da carteira não pode estar vazio.';
+      newErrors.coldWallet = t('buycheckout.coldWalletError');
     } else if (
       !/^(1|3)[a-km-zA-HJ-NP-Z0-9]{25,34}$|^bc1[a-zA-HJ-NP-Z0-9]{39,59}$/.test(
         coldWallet,
       )
     ) {
-      newErrors.coldWallet = 'Endereço da carteira inválido.';
+      newErrors.coldWallet = t('buycheckout.invalidColdWalletError');
     }
 
     if (!transactionNumber) {
-      newErrors.transactionNumber = 'O número de telefone é obrigatório.';
+      newErrors.transactionNumber = t('buycheckout.transactionNumberError');
     } else if (!/^\d{9,15}$/.test(transactionNumber)) {
-      newErrors.transactionNumber =
-        'Insira um número de telefone válido (9 a 15 dígitos).';
+      newErrors.transactionNumber = t(
+        'buycheckout.invalidTransactionNumberError',
+      );
     }
 
     setErrors(newErrors);
@@ -92,18 +94,17 @@ export default function BuyCheckout() {
   };
 
   const networks = [
-    // { name: 'Lightning', icon: Lightning },
     { name: 'Onchain', icon: Onchain },
     { name: 'Liquid', icon: Liquid },
   ];
 
   const handleProcessPayment = async () => {
     if (!acceptFees || !acceptTerms) {
-      alert('Você precisa aceitar as taxas e os termos de uso.');
+      alert(t('buycheckout.termsAndFeesAlert'));
       return;
     }
     if (!network) {
-      alert('Você precisa selecionar uma rede de Bitcoin antes de prosseguir.');
+      alert(t('buycheckout.networkSelectionAlert'));
       return;
     }
 
@@ -146,7 +147,7 @@ export default function BuyCheckout() {
       verifyPaymentStatus(response.data.order.id);
     } catch (error) {
       console.error('Erro ao processar pagamento:', error);
-      alert('Erro ao processar o pagamento.');
+      alert(t('buycheckout.paymentError'));
       setIsLoading(false);
     }
   };
@@ -154,7 +155,7 @@ export default function BuyCheckout() {
   const copyToClipboard = () => {
     if (pixKey) {
       navigator.clipboard.writeText(pixKey);
-      alert('Chave PIX copiada para a área de transferência!');
+      alert(t('buycheckout.pixKeyCopied'));
     }
   };
 
@@ -168,7 +169,7 @@ export default function BuyCheckout() {
       if (response.data === 'confirmed') {
         navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
       } else {
-        console.warn('Pagamento ainda não confirmado. Tente novamente.');
+        console.warn(t('buycheckout.paymentNotConfirmed'));
         setIsWaitingForPayment(false);
       }
     } catch (error) {
@@ -177,30 +178,6 @@ export default function BuyCheckout() {
     }
   };
 
-  useEffect(() => {
-    if (!pixKey) {
-      console.log(pixKey);
-      return;
-    }
-    if (timeLeft <= 0) {
-      setIsTransactionTimedOut(true);
-      navigate(ROUTES.paymentAlfredStatus.failure.call(currentLang));
-      return;
-    }
-
-    const timer = setTimeout(
-      () => setTimeLeft((prevTime) => prevTime - 1),
-      1000,
-    );
-
-    return () => clearTimeout(timer);
-  }, [timeLeft, navigate, currentLang, pixKey]);
-
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, []);
   const checkCouponValidity = async () => {
     try {
       setIsLoading(true);
@@ -213,26 +190,27 @@ export default function BuyCheckout() {
       const coupon = response.data;
 
       if (!coupon.isActive) {
-        alert('O cupom não está ativo.');
+        alert(t('buycheckout.couponInactive'));
         return;
       }
 
       const currentDate = new Date();
       const validUntilDate = new Date(coupon.validUntil);
       if (currentDate > validUntilDate) {
-        alert('O cupom expirou.');
+        alert(t('buycheckout.couponExpired'));
         return;
       }
 
       if (coupon.usedCount >= coupon.usageLimit) {
-        alert('O cupom atingiu o limite de uso.');
+        alert(t('buycheckout.couponUsageLimitReached'));
         return;
       }
 
-      alert('O cupom é válido!');
+      alert(t('buycheckout.couponValid'));
     } catch (error) {
       console.error('Erro ao verificar o cupom:', error);
-      alert('Houve um erro ao verificar o cupom.');
+
+      alert(t('buycheckout.couponCheckError'));
     } finally {
       setIsLoading(false);
     }
@@ -250,20 +228,20 @@ export default function BuyCheckout() {
       <div className="flex justify-center">
         <div>
           <p className="text-xl text-center text-black dark:text-white">
-            Valor: {brlAmount} BRL
-            <br /> Valor: {btcAmount} BTC
+            {t('buycheckout.value')}: {brlAmount} BRL
+            <br /> {t('buycheckout.valueBTC')}: {btcAmount} BTC
           </p>
 
           {pixKey ? (
             <div className="flex flex-col items-center pt-4">
               <p className="text-center text-red-600">
-                Tempo restante para pagamento: {Math.floor(timeLeft / 60)}:
+                {t('buycheckout.timeRemaining')}: {Math.floor(timeLeft / 60)}:
                 {timeLeft % 60 < 10 ? '0' : ''}
-                {timeLeft % 60} minutos
+                {timeLeft % 60} {t('buycheckout.minutes')}
               </p>
 
               <p className="text-xl text-center text-black dark:text-white mb-4">
-                Escaneie o QR Code ou copie a chave PIX abaixo:
+                {t('buycheckout.scanQRCode')}
               </p>
 
               <QRCodeSVG value={pixKey} size={256} />
@@ -279,7 +257,7 @@ export default function BuyCheckout() {
                 onClick={copyToClipboard}
                 className="mt-4 px-6 py-3 bg-[#F39200] text-white rounded-3xl font-bold"
               >
-                Copiar Chave PIX
+                {t('buycheckout.copyPixKey')}
               </button>
             </div>
           ) : (
@@ -292,8 +270,8 @@ export default function BuyCheckout() {
                         type="text"
                         value={network}
                         readOnly
-                        placeholder="Selecione uma rede"
-                        className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-[#B9B8B8] text-center w-full"
+                        placeholder={t('buycheckout.selectNetwork')}
+                        className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:placeholder-white placeholder-[#606060]  bg-slate-100 dark:bg-[#B9B8B8] text-center w-full"
                         onClick={toggleDropdown}
                       />
                       <button
@@ -339,8 +317,8 @@ export default function BuyCheckout() {
                         type="text"
                         value={paymentMethod}
                         readOnly
-                        placeholder="Selecione o método de pagamento"
-                        className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-[#B9B8B8] cursor-pointer w-full"
+                        placeholder={t('buycheckout.selectPaymentMethod')}
+                        className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg dark:text-white text-black dark:placeholder-white placeholder-[#606060]  bg-slate-100 dark:bg-[#B9B8B8] cursor-pointer w-full"
                         onClick={toggleDropdownMethod}
                       />
                       <button
@@ -378,8 +356,8 @@ export default function BuyCheckout() {
                         onChange={(e: ChangeEvent<HTMLInputElement>) =>
                           setColdWallet(e.target.value)
                         }
-                        placeholder="Endereço da carteira Bitcoin (wallet)"
-                        className="border pl-4 pr-6 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-[#B9B8B8] w-full"
+                        placeholder={t('buycheckout.bitcoinWallet')}
+                        className="border pl-4 pr-6 py-3 rounded-3xl text-base sm:text-lg text-black dark:placeholder-white placeholder-[#606060]  bg-slate-100 dark:bg-[#B9B8B8] text-center w-full"
                       />
                       {errors.coldWallet && (
                         <p className="text-red-500 text-sm">
@@ -396,8 +374,8 @@ export default function BuyCheckout() {
                         onChange={(e: ChangeEvent<HTMLInputElement>) =>
                           setTransactionNumber(e.target.value)
                         }
-                        placeholder="Telefone para contato (WhatsApp)"
-                        className="border pl-4 pr-6 py-3 rounded-3xl text-base sm:text-lg text-black dark:text-white bg-slate-100 dark:bg-[#B9B8B8] w-full"
+                        placeholder={t('buycheckout.contactNumber')}
+                        className="border pl-4 pr-6 py-3 rounded-3xl text-base sm:text-lg text-black dark:placeholder-white placeholder-[#606060]  bg-slate-100 dark:bg-[#B9B8B8] text-center w-full"
                       />
                       {errors.transactionNumber && (
                         <p className="text-red-500 text-sm">
@@ -412,14 +390,15 @@ export default function BuyCheckout() {
                       type="text"
                       value={cupom}
                       onChange={(e) => setCupom(e.target.value)}
-                      placeholder="Digite o cupom"
-                      className="border px-4 py-3 rounded-3xl text-lg text-black dark:text-white bg-slate-100 dark:bg-[#B9B8B8] w-full"
+                      placeholder={t('buycheckout.couponPlaceholder')}
+                      className="border px-4 py-3 rounded-3xl text-lgtext-black dark:placeholder-white placeholder-[#606060]  bg-slate-100 dark:bg-[#B9B8B8] w-full"
                     />
+
                     <button
                       onClick={checkCouponValidity}
                       className="ml-4 px-6 py-3 bg-[#F39200] text-white rounded-3xl font-bold"
                     >
-                      Aplicar
+                      {t('buycheckout.apply')}
                     </button>
                   </div>
 
@@ -441,7 +420,7 @@ export default function BuyCheckout() {
                         }
                         className="cursor-pointer text-blue-500 hover:underline"
                       >
-                        ACEITO AS TAXAS
+                        {t('buycheckout.acceptFees')}
                       </span>
                     </label>
                     <label className="flex items-center dark:text-white">
@@ -461,7 +440,7 @@ export default function BuyCheckout() {
                         }
                         className="cursor-pointer text-blue-500 hover:underline"
                       >
-                        ACEITO OS TERMOS DE USO
+                        {t('buycheckout.acceptTerms')}
                       </span>
                     </label>
                   </div>
@@ -479,7 +458,7 @@ export default function BuyCheckout() {
                           (!acceptFees || !acceptTerms) && 'opacity-50',
                         )}
                       >
-                        Obter Chave PIX
+                        {t('buycheckout.getPixKey')}
                       </button>
                     )}
                   </div>

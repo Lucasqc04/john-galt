@@ -20,19 +20,18 @@ export function PaymentAlfredFailure() {
         to={ROUTES.buyBitcoin.call(currentLang)}
         className="bg-[#F39200] text-white font-bold px-4 py-2 rounded-sm w-64"
       >
-        VOLTAR PARA O SITE
+        {t('paymentFailure.returnToSite')}
       </Link>
       <button
         onClick={() =>
           window.open(
             'https://api.whatsapp.com/send?phone=+5511919050416&text=Ol%C3%A1,%20Tudo%20bem?%0A%0APreciso%20de%20ajuda%20sobre%20os%20produtos%20da%20DIY%20LAB...',
-
             '_blank',
           )
         }
         className="bg-success text-white px-8 py-3 m-5 rounded-lg font-semibold text-lg hover:bg-green-600 transition-colors"
       >
-        <span>WhatsApp</span>
+        {t('paymentFailure.whatsapp')}
       </button>
     </div>
   );

@@ -5,39 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Alfred</title>
 
-    <!-- Favicon em SVG, a ser alternado dinamicamente -->
+    <!-- Favicon atualizado -->
     <link
       id="favicon"
       rel="icon"
-      type="image/svg+xml"
-      href="/favicon-black.svg"
+      type="image/jpeg"
+      href="/public/Alfred_Logo_SIte.jpg"
     />
 
-    <!-- Outros favicons como fallback -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="180x180"
-      href="/favicon-180x180.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="192x192"
-      href="/web-app-manifest-192x192.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="512x512"
-      href="/web-app-manifest-512x512.png"
-    />
-
-    <!-- Apple Touch Icon (para dispositivos Apple) -->
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png" />
+    <!-- Outros favicons removidos para simplificar -->
 
     <!-- Manifest para PWA -->
     <link rel="manifest" href="/manifest.json" />
@@ -99,7 +75,9 @@
         ).matches;
         favicon.setAttribute(
           'href',
-          darkMode ? '/favicon-white.svg' : '/favicon-black.svg',
+          darkMode
+            ? '/public/Alfred_Logo_SIte.jpg'
+            : '/public/Alfred_Logo_SIte.jpg',
         );
       }
 
