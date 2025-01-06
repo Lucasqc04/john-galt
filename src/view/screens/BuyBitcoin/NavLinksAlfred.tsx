@@ -91,9 +91,7 @@ export function NavLinks({
               {t(LanguageTexts.header.links[4])}
             </button>
 
-
-             <LanguageSwitcher className="text-xl flex items-center justify-center gap-x-2 lg:text-xl font-semibold leading-6 hover:text-[#F39200] dark:hover:text-[#F39200]" />
-
+            <LanguageSwitcher className="text-xl flex items-center justify-center gap-x-2 lg:text-xl font-semibold leading-6 hover:text-[#F39200] dark:hover:text-[#F39200]" />
           </PopoverGroup>
         </>
       )}

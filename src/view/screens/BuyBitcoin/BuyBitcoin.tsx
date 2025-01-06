@@ -118,10 +118,8 @@ export default function BuyBitcoinAndCheckout() {
               <input
                 value={brlAmount}
                 onChange={handleBrlChange}
-
                 placeholder={t('checkout.brl_placeholder')}
                 className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:placeholder-white placeholder-[#606060]  bg-slate-100 dark:bg-[#B9B8B8] text-center w-full"
-
               />
 
               <button className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white">
@@ -139,7 +137,6 @@ export default function BuyBitcoinAndCheckout() {
               <input
                 value={btcAmount}
                 readOnly
-
                 placeholder={t('checkout.btc_placeholder')}
                 className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:placeholder-white placeholder-[#606060]  bg-slate-100 dark:bg-[#B9B8B8] text-center w-full"
               />
