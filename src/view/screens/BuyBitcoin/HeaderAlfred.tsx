@@ -82,7 +82,7 @@ export default function HeaderAlfred() {
 
         {menu.isOpen &&
           createPortal(
-            <div className="fixed top-0 left-0 h-screen w-screen bg-white dark:bg-gray-900 z-50 px-6">
+            <div className="fixed top-0 left-0 h-screen w-screen  bg-[#B9B8B8] dark:bg-[#606060] z-50 px-6">
               <div className="w-full flex justify-between items-center">
                 <img
                   src={theme.isDarkTheme ? LogoWhite : Logo}

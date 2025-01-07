@@ -10,7 +10,7 @@ export function TermsOfUse() {
     <>
       <BackgroundAnimatedProduct />
       <HeaderAlfred />
-      <div className="container mx-auto p-6 mt-[20%] sm:mt-[10%]">
+      <div className="container mx-auto p-6 mt-[20%] sm:mt-[10%] mb-20">
         <h1 className="text-2xl font-bold mb-6 text-black dark:text-white">
           {t('termsOfUse.title')}
         </h1>
