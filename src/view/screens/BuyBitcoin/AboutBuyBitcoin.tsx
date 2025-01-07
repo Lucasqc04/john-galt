@@ -15,7 +15,7 @@ export function AboutBuyBitcoin() {
     <>
       <BackgroundAnimatedProduct />
       <HeaderAlfred />
-      <div className="container mx-auto p-6 mt-[20%] sm:mt-[10%]">
+      <div className="container mx-auto p-6 mt-[20%] sm:mt-[10%] mb-16">
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold text-black dark:text-white">
             {t('about.title')}
