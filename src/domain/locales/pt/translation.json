@@ -107,7 +107,7 @@
     "couponExpired": "O cupom expirou.",
     "couponUsageLimitReached": "O cupom atingiu o limite de uso.",
     "couponValid": "O cupom é válido!",
-    "couponCheckError": "Houve um erro ao verificar o cupom.",
+    "couponCheckError": "Cupom inválido. Entre em contado.",
     "value": "Valor",
     "valueBTC": "Valor em BTC",
     "timeRemaining": "Tempo restante",
