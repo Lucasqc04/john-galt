@@ -194,18 +194,6 @@ export default function BuyCheckout() {
         return;
       }
 
-      const currentDate = new Date();
-      const validUntilDate = new Date(coupon.validUntil);
-      if (currentDate > validUntilDate) {
-        alert(t('buycheckout.couponExpired'));
-        return;
-      }
-
-      if (coupon.usedCount >= coupon.usageLimit) {
-        alert(t('buycheckout.couponUsageLimitReached'));
-        return;
-      }
-
       alert(t('buycheckout.couponValid'));
     } catch (error) {
       console.error('Erro ao verificar o cupom:', error);
