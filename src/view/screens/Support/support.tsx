@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
-import { ThemeMode } from '../../domain/entities/theme.entity';
-import logoBlack from '../assets/logo/logo-complete-black.png';
-import logoWhite from '../assets/logo/logo-complete-white.png';
-import { BackgroundAnimatedProduct } from '../components/BackgroundAnimatedProduct';
-import { useHeader } from '../layout/Header/useHeader';
-import HeaderAlfred from './BuyBitcoin/HeaderAlfred';
+import { ThemeMode } from '../../../domain/entities/theme.entity';
+import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
+
+import logoBlack from '../../assets/logo/logo-complete-black.png';
+import logoWhite from '../../assets/logo/logo-complete-white.png';
+import Header from '../Header/HeaderAlfred';
+import { useHeader } from '../Header/useHeader';
 
 export function Support() {
   const { t } = useTranslation();
@@ -18,7 +19,7 @@ export function Support() {
   const [responseMessage, setResponseMessage] = useState<string | null>(null);
   const [responseType, setResponseType] = useState<'success' | 'error' | null>(
     null,
-  ); // Estado para o tipo da mensagem
+  );
 
   useEffect(() => {
     document.documentElement.classList.toggle(
@@ -68,7 +69,7 @@ export function Support() {
   return (
     <>
       <BackgroundAnimatedProduct />
-      <HeaderAlfred />
+      <Header />
       <section className="min-h-screen flex items-center justify-center">
         <div className="w-full max-w-4xl bg-[#B9B8B8] dark:bg-[#606060] p-8 rounded-lg shadow-xl">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">

@@ -8,7 +8,7 @@ import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedPr
 import WhatsAppButton from '../../components/buttonWhatsApp';
 import { ROUTES } from '../../routes/Routes';
 import { useCurrentLang } from '../../utils/useCurrentLang';
-import HeaderAlfred from './HeaderAlfred';
+import HeaderAlfred from '../Header/HeaderAlfred';
 
 export default function BuyBitcoinAndCheckout() {
   const navigate = useNavigate();

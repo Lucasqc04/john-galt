@@ -8,13 +8,13 @@ import {
 import { AcceptedLanguages, useLanguage } from '../../domain/locales/Language';
 import { Loader } from '../components/Loader';
 import ScrollToTop from '../components/ScrollToTop';
-import { AboutBuyBitcoin } from '../screens/BuyBitcoin/AboutBuyBitcoin';
+import { AboutBuyBitcoin } from '../screens/About/AboutBuyBitcoin';
 import BuyBitcoin from '../screens/BuyBitcoin/BuyBitcoin';
-import BuyCheckout from '../screens/BuyBitcoin/BuyCheckout';
-import { PaymentAlfredFailure } from '../screens/BuyBitcoin/pageFailure';
-import { PaymentAlfredSuccess } from '../screens/BuyBitcoin/pageSucces';
-import { Fees } from '../screens/BuyBitcoin/RateBitcoin';
-import { TermsOfUse } from '../screens/BuyBitcoin/TermsUse';
+import Checkout from '../screens/Checkout/Checkout';
+import { PaymentAlfredFailure } from '../screens/paymentStatus/pageFailure';
+import { PaymentAlfredSuccess } from '../screens/paymentStatus/pageSucces';
+import { Fees } from '../screens/Rate/RateBitcoin';
+import { TermsOfUse } from '../screens/Terms/TermsUse';
 import { ROUTES } from './Routes';
 
 const NotFound = lazy(() =>
@@ -24,7 +24,7 @@ const NotFound = lazy(() =>
 );
 
 const SupportPage = lazy(() =>
-  import('../screens/support').then((module) => ({
+  import('../screens/Support/support').then((module) => ({
     default: module.Support,
   })),
 );
@@ -47,7 +47,7 @@ export function BrowserRouter() {
           <Route path={ROUTES.lang.call()}>
             <Route path={ROUTES.buyBitcoin.path} element={<BuyBitcoin />} />
             <Route path={ROUTES.fee.path} element={<Fees />} />
-            <Route path={ROUTES.buyCheckout.path} element={<BuyCheckout />} />
+            <Route path={ROUTES.buyCheckout.path} element={<Checkout />} />
             <Route path={ROUTES.Support.path} element={<SupportPage />} />
             <Route
               path={ROUTES.paymentAlfredStatus.success.path}

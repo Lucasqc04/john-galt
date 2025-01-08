@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import WhatsAppButton from '../../components/buttonWhatsApp';
-import HeaderAlfred from './HeaderAlfred';
+import Header from '../Header/HeaderAlfred';
 
 export function Fees() {
   const { t } = useTranslation();
@@ -9,7 +9,7 @@ export function Fees() {
   return (
     <>
       <BackgroundAnimatedProduct />
-      <HeaderAlfred />
+      <Header />
       <div className="container mx-auto p-6 mt-[20%] sm:mt-[10%] mb-16">
         <h1 className="text-2xl font-bold mb-6 text-black dark:text-white">
           {t('fees.title')}

@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import WhatsAppButton from '../../components/buttonWhatsApp';
-import HeaderAlfred from './HeaderAlfred';
+import HeaderAlfred from '../Header/HeaderAlfred';
 
 export function AboutBuyBitcoin() {
   const { t } = useTranslation();
