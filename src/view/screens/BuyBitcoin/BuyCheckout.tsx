@@ -177,6 +177,27 @@ export default function BuyCheckout() {
       setIsWaitingForPayment(false);
     }
   };
+  useEffect(() => {
+    if (!pixKey) {
+      console.log(pixKey);
+      return;
+    }
+    if (timeLeft <= 0) {
+      setIsTransactionTimedOut(true);
+      navigate(ROUTES.paymentAlfredStatus.failure.call(currentLang));
+      return;
+    }
+    const timer = setTimeout(
+      () => setTimeLeft((prevTime) => prevTime - 1),
+      1000,
+    );
+    return () => clearTimeout(timer);
+  }, [timeLeft, navigate, currentLang, pixKey]);
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   const checkCouponValidity = async () => {
     try {
