@@ -6,7 +6,6 @@ import HeaderAlfred from './HeaderAlfred';
 export function AboutBuyBitcoin() {
   const { t } = useTranslation();
 
-  // Tipagem explícita para os parágrafos
   const paragraphs: string[] = t('about.paragraphs', {
     returnObjects: true,
   }) as string[];
