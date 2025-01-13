@@ -6,7 +6,6 @@ import { LanguageTexts } from '../../../domain/locales/Language';
 import { LanguageSwitcher } from '../../components/LanguageSwitcher/LanguageSwitcher';
 import { ROUTES } from '../../routes/Routes';
 import { useCurrentLang } from '../../utils/useCurrentLang';
-
 type NavLinksProps = {
   isVisible: boolean;
   closeButton?: ReactNode;

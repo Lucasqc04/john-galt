@@ -1,15 +1,14 @@
 import { useTranslation } from 'react-i18next';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import WhatsAppButton from '../../components/buttonWhatsApp';
-import HeaderAlfred from './HeaderAlfred';
-
+import Header from '../Header/HeaderAlfred';
 export function TermsOfUse() {
   const { t } = useTranslation();
 
   return (
     <>
       <BackgroundAnimatedProduct />
-      <HeaderAlfred />
+      <Header />
       <div className="container mx-auto p-6 mt-[20%] sm:mt-[10%] mb-20">
         <h1 className="text-2xl font-bold mb-6 text-black dark:text-white">
           {t('termsOfUse.title')}
