@@ -6,6 +6,7 @@ import { LanguageTexts } from '../../../domain/locales/Language';
 import { LanguageSwitcher } from '../../components/LanguageSwitcher/LanguageSwitcher';
 import { ROUTES } from '../../routes/Routes';
 import { useCurrentLang } from '../../utils/useCurrentLang';
+
 type NavLinksProps = {
   isVisible: boolean;
   closeButton?: ReactNode;
@@ -28,13 +29,7 @@ export function NavLinks({
     }
     navigate(path);
   };
-  //   const callsToAction = [
-  //     {
-  //       name: t(LanguageTexts.header.contact_sales),
-  //       href: 'https://api.whatsapp.com/send?phone=+5511919050416&text=Ol%C3%A1,%20Tudo%20bem?%0A%0AEu%20gostaria%20de%20saber%20mais%20sobre%20os%20produtos%20da%20DIY%20LAB...',
-  //       icon: PhoneIcon,
-  //     },
-  //   ];
+
   return (
     <>
       {isVisible && (
