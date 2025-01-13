@@ -2,9 +2,8 @@ import classNames from 'classnames';
 import { t } from 'i18next';
 import { QRCodeSVG } from 'qrcode.react';
 import { ChangeEvent } from 'react';
-import { CiCreditCard1 } from 'react-icons/ci';
-import { FaBarcode } from 'react-icons/fa';
-import { FaPix } from 'react-icons/fa6';
+import Alfred from '../../assets/AlfredComercial.png';
+import AlfredImg from '../../assets/c1b28810-5a23-4e7c-bcce-bd1f42b271c5.png';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import { Loader } from '../../components/Loader';
 import WhatsAppButton from '../../components/buttonWhatsApp';
@@ -20,8 +19,6 @@ export default function Checkout() {
     transactionNumber,
     cupom,
     isDropdownOpen,
-    isDropdownOpenMethod,
-    paymentMethod,
     pixKey,
     isLoading,
     errors,
@@ -33,8 +30,6 @@ export default function Checkout() {
     currentLang,
     toggleDropdown,
     selectNetwork,
-    toggleDropdownMethod,
-    selectPaymentMethod,
     handleProcessPayment,
     copyToClipboard,
     checkCouponValidity,
@@ -88,9 +83,12 @@ export default function Checkout() {
               >
                 {t('buycheckout.copyPixKey')}
               </button>
+              <div className="hidden sm:block absolute right-[20%] top-[30%] transform translate-x-1/2 translate-y-1/2 w-[50%]">
+                <img src={Alfred} alt="" />
+              </div>
             </div>
           ) : (
-            <div className="flex justify-center px-4 sm:px-8 lg:px-0">
+            <div className="flex justify-center items-center relative px-4 mb-28">
               <div className="w-full max-w-lg">
                 {/* Network Dropdown */}
                 <div className="flex justify-center items-center space-x-4">
@@ -141,7 +139,7 @@ export default function Checkout() {
                 </div>
 
                 {/* Payment Method Dropdown */}
-                <div className="flex justify-center items-center pt-4">
+                {/* <div className="flex justify-center items-center pt-4">
                   <div className="relative w-full">
                     <input
                       type="text"
@@ -177,7 +175,7 @@ export default function Checkout() {
                       </div>
                     )}
                   </div>
-                </div>
+                </div> */}
 
                 {/* Wallet and Transaction Number Inputs */}
                 <div className="flex justify-center items-center pt-4">
@@ -295,6 +293,11 @@ export default function Checkout() {
                     </button>
                   )}
                 </div>
+              </div>
+
+              {/* Imagem à direita */}
+              <div className=" hidden sm:block absolute right-[-20%] top-[-10%] transform translate-x-1/2 translate-y-1/2 w-[50%]">
+                <img src={AlfredImg} alt="imagem-alfred" className="" />
               </div>
             </div>
           )}
