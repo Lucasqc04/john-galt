@@ -10,5 +10,7 @@ ignores:
     'postcss',
     'tailwindcss',
     'tailwindcss-animated',
+    'react-gtm-module',
+    '@types/react-gtm-module',
   ]
 skip-missing: true
