@@ -17,12 +17,8 @@ export function Fees() {
 
         <section className="mb-8">
           <ul className="list-disc pl-5 text-black dark:text-white">
-            <li>
-              <strong>5%:</strong> {t('fees.above1000')}
-            </li>
-            <li>
-              <strong>10%:</strong> {t('fees.below1000')}
-            </li>
+            <li>{t('fees.above1000')}</li>
+            <li>{t('fees.below1000')}</li>
           </ul>
         </section>
 
@@ -49,7 +45,6 @@ export function Fees() {
           <p className="text-black dark:text-white">{t('fees.privacy1')}</p>
           <p className="text-black dark:text-white mt-4">
             {t('fees.privacy2')}
-            <strong>700 BRL</strong>.
           </p>
         </section>
       </div>
