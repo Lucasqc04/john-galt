@@ -1,19 +1,30 @@
-import { useEffect, useState } from 'react';
+import { BackgroundAnimatedProduct } from '@/view/components/BackgroundAnimatedProduct';
+import WhatsAppButton from '@/view/components/buttonWhatsApp';
+import { useScaleFactor } from '@/view/hooks/useScaleFactor';
+import { useWindowSize } from '@/view/utils/useWindowSize';
+import axios from 'axios';
+import classNames from 'classnames';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
-import { ThemeMode } from '../../../domain/entities/theme.entity';
-import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
-
-import logoBlack from '../../assets/logo/logo-complete-black.png';
-import logoWhite from '../../assets/logo/logo-complete-white.png';
 import Header from '../Header/HeaderAlfred';
-import { useHeader } from '../Header/useHeader';
+
+type FormValues = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  message: string;
+};
 
 export function Support() {
   const { t } = useTranslation();
-  const currentTheme = localStorage.getItem('theme');
-  const { theme } = useHeader();
+  const { width } = useWindowSize();
+  const { scaleFactor } = useScaleFactor();
+
+  const IS_LARGE_SCREEN = width >= 768;
+  const IS_ZOOM_BIGGER_THAN_100 = scaleFactor > 1 && IS_LARGE_SCREEN;
 
   const [isLoading, setIsLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState<string | null>(null);
@@ -21,39 +32,26 @@ export function Support() {
     null,
   );
 
-  useEffect(() => {
-    document.documentElement.classList.toggle(
-      ThemeMode.dark,
-      currentTheme === ThemeMode.dark,
-    );
-  }, [currentTheme]);
+  const { register, handleSubmit, reset } = useForm<FormValues>();
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const onSubmit = async (data: FormValues) => {
     setIsLoading(true);
     setResponseMessage(null);
-    const formData = new FormData(event.currentTarget);
-    const data = {
-      firstName: formData.get('firstName'),
-      lastName: formData.get('lastName'),
-      email: formData.get('email'),
-      message: formData.get('message'),
-    };
 
     try {
-      const response = await fetch(import.meta.env.VITE_API_URL + '/support', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/support`,
+        data,
+        {
+          headers: { 'Content-Type': 'application/json' },
+        },
+      );
 
-      const result = await response.json();
-
-      if (response.ok) {
+      if (response.status === 200) {
         setResponseType('success');
         setResponseMessage(t('support.successMessage'));
+        reset();
       } else {
-        console.error('Error:', result.error);
         setResponseType('error');
         setResponseMessage(t('support.errorMessage'));
       }
@@ -68,27 +66,33 @@ export function Support() {
 
   return (
     <>
+      {isLoading && (
+        <span className="loader border-t-transparent border-4 border-white rounded-full w-6 h-6 animate-spin"></span>
+      )}
       <BackgroundAnimatedProduct />
       <Header />
-      <section className="min-h-screen flex items-center justify-center">
-        <div className="w-full max-w-4xl bg-[#B9B8B8] dark:bg-[#606060] p-8 rounded-lg shadow-xl">
+      <section
+        className={classNames(
+          'min-h-screen flex items-center justify-center',
+          IS_ZOOM_BIGGER_THAN_100 && 'pt-16',
+        )}
+      >
+        <div className="w-full max-w-4xl bg-white dark:bg-gray-800 p-8 rounded-lg shadow-xl">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
             <aside className="col-span-full md:col-span-6 flex flex-col items-center">
-              <img
-                src={theme.isDarkTheme ? logoWhite : logoBlack}
-                alt="Logo"
-                className="w-[150px] h-auto mb-8"
-              />
+              <h1 className="text-[#F39200] dark:text-[#F39200] font-black text-5xl sm:text-6xl lg:text-7xl flex items-center pb-4">
+                ALFRED
+              </h1>
 
               <div className="flex flex-col gap-6 w-full max-w-[368px]">
                 <a
                   href="https://chat.whatsapp.com/HtFSC2xozFhLEFxaDf5Psx"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 bg-[#B9B8B8] dark:bg-[#606060] border border-gray-300 dark:border-[#B9B8B8] rounded-[24px] shadow-sm hover:bg-gray-200 dark:hover:bg-[#B9B8B8] transition"
+                  className="flex items-center gap-4 p-4 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-[24px] shadow-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition"
                 >
                   <FaWhatsapp size={32} className="text-green-500" />
-                  <span className="font-semibold text-lg text-[#606060] dark:text-white ">
+                  <span className="font-semibold text-lg text-gray-900 dark:text-gray-100">
                     WhatsApp
                   </span>
                 </a>
@@ -96,10 +100,10 @@ export function Support() {
                   href="https://www.instagram.com/diyseclab.io/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 bg-[#B9B8B8] dark:bg-[#606060] border border-gray-300 dark:border-[#B9B8B8] rounded-[24px] shadow-sm hover:bg-gray-200 dark:hover:bg-[#B9B8B8] transition"
+                  className="flex items-center gap-4 p-4 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-[24px] shadow-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition"
                 >
                   <FaInstagram size={32} className="text-pink-500" />
-                  <span className="font-semibold text-lg text-[#606060] dark:text-white">
+                  <span className="font-semibold text-lg text-gray-900 dark:text-gray-100">
                     Instagram
                   </span>
                 </a>
@@ -107,13 +111,13 @@ export function Support() {
                   href="https://x.com/diyseclab"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 bg-[#B9B8B8] dark:bg-[#606060] border border-gray-300 dark:border-[#B9B8B8] rounded-[24px] shadow-sm hover:bg-gray-200 dark:hover:bg-[#B9B8B8] transition"
+                  className="flex items-center gap-4 p-4 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-[24px] shadow-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition"
                 >
                   <FaXTwitter
                     size={32}
                     className="text-black dark:text-white"
                   />
-                  <span className="font-semibold text-lg text-[#606060] dark:text-white">
+                  <span className="font-semibold text-lg text-gray-900 dark:text-gray-100">
                     X
                   </span>
                 </a>
@@ -122,20 +126,20 @@ export function Support() {
 
             <article className="col-span-full md:col-span-6 flex items-center justify-center">
               <form
-                onSubmit={handleSubmit}
-                className="w-full max-w-[370px] bg-[#B9B8B8] dark:bg-[#606060] p-8 rounded-lg flex flex-col gap-y-6"
+                onSubmit={handleSubmit(onSubmit)}
+                className="w-full max-w-[370px] bg-white dark:bg-gray-800 p-8 rounded-lg flex flex-col gap-y-6"
               >
-                <h3 className="font-bold text-lg md:text-2xl text-center text-[#606060] dark:text-white">
+                <h3 className="font-bold text-lg md:text-2xl text-center text-gray-900 dark:text-gray-100">
                   {t('support.sendMessage')}
                 </h3>
 
                 {responseMessage && (
                   <p
-                    className={`text-center font-medium ${
-                      responseType === 'success'
-                        ? 'text-green-600'
-                        : 'text-red-600'
-                    }`}
+                    className={classNames(
+                      'text-center font-medium',
+                      responseType === 'success' && 'text-green-600',
+                      responseType === 'error' && 'text-red-600',
+                    )}
                   >
                     {responseMessage}
                   </p>
@@ -144,49 +148,42 @@ export function Support() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                   <input
                     type="text"
-                    name="firstName"
+                    {...register('firstName', { required: true })}
                     placeholder={t('support.firstName')}
-                    required
-                    className="p-3 border border-gray-300 dark:border-[#B9B8B8] rounded-lg focus:outline-none bg-[#B9B8B8] dark:bg-[#606060] text-[#606060] dark:text-white"
+                    className="p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                   />
                   <input
                     type="text"
-                    name="lastName"
+                    {...register('lastName', { required: true })}
                     placeholder={t('support.lastName')}
-                    required
-                    className="p-3 border border-gray-300 dark:border-[#B9B8B8] rounded-lg focus:outline-none bg-[#B9B8B8] dark:bg-[#606060] text-[#606060] dark:text-white"
+                    className="p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                   />
                 </div>
                 <input
                   type="email"
-                  name="email"
+                  {...register('email', { required: true })}
                   placeholder={t('support.email')}
-                  required
-                  className="p-3 border border-gray-300 dark:border-[#B9B8B8] rounded-lg focus:outline-none bg-[#B9B8B8] dark:bg-[#606060] text-[#606060] dark:text-white"
+                  className="p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                 />
                 <textarea
-                  name="message"
+                  {...register('message', { required: true })}
                   placeholder={t('support.message')}
-                  required
-                  className="p-3 border border-gray-300 dark:border-[#B9B8B8] rounded-lg focus:outline-none bg-[#B9B8B8] dark:bg-[#606060] text-[#606060] dark:text-white"
+                  className="p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                 ></textarea>
 
                 <button
                   type="submit"
-                  className="w-full py-3 rounded-lg font-bold transition bg-black hover:bg-[#606060] text-white dark:bg-[#] dark:hover:bg-[#B9B8B8] flex items-center justify-center"
+                  className="w-full py-3 rounded-lg font-bold transition bg-black hover:bg-gray-800 text-white dark:bg-gray-900 dark:hover:bg-blue-800 flex items-center justify-center"
                   disabled={isLoading}
                 >
-                  {isLoading ? (
-                    <span className="loader border-t-transparent border-4 border-white rounded-full w-6 h-6 animate-spin"></span>
-                  ) : (
-                    t('support.send')
-                  )}
+                  {t('support.send')}
                 </button>
               </form>
             </article>
           </div>
         </div>
       </section>
+      <WhatsAppButton />
     </>
   );
 }

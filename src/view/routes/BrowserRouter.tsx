@@ -43,7 +43,7 @@ export function BrowserRouter() {
               <Navigate to={`/${currentLang || AcceptedLanguages.pt}`} />
             }
           />
-          <Route path={ROUTES.lang.call()} element={<BuyBitcoin />}></Route>
+          <Route path={ROUTES.lang.call()} element={<BuyBitcoin />} />
           <Route path={ROUTES.lang.call()}>
             <Route path={ROUTES.buyBitcoin.path} element={<BuyBitcoin />} />
             <Route path={ROUTES.fee.path} element={<Fees />} />
