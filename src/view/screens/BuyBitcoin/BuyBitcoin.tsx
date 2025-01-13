@@ -5,11 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import AlfredImg from '../../assets/_DIY SEC LAB - Apresentação Comercial (1).png';
 import Btc from '../../assets/bitcoin.svg';
 import Brl from '../../assets/brl.svg';
-import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
-import WhatsAppButton from '../../components/buttonWhatsApp';
 import { ROUTES } from '../../routes/Routes';
 import { useCurrentLang } from '../../utils/useCurrentLang';
-import HeaderAlfred from '../Header/HeaderAlfred';
 
 export default function BuyBitcoinAndCheckout() {
   const navigate = useNavigate();
@@ -100,10 +97,7 @@ export default function BuyBitcoinAndCheckout() {
     <>
       <div className="flex justify-center items-center">
         <div className="flex flex-col lg:flex-row items-center justify-between w-full max-w-7xl px-4 lg:px-16 lg:pt-[5%] lg:pb-[3%] pt-[20%] pb-[3%]">
-          {/* Seção do conteúdo */}
           <div className="w-full lg:w-1/2">
-            <BackgroundAnimatedProduct />
-            <HeaderAlfred />
             <div className="lg:pt-[5%] lg:pb-[3%] pt-[20%] pb-[3%] flex items-center justify-center mt-[10%] sm:mt-[5%] lg:mt-[2%]">
               <h1 className="text-[#F39200] dark:text-[#F39200] font-black text-5xl sm:text-6xl lg:text-7xl flex items-center">
                 ALFRED
@@ -118,7 +112,6 @@ export default function BuyBitcoinAndCheckout() {
 
             <div className="flex justify-center px-4 sm:px-8 lg:px-0">
               <div className="w-full max-w-lg">
-                {/* Campo BRL */}
                 <div className="flex justify-center items-center space-x-4">
                   <div className="relative w-full">
                     <input
@@ -137,7 +130,6 @@ export default function BuyBitcoinAndCheckout() {
                   </div>
                 </div>
 
-                {/* Campo BTC */}
                 <div className="flex justify-center items-center pt-4">
                   <div className="relative w-full">
                     <input
@@ -156,7 +148,6 @@ export default function BuyBitcoinAndCheckout() {
                   </div>
                 </div>
 
-                {/* Botão de próximo */}
                 <div className="flex justify-center items-center pt-4">
                   <button
                     onClick={handleNextStep}
@@ -168,11 +159,8 @@ export default function BuyBitcoinAndCheckout() {
                 </div>
               </div>
             </div>
-
-            <WhatsAppButton />
           </div>
 
-          {/* Seção da imagem */}
           <div className="w-full lg:w-1/2 flex justify-center lg:justify-end mt-8 lg:mt-0">
             <img
               src={AlfredImg}
@@ -183,7 +171,6 @@ export default function BuyBitcoinAndCheckout() {
         </div>
       </div>
 
-      {/* Rodapé - Centralizando o texto */}
       <div className="w-full py-6 mt-16 mb-[10%] flex justify-center">
         <div className="text-center px-4 sm:px-8 lg:px-16">
           <p className="text-xl sm:text-2xl lg:text-3xl dark:text-white">
