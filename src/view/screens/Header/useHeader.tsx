@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { ThemeMode } from '../../../domain/entities/theme.entity';
-import { useTheme } from '../../screens/useTheme';
 import { useWindowSize } from '../../utils/useWindowSize';
+import { useTheme } from '../useTheme';
 
-export function useHeaderAlfred() {
+export function useHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { currentTheme, toggleTheme } = useTheme();
   const { width } = useWindowSize();

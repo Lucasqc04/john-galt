@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import WhatsAppButton from '../../components/buttonWhatsApp';
-import HeaderAlfred from './HeaderAlfred';
+import Header from '../Header/HeaderAlfred';
 
 export function Fees() {
   const { t } = useTranslation();
@@ -9,7 +9,7 @@ export function Fees() {
   return (
     <>
       <BackgroundAnimatedProduct />
-      <HeaderAlfred />
+      <Header />
       <div className="container mx-auto p-6 mt-[20%] sm:mt-[10%] mb-16">
         <h1 className="text-2xl font-bold mb-6 text-black dark:text-white">
           {t('fees.title')}
@@ -17,12 +17,8 @@ export function Fees() {
 
         <section className="mb-8">
           <ul className="list-disc pl-5 text-black dark:text-white">
-            <li>
-              <strong>5%:</strong> {t('fees.above1000')}
-            </li>
-            <li>
-              <strong>10%:</strong> {t('fees.below1000')}
-            </li>
+            <li>{t('fees.above1000')}</li>
+            <li>{t('fees.below1000')}</li>
           </ul>
         </section>
 
@@ -49,7 +45,6 @@ export function Fees() {
           <p className="text-black dark:text-white">{t('fees.privacy1')}</p>
           <p className="text-black dark:text-white mt-4">
             {t('fees.privacy2')}
-            <strong>700 BRL</strong>.
           </p>
         </section>
       </div>

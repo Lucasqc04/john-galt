@@ -7,11 +7,11 @@ import Logo from '../../assets/logo/logo-complete-black.png';
 import LogoWhite from '../../assets/logo/logo-complete-white.png';
 import { LanguageSwitcher } from '../../components/LanguageSwitcher/LanguageSwitcher';
 import { ROUTES } from '../../routes/Routes';
-import { NavLinks } from './NavLinksAlfred';
-import { useHeaderAlfred } from './useHeaderAlfred';
+import { NavLinks } from './NavLinks';
+import { useHeader } from './useHeader';
 
-export default function HeaderAlfred() {
-  const { isLargeScreen, menu, theme, isScrolled } = useHeaderAlfred();
+export default function Header() {
+  const { isLargeScreen, menu, theme, isScrolled } = useHeader();
 
   return (
     <header
