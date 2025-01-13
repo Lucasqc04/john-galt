@@ -17,7 +17,7 @@ export default function Header() {
     <header
       className={classNames(
         'fixed z-50 top-0 left-0 pt-0 md:p-2 flex items-center justify-between w-full max-w-[100vw] transition-all duration-300',
-        isScrolled && 'shadow-sm bg-[#B9B8B8] dark:bg-[#606060]',
+        isScrolled && 'shadow-sm bg-[#B9B8B8] dark:bg-black',
       )}
     >
       <nav
@@ -26,12 +26,7 @@ export default function Header() {
       >
         <div className="flex lg:flex-1 justify-center lg:justify-start">
           <Link to={ROUTES.home.call()}>
-            <img
-              src={theme.isDarkTheme ? LogoWhite : Logo}
-              alt="DIY LAB Logo"
-              className="w-26 h-24"
-            />
-            <span className="sr-only">DIY LAB</span>
+            <h1 className="font-extrabold  dark:text-white">ALFRED</h1>
           </Link>
         </div>
         <div className="flex lg:hidden items-center">
