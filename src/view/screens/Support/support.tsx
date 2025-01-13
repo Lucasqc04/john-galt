@@ -1,5 +1,4 @@
-import { BackgroundAnimatedProduct } from '@/view/components/BackgroundAnimatedProduct';
-import WhatsAppButton from '@/view/components/buttonWhatsApp';
+import { Loader } from '@/view/components/Loader';
 import { useScaleFactor } from '@/view/hooks/useScaleFactor';
 import { useWindowSize } from '@/view/utils/useWindowSize';
 import axios from 'axios';
@@ -9,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
-import Header from '../Header/HeaderAlfred';
+import { toast } from 'react-toastify';
 
 type FormValues = {
   firstName: string;
@@ -27,38 +26,48 @@ export function Support() {
   const IS_ZOOM_BIGGER_THAN_100 = scaleFactor > 1 && IS_LARGE_SCREEN;
 
   const [isLoading, setIsLoading] = useState(false);
-  const [responseMessage, setResponseMessage] = useState<string | null>(null);
-  const [responseType, setResponseType] = useState<'success' | 'error' | null>(
-    null,
-  );
 
   const { register, handleSubmit, reset } = useForm<FormValues>();
 
   const onSubmit = async (data: FormValues) => {
     setIsLoading(true);
-    setResponseMessage(null);
 
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/support`,
         data,
-        {
-          headers: { 'Content-Type': 'application/json' },
-        },
       );
 
-      if (response.status === 200) {
-        setResponseType('success');
-        setResponseMessage(t('support.successMessage'));
+      if (response.status === 200 || response.status === 201) {
+        toast.success(t('support.successMessage'), {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
         reset();
       } else {
-        setResponseType('error');
-        setResponseMessage(t('support.errorMessage'));
+        toast.error(t('support.errorMessage'), {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+        });
       }
     } catch (error) {
       console.error('Error:', error);
-      setResponseType('error');
-      setResponseMessage(t('support.errorMessage'));
+      toast.error(t('support.errorMessage'), {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+      });
     } finally {
       setIsLoading(false);
     }
@@ -66,11 +75,7 @@ export function Support() {
 
   return (
     <>
-      {isLoading && (
-        <span className="loader border-t-transparent border-4 border-white rounded-full w-6 h-6 animate-spin"></span>
-      )}
-      <BackgroundAnimatedProduct />
-      <Header />
+      {isLoading && <Loader />}
       <section
         className={classNames(
           'min-h-screen flex items-center justify-center',
@@ -133,18 +138,6 @@ export function Support() {
                   {t('support.sendMessage')}
                 </h3>
 
-                {responseMessage && (
-                  <p
-                    className={classNames(
-                      'text-center font-medium',
-                      responseType === 'success' && 'text-green-600',
-                      responseType === 'error' && 'text-red-600',
-                    )}
-                  >
-                    {responseMessage}
-                  </p>
-                )}
-
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                   <input
                     type="text"
@@ -183,7 +176,6 @@ export function Support() {
           </div>
         </div>
       </section>
-      <WhatsAppButton />
     </>
   );
 }
