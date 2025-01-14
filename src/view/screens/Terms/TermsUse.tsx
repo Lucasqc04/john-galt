@@ -1,6 +1,6 @@
+import { BackgroundAnimatedProduct } from '@/view/components/BackgroundAnimatedProduct';
+import WhatsAppButton from '@/view/components/buttonWhatsApp';
 import { useTranslation } from 'react-i18next';
-import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
-import WhatsAppButton from '../../components/buttonWhatsApp';
 import Header from '../Header/HeaderAlfred';
 export function TermsOfUse() {
   const { t } = useTranslation();

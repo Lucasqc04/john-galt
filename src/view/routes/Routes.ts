@@ -6,8 +6,8 @@ export const ROUTES = {
     call: () => '/',
   },
   buyBitcoin: {
-    path: 'buy-bitcoin',
-    call: (currentLang: string) => `/${currentLang}/buy-bitcoin`,
+    path: '',
+    call: (currentLang: string) => `/${currentLang}`,
   },
   buyCheckout: {
     path: 'buy-checkout',

@@ -14,7 +14,7 @@ export function NotFound() {
         to={ROUTES.home.call()}
         className="px-6 py-3 bg-orange-primary text-white rounded-lg transition"
       >
-        Back to DIY LAB
+        Back to ALFRED
       </Link>
     </div>
   );

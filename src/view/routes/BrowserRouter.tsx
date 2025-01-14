@@ -8,6 +8,7 @@ import {
 import { AcceptedLanguages, useLanguage } from '../../domain/locales/Language';
 import { Loader } from '../components/Loader';
 import ScrollToTop from '../components/ScrollToTop';
+import { DefaultLayout } from '../layout/DefaultyLayout';
 import { AboutBuyBitcoin } from '../screens/About/AboutBuyBitcoin';
 import BuyBitcoin from '../screens/BuyBitcoin/BuyBitcoin';
 import Checkout from '../screens/Checkout/Checkout';
@@ -43,8 +44,7 @@ export function BrowserRouter() {
               <Navigate to={`/${currentLang || AcceptedLanguages.pt}`} />
             }
           />
-          <Route path={ROUTES.lang.call()} element={<BuyBitcoin />}></Route>
-          <Route path={ROUTES.lang.call()}>
+          <Route path={ROUTES.lang.call()} element={<DefaultLayout />}>
             <Route path={ROUTES.buyBitcoin.path} element={<BuyBitcoin />} />
             <Route path={ROUTES.fee.path} element={<Fees />} />
             <Route path={ROUTES.buyCheckout.path} element={<Checkout />} />

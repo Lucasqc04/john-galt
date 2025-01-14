@@ -1,14 +1,12 @@
+import { LogoAlfred } from '@/view/components/LogoAlfred';
 import classNames from 'classnames';
 import { t } from 'i18next';
 import { QRCodeSVG } from 'qrcode.react';
 import { ChangeEvent } from 'react';
 import Alfred from '../../assets/AlfredComercial.png';
 import AlfredImg from '../../assets/c1b28810-5a23-4e7c-bcce-bd1f42b271c5.png';
-import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
 import { Loader } from '../../components/Loader';
-import WhatsAppButton from '../../components/buttonWhatsApp';
 import { ROUTES } from '../../routes/Routes';
-import HeaderAlfred from '../Header/HeaderAlfred';
 import { useCheckout } from './useChekout';
 
 export default function Checkout() {
@@ -41,13 +39,9 @@ export default function Checkout() {
   } = useCheckout();
 
   return (
-    <div>
-      <BackgroundAnimatedProduct />
-      <HeaderAlfred />
+    <div className="mb-10">
       <div className="pt-[10%] pb-[10%] lg:pt-8 lg:pb-8 flex items-center justify-center mt-[20%] sm:mt-[10%]">
-        <h1 className="text-[#F39200] dark:text-[#F39200] font-black text-7xl flex items-center">
-          ALFRED
-        </h1>
+        <LogoAlfred />
       </div>
       <div className="flex justify-center">
         <div>
@@ -90,7 +84,6 @@ export default function Checkout() {
           ) : (
             <div className="flex justify-center items-center relative px-4 mb-28">
               <div className="w-full max-w-lg">
-                {/* Network Dropdown */}
                 <div className="flex justify-center items-center space-x-4">
                   <div className="relative w-full">
                     <input
@@ -177,7 +170,6 @@ export default function Checkout() {
                   </div>
                 </div> */}
 
-                {/* Wallet and Transaction Number Inputs */}
                 <div className="flex justify-center items-center pt-4">
                   <div className="relative w-full">
                     <input
@@ -214,7 +206,6 @@ export default function Checkout() {
                   </div>
                 </div>
 
-                {/* Coupon Input */}
                 <div className="flex items-center justify-center mt-4">
                   <input
                     type="text"
@@ -231,7 +222,6 @@ export default function Checkout() {
                   </button>
                 </div>
 
-                {/* Terms and Fees Acceptance */}
                 <div className="flex flex-col justify-center items-start pt-4">
                   <label className="flex items-center dark:text-white">
                     <input
@@ -275,7 +265,6 @@ export default function Checkout() {
                   </label>
                 </div>
 
-                {/* Payment Button */}
                 <div className="flex justify-center items-center pt-4">
                   {isLoading ? (
                     <Loader />
@@ -295,7 +284,6 @@ export default function Checkout() {
                 </div>
               </div>
 
-              {/* Imagem à direita */}
               <div className=" hidden sm:block absolute right-[-20%] top-[-10%] transform translate-x-1/2 translate-y-1/2 w-[50%]">
                 <img src={AlfredImg} alt="imagem-alfred" className="" />
               </div>
@@ -303,7 +291,6 @@ export default function Checkout() {
           )}
         </div>
       </div>
-      <WhatsAppButton />
     </div>
   );
 }
