@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Onchain from '../../assets/bitcoin.svg';
 import Liquid from '../../assets/lbtc.svg';
 import { ROUTES } from '../../routes/Routes';
@@ -92,12 +93,12 @@ export function useCheckout() {
 
   const handleProcessPayment = async () => {
     if (!acceptFees || !acceptTerms) {
-      alert(t('buycheckout.termsAndFeesAlert'));
+      toast.warning(t('buycheckout.termsAndFeesAlert'));
       return;
     }
 
     if (!network) {
-      alert(t('buycheckout.networkSelectionAlert'));
+      toast.warning(t('buycheckout.networkSelectionAlert'));
       return;
     }
 
@@ -137,7 +138,7 @@ export function useCheckout() {
       verifyPaymentStatus(response.data.order.id);
     } catch (error) {
       console.error('Erro ao processar pagamento:', error);
-      alert(t('buycheckout.paymentError'));
+      toast.error(t('buycheckout.paymentError'));
       setIsLoading(false);
     }
   };
@@ -145,7 +146,7 @@ export function useCheckout() {
   const copyToClipboard = () => {
     if (pixKey) {
       navigator.clipboard.writeText(pixKey);
-      alert(t('buycheckout.pixKeyCopied'));
+      toast.success(t('buycheckout.pixKeyCopied'));
     }
   };
 
@@ -201,14 +202,14 @@ export function useCheckout() {
       const coupon = response.data;
 
       if (!coupon.isActive) {
-        alert(t('buycheckout.couponInactive'));
+        toast.warning(t('buycheckout.couponInactive'));
         return;
       }
 
-      alert(t('buycheckout.couponValid'));
+      toast.success(t('buycheckout.couponValid'));
     } catch (error) {
       console.error('Erro ao verificar o cupom:', error);
-      alert(t('buycheckout.couponCheckError'));
+      toast.error(t('buycheckout.couponCheckError'));
     } finally {
       setIsLoading(false);
     }

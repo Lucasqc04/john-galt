@@ -2,6 +2,7 @@ import { toZonedTime } from 'date-fns-tz';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import AlfredImg from '../../assets/_DIY SEC LAB - Apresentação Comercial (1).png';
 import Btc from '../../assets/bitcoin.svg';
 import Brl from '../../assets/brl.svg';
@@ -79,7 +80,7 @@ export default function BuyBitcoinAndCheckout() {
 
   const handleNextStep = () => {
     if (!isTransactionAllowed) {
-      alert(t('checkout.transaction_error'));
+      toast.error(t('checkout.transaction_error'));
       return;
     }
 
@@ -89,7 +90,7 @@ export default function BuyBitcoinAndCheckout() {
       localStorage.setItem('btcAmount', btcAmount);
       navigate(ROUTES.buyCheckout.call(currentLang));
     } else {
-      alert(t('checkout.amount_error'));
+      toast.error(t('checkout.amount_error'));
     }
   };
 
