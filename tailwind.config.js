@@ -14,6 +14,9 @@ export default {
         'orange-primary': '#F39200',
         success: '#28A745',
       },
+      fontFamily: {
+        lexend: ['"Lexend Deca"', 'sans-serif'],
+      },
     },
   },
   plugins: [],
