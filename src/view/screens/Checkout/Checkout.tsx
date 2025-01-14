@@ -1,3 +1,4 @@
+import { LogoAlfred } from '@/view/components/LogoAlfred';
 import classNames from 'classnames';
 import { t } from 'i18next';
 import { QRCodeSVG } from 'qrcode.react';
@@ -38,11 +39,9 @@ export default function Checkout() {
   } = useCheckout();
 
   return (
-    <div>
+    <div className="mb-10">
       <div className="pt-[10%] pb-[10%] lg:pt-8 lg:pb-8 flex items-center justify-center mt-[20%] sm:mt-[10%]">
-        <h1 className="text-[#F39200] dark:text-[#F39200] font-black text-7xl flex items-center">
-          ALFRED
-        </h1>
+        <LogoAlfred />
       </div>
       <div className="flex justify-center">
         <div>

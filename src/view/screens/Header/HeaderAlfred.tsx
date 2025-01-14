@@ -24,14 +24,16 @@ export default function Header() {
         aria-label="Global"
         className="w-full flex items-center justify-between"
       >
-        <div className="flex lg:flex-1 justify-center lg:justify-start">
+        <div className="flex lg:flex-1 justify-center lg:justify-start ml-7">
           <Link to={ROUTES.home.call()}>
-            <h1 className="font-extrabold  dark:text-white">ALFRED</h1>
+            <h1 className="font-extrabold  dark:text-white font-lexend ">
+              ALFRED
+            </h1>
           </Link>
         </div>
         <div className="flex lg:hidden items-center">
-          <LanguageSwitcher className="text-xl flex items-center justify-center gap-x-2 lg:text-xl font-semibold leading-6 hover:text-[#F6911D]" />
-          <label className="inline-flex items-center relative cursor-pointer mr-4">
+          <LanguageSwitcher className=" text-xl flex items-center justify-center gap-x-2 lg:text-xl font-semibold leading-6 hover:text-[#F6911D]" />
+          <label className="inline-flex items-center relative cursor-pointer mr-7">
             <input
               className="peer hidden"
               id="toggle-mobile"
@@ -40,7 +42,12 @@ export default function Header() {
               onClick={theme.toggle}
               onChange={() => {}}
             />
-            <div className="relative w-[80px] h-[35px] bg-white peer-checked:bg-zinc-500 rounded-full after:absolute after:content-[''] after:w-[30px] after:h-[30px] after:bg-gradient-to-r from-orange-500 to-yellow-400 peer-checked:after:from-zinc-900 peer-checked:after:to-zinc-900 after:rounded-full after:top-[2.5px] after:left-[2.5px] active:after:w-[40px] peer-checked:after:left-[75px] peer-checked:after:translate-x-[-100%] shadow-sm duration-300 after:duration-300 after:shadow-md"></div>
+            <div
+              className="relative w-[80px] h-[35px] bg-white peer-checked:bg-zinc-500 rounded-full after:absolute after:content-['']
+            after:w-[30px] after:h-[30px] after:bg-gradient-to-r from-orange-500 to-yellow-400 peer-checked:after:from-zinc-900 peer-checked:after:to-zinc-900
+            after:rounded-full after:top-[2.5px] after:left-[2.5px] active:after:w-[40px] peer-checked:after:left-[75px] peer-checked:after:translate-x-[-100%]
+            shadow-sm duration-300 after:duration-300 after:shadow-md"
+            ></div>
             <FaSun className="fill-white peer-checked:opacity-60 absolute w-4 h-4 left-[10px]" />
             <FaMoon className="fill-black opacity-60 peer-checked:opacity-70 peer-checked:fill-white absolute w-4 h-4 right-[10px]" />
           </label>

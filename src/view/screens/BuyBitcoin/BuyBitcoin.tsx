@@ -1,3 +1,4 @@
+import { LogoAlfred } from '@/view/components/LogoAlfred';
 import { toZonedTime } from 'date-fns-tz';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -100,9 +101,7 @@ export default function BuyBitcoinAndCheckout() {
         <div className="flex flex-col lg:flex-row items-center justify-between w-full max-w-7xl px-4 lg:px-16 lg:pt-[5%] lg:pb-[3%] pt-[20%] pb-[3%]">
           <div className="w-full lg:w-1/2">
             <div className="lg:pt-[5%] lg:pb-[3%] pt-[20%] pb-[3%] flex items-center justify-center mt-[10%] sm:mt-[5%] lg:mt-[2%]">
-              <h1 className="text-[#F39200] dark:text-[#F39200] font-black text-5xl sm:text-6xl lg:text-7xl flex items-center">
-                ALFRED
-              </h1>
+              <LogoAlfred />
             </div>
 
             {!isTransactionAllowed && (
