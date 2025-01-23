@@ -95,10 +95,12 @@
   },
   "buycheckout": {
     "coldWalletError": "La dirección de la cartera no puede estar vacía.",
-    "invalidColdWalletError": "Dirección de cartera inválida.",
+    "invalidColdWalletErrorLiquid": "Dirección de billetera Liquid inválida.",
+    "invalidColdWalletErrorOnchain": "Dirección de billetera Onchain inválida.",
+    "invalidColdWalletErrorLightning": "Dirección de billetera Lightning inválida.",
     "transactionNumberError": "El número de teléfono es obligatorio.",
     "invalidTransactionNumberError": "Ingresa un número de teléfono válido (9 a 15 dígitos).",
-    "termsAndFeesAlert": "Debe aceptar las tarifas y los términos de uso.",
+    "termsAndFeesAlert": "Debes aceptar las tarifas, condiciones de uso y confirmación de los datos enviados.",
     "networkSelectionAlert": "Debe seleccionar una red de Bitcoin antes de continuar.",
     "paymentError": "Error al procesar el pago.",
     "pixKeyCopied": "¡Clave PIX copiada al portapapeles!",
@@ -122,6 +124,7 @@
     "apply": "Aplicar",
     "acceptFees": "Acepto las tarifas",
     "acceptTerms": "Acepto los términos y condiciones",
+    "confirmDate": "Confirmo que los datos enviados son correctos",
     "getPixKey": "Obtener clave PIX"
   }
 }
