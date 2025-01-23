@@ -28,6 +28,7 @@ export function useCheckout() {
   const [btcAmount, setBtcAmount] = useState('');
   const [acceptFees, setAcceptFees] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
+  const [confirmDate, setconfirmDate] = useState(false);
 
   const navigate = useNavigate();
   const { currentLang } = useCurrentLang();
@@ -65,12 +66,41 @@ export function useCheckout() {
 
     if (!coldWallet) {
       newErrors.coldWallet = t('buycheckout.coldWalletError');
-    } else if (
-      !/^(1|3)[a-km-zA-HJ-NP-Z0-9]{25,34}$|^bc1[a-zA-HJ-NP-Z0-9]{39,59}$/.test(
-        coldWallet,
-      )
-    ) {
-      newErrors.coldWallet = t('buycheckout.invalidColdWalletError');
+    } else {
+      switch (network) {
+        case 'Onchain':
+          if (
+            !/^(1|3)[a-km-zA-HJ-NP-Z0-9]{25,34}$|^bc1[a-zA-HJ-NP-Z0-9]{39,59}$/.test(
+              coldWallet,
+            )
+          ) {
+            newErrors.coldWallet = t(
+              'buycheckout.invalidColdWalletErrorOnchain',
+            );
+          }
+          break;
+        case 'Liquid':
+          if (
+            !/^VJL[a-km-zA-HJ-NP-Z0-9]{43,}$/i.test(coldWallet) &&
+            !/^ex1[a-z0-9]{39,59}$/i.test(coldWallet) &&
+            !/^CT[a-km-zA-HJ-NP-Z0-9]{40,64}$/i.test(coldWallet)
+          ) {
+            newErrors.coldWallet = t(
+              'buycheckout.invalidColdWalletErrorLiquid',
+            );
+          }
+          break;
+        case 'Lightning':
+          if (!/^lnbc[0-9]{1,}[a-zA-Z0-9]+$/.test(coldWallet)) {
+            newErrors.coldWallet = t(
+              'buycheckout.invalidColdWalletErrorLightning',
+            );
+          }
+          break;
+        default:
+          newErrors.coldWallet = t('buycheckout.invalidColdWalletError');
+          break;
+      }
     }
 
     if (!transactionNumber) {
@@ -241,6 +271,7 @@ export function useCheckout() {
     acceptTerms,
     networks,
     currentLang,
+    confirmDate,
     toggleDropdown,
     selectNetwork,
     toggleDropdownMethod,
@@ -254,5 +285,6 @@ export function useCheckout() {
     setCupom,
     setTransactionNumber,
     verifyPaymentStatus,
+    setconfirmDate,
   };
 }

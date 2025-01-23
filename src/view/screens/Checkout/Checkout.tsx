@@ -26,6 +26,7 @@ export default function Checkout() {
     acceptTerms,
     networks,
     currentLang,
+    confirmDate,
     toggleDropdown,
     selectNetwork,
     handleProcessPayment,
@@ -37,6 +38,7 @@ export default function Checkout() {
     setCupom,
     setTransactionNumber,
     verifyPaymentStatus,
+    setconfirmDate,
   } = useCheckout();
 
   return (
@@ -269,6 +271,17 @@ export default function Checkout() {
                       className="cursor-pointer text-blue-500 hover:underline"
                     >
                       {t('buycheckout.acceptTerms')}
+                    </span>
+                  </label>
+                  <label className="flex items-center dark:text-white">
+                    <input
+                      type="checkbox"
+                      checked={confirmDate}
+                      onChange={() => setconfirmDate(!confirmDate)}
+                      className="mr-2"
+                    />
+                    <span className="cursor-pointer text-blue-500 hover:underline">
+                      {t('buycheckout.confirmDate')}
                     </span>
                   </label>
                 </div>
