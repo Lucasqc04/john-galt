@@ -95,10 +95,12 @@
   },
   "buycheckout": {
     "coldWalletError": "The wallet address cannot be empty.",
-    "invalidColdWalletError": "Invalid wallet address.",
+    "invalidColdWalletErrorLiquid": "Invalid Liquid wallet address.",
+    "invalidColdWalletErrorOnchain": "Invalid Onchain wallet address.",
+    "invalidColdWalletErrorLightning": "Invalid Lightning wallet address.",
     "transactionNumberError": "The phone number is required.",
     "invalidTransactionNumberError": "Enter a valid phone number (9 to 15 digits).",
-    "termsAndFeesAlert": "You need to accept the fees and the terms of use.",
+    "termsAndFeesAlert": "You need to accept the fees, terms of use and confirmation of the data sent",
     "networkSelectionAlert": "You need to select a Bitcoin network before proceeding.",
     "paymentError": "Error processing the payment.",
     "pixKeyCopied": "PIX key copied to clipboard!",
@@ -122,6 +124,7 @@
     "apply": "Apply",
     "acceptFees": "I accept the fees",
     "acceptTerms": "I accept the terms and conditions",
+    "confirmDate": "I confirm that the data sent is correct",
     "getPixKey": "Get PIX key"
   }
 }
