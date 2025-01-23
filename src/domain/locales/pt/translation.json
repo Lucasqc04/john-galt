@@ -95,10 +95,12 @@
   },
   "buycheckout": {
     "coldWalletError": "O endereço da carteira não pode estar vazio.",
-    "invalidColdWalletError": "Endereço da carteira inválido.",
+    "invalidColdWalletErrorLiquid": "Endereço da carteira Liquid inválido.",
+    "invalidColdWalletErrorOnchain": "Endereço da carteira Onchain inválido.",
+    "invalidColdWalletErrorlightning ": "Endereço da carteira lightning  inválido.",
     "transactionNumberError": "O número de telefone é obrigatório.",
     "invalidTransactionNumberError": "Insira um número de telefone válido (9 a 15 dígitos).",
-    "termsAndFeesAlert": "Você precisa aceitar as taxas e os termos de uso.",
+    "termsAndFeesAlert": "Você precisa aceitar as taxas, termos de uso e a confirmação dos dados enviados",
     "networkSelectionAlert": "Você precisa selecionar uma rede de Bitcoin antes de prosseguir.",
     "paymentError": "Erro ao processar o pagamento.",
     "pixKeyCopied": "Chave PIX copiada para a área de transferência!",
@@ -122,6 +124,7 @@
     "apply": "Aplicar",
     "acceptFees": "Aceito as taxas",
     "acceptTerms": "Aceito os termos e condições",
+    "confirmDate": "Confirmo que os dados enviados estão corretos",
     "getPixKey": "Gerar chave PIX"
   }
 }
