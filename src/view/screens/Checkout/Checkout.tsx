@@ -37,6 +37,7 @@ export default function Checkout() {
     setAcceptFees,
     setCupom,
     setTransactionNumber,
+    verifyPaymentStatus,
     setconfirmDate,
   } = useCheckout();
 
@@ -79,6 +80,13 @@ export default function Checkout() {
               >
                 {t('buycheckout.copyPixKey')}
               </button>
+              <button
+                onClick={() => verifyPaymentStatus(transactionNumber)}
+                className="mt-4 px-6 py-3 bg-green-500 text-white rounded-3xl font-bold"
+              >
+                Efetuei o pagamento
+              </button>
+
               <div className="hidden sm:block absolute right-[20%] top-[30%] transform translate-x-1/2 translate-y-1/2 w-[50%]">
                 <img src={Alfred} alt="" />
               </div>

@@ -97,7 +97,7 @@
     "coldWalletError": "O endereço da carteira não pode estar vazio.",
     "invalidColdWalletErrorLiquid": "Endereço da carteira Liquid inválido.",
     "invalidColdWalletErrorOnchain": "Endereço da carteira Onchain inválido.",
-    "invalidColdWalletErrorLightning": "Endereço da carteira Lightning inválido.",
+    "invalidColdWalletErrorlightning ": "Endereço da carteira lightning  inválido.",
     "transactionNumberError": "O número de telefone é obrigatório.",
     "invalidTransactionNumberError": "Insira um número de telefone válido (9 a 15 dígitos).",
     "termsAndFeesAlert": "Você precisa aceitar as taxas, termos de uso e a confirmação dos dados enviados",
