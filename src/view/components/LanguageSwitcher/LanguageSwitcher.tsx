@@ -1,5 +1,6 @@
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
+import classNames from 'classnames';
 import { AcceptedLanguages } from '../../../domain/locales/Language';
 import brasil from '../../assets/images/brasil.png';
 import espanha from '../../assets/images/espanha.png';
@@ -9,29 +10,32 @@ import {
   useLanguageSwitcher,
 } from './useLanguageSwitcher';
 
-export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
+export function LanguageSwitcher({
+  className,
+  LabelClassName,
+}: LanguageSwitcherProps) {
   const { language } = useLanguageSwitcher();
 
   return (
-    <div className="flex gap-2">
+    <div className={classNames('flex gap-2', className)}>
       <Popover className="relative">
         <PopoverButton className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900 dark:text-white focus:ring-0 focus:outline-none">
           {language.current === AcceptedLanguages.pt && (
             <>
               <img src={brasil} alt="Português" className="h-5 w-5" />
-              <span className={className}>BR</span>
+              <span className={LabelClassName}>BR</span>
             </>
           )}
           {language.current === AcceptedLanguages.en && (
             <>
               <img src={estadosUnidos} alt="English" className="h-5 w-5" />
-              <span className={className}>EN</span>
+              <span className={LabelClassName}>EN</span>
             </>
           )}
           {language.current === AcceptedLanguages.es && (
             <>
               <img src={espanha} alt="Español" className="h-5 w-5" />
-              <span className={className}>ES</span>
+              <span className={LabelClassName}>ES</span>
             </>
           )}
           <ChevronDownIcon

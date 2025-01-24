@@ -18,7 +18,7 @@ export function PaymentAlfredSuccess() {
   return (
     <div className="min-h-screen bg-primary-light dark:bg-primary-dark flex flex-col justify-center items-center px-4 text-center">
       <div className="flex justify-center">
-        <LanguageSwitcher className="transform scale-110" />
+        <LanguageSwitcher LabelClassName="transform scale-110" />
       </div>
       <div className="bg-success rounded-full p-8 mb-8 mt-5">
         <svg
