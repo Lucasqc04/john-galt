@@ -117,7 +117,7 @@ export default function BuyBitcoinAndCheckout() {
                     value={brlAmount}
                     onChange={handleBrlChange}
                     placeholder={t('checkout.brl_placeholder')}
-                    className="border-2 px-16 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-transparent text-center w-full"
+                    className="border-2 px-16 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-transparent text-center w-full brl-step"
                   />
                   <button className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white">
                     <img
@@ -151,25 +151,23 @@ export default function BuyBitcoinAndCheckout() {
                 <button
                   onClick={handleNextStep}
                   type="button"
-                  className="w-full h-10 sm:h-12 bg-[#F39200] text-white rounded-3xl font-bold text-sm sm:text-base border-2"
+                  className="w-full h-10 sm:h-12 bg-[#F39200] text-white rounded-3xl font-bold text-sm sm:text-base border-2 proceed-button-step"
                 >
                   {t('checkout.proceed_button')}
                 </button>
               </div>
             </form>
           </article>
-          <article className="w-full lg:w-1/2 flex justify-center">
+          <article className="w-full lg:w-1/2 flex justify-center image-step">
             <img src={AlfredImg} alt="Imagem Alfred" className="w-full" />
           </article>
         </section>
-        <section className="">
-          <div className="text-center px-4 sm:px-8 lg:px-16 py-6 sm:py-0">
-            <p className="text-base sm:text-2xl lg:text-3xl text-white">
-              Com o ALFRED, você pode adquirir seus BITCOINS de maneira simples
-              e enviá-los diretamente para sua carteira offline, garantindo
-              total privacidade e segurança.
-            </p>
-          </div>
+        <section className="text-center px-4 sm:px-8 lg:px-16 py-6 sm:py-2">
+          <p className="text-base sm:text-2xl lg:text-3xl text-white">
+            Com o ALFRED, você pode adquirir seus BITCOINS de maneira simples e
+            enviá-los diretamente para sua carteira offline, garantindo total
+            privacidade e segurança.
+          </p>
         </section>
       </main>
     </>

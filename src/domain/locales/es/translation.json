@@ -126,5 +126,10 @@
     "acceptTerms": "Acepto los términos y condiciones",
     "confirmDate": "Confirmo que los datos enviados son correctos",
     "getPixKey": "Obtener clave PIX"
+  },
+  "guide": {
+    "imageStep": "¡Hola, soy Alfred! ¡Bienvenido! Soy un robot que facilita las transacciones de Bitcoin sin KYC, de manera simple y segura.",
+    "brlStep": "Ingresa el valor en BRL que deseas convertir a Bitcoin.",
+    "proceedButtonStep": "Después de ingresar el valor, haz clic en el botón 'Continuar' para seguir con la compra."
   }
 }
