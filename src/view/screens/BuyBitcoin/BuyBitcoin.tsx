@@ -91,7 +91,7 @@ export default function BuyBitcoinAndCheckout() {
       localStorage.setItem('btcAmount', btcAmount);
       navigate(ROUTES.buyCheckout.call(currentLang));
     } else {
-      toast.error(t('checkout.amount_error'));
+      toast.warning(t('checkout.amount_error'));
     }
   };
 
