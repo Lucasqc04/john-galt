@@ -1,4 +1,4 @@
-import AlfredBlackLogo from '@/view/assets/header/alfred-black-logo.svg';
+import AlfredBlackLogo from '@/view/assets/logo/alfred-black-logo.svg';
 import classNames from 'classnames';
 import { createPortal } from 'react-dom';
 import { FaBars } from 'react-icons/fa';
@@ -15,7 +15,7 @@ export default function Header() {
   return (
     <header
       className={classNames(
-        'fixed z-50 top-0 left-0 flex items-center justify-between w-full max-w-[100vw] transition-all duration-300 bg-white px-28 py-8',
+        'flex items-center justify-between w-full max-w-[100vw] transition-all duration-300 bg-white px-28 py-8',
         isScrolled && 'shadow-sm ',
       )}
     >
