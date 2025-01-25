@@ -11,7 +11,7 @@ function WhatsAppButton() {
         )
       }
       title="Whatsapp Button"
-      className="fixed bottom-8 right-5 bg-green-500 text-white rounded-full p-4 text-3xl cursor-pointer hover:bg-green-600"
+      className="fixed bottom-8 right-5 text-green-500 rounded-full p-4 text-3xl cursor-pointer hover:text-green-600"
     >
       <FaWhatsapp />
     </button>

@@ -97,11 +97,14 @@ export default function BuyBitcoinAndCheckout() {
 
   return (
     <>
-      <main className="flex flex-col justify-center items-center px-24 pt-44">
-        <section className="w-full flex items-center justify-center">
-          <article className="w-1/2 flex flex-col items-center justify-around gap-y-10">
-            <img src={AlfredWhiteLogo} alt="Alfred Logo" className="w-80" />
-
+      <main className="flex flex-col justify-center items-center px-10 sm:px-24 pt-12 sm:pt-44">
+        <section className="w-full flex flex-col lg:flex-row items-center justify-center">
+          <article className="w-full lg:w-1/2 flex flex-col items-center justify-around gap-y-10">
+            <img
+              src={AlfredWhiteLogo}
+              alt="Alfred Logo"
+              className="w-72 sm:w-80"
+            />
             <form className="flex flex-col justify-center w-full max-w-2xl">
               {!isTransactionAllowed && (
                 <span className="text-red-500 text-center font-bold pb-4">
@@ -155,13 +158,13 @@ export default function BuyBitcoinAndCheckout() {
               </div>
             </form>
           </article>
-          <article className="w-1/2 flex justify-center">
+          <article className="w-full lg:w-1/2 flex justify-center">
             <img src={AlfredImg} alt="Imagem Alfred" className="w-full" />
           </article>
         </section>
         <section className="">
-          <div className="text-center px-4 sm:px-8 lg:px-16">
-            <p className="text-xl sm:text-2xl lg:text-3xl text-white">
+          <div className="text-center px-4 sm:px-8 lg:px-16 py-6 sm:py-0">
+            <p className="text-base sm:text-2xl lg:text-3xl text-white">
               Com o ALFRED, você pode adquirir seus BITCOINS de maneira simples
               e enviá-los diretamente para sua carteira offline, garantindo
               total privacidade e segurança.

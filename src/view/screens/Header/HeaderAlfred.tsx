@@ -10,13 +10,12 @@ import { NavLinks } from './NavLinks';
 import { useHeader } from './useHeader';
 
 export default function Header() {
-  const { isLargeScreen, menu, isScrolled } = useHeader();
+  const { isLargeScreen, menu } = useHeader();
 
   return (
     <header
       className={classNames(
-        'flex items-center justify-between w-full max-w-[100vw] transition-all duration-300 bg-white px-28 py-8',
-        isScrolled && 'shadow-sm ',
+        'flex items-center justify-between w-full max-w-[100vw] transition-all duration-300 bg-white px-8 sm:px-28 py-6 sm:py-8',
       )}
     >
       <nav
@@ -48,7 +47,7 @@ export default function Header() {
         />
         {menu.isOpen &&
           createPortal(
-            <div className="fixed top-0 left-0 h-screen w-screen  bg-[#B9B8B8] dark:bg-[#606060] z-50 px-6">
+            <div className="fixed top-0 left-0 h-screen w-screen bg-white z-50 px-6">
               <div className="w-full flex justify-between items-center">
                 <img
                   src={AlfredBlackLogo}
