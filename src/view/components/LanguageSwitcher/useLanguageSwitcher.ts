@@ -5,6 +5,7 @@ import { AcceptedLanguages } from '../../../domain/locales/Language';
 
 export type LanguageSwitcherProps = {
   className?: string;
+  LabelClassName?: string;
 };
 
 export function useLanguageSwitcher() {

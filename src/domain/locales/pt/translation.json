@@ -97,7 +97,7 @@
     "coldWalletError": "O endereço da carteira não pode estar vazio.",
     "invalidColdWalletErrorLiquid": "Endereço da carteira Liquid inválido.",
     "invalidColdWalletErrorOnchain": "Endereço da carteira Onchain inválido.",
-    "invalidColdWalletErrorLightning": "Endereço da carteira Lightning inválido.",
+    "invalidColdWalletErrorlightning ": "Endereço da carteira lightning  inválido.",
     "transactionNumberError": "O número de telefone é obrigatório.",
     "invalidTransactionNumberError": "Insira um número de telefone válido (9 a 15 dígitos).",
     "termsAndFeesAlert": "Você precisa aceitar as taxas, termos de uso e a confirmação dos dados enviados",
@@ -126,5 +126,10 @@
     "acceptTerms": "Aceito os termos e condições",
     "confirmDate": "Confirmo que os dados enviados estão corretos",
     "getPixKey": "Gerar chave PIX"
+  },
+  "guide": {
+    "imageStep": "Olá, eu sou o Alfred! Seja bem-vindo! Sou um robô que facilita para você transações de Bitcoin sem KYC, de forma simples e segura.",
+    "brlStep": "Digite o valor em BRL que você deseja converter para Bitcoin.",
+    "proceedButtonStep": "Após preencher o valor, clique no botão 'Prosseguir' para continuar com a compra."
   }
 }

@@ -27,7 +27,6 @@ export function useCheckout() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [brlAmount, setBrlAmount] = useState('');
   const [btcAmount, setBtcAmount] = useState('');
-  const [, setIsWaitingForPayment] = useState(false);
   const [acceptFees, setAcceptFees] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [confirmDate, setconfirmDate] = useState(false);
@@ -93,17 +92,14 @@ export function useCheckout() {
           }
           break;
         case 'Lightning':
-          if (
-            !/^lnbc[0-9]{1,}[a-zA-Z0-9]+$/.test(coldWallet) &&
-            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(coldWallet)
-          ) {
+          if (!/^lnbc[0-9]{1,}[a-zA-Z0-9]+$/.test(coldWallet)) {
             newErrors.coldWallet = t(
-              t('buycheckout.invalidColdWalletErrorLightning'),
+              'buycheckout.invalidColdWalletErrorLightning',
             );
           }
           break;
         default:
-          newErrors.coldWallet = 'Erro';
+          newErrors.coldWallet = t('buycheckout.invalidColdWalletError');
           break;
       }
     }
@@ -151,30 +147,58 @@ export function useCheckout() {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/orders/create-order`,
+        `${import.meta.env.VITE_API_URL}/deposit`,
         {
-          realValue: parseFloat(brlAmount.replace(/\D/g, '')),
-          bitcoinValue: parseFloat(btcAmount),
+          valorBRL: parseFloat(brlAmount.replace(/\D/g, '')),
+          valorBTC: parseFloat(btcAmount),
           paymentMethod: 'PIX',
           network: network,
-          phone: transactionNumber,
-          coldWalletId: coldWallet,
+          telefone: transactionNumber,
+          coldWallet: coldWallet,
           cupom: cupom,
         },
       );
 
-      if (isTransactionTimedOut) return;
-
-      const pixKey = response.data.order.pixKey;
+      const pixKey = response.data.response.qrCopyPaste;
+      console.log('PixKey:', pixKey);
       setPixKey(pixKey);
       setTimeLeft(240);
       setIsLoading(false);
 
-      verifyPaymentStatus(response.data.order.id);
+      verifyPaymentStatus(response.data.response.id);
+      const transactionId = response.data.response.id;
+      localStorage.setItem('transactionId', transactionId);
+      console.log('ID da transação:', response.data.response.id);
     } catch (error) {
       console.error('Erro ao processar pagamento:', error);
       toast.error(t('buycheckout.paymentError'));
       setIsLoading(false);
+    }
+  };
+
+  const verifyPaymentStatus = async (transactionId: string) => {
+    const transaction = localStorage.getItem('transactionId');
+    if (!transaction) {
+      toast.error(t('buycheckout.transactionNumberError'));
+      console.log('Transaction ID:', transactionId);
+      return;
+    }
+
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/deposit-status?transactionId=${transaction}`,
+      );
+
+      const status = response.data.response.status;
+      if (status === 'paid') {
+        navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
+      } else if (status === 'canceled') {
+        navigate(ROUTES.paymentAlfredStatus.failure.call(currentLang));
+      } else {
+        console.warn(t('buycheckout.paymentNotConfirmed'));
+      }
+    } catch (error) {
+      console.error('Erro ao verificar o status do pagamento:', error);
     }
   };
 
@@ -184,26 +208,6 @@ export function useCheckout() {
       toast.success(t('buycheckout.pixKeyCopied'));
     }
   };
-
-  const verifyPaymentStatus = async (orderId: string) => {
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/orders/confirm-payment`,
-        { orderId },
-      );
-
-      if (response.data === 'confirmed') {
-        navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
-      } else {
-        console.warn(t('buycheckout.paymentNotConfirmed'));
-        setIsWaitingForPayment(false);
-      }
-    } catch (error) {
-      console.error('Erro ao verificar o status do pagamento:', error);
-      setIsWaitingForPayment(false);
-    }
-  };
-
   useEffect(() => {
     if (!pixKey) return;
 
@@ -282,6 +286,7 @@ export function useCheckout() {
     setAcceptFees,
     setCupom,
     setTransactionNumber,
+    verifyPaymentStatus,
     setconfirmDate,
   };
 }
