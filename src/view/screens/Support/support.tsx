@@ -1,3 +1,4 @@
+import AlfredWhiteLogo from '@/view/assets/logo/alfred-white-logo.svg';
 import { Loader } from '@/view/components/Loader';
 import { useScaleFactor } from '@/view/hooks/useScaleFactor';
 import { useWindowSize } from '@/view/utils/useWindowSize';
@@ -82,22 +83,24 @@ export function Support() {
           IS_ZOOM_BIGGER_THAN_100 && 'pt-16',
         )}
       >
-        <div className="w-full max-w-4xl bg-white dark:bg-gray-800 p-8 rounded-lg shadow-xl">
+        <div className="w-full max-w-4xl bg-gray-800 p-8 rounded-lg shadow-xl">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
             <aside className="col-span-full md:col-span-6 flex flex-col items-center">
-              <h1 className="text-[#F39200] dark:text-[#F39200] font-black text-5xl sm:text-6xl lg:text-7xl flex items-center pb-4">
-                ALFRED
-              </h1>
+              <img
+                src={AlfredWhiteLogo}
+                alt="Alfred Logo"
+                className="pb-8 w-3/4"
+              />
 
               <div className="flex flex-col gap-6 w-full max-w-[368px]">
                 <a
                   href="https://chat.whatsapp.com/HtFSC2xozFhLEFxaDf5Psx"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-[24px] shadow-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                  className="flex items-center gap-4 p-4 bg-gray-800 border border-gray-600 rounded-[24px] shadow-sm hover:bg-gray-700 transition"
                 >
                   <FaWhatsapp size={32} className="text-green-500" />
-                  <span className="font-semibold text-lg text-gray-900 dark:text-gray-100">
+                  <span className="font-semibold text-lg text-gray-100">
                     WhatsApp
                   </span>
                 </a>
@@ -105,10 +108,10 @@ export function Support() {
                   href="https://www.instagram.com/diyseclab.io/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-[24px] shadow-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                  className="flex items-center gap-4 p-4 bg-gray-800 border border-gray-600 rounded-[24px] shadow-sm hover:bg-gray-700 transition"
                 >
                   <FaInstagram size={32} className="text-pink-500" />
-                  <span className="font-semibold text-lg text-gray-900 dark:text-gray-100">
+                  <span className="font-semibold text-lg text-gray-100">
                     Instagram
                   </span>
                 </a>
@@ -116,15 +119,10 @@ export function Support() {
                   href="https://x.com/diyseclab"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-[24px] shadow-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                  className="flex items-center gap-4 p-4 bg-gray-800 border border-gray-600 rounded-[24px] shadow-sm hover:bg-gray-700 transition"
                 >
-                  <FaXTwitter
-                    size={32}
-                    className="text-black dark:text-white"
-                  />
-                  <span className="font-semibold text-lg text-gray-900 dark:text-gray-100">
-                    X
-                  </span>
+                  <FaXTwitter size={32} className="text-white" />
+                  <span className="font-semibold text-lg text-gray-100">X</span>
                 </a>
               </div>
             </aside>
@@ -132,9 +130,9 @@ export function Support() {
             <article className="col-span-full md:col-span-6 flex items-center justify-center">
               <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="w-full max-w-[370px] bg-white dark:bg-gray-800 p-8 rounded-lg flex flex-col gap-y-6"
+                className="w-full max-w-[370px] bg-gray-800 p-8 rounded-lg flex flex-col gap-y-6"
               >
-                <h3 className="font-bold text-lg md:text-2xl text-center text-gray-900 dark:text-gray-100">
+                <h3 className="font-bold text-lg md:text-2xl text-center text-gray-100">
                   {t('support.sendMessage')}
                 </h3>
 
@@ -143,30 +141,30 @@ export function Support() {
                     type="text"
                     {...register('firstName', { required: true })}
                     placeholder={t('support.firstName')}
-                    className="p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                    className="p-3 border border-gray-600 rounded-lg focus:outline-none bg-gray-800 text-gray-100"
                   />
                   <input
                     type="text"
                     {...register('lastName', { required: true })}
                     placeholder={t('support.lastName')}
-                    className="p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                    className="p-3 border border-gray-600 rounded-lg focus:outline-none bg-gray-800 text-gray-100"
                   />
                 </div>
                 <input
                   type="email"
                   {...register('email', { required: true })}
                   placeholder={t('support.email')}
-                  className="p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                  className="p-3 border border-gray-600 rounded-lg focus:outline-none bg-gray-800 text-gray-100"
                 />
                 <textarea
                   {...register('message', { required: true })}
                   placeholder={t('support.message')}
-                  className="p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                  className="p-3 border border-gray-600 rounded-lg focus:outline-none bg-gray-800 text-gray-100"
                 ></textarea>
 
                 <button
                   type="submit"
-                  className="w-full py-3 rounded-lg font-bold transition bg-black hover:bg-gray-800 text-white dark:bg-gray-900 dark:hover:bg-blue-800 flex items-center justify-center"
+                  className="w-full py-3 rounded-lg font-bold transition  bg-gray-900 border border-gray-600 flex items-center justify-center text-white"
                   disabled={isLoading}
                 >
                   {t('support.send')}
