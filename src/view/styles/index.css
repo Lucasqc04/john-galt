@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  font-family: 'Lexend', serif, ui-sans-serif, system-ui;
+}
+
 html {
   scroll-behavior: smooth;
 }

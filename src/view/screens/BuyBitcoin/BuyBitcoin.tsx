@@ -1,4 +1,4 @@
-import { LogoAlfred } from '@/view/components/LogoAlfred';
+import AlfredWhiteLogo from '@/view/assets/logo/alfred-white-logo.svg';
 import { toZonedTime } from 'date-fns-tz';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -91,95 +91,85 @@ export default function BuyBitcoinAndCheckout() {
       localStorage.setItem('btcAmount', btcAmount);
       navigate(ROUTES.buyCheckout.call(currentLang));
     } else {
-      toast.error(t('checkout.amount_error'));
+      toast.warning(t('checkout.amount_error'));
     }
   };
 
   return (
     <>
-      <div className="flex justify-center items-center">
-        <div className="flex flex-col lg:flex-row items-center justify-between w-full max-w-7xl px-4 lg:px-16 lg:pt-[5%] lg:pb-[3%] pt-[20%] pb-[3%]">
-          <div className="w-full lg:w-1/2">
-            <div className="lg:pt-[5%] lg:pb-[3%] pt-[20%] pb-[3%] flex items-center justify-center mt-[10%] sm:mt-[5%] lg:mt-[2%]">
-              <LogoAlfred />
-            </div>
-
-            {!isTransactionAllowed && (
-              <div className="text-red-500 text-center font-bold">
-                {t('checkout.transaction_error')}
-              </div>
-            )}
-
-            <div className="flex justify-center px-4 sm:px-8 lg:px-0">
-              <div className="w-full max-w-lg">
-                <div className="flex justify-center items-center space-x-4">
-                  <div className="relative w-full">
-                    <input
-                      value={brlAmount}
-                      onChange={handleBrlChange}
-                      placeholder={t('checkout.brl_placeholder')}
-                      className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:placeholder-white placeholder-[#606060] bg-slate-100 dark:bg-[#B9B8B8] text-center w-full"
+      <main className="flex flex-col justify-center items-center px-10 sm:px-24 pt-12 sm:pt-44">
+        <section className="w-full flex flex-col lg:flex-row items-center justify-center">
+          <article className="w-full lg:w-1/2 flex flex-col items-center justify-around gap-y-10">
+            <img
+              src={AlfredWhiteLogo}
+              alt="Alfred Logo"
+              className="w-72 sm:w-80"
+            />
+            <form className="flex flex-col justify-center w-full max-w-2xl">
+              {!isTransactionAllowed && (
+                <span className="text-red-500 text-center font-bold pb-4">
+                  {t('checkout.transaction_error')}
+                </span>
+              )}
+              <div className="w-full flex justify-center items-center">
+                <div className="relative w-full">
+                  <input
+                    value={brlAmount}
+                    onChange={handleBrlChange}
+                    placeholder={t('checkout.brl_placeholder')}
+                    className="border-2 px-16 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-transparent text-center w-full brl-step"
+                  />
+                  <button className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white">
+                    <img
+                      src={Brl}
+                      alt={t('checkout.brl_label')}
+                      className="w-6 h-6 sm:w-10 sm:h-10"
                     />
-                    <button className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white">
-                      <img
-                        src={Brl}
-                        alt={t('checkout.brl_label')}
-                        className="w-6 h-6 sm:w-8 sm:h-8"
-                      />
-                    </button>
-                  </div>
-                </div>
-
-                <div className="flex justify-center items-center pt-4">
-                  <div className="relative w-full">
-                    <input
-                      value={btcAmount}
-                      readOnly
-                      placeholder={t('checkout.btc_placeholder')}
-                      className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg text-black dark:placeholder-white placeholder-[#606060] bg-slate-100 dark:bg-[#B9B8B8] text-center w-full"
-                    />
-                    <button className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white">
-                      <img
-                        src={Btc}
-                        alt={t('checkout.btc_label')}
-                        className="w-6 h-6 sm:w-8 sm:h-8"
-                      />
-                    </button>
-                  </div>
-                </div>
-
-                <div className="flex justify-center items-center pt-4">
-                  <button
-                    onClick={handleNextStep}
-                    type="button"
-                    className="w-full h-10 sm:h-12 bg-[#F39200] text-white rounded-3xl font-bold text-sm sm:text-base"
-                  >
-                    {t('checkout.proceed_button')}
                   </button>
                 </div>
               </div>
-            </div>
-          </div>
 
-          <div className="w-full lg:w-1/2 flex justify-center lg:justify-end mt-8 lg:mt-0">
-            <img
-              src={AlfredImg}
-              alt="Imagem Alfred"
-              className="w-3/4 lg:w-full max-w-md lg:max-w-none"
-            />
-          </div>
-        </div>
-      </div>
+              <div className="w-full flex justify-center items-center pt-4">
+                <div className="relative w-full">
+                  <input
+                    value={btcAmount}
+                    readOnly
+                    placeholder={t('checkout.btc_placeholder')}
+                    className="border-2 px-16 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-transparent text-center w-full"
+                  />
+                  <button className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white">
+                    <img
+                      src={Btc}
+                      alt={t('checkout.btc_label')}
+                      className="w-6 h-6 sm:w-10 sm:h-10"
+                    />
+                  </button>
+                </div>
+              </div>
 
-      <div className="w-full py-6 mt-16 mb-[10%] flex justify-center">
-        <div className="text-center px-4 sm:px-8 lg:px-16">
-          <p className="text-xl sm:text-2xl lg:text-3xl dark:text-white">
+              <div className="w-full flex justify-center items-center pt-4">
+                <button
+                  onClick={handleNextStep}
+                  type="button"
+                  className="w-full h-10 sm:h-12 bg-[#F39200] text-white rounded-3xl font-bold text-sm sm:text-base border-2 proceed-button-step"
+                >
+                  {t('checkout.proceed_button')}
+                </button>
+              </div>
+            </form>
+          </article>
+          <article className="w-full lg:w-1/2 flex justify-center image-step">
+            <img src={AlfredImg} alt="Imagem Alfred" className="w-full" />
+          </article>
+        </section>
+        <section className="text-center px-4 sm:px-8 lg:px-16 py-6 sm:py-2">
+          <p className="text-base sm:text-2xl lg:text-3xl text-white">
             Com o ALFRED, você pode adquirir seus BITCOINS de maneira simples e
             enviá-los diretamente para sua carteira offline, garantindo total
             privacidade e segurança.
           </p>
-        </div>
-      </div>
+        </section>
+      </main>
     </>
   );
 }

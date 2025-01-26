@@ -1,7 +1,4 @@
 import { useTranslation } from 'react-i18next';
-import { BackgroundAnimatedProduct } from '../../components/BackgroundAnimatedProduct';
-import WhatsAppButton from '../../components/buttonWhatsApp';
-import HeaderAlfred from '../Header/HeaderAlfred';
 
 export function AboutBuyBitcoin() {
   const { t } = useTranslation();
@@ -12,22 +9,17 @@ export function AboutBuyBitcoin() {
 
   return (
     <>
-      <BackgroundAnimatedProduct />
-      <HeaderAlfred />
-      <div className="container mx-auto p-6 mt-[20%] sm:mt-[10%] mb-16">
-        <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold text-black dark:text-white">
-            {t('about.title')}
-          </h1>
+      <div className="container mx-auto p-6 pt-[10%] sm:pt-16 pb-16 px-8">
+        <div className="pb-4 text-center">
+          <h1 className="text-3xl font-bold text-white">{t('about.title')}</h1>
         </div>
-        <div className="text-black dark:text-white space-y-6">
+        <div className="text-white text-justify ">
           {paragraphs.map((paragraph, index) => (
-            <p key={index} className={index === 3 ? 'font-semibold' : ''}>
+            <p key={index} className={`${index === 3 && 'font-semibold'} py-4`}>
               {paragraph}
             </p>
           ))}
         </div>
-        <WhatsAppButton />
       </div>
     </>
   );
