@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Onchain from '../../assets/bitcoin.svg';
 import Liquid from '../../assets/lbtc.svg';
+import Lightning from '../../assets/lightning.svg';
 import { ROUTES } from '../../routes/Routes';
 import { useCurrentLang } from '../../utils/useCurrentLang';
 
@@ -118,10 +119,11 @@ export function useCheckout() {
   const networks = [
     { name: 'Onchain', icon: Onchain },
     { name: 'Liquid', icon: Liquid },
+    { name: 'Lightning', icon: Lightning },
   ];
 
   const handleProcessPayment = async () => {
-    if (!acceptFees || !acceptTerms) {
+    if (!acceptFees || !acceptTerms || !confirmDate) {
       toast.warning(t('buycheckout.termsAndFeesAlert'));
       return;
     }
@@ -163,7 +165,6 @@ export function useCheckout() {
       setTimeLeft(240);
       setIsLoading(false);
 
-      verifyPaymentStatus(response.data.response.id);
       const transactionId = response.data.response.id;
       localStorage.setItem('transactionId', transactionId);
       console.log('ID da transação:', response.data.response.id);
@@ -174,11 +175,10 @@ export function useCheckout() {
     }
   };
 
-  const verifyPaymentStatus = async (transactionId: string) => {
+  const verifyPaymentStatus = async () => {
     const transaction = localStorage.getItem('transactionId');
     if (!transaction) {
       toast.error(t('buycheckout.transactionNumberError'));
-      console.log('Transaction ID:', transactionId);
       return;
     }
 
@@ -188,15 +188,15 @@ export function useCheckout() {
       );
 
       const status = response.data.response.status;
-      if (status === 'paid') {
-        navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
-      } else if (status === 'canceled') {
-        navigate(ROUTES.paymentAlfredStatus.failure.call(currentLang));
+      if (status !== 'paid') {
+        // Exibe mensagem se o pagamento ainda não foi confirmado
+        toast.warn(t('buycheckout.paymentNotConfirmed'));
       } else {
-        console.warn(t('buycheckout.paymentNotConfirmed'));
+        navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
       }
     } catch (error) {
       console.error('Erro ao verificar o status do pagamento:', error);
+      toast.error(t('buycheckout.paymentCheckError'));
     }
   };
 
