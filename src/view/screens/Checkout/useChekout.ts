@@ -92,7 +92,10 @@ export function useCheckout() {
           }
           break;
         case 'Lightning':
-          if (!/^lnbc[0-9]{1,}[a-zA-Z0-9]+$/.test(coldWallet)) {
+          if (
+            !/^lnbc[0-9]{1,}[a-zA-Z0-9]+$/.test(coldWallet) &&
+            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(coldWallet)
+          ) {
             newErrors.coldWallet = t(
               'buycheckout.invalidColdWalletErrorLightning',
             );

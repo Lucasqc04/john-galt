@@ -164,9 +164,8 @@ export default function BuyBitcoinAndCheckout() {
         </section>
         <section className="text-center px-4 sm:px-8 lg:px-16 py-6 sm:py-2">
           <p className="text-base sm:text-2xl lg:text-3xl text-white">
-            Com o ALFRED, você pode adquirir seus BITCOINS de maneira simples e
-            enviá-los diretamente para sua carteira offline, garantindo total
-            privacidade e segurança.
+            Alfred P2P: Bitcoin na sua mão, sem complicação, com total
+            privacidade.
           </p>
         </section>
       </main>
