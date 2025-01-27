@@ -229,7 +229,7 @@ export function useCheckout() {
     try {
       setIsLoading(true);
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL_CUOUPON}/coupons/is-valid`,
+        `${import.meta.env.VITE_API_URL}/coupons/is-valid`,
         { code: cupom.trim() },
       );
       const coupon = response.data;
