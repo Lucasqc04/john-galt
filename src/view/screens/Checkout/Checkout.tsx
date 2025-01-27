@@ -280,7 +280,8 @@ export default function Checkout() {
                 Atenção:
               </h3>
               <p className="text-lg text-center text-gray-100 mb-4">
-                Para concluir sua transação, confirme o pagamento agora.
+                Para concluir sua transação, clique no botão abaixo após
+                realizar o pagamento.
               </p>
               <button
                 onClick={() => verifyPaymentStatus()}
