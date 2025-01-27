@@ -185,7 +185,9 @@ export function useCheckout() {
         `${import.meta.env.VITE_API_URL}/deposit-status?transactionId=${transaction}`,
       );
 
-      const status = response.data.response.status;
+      const status = response.data.status;
+      console.log('Status:', status);
+
       if (status !== 'paid') {
         toast.warn(t('buycheckout.paymentNotConfirmed'));
       } else {
