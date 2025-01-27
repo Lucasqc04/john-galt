@@ -275,10 +275,23 @@ export default function Checkout() {
                 {timeLeft % 60 < 10 && '0'}
                 {timeLeft % 60} {t('buycheckout.minutes')}
               </p> */}
+
+              <h3 className="text-red-600 text-3xl font-semibold mb-2">
+                Atenção:
+              </h3>
+              <p className="text-lg text-center text-gray-100 mb-4">
+                Para concluir sua transação, confirme o pagamento agora.
+              </p>
+              <button
+                onClick={() => verifyPaymentStatus()}
+                className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold transition-all duration-300 shadow-md mb-8"
+              >
+                {t('buycheckout.makePayment')}
+              </button>
+
               <p className="text-xl text-center text-white">
                 {t('buycheckout.scanQRCode')}
               </p>
-
               <div className="relative flex justify-center items-center p-4">
                 <QRCodeSVG
                   value={pixKey}
@@ -308,12 +321,6 @@ export default function Checkout() {
                 className="pt-4 px-6 py-3 bg-[#F39200] text-white rounded-3xl font-bold m-3"
               >
                 {t('buycheckout.copyPixKey')}
-              </button>
-              <button
-                onClick={() => verifyPaymentStatus()}
-                className="pt-4 px-6 py-3 bg-green-500 text-white rounded-3xl font-bold mb-9"
-              >
-                {t('buycheckout.makePayment')}
               </button>
             </div>
           )}
