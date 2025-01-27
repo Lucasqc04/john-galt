@@ -11,7 +11,7 @@ export function PaymentAlfredFailure() {
   return (
     <div className="min-h-screen flex flex-col items-center gap-y-6 bg-primary-light dark:bg-primary-dark pt-[15%] md:pt-[10%] px-4 text-center">
       <div className="flex justify-center">
-        <LanguageSwitcher className="transform scale-110" />
+        <LanguageSwitcher LabelClassName="transform scale-110" />
       </div>
       <h1 className="text-3xl md:text-4xl font-bold text-[#F39200] dark:text-white">
         {t('paymentFailure.title')}

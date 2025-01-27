@@ -116,15 +116,21 @@
     "minutes": "minutos",
     "scanQRCode": "Escanear el código QR",
     "copyPixKey": "Copiar clave PIX",
+    "makePayment": "Realizar el pago",
     "selectNetwork": "Seleccionar red",
     "selectPaymentMethod": "Seleccionar método de pago",
     "bitcoinWallet": "Cartera Bitcoin",
     "contactNumber": "Número de contacto",
-    "couponPlaceholder": "Introduzca el código del cupón",
+    "couponPlaceholder": "Insertar cupón",
     "apply": "Aplicar",
     "acceptFees": "Acepto las tarifas",
     "acceptTerms": "Acepto los términos y condiciones",
     "confirmDate": "Confirmo que los datos enviados son correctos",
     "getPixKey": "Obtener clave PIX"
+  },
+  "guide": {
+    "imageStep": "¡Hola, soy Alfred! ¡Bienvenido! Soy un robot que facilita las transacciones de Bitcoin sin KYC, de manera simple y segura.",
+    "brlStep": "Ingresa el valor en BRL que deseas convertir a Bitcoin.",
+    "proceedButtonStep": "Después de ingresar el valor, haz clic en el botón 'Continuar' para seguir con la compra."
   }
 }
