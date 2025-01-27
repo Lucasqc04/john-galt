@@ -2,10 +2,12 @@ import AlfredWhiteLogo from '@/view/assets/logo/alfred-white-logo.svg';
 import { Loader } from '@/view/components/Loader';
 import classNames from 'classnames';
 import { t } from 'i18next';
+import { QRCodeSVG } from 'qrcode.react';
 import { ChangeEvent } from 'react';
-import { QRCode } from 'react-qrcode-logo';
-import Alfred from '../../assets/AlfredComercial.png';
+import AlfredQr from '../../assets/Alfred Mão fechada (1).png';
+
 import AlfredImg from '../../assets/c1b28810-5a23-4e7c-bcce-bd1f42b271c5.png';
+
 import { ROUTES } from '../../routes/Routes';
 import { useCheckout } from './useChekout';
 
@@ -248,10 +250,11 @@ export default function Checkout() {
                   <button
                     onClick={handleProcessPayment}
                     type="button"
-                    disabled={!acceptFees || !acceptTerms}
+                    disabled={!acceptFees || !acceptTerms || !confirmDate}
                     className={classNames(
                       'w-full h-12 sm:h-14 bg-[#F39200] text-white rounded-3xl font-bold text-sm sm:text-base',
-                      (!acceptFees || !acceptTerms) && 'opacity-50',
+                      (!acceptFees || !acceptTerms || !confirmDate) &&
+                        'opacity-50',
                     )}
                   >
                     {t('buycheckout.getPixKey')}
@@ -277,38 +280,42 @@ export default function Checkout() {
                 {t('buycheckout.scanQRCode')}
               </p>
 
-              <div className="flex justify-center pb-4">
-                <QRCode
+              <div className="relative flex justify-center items-center p-4">
+                <QRCodeSVG
                   value={pixKey}
-                  logoImage={Alfred}
-                  logoWidth={256}
-                  logoHeight={256}
+                  size={256}
+                  level="H"
+                  marginSize={10}
+                  className="relative"
                 />
+                <div className="absolute">
+                  <img
+                    src={AlfredQr}
+                    alt="Logo"
+                    className="w-40 h-40 rounded-full"
+                  />
+                </div>
               </div>
 
               <textarea
                 value={pixKey}
                 readOnly
-                className="border px-4 py-3 rounded-3xl text-lg text-white bg-[#B9B8B8] w-full"
-                rows={6}
+                className="border px-4 py-4 rounded-3xl text-lg text-white bg-[#B9B8B8] w-full overflow-hidden"
+                rows={8}
               />
 
               <button
                 onClick={copyToClipboard}
-                className="pt-4 px-6 py-3 bg-[#F39200] text-white rounded-3xl font-bold"
+                className="pt-4 px-6 py-3 bg-[#F39200] text-white rounded-3xl font-bold m-3"
               >
                 {t('buycheckout.copyPixKey')}
               </button>
               <button
                 onClick={() => verifyPaymentStatus()}
-                className="pt-4 px-6 py-3 bg-green-500 text-white rounded-3xl font-bold"
+                className="pt-4 px-6 py-3 bg-green-500 text-white rounded-3xl font-bold mb-9"
               >
                 {t('buycheckout.makePayment')}
               </button>
-
-              <div className="hidden sm:block">
-                <img src={Alfred} alt="" />
-              </div>
             </div>
           )}
         </section>

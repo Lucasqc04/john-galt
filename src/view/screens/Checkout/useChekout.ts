@@ -160,14 +160,12 @@ export function useCheckout() {
       );
 
       const pixKey = response.data.response.qrCopyPaste;
-      console.log('PixKey:', pixKey);
       setPixKey(pixKey);
       setTimeLeft(240);
       setIsLoading(false);
 
       const transactionId = response.data.response.id;
       localStorage.setItem('transactionId', transactionId);
-      console.log('ID da transação:', response.data.response.id);
     } catch (error) {
       console.error('Erro ao processar pagamento:', error);
       toast.error(t('buycheckout.paymentError'));
@@ -189,14 +187,13 @@ export function useCheckout() {
 
       const status = response.data.response.status;
       if (status !== 'paid') {
-        // Exibe mensagem se o pagamento ainda não foi confirmado
         toast.warn(t('buycheckout.paymentNotConfirmed'));
       } else {
         navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
       }
     } catch (error) {
       console.error('Erro ao verificar o status do pagamento:', error);
-      toast.error(t('buycheckout.paymentCheckError'));
+      toast.warn(t('buycheckout.paymentNotConfirmed'));
     }
   };
 
