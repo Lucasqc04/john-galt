@@ -116,6 +116,7 @@
     "minutes": "minutos",
     "scanQRCode": "Escanear el código QR",
     "copyPixKey": "Copiar clave PIX",
+    "makePayment": "Realizar el pago",
     "selectNetwork": "Seleccionar red",
     "selectPaymentMethod": "Seleccionar método de pago",
     "bitcoinWallet": "Cartera Bitcoin",

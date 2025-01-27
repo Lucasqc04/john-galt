@@ -160,15 +160,12 @@ export function useCheckout() {
       );
 
       const pixKey = response.data.response.qrCopyPaste;
-      console.log('PixKey:', pixKey);
       setPixKey(pixKey);
       setTimeLeft(240);
       setIsLoading(false);
 
-      verifyPaymentStatus(response.data.response.id);
       const transactionId = response.data.response.id;
       localStorage.setItem('transactionId', transactionId);
-      console.log('ID da transação:', response.data.response.id);
     } catch (error) {
       console.error('Erro ao processar pagamento:', error);
       toast.error(t('buycheckout.paymentError'));
@@ -176,11 +173,10 @@ export function useCheckout() {
     }
   };
 
-  const verifyPaymentStatus = async (transactionId: string) => {
+  const verifyPaymentStatus = async () => {
     const transaction = localStorage.getItem('transactionId');
     if (!transaction) {
       toast.error(t('buycheckout.transactionNumberError'));
-      console.log('Transaction ID:', transactionId);
       return;
     }
 
@@ -190,15 +186,14 @@ export function useCheckout() {
       );
 
       const status = response.data.response.status;
-      if (status === 'paid') {
-        navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
-      } else if (status === 'canceled') {
-        navigate(ROUTES.paymentAlfredStatus.failure.call(currentLang));
+      if (status !== 'paid') {
+        toast.warn(t('buycheckout.paymentNotConfirmed'));
       } else {
-        console.warn(t('buycheckout.paymentNotConfirmed'));
+        navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
       }
     } catch (error) {
       console.error('Erro ao verificar o status do pagamento:', error);
+      toast.warn(t('buycheckout.paymentNotConfirmed'));
     }
   };
 

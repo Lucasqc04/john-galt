@@ -104,6 +104,7 @@
     "networkSelectionAlert": "Você precisa selecionar uma rede de Bitcoin antes de prosseguir.",
     "paymentError": "Erro ao processar o pagamento.",
     "pixKeyCopied": "Chave PIX copiada para a área de transferência!",
+    "makePayment": "Efetuar pagamento",
     "paymentNotConfirmed": "Pagamento ainda não confirmado. Tente novamente.",
     "couponInactive": "O cupom não está ativo.",
     "couponExpired": "O cupom expirou.",

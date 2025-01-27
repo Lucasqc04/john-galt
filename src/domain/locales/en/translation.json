@@ -104,6 +104,7 @@
     "networkSelectionAlert": "You need to select a Bitcoin network before proceeding.",
     "paymentError": "Error processing the payment.",
     "pixKeyCopied": "PIX key copied to clipboard!",
+    "makePayment": "Make payment",
     "paymentNotConfirmed": "Payment not confirmed yet. Please try again.",
     "couponInactive": "The coupon is not active.",
     "couponExpired": "The coupon has expired.",
