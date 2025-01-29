@@ -163,6 +163,10 @@ export function useCheckout() {
       );
 
       const pixKey = response.data.response.qrCopyPaste;
+      const status = response.data.response.status;
+      if (status == 'paid') {
+        navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
+      }
       setPixKey(pixKey);
       setTimeLeft(240);
       setIsLoading(false);
