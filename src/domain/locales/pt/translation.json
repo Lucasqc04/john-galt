@@ -18,7 +18,7 @@
     "brl_placeholder": "Digite o valor em BRL",
     "btc_placeholder": "Valor em BTC",
     "proceed_button": "Prosseguir",
-    "transaction_error": "Transações só são permitidas todos os dias, das 10h às 22h no horário de Brasília.",
+    "transaction_error": "Transações só são permitidas todos os dias, das 11h às 22h no horário de Brasília.",
     "amount_error": "O valor deve ser maior que R$700 e menor que R$5000 para prosseguir.",
     "brl_label": "BRL",
     "btc_label": "Bitcoin"
