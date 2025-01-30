@@ -1,4 +1,6 @@
 import AlfredWhiteLogo from '@/view/assets/logo/alfred-white-logo.svg';
+import TwitterButton from '@/view/components/ButtonTwitter';
+import InstagramButton from '@/view/components/buttonInstagram';
 import { toZonedTime } from 'date-fns-tz';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -168,6 +170,9 @@ export default function BuyBitcoinAndCheckout() {
             privacidade.
           </p>
         </section>
+
+        <TwitterButton />
+        <InstagramButton />
       </main>
     </>
   );
