@@ -47,7 +47,7 @@ export default function BuyBitcoinAndCheckout() {
     const zonedTime = toZonedTime(now, timeZone);
     const currentHour = zonedTime.getHours();
 
-    if (currentHour < 8 || currentHour >= 22) {
+    if (currentHour < 10 || currentHour >= 22) {
       setIsTransactionAllowed(false);
     }
   }, []);
