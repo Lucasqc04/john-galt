@@ -161,24 +161,40 @@ export function useCheckout() {
           cupom: cupom,
         },
       );
-
       const pixKey = response.data.response.qrCopyPaste;
       const status = response.data.response.status;
-      if (status == 'paid') {
-        navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
-      }
+      const transactionId = response.data.response.id;
+      localStorage.setItem('transactionId', transactionId);
+      localStorage.setItem('pixKey', pixKey);
+      localStorage.setItem('status', status);
+
       setPixKey(pixKey);
       setTimeLeft(240);
       setIsLoading(false);
-
-      const transactionId = response.data.response.id;
-      localStorage.setItem('transactionId', transactionId);
+      if (pixKey) {
+        navigate(ROUTES.checkoutPix.call(currentLang));
+      }
+      if (status == 'depix_sent') {
+        navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
+      }
     } catch (error) {
       console.error('Erro ao processar pagamento:', error);
       toast.error(t('buycheckout.paymentError'));
       setIsLoading(false);
     }
   };
+  useEffect(() => {
+    if (pixKey) {
+      localStorage.setItem('pixKey', pixKey);
+    }
+  }, [pixKey]);
+
+  useEffect(() => {
+    const storedPixKey = localStorage.getItem('pixKey');
+    if (storedPixKey) {
+      setPixKey(storedPixKey);
+    }
+  }, []);
 
   const verifyPaymentStatus = async () => {
     const transaction = localStorage.getItem('transactionId');
