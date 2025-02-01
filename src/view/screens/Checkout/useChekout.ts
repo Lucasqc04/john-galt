@@ -171,10 +171,14 @@ export function useCheckout() {
       setPixKey(pixKey);
       setTimeLeft(240);
       setIsLoading(false);
+      checkPaymentStatusPeriodically();
       if (pixKey) {
         navigate(ROUTES.checkoutPix.call(currentLang));
       }
-      if (status == 'depix_sent') {
+      if (status === 'depix_sent') {
+        navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
+      } else if (status === 'paid') {
+        toast.success(t('Pagamento confirmado'));
         navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
       }
     } catch (error) {
@@ -195,6 +199,53 @@ export function useCheckout() {
       setPixKey(storedPixKey);
     }
   }, []);
+  const checkPaymentStatusPeriodically = async () => {
+    const interval = 5000; // Verificação a cada 5 segundos
+    const maxAttempts = 60; // Máximo de 60 tentativas (5 minutos)
+    let attempts = 0;
+
+    const checkStatus = async () => {
+      const transaction = localStorage.getItem('transactionId');
+      if (!transaction) {
+        toast.error(t('buycheckout.transactionNumberError'));
+        return;
+      }
+
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/deposit-status?transactionId=${transaction}`,
+        );
+
+        const status = response.data.status;
+        console.log('Status:', status);
+
+        if (status === 'depix_sent') {
+          // Evita múltiplos redirecionamentos
+          if (!isTransactionTimedOut) {
+            console.log(status);
+            navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
+          }
+        } else if (status === 'paid') {
+          navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
+        } else {
+          if (attempts >= maxAttempts) {
+            toast.warn(t('buycheckout.paymentNotConfirmed'));
+            return;
+          }
+
+          attempts++;
+          setTimeout(async () => {
+            await checkStatus(); // Chama a função de forma assíncrona após o intervalo
+          }, interval);
+        }
+      } catch (error) {
+        console.error('Erro ao verificar o status do pagamento:', error);
+        toast.warn(t('buycheckout.paymentNotConfirmed'));
+      }
+    };
+
+    await checkStatus(); // Inicia a verificação de status de forma assíncrona
+  };
 
   const verifyPaymentStatus = async () => {
     const transaction = localStorage.getItem('transactionId');
@@ -211,9 +262,10 @@ export function useCheckout() {
       const status = response.data.status;
       console.log('Status:', status);
 
-      if (status !== 'paid') {
+      if (status == 'depix_sent') {
         toast.warn(t('buycheckout.paymentNotConfirmed'));
       } else {
+        console.log(status);
         navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
       }
     } catch (error) {
