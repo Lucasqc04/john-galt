@@ -13,6 +13,10 @@ export const ROUTES = {
     path: 'buy-checkout',
     call: (currentLang: string) => `/${currentLang}/buy-checkout`,
   },
+  checkoutPix: {
+    path: 'checkout-pix',
+    call: (currentLang: string) => `/${currentLang}/checkout-pix`,
+  },
   aboutBitcoin: {
     path: 'about-buy-bitcoin',
     call: (currentLang: string) => `/${currentLang}/about-buy-bitcoin`,
