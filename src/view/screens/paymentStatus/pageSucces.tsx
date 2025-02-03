@@ -1,13 +1,26 @@
+import { Background } from '@/view/components/BackgroundAnimatedProduct';
+import { LanguageSwitcher } from '@/view/components/LanguageSwitcher/LanguageSwitcher';
+import { motion } from 'framer-motion';
+import { CSSProperties, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { LanguageSwitcher } from '../../components/LanguageSwitcher/LanguageSwitcher';
+import Alfred from '../../assets/AlfredComercial.png';
+import TalkBallon from '../../assets/talk.png';
 import { ROUTES } from '../../routes/Routes';
 import { useCurrentLang } from '../../utils/useCurrentLang';
 
 export function PaymentAlfredSuccess() {
   const { t } = useTranslation();
-  const { currentLang } = useCurrentLang();
+  const { currentLang } = useCurrentLang(); // Obtemos o idioma atual
   const navigate = useNavigate();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const handleOnLink = (path: string, callback?: () => void) => {
     if (callback) {
       callback();
@@ -15,15 +28,112 @@ export function PaymentAlfredSuccess() {
     navigate(path);
   };
 
+  const alfredStyle: CSSProperties = {
+    position: 'absolute',
+    top: '7rem',
+    right: windowWidth < 768 ? '3rem' : '5rem',
+    width: windowWidth < 768 ? '12rem' : '18rem',
+    height: 'auto',
+    transform: 'rotate(12deg)',
+  };
+
+  const talkBallonStyle: CSSProperties = {
+    position: 'absolute',
+    top: '2rem',
+    right: windowWidth < 768 ? '2rem' : '5rem',
+    width: windowWidth < 768 ? '6.3rem' : '8rem',
+    zIndex: 10,
+  };
+
+  const textStyle: CSSProperties = {
+    position: 'absolute',
+    top:
+      windowWidth < 768
+        ? currentLang === 'es'
+          ? '1rem' // Ajuste para espanhol quando a tela for pequena
+          : currentLang === 'en'
+            ? '1.5rem' // Ajuste para inglês quando a tela for pequena
+            : '1.7rem' // Ajuste para português quando a tela for pequena
+        : currentLang === 'es'
+          ? '1.4rem' // Ajuste para espanhol quando a tela for grande
+          : currentLang === 'en'
+            ? '2rem' // Ajuste para inglês quando a tela for grande
+            : '2.4rem', // Ajuste para português quando a tela for grande
+    left:
+      windowWidth < 768
+        ? currentLang === 'es'
+          ? '0.2rem' // Ajuste para espanhol quando a tela for pequena
+          : currentLang === 'en'
+            ? '0.2rem' // Ajuste para inglês quando a tela for pequena
+            : '0.5rem' // Ajuste para português quando a tela for pequena
+        : currentLang === 'es'
+          ? '0.2rem' // Ajuste para espanhol quando a tela for grande
+          : currentLang === 'en'
+            ? '0.2rem' // Ajuste para inglês quando a tela for grande
+            : '1rem', // Ajuste para português quando a tela for grande
+    fontSize:
+      windowWidth < 768
+        ? currentLang === 'es'
+          ? '1rem' // Ajuste para espanhol quando a tela for pequena
+          : currentLang === 'en'
+            ? '0.9rem' // Ajuste para inglês quando a tela for pequena
+            : '1rem' // Ajuste para português quando a tela for pequena
+        : currentLang === 'es'
+          ? '1.3rem' // Ajuste para espanhol quando a tela for grande
+          : currentLang === 'en'
+            ? '1rem' // Ajuste para inglês quando a tela for grande
+            : '1.2rem', // Ajuste para português quando a tela for grande
+    fontWeight: 'bold',
+    color: 'black',
+  };
+
   return (
-    <div className="min-h-screen bg-primary-light dark:bg-primary-dark flex flex-col justify-center items-center px-4 text-center">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen flex flex-col justify-center items-center px-6 text-center relative text-white"
+    >
+      <Background />
+      <motion.img
+        src={Alfred}
+        alt="Alfred Mascote"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
+        style={alfredStyle}
+      />
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.5, duration: 0.5 }}
+        style={talkBallonStyle}
+      >
+        <img
+          src={TalkBallon}
+          alt="Balão de fala"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'contain',
+          }}
+        />
+        <p style={textStyle}>{t('paymentSuccess.Ballon')}</p>
+      </motion.div>
+
       <div className="flex justify-center">
-        <LanguageSwitcher LabelClassName="transform scale-110" />
+        <LanguageSwitcher LabelClassName="transform scale-110 text-white" />
       </div>
-      <div className="bg-success rounded-full p-8 mb-8 mt-5">
+
+      <motion.div
+        initial={{ scale: 0.5, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 0.5, duration: 0.5, type: 'spring' }}
+        className="bg-success rounded-full p-6 md:p-8 mb-8 mt-5 shadow-lg"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-24 w-24 text-white"
+          className="h-20 w-20 md:h-24 md:w-24 text-white animate-pulse"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -35,30 +145,51 @@ export function PaymentAlfredSuccess() {
             d="M5 13l4 4L19 7"
           />
         </svg>
-      </div>
-      <h1 className="text-4xl md:text-5xl font-bold text-success dark:text-white mb-6">
+      </motion.div>
+
+      <motion.h1
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6, duration: 0.5 }}
+        className="text-3xl md:text-5xl font-bold text-white drop-shadow-lg mb-4"
+      >
         {t('paymentSuccess.title')}
-      </h1>
-      <p className="text-lg md:text-xl mb-12 text-gray-700 dark:text-gray-300 max-w-xl">
-        {t('paymentSuccess.description')} {t('paymentSuccess.transactionTime')}
-      </p>
-      <button
-        onClick={() =>
-          window.open(
-            'https://api.whatsapp.com/send?phone=+5511919050416&text=Ol%C3%A1,%20Tudo%20bem?%0A%0APreciso%20de%20ajuda%20sobre%20os%20produtos%20do%20ALFRED...',
-            '_blank',
-          )
-        }
-        className="bg-success text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-green-600 transition-colors"
+      </motion.h1>
+
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.7, duration: 0.5 }}
+        className="text-lg md:text-xl mb-8 max-w-xl text-gray-100"
       >
-        {t('paymentSuccess.whatsapp')}
-      </button>
-      <button
-        onClick={() => handleOnLink(ROUTES.buyBitcoin.call(currentLang))}
-        className="bg-success m-5 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-green-600 transition-colors"
+        {t('paymentSuccess.description')}{' '}
+        <strong>{t('paymentSuccess.transactionTime')}</strong>
+      </motion.p>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8, duration: 0.5 }}
+        className="flex flex-col md:flex-row gap-4"
       >
-        {t('paymentSuccess.redirectButton')}
-      </button>
-    </div>
+        <button
+          onClick={() =>
+            window.open(
+              'https://api.whatsapp.com/send?phone=+5511919050416&text=Meu%20pagamento%20no%20Alfred%20foi%20conclu%C3%ADdo%20e%20tenho%20algumas%20d%C3%BAvidas.%20Poderia%20me%20ajudar%3F',
+              '_blank',
+            )
+          }
+          className="bg-green-500 text-white px-6 py-3 rounded-lg font-semibold text-lg hover:bg-green-600 transition-colors shadow-lg"
+        >
+          {t('paymentSuccess.whatsapp')}
+        </button>
+        <button
+          onClick={() => handleOnLink(ROUTES.buyBitcoin.call(currentLang))}
+          className="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold text-lg hover:bg-blue-600 transition-colors shadow-lg"
+        >
+          {t('paymentSuccess.redirectButton')}
+        </button>
+      </motion.div>
+    </motion.div>
   );
 }
