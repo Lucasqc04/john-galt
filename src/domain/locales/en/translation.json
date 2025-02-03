@@ -29,11 +29,12 @@
     "whatsapp": "WhatsApp"
   },
   "paymentSuccess": {
-    "title": "Payment Successful",
+    "title": "Payment completed successfully!",
     "description": "Your transaction has been successfully completed.",
-    "transactionTime": "The transaction can take between 30 minutes to 24 hours.",
-    "whatsapp": "WhatsApp",
-    "redirectButton": "BACK TO SITE"
+    "transactionTime": "Processing may take from 30 minutes to 24 hours, please wait.",
+    "whatsapp": "Contact us via WhatsApp",
+    "redirectButton": "Go back to SITE",
+    "Ballon": "Come back soon!"
   },
   "fees": {
     "title": "Fees",

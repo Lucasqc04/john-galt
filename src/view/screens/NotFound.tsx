@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Logo from '../assets/logo.svg';
+import Logo from '../assets/logo/alfred-black-logo.svg';
 import { ROUTES } from '../routes/Routes';
 
 export function NotFound() {

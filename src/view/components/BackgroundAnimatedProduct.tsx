@@ -1,5 +1,5 @@
 export function Background() {
   return (
-    <div className="fixed inset-0 -z-10 w-full h-full bg-black bg-[url('/bg-hero.png')] bg-cover bg-center" />
+    <div className="fixed inset-0 -z-10 w-full h-full bg-black bg-[url('/bg-hero.png')] bg-cover bg-[center_90px]" />
   );
 }
