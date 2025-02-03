@@ -29,11 +29,12 @@
     "whatsapp": "WhatsApp"
   },
   "paymentSuccess": {
-    "title": "Pagamento concluído com sucesso",
+    "title": "Pagamento concluído com sucesso!",
     "description": "Sua transação foi concluída com sucesso.",
-    "transactionTime": "A transação pode variar entre 30 minutos a 24 horas.",
-    "whatsapp": "WhatsApp",
-    "redirectButton": "VOLTAR PARA O SITE"
+    "transactionTime": "O processamento pode levar de 30 minutos a 24 horas, por favor, aguarde.",
+    "whatsapp": "Entre em contato via WhatsApp",
+    "redirectButton": "Voltar ao SITE",
+    "Ballon": "Volte logo!"
   },
   "fees": {
     "title": "Taxas",
