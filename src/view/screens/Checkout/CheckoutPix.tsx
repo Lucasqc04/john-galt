@@ -1,12 +1,11 @@
 import { t } from 'i18next';
 import { QRCodeSVG } from 'qrcode.react';
-import AlfredQr from '../../assets/Alfred Mão fechada (1).png';
+import AlfredQr from '../../assets/_DIY SEC LAB - Apresentação Comercial (1).png';
 import { useCheckout } from './useChekout';
 
 export function CheckoutPix() {
   const { pixKey, copyToClipboard, verifyPaymentStatus } = useCheckout();
 
-  console.log(`Pix ${pixKey}`);
   return (
     <div className="flex flex-col items-center pt-4">
       {/* <p className="text-center text-red-600">
@@ -39,20 +38,24 @@ export function CheckoutPix() {
           className="relative"
         />
         <div className="absolute">
-          <img src={AlfredQr} alt="Logo" className="w-40 h-40 rounded-full" />
+          <img
+            src={AlfredQr}
+            alt="Logo-alfred"
+            className="w-full h-40 rounded-full"
+          />
         </div>
       </div>
 
       <textarea
         value={pixKey ?? ''}
         readOnly
-        className="border px-4 py-4 rounded-3xl text-lg text-white bg-[#B9B8B8] w-full overflow-hidden"
-        rows={8}
+        className="border px-4 py-4 rounded-3xl text-lg text-white bg-[#000E16] w-[30%] overflow-hidden"
+        rows={6}
       />
 
       <button
         onClick={copyToClipboard}
-        className="pt-4 px-6 py-3 bg-[#F39200] text-white rounded-3xl font-bold m-3"
+        className="pt-4 px-6 py-3 bg-[#F39200] text-white rounded-3xl font-bold m-3 mb-[5%]"
       >
         {t('buycheckout.copyPixKey')}
       </button>

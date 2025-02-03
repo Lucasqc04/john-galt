@@ -99,7 +99,7 @@ export default function BuyBitcoinAndCheckout() {
 
   return (
     <>
-      <main className="flex flex-col justify-center items-center px-10 sm:px-24 pt-12 sm:pt-44">
+      <main className="flex flex-col justify-center items-center w-full max-w-screen-xl px-6 sm:px-12 md:px-20 lg:px-32 xl:px-40 pt-12 sm:pt-28 ">
         <section className="w-full flex flex-col lg:flex-row items-center justify-center">
           <article className="w-full lg:w-1/2 flex flex-col items-center justify-around gap-y-10">
             <img
@@ -107,7 +107,10 @@ export default function BuyBitcoinAndCheckout() {
               alt="Alfred Logo"
               className="w-72 sm:w-80"
             />
-            <form className="flex flex-col justify-center w-full max-w-2xl">
+            <form
+              className="flex flex-col justify-center w-full max-w-2xl"
+              onSubmit={handleNextStep}
+            >
               {!isTransactionAllowed && (
                 <span className="text-red-500 text-center font-bold pb-4">
                   {t('checkout.transaction_error')}
@@ -151,8 +154,7 @@ export default function BuyBitcoinAndCheckout() {
 
               <div className="w-full flex justify-center items-center pt-4">
                 <button
-                  onClick={handleNextStep}
-                  type="button"
+                  type="submit"
                   className="w-full h-10 sm:h-12 bg-[#F39200] text-white rounded-3xl font-bold text-sm sm:text-base border-2 proceed-button-step"
                 >
                   {t('checkout.proceed_button')}

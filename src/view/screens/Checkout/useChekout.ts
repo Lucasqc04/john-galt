@@ -200,8 +200,8 @@ export function useCheckout() {
     }
   }, []);
   const checkPaymentStatusPeriodically = async () => {
-    const interval = 5000; // Verificação a cada 5 segundos
-    const maxAttempts = 60; // Máximo de 60 tentativas (5 minutos)
+    const interval = 5000;
+    const maxAttempts = 60;
     let attempts = 0;
 
     const checkStatus = async () => {
@@ -217,10 +217,8 @@ export function useCheckout() {
         );
 
         const status = response.data.status;
-        console.log('Status:', status);
 
         if (status === 'depix_sent') {
-          // Evita múltiplos redirecionamentos
           if (!isTransactionTimedOut) {
             console.log(status);
             navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
@@ -235,7 +233,7 @@ export function useCheckout() {
 
           attempts++;
           setTimeout(async () => {
-            await checkStatus(); // Chama a função de forma assíncrona após o intervalo
+            await checkStatus();
           }, interval);
         }
       } catch (error) {
@@ -244,7 +242,7 @@ export function useCheckout() {
       }
     };
 
-    await checkStatus(); // Inicia a verificação de status de forma assíncrona
+    await checkStatus();
   };
 
   const verifyPaymentStatus = async () => {
