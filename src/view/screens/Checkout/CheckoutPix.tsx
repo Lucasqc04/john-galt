@@ -4,20 +4,20 @@ import AlfredQr from '../../assets/_DIY SEC LAB - Apresentação Comercial (1).p
 import { useCheckout } from './useChekout';
 
 export function CheckoutPix() {
-  const { pixKey, copyToClipboard, verifyPaymentStatus } = useCheckout();
+  const { pixKey, timeLeft, copyToClipboard, verifyPaymentStatus } =
+    useCheckout();
 
   return (
     <div className="flex flex-col items-center pt-4">
-      {/* <p className="text-center text-red-600">
-      {t('buycheckout.timeRemaining')}: {Math.floor(timeLeft / 60)}:
-      {timeLeft % 60 < 10 && '0'}
-      {timeLeft % 60} {t('buycheckout.minutes')}
-    </p> */}
-
       <h3 className="text-red-600 text-3xl font-semibold mb-2">Atenção:</h3>
       <p className="text-lg text-center text-gray-100 mb-4">
         Para concluir sua transação, clique no botão abaixo após realizar o
         pagamento.
+      </p>
+      <p className="text-center text-red-600">
+        {t('buycheckout.timeRemaining')}: {Math.floor(timeLeft / 60)}:
+        {timeLeft % 60 < 10 && '0'}
+        {timeLeft % 60} {t('buycheckout.minutes')}
       </p>
       <button
         onClick={() => verifyPaymentStatus()}
@@ -49,8 +49,8 @@ export function CheckoutPix() {
       <textarea
         value={pixKey ?? ''}
         readOnly
-        className="border px-4 py-4 rounded-3xl text-lg text-white bg-[#000E16] w-[30%] overflow-hidden"
-        rows={6}
+        className="border px-4 py-3 rounded-2xl text-base text-white bg-[#000E16] w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl overflow-hidden"
+        rows={4}
       />
 
       <button
