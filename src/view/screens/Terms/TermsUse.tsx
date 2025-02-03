@@ -13,13 +13,19 @@ export function TermsOfUse() {
           <h2 className="text-xl font-semibold pb-4 text-white">
             1. {t('termsOfUse.platformTitle')}
           </h2>
-          <p className="text-white">{t('termsOfUse.platformDescription1')}</p>
-          <p className="text-white pt-4">
-            {t('termsOfUse.platformDescription2')}
-          </p>
-          <p className="text-white pt-4">
-            {t('termsOfUse.platformDescription3')}
-          </p>
+          {t('termsOfUse.platformDescription')
+            .split('\n\n')
+            .map((paragraph, index, array) => (
+              <p key={index} className="text-white">
+                {paragraph}
+                {index < array.length - 1 && (
+                  <>
+                    <br />
+                    <br />
+                  </>
+                )}
+              </p>
+            ))}
         </section>
 
         <section className="pb-8">
@@ -27,10 +33,13 @@ export function TermsOfUse() {
             2. {t('termsOfUse.transactionsTitle')}
           </h2>
           <ol className="list-decimal pl-5 text-white">
-            <li>{t('termsOfUse.transactionsStep1')}</li>
-            <li>{t('termsOfUse.transactionsStep2')}</li>
-            <li>{t('termsOfUse.transactionsStep3')}</li>
-            <li>{t('termsOfUse.transactionsStep4')}</li>
+            {(
+              t('termsOfUse.transactionsSteps', {
+                returnObjects: true,
+              }) as string[]
+            ).map((step, index) => (
+              <li key={index}>{step}</li>
+            ))}
           </ol>
         </section>
 
@@ -39,10 +48,7 @@ export function TermsOfUse() {
             3. {t('termsOfUse.transactionDurationTitle')}
           </h2>
           <p className="text-white">
-            {t('termsOfUse.transactionDurationDescription1')}
-          </p>
-          <p className="text-white pt-4">
-            {t('termsOfUse.transactionDurationDescription2')}
+            {t('termsOfUse.transactionDurationDescription')}
           </p>
         </section>
 
@@ -51,10 +57,19 @@ export function TermsOfUse() {
             4. {t('termsOfUse.kycPoliciesTitle')}
           </h2>
           <p className="text-white">
-            {t('termsOfUse.kycPoliciesDescription1')}
-          </p>
-          <p className="text-white pt-4">
-            {t('termsOfUse.kycPoliciesDescription2')}
+            {t('termsOfUse.kycPoliciesDescription')
+              .split('\n\n')
+              .map((paragraph, index, array) => (
+                <p key={index} className="text-white">
+                  {paragraph}
+                  {index < array.length - 1 && (
+                    <>
+                      <br />
+                      <br />
+                    </>
+                  )}
+                </p>
+              ))}
           </p>
         </section>
 
