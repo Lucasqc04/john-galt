@@ -20,8 +20,8 @@ export function useCheckout() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpenMethod, setIsDropdownOpenMethod] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<
-    'PIX' | 'Cartão de Crédito' | 'Boleto Bancário'
-  >('PIX');
+    'PIX' | 'Cartão de Crédito' | 'Boleto Bancário' | 'WISE'
+  >();
   const [pixKey, setPixKey] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -58,7 +58,7 @@ export function useCheckout() {
     setIsDropdownOpenMethod((prevState) => !prevState);
   };
 
-  const selectPaymentMethod = (method: 'PIX') => {
+  const selectPaymentMethod = (method: 'PIX' | 'WISE') => {
     setPaymentMethod(method);
     setIsDropdownOpenMethod(false);
   };
@@ -155,13 +155,14 @@ export function useCheckout() {
         {
           valorBRL: parseFloat(brlAmount.replace(/\D/g, '')),
           valorBTC: parseFloat(btcAmount),
-          paymentMethod: 'PIX',
+          paymentMethod: paymentMethod,
           network: network,
           telefone: transactionNumber,
           coldWallet: coldWallet,
           cupom: cupom,
         },
       );
+
       const pixKey = response.data.response.qrCopyPaste;
       const status = response.data.response.status;
       const transactionId = response.data.response.id;
@@ -173,9 +174,20 @@ export function useCheckout() {
       setTimeLeft(240);
       setIsLoading(false);
       checkPaymentStatusPeriodically();
+
+      if (paymentMethod === 'WISE') {
+        const whatsappNumber = '5511993439032'; // Número com código do país (Brasil: 55)
+        const message = `Olá! Aqui estão os detalhes do pedido Wise:\n\n Valor BRL: ${brlAmount} \n BTC: ${btcAmount}\n Rede: ${network}\n Cold Wallet: ${coldWallet} \n Método: Wise\n Telefone: ${transactionNumber}\n Cupom: ${cupom}`;
+        const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+        window.location.href = whatsappLink; // Redireciona para o WhatsApp
+        return;
+      }
+
       if (pixKey) {
         navigate(ROUTES.checkoutPix.call(currentLang));
       }
+
       if (status === 'depix_sent') {
         navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
       } else if (status === 'paid') {
@@ -188,6 +200,7 @@ export function useCheckout() {
       setIsLoading(false);
     }
   };
+
   useEffect(() => {
     if (pixKey) {
       localStorage.setItem('pixKey', pixKey);
@@ -364,6 +377,6 @@ export function useCheckout() {
     setTransactionNumber,
     verifyPaymentStatus,
     setconfirmDate,
-    // setPaymentMethod,
+    setPaymentMethod,
   };
 }
