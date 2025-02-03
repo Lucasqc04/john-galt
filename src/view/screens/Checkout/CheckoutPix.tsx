@@ -4,8 +4,13 @@ import AlfredQr from '../../assets/_DIY SEC LAB - Apresentação Comercial (1).p
 import { useCheckout } from './useChekout';
 
 export function CheckoutPix() {
-  const { pixKey, timeLeft, copyToClipboard, verifyPaymentStatus } =
-    useCheckout();
+  const {
+    pixKey,
+    timeLeft,
+    isLoadingPayment,
+    copyToClipboard,
+    verifyPaymentStatus,
+  } = useCheckout();
 
   return (
     <div className="flex flex-col items-center pt-4">
@@ -20,10 +25,11 @@ export function CheckoutPix() {
         {timeLeft % 60} {t('buycheckout.minutes')}
       </p>
       <button
-        onClick={() => verifyPaymentStatus()}
+        onClick={verifyPaymentStatus}
+        disabled={isLoadingPayment}
         className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold transition-all duration-300 shadow-md mb-8"
       >
-        {t('buycheckout.makePayment')}
+        {isLoadingPayment ? 'Verificando...' : t('buycheckout.makePayment')}
       </button>
 
       <p className="text-xl text-center text-white">

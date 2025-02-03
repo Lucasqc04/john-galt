@@ -30,6 +30,7 @@ export function useCheckout() {
   const [acceptFees, setAcceptFees] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [confirmDate, setconfirmDate] = useState(false);
+  const [isLoadingPayment, setIsLoadingPaymet] = useState(false);
 
   const navigate = useNavigate();
   const { currentLang } = useCurrentLang();
@@ -218,16 +219,19 @@ export function useCheckout() {
 
         const status = response.data.status;
 
-        if (status === 'depix_sent') {
+        if (status !== 'depix_sent') {
+          toast.warn(t('buycheckout.paymentNotConfirmed'));
           if (!isTransactionTimedOut) {
             console.log(status);
-            navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
           }
-        } else if (status === 'paid') {
-          navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
+        } else if (status !== 'paid') {
+          console.log(`${status}`);
+          toast.warn(t('buycheckout.paymentNotConfirmed'));
         } else {
+          navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
           if (attempts >= maxAttempts) {
             toast.warn(t('buycheckout.paymentNotConfirmed'));
+
             return;
           }
 
@@ -251,6 +255,7 @@ export function useCheckout() {
       toast.error(t('buycheckout.transactionNumberError'));
       return;
     }
+    setIsLoadingPaymet(true);
 
     try {
       const response = await axios.get(
@@ -260,15 +265,16 @@ export function useCheckout() {
       const status = response.data.status;
       console.log('Status:', status);
 
-      if (status == 'depix_sent') {
+      if (status !== 'paid') {
         toast.warn(t('buycheckout.paymentNotConfirmed'));
       } else {
-        console.log(status);
         navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
       }
     } catch (error) {
       console.error('Erro ao verificar o status do pagamento:', error);
       toast.warn(t('buycheckout.paymentNotConfirmed'));
+    } finally {
+      setIsLoadingPaymet(false);
     }
   };
 
@@ -343,6 +349,7 @@ export function useCheckout() {
     networks,
     currentLang,
     confirmDate,
+    isLoadingPayment,
     toggleDropdown,
     selectNetwork,
     toggleDropdownMethod,
@@ -357,5 +364,6 @@ export function useCheckout() {
     setTransactionNumber,
     verifyPaymentStatus,
     setconfirmDate,
+    // setPaymentMethod,
   };
 }
