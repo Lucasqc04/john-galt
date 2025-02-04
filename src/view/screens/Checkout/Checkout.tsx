@@ -3,8 +3,9 @@ import { Loader } from '@/view/components/Loader';
 import classNames from 'classnames';
 import { t } from 'i18next';
 import { ChangeEvent } from 'react';
+import { FaPix } from 'react-icons/fa6';
 import AlfredImg from '../../assets/c1b28810-5a23-4e7c-bcce-bd1f42b271c5.png';
-
+import WiseIcon from '../../assets/wiseIcon.png';
 import { ROUTES } from '../../routes/Routes';
 import { useCheckout } from './useChekout';
 
@@ -25,6 +26,10 @@ export default function Checkout() {
     networks,
     currentLang,
     confirmDate,
+    paymentMethod,
+    isDropdownOpenMethod,
+    selectPaymentMethod,
+    toggleDropdownMethod,
     toggleDropdown,
     selectNetwork,
     handleProcessPayment,
@@ -93,46 +98,56 @@ export default function Checkout() {
                   </div>
                 )}
               </div>
-
-              {/* Payment Method Dropdown */}
-              {/* <div className="flex justify-center items-center pt-4">
-         <div className="relative w-full">
-           <input
-             type="text"
-             value={paymentMethod}
-             readOnly
-             placeholder={t('buycheckout.selectPaymentMethod')}
-             className="border pl-16 pr-16 py-3 rounded-3xl text-base sm:text-lg dark:text-white text-black dark:placeholder-white placeholder-[#606060] bg-slate-100 dark:bg-[#B9B8B8] cursor-pointer w-full"
-             onClick={toggleDropdownMethod}
-           />
-           <button
-             onClick={toggleDropdownMethod}
-             className="absolute right-4 top-1/2 transform -translate-y-1/2 text-black dark:text-white"
-           >
-             {paymentMethod === 'PIX' ? (
-               <FaPix className="w-8 h-8 sm:w-10 sm:h-10" />
-             ) : paymentMethod === 'Cartão de Crédito' ? (
-               <CiCreditCard1 className="w-8 h-8 sm:w-10 sm:h-10" />
-             ) : (
-               <FaBarcode className="w-8 h-8 sm:w-10 sm:h-10" />
-             )}
-           </button>
-           {isDropdownOpenMethod && (
-             <div className="absolute z-50 right-0 top-full mt-2 w-full sm:w-48 bg-white border border-gray-300 rounded-lg shadow-lg">
-               <ul>
-                 <li
-                   onClick={() => selectPaymentMethod('PIX')}
-                   className="flex items-center px-3 py-2 hover:bg-gray-100 cursor-pointer"
-                 >
-                   PIX
-                   <FaPix className="w-8 h-8 sm:w-10 sm:h-10" />
-                 </li>
-               </ul>
-             </div>
-           )}
-         </div>
-       </div> */}
-
+              <div className="flex justify-center items-center relative w-full pt-4">
+                <div className="relative w-full">
+                  <input
+                    type="text"
+                    value={paymentMethod}
+                    readOnly
+                    placeholder={t('buycheckout.selectPaymentMethod')}
+                    className="border-2 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-transparent text-center w-full"
+                    onClick={toggleDropdownMethod}
+                  />
+                  <button
+                    onClick={toggleDropdownMethod}
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-black dark:text-white"
+                  >
+                    {paymentMethod === 'PIX' ? (
+                      <FaPix className="w-8 h-8 sm:w-10 sm:h-10" />
+                    ) : paymentMethod === 'WISE' ? (
+                      <img
+                        src={WiseIcon}
+                        alt="Wise"
+                        className="w-8 h-8 sm:w-10 sm:h-10 rounded-full"
+                      />
+                    ) : null}
+                  </button>
+                  {isDropdownOpenMethod && (
+                    <div className="absolute right-0 top-full pt-2 w-full sm:w-48 bg-[#00070F] border border-gray-300 rounded-lg shadow-lg z-10">
+                      <ul>
+                        <li
+                          onClick={() => selectPaymentMethod('PIX')}
+                          className="flex items-center px-3 py-2 hover:bg-slate-900 cursor-pointer text-white "
+                        >
+                          PIX
+                          <FaPix className="w-8 h-8 sm:w-10 sm:h-10  text-white ml-2" />
+                        </li>
+                        <li
+                          onClick={() => selectPaymentMethod('WISE')}
+                          className="flex items-center px-3 py-2 hover:bg-slate-900  cursor-pointer text-white"
+                        >
+                          Wise
+                          <img
+                            src={WiseIcon}
+                            alt="Wise"
+                            className="w-8 h-8 sm:w-10 sm:h-10 rounded-full text-white ml-2"
+                          />
+                        </li>
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </div>
               <div className="flex justify-center items-center pt-4">
                 <div className="relative w-full">
                   <input
@@ -148,7 +163,6 @@ export default function Checkout() {
                   )}
                 </div>
               </div>
-
               <div className="flex justify-center items-center pt-4">
                 <div className="relative w-full">
                   <input
@@ -166,7 +180,6 @@ export default function Checkout() {
                   )}
                 </div>
               </div>
-
               <div className="flex items-center justify-center mt-4">
                 <input
                   type="text"
@@ -182,7 +195,6 @@ export default function Checkout() {
                   {t('buycheckout.apply')}
                 </button>
               </div>
-
               <div className="flex flex-col justify-center items-start pt-4">
                 <label className="flex items-center text-white">
                   <input
@@ -236,7 +248,6 @@ export default function Checkout() {
                   </span>
                 </label>
               </div>
-
               <div className="flex justify-center items-center pt-4">
                 <button
                   onClick={handleProcessPayment}

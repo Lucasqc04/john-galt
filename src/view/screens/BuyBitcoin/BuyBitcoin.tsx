@@ -1,6 +1,5 @@
 import AlfredWhiteLogo from '@/view/assets/logo/alfred-white-logo.svg';
-import TwitterButton from '@/view/components/ButtonTwitter';
-import InstagramButton from '@/view/components/buttonInstagram';
+import SocialButtons from '@/view/components/SocialButtons';
 import { toZonedTime } from 'date-fns-tz';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -160,21 +159,19 @@ export default function BuyBitcoinAndCheckout() {
                   {t('checkout.proceed_button')}
                 </button>
               </div>
+              <section className="mt-[8%]">
+                <p className=" text-white ">
+                  BITCOIN na sua mão, sem complicação e com privacidade.
+                </p>
+              </section>
             </form>
           </article>
           <article className="w-full lg:w-1/2 flex justify-center image-step">
             <img src={AlfredImg} alt="Imagem Alfred" className="w-full" />
           </article>
         </section>
-        <section className="text-center px-4 sm:px-8 lg:px-16 py-6 sm:py-2">
-          <p className="text-base sm:text-2xl lg:text-3xl text-white">
-            Alfred P2P: Bitcoin na sua mão, sem complicação, com total
-            privacidade.
-          </p>
-        </section>
 
-        <TwitterButton />
-        <InstagramButton />
+        <SocialButtons />
       </main>
     </>
   );
