@@ -22,7 +22,7 @@ export default function Header() {
         aria-label="Global"
         className="w-full flex items-center justify-between"
       >
-        <div className="flex justify-center lg:justify-start ">
+        <div className="flex justify-center lg:justify-start text-white">
           <Link to={ROUTES.home.call()}>
             <img src={AlfredBlackLogo} alt="Alfred Logo" className="w-28" />
           </Link>
@@ -47,7 +47,7 @@ export default function Header() {
         />
         {menu.isOpen &&
           createPortal(
-            <div className="fixed top-0 left-0 h-screen w-screen bg-white z-50 px-6">
+            <div className="fixed top-0 left-0 h-screen w-screen bg-[#00050B] z-50 px-6">
               <div className="w-full flex justify-between items-center">
                 <img
                   src={AlfredBlackLogo}
