@@ -67,8 +67,8 @@ export function NavLinks({
               <button
                 onClick={() => handleOnLink(link.path, LinkCallBack)}
                 className={classNames(
-                  'text-2xl lg:text-xl font-semibold leading-6 text-black px-2 transition-all',
-                  'hover:bg-black hover:text-white duration-300 ease-in-out',
+                  'text-2xl lg:text-xl font-semibold leading-6 text-white px-2 transition-all',
+                  'hover:bg-white hover:text-black duration-300 ease-in-out',
                 )}
               >
                 {link.label}

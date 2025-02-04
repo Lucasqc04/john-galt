@@ -19,7 +19,7 @@ export function LanguageSwitcher({
   return (
     <div className={classNames('flex gap-2', className)}>
       <Popover className="relative">
-        <PopoverButton className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900 dark:text-white focus:ring-0 focus:outline-none">
+        <PopoverButton className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-white dark:text-white focus:ring-0 focus:outline-none">
           {language.current === AcceptedLanguages.pt && (
             <>
               <img src={brasil} alt="Português" className="h-5 w-5" />
