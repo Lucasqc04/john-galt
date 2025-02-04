@@ -1,4 +1,4 @@
-import AlfredBlackLogo from '@/view/assets/logo/alfred-black-logo.svg';
+import AlfredBlackLogo from '@/view/assets/logo/alfred-white-logo.svg';
 import classNames from 'classnames';
 import { createPortal } from 'react-dom';
 import { FaBars } from 'react-icons/fa';
@@ -15,14 +15,14 @@ export default function Header() {
   return (
     <header
       className={classNames(
-        'flex items-center justify-between w-full max-w-[100vw] transition-all duration-300 bg-white px-8 sm:px-28 py-6 sm:py-8',
+        'flex items-center justify-between w-full max-w-[100vw] transition-all duration-300 bg-transparent px-8 sm:px-28 py-6 sm:py-8',
       )}
     >
       <nav
         aria-label="Global"
         className="w-full flex items-center justify-between"
       >
-        <div className="flex justify-center lg:justify-start">
+        <div className="flex justify-center lg:justify-start ">
           <Link to={ROUTES.home.call()}>
             <img src={AlfredBlackLogo} alt="Alfred Logo" className="w-28" />
           </Link>

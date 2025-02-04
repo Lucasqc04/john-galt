@@ -118,29 +118,29 @@ export default function Checkout() {
                       <img
                         src={WiseIcon}
                         alt="Wise"
-                        className="w-8 h-8 sm:w-10 sm:h-10"
+                        className="w-8 h-8 sm:w-10 sm:h-10 rounded-full"
                       />
                     ) : null}
                   </button>
                   {isDropdownOpenMethod && (
-                    <div className="absolute right-0 top-full pt-2 w-full sm:w-48 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+                    <div className="absolute right-0 top-full pt-2 w-full sm:w-48 bg-[#00070F] border border-gray-300 rounded-lg shadow-lg z-10">
                       <ul>
                         <li
                           onClick={() => selectPaymentMethod('PIX')}
-                          className="flex items-center px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                          className="flex items-center px-3 py-2 hover:bg-slate-900 cursor-pointer text-white "
                         >
                           PIX
-                          <FaPix className="w-8 h-8 sm:w-10 sm:h-10 bg-white" />
+                          <FaPix className="w-8 h-8 sm:w-10 sm:h-10  text-white ml-2" />
                         </li>
                         <li
                           onClick={() => selectPaymentMethod('WISE')}
-                          className="flex items-center px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                          className="flex items-center px-3 py-2 hover:bg-slate-900  cursor-pointer text-white"
                         >
                           Wise
                           <img
                             src={WiseIcon}
                             alt="Wise"
-                            className="w-8 h-8 sm:w-10 sm:h-10"
+                            className="w-8 h-8 sm:w-10 sm:h-10 rounded-full text-white ml-2"
                           />
                         </li>
                       </ul>
