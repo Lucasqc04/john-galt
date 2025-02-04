@@ -12,7 +12,6 @@ import { useCheckout } from './useChekout';
 export default function Checkout() {
   const {
     network,
-    // timeLeft,
     coldWallet,
     transactionNumber,
     cupom,
@@ -55,7 +54,7 @@ export default function Checkout() {
           </p>
 
           <div className="flex justify-center items-center relative px-4">
-            <div className="w-full max-w-2xl">
+            <div className="w-full max-w-2xl ">
               <div className="flex justify-center items-center relative w-full">
                 <input
                   type="text"
@@ -248,13 +247,13 @@ export default function Checkout() {
                   </span>
                 </label>
               </div>
-              <div className="flex justify-center items-center pt-4">
+              <div className="flex justify-center items-center pt-4 ">
                 <button
                   onClick={handleProcessPayment}
                   type="button"
                   disabled={!acceptFees || !acceptTerms || !confirmDate}
                   className={classNames(
-                    'w-full h-12 sm:h-14 bg-[#F39200] text-white rounded-3xl font-bold text-sm sm:text-base',
+                    'w-full h-12 sm:h-14 bg-[#F39200] text-white rounded-3xl font-bold text-sm sm:text-base mb-[10%]',
                     (!acceptFees || !acceptTerms || !confirmDate) &&
                       'opacity-50',
                   )}
