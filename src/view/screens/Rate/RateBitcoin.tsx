@@ -1,3 +1,4 @@
+import WhatsAppButton from '@/view/components/buttonWhatsApp';
 import { useTranslation } from 'react-i18next';
 
 export function Fees() {
@@ -36,6 +37,7 @@ export function Fees() {
           <p className="text-white pt-4">{t('fees.privacy2')}</p>
         </section>
       </div>
+      <WhatsAppButton />
     </>
   );
 }
