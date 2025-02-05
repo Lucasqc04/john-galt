@@ -1,3 +1,4 @@
+import WhatsAppButton from '@/view/components/buttonWhatsApp';
 import { useTranslation } from 'react-i18next';
 
 export function AboutBuyBitcoin() {
@@ -21,6 +22,7 @@ export function AboutBuyBitcoin() {
           ))}
         </div>
       </div>
+      <WhatsAppButton />
     </>
   );
 }

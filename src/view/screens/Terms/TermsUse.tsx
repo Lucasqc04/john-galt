@@ -1,3 +1,4 @@
+import WhatsAppButton from '@/view/components/buttonWhatsApp';
 import { useTranslation } from 'react-i18next';
 export function TermsOfUse() {
   const { t } = useTranslation();
@@ -120,6 +121,7 @@ export function TermsOfUse() {
           <p className="text-white">{t('termsOfUse.footer')}</p>
         </footer>
       </div>
+      <WhatsAppButton />
     </>
   );
 }

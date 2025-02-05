@@ -125,7 +125,7 @@
     "acceptFees": "Aceito as taxas",
     "acceptTerms": "Aceito os termos e condições",
     "confirmDate": "Confirmo que os dados enviados estão corretos",
-    "getPixKey": "Gerar chave PIX"
+    "getPixKey": "Finalizar Pagamento"
   },
   "guide": {
     "imageStep": "Olá, eu sou o Alfred! Seja bem-vindo! Sou um robô que facilita para você transações de Bitcoin sem KYC, de forma simples e segura.",
