@@ -14,11 +14,7 @@ type NavLinksProps = {
   LinkCallBack?: () => void;
 };
 
-export function NavLinks({
-  closeButton,
-  isVisible,
-  LinkCallBack,
-}: NavLinksProps) {
+export function NavLinks({ LinkCallBack }: NavLinksProps) {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { currentLang } = useCurrentLang();
@@ -55,28 +51,21 @@ export function NavLinks({
 
   return (
     <>
-      {isVisible && (
-        <>
-          {closeButton && (
-            <div className="w-screen flex justify-end pt-4 pr-6">
-              {closeButton}
-            </div>
-          )}
-          <PopoverGroup className="flex flex-col items-center justify-center gap-y-10 lg:gap-x-12 lg:flex-row lg:gap-y-0">
-            {Links.map((link) => (
-              <button
-                onClick={() => handleOnLink(link.path, LinkCallBack)}
-                className={classNames(
-                  'text-2xl lg:text-xl font-semibold leading-6 text-white px-2 transition-all',
-                  'hover:bg-white hover:text-black duration-300 ease-in-out',
-                )}
-              >
-                {link.label}
-              </button>
-            ))}
-          </PopoverGroup>
-        </>
-      )}
+      <PopoverGroup className="flex flex-row items-center justify-center gap-x-1 sm:gap-x-2 flex-wrap">
+        {Links.map((link, index) => (
+          <button
+            key={index}
+            onClick={() => handleOnLink(link.path, LinkCallBack)}
+            className={classNames(
+              'text-sm sm:text-lg lg:text-base font-semibold leading-6 text-white px-1 sm:px-2 py-1 transition-all text-center',
+              'hover:bg-white hover:text-black duration-300 ease-in-out',
+              'w-auto',
+            )}
+          >
+            {link.label}
+          </button>
+        ))}
+      </PopoverGroup>
     </>
   );
 }
