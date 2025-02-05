@@ -98,16 +98,16 @@ export default function BuyBitcoinAndCheckout() {
 
   return (
     <>
-      <main className="flex flex-col justify-center items-center w-full max-w-screen-xl px-6 sm:px-12 md:px-20 lg:px-32 xl:px-40 pt-12 sm:pt-28 ">
-        <section className="w-full flex flex-col lg:flex-row items-center justify-center">
-          <article className="w-full lg:w-1/2 flex flex-col items-center justify-around gap-y-10">
+      <main className="flex flex-col justify-center items-center w-full max-w-screen-xl px-6 sm:px-12 md:px-20 lg:px-32 xl:px-40 pt-12 sm:pt-28 mx-auto">
+        <section className="w-full max-w-screen-lg flex flex-col lg:flex-row items-center justify-center mx-auto">
+          <article className="w-full lg:w-1/2 flex flex-col items-center justify-center gap-y-10">
             <img
               src={AlfredWhiteLogo}
               alt="Alfred Logo"
-              className="w-72 sm:w-80"
+              className="w-44 sm:w-60"
             />
             <form
-              className="flex flex-col justify-center w-full max-w-2xl"
+              className="flex flex-col justify-center items-center w-full max-w-2xl"
               onSubmit={handleNextStep}
             >
               {!isTransactionAllowed && (
@@ -121,9 +121,9 @@ export default function BuyBitcoinAndCheckout() {
                     value={brlAmount}
                     onChange={handleBrlChange}
                     placeholder={t('checkout.brl_placeholder')}
-                    className="border-2 px-16 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-transparent text-center w-full brl-step"
+                    className="border-2 px-16 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-transparent text-center w-full"
                   />
-                  <button className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white">
+                  <button className="absolute right-2 top-1/2 -translate-y-1/2 text-white">
                     <img
                       src={Brl}
                       alt={t('checkout.brl_label')}
@@ -141,7 +141,7 @@ export default function BuyBitcoinAndCheckout() {
                     placeholder={t('checkout.btc_placeholder')}
                     className="border-2 px-16 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-transparent text-center w-full"
                   />
-                  <button className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white">
+                  <button className="absolute right-2 top-1/2 -translate-y-1/2 text-white">
                     <img
                       src={Btc}
                       alt={t('checkout.btc_label')}
@@ -154,24 +154,40 @@ export default function BuyBitcoinAndCheckout() {
               <div className="w-full flex justify-center items-center pt-4">
                 <button
                   type="submit"
-                  className="w-full h-10 sm:h-12 bg-[#F39200] text-white rounded-3xl font-bold text-sm sm:text-base border-2 proceed-button-step"
+                  className="w-full h-10 sm:h-12 bg-[#F39200] text-white rounded-3xl font-bold text-sm sm:text-base border-2"
                 >
                   {t('checkout.proceed_button')}
                 </button>
               </div>
-              <section className="mt-[8%]">
-                <p className=" text-white ">
-                  BITCOIN na sua mão, sem complicação e com privacidade.
+
+              <section className="hidden lg:flex items-center justify-center h-full mt-8 text-center">
+                <p className="text-white">
+                  <b>BITCOIN</b> na sua mão, sem complicação e
+                  <b> com privacidade</b>.
                 </p>
               </section>
             </form>
           </article>
-          <article className="w-full lg:w-1/2 flex justify-center image-step">
-            <img src={AlfredImg} alt="Imagem Alfred" className="w-full" />
+
+          <article className="w-full lg:w-1/2 flex justify-center">
+            <img
+              src={AlfredImg}
+              alt="Imagem Alfred"
+              className="w-full max-w-md lg:max-w-full"
+            />
           </article>
+
+          <section className="lg:hidden mt-8 mb-[10%] text-center">
+            <p className="text-white">
+              <b>BITCOIN</b> na sua mão, sem complicação e
+              <b> com privacidade</b>.
+            </p>
+          </section>
         </section>
 
-        <SocialButtons />
+        <div className="flex justify-center w-full">
+          <SocialButtons />
+        </div>
       </main>
     </>
   );
