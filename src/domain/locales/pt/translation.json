@@ -2,8 +2,17 @@
   "header": {
     "links": ["Início", "Sobre", "Taxas", "Termos", "Suporte"]
   },
+
   "about": {
     "title": "Compra e venda de Bitcoin sem burocracia, com total liberdade",
+    "titles": [
+      "Compra e venda de Bitcoin sem burocracia, com total liberdade",
+      "Privacidade acima de tudo",
+      "Como garantimos a segurança?",
+      "Transações rápidas e sem complicação",
+      "Apoio sempre que necessário",
+      "A liberdade de negociar, a segurança de sempre"
+    ],
     "paragraphs": [
       "No Alfred, acreditamos que a liberdade financeira deve ser simples e acessível para todos. Por isso, oferecemos uma plataforma P2P (peer-to-peer) onde você pode comprar e vender Bitcoin de maneira direta, sem a necessidade de processos de verificação de identidade (KYC). Aqui, a privacidade e a autonomia são respeitadas em cada transação.",
       "Sabemos que cada pessoa tem o direito de gerenciar seus recursos de forma discreta e sem interferências. Ao optar pelo Alfred, você está escolhendo um serviço onde a sua identidade e dados pessoais não são exigidos. Nosso modelo de operação é baseado na confiança entre compradores e vendedores, criando um ambiente onde todos podem negociar com segurança e sem comprometer sua privacidade.",
@@ -13,6 +22,7 @@
       "Com o Alfred, você tem a oportunidade de fazer parte de uma comunidade que valoriza a liberdade financeira e a privacidade, sem abrir mão da segurança. Nós acreditamos em um mercado mais justo, onde a confiança é o principal alicerce das transações. Junte-se a nós e experimente a verdadeira liberdade ao negociar Bitcoin."
     ]
   },
+
   "checkout": {
     "title": "Compra de Bitcoin e Checkout",
     "brl_placeholder": "Digite o valor em BRL",

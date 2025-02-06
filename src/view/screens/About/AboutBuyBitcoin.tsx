@@ -4,6 +4,10 @@ import { useTranslation } from 'react-i18next';
 export function AboutBuyBitcoin() {
   const { t } = useTranslation();
 
+  const titles: string[] = t('about.titles', {
+    returnObjects: true,
+  }) as string[];
+
   const paragraphs: string[] = t('about.paragraphs', {
     returnObjects: true,
   }) as string[];
@@ -14,11 +18,15 @@ export function AboutBuyBitcoin() {
         <div className="pb-4 text-center">
           <h1 className="text-3xl font-bold text-white">{t('about.title')}</h1>
         </div>
-        <div className="text-white text-justify ">
-          {paragraphs.map((paragraph, index) => (
-            <p key={index} className={`${index === 3 && 'font-semibold'} py-4`}>
-              {paragraph}
-            </p>
+
+        <div className="text-white text-justify">
+          {titles.map((title, index) => (
+            <div key={index}>
+              <h2 className="text-xl font-semibold pt-6">{title}</h2>
+              <p className={`${index === 3 && 'font-semibold'} py-4`}>
+                {paragraphs[index]}
+              </p>
+            </div>
           ))}
         </div>
       </div>
