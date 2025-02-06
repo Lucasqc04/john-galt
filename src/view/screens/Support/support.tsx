@@ -83,7 +83,7 @@ export function Support() {
           IS_ZOOM_BIGGER_THAN_100 && 'pt-16',
         )}
       >
-        <div className="w-full max-w-4xl bg-gray-800 p-8 rounded-lg shadow-xl">
+        <div className="w-full max-w-4xl  p-8 ">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
             <aside className="col-span-full md:col-span-6 flex flex-col items-center">
               <img
@@ -97,7 +97,7 @@ export function Support() {
                   href="https://chat.whatsapp.com/HtFSC2xozFhLEFxaDf5Psx"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 bg-gray-800 border border-gray-600 rounded-[24px] shadow-sm hover:bg-gray-700 transition"
+                  className="flex items-center gap-4 p-4  border border-gray-600 rounded-[24px] shadow-sm hover:bg-[#000A13] transition"
                 >
                   <FaWhatsapp size={32} className="text-green-500" />
                   <span className="font-semibold text-lg text-gray-100">
@@ -108,7 +108,7 @@ export function Support() {
                   href="https://www.instagram.com/diyseclab.io/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 bg-gray-800 border border-gray-600 rounded-[24px] shadow-sm hover:bg-gray-700 transition"
+                  className="flex items-center gap-4 p-4  border border-gray-600 rounded-[24px] shadow-sm hover:bg-[#000A13] transition"
                 >
                   <FaInstagram size={32} className="text-pink-500" />
                   <span className="font-semibold text-lg text-gray-100">
@@ -119,7 +119,7 @@ export function Support() {
                   href="https://x.com/diyseclab"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 bg-gray-800 border border-gray-600 rounded-[24px] shadow-sm hover:bg-gray-700 transition"
+                  className="flex items-center gap-4 p-4  border border-gray-600 rounded-[24px] shadow-sm hover:bg-[#000A13] transition"
                 >
                   <FaXTwitter size={32} className="text-white" />
                   <span className="font-semibold text-lg text-gray-100">X</span>
@@ -130,7 +130,7 @@ export function Support() {
             <article className="col-span-full md:col-span-6 flex items-center justify-center">
               <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="w-full max-w-[370px] bg-gray-800 p-8 rounded-lg flex flex-col gap-y-6"
+                className="w-full max-w-[370px]  p-8 rounded-lg flex flex-col gap-y-6"
               >
                 <h3 className="font-bold text-lg md:text-2xl text-center text-gray-100">
                   {t('support.sendMessage')}
@@ -141,30 +141,30 @@ export function Support() {
                     type="text"
                     {...register('firstName', { required: true })}
                     placeholder={t('support.firstName')}
-                    className="p-3 border border-gray-600 rounded-lg focus:outline-none bg-gray-800 text-gray-100"
+                    className="p-3 border border-gray-600 rounded-lg focus:outline-none  text-gray-100 bg-[#000A13]"
                   />
                   <input
                     type="text"
                     {...register('lastName', { required: true })}
                     placeholder={t('support.lastName')}
-                    className="p-3 border border-gray-600 rounded-lg focus:outline-none bg-gray-800 text-gray-100"
+                    className="p-3 border border-gray-600 rounded-lg focus:outline-none  text-gray-100 bg-[#000A13]"
                   />
                 </div>
                 <input
                   type="email"
                   {...register('email', { required: true })}
                   placeholder={t('support.email')}
-                  className="p-3 border border-gray-600 rounded-lg focus:outline-none bg-gray-800 text-gray-100"
+                  className="p-3 border border-gray-600 rounded-lg focus:outline-none  text-gray-100 bg-[#000A13]"
                 />
                 <textarea
                   {...register('message', { required: true })}
                   placeholder={t('support.message')}
-                  className="p-3 border border-gray-600 rounded-lg focus:outline-none bg-gray-800 text-gray-100"
+                  className="p-3 border border-gray-600 rounded-lg focus:outline-none  text-gray-100 bg-[#000A13]"
                 ></textarea>
 
                 <button
                   type="submit"
-                  className="w-full py-3 rounded-lg font-bold transition  bg-gray-900 border border-gray-600 flex items-center justify-center text-white"
+                  className="w-full p-3 rounded-lg font-bold transition  border bg-[#F39200] flex items-center justify-center text-white"
                   disabled={isLoading}
                 >
                   {t('support.send')}
