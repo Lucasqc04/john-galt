@@ -80,7 +80,9 @@ export default function BuyBitcoinAndCheckout() {
     }
   };
 
-  const handleNextStep = () => {
+  const handleNextStep = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
     if (!isTransactionAllowed) {
       toast.error(t('checkout.transaction_error'));
       return;
