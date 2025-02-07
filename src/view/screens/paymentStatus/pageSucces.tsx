@@ -1,10 +1,11 @@
 import { Background } from '@/view/components/BackgroundAnimatedProduct';
-import { LanguageSwitcher } from '@/view/components/LanguageSwitcher/LanguageSwitcher';
 import { motion } from 'framer-motion';
 import { CSSProperties, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { FaWhatsapp } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import Alfred from '../../assets/AlfredComercial.png';
+import logoSucces from '../../assets/Check_Tela_Alfred.png';
 import TalkBallon from '../../assets/talk.png';
 import { ROUTES } from '../../routes/Routes';
 import { useCurrentLang } from '../../utils/useCurrentLang';
@@ -121,30 +122,12 @@ export function PaymentAlfredSuccess() {
         <p style={textStyle}>{t('paymentSuccess.Ballon')}</p>
       </motion.div>
 
-      <div className="flex justify-center">
-        <LanguageSwitcher LabelClassName="transform scale-110 text-white" />
-      </div>
-
       <motion.div
         initial={{ scale: 0.5, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 0.5, duration: 0.5, type: 'spring' }}
-        className="bg-success rounded-full p-6 md:p-8 mb-8 mt-5 shadow-lg"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-20 w-20 md:h-24 md:w-24 text-white animate-pulse"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M5 13l4 4L19 7"
-          />
-        </svg>
+        <img src={logoSucces} alt="check" className="w-60" />
       </motion.div>
 
       <motion.h1
@@ -173,21 +156,21 @@ export function PaymentAlfredSuccess() {
         className="flex flex-col md:flex-row gap-4"
       >
         <button
+          onClick={() => handleOnLink(ROUTES.buyBitcoin.call(currentLang))}
+          className="w-[200px] h-[50px] bg-[#F49300] border-[3px] border-white rounded-[40px] "
+        >
+          {t('paymentSuccess.redirectButton')}
+        </button>
+        <button
           onClick={() =>
             window.open(
               'https://api.whatsapp.com/send?phone=+5511919050416&text=Meu%20pagamento%20no%20Alfred%20foi%20conclu%C3%ADdo%20e%20tenho%20algumas%20d%C3%BAvidas.%20Poderia%20me%20ajudar%3F',
               '_blank',
             )
           }
-          className="bg-green-500 text-white px-6 py-3 rounded-lg font-semibold text-lg hover:bg-green-600 transition-colors shadow-lg"
+          className="bg-black w-[200px] h-[50px] text-[#00FC00] border-[3px] border-[#00FC00] rounded-[40px] flex items-center justify-center gap-2"
         >
-          {t('paymentSuccess.whatsapp')}
-        </button>
-        <button
-          onClick={() => handleOnLink(ROUTES.buyBitcoin.call(currentLang))}
-          className="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold text-lg hover:bg-blue-600 transition-colors shadow-lg"
-        >
-          {t('paymentSuccess.redirectButton')}
+          {t('paymentSuccess.whatsapp')} <FaWhatsapp />
         </button>
       </motion.div>
     </motion.div>

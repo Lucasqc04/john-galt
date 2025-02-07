@@ -4,13 +4,21 @@
   },
   "about": {
     "title": "Buy and sell Bitcoin without bureaucracy, with total freedom",
+    "titles": [
+      "Buy and sell Bitcoin without bureaucracy, with total freedom",
+      "Privacy above all",
+      "How do we ensure security?",
+      "Fast and hassle-free transactions",
+      "Support whenever needed",
+      "The freedom to negotiate, the security of always"
+    ],
     "paragraphs": [
-      "At Alfred, we believe that financial freedom should be simple and accessible to everyone. That’s why we offer a P2P (peer-to-peer) platform where you can buy and sell Bitcoin directly, without the need for identity verification processes (KYC). Here, privacy and autonomy are respected in every transaction.",
-      "We understand that everyone has the right to manage their resources discreetly and without interference. By choosing Alfred, you are opting for a service where your identity and personal data are not required. Our operating model is based on trust between buyers and sellers, creating an environment where everyone can trade securely without compromising their privacy.",
-      "Although we do not require KYC, we do not compromise on security. Our platform provides a robust verification and monitoring system that ensures all transactions are legitimate and secure. Each seller is responsible for ensuring the quality of the Bitcoin being traded, and our team is always available to resolve any issues, ensuring that all parties involved fulfill their responsibilities.",
-      "Forget long verification queues and excessive documentation. At Alfred, transactions are fast, simple, and transparent. Without intermediaries, you deal directly with the other party, without losing the necessary security to ensure that everything happens in the best possible way.",
-      "We understand that operating without KYC makes customer support essential. Our support team is always available to resolve any issues, mediate disputes, and ensure your buying and selling experience is smooth and risk-free. If something does not go as expected, our dispute resolution structure is ready to act and protect the interests of our users.",
-      "With Alfred, you have the opportunity to be part of a community that values financial freedom and privacy without compromising security. We believe in a fairer market where trust is the cornerstone of transactions. Join us and experience true freedom when trading Bitcoin."
+      "At Alfred, we believe that financial freedom should be simple and accessible to everyone. That's why we offer a P2P (peer-to-peer) platform where you can buy and sell Bitcoin directly, without the need for identity verification processes (KYC). Here, privacy and autonomy are respected in every transaction.",
+      "We understand that everyone has the right to manage their resources discreetly and without interference. By choosing Alfred, you're selecting a service where your identity and personal data are not required. Our operating model is based on trust between buyers and sellers, creating an environment where everyone can negotiate securely without compromising their privacy.",
+      "Although we don't require KYC, we don't compromise on security. Our platform offers a robust verification and monitoring system to ensure all transactions are legitimate and secure. Each seller is responsible for ensuring the quality of the Bitcoin being traded, and our team is always available to resolve any issues, ensuring that all parties involved in the transaction fulfill their responsibilities.",
+      "Forget about long queues for verification and excessive paperwork. At Alfred, transactions are fast, simple, and transparent. With no intermediaries, you deal directly with the other party, without losing the necessary security to ensure everything goes smoothly.",
+      "We understand that, operating without KYC, customer support becomes essential. Our support team is always available to resolve any issues, mediate disputes, and ensure that your buying and selling experience is smooth and risk-free. If something doesn't go as expected, our dispute resolution structure is ready to act and protect the interests of our users.",
+      "With Alfred, you have the opportunity to be part of a community that values financial freedom and privacy without sacrificing security. We believe in a fairer market where trust is the cornerstone of transactions. Join us and experience true freedom when trading Bitcoin."
     ]
   },
   "checkout": {
