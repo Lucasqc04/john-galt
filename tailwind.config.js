@@ -15,7 +15,8 @@ export default {
         success: '#28A745',
       },
       fontFamily: {
-        lexend: ['"Lexend Deca"', 'sans-serif'],
+        lexend: ['"Lexend Deca"', 'sans-serif'], // Fonte global
+        pixelade: ['"Pixelade"', 'sans-serif'], // Fonte exclusiva do Navbar
       },
     },
   },
