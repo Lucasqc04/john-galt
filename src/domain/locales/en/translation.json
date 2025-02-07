@@ -127,6 +127,17 @@
     "confirmDate": "I confirm that the data sent is correct",
     "getPixKey": "Finalize Payment"
   },
+  "confirmModal": {
+    "title": "Confirm Information",
+    "value": "Amount",
+    "valueBTC": "Amount in BTC",
+    "network": "Network",
+    "coldWallet": "Bitcoin Wallet",
+    "paymentMethod": "Payment Method",
+    "transactionNumber": "Transaction Number",
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  },
   "guide": {
     "imageStep": "Hello, I’m Alfred! Welcome! I’m a robot that helps you with Bitcoin transactions without KYC, in a simple and secure way.",
     "brlStep": "Enter the amount in BRL that you wish to convert to Bitcoin.",

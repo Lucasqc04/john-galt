@@ -128,6 +128,17 @@
     "confirmDate": "Confirmo que los datos enviados son correctos",
     "getPixKey": "Finalizar pago"
   },
+  "confirmModal": {
+    "title": "Confirmar Información",
+    "value": "Monto",
+    "valueBTC": "Monto en BTC",
+    "network": "Red",
+    "coldWallet": "Cartera de Bitcoin",
+    "paymentMethod": "Método de Pago",
+    "transactionNumber": "Número de Transacción",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar"
+  },
   "guide": {
     "imageStep": "¡Hola, soy Alfred! ¡Bienvenido! Soy un robot que facilita las transacciones de Bitcoin sin KYC, de manera simple y segura.",
     "brlStep": "Ingresa el valor en BRL que deseas convertir a Bitcoin.",

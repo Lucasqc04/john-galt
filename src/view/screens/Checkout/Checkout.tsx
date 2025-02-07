@@ -3,11 +3,12 @@ import WhatsAppButton from '@/view/components/buttonWhatsApp';
 import { Loader } from '@/view/components/Loader';
 import classNames from 'classnames';
 import { t } from 'i18next';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { FaPix } from 'react-icons/fa6';
 import AlfredImg from '../../assets/c1b28810-5a23-4e7c-bcce-bd1f42b271c5.png';
 import WiseIcon from '../../assets/wiseIcon.png';
 import { ROUTES } from '../../routes/Routes';
+import ConfirmInfosModal from './modal.confirminfos';
 import { useCheckout } from './useChekout';
 
 export default function Checkout() {
@@ -41,6 +42,11 @@ export default function Checkout() {
     setTransactionNumber,
     setconfirmDate,
   } = useCheckout();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   return (
     <>
@@ -250,7 +256,7 @@ export default function Checkout() {
               </div>
               <div className="flex justify-center items-center pt-4 ">
                 <button
-                  onClick={handleProcessPayment}
+                  onClick={openModal} // Em vez de chamar `handleProcessPayment`
                   type="button"
                   disabled={!acceptFees || !acceptTerms || !confirmDate}
                   className={classNames(
@@ -268,6 +274,21 @@ export default function Checkout() {
               <img src={AlfredImg} alt="Alfred" />
             </div>
           </div>
+
+          <ConfirmInfosModal
+            isOpen={isModalOpen}
+            onClose={closeModal}
+            onConfirm={() => {
+              closeModal();
+              handleProcessPayment();
+            }}
+            brlAmount={brlAmount || ''}
+            btcAmount={btcAmount || ''}
+            network={network || ''}
+            coldWallet={coldWallet || ''}
+            paymentMethod={paymentMethod || ''}
+            transactionNumber={transactionNumber || ''}
+          />
         </section>
       </main>
       <WhatsAppButton />
