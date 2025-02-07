@@ -2,7 +2,6 @@
   "header": {
     "links": ["Início", "Sobre", "Taxas", "Termos", "Suporte"]
   },
-
   "about": {
     "title": "Compra e venda de Bitcoin sem burocracia, com total liberdade",
     "titles": [
@@ -22,7 +21,6 @@
       "Com o Alfred, você tem a oportunidade de fazer parte de uma comunidade que valoriza a liberdade financeira e a privacidade, sem abrir mão da segurança. Nós acreditamos em um mercado mais justo, onde a confiança é o principal alicerce das transações. Junte-se a nós e experimente a verdadeira liberdade ao negociar Bitcoin."
     ]
   },
-
   "checkout": {
     "title": "Compra de Bitcoin e Checkout",
     "brl_placeholder": "Digite o valor em BRL",
@@ -145,8 +143,14 @@
     "coldWallet": "Carteira Bitcoin",
     "paymentMethod": "Método de Pagamento",
     "transactionNumber": "Número de contato",
+    "swapFee": "Taxa de Troca",
+    "onchainFee": "Taxa rede Onchain",
+    "transactionFee": "Taxa de Transação",
+    "totalFees": "Taxas Totais",
+    "expectedAmount": "Valor Esperado",
     "cancel": "Cancelar",
-    "confirm": "Confirmar"
+    "confirm": "Confirmar",
+    "alfredFeeWarning": "Além das taxas mencionadas, haverá uma taxa adicional do Alfred."
   },
   "guide": {
     "imageStep": "Olá, eu sou o Alfred! Seja bem-vindo! Sou um robô que facilita para você transações de Bitcoin sem KYC, de forma simples e segura.",

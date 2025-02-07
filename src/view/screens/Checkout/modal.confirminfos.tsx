@@ -1,7 +1,7 @@
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import { t } from 'i18next';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Button = ({
   onClick,
@@ -47,6 +47,9 @@ export default function ConfirmInfosModal({
   paymentMethod,
   transactionNumber,
 }: ConfirmInfosModalProps) {
+  const [onchainFee, setOnchainFee] = useState<number | null>(null);
+  const [btcToBrl, setBtcToBrl] = useState<number | null>(null);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -59,7 +62,63 @@ export default function ConfirmInfosModal({
     };
   }, [onClose]);
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    const fetchBtcToBrl = async (): Promise<number> => {
+      try {
+        const response = await fetch(
+          'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=brl',
+        );
+        const data = await response.json();
+        return data.bitcoin.brl;
+      } catch (error) {
+        console.error('Erro ao buscar a cotação do BTC:', error);
+        return 0;
+      }
+    };
+
+    const fetchOnchainFee = async () => {
+      try {
+        const response = await fetch(
+          'https://mempool.space/api/v1/fees/recommended',
+        );
+        const data = await response.json();
+        const satPerVByte = data.halfHourFee;
+        const btcToBrl = await fetchBtcToBrl();
+        const transactionSize = 250;
+
+        const feeInSats = satPerVByte * transactionSize;
+        const feeInBTC = feeInSats / 1e8;
+        const feeInBRL = feeInBTC * btcToBrl;
+
+        setOnchainFee(feeInBRL);
+        setBtcToBrl(btcToBrl);
+      } catch (error) {
+        console.error('Erro ao buscar a taxa on-chain:', error);
+      }
+    };
+
+    if (network.toLowerCase() === 'onchain') {
+      fetchOnchainFee();
+    } else {
+      setOnchainFee(null);
+    }
+  }, [network]);
+
+  if (
+    !isOpen ||
+    btcToBrl === null ||
+    (network.toLowerCase() === 'onchain' && onchainFee === null)
+  )
+    return null;
+
+  const brlAmountNum = parseFloat(
+    brlAmount.replace(/[^\d,]/g, '').replace(',', '.'),
+  );
+
+  const swapFee = brlAmountNum * 0.02;
+
+  const totalFees = swapFee + (onchainFee || 0);
+  const expectedAmount = brlAmountNum - totalFees;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -107,6 +166,37 @@ export default function ConfirmInfosModal({
           <p>
             {t('confirmModal.transactionNumber')}:{' '}
             <span className="font-semibold">{transactionNumber}</span>
+          </p>
+          <p>
+            {t('confirmModal.swapFee')}:{' '}
+            <span className="font-semibold">{swapFee.toFixed(2)} BRL (2%)</span>
+          </p>
+          {network.toLowerCase() === 'onchain' && (
+            <>
+              <p>
+                {t('confirmModal.onchainFee')}:{' '}
+                <span className="font-semibold">
+                  {onchainFee?.toFixed(2)} BRL
+                </span>
+              </p>
+              <p>
+                {t('confirmModal.totalFees')}:{' '}
+                <span className="font-semibold">
+                  {totalFees.toFixed(2)} BRL
+                </span>
+              </p>
+            </>
+          )}
+          <p>
+            {t('confirmModal.expectedAmount')}:{' '}
+            <span className="font-semibold">
+              {expectedAmount.toFixed(2)} BRL
+            </span>
+          </p>
+
+          {/* Aviso sobre a taxa do Alfred */}
+          <p className="text-sm text-yellow-400 mt-4">
+            {t('confirmModal.alfredFeeWarning')}
           </p>
         </div>
 
