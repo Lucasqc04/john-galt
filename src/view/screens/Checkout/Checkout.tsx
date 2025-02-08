@@ -5,10 +5,11 @@ import classNames from 'classnames';
 import { t } from 'i18next';
 import { ChangeEvent, useState } from 'react';
 import { FaPix } from 'react-icons/fa6';
+import { toast } from 'react-toastify';
 import AlfredImg from '../../assets/c1b28810-5a23-4e7c-bcce-bd1f42b271c5.png';
 import WiseIcon from '../../assets/wiseIcon.png';
 import { ROUTES } from '../../routes/Routes';
-import ConfirmInfosModal from './modal.confirminfos';
+import ConfirmInfosModal from './modal/ConfirmInfos';
 import { useCheckout } from './useChekout';
 
 export default function Checkout() {
@@ -41,12 +42,27 @@ export default function Checkout() {
     setCupom,
     setTransactionNumber,
     setconfirmDate,
+    validateFields,
   } = useCheckout();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  const handleOpenModal = async () => {
+    await checkCouponValidity();
+
+    if (errors.cupom) {
+      return;
+    }
+
+    if (!validateFields()) {
+      toast.error(t('buycheckout.missingFields'));
+      return;
+    }
+
+    setIsModalOpen(true);
+  };
 
   return (
     <>
@@ -256,7 +272,7 @@ export default function Checkout() {
               </div>
               <div className="flex justify-center items-center pt-4 ">
                 <button
-                  onClick={openModal} // Em vez de chamar `handleProcessPayment`
+                  onClick={handleOpenModal}
                   type="button"
                   disabled={!acceptFees || !acceptTerms || !confirmDate}
                   className={classNames(
@@ -288,6 +304,7 @@ export default function Checkout() {
             coldWallet={coldWallet || ''}
             paymentMethod={paymentMethod || ''}
             transactionNumber={transactionNumber || ''}
+            cupom={cupom || ''}
           />
         </section>
       </main>
