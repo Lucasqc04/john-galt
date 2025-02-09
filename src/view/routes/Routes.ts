@@ -5,7 +5,7 @@ export const ROUTES = {
   home: {
     call: () => '/',
   },
-  buyBitcoin: {
+  checkout: {
     path: '',
     call: (currentLang: string) => `/${currentLang}`,
   },

@@ -8,7 +8,7 @@ import { FaPix } from 'react-icons/fa6';
 import AlfredImg from '../../assets/c1b28810-5a23-4e7c-bcce-bd1f42b271c5.png';
 import WiseIcon from '../../assets/wiseIcon.png';
 import { ROUTES } from '../../routes/Routes';
-import { useCheckout } from './useChekout';
+import { useCheckoutOld } from './useChekoutOld';
 
 export default function CheckoutOld() {
   const {
@@ -40,7 +40,7 @@ export default function CheckoutOld() {
     setCupom,
     setTransactionNumber,
     setconfirmDate,
-  } = useCheckout();
+  } = useCheckoutOld();
 
   return (
     <>

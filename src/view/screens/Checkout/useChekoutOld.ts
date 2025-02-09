@@ -9,7 +9,7 @@ import Lightning from '../../assets/lightning.svg';
 import { ROUTES } from '../../routes/Routes';
 import { useCurrentLang } from '../../utils/useCurrentLang';
 
-export function useCheckout() {
+export function useCheckoutOld() {
   const [network, setNetwork] = useState<string>('');
   const [timeLeft, setTimeLeft] = useState(240);
   const [isTransactionTimedOut, setIsTransactionTimedOut] = useState(false);
