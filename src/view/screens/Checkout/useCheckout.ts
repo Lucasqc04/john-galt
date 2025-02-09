@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-export type GetCheckout = {
+export type Checkout = {
   brlAmount: string;
   btcAmount: string;
 };
@@ -85,7 +85,7 @@ export function useCheckout() {
     }
   };
 
-  async function onSubmit(data: GetCheckout) {
+  async function onSubmit(data: Checkout) {
     if (!isTransactionAllowed) {
       toast.error(t('checkout.transaction_error'));
       return;
@@ -105,7 +105,7 @@ export function useCheckout() {
     }
   }
 
-  const form = useForm<GetCheckout>({
+  const form = useForm<Checkout>({
     mode: 'onChange',
     defaultValues: {
       brlAmount: '',
