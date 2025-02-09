@@ -10,7 +10,7 @@ import WiseIcon from '../../assets/wiseIcon.png';
 import { ROUTES } from '../../routes/Routes';
 import { useCheckout } from './useChekout';
 
-export default function Checkout() {
+export default function CheckoutOld() {
   const {
     network,
     coldWallet,
