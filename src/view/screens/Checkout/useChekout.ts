@@ -176,11 +176,11 @@ export function useCheckout() {
       checkPaymentStatusPeriodically();
 
       if (paymentMethod === 'WISE') {
-        const whatsappNumber = '5511993439032'; // Número com código do país (Brasil: 55)
+        const whatsappNumber = '5511993439032';
         const message = `Olá! Aqui estão os detalhes do pedido Wise:\n\n Valor BRL: ${brlAmount} \n BTC: ${btcAmount}\n Rede: ${network}\n Cold Wallet: ${coldWallet} \n Método: Wise\n Telefone: ${transactionNumber}\n Cupom: ${cupom}`;
         const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
-        window.location.href = whatsappLink; // Redireciona para o WhatsApp
+        window.location.href = whatsappLink;
         return;
       }
 
