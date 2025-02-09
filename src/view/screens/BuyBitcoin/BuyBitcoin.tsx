@@ -115,7 +115,7 @@ export default function BuyBitcoinAndCheckout() {
                   {t('checkout.transaction_error')}
                 </span>
               )}
-              <div className="w-full flex justify-center items-center">
+              <div className="w-full flex justify-center items-center brl-step">
                 <div className="relative w-full">
                   <input
                     value={brlAmount}
@@ -154,7 +154,7 @@ export default function BuyBitcoinAndCheckout() {
               <div className="w-full flex justify-center items-center pt-4">
                 <button
                   type="submit"
-                  className="w-full h-10 sm:h-12 bg-[#F39200] text-white rounded-3xl font-bold text-sm sm:text-base border-2"
+                  className="w-full h-10 sm:h-12 bg-[#F39200] text-white rounded-3xl font-bold text-sm sm:text-base border-2 proceed-button-step"
                 >
                   {t('checkout.proceed_button')}
                 </button>
@@ -173,7 +173,7 @@ export default function BuyBitcoinAndCheckout() {
             <img
               src={AlfredImg}
               alt="Imagem Alfred"
-              className="w-full max-w-md lg:max-w-full"
+              className="w-full max-w-md lg:max-w-full image-step"
             />
           </article>
 
