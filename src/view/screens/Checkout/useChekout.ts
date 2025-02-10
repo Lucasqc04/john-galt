@@ -30,6 +30,7 @@ export function useCheckout() {
   const [acceptFees, setAcceptFees] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [isLoadingPayment, setIsLoadingPaymet] = useState(false);
+  const [alfredFeePercentage, setAlfredFeePercentage] = useState(5);
 
   const navigate = useNavigate();
   const { currentLang } = useCurrentLang();
@@ -350,6 +351,12 @@ export function useCheckout() {
         return;
       }
 
+      if (coupon.discountType === 'percentage') {
+        setAlfredFeePercentage(() => {
+          return coupon.discountValue;
+        });
+      }
+
       setErrors((prev) => ({ ...prev, cupom: '' }));
       toast.success(t('buycheckout.couponValid'));
     } catch (error) {
@@ -385,6 +392,7 @@ export function useCheckout() {
     networks,
     currentLang,
     isLoadingPayment,
+    alfredFeePercentage,
     toggleDropdown,
     selectNetwork,
     toggleDropdownMethod,
@@ -400,5 +408,6 @@ export function useCheckout() {
     verifyPaymentStatus,
     setPaymentMethod,
     validateFields,
+    setAlfredFeePercentage,
   };
 }
