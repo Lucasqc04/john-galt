@@ -29,7 +29,6 @@ export function useCheckout() {
   const [btcAmount, setBtcAmount] = useState('');
   const [acceptFees, setAcceptFees] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
-  const [confirmDate, setconfirmDate] = useState(false);
   const [isLoadingPayment, setIsLoadingPaymet] = useState(false);
 
   const navigate = useNavigate();
@@ -127,7 +126,7 @@ export function useCheckout() {
   ];
 
   const handleProcessPayment = async () => {
-    if (!acceptFees || !acceptTerms || !confirmDate) {
+    if (!acceptFees || !acceptTerms) {
       toast.warning(t('buycheckout.termsAndFeesAlert'));
       return;
     }
@@ -328,6 +327,11 @@ export function useCheckout() {
   }, []);
 
   const checkCouponValidity = async () => {
+    if (!cupom.trim()) {
+      setErrors((prev) => ({ ...prev, cupom: '' }));
+      return;
+    }
+
     try {
       setIsLoading(true);
       const response = await axios.post(
@@ -337,13 +341,24 @@ export function useCheckout() {
       const coupon = response.data;
 
       if (!coupon.isActive) {
-        toast.warning(t('buycheckout.couponInactive'));
+        setErrors((prev) => ({
+          ...prev,
+          cupom: t('buycheckout.couponInactive'),
+        }));
+        setCupom('');
+        toast.error(t('buycheckout.couponInactive'));
         return;
       }
 
+      setErrors((prev) => ({ ...prev, cupom: '' }));
       toast.success(t('buycheckout.couponValid'));
     } catch (error) {
       console.error('Erro ao verificar o cupom:', error);
+      setErrors((prev) => ({
+        ...prev,
+        cupom: t('buycheckout.couponCheckError'),
+      }));
+      setCupom('');
       toast.error(t('buycheckout.couponCheckError'));
     } finally {
       setIsLoading(false);
@@ -369,7 +384,6 @@ export function useCheckout() {
     acceptTerms,
     networks,
     currentLang,
-    confirmDate,
     isLoadingPayment,
     toggleDropdown,
     selectNetwork,
@@ -384,7 +398,7 @@ export function useCheckout() {
     setCupom,
     setTransactionNumber,
     verifyPaymentStatus,
-    setconfirmDate,
     setPaymentMethod,
+    validateFields,
   };
 }

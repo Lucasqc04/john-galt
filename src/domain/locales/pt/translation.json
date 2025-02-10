@@ -2,7 +2,6 @@
   "header": {
     "links": ["Início", "Sobre", "Taxas", "Termos", "Suporte"]
   },
-
   "about": {
     "title": "Compra e venda de Bitcoin sem burocracia, com total liberdade",
     "titles": [
@@ -22,7 +21,6 @@
       "Com o Alfred, você tem a oportunidade de fazer parte de uma comunidade que valoriza a liberdade financeira e a privacidade, sem abrir mão da segurança. Nós acreditamos em um mercado mais justo, onde a confiança é o principal alicerce das transações. Junte-se a nós e experimente a verdadeira liberdade ao negociar Bitcoin."
     ]
   },
-
   "checkout": {
     "title": "Compra de Bitcoin e Checkout",
     "brl_placeholder": "Digite o valor em BRL",
@@ -136,6 +134,41 @@
     "acceptTerms": "Aceito os termos e condições",
     "confirmDate": "Confirmo que os dados enviados estão corretos",
     "getPixKey": "Finalizar Pagamento"
+  },
+  "confirm_infos": {
+    "title": "Confirmar Informações",
+    "description": "Por favor, revise as informações da transação antes de confirmar.",
+    "amount_section": {
+      "title": "Valor",
+      "brl_label": "R$",
+      "btc_label": "Em Bitcoin:"
+    },
+    "user_data_section": {
+      "title": "Meus Dados",
+      "wallet": "Carteira Bitcoin",
+      "contact_number": "Número de Contato",
+      "coupon": "Cupom",
+      "coupon_none": "Nenhum",
+      "network": "Rede",
+      "payment_method": "Método de Pagamento"
+    },
+    "fees_section": {
+      "title": "Taxas",
+      "conversion_fee": "Taxa de Conversão",
+      "conversion_fee_value": "(2%)",
+      "onchain_fee": "Taxa Rede Onchain",
+      "onchain_fee_variable": "(variável)",
+      "alfred_fee": "Taxa Alfred",
+      "total_fees": "Total de Taxas"
+    },
+    "final_summary": {
+      "title": "Resumo Final",
+      "expected_amount": "Valor Esperado após taxas"
+    },
+    "buttons": {
+      "cancel": "Cancelar",
+      "confirm": "Confirmar"
+    }
   },
   "guide": {
     "imageStep": "Olá, eu sou o Alfred! Seja bem-vindo! Sou um robô que facilita para você transações de Bitcoin sem KYC, de forma simples e segura.",

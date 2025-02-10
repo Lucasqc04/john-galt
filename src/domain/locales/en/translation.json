@@ -135,6 +135,41 @@
     "confirmDate": "I confirm that the data sent is correct",
     "getPixKey": "Finalize Payment"
   },
+  "confirm_infos": {
+    "title": "Confirm Information",
+    "description": "Please review the transaction details before confirming.",
+    "amount_section": {
+      "title": "Amount",
+      "brl_label": "R$",
+      "btc_label": "In Bitcoin:"
+    },
+    "user_data_section": {
+      "title": "My Information",
+      "wallet": "Bitcoin Wallet",
+      "contact_number": "Contact Number",
+      "coupon": "Coupon",
+      "coupon_none": "None",
+      "network": "Network",
+      "payment_method": "Payment Method"
+    },
+    "fees_section": {
+      "title": "Fees",
+      "conversion_fee": "Conversion Fee",
+      "conversion_fee_value": "(2%)",
+      "onchain_fee": "Onchain Network Fee",
+      "onchain_fee_variable": "(variable)",
+      "alfred_fee": "Alfred Fee",
+      "total_fees": "Total Fees"
+    },
+    "final_summary": {
+      "title": "Final Summary",
+      "expected_amount": "Expected Amount after Fees"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "confirm": "Confirm"
+    }
+  },
   "guide": {
     "imageStep": "Hello, I’m Alfred! Welcome! I’m a robot that helps you with Bitcoin transactions without KYC, in a simple and secure way.",
     "brlStep": "Enter the amount in BRL that you wish to convert to Bitcoin.",

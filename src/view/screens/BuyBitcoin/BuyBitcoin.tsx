@@ -80,7 +80,9 @@ export default function BuyBitcoinAndCheckout() {
     }
   };
 
-  const handleNextStep = () => {
+  const handleNextStep = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
     if (!isTransactionAllowed) {
       toast.error(t('checkout.transaction_error'));
       return;
@@ -121,7 +123,7 @@ export default function BuyBitcoinAndCheckout() {
                     value={brlAmount}
                     onChange={handleBrlChange}
                     placeholder={t('checkout.brl_placeholder')}
-                    className="border-2 px-16 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-transparent text-center w-full"
+                    className="border-2 px-16 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-black text-center w-full"
                   />
                   <button className="absolute right-2 top-1/2 -translate-y-1/2 text-white">
                     <img
@@ -139,7 +141,7 @@ export default function BuyBitcoinAndCheckout() {
                     value={btcAmount}
                     readOnly
                     placeholder={t('checkout.btc_placeholder')}
-                    className="border-2 px-16 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-transparent text-center w-full"
+                    className="border-2 px-16 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-black text-center w-full"
                   />
                   <button className="absolute right-2 top-1/2 -translate-y-1/2 text-white">
                     <img
