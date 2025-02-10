@@ -1,6 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Checkout } from '../useCheckout2';
+import { Checkout } from '../useCheckout';
 
 export function useValuesForm() {
   const { t } = useTranslation();

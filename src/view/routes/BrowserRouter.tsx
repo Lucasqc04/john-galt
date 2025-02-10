@@ -10,7 +10,7 @@ import { Loader } from '../components/Loader';
 import ScrollToTop from '../components/ScrollToTop';
 import { DefaultLayout } from '../layout/DefaultyLayout';
 import { AboutBuyBitcoin } from '../screens/About/AboutBuyBitcoin';
-import BuyBitcoin from '../screens/Checkout/Checkout2';
+import BuyBitcoin from '../screens/Checkout/Checkout';
 import CheckoutOld from '../screens/Checkout/CheckoutOld';
 import { CheckoutPix } from '../screens/Checkout/CheckoutPix';
 import { PaymentAlfredFailure } from '../screens/paymentStatus/pageFailure';
