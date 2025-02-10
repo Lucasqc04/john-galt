@@ -12,7 +12,7 @@ export default function Header() {
 
         <LanguageSwitcher
           className="flex justify-center"
-          LabelClassName="text-xl sm:text-2xl lg:text-3xl font-pixelade items-center justify-center gap-x-2 font-semibold leading-6"
+          LabelClassName="text-xl sm:text-2xl lg:text-3xl font-pixelade items-center justify-center gap-x-2 font-extralight leading-6"
         />
       </nav>
     </header>
