@@ -3,7 +3,7 @@ import SocialButtons from '@/view/components/SocialButtons';
 import { FormProvider } from 'react-hook-form';
 import AlfredImg from '../../assets/_DIY SEC LAB - Apresentação Comercial (1).png';
 
-import { useCheckout } from './useCheckout';
+import { useCheckout } from './useCheckout2';
 import { ValuesForm } from './ValuesForm/ValuesForm';
 
 export default function Checkout() {
