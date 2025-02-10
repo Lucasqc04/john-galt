@@ -29,7 +29,6 @@ export function useCheckout() {
   const [btcAmount, setBtcAmount] = useState('');
   const [acceptFees, setAcceptFees] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
-  const [confirmDate, setconfirmDate] = useState(false);
   const [isLoadingPayment, setIsLoadingPaymet] = useState(false);
 
   const navigate = useNavigate();
@@ -127,7 +126,7 @@ export function useCheckout() {
   ];
 
   const handleProcessPayment = async () => {
-    if (!acceptFees || !acceptTerms || !confirmDate) {
+    if (!acceptFees || !acceptTerms) {
       toast.warning(t('buycheckout.termsAndFeesAlert'));
       return;
     }
@@ -385,7 +384,6 @@ export function useCheckout() {
     acceptTerms,
     networks,
     currentLang,
-    confirmDate,
     isLoadingPayment,
     toggleDropdown,
     selectNetwork,
@@ -400,7 +398,6 @@ export function useCheckout() {
     setCupom,
     setTransactionNumber,
     verifyPaymentStatus,
-    setconfirmDate,
     setPaymentMethod,
     validateFields,
   };

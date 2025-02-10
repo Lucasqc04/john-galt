@@ -27,7 +27,6 @@ export default function Checkout() {
     acceptTerms,
     networks,
     currentLang,
-    confirmDate,
     paymentMethod,
     isDropdownOpenMethod,
     selectPaymentMethod,
@@ -41,7 +40,6 @@ export default function Checkout() {
     setAcceptFees,
     setCupom,
     setTransactionNumber,
-    setconfirmDate,
     validateFields,
   } = useCheckout();
 
@@ -258,27 +256,15 @@ export default function Checkout() {
                     {t('buycheckout.acceptTerms')}
                   </span>
                 </label>
-                <label className="flex items-center text-white">
-                  <input
-                    type="checkbox"
-                    checked={confirmDate}
-                    onChange={() => setconfirmDate(!confirmDate)}
-                    className="mr-2"
-                  />
-                  <span className="text-xs sm:text-base cursor-pointer text-blue-500 hover:underline">
-                    {t('buycheckout.confirmDate')}
-                  </span>
-                </label>
               </div>
               <div className="flex justify-center items-center pt-4 ">
                 <button
                   onClick={handleOpenModal}
                   type="button"
-                  disabled={!acceptFees || !acceptTerms || !confirmDate}
+                  disabled={!acceptFees || !acceptTerms}
                   className={classNames(
                     'w-full h-12 sm:h-14 bg-[#F39200] text-white rounded-3xl font-bold text-sm sm:text-base mb-[10%]',
-                    (!acceptFees || !acceptTerms || !confirmDate) &&
-                      'opacity-50',
+                    (!acceptFees || !acceptTerms) && 'opacity-50',
                   )}
                 >
                   {t('buycheckout.getPixKey')}
