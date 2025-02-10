@@ -7,6 +7,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
+import { t } from 'i18next';
 import React, { useState } from 'react';
 import { useConfirmInfos } from './useConfirmInfos';
 
@@ -95,10 +96,10 @@ export default function ConfirmInfosModal({
 
         <div className="text-center mb-6">
           <h2 className="text-2xl text-white font-semibold">
-            Confirmar Informações
+            {t('confirm_infos.title')}
           </h2>
           <p className="text-sm text-gray-300 mt-2">
-            Por favor, revise as informações da transação antes de confirmar.
+            {t('confirm_infos.description')}
           </p>
         </div>
 
@@ -107,13 +108,16 @@ export default function ConfirmInfosModal({
           <div className="bg-[#1a1d2b] p-4 rounded-lg">
             <div className="flex items-center space-x-2">
               <CurrencyDollarIcon className="w-6 h-6 text-[#F39200]" />
-              <h3 className="text-lg font-semibold">Valor</h3>
+              <h3 className="text-lg font-semibold">
+                {t('confirm_infos.amount_section.title')}
+              </h3>
             </div>
             <p>
-              R$ <span className="text-xl font-bold">{brlAmount}</span> BRL
+              {t('confirm_infos.amount_section.brl_label')}{' '}
+              <span className="text-xl font-bold">{brlAmount}</span> BRL
             </p>
             <p>
-              Em Bitcoin:{' '}
+              {t('confirm_infos.amount_section.btc_label')}{' '}
               <span className="text-xl font-bold">{btcAmount} BTC</span>
             </p>
           </div>
@@ -125,7 +129,9 @@ export default function ConfirmInfosModal({
           >
             <div className="flex items-center space-x-2">
               <InformationCircleIcon className="w-6 h-6 text-[#F39200]" />
-              <h3 className="text-lg font-semibold">Meus Dados</h3>
+              <h3 className="text-lg font-semibold">
+                {t('confirm_infos.user_data_section.title')}
+              </h3>
               {isDataVisible ? (
                 <ChevronUpIcon className="w-5 h-5 text-[#F39200]" />
               ) : (
@@ -135,19 +141,34 @@ export default function ConfirmInfosModal({
             {isDataVisible && (
               <div className="mt-4 space-y-2">
                 <p>
-                  <strong>Carteira Bitcoin:</strong> {coldWallet}
+                  <strong>
+                    {t('confirm_infos.user_data_section.wallet')}:
+                  </strong>{' '}
+                  {coldWallet}
                 </p>
                 <p>
-                  <strong>Número de Contato:</strong> {transactionNumber}
+                  <strong>
+                    {t('confirm_infos.user_data_section.contact_number')}:
+                  </strong>{' '}
+                  {transactionNumber}
                 </p>
                 <p>
-                  <strong>Cupom:</strong> {cupom || 'Nenhum'}
+                  <strong>
+                    {t('confirm_infos.user_data_section.coupon')}:
+                  </strong>{' '}
+                  {cupom || t('confirm_infos.user_data_section.coupon_none')}
                 </p>
                 <p>
-                  <strong>Rede:</strong> {network}
+                  <strong>
+                    {t('confirm_infos.user_data_section.network')}:
+                  </strong>{' '}
+                  {network}
                 </p>
                 <p>
-                  <strong>Método de Pagamento:</strong> {paymentMethod}
+                  <strong>
+                    {t('confirm_infos.user_data_section.payment_method')}:
+                  </strong>{' '}
+                  {paymentMethod}
                 </p>
               </div>
             )}
@@ -160,7 +181,9 @@ export default function ConfirmInfosModal({
           >
             <div className="flex items-center space-x-2">
               <ArrowPathIcon className="w-6 h-6 text-[#F39200]" />
-              <h3 className="text-lg font-semibold">Taxas</h3>
+              <h3 className="text-lg font-semibold">
+                {t('confirm_infos.fees_section.title')}
+              </h3>
               {isTaxVisible ? (
                 <ChevronUpIcon className="w-5 h-5 text-[#F39200]" />
               ) : (
@@ -170,21 +193,29 @@ export default function ConfirmInfosModal({
             {isTaxVisible && (
               <div className="mt-4 space-y-2">
                 <p>
-                  <strong>taxa de conversão:</strong> R$ {swapFee.toFixed(2)}{' '}
-                  (2%)
+                  <strong>
+                    {t('confirm_infos.fees_section.conversion_fee')}:
+                  </strong>{' '}
+                  R$ {swapFee.toFixed(2)}{' '}
+                  {t('confirm_infos.fees_section.conversion_fee_value')}
                 </p>
                 {network.toLowerCase() === 'onchain' && (
                   <p>
-                    <strong>Taxa Rede Onchain:</strong> R${' '}
-                    {onchainFee?.toFixed(2)} (variável)
+                    <strong>
+                      {t('confirm_infos.fees_section.onchain_fee')}:
+                    </strong>{' '}
+                    R$ {onchainFee?.toFixed(2)}{' '}
+                    {t('confirm_infos.fees_section.onchain_fee_variable')}
                   </p>
                 )}
                 <p>
-                  <strong>Taxa Alfred:</strong> R$ {alfredFee.toFixed(2)} (
-                  {(alfredFeeRate * 100).toFixed(2)}%)
+                  <strong>{t('confirm_infos.fees_section.alfred_fee')}:</strong>{' '}
+                  R$ {alfredFee.toFixed(2)} ({(alfredFeeRate * 100).toFixed(2)}
+                  %)
                 </p>
                 <p>
-                  <strong>Total de Taxas:</strong> R$ {totalFees.toFixed(2)}
+                  <strong>{t('confirm_infos.fees_section.total_fees')}:</strong>{' '}
+                  R$ {totalFees.toFixed(2)}
                 </p>
               </div>
             )}
@@ -194,20 +225,26 @@ export default function ConfirmInfosModal({
           <div className="bg-[#1a1d2b] p-4 rounded-lg">
             <div className="flex items-center space-x-2">
               <ArrowPathIcon className="w-6 h-6 text-[#F39200]" />
-              <h3 className="text-lg font-semibold">Resumo Final</h3>
+              <h3 className="text-lg font-semibold">
+                {t('confirm_infos.final_summary.title')}
+              </h3>
             </div>
             <p>
-              <strong>Valor Esperado após taxas:</strong> R${' '}
-              {expectedAmount.toFixed(2)}
+              <strong>
+                {t('confirm_infos.final_summary.expected_amount')}:
+              </strong>{' '}
+              R$ {expectedAmount.toFixed(2)}
             </p>
           </div>
 
           {/* Botões */}
           <div className="flex justify-between space-x-4 mt-6">
             <Button variant="outline" onClick={onClose}>
-              Cancelar
+              {t('confirm_infos.buttons.cancel')}
             </Button>
-            <Button onClick={onConfirm}>Confirmar</Button>
+            <Button onClick={onConfirm}>
+              {t('confirm_infos.buttons.confirm')}
+            </Button>
           </div>
         </div>
       </motion.div>

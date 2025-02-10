@@ -136,16 +136,40 @@
     "confirmDate": "Confirmo que los datos enviados son correctos",
     "getPixKey": "Finalizar pago"
   },
-  "confirmModal": {
-    "title": "Confirmar Información",
-    "value": "Monto",
-    "valueBTC": "Monto en BTC",
-    "network": "Red",
-    "coldWallet": "Cartera de Bitcoin",
-    "paymentMethod": "Método de Pago",
-    "transactionNumber": "Número de Transacción",
-    "cancel": "Cancelar",
-    "confirm": "Confirmar"
+  "confirm_infos": {
+    "title": "Confirm Information",
+    "description": "Please review the transaction details before confirming.",
+    "amount_section": {
+      "title": "Amount",
+      "brl_label": "R$",
+      "btc_label": "In Bitcoin:"
+    },
+    "user_data_section": {
+      "title": "My Information",
+      "wallet": "Bitcoin Wallet",
+      "contact_number": "Contact Number",
+      "coupon": "Coupon",
+      "coupon_none": "None",
+      "network": "Network",
+      "payment_method": "Payment Method"
+    },
+    "fees_section": {
+      "title": "Fees",
+      "conversion_fee": "Conversion Fee",
+      "conversion_fee_value": "(2%)",
+      "onchain_fee": "Onchain Network Fee",
+      "onchain_fee_variable": "(variable)",
+      "alfred_fee": "Alfred Fee",
+      "total_fees": "Total Fees"
+    },
+    "final_summary": {
+      "title": "Final Summary",
+      "expected_amount": "Expected Amount after Fees"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "confirm": "Confirm"
+    }
   },
   "guide": {
     "imageStep": "¡Hola, soy Alfred! ¡Bienvenido! Soy un robot que facilita las transacciones de Bitcoin sin KYC, de manera simple y segura.",

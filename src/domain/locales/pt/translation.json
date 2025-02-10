@@ -135,22 +135,40 @@
     "confirmDate": "Confirmo que os dados enviados estão corretos",
     "getPixKey": "Finalizar Pagamento"
   },
-  "confirmModal": {
+  "confirm_infos": {
     "title": "Confirmar Informações",
-    "value": "Valor",
-    "valueBTC": "Valor em BTC",
-    "network": "Rede",
-    "coldWallet": "Carteira Bitcoin",
-    "paymentMethod": "Método de Pagamento",
-    "transactionNumber": "Número de contato",
-    "swapFee": "Taxa de Troca",
-    "onchainFee": "Taxa rede Onchain",
-    "transactionFee": "Taxa de Transação",
-    "totalFees": "Taxas Totais",
-    "expectedAmount": "Valor Esperado",
-    "cancel": "Cancelar",
-    "confirm": "Confirmar",
-    "alfredFeeWarning": "Além das taxas mencionadas, haverá uma taxa adicional do Alfred."
+    "description": "Por favor, revise as informações da transação antes de confirmar.",
+    "amount_section": {
+      "title": "Valor",
+      "brl_label": "R$",
+      "btc_label": "Em Bitcoin:"
+    },
+    "user_data_section": {
+      "title": "Meus Dados",
+      "wallet": "Carteira Bitcoin",
+      "contact_number": "Número de Contato",
+      "coupon": "Cupom",
+      "coupon_none": "Nenhum",
+      "network": "Rede",
+      "payment_method": "Método de Pagamento"
+    },
+    "fees_section": {
+      "title": "Taxas",
+      "conversion_fee": "Taxa de Conversão",
+      "conversion_fee_value": "(2%)",
+      "onchain_fee": "Taxa Rede Onchain",
+      "onchain_fee_variable": "(variável)",
+      "alfred_fee": "Taxa Alfred",
+      "total_fees": "Total de Taxas"
+    },
+    "final_summary": {
+      "title": "Resumo Final",
+      "expected_amount": "Valor Esperado após taxas"
+    },
+    "buttons": {
+      "cancel": "Cancelar",
+      "confirm": "Confirmar"
+    }
   },
   "guide": {
     "imageStep": "Olá, eu sou o Alfred! Seja bem-vindo! Sou um robô que facilita para você transações de Bitcoin sem KYC, de forma simples e segura.",
