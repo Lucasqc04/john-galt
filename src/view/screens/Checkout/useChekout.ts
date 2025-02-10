@@ -3,13 +3,13 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import Onchain from '../../../assets/bitcoin.svg';
-import Liquid from '../../../assets/lbtc.svg';
-import Lightning from '../../../assets/lightning.svg';
-import { ROUTES } from '../../../routes/Routes';
-import { useCurrentLang } from '../../../utils/useCurrentLang';
+import Onchain from '../../assets/bitcoin.svg';
+import Liquid from '../../assets/lbtc.svg';
+import Lightning from '../../assets/lightning.svg';
+import { ROUTES } from '../../routes/Routes';
+import { useCurrentLang } from '../../utils/useCurrentLang';
 
-export function useDataForm() {
+export function useCheckout() {
   const [network, setNetwork] = useState<string>('');
   const [timeLeft, setTimeLeft] = useState(240);
   const [isTransactionTimedOut, setIsTransactionTimedOut] = useState(false);
@@ -30,6 +30,7 @@ export function useDataForm() {
   const [acceptFees, setAcceptFees] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [isLoadingPayment, setIsLoadingPaymet] = useState(false);
+  const [alfredFeePercentage, setAlfredFeePercentage] = useState(5);
 
   const navigate = useNavigate();
   const { currentLang } = useCurrentLang();
@@ -350,6 +351,13 @@ export function useDataForm() {
         return;
       }
 
+      if (coupon.discountType === 'percentage') {
+        setAlfredFeePercentage(() => {
+          console.log('Novo valor do Alfred Fee:', coupon.discountValue);
+          return coupon.discountValue;
+        });
+      }
+
       setErrors((prev) => ({ ...prev, cupom: '' }));
       toast.success(t('buycheckout.couponValid'));
     } catch (error) {
@@ -385,6 +393,7 @@ export function useDataForm() {
     networks,
     currentLang,
     isLoadingPayment,
+    alfredFeePercentage,
     toggleDropdown,
     selectNetwork,
     toggleDropdownMethod,

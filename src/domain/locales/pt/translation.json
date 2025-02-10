@@ -134,7 +134,8 @@
     "acceptTerms": "Aceito os termos e condições",
     "confirmDate": "Confirmo que os dados enviados estão corretos",
     "getPixKey": "Finalizar Pagamento",
-    "missingFields": "Os dados inseridos estão incompletos ou inválidos. Corrija antes de prosseguir."
+    "missingFields": "Os dados inseridos estão incompletos ou inválidos. Corrija antes de prosseguir.",
+    "applyCouponFirst": "aplique o cupom antes de continuar"
   },
   "confirm_infos": {
     "title": "Confirmar Informações",
