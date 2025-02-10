@@ -1,19 +1,18 @@
 import { useEffect, useState } from 'react';
 
+interface CouponResponse {
+  discountType: 'percentage' | 'fixed_amount';
+  discountValue: number;
+}
+
 export function useConfirmInfos(
   network: string,
   brlAmount: string,
-  alfredFeePercentage: number,
+  cupom: string,
 ) {
-  const [localAlfredFeePercentage, setLocalAlfredFeePercentage] =
-    useState<number>(alfredFeePercentage);
-
-  useEffect(() => {
-    setLocalAlfredFeePercentage(alfredFeePercentage);
-  }, [alfredFeePercentage]);
-
   const [onchainFee, setOnchainFee] = useState<number | null>(null);
   const [btcToBrl, setBtcToBrl] = useState<number | null>(null);
+  const [alfredFeePercentage, setAlfredFeePercentage] = useState<number>(5); // Começa em 5% (default)
 
   useEffect(() => {
     const fetchBtcToBrl = async (): Promise<number> => {
@@ -57,6 +56,40 @@ export function useConfirmInfos(
     }
   }, [network]);
 
+  useEffect(() => {
+    const checkCoupon = async () => {
+      if (!cupom) return;
+
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/coupons/is-valid`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ code: cupom }),
+          },
+        );
+
+        if (!response.ok) throw new Error('Cupom inválido');
+
+        const data: CouponResponse = await response.json();
+
+        let newAlfredFeePercentage = 5; // Começa com 5% padrão
+
+        if (data.discountType === 'percentage') {
+          newAlfredFeePercentage = data.discountValue; // Usa o valor do cupom como nova taxa Alfred
+        }
+
+        setAlfredFeePercentage(newAlfredFeePercentage);
+      } catch (error) {
+        console.error('Erro ao validar cupom:', error);
+        setAlfredFeePercentage(5); // Se der erro, mantém os 5% padrão
+      }
+    };
+
+    checkCoupon();
+  }, [cupom, brlAmount]);
+
   const brlAmountNum = parseFloat(
     brlAmount.replace(/[^\d,]/g, '').replace(',', '.'),
   );
@@ -64,8 +97,8 @@ export function useConfirmInfos(
   // Aplicar a lógica correta para a taxa Alfred
   const alfredFeeRate =
     brlAmountNum >= 1000
-      ? localAlfredFeePercentage / 100
-      : (localAlfredFeePercentage * 2) / 100;
+      ? alfredFeePercentage / 100
+      : (alfredFeePercentage * 2) / 100;
   const alfredFee = brlAmountNum * alfredFeeRate;
 
   const afterAlfredFee = brlAmountNum - alfredFee;

@@ -29,7 +29,6 @@ export default function Checkout() {
     currentLang,
     paymentMethod,
     isDropdownOpenMethod,
-    alfredFeePercentage,
     selectPaymentMethod,
     toggleDropdownMethod,
     toggleDropdown,
@@ -45,20 +44,13 @@ export default function Checkout() {
   } = useCheckout();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [couponApplied, setCouponApplied] = useState(false);
 
   const closeModal = () => setIsModalOpen(false);
 
-  const handleApplyCoupon = async () => {
-    await checkCouponValidity();
-    if (!errors.cupom) {
-      setCouponApplied(true);
-    }
-  };
-
   const handleOpenModal = async () => {
-    if (cupom.trim() && !couponApplied) {
-      toast.error(t('buycheckout.applyCouponFirst'));
+    await checkCouponValidity();
+
+    if (errors.cupom) {
       return;
     }
 
@@ -212,15 +204,12 @@ export default function Checkout() {
                 <input
                   type="text"
                   value={cupom}
-                  onChange={(e) => {
-                    setCupom(e.target.value);
-                    setCouponApplied(false);
-                  }}
+                  onChange={(e) => setCupom(e.target.value)}
                   placeholder={t('buycheckout.couponPlaceholder')}
                   className="border-2 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-black text-center w-full"
                 />
                 <button
-                  onClick={handleApplyCoupon}
+                  onClick={checkCouponValidity}
                   className="ml-4 px-6 py-3 bg-[#F39200] text-white rounded-3xl font-bold"
                 >
                   {t('buycheckout.apply')}
@@ -302,7 +291,6 @@ export default function Checkout() {
             paymentMethod={paymentMethod || ''}
             transactionNumber={transactionNumber || ''}
             cupom={cupom || ''}
-            alfredFeePercentage={alfredFeePercentage}
           />
         </section>
       </main>

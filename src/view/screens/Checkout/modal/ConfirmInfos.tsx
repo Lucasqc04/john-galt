@@ -43,7 +43,6 @@ interface ConfirmInfosModalProps {
   paymentMethod: string;
   transactionNumber: string;
   cupom: string;
-  alfredFeePercentage: number;
 }
 
 export default function ConfirmInfosModal({
@@ -57,7 +56,6 @@ export default function ConfirmInfosModal({
   paymentMethod,
   transactionNumber,
   cupom,
-  alfredFeePercentage,
 }: ConfirmInfosModalProps) {
   const {
     onchainFee,
@@ -67,7 +65,7 @@ export default function ConfirmInfosModal({
     expectedAmount,
     alfredFee,
     alfredFeeRate,
-  } = useConfirmInfos(network, brlAmount, alfredFeePercentage);
+  } = useConfirmInfos(network, brlAmount, cupom);
   const [isDataVisible, setIsDataVisible] = useState(false);
   const [isTaxVisible, setIsTaxVisible] = useState(false);
 
