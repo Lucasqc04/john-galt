@@ -133,7 +133,8 @@
     "acceptFees": "I accept the fees",
     "acceptTerms": "I accept the terms and conditions",
     "confirmDate": "I confirm that the data sent is correct",
-    "getPixKey": "Finalize Payment"
+    "getPixKey": "Finalize Payment",
+    "missingFields": "The information entered is incomplete or invalid. Please correct it before proceeding."
   },
   "confirm_infos": {
     "title": "Confirm Information",
