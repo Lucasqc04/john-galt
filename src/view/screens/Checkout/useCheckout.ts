@@ -11,15 +11,23 @@ import { toast } from 'react-toastify';
 export type Checkout = {
   brlAmount: string;
   btcAmount: string;
+  btcRate: number;
 };
 
 export function useCheckout() {
   const navigate = useNavigate();
-  const { t } = useTranslation();
   const { currentLang } = useCurrentLang();
-
-  const [btcRate, setBtcRate] = useState(0);
+  const { t } = useTranslation();
+  const [currentStep, setCurrentStep] = useState(1);
   const [isTransactionAllowed, setIsTransactionAllowed] = useState(true);
+
+  const form = useForm<Checkout>({
+    mode: 'onChange',
+    defaultValues: {
+      brlAmount: '',
+      btcAmount: '',
+    },
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,15 +45,14 @@ export function useCheckout() {
           return;
         }
 
-        setBtcRate(result.data.bitcoin.brl);
-        console.log(btcRate);
+        form.setValue('btcRate', result.data.bitcoin.brl);
       } catch (error) {
         console.error('Erro ao buscar taxa de Bitcoin:', error);
       }
     };
 
     fetchBitcoinRate();
-  }, [btcRate]);
+  }, [form]);
 
   useEffect(() => {
     const timeZone = 'America/Sao_Paulo';
@@ -58,34 +65,7 @@ export function useCheckout() {
     }
   }, []);
 
-  const handleBrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/\D/g, '');
-    let numericValue = parseInt(value, 10);
-
-    if (isNaN(numericValue)) {
-      form.setValue('brlAmount', '');
-      form.setValue('btcAmount', '');
-      return;
-    }
-
-    if (numericValue > 5000) {
-      numericValue = 5000;
-    }
-
-    const formattedValue = new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-      minimumFractionDigits: 0,
-    }).format(numericValue);
-
-    form.setValue('brlAmount', formattedValue);
-
-    if (btcRate > 0 && numericValue >= 0) {
-      form.setValue('btcAmount', (numericValue / btcRate).toFixed(8));
-    }
-  };
-
-  async function onSubmit(data: Checkout) {
+  async function ValidateValues(data: Checkout) {
     if (!isTransactionAllowed) {
       toast.error(t('checkout.transaction_error'));
       return;
@@ -105,19 +85,15 @@ export function useCheckout() {
     }
   }
 
-  const form = useForm<Checkout>({
-    mode: 'onChange',
-    defaultValues: {
-      brlAmount: '',
-      btcAmount: '',
-    },
-  });
-
   return {
-    t,
+    steps: {
+      current: currentStep,
+      next: () => setCurrentStep(currentStep + 1),
+      prev: () => setCurrentStep(currentStep - 1),
+    },
     form,
-    handleBrlChange,
-    onSubmit,
+    ValidateValues,
     isTransactionAllowed,
+    t,
   };
 }
