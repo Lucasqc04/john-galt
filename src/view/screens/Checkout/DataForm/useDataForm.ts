@@ -3,13 +3,13 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import Onchain from '../../assets/bitcoin.svg';
-import Liquid from '../../assets/lbtc.svg';
-import Lightning from '../../assets/lightning.svg';
-import { ROUTES } from '../../routes/Routes';
-import { useCurrentLang } from '../../utils/useCurrentLang';
+import Onchain from '../../../assets/bitcoin.svg';
+import Liquid from '../../../assets/lbtc.svg';
+import Lightning from '../../../assets/lightning.svg';
+import { ROUTES } from '../../../routes/Routes';
+import { useCurrentLang } from '../../../utils/useCurrentLang';
 
-export function useCheckout() {
+export function useDataForm() {
   const [network, setNetwork] = useState<string>('');
   const [timeLeft, setTimeLeft] = useState(240);
   const [isTransactionTimedOut, setIsTransactionTimedOut] = useState(false);

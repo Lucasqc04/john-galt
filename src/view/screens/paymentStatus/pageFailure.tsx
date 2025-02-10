@@ -17,7 +17,7 @@ export function PaymentAlfredFailure() {
         {t('paymentFailure.title')}
       </h1>
       <Link
-        to={ROUTES.buyBitcoin.call(currentLang)}
+        to={ROUTES.checkout.call(currentLang)}
         className="bg-[#F39200] text-white font-bold px-4 py-2 rounded-sm w-64"
       >
         {t('paymentFailure.returnToSite')}

@@ -156,7 +156,7 @@ export function PaymentAlfredSuccess() {
         className="flex flex-col md:flex-row gap-4"
       >
         <button
-          onClick={() => handleOnLink(ROUTES.buyBitcoin.call(currentLang))}
+          onClick={() => handleOnLink(ROUTES.checkout.call(currentLang))}
           className="w-[200px] h-[50px] bg-[#F49300] border-[3px] border-white rounded-[40px] "
         >
           {t('paymentSuccess.redirectButton')}

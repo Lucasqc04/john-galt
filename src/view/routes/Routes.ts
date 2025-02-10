@@ -5,13 +5,13 @@ export const ROUTES = {
   home: {
     call: () => '/',
   },
-  buyBitcoin: {
+  checkout: {
     path: '',
     call: (currentLang: string) => `/${currentLang}`,
   },
   buyCheckout: {
-    path: 'buy-checkout',
-    call: (currentLang: string) => `/${currentLang}/buy-checkout`,
+    path: 'checkout',
+    call: (currentLang: string) => `/${currentLang}/checkout`,
   },
   checkoutPix: {
     path: 'checkout-pix',
