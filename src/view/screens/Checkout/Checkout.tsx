@@ -85,7 +85,7 @@ export default function Checkout() {
                   readOnly
                   placeholder={t('buycheckout.selectNetwork')}
                   onClick={toggleDropdown}
-                  className="border-2 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-transparent text-center w-full"
+                  className="border-2 px-8 py-3 rounded-3xl text-base bg-black sm:text-lg text-white placeholder-white bg-black text-center w-full"
                 />
                 <button
                   onClick={toggleDropdown}
@@ -127,7 +127,7 @@ export default function Checkout() {
                     value={paymentMethod}
                     readOnly
                     placeholder={t('buycheckout.selectPaymentMethod')}
-                    className="border-2 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-transparent text-center w-full"
+                    className="border-2 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-black text-center w-full"
                     onClick={toggleDropdownMethod}
                   />
                   <button
@@ -178,7 +178,7 @@ export default function Checkout() {
                       setColdWallet(e.target.value)
                     }
                     placeholder={t('buycheckout.bitcoinWallet')}
-                    className="border-2 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-transparent text-center w-full"
+                    className="border-2 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-black text-center w-full"
                   />
                   {errors.coldWallet && (
                     <p className="text-red-500 text-sm">{errors.coldWallet}</p>
@@ -193,7 +193,7 @@ export default function Checkout() {
                       setTransactionNumber(e.target.value)
                     }
                     placeholder={t('buycheckout.contactNumber')}
-                    className="border-2 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-transparent text-center w-full"
+                    className="border-2 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-black text-center w-full"
                   />
                   {errors.transactionNumber && (
                     <p className="text-red-500 text-sm">
@@ -208,7 +208,7 @@ export default function Checkout() {
                   value={cupom}
                   onChange={(e) => setCupom(e.target.value)}
                   placeholder={t('buycheckout.couponPlaceholder')}
-                  className="border-2 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-transparent text-center w-full"
+                  className="border-2 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-black text-center w-full"
                 />
                 <button
                   onClick={checkCouponValidity}
