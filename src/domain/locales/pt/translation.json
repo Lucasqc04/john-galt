@@ -4,6 +4,14 @@
   },
   "about": {
     "title": "Compra e venda de Bitcoin sem burocracia, com total liberdade",
+    "titles": [
+      "Compra e venda de Bitcoin sem burocracia, com total liberdade",
+      "Privacidade acima de tudo",
+      "Como garantimos a segurança?",
+      "Transações rápidas e sem complicação",
+      "Apoio sempre que necessário",
+      "A liberdade de negociar, a segurança de sempre"
+    ],
     "paragraphs": [
       "No Alfred, acreditamos que a liberdade financeira deve ser simples e acessível para todos. Por isso, oferecemos uma plataforma P2P (peer-to-peer) onde você pode comprar e vender Bitcoin de maneira direta, sem a necessidade de processos de verificação de identidade (KYC). Aqui, a privacidade e a autonomia são respeitadas em cada transação.",
       "Sabemos que cada pessoa tem o direito de gerenciar seus recursos de forma discreta e sem interferências. Ao optar pelo Alfred, você está escolhendo um serviço onde a sua identidade e dados pessoais não são exigidos. Nosso modelo de operação é baseado na confiança entre compradores e vendedores, criando um ambiente onde todos podem negociar com segurança e sem comprometer sua privacidade.",
@@ -32,8 +40,8 @@
     "title": "Pagamento concluído com sucesso!",
     "description": "Sua transação foi concluída com sucesso.",
     "transactionTime": "O processamento pode levar de 30 minutos a 24 horas, por favor, aguarde.",
-    "whatsapp": "Entre em contato via WhatsApp",
-    "redirectButton": "Voltar ao SITE",
+    "whatsapp": "FALE CONOSCO",
+    "redirectButton": "VOLTAR PARA O SITE",
     "Ballon": "Volte logo!"
   },
   "fees": {
@@ -126,6 +134,41 @@
     "acceptTerms": "Aceito os termos e condições",
     "confirmDate": "Confirmo que os dados enviados estão corretos",
     "getPixKey": "Finalizar Pagamento"
+  },
+  "confirm_infos": {
+    "title": "Confirmar Informações",
+    "description": "Por favor, revise as informações da transação antes de confirmar.",
+    "amount_section": {
+      "title": "Valor",
+      "brl_label": "R$",
+      "btc_label": "Em Bitcoin:"
+    },
+    "user_data_section": {
+      "title": "Meus Dados",
+      "wallet": "Carteira Bitcoin",
+      "contact_number": "Número de Contato",
+      "coupon": "Cupom",
+      "coupon_none": "Nenhum",
+      "network": "Rede",
+      "payment_method": "Método de Pagamento"
+    },
+    "fees_section": {
+      "title": "Taxas",
+      "conversion_fee": "Taxa de Conversão",
+      "conversion_fee_value": "(2%)",
+      "onchain_fee": "Taxa Rede Onchain",
+      "onchain_fee_variable": "(variável)",
+      "alfred_fee": "Taxa Alfred",
+      "total_fees": "Total de Taxas"
+    },
+    "final_summary": {
+      "title": "Resumo Final",
+      "expected_amount": "Valor Esperado após taxas"
+    },
+    "buttons": {
+      "cancel": "Cancelar",
+      "confirm": "Confirmar"
+    }
   },
   "guide": {
     "imageStep": "Olá, eu sou o Alfred! Seja bem-vindo! Sou um robô que facilita para você transações de Bitcoin sem KYC, de forma simples e segura.",

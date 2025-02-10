@@ -3,11 +3,13 @@ import WhatsAppButton from '@/view/components/buttonWhatsApp';
 import { Loader } from '@/view/components/Loader';
 import classNames from 'classnames';
 import { t } from 'i18next';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { FaPix } from 'react-icons/fa6';
+import { toast } from 'react-toastify';
 import AlfredImg from '../../assets/c1b28810-5a23-4e7c-bcce-bd1f42b271c5.png';
 import WiseIcon from '../../assets/wiseIcon.png';
 import { ROUTES } from '../../routes/Routes';
+import ConfirmInfosModal from './modal/ConfirmInfos';
 import { useCheckout } from './useChekout';
 
 export default function Checkout() {
@@ -25,7 +27,6 @@ export default function Checkout() {
     acceptTerms,
     networks,
     currentLang,
-    confirmDate,
     paymentMethod,
     isDropdownOpenMethod,
     selectPaymentMethod,
@@ -39,8 +40,27 @@ export default function Checkout() {
     setAcceptFees,
     setCupom,
     setTransactionNumber,
-    setconfirmDate,
+    validateFields,
   } = useCheckout();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const closeModal = () => setIsModalOpen(false);
+
+  const handleOpenModal = async () => {
+    await checkCouponValidity();
+
+    if (errors.cupom) {
+      return;
+    }
+
+    if (!validateFields()) {
+      toast.error(t('buycheckout.missingFields'));
+      return;
+    }
+
+    setIsModalOpen(true);
+  };
 
   return (
     <>
@@ -63,7 +83,7 @@ export default function Checkout() {
                   readOnly
                   placeholder={t('buycheckout.selectNetwork')}
                   onClick={toggleDropdown}
-                  className="border-2 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-transparent text-center w-full"
+                  className="border-2 px-8 py-3 rounded-3xl text-base bg-black sm:text-lg text-white placeholder-white bg-black text-center w-full"
                 />
                 <button
                   onClick={toggleDropdown}
@@ -105,7 +125,7 @@ export default function Checkout() {
                     value={paymentMethod}
                     readOnly
                     placeholder={t('buycheckout.selectPaymentMethod')}
-                    className="border-2 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-transparent text-center w-full"
+                    className="border-2 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-black text-center w-full"
                     onClick={toggleDropdownMethod}
                   />
                   <button
@@ -156,7 +176,7 @@ export default function Checkout() {
                       setColdWallet(e.target.value)
                     }
                     placeholder={t('buycheckout.bitcoinWallet')}
-                    className="border-2 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-transparent text-center w-full"
+                    className="border-2 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-black text-center w-full"
                   />
                   {errors.coldWallet && (
                     <p className="text-red-500 text-sm">{errors.coldWallet}</p>
@@ -171,7 +191,7 @@ export default function Checkout() {
                       setTransactionNumber(e.target.value)
                     }
                     placeholder={t('buycheckout.contactNumber')}
-                    className="border-2 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-transparent text-center w-full"
+                    className="border-2 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-black text-center w-full"
                   />
                   {errors.transactionNumber && (
                     <p className="text-red-500 text-sm">
@@ -186,7 +206,7 @@ export default function Checkout() {
                   value={cupom}
                   onChange={(e) => setCupom(e.target.value)}
                   placeholder={t('buycheckout.couponPlaceholder')}
-                  className="border-2 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-transparent text-center w-full"
+                  className="border-2 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-black text-center w-full"
                 />
                 <button
                   onClick={checkCouponValidity}
@@ -236,27 +256,15 @@ export default function Checkout() {
                     {t('buycheckout.acceptTerms')}
                   </span>
                 </label>
-                <label className="flex items-center text-white">
-                  <input
-                    type="checkbox"
-                    checked={confirmDate}
-                    onChange={() => setconfirmDate(!confirmDate)}
-                    className="mr-2"
-                  />
-                  <span className="text-xs sm:text-base cursor-pointer text-blue-500 hover:underline">
-                    {t('buycheckout.confirmDate')}
-                  </span>
-                </label>
               </div>
               <div className="flex justify-center items-center pt-4 ">
                 <button
-                  onClick={handleProcessPayment}
+                  onClick={handleOpenModal}
                   type="button"
-                  disabled={!acceptFees || !acceptTerms || !confirmDate}
+                  disabled={!acceptFees || !acceptTerms}
                   className={classNames(
                     'w-full h-12 sm:h-14 bg-[#F39200] text-white rounded-3xl font-bold text-sm sm:text-base mb-[10%]',
-                    (!acceptFees || !acceptTerms || !confirmDate) &&
-                      'opacity-50',
+                    (!acceptFees || !acceptTerms) && 'opacity-50',
                   )}
                 >
                   {t('buycheckout.getPixKey')}
@@ -268,6 +276,22 @@ export default function Checkout() {
               <img src={AlfredImg} alt="Alfred" />
             </div>
           </div>
+
+          <ConfirmInfosModal
+            isOpen={isModalOpen}
+            onClose={closeModal}
+            onConfirm={() => {
+              closeModal();
+              handleProcessPayment();
+            }}
+            brlAmount={brlAmount || ''}
+            btcAmount={btcAmount || ''}
+            network={network || ''}
+            coldWallet={coldWallet || ''}
+            paymentMethod={paymentMethod || ''}
+            transactionNumber={transactionNumber || ''}
+            cupom={cupom || ''}
+          />
         </section>
       </main>
       <WhatsAppButton />

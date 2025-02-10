@@ -4,13 +4,21 @@
   },
   "about": {
     "title": "Compra y venta de Bitcoin sin burocracia, con total libertad",
+    "titles": [
+      "Compra y venta de Bitcoin sin burocracia, con total libertad",
+      "Privacidad por encima de todo",
+      "¿Cómo garantizamos la seguridad?",
+      "Transacciones rápidas y sin complicaciones",
+      "Apoyo siempre que sea necesario",
+      "La libertad de negociar, la seguridad de siempre"
+    ],
     "paragraphs": [
-      "En Alfred, creemos que la libertad financiera debe ser simple y accesible para todos. Por eso ofrecemos una plataforma P2P (peer-to-peer) donde puedes comprar y vender Bitcoin de manera directa, sin necesidad de procesos de verificación de identidad (KYC). Aquí, la privacidad y la autonomía se respetan en cada transacción.",
-      "Sabemos que cada persona tiene derecho a gestionar sus recursos de forma discreta y sin interferencias. Al elegir Alfred, estás optando por un servicio donde no se requiere tu identidad ni tus datos personales. Nuestro modelo de operación se basa en la confianza entre compradores y vendedores, creando un entorno donde todos pueden negociar con seguridad sin comprometer su privacidad.",
-      "Aunque no solicitamos KYC, no comprometemos la seguridad. Nuestra plataforma ofrece un sistema robusto de verificación y monitoreo que garantiza que todas las transacciones realizadas sean legítimas y seguras. Cada vendedor es responsable de garantizar la calidad del Bitcoin que se negocia, y nuestro equipo siempre está disponible para resolver cualquier problema, asegurando que todas las partes involucradas cumplan con sus responsabilidades.",
-      "Olvídate de las largas filas de verificaciones y del exceso de documentación. En Alfred, las transacciones son rápidas, simples y transparentes. Sin intermediarios, tratas directamente con la otra parte, sin perder la seguridad necesaria para garantizar que todo ocurra de la mejor manera posible.",
-      "Entendemos que, al operar sin KYC, el soporte al cliente se vuelve esencial. Nuestro equipo de atención siempre está disponible para resolver cualquier problema, mediar disputas y garantizar que tu experiencia de compra y venta sea tranquila y sin riesgos. Si algo no ocurre como esperabas, nuestra estructura de resolución de disputas está lista para actuar y proteger los intereses de nuestros usuarios.",
-      "Con Alfred, tienes la oportunidad de formar parte de una comunidad que valora la libertad financiera y la privacidad sin comprometer la seguridad. Creemos en un mercado más justo, donde la confianza es el pilar principal de las transacciones. Únete a nosotros y experimenta la verdadera libertad al negociar Bitcoin."
+      "En Alfred, creemos que la libertad financiera debe ser simple y accesible para todos. Por eso, ofrecemos una plataforma P2P (peer-to-peer) donde puedes comprar y vender Bitcoin de manera directa, sin necesidad de procesos de verificación de identidad (KYC). Aquí, la privacidad y la autonomía se respetan en cada transacción.",
+      "Entendemos que cada persona tiene derecho a gestionar sus recursos de manera discreta y sin interferencias. Al elegir Alfred, estás seleccionando un servicio donde tu identidad y datos personales no son requeridos. Nuestro modelo operativo se basa en la confianza entre compradores y vendedores, creando un ambiente donde todos pueden negociar de manera segura sin comprometer su privacidad.",
+      "Aunque no requerimos KYC, no comprometemos la seguridad. Nuestra plataforma ofrece un sistema robusto de verificación y monitoreo que garantiza que todas las transacciones sean legítimas y seguras. Cada vendedor es responsable de garantizar la calidad del Bitcoin que se está negociando, y nuestro equipo está siempre disponible para resolver cualquier problema, asegurando que todas las partes involucradas en la transacción cumplan con sus responsabilidades.",
+      "Olvídate de las largas colas para verificación y el exceso de documentación. En Alfred, las transacciones son rápidas, simples y transparentes. Sin intermediarios, tratas directamente con la otra parte, sin perder la seguridad necesaria para asegurar que todo transcurra de la mejor manera posible.",
+      "Entendemos que, al operar sin KYC, el soporte al cliente se vuelve esencial. Nuestro equipo de atención al cliente está siempre disponible para resolver cualquier problema, mediar disputas y garantizar que tu experiencia de compra y venta sea fluida y sin riesgos. Si algo no ocurre como se esperaba, nuestra estructura de resolución de disputas está lista para actuar y proteger los intereses de nuestros usuarios.",
+      "Con Alfred, tienes la oportunidad de ser parte de una comunidad que valora la libertad financiera y la privacidad sin sacrificar la seguridad. Creemos en un mercado más justo donde la confianza es la base de las transacciones. Únete a nosotros y experimenta la verdadera libertad al negociar Bitcoin."
     ]
   },
   "checkout": {
@@ -127,6 +135,41 @@
     "acceptTerms": "Acepto los términos y condiciones",
     "confirmDate": "Confirmo que los datos enviados son correctos",
     "getPixKey": "Finalizar pago"
+  },
+  "confirm_infos": {
+    "title": "Confirm Information",
+    "description": "Please review the transaction details before confirming.",
+    "amount_section": {
+      "title": "Amount",
+      "brl_label": "R$",
+      "btc_label": "In Bitcoin:"
+    },
+    "user_data_section": {
+      "title": "My Information",
+      "wallet": "Bitcoin Wallet",
+      "contact_number": "Contact Number",
+      "coupon": "Coupon",
+      "coupon_none": "None",
+      "network": "Network",
+      "payment_method": "Payment Method"
+    },
+    "fees_section": {
+      "title": "Fees",
+      "conversion_fee": "Conversion Fee",
+      "conversion_fee_value": "(2%)",
+      "onchain_fee": "Onchain Network Fee",
+      "onchain_fee_variable": "(variable)",
+      "alfred_fee": "Alfred Fee",
+      "total_fees": "Total Fees"
+    },
+    "final_summary": {
+      "title": "Final Summary",
+      "expected_amount": "Expected Amount after Fees"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "confirm": "Confirm"
+    }
   },
   "guide": {
     "imageStep": "¡Hola, soy Alfred! ¡Bienvenido! Soy un robot que facilita las transacciones de Bitcoin sin KYC, de manera simple y segura.",

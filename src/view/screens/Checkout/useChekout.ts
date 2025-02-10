@@ -29,7 +29,6 @@ export function useCheckout() {
   const [btcAmount, setBtcAmount] = useState('');
   const [acceptFees, setAcceptFees] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
-  const [confirmDate, setconfirmDate] = useState(false);
   const [isLoadingPayment, setIsLoadingPaymet] = useState(false);
 
   const navigate = useNavigate();
@@ -127,7 +126,7 @@ export function useCheckout() {
   ];
 
   const handleProcessPayment = async () => {
-    if (!acceptFees || !acceptTerms || !confirmDate) {
+    if (!acceptFees || !acceptTerms) {
       toast.warning(t('buycheckout.termsAndFeesAlert'));
       return;
     }
@@ -163,26 +162,34 @@ export function useCheckout() {
         },
       );
 
-      const pixKey = response.data.response.qrCopyPaste;
-      const status = response.data.response.status;
-      const transactionId = response.data.response.id;
-      localStorage.setItem('transactionId', transactionId);
-      localStorage.setItem('pixKey', pixKey);
-      localStorage.setItem('status', status);
-
-      setPixKey(pixKey);
-      setTimeLeft(240);
-      setIsLoading(false);
-      checkPaymentStatusPeriodically();
-
+      // **Se o backend indicar redirecionamento para o WhatsApp**
       if (paymentMethod === 'WISE') {
-        const whatsappNumber = '5511993439032'; // Número com código do país (Brasil: 55)
+        const whatsappNumber = '5511993439032';
         const message = `Olá! Aqui estão os detalhes do pedido Wise:\n\n Valor BRL: ${brlAmount} \n BTC: ${btcAmount}\n Rede: ${network}\n Cold Wallet: ${coldWallet} \n Método: Wise\n Telefone: ${transactionNumber}\n Cupom: ${cupom}`;
         const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
-        window.location.href = whatsappLink; // Redireciona para o WhatsApp
+        window.location.href = whatsappLink;
         return;
       }
+
+      const pixKey = response.data.response?.qrCopyPaste;
+      const status = response.data.response?.status;
+      const transactionId = response.data.response?.id;
+
+      if (transactionId) {
+        localStorage.setItem('transactionId', transactionId);
+      }
+      if (pixKey) {
+        localStorage.setItem('pixKey', pixKey);
+        setPixKey(pixKey);
+      }
+      if (status) {
+        localStorage.setItem('status', status);
+      }
+
+      setTimeLeft(240);
+      setIsLoading(false);
+      checkPaymentStatusPeriodically();
 
       if (pixKey) {
         navigate(ROUTES.checkoutPix.call(currentLang));
@@ -320,6 +327,11 @@ export function useCheckout() {
   }, []);
 
   const checkCouponValidity = async () => {
+    if (!cupom.trim()) {
+      setErrors((prev) => ({ ...prev, cupom: '' }));
+      return;
+    }
+
     try {
       setIsLoading(true);
       const response = await axios.post(
@@ -329,13 +341,24 @@ export function useCheckout() {
       const coupon = response.data;
 
       if (!coupon.isActive) {
-        toast.warning(t('buycheckout.couponInactive'));
+        setErrors((prev) => ({
+          ...prev,
+          cupom: t('buycheckout.couponInactive'),
+        }));
+        setCupom('');
+        toast.error(t('buycheckout.couponInactive'));
         return;
       }
 
+      setErrors((prev) => ({ ...prev, cupom: '' }));
       toast.success(t('buycheckout.couponValid'));
     } catch (error) {
       console.error('Erro ao verificar o cupom:', error);
+      setErrors((prev) => ({
+        ...prev,
+        cupom: t('buycheckout.couponCheckError'),
+      }));
+      setCupom('');
       toast.error(t('buycheckout.couponCheckError'));
     } finally {
       setIsLoading(false);
@@ -361,7 +384,6 @@ export function useCheckout() {
     acceptTerms,
     networks,
     currentLang,
-    confirmDate,
     isLoadingPayment,
     toggleDropdown,
     selectNetwork,
@@ -376,7 +398,7 @@ export function useCheckout() {
     setCupom,
     setTransactionNumber,
     verifyPaymentStatus,
-    setconfirmDate,
     setPaymentMethod,
+    validateFields,
   };
 }
