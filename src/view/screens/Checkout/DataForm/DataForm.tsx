@@ -6,13 +6,13 @@ import { t } from 'i18next';
 import { ChangeEvent, useState } from 'react';
 import { FaPix } from 'react-icons/fa6';
 import { toast } from 'react-toastify';
-import AlfredImg from '../../assets/c1b28810-5a23-4e7c-bcce-bd1f42b271c5.png';
-import WiseIcon from '../../assets/wiseIcon.png';
-import { ROUTES } from '../../routes/Routes';
-import ConfirmInfosModal from './modal/ConfirmInfos';
-import { useCheckoutOld } from './useChekoutOld';
+import AlfredImg from '../../../assets/c1b28810-5a23-4e7c-bcce-bd1f42b271c5.png';
+import WiseIcon from '../../../assets/wiseIcon.png';
+import { ROUTES } from '../../../routes/Routes';
+import ConfirmInfosModal from '../modal/ConfirmInfos';
+import { useDataForm } from './useDataForm';
 
-export default function CheckoutOld() {
+export default function DataForm() {
   const {
     network,
     coldWallet,
@@ -41,7 +41,7 @@ export default function CheckoutOld() {
     setCupom,
     setTransactionNumber,
     validateFields,
-  } = useCheckoutOld();
+  } = useDataForm();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
