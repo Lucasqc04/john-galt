@@ -133,7 +133,8 @@
     "acceptFees": "Aceito as taxas",
     "acceptTerms": "Aceito os termos e condições",
     "confirmDate": "Confirmo que os dados enviados estão corretos",
-    "getPixKey": "Finalizar Pagamento"
+    "getPixKey": "Finalizar Pagamento",
+    "missingFields": "Os dados inseridos estão incompletos ou inválidos. Corrija antes de prosseguir."
   },
   "confirm_infos": {
     "title": "Confirmar Informações",
