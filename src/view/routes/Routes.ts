@@ -10,8 +10,8 @@ export const ROUTES = {
     call: (currentLang: string) => `/${currentLang}`,
   },
   buyCheckout: {
-    path: 'buy-checkout',
-    call: (currentLang: string) => `/${currentLang}/buy-checkout`,
+    path: 'checkout',
+    call: (currentLang: string) => `/${currentLang}/checkout`,
   },
   checkoutPix: {
     path: 'checkout-pix',
