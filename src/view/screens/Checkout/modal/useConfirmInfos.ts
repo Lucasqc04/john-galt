@@ -61,8 +61,6 @@ export function useConfirmInfos(
     brlAmount.replace(/[^\d,]/g, '').replace(',', '.'),
   );
 
-  // Aplicar a lógica correta para a taxa Alfred
-  console.log('console log do useconfirminfos ', localAlfredFeePercentage);
   const alfredFeeRate =
     brlAmountNum >= 1000
       ? localAlfredFeePercentage / 100
@@ -70,7 +68,7 @@ export function useConfirmInfos(
   const alfredFee = brlAmountNum * alfredFeeRate;
 
   const afterAlfredFee = brlAmountNum - alfredFee;
-  const swapFee = afterAlfredFee * 0.02; // Taxa de troca fixa de 2%
+  const swapFee = afterAlfredFee * 0.02;
   const totalFees = alfredFee + swapFee + (onchainFee || 0);
   const finalAmount = afterAlfredFee - swapFee - (onchainFee || 0);
 

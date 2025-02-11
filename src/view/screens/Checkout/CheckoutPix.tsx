@@ -1,16 +1,11 @@
 import { t } from 'i18next';
-import { QRCodeSVG } from 'qrcode.react';
-import AlfredQr from '../../assets/_DIY SEC LAB - Apresentação Comercial (1).png';
-import { useCheckout } from './useChekout';
+import Qrcode from '../../assets/qrcode100k.jpeg';
+import { useDataForm } from './DataForm/useDataForm';
+import { usePaymentStatusPolling } from './usePaymentStatusPolling';
 
 export function CheckoutPix() {
-  const {
-    pixKey,
-    timeLeft,
-    isLoadingPayment,
-    copyToClipboard,
-    verifyPaymentStatus,
-  } = useCheckout();
+  const { timeLeft, copyToClipboard } = useDataForm();
+  const { isLoadingPayment, verifyPaymentStatus } = usePaymentStatusPolling();
 
   return (
     <div className="flex flex-col items-center pt-4">
@@ -36,7 +31,8 @@ export function CheckoutPix() {
         {t('buycheckout.scanQRCode')}
       </p>
       <div className="relative flex justify-center items-center p-4">
-        <QRCodeSVG
+        <img src={Qrcode} alt="" className="w-[50%]" />
+        {/* <QRCodeSVG
           value={pixKey ?? ''}
           size={256}
           level="H"
@@ -49,11 +45,13 @@ export function CheckoutPix() {
             alt="Logo-alfred"
             className="w-full h-40 rounded-full"
           />
-        </div>
+        </div> */}
       </div>
 
       <textarea
-        value={pixKey ?? ''}
+        value={
+          '00020126360014BR.GOV.BCB.PIX0114vip@depix.info5204000053039865409100000.005802BR5901N6001C62070503***63042A76'
+        }
         readOnly
         className="border px-4 py-3 rounded-2xl text-base text-white bg-[#000E16] w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl overflow-hidden"
         rows={4}
