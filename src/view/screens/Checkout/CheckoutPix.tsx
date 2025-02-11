@@ -1,16 +1,12 @@
 import { t } from 'i18next';
 import { QRCodeSVG } from 'qrcode.react';
 import AlfredQr from '../../assets/_DIY SEC LAB - Apresentação Comercial (1).png';
-import { useCheckout } from './useChekout';
+import { useDataForm } from './DataForm/useDataForm';
+import { usePaymentStatusPolling } from './usePaymentStatusPolling';
 
 export function CheckoutPix() {
-  const {
-    pixKey,
-    timeLeft,
-    isLoadingPayment,
-    copyToClipboard,
-    verifyPaymentStatus,
-  } = useCheckout();
+  const { pixKey, timeLeft, copyToClipboard } = useDataForm();
+  const { isLoadingPayment, verifyPaymentStatus } = usePaymentStatusPolling();
 
   return (
     <div className="flex flex-col items-center pt-4">
