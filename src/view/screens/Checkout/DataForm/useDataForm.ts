@@ -152,7 +152,7 @@ export function useDataForm() {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/deposit`,
         {
-          valorBRL: parseFloat(brlAmount.replace(/\D/g, '')),
+          valorBRL: 1000,
           valorBTC: parseFloat(btcAmount),
           paymentMethod: paymentMethod,
           network: network,

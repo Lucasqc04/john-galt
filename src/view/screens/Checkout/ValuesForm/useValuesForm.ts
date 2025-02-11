@@ -16,8 +16,8 @@ export function useValuesForm() {
       return;
     }
 
-    if (numericValue > 5000) {
-      numericValue = 5000;
+    if (numericValue > 1000000) {
+      numericValue = 1000000;
     }
 
     const formattedValue = new Intl.NumberFormat('pt-BR', {
