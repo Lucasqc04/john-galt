@@ -76,7 +76,8 @@ export function useCheckout() {
       10,
     );
 
-    if (numericValue >= 700 && numericValue <= 5000) {
+    // Ajuste do limite para R$ 5.000.000
+    if (numericValue >= 700 && numericValue <= 5000000) {
       localStorage.setItem('brlAmount', data.brlAmount);
       localStorage.setItem('btcAmount', data.btcAmount);
       navigate(ROUTES.buyCheckout.call(currentLang));

@@ -9,7 +9,6 @@ import { toast } from 'react-toastify';
 import AlfredImg from '../../../assets/c1b28810-5a23-4e7c-bcce-bd1f42b271c5.png';
 import WiseIcon from '../../../assets/wiseIcon.png';
 import { ROUTES } from '../../../routes/Routes';
-import ConfirmInfosModal from '../modal/ConfirmInfos';
 import { useDataForm } from './useDataForm';
 
 export default function DataForm() {
@@ -29,7 +28,7 @@ export default function DataForm() {
     currentLang,
     paymentMethod,
     isDropdownOpenMethod,
-    alfredFeePercentage,
+    // alfredFeePercentage,
     selectPaymentMethod,
     toggleDropdownMethod,
     toggleDropdown,
@@ -44,10 +43,7 @@ export default function DataForm() {
     validateFields,
   } = useDataForm();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [couponApplied, setCouponApplied] = useState(false);
-
-  const closeModal = () => setIsModalOpen(false);
 
   const handleApplyCoupon = async () => {
     await checkCouponValidity();
@@ -56,7 +52,7 @@ export default function DataForm() {
     }
   };
 
-  const handleOpenModal = async () => {
+  const handlePayment = async () => {
     if (cupom.trim() && !couponApplied) {
       toast.error(t('buycheckout.applyCouponFirst'));
       return;
@@ -67,9 +63,8 @@ export default function DataForm() {
       return;
     }
 
-    setIsModalOpen(true);
+    handleProcessPayment();
   };
-
   return (
     <>
       {isLoading && <Loader />}
@@ -270,7 +265,7 @@ export default function DataForm() {
               </div>
               <div className="flex justify-center items-center pt-4 ">
                 <button
-                  onClick={handleOpenModal}
+                  onClick={handlePayment}
                   type="button"
                   disabled={!acceptFees || !acceptTerms}
                   className={classNames(
@@ -287,23 +282,6 @@ export default function DataForm() {
               <img src={AlfredImg} alt="Alfred" />
             </div>
           </div>
-
-          <ConfirmInfosModal
-            isOpen={isModalOpen}
-            onClose={closeModal}
-            onConfirm={() => {
-              closeModal();
-              handleProcessPayment();
-            }}
-            brlAmount={brlAmount || ''}
-            btcAmount={btcAmount || ''}
-            network={network || ''}
-            coldWallet={coldWallet || ''}
-            paymentMethod={paymentMethod || ''}
-            transactionNumber={transactionNumber || ''}
-            cupom={cupom || ''}
-            alfredFeePercentage={alfredFeePercentage}
-          />
         </section>
       </main>
       <WhatsAppButton />
