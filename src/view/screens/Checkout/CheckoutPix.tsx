@@ -1,7 +1,7 @@
 import { t } from 'i18next';
 import { QRCodeSVG } from 'qrcode.react';
 import AlfredQr from '../../assets/_DIY SEC LAB - Apresentação Comercial (1).png';
-import { useDataForm } from './DataForm/useDataForm';
+import { useCheckout } from './useChekout';
 
 export function CheckoutPix() {
   const {
@@ -10,7 +10,7 @@ export function CheckoutPix() {
     isLoadingPayment,
     copyToClipboard,
     verifyPaymentStatus,
-  } = useDataForm();
+  } = useCheckout();
 
   return (
     <div className="flex flex-col items-center pt-4">
