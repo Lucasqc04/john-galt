@@ -163,7 +163,6 @@ export function useCheckout() {
         },
       );
 
-      // **Se o backend indicar redirecionamento para o WhatsApp**
       if (paymentMethod === 'WISE') {
         const whatsappNumber = '5511993439032';
         const message = `Olá! Aqui estão os detalhes do pedido Wise:\n\n Valor BRL: ${brlAmount} \n BTC: ${btcAmount}\n Rede: ${network}\n Cold Wallet: ${coldWallet} \n Método: Wise\n Telefone: ${transactionNumber}\n Cupom: ${cupom}`;

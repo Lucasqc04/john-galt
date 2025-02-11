@@ -57,7 +57,7 @@ export function NavLinks({ LinkCallBack }: NavLinksProps) {
             key={index}
             onClick={() => handleOnLink(link.path, LinkCallBack)}
             className={classNames(
-              'text-xl sm:text-2xl lg:text-3xl font-semibold leading-6 text-white px-3 sm:px-5 py-2 transition-all text-center',
+              'text-xl sm:text-2xl lg:text-3xl font-extralight leading-6 text-white px-3 sm:px-5 py-2 transition-all text-center',
               'hover:bg-white hover:text-black duration-300 ease-in-out',
               'w-auto',
               'font-pixelade',
