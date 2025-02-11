@@ -29,7 +29,6 @@ export function useDataForm() {
   const [btcAmount, setBtcAmount] = useState('');
   const [acceptFees, setAcceptFees] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
-  const [isLoadingPayment, setIsLoadingPaymet] = useState(false);
   const [alfredFeePercentage, setAlfredFeePercentage] = useState(5);
 
   const navigate = useNavigate();
@@ -269,35 +268,6 @@ export function useDataForm() {
     await checkStatus();
   };
 
-  const verifyPaymentStatus = async () => {
-    const transaction = localStorage.getItem('transactionId');
-    if (!transaction) {
-      toast.error(t('buycheckout.transactionNumberError'));
-      return;
-    }
-    setIsLoadingPaymet(true);
-
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/deposit-status?transactionId=${transaction}`,
-      );
-
-      const status = response.data.status;
-      console.log('Status:', status);
-
-      if (status !== 'paid') {
-        toast.warn(t('buycheckout.paymentNotConfirmed'));
-      } else {
-        navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
-      }
-    } catch (error) {
-      console.error('Erro ao verificar o status do pagamento:', error);
-      toast.warn(t('buycheckout.paymentNotConfirmed'));
-    } finally {
-      setIsLoadingPaymet(false);
-    }
-  };
-
   const copyToClipboard = () => {
     if (pixKey) {
       navigator.clipboard.writeText(pixKey);
@@ -391,7 +361,6 @@ export function useDataForm() {
     acceptTerms,
     networks,
     currentLang,
-    isLoadingPayment,
     alfredFeePercentage,
     toggleDropdown,
     selectNetwork,
@@ -405,7 +374,6 @@ export function useDataForm() {
     setAcceptFees,
     setCupom,
     setTransactionNumber,
-    verifyPaymentStatus,
     setPaymentMethod,
     validateFields,
   };
