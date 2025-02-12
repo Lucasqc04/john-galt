@@ -12,7 +12,7 @@ import { useCurrentLang } from '../../utils/useCurrentLang';
 
 export function PaymentAlfredSuccess() {
   const { t } = useTranslation();
-  const { currentLang } = useCurrentLang(); // Obtemos o idioma atual
+  const { currentLang } = useCurrentLang();
   const navigate = useNavigate();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 

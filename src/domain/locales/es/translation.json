@@ -32,9 +32,10 @@
     "btc_label": "Bitcoin"
   },
   "paymentFailure": {
-    "title": "Fallo en el pago",
-    "returnToSite": "VOLVER AL SITIO",
-    "whatsapp": "WhatsApp"
+    "title": "Fallo en el Pago",
+    "description": "Hubo un problema al procesar su pago. Intente nuevamente o entre en contacto con el soporte.",
+    "retryButton": "INTENTAR DE NUEVO",
+    "whatsapp": "HABLA CON NOSOTROS"
   },
   "paymentSuccess": {
     "title": "¡Pago completado con éxito!",
