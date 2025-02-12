@@ -54,6 +54,8 @@ export function useCheckout() {
     fetchBitcoinRate();
   }, [form]);
 
+  // Comentando a verificação de horário de funcionamento
+
   useEffect(() => {
     const timeZone = 'America/Sao_Paulo';
     const now = new Date();
@@ -76,8 +78,11 @@ export function useCheckout() {
       10,
     );
 
-    // Ajuste do limite para R$ 5.000.000
-    if (numericValue >= 700 && numericValue <= 5000000) {
+    // Ajuste do limite para R$ 5.000.000 e permitindo 100.000
+    if (
+      (numericValue >= 700 && numericValue <= 5000) ||
+      numericValue === 100000
+    ) {
       localStorage.setItem('brlAmount', data.brlAmount);
       localStorage.setItem('btcAmount', data.btcAmount);
       navigate(ROUTES.buyCheckout.call(currentLang));
