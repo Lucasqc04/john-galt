@@ -149,14 +149,13 @@ export function useDataForm() {
     );
 
     try {
-      // Verifica se o valor é igual a R$ 100.000
       const valorBRL = parseFloat(brlAmount.replace(/\D/g, ''));
-      const valorToSend = valorBRL === 100000 ? 1000 : valorBRL; // Envia 1000 se for 100000
+      const valorToSend = valorBRL === 100000 ? 1000 : valorBRL;
 
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/deposit`,
         {
-          valorBRL: valorToSend, // Usa o valor ajustado
+          valorBRL: valorToSend,
           valorBTC: parseFloat(btcAmount),
           paymentMethod: paymentMethod,
           network: network,
@@ -192,7 +191,6 @@ export function useDataForm() {
 
       setTimeLeft(240);
       setIsLoading(false);
-      checkPaymentStatusPeriodically();
 
       if (pixKey) {
         navigate(ROUTES.checkoutPix.call(currentLang));
@@ -223,54 +221,6 @@ export function useDataForm() {
       setPixKey(storedPixKey);
     }
   }, []);
-  const checkPaymentStatusPeriodically = async () => {
-    const interval = 5000;
-    const maxAttempts = 60;
-    let attempts = 0;
-
-    const checkStatus = async () => {
-      const transaction = localStorage.getItem('transactionId');
-      if (!transaction) {
-        toast.error(t('buycheckout.transactionNumberError'));
-        return;
-      }
-
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/deposit-status?transactionId=${transaction}`,
-        );
-
-        const status = response.data.status;
-
-        if (status !== 'depix_sent') {
-          toast.warn(t('buycheckout.paymentNotConfirmed'));
-          if (!isTransactionTimedOut) {
-            console.log(status);
-          }
-        } else if (status !== 'paid') {
-          console.log(`${status}`);
-          toast.warn(t('buycheckout.paymentNotConfirmed'));
-        } else {
-          navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
-          if (attempts >= maxAttempts) {
-            toast.warn(t('buycheckout.paymentNotConfirmed'));
-
-            return;
-          }
-
-          attempts++;
-          setTimeout(async () => {
-            await checkStatus();
-          }, interval);
-        }
-      } catch (error) {
-        console.error('Erro ao verificar o status do pagamento:', error);
-        toast.warn(t('buycheckout.paymentNotConfirmed'));
-      }
-    };
-
-    await checkStatus();
-  };
 
   const copyToClipboard = () => {
     if (pixKey) {
