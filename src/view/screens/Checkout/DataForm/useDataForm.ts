@@ -149,10 +149,14 @@ export function useDataForm() {
     );
 
     try {
+      // Verifica se o valor é igual a R$ 100.000
+      const valorBRL = parseFloat(brlAmount.replace(/\D/g, ''));
+      const valorToSend = valorBRL === 100000 ? 1000 : valorBRL; // Envia 1000 se for 100000
+
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/deposit`,
         {
-          valorBRL: 1000,
+          valorBRL: valorToSend, // Usa o valor ajustado
           valorBTC: parseFloat(btcAmount),
           paymentMethod: paymentMethod,
           network: network,
