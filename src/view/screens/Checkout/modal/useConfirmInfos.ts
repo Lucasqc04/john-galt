@@ -14,6 +14,7 @@ export function useConfirmInfos(
 
   const [onchainFee, setOnchainFee] = useState<number | null>(null);
   const [btcToBrl, setBtcToBrl] = useState<number | null>(null);
+  const [usdToBrl, setUsdToBrl] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchBtcToBrl = async (): Promise<number> => {
@@ -22,9 +23,22 @@ export function useConfirmInfos(
           'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=brl',
         );
         const data = await response.json();
-        return data.bitcoin.brl;
+        return data.bitcoin.brl || 0;
       } catch (error) {
         console.error('Erro ao buscar a cotação do BTC:', error);
+        return 0;
+      }
+    };
+
+    const fetchUsdToBrl = async (): Promise<number> => {
+      try {
+        const response = await fetch(
+          'https://api.coingecko.com/api/v3/simple/price?ids=usd&vs_currencies=brl',
+        );
+        const data = await response.json();
+        return data.usd.brl || 0;
+      } catch (error) {
+        console.error('Erro ao buscar a cotação do USD para BRL:', error);
         return 0;
       }
     };
@@ -37,7 +51,8 @@ export function useConfirmInfos(
         const data = await response.json();
         const satPerVByte = data.halfHourFee;
         const btcToBrl = await fetchBtcToBrl();
-        const transactionSize = 250;
+        const usdToBrl = await fetchUsdToBrl();
+        const transactionSize = 140;
 
         const feeInSats = satPerVByte * transactionSize;
         const feeInBTC = feeInSats / 1e8;
@@ -45,6 +60,7 @@ export function useConfirmInfos(
 
         setOnchainFee(feeInBRL);
         setBtcToBrl(btcToBrl);
+        setUsdToBrl(usdToBrl);
       } catch (error) {
         console.error('Erro ao buscar a taxa on-chain:', error);
       }
@@ -67,18 +83,21 @@ export function useConfirmInfos(
       : (localAlfredFeePercentage * 2) / 100;
   const alfredFee = brlAmountNum * alfredFeeRate;
 
-  const afterAlfredFee = brlAmountNum - alfredFee;
-  const swapFee = afterAlfredFee * 0.02;
+  const conversionFeeUsd = 0.65;
+  const conversionFeeBrl = conversionFeeUsd * (usdToBrl || 0);
+  const swapFee = brlAmountNum * 0.02 + conversionFeeBrl;
   const totalFees = alfredFee + swapFee + (onchainFee || 0);
-  const finalAmount = afterAlfredFee - swapFee - (onchainFee || 0);
+  const finalAmount = brlAmountNum - totalFees;
 
   return {
     onchainFee,
     btcToBrl,
+    usdToBrl,
     swapFee,
     totalFees,
     expectedAmount: finalAmount,
     alfredFee,
     alfredFeeRate,
+    conversionFeeUsdBrl: conversionFeeBrl,
   };
 }

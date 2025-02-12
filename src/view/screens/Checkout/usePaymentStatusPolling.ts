@@ -30,8 +30,6 @@ export const usePaymentStatusPolling = () => {
       );
       const status = response.data.status;
 
-      console.log('Status:', status);
-
       if (status === 'paid') {
         navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
         clearInterval(timerRef.current!);

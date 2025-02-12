@@ -33,8 +33,9 @@
   },
   "paymentFailure": {
     "title": "Payment Failure",
-    "returnToSite": "BACK TO SITE",
-    "whatsapp": "WhatsApp"
+    "description": "There was a problem processing your payment. Please try again or contact support.",
+    "retryButton": "TRY AGAIN",
+    "whatsapp": "CONTACT US"
   },
   "paymentSuccess": {
     "title": "Payment completed successfully!",

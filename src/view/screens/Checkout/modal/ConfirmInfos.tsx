@@ -67,6 +67,7 @@ export default function ConfirmInfosModal({
     expectedAmount,
     alfredFee,
     alfredFeeRate,
+    conversionFeeUsdBrl,
   } = useConfirmInfos(network, brlAmount, alfredFeePercentage);
   const [isDataVisible, setIsDataVisible] = useState(false);
   const [isTaxVisible, setIsTaxVisible] = useState(false);
@@ -198,8 +199,9 @@ export default function ConfirmInfosModal({
                   <strong>
                     {t('confirm_infos.fees_section.conversion_fee')}:
                   </strong>{' '}
-                  R$ {swapFee.toFixed(2)}{' '}
-                  {t('confirm_infos.fees_section.conversion_fee_value')}
+                  R$ {swapFee.toFixed(2)} (
+                  {t('confirm_infos.fees_section.conversion_fee_value')} + R${' '}
+                  {conversionFeeUsdBrl?.toFixed(2)})
                 </p>
                 {network.toLowerCase() === 'onchain' && (
                   <p>
