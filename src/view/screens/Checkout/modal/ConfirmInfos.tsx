@@ -68,6 +68,7 @@ export default function ConfirmInfosModal({
     alfredFee,
     alfredFeeRate,
     conversionFeeUsdBrl,
+    expectedAmountBTC,
   } = useConfirmInfos(network, brlAmount, alfredFeePercentage);
   const [isDataVisible, setIsDataVisible] = useState(false);
   const [isTaxVisible, setIsTaxVisible] = useState(false);
@@ -81,9 +82,6 @@ export default function ConfirmInfosModal({
   )
     return null;
 
-  const expectedAmountBTC = btcToBrl
-    ? (expectedAmount / btcToBrl).toFixed(8)
-    : '0.00000000';
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto">
       <motion.div

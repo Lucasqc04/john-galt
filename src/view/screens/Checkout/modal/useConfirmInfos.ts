@@ -17,61 +17,51 @@ export function useConfirmInfos(
   const [usdToBrl, setUsdToBrl] = useState<number | null>(null);
 
   useEffect(() => {
-    const fetchBtcToBrl = async (): Promise<number> => {
+    const fetchPrices = async () => {
       try {
         const response = await fetch(
-          'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=brl',
+          'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,usd&vs_currencies=brl',
         );
         const data = await response.json();
-        return data.bitcoin.brl || 0;
+        setBtcToBrl(data.bitcoin.brl || 0);
+        setUsdToBrl(data.usd.brl || 0);
       } catch (error) {
-        console.error('Erro ao buscar a cotação do BTC:', error);
-        return 0;
+        console.error('Erro ao buscar cotações:', error);
+        setBtcToBrl(0);
+        setUsdToBrl(0);
       }
     };
 
-    const fetchUsdToBrl = async (): Promise<number> => {
-      try {
-        const response = await fetch(
-          'https://api.coingecko.com/api/v3/simple/price?ids=usd&vs_currencies=brl',
-        );
-        const data = await response.json();
-        return data.usd.brl || 0;
-      } catch (error) {
-        console.error('Erro ao buscar a cotação do USD para BRL:', error);
-        return 0;
-      }
-    };
+    fetchPrices();
+  }, []);
 
+  useEffect(() => {
     const fetchOnchainFee = async () => {
+      if (network.toLowerCase() !== 'onchain') {
+        setOnchainFee(null);
+        return;
+      }
       try {
         const response = await fetch(
           'https://mempool.space/api/v1/fees/recommended',
         );
         const data = await response.json();
         const satPerVByte = data.halfHourFee;
-        const btcToBrl = await fetchBtcToBrl();
-        const usdToBrl = await fetchUsdToBrl();
         const transactionSize = 140;
 
         const feeInSats = satPerVByte * transactionSize;
         const feeInBTC = feeInSats / 1e8;
-        const feeInBRL = feeInBTC * btcToBrl;
+        const feeInBRL = btcToBrl ? feeInBTC * btcToBrl : 0;
 
         setOnchainFee(feeInBRL);
-        setBtcToBrl(btcToBrl);
-        setUsdToBrl(usdToBrl);
       } catch (error) {
         console.error('Erro ao buscar a taxa on-chain:', error);
+        setOnchainFee(null);
       }
     };
 
-    if (network.toLowerCase() === 'onchain') {
-      fetchOnchainFee();
-    } else {
-      setOnchainFee(null);
-    }
-  }, [network]);
+    fetchOnchainFee();
+  }, [network, btcToBrl]);
 
   const brlAmountNum = parseFloat(
     brlAmount.replace(/[^\d,]/g, '').replace(',', '.'),
@@ -89,6 +79,10 @@ export function useConfirmInfos(
   const totalFees = alfredFee + swapFee + (onchainFee || 0);
   const finalAmount = brlAmountNum - totalFees;
 
+  const expectedAmountBTC = btcToBrl
+    ? (finalAmount / btcToBrl).toFixed(8)
+    : '0.00000000';
+
   return {
     onchainFee,
     btcToBrl,
@@ -96,6 +90,7 @@ export function useConfirmInfos(
     swapFee,
     totalFees,
     expectedAmount: finalAmount,
+    expectedAmountBTC,
     alfredFee,
     alfredFeeRate,
     conversionFeeUsdBrl: conversionFeeBrl,
