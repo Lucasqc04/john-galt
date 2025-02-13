@@ -100,7 +100,7 @@ export default function DataForm() {
                   readOnly
                   placeholder={t('buycheckout.selectNetwork')}
                   onClick={toggleDropdown}
-                  className="border-2 px-8 py-3 rounded-3xl text-base bg-black sm:text-lg text-white placeholder-white bg-black text-center w-full"
+                  className="border-2 px-8 py-3 rounded-3xl text-base bg-black sm:text-lg text-white placeholder-white  text-center w-full"
                 />
                 <button
                   onClick={toggleDropdown}
