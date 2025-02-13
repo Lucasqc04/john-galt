@@ -81,14 +81,21 @@ export default function ConfirmInfosModal({
   )
     return null;
 
+  const expectedAmountBTC = btcToBrl
+    ? (expectedAmount / btcToBrl).toFixed(8)
+    : '0.00000000';
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
         transition={{ duration: 0.3 }}
-        className="bg-[#040311] p-6 rounded-xl max-w-lg shadow-lg relative w-full"
+        className="bg-[#040311] p-6 rounded-xl max-w-lg shadow-lg relative w-full max-h-[90vh] overflow-y-auto"
+        style={{
+          scrollbarWidth: 'thin',
+          scrollbarColor: '#040311 #0d131f',
+        }}
       >
         <button
           onClick={onClose}
@@ -238,6 +245,12 @@ export default function ConfirmInfosModal({
                 {t('confirm_infos.final_summary.expected_amount')}:
               </strong>{' '}
               R$ {expectedAmount.toFixed(2)}
+            </p>
+            <p>
+              <strong>
+                {t('confirm_infos.final_summary.expected_amount_btc')}:
+              </strong>{' '}
+              {expectedAmountBTC} BTC
             </p>
           </div>
 

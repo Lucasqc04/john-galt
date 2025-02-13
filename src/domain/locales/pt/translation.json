@@ -166,7 +166,8 @@
     },
     "final_summary": {
       "title": "Resumo Final",
-      "expected_amount": "Valor Esperado após taxas"
+      "expected_amount": "Valor Esperado (BRL)",
+      "expected_amount_btc": "Valor Esperado (BTC)"
     },
     "buttons": {
       "cancel": "Cancelar",

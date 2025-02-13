@@ -166,7 +166,8 @@
     },
     "final_summary": {
       "title": "Final Summary",
-      "expected_amount": "Expected Amount after Fees"
+      "expected_amount": "Expected Amount (BRL)",
+      "expected_amount_btc": "Expected Amount (BTC)"
     },
     "buttons": {
       "cancel": "Cancel",
