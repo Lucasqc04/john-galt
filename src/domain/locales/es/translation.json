@@ -166,8 +166,9 @@
       "total_fees": "Total Fees"
     },
     "final_summary": {
-      "title": "Final Summary",
-      "expected_amount": "Expected Amount after Fees"
+      "title": "Resumen Final",
+      "expected_amount": "Monto Esperado (BRL)",
+      "expected_amount_btc": "Monto Esperado (BTC)"
     },
     "buttons": {
       "cancel": "Cancel",

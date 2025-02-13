@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import AlfredImg from '../../../assets/c1b28810-5a23-4e7c-bcce-bd1f42b271c5.png';
 import WiseIcon from '../../../assets/wiseIcon.png';
 import { ROUTES } from '../../../routes/Routes';
+import ConfirmInfosModal from '../modal/ConfirmInfos';
 import { useDataForm } from './useDataForm';
 
 export default function DataForm() {
@@ -28,7 +29,7 @@ export default function DataForm() {
     currentLang,
     paymentMethod,
     isDropdownOpenMethod,
-    // alfredFeePercentage,
+    alfredFeePercentage,
     selectPaymentMethod,
     toggleDropdownMethod,
     toggleDropdown,
@@ -43,7 +44,15 @@ export default function DataForm() {
     validateFields,
   } = useDataForm();
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [couponApplied, setCouponApplied] = useState(false);
+  const closeModal = () => setIsModalOpen(false);
+
+  const is100k =
+    parseInt(
+      localStorage.getItem('brlAmount')?.replace(/\D/g, '') || '0',
+      10,
+    ) === 100000;
 
   const handleApplyCoupon = async () => {
     await checkCouponValidity();
@@ -52,7 +61,7 @@ export default function DataForm() {
     }
   };
 
-  const handlePayment = async () => {
+  const handleOpenModal = async () => {
     if (cupom.trim() && !couponApplied) {
       toast.error(t('buycheckout.applyCouponFirst'));
       return;
@@ -63,8 +72,13 @@ export default function DataForm() {
       return;
     }
 
-    handleProcessPayment();
+    if (is100k) {
+      handleProcessPayment();
+    } else {
+      setIsModalOpen(true);
+    }
   };
+
   return (
     <>
       {isLoading && <Loader />}
@@ -86,7 +100,7 @@ export default function DataForm() {
                   readOnly
                   placeholder={t('buycheckout.selectNetwork')}
                   onClick={toggleDropdown}
-                  className="border-2 px-8 py-3 rounded-3xl text-base bg-black sm:text-lg text-white placeholder-white bg-black text-center w-full"
+                  className="border-2 px-8 py-3 rounded-3xl text-base bg-black sm:text-lg text-white placeholder-white  text-center w-full"
                 />
                 <button
                   onClick={toggleDropdown}
@@ -265,7 +279,7 @@ export default function DataForm() {
               </div>
               <div className="flex justify-center items-center pt-4 ">
                 <button
-                  onClick={handlePayment}
+                  onClick={handleOpenModal}
                   type="button"
                   disabled={!acceptFees || !acceptTerms}
                   className={classNames(
@@ -282,6 +296,25 @@ export default function DataForm() {
               <img src={AlfredImg} alt="Alfred" />
             </div>
           </div>
+
+          {!is100k && (
+            <ConfirmInfosModal
+              isOpen={isModalOpen}
+              onClose={closeModal}
+              onConfirm={() => {
+                closeModal();
+                handleProcessPayment();
+              }}
+              brlAmount={brlAmount || ''}
+              btcAmount={btcAmount || ''}
+              network={network || ''}
+              coldWallet={coldWallet || ''}
+              paymentMethod={paymentMethod || ''}
+              transactionNumber={transactionNumber || ''}
+              cupom={cupom || ''}
+              alfredFeePercentage={alfredFeePercentage}
+            />
+          )}
         </section>
       </main>
       <WhatsAppButton />
