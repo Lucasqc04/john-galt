@@ -144,7 +144,7 @@
     "description": "Please review the transaction details before confirming.",
     "amount_section": {
       "title": "Amount",
-      "brl_label": "R$",
+      "brl_label": "",
       "btc_label": "In Bitcoin:"
     },
     "user_data_section": {
