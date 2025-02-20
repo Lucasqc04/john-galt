@@ -44,6 +44,9 @@ export default function DataForm() {
     validateFields,
   } = useDataForm();
 
+  // Converte brlAmount para número (removendo caracteres não numéricos)
+  const numericBRL = parseInt(brlAmount.replace(/\D/g, ''), 10);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [couponApplied, setCouponApplied] = useState(false);
   const closeModal = () => setIsModalOpen(false);
@@ -92,7 +95,7 @@ export default function DataForm() {
           </p>
 
           <div className="flex justify-center items-center relative px-4">
-            <div className="w-full max-w-2xl ">
+            <div className="w-full max-w-2xl">
               <div className="flex justify-center items-center relative w-full">
                 <input
                   type="text"
@@ -100,7 +103,7 @@ export default function DataForm() {
                   readOnly
                   placeholder={t('buycheckout.selectNetwork')}
                   onClick={toggleDropdown}
-                  className="border-2 px-8 py-3 rounded-3xl text-base bg-black sm:text-lg text-white placeholder-white  text-center w-full"
+                  className="border-2 px-8 py-3 rounded-3xl text-base bg-black sm:text-lg text-white placeholder-white text-center w-full"
                 />
                 <button
                   onClick={toggleDropdown}
@@ -115,22 +118,40 @@ export default function DataForm() {
                   )}
                 </button>
                 {isDropdownOpen && (
-                  <div className="absolute right-0 top-full pt-2 w-full sm:w-48 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
-                    <ul>
-                      {networks.map((net) => (
-                        <li
-                          key={net.name}
-                          onClick={() => selectNetwork(net.name)}
-                          className="flex items-center px-3 py-2 hover:bg-gray-100 cursor-pointer"
-                        >
-                          {net.name}
-                          <img
-                            src={net.icon}
-                            alt={net.name}
-                            className="w-8 h-8 ml-2 sm:w-10 sm:h-10"
-                          />
-                        </li>
-                      ))}
+                  <div className="absolute left-0 top-full mt-2 w-full bg-gray-900 border border-gray-700 rounded-lg shadow-lg z-10 transition-all duration-300 ease-out transform scale-100 opacity-100">
+                    <ul className="w-full">
+                      {networks.map((net) => {
+                        const isOnchainDisabled =
+                          net.name.toLowerCase() === 'onchain' &&
+                          numericBRL >= 200 &&
+                          numericBRL < 700;
+                        return (
+                          <li
+                            key={net.name}
+                            onClick={() => {
+                              if (isOnchainDisabled) {
+                                toast.info(t('checkout.liquid_lightning_only'));
+                              } else {
+                                selectNetwork(net.name);
+                              }
+                            }}
+                            className={`flex flex-col items-center justify-center px-4 py-2 cursor-pointer text-white ${
+                              isOnchainDisabled
+                                ? 'opacity-50'
+                                : 'hover:bg-gray-800'
+                            }`}
+                          >
+                            <span className="w-full text-center">
+                              {net.name}
+                            </span>
+                            <img
+                              src={net.icon}
+                              alt={net.name}
+                              className="w-6 h-6 mt-1"
+                            />
+                          </li>
+                        );
+                      })}
                     </ul>
                   </div>
                 )}
@@ -160,24 +181,24 @@ export default function DataForm() {
                     ) : null}
                   </button>
                   {isDropdownOpenMethod && (
-                    <div className="absolute right-0 top-full pt-2 w-full sm:w-48 bg-[#00070F] border border-gray-300 rounded-lg shadow-lg z-10">
-                      <ul>
+                    <div className="absolute left-0 top-full mt-2 w-full bg-gray-900 border border-gray-700 rounded-lg shadow-lg z-10 transition-all duration-300 ease-out transform scale-100 opacity-100">
+                      <ul className="w-full">
                         <li
                           onClick={() => selectPaymentMethod('PIX')}
-                          className="flex items-center px-3 py-2 hover:bg-slate-900 cursor-pointer text-white "
+                          className="flex flex-col items-center justify-center px-4 py-2 cursor-pointer text-white hover:bg-gray-800"
                         >
-                          PIX
-                          <FaPix className="w-8 h-8 sm:w-10 sm:h-10  text-white ml-2" />
+                          <span className="w-full text-center">PIX</span>
+                          <FaPix className="w-6 h-6 mt-1" />
                         </li>
                         <li
                           onClick={() => selectPaymentMethod('WISE')}
-                          className="flex items-center px-3 py-2 hover:bg-slate-900  cursor-pointer text-white"
+                          className="flex flex-col items-center justify-center px-4 py-2 cursor-pointer text-white hover:bg-gray-800"
                         >
-                          Wise
+                          <span className="w-full text-center">Wise</span>
                           <img
                             src={WiseIcon}
                             alt="Wise"
-                            className="w-8 h-8 sm:w-10 sm:h-10 rounded-full text-white ml-2"
+                            className="w-6 h-6 mt-1 rounded-full"
                           />
                         </li>
                       </ul>
@@ -277,7 +298,7 @@ export default function DataForm() {
                   </span>
                 </label>
               </div>
-              <div className="flex justify-center items-center pt-4 ">
+              <div className="flex justify-center items-center pt-4">
                 <button
                   onClick={handleOpenModal}
                   type="button"
@@ -292,7 +313,7 @@ export default function DataForm() {
               </div>
             </div>
 
-            <div className=" hidden sm:block absolute right-[-25%] top-[-20%] transform translate-x-1/2 translate-y-1/2 w-[50%]">
+            <div className="hidden sm:block absolute right-[-25%] top-[-20%] transform translate-x-1/2 translate-y-1/2 w-[50%]">
               <img src={AlfredImg} alt="Alfred" />
             </div>
           </div>
