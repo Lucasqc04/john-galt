@@ -76,7 +76,17 @@ export function useCheckout() {
       10,
     );
 
+    if (numericValue < 200) {
+      toast.warning(t('checkout.min_value_error'));
+      return;
+    }
+
+    if (numericValue < 700) {
+      toast.info(t('checkout.liquid_lightning_only'));
+    }
+
     if (
+      (numericValue >= 200 && numericValue < 700) || // Agora aceita a partir de 200, mas sem onchain
       (numericValue >= 700 && numericValue <= 5000) ||
       numericValue === 100000
     ) {

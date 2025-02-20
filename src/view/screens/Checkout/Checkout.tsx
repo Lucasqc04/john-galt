@@ -1,6 +1,7 @@
 import AlfredWhiteLogo from '@/view/assets/logo/alfred-white-logo.svg';
 import SocialButtons from '@/view/components/SocialButtons';
 import { FormProvider } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import AlfredImg from '../../assets/_DIY SEC LAB - Apresentação Comercial (1).png';
 import { useCheckout } from './useCheckout';
 import { ValuesForm } from './ValuesForm/ValuesForm';
@@ -34,9 +35,26 @@ export default function Checkout() {
                       <button
                         type="button"
                         onClick={() => {
+                          const numericValue = parseInt(
+                            form.getValues('brlAmount').replace(/\D/g, ''),
+                            10,
+                          );
+
+                          if (numericValue < 200) {
+                            toast.warning(t('checkout.min_value_error'));
+                            return;
+                          }
+
                           ValidateValues(form.getValues());
                         }}
-                        className="w-full h-10 sm:h-12 bg-[#F39200] text-white rounded-3xl font-bold text-sm sm:text-base border-2 proceed-button-step"
+                        className={`w-full h-10 sm:h-12 rounded-3xl font-bold text-sm sm:text-base border-2 proceed-button-step
+    ${parseInt(form.getValues('brlAmount').replace(/\D/g, ''), 10) < 200 ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#F39200] text-white'}`}
+                        disabled={
+                          parseInt(
+                            form.getValues('brlAmount').replace(/\D/g, ''),
+                            10,
+                          ) < 200
+                        }
                       >
                         {t('checkout.proceed_button')}
                       </button>

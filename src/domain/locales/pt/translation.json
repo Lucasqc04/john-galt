@@ -29,7 +29,9 @@
     "transaction_error": "Transações só são permitidas todos os dias, das 8h às 22h no horário de Brasília.",
     "amount_error": "O valor deve ser maior que R$700 e menor que R$5000 para prosseguir.",
     "brl_label": "BRL",
-    "btc_label": "Bitcoin"
+    "btc_label": "Bitcoin",
+    "liquid_lightning_only": "Valores abaixo de 700 BRL só podem ser enviados via Liquid ou Lightning.",
+    "min_value_error": "O valor mínimo para compra é 200 BRL."
   },
   "paymentFailure": {
     "title": "Falha no pagamento",
@@ -57,7 +59,7 @@
     "reflection4": "A 'conveniência' das exchanges convencionais pode sair muito mais cara do que você imagina. E, além disso, ao entregar seus dados pessoais, você nunca sabe como eles poderão ser usados ou manipulados no futuro.",
     "privacyTitle": "Privacidade e Anonimato",
     "privacy1": "É simples: ao escolher o Alfred, você garante a sua privacidade e anonimato.",
-    "privacy2": "Aqui, você pode começar a negociar a partir de 700 BRL sem comprometer sua identidade ou expor suas transações ao controle externo."
+    "privacy2": "Aqui, você pode começar a negociar a partir de 200 BRL usando as redes Liquid e Lightning, enquanto transações on-chain requerem um valor mínimo de 700 BRL."
   },
   "termsOfUse": {
     "title": "Termos de Uso",
