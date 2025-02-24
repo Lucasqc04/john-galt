@@ -27,7 +27,7 @@
     "btc_placeholder": "Amount in BTC",
     "proceed_button": "Proceed",
     "transaction_error": "Transactions are only allowed daily from 8 AM to 10 PM in Brasília time.",
-    "amount_error": "The amount must be greater than R$700 and less than R$5000 to proceed.",
+    "amount_error": "The amount must be greater than R$200 and less than R$1000 to proceed.",
     "brl_label": "BRL",
     "btc_label": "Bitcoin",
     "liquid_lightning_only": "Amounts below 700 BRL can only be sent via Liquid or Lightning.",
