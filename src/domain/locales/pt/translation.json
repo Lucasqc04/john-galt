@@ -27,11 +27,10 @@
     "btc_placeholder": "Valor em BTC",
     "proceed_button": "Prosseguir",
     "transaction_error": "Transações só são permitidas todos os dias, das 8h às 22h no horário de Brasília.",
-    "amount_error": "O valor deve ser maior que R$200 e menor que R$5000 para prosseguir.",
-    "brl_label": "BRL",
-    "btc_label": "Bitcoin",
-    "liquid_lightning_only": "Valores abaixo de 700 BRL só podem ser enviados via Liquid ou Lightning.",
-    "min_value_error": "O valor mínimo para compra é 200 BRL."
+    "min_value_error": "O valor mínimo para compra é 200 BRL.",
+    "wallet_error_below_700": "Para valores abaixo de 700 BRL, apenas carteiras Liquid e Lightning são permitidas.",
+    "amount_error_above_1m": "O valor máximo permitido é 1.000.000 BRL.",
+    "payment_error_above_5000": "Para valores acima de 5000 BRL, o pagamento via Pix não é permitido. Utilize Wise ou Boleto Bancário."
   },
   "paymentFailure": {
     "title": "Falha no pagamento",

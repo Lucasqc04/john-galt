@@ -131,7 +131,9 @@ export default function DataForm() {
                             key={net.name}
                             onClick={() => {
                               if (isOnchainDisabled) {
-                                toast.info(t('checkout.liquid_lightning_only'));
+                                toast.info(
+                                  t('checkout.wallet_error_below_700'),
+                                );
                               } else {
                                 selectNetwork(net.name);
                               }
@@ -191,8 +193,20 @@ export default function DataForm() {
                     <div className="absolute left-0 top-full mt-2 w-full bg-gray-900 border border-gray-700 rounded-lg shadow-lg z-10 transition-all duration-300 ease-out transform scale-100 opacity-100">
                       <ul className="w-full">
                         <li
-                          onClick={() => selectPaymentMethod('PIX')}
-                          className="flex flex-col items-center justify-center px-4 py-2 cursor-pointer text-white hover:bg-gray-800"
+                          onClick={() => {
+                            if (numericBRL > 5000) {
+                              toast.warning(
+                                t('checkout.payment_error_above_5000'),
+                              );
+                              return;
+                            }
+                            selectPaymentMethod('PIX');
+                          }}
+                          className={`flex flex-col items-center justify-center px-4 py-2 cursor-pointer text-white ${
+                            numericBRL > 5000
+                              ? 'opacity-50'
+                              : 'hover:bg-gray-800'
+                          }`}
                         >
                           <span className="w-full text-center">PIX</span>
                           <FaPix className="w-6 h-6 mt-1" />
