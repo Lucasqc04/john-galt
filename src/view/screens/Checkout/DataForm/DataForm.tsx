@@ -6,6 +6,7 @@ import { t } from 'i18next';
 import { ChangeEvent, useState } from 'react';
 import { FaPix } from 'react-icons/fa6';
 import { toast } from 'react-toastify';
+import BoletoIcon from '../../../assets/BoletoIcon.png';
 import AlfredImg from '../../../assets/c1b28810-5a23-4e7c-bcce-bd1f42b271c5.png';
 import WiseIcon from '../../../assets/wiseIcon.png';
 import { ROUTES } from '../../../routes/Routes';
@@ -178,6 +179,12 @@ export default function DataForm() {
                         alt="Wise"
                         className="w-8 h-8 sm:w-10 sm:h-10 rounded-full"
                       />
+                    ) : paymentMethod === 'BANK_TRANSFER' ? (
+                      <img
+                        src={BoletoIcon}
+                        alt="Boleto Bancário"
+                        className="w-8 h-8 sm:w-10 sm:h-10 rounded-full"
+                      />
                     ) : null}
                   </button>
                   {isDropdownOpenMethod && (
@@ -198,6 +205,19 @@ export default function DataForm() {
                           <img
                             src={WiseIcon}
                             alt="Wise"
+                            className="w-6 h-6 mt-1 rounded-full"
+                          />
+                        </li>
+                        <li
+                          onClick={() => selectPaymentMethod('BANK_TRANSFER')}
+                          className="flex flex-col items-center justify-center px-4 py-2 cursor-pointer text-white hover:bg-gray-800"
+                        >
+                          <span className="w-full text-center">
+                            Boleto Bancário
+                          </span>
+                          <img
+                            src={BoletoIcon}
+                            alt="Boleto Bancário"
                             className="w-6 h-6 mt-1 rounded-full"
                           />
                         </li>

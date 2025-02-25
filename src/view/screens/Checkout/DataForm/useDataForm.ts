@@ -11,7 +11,7 @@ import { useCurrentLang } from '../../../utils/useCurrentLang';
 
 export function useDataForm() {
   const [network, setNetwork] = useState<string>('');
-  const [timeLeft, setTimeLeft] = useState(240);
+  const [timeLeft, setTimeLeft] = useState(150);
   const [isTransactionTimedOut, setIsTransactionTimedOut] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [coldWallet, setColdWallet] = useState<string>('');
@@ -20,7 +20,7 @@ export function useDataForm() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpenMethod, setIsDropdownOpenMethod] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<
-    'PIX' | 'Cartão de Crédito' | 'Boleto Bancário' | 'WISE'
+    'PIX' | 'Cartão de Crédito' | 'BANK_TRANSFER' | 'WISE'
   >();
   const [pixKey, setPixKey] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -57,7 +57,7 @@ export function useDataForm() {
     setIsDropdownOpenMethod((prevState) => !prevState);
   };
 
-  const selectPaymentMethod = (method: 'PIX' | 'WISE') => {
+  const selectPaymentMethod = (method: 'PIX' | 'WISE' | 'BANK_TRANSFER') => {
     setPaymentMethod(method);
     setIsDropdownOpenMethod(false);
   };
@@ -174,6 +174,15 @@ export function useDataForm() {
         return;
       }
 
+      if (paymentMethod === 'BANK_TRANSFER') {
+        const whatsappNumber = '5511993439032';
+        const message = `Olá! Aqui estão os detalhes do pedido Boleto Bancário:\n\n Valor BRL: ${brlAmount} \n BTC: ${btcAmount}\n Rede: ${network}\n Cold Wallet: ${coldWallet} \n Método: Boleto Bancário\n Telefone: ${transactionNumber}\n Cupom: ${cupom}`;
+        const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+        window.location.href = whatsappLink;
+        return;
+      }
+
       const pixKey = response.data.response?.qrCopyPaste;
       const status = response.data.response?.status;
       const transactionId = response.data.response?.id;
@@ -189,7 +198,7 @@ export function useDataForm() {
         localStorage.setItem('status', status);
       }
 
-      setTimeLeft(240);
+      setTimeLeft(150);
       setIsLoading(false);
 
       if (pixKey) {

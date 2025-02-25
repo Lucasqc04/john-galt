@@ -52,11 +52,10 @@ export function CheckoutPix() {
         {t('buycheckout.scanQRCode')}
       </p>
       <div className="relative flex justify-center items-center p-4">
-        {/* Exibe o QR Code específico para R$ 100.000 ou o QR Code dinâmico */}
         {is100k ? (
           <img src={Qrcode} alt="QR Code para R$ 100.000" className="w-[50%]" />
         ) : (
-          <>
+          <div className="relative">
             <QRCodeSVG
               value={pixKey ?? ''}
               size={256}
@@ -64,18 +63,20 @@ export function CheckoutPix() {
               marginSize={10}
               className="relative"
             />
-            <div className="absolute">
+            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+              <span className="text-red-600 font-bold bg-white text-xs mb-1">
+                Atenção: Você está comprando Bitcoin
+              </span>
               <img
                 src={AlfredQr}
-                alt="Logo-alfred"
-                className="w-full h-40 rounded-full"
+                alt="Logo Alfred"
+                className="w-[140px] h-[120px] rounded-full"
               />
             </div>
-          </>
+          </div>
         )}
       </div>
 
-      {/* Exibe o valor específico do PIX para R$ 100.000 ou a chave PIX normal */}
       {is100k ? (
         <textarea
           value={pixValue100k}
@@ -93,7 +94,7 @@ export function CheckoutPix() {
       )}
 
       <button
-        onClick={handleCopyToClipboard} // Usa a nova função de cópia
+        onClick={handleCopyToClipboard}
         className="pt-4 px-6 py-3 bg-[#F39200] text-white rounded-3xl font-bold m-3 mb-[5%]"
       >
         {t('buycheckout.copyPixKey')}
