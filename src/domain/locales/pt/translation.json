@@ -27,7 +27,7 @@
     "btc_placeholder": "Valor em BTC",
     "proceed_button": "Prosseguir",
     "transaction_error": "Transações só são permitidas todos os dias, das 8h às 22h no horário de Brasília.",
-    "amount_error": "O valor deve ser maior que R$200 e menor que R$1000 para prosseguir.",
+    "amount_error": "O valor deve ser maior que R$200 e menor que R$5000 para prosseguir.",
     "brl_label": "BRL",
     "btc_label": "Bitcoin",
     "liquid_lightning_only": "Valores abaixo de 700 BRL só podem ser enviados via Liquid ou Lightning.",
