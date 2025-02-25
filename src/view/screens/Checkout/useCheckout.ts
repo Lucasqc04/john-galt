@@ -14,12 +14,19 @@ export type Checkout = {
   btcRate: number;
 };
 
+export type WalletType = 'liquid' | 'lightning' | 'onchain';
+export type PaymentMethod = 'pix' | 'wise' | 'boleto';
+
 export function useCheckout() {
   const navigate = useNavigate();
   const { currentLang } = useCurrentLang();
   const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(1);
   const [isTransactionAllowed, setIsTransactionAllowed] = useState(true);
+
+  // Estado para o tipo de carteira (wallet) e para o método de pagamento
+  const [walletType, setWalletType] = useState<WalletType>('liquid');
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('pix');
 
   const form = useForm<Checkout>({
     mode: 'onChange',
@@ -81,21 +88,25 @@ export function useCheckout() {
       return;
     }
 
+    // Se for menor que 700 e estiver usando onchain, exibe aviso
     if (numericValue < 700) {
-      toast.info(t('checkout.liquid_lightning_only'));
+      toast.info(t('checkout.wallet_error_below_700'));
     }
 
-    if (
-      (numericValue >= 200 && numericValue < 700) || // Agora aceita a partir de 200, mas sem onchain
-      (numericValue >= 700 && numericValue <= 5000) ||
-      numericValue === 100000
-    ) {
-      localStorage.setItem('brlAmount', data.brlAmount);
-      localStorage.setItem('btcAmount', data.btcAmount);
-      navigate(ROUTES.buyCheckout.call(currentLang));
-    } else {
-      toast.warning(t('checkout.amount_error'));
+    // Se for acima de 5000 e o método de pagamento for PIX, exibe aviso
+    if (numericValue > 5000) {
+      toast.warning(t('checkout.payment_error_above_5000'));
     }
+
+    // Se o valor for superior a 1.000.000, não permite prosseguir
+    if (numericValue > 1000000) {
+      toast.warning(t('checkout.amount_error_above_1m'));
+      return;
+    }
+
+    localStorage.setItem('brlAmount', data.brlAmount);
+    localStorage.setItem('btcAmount', data.btcAmount);
+    navigate(ROUTES.buyCheckout.call(currentLang));
   }
 
   return {
@@ -108,5 +119,9 @@ export function useCheckout() {
     ValidateValues,
     isTransactionAllowed,
     t,
+    walletType,
+    setWalletType,
+    paymentMethod,
+    setPaymentMethod,
   };
 }
