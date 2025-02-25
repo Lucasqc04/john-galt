@@ -87,7 +87,7 @@ export function useCheckout() {
 
     if (
       (numericValue >= 200 && numericValue < 700) || // Agora aceita a partir de 200, mas sem onchain
-      (numericValue >= 700 && numericValue <= 1000) ||
+      (numericValue >= 700 && numericValue <= 5000) ||
       numericValue === 100000
     ) {
       localStorage.setItem('brlAmount', data.brlAmount);
