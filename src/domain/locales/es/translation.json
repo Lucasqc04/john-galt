@@ -30,7 +30,8 @@
     "min_value_error": "El monto mínimo de compra es de 200 BRL.",
     "wallet_error_below_700": "Para montos inferiores a 700 BRL, solo se permiten billeteras Liquid y Lightning.",
     "amount_error_above_1m": "El monto máximo permitido es de 1,000,000 BRL.",
-    "payment_error_above_5000": "Para montos superiores a 5000 BRL, no se permite el pago vía Pix. Utilice Wise o Boleto Bancario."
+    "payment_error_above_5000": "Para montos superiores a 5000 BRL, no se permite el pago vía Pix. Utilice Wise o Boleto Bancario.",
+    "bitcoin_message": "BITCOIN en tus manos, sin complicaciones y con privacidad."
   },
   "paymentFailure": {
     "title": "Fallo en el Pago",

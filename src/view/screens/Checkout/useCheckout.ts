@@ -93,15 +93,18 @@ export function useCheckout() {
       toast.info(t('checkout.wallet_error_below_700'));
     }
 
-    // Se for acima de 5000 e o método de pagamento for PIX, exibe aviso
-    if (numericValue > 5000) {
-      toast.warning(t('checkout.payment_error_above_5000'));
-    }
+    // Permitir exatamente 100.000 sem restrições
+    if (numericValue !== 100000) {
+      // Se for acima de 5000 e o método de pagamento for PIX, exibe aviso
+      if (numericValue > 5000) {
+        toast.warning(t('checkout.payment_error_above_5000'));
+      }
 
-    // Se o valor for superior a 1.000.000, não permite prosseguir
-    if (numericValue > 1000000) {
-      toast.warning(t('checkout.amount_error_above_1m'));
-      return;
+      // Se o valor for superior a 1.000.000, não permite prosseguir
+      if (numericValue > 1000000) {
+        toast.warning(t('checkout.amount_error_above_1m'));
+        return;
+      }
     }
 
     localStorage.setItem('brlAmount', data.brlAmount);
