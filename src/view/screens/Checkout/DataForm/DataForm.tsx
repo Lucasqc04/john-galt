@@ -194,7 +194,8 @@ export default function DataForm() {
                       <ul className="w-full">
                         <li
                           onClick={() => {
-                            if (numericBRL > 5000) {
+                            // Permite PIX se o valor for 100.000, senão aplica a regra normal (>5000)
+                            if (numericBRL > 5000 && numericBRL !== 100000) {
                               toast.warning(
                                 t('checkout.payment_error_above_5000'),
                               );
@@ -203,7 +204,7 @@ export default function DataForm() {
                             selectPaymentMethod('PIX');
                           }}
                           className={`flex flex-col items-center justify-center px-4 py-2 cursor-pointer text-white ${
-                            numericBRL > 5000
+                            numericBRL > 5000 && numericBRL !== 100000
                               ? 'opacity-50'
                               : 'hover:bg-gray-800'
                           }`}
@@ -211,6 +212,7 @@ export default function DataForm() {
                           <span className="w-full text-center">PIX</span>
                           <FaPix className="w-6 h-6 mt-1" />
                         </li>
+
                         <li
                           onClick={() => selectPaymentMethod('WISE')}
                           className="flex flex-col items-center justify-center px-4 py-2 cursor-pointer text-white hover:bg-gray-800"

@@ -182,7 +182,6 @@ export function useDataForm() {
         window.location.href = whatsappLink;
         return;
       }
-
       const pixKey = response.data.response?.qrCopyPaste;
       const status = response.data.response?.status;
       const transactionId = response.data.response?.id;
@@ -205,9 +204,7 @@ export function useDataForm() {
         navigate(ROUTES.checkoutPix.call(currentLang));
       }
 
-      if (status === 'depix_sent') {
-        navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
-      } else if (status === 'paid') {
+      if (status === 'depix_sent' || status === 'paid') {
         toast.success(t('Pagamento confirmado'));
         navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
       }

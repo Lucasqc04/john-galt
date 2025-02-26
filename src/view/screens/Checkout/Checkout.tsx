@@ -1,14 +1,15 @@
 import AlfredWhiteLogo from '@/view/assets/logo/alfred-white-logo.svg';
 import SocialButtons from '@/view/components/SocialButtons';
 import { FormProvider } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import AlfredImg from '../../assets/_DIY SEC LAB - Apresentação Comercial (1).png';
 import { useCheckout } from './useCheckout';
 import { ValuesForm } from './ValuesForm/ValuesForm';
 
 export default function Checkout() {
-  const { t, form, steps, isTransactionAllowed, ValidateValues } =
-    useCheckout();
+  const { t } = useTranslation();
+  const { form, steps, isTransactionAllowed, ValidateValues } = useCheckout();
 
   return (
     <>
@@ -62,8 +63,7 @@ export default function Checkout() {
 
                     <section className="hidden lg:flex items-center justify-center h-full mt-8 text-center">
                       <p className="text-white">
-                        <b>BITCOIN</b> na sua mão, sem complicação e
-                        <b> com privacidade</b>.
+                        {t('checkout.bitcoin_message')}
                       </p>
                     </section>
                   </>
@@ -81,10 +81,7 @@ export default function Checkout() {
           </article>
 
           <section className="lg:hidden mt-8 mb-[10%] text-center">
-            <p className="text-white">
-              <b>BITCOIN</b> na sua mão, sem complicação e
-              <b> com privacidade</b>.
-            </p>
+            <p className="text-white">{t('checkout.bitcoin_message')}</p>
           </section>
         </section>
 
