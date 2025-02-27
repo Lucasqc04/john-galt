@@ -1,8 +1,12 @@
 import { z } from 'zod';
 
-export const ListedBitcoinRateModel = z.object({
+export const ListedCryptoRateModel = z.object({
   bitcoin: z.object({
     brl: z.number(),
   }),
+  tether: z.object({
+    brl: z.number(),
+  }),
 });
-export type ListedBitcoinRateModel = z.infer<typeof ListedBitcoinRateModel>;
+
+export type ListedCryptoRateModel = z.infer<typeof ListedCryptoRateModel>;

@@ -23,7 +23,8 @@ export default function DataForm() {
     isLoading,
     errors,
     brlAmount,
-    btcAmount,
+    cryptoAmount,
+    cryptoType,
     acceptFees,
     acceptTerms,
     networks,
@@ -92,7 +93,8 @@ export default function DataForm() {
         <section className="flex flex-col justify-center items-center gap-y-4 pt-4">
           <p className="text-lg sm:text-xl text-center text-white">
             {t('buycheckout.value')}: {brlAmount} BRL
-            <br /> {t('buycheckout.valueBTC')}: {btcAmount} BTC
+            <br /> {t('buycheckout.valueCrypto')}: {cryptoAmount}{' '}
+            {cryptoType.toUpperCase()}
           </p>
 
           <div className="flex justify-center items-center relative px-4">
@@ -363,13 +365,14 @@ export default function DataForm() {
                 handleProcessPayment();
               }}
               brlAmount={brlAmount || ''}
-              btcAmount={btcAmount || ''}
+              cryptoAmount={cryptoAmount || ''}
               network={network || ''}
               coldWallet={coldWallet || ''}
               paymentMethod={paymentMethod || ''}
               transactionNumber={transactionNumber || ''}
               cupom={cupom || ''}
               alfredFeePercentage={alfredFeePercentage}
+              cryptoType={cryptoType || ''}
             />
           )}
         </section>
