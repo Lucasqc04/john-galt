@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import Onchain from '../../../assets/bitcoin.svg';
 import Liquid from '../../../assets/lbtc.svg';
 import Lightning from '../../../assets/lightning.svg';
+import Polygon from '../../../assets/polygon.png';
 import { ROUTES } from '../../../routes/Routes';
 import { useCurrentLang } from '../../../utils/useCurrentLang';
 
@@ -71,19 +72,8 @@ export function useDataForm() {
     if (!coldWallet) {
       newErrors.coldWallet = t('buycheckout.coldWalletError');
     } else {
-      switch (network) {
-        case 'Onchain':
-          if (
-            !/^(1|3)[a-km-zA-HJ-NP-Z0-9]{25,34}$|^bc1[a-zA-HJ-NP-Z0-9]{39,59}$/.test(
-              coldWallet,
-            )
-          ) {
-            newErrors.coldWallet = t(
-              'buycheckout.invalidColdWalletErrorOnchain',
-            );
-          }
-          break;
-        case 'Liquid':
+      if (cryptoType.toUpperCase() === 'USDT') {
+        if (network === 'Liquid') {
           if (
             !/^VJL[a-km-zA-HJ-NP-Z0-9]{43,}$/i.test(coldWallet) &&
             !/^ex1[a-z0-9]{39,59}$/i.test(coldWallet) &&
@@ -93,20 +83,53 @@ export function useDataForm() {
               'buycheckout.invalidColdWalletErrorLiquid',
             );
           }
-          break;
-        case 'Lightning':
-          if (
-            !/^lnbc[0-9]{1,}[a-zA-Z0-9]+$/.test(coldWallet) &&
-            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(coldWallet)
-          ) {
+        } else if (network === 'Polygon') {
+          if (!/^0x[a-fA-F0-9]{40}$/.test(coldWallet)) {
             newErrors.coldWallet = t(
-              'buycheckout.invalidColdWalletErrorLightning',
+              'buycheckout.invalidColdWalletErrorPolygon',
             );
           }
-          break;
-        default:
-          newErrors.coldWallet = t('buycheckout.invalidColdWalletError');
-          break;
+        } else {
+          newErrors.coldWallet = t('buycheckout.invalidNetworkForUSDT');
+        }
+      } else {
+        switch (network) {
+          case 'Onchain':
+            if (
+              !/^(1|3)[a-km-zA-HJ-NP-Z0-9]{25,34}$|^bc1[a-zA-HJ-NP-Z0-9]{39,59}$/.test(
+                coldWallet,
+              )
+            ) {
+              newErrors.coldWallet = t(
+                'buycheckout.invalidColdWalletErrorOnchain',
+              );
+            }
+            break;
+          case 'Liquid':
+            if (
+              !/^VJL[a-km-zA-HJ-NP-Z0-9]{43,}$/i.test(coldWallet) &&
+              !/^ex1[a-z0-9]{39,59}$/i.test(coldWallet) &&
+              !/^CT[a-km-zA-HJ-NP-Z0-9]{40,64}$/i.test(coldWallet)
+            ) {
+              newErrors.coldWallet = t(
+                'buycheckout.invalidColdWalletErrorLiquid',
+              );
+            }
+            break;
+          case 'Lightning':
+            if (
+              !/^lnbc[0-9]{1,}[a-zA-Z0-9]+$/.test(coldWallet) &&
+              !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(coldWallet)
+            ) {
+              newErrors.coldWallet = t(
+                'buycheckout.invalidColdWalletErrorLightning',
+              );
+            }
+            break;
+          default:
+            newErrors.coldWallet = t('buycheckout.invalidColdWalletError');
+            break;
+        }
       }
     }
 
@@ -122,11 +145,17 @@ export function useDataForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const networks = [
-    { name: 'Onchain', icon: Onchain },
-    { name: 'Liquid', icon: Liquid },
-    { name: 'Lightning', icon: Lightning },
-  ];
+  const networks =
+    cryptoType.toUpperCase() === 'USDT'
+      ? [
+          { name: 'Liquid', icon: Liquid },
+          { name: 'Polygon', icon: Polygon },
+        ]
+      : [
+          { name: 'Onchain', icon: Onchain },
+          { name: 'Liquid', icon: Liquid },
+          { name: 'Lightning', icon: Lightning },
+        ];
 
   const handleProcessPayment = async () => {
     if (!acceptFees || !acceptTerms) {

@@ -120,6 +120,8 @@
     "transactionNumberError": "The phone number is required.",
     "invalidTransactionNumberError": "Enter a valid phone number (9 to 15 digits).",
     "termsAndFeesAlert": "You must accept the fees, terms of use, and confirmation of the submitted data.",
+    "invalidColdWalletErrorPolygon": "Invalid wallet address for the Polygon network.",
+    "invalidNetworkForUSDT": "For USDT, please select only Liquid or Polygon.",
     "networkSelectionAlert": "You must select a Bitcoin network before proceeding.",
     "paymentError": "Error processing the payment.",
     "pixKeyCopied": "PIX key copied to clipboard!",
