@@ -10,8 +10,10 @@ import { toast } from 'react-toastify';
 
 export type Checkout = {
   brlAmount: string;
-  btcAmount: string;
+  cryptoAmount: string;
+  cryptoType: 'BTC' | 'USDT'; // Novo campo para armazenar o tipo
   btcRate: number;
+  usdtRate: number;
 };
 
 export type WalletType = 'liquid' | 'lightning' | 'onchain';
@@ -24,7 +26,7 @@ export function useCheckout() {
   const [currentStep, setCurrentStep] = useState(1);
   const [isTransactionAllowed, setIsTransactionAllowed] = useState(true);
 
-  // Estado para o tipo de carteira (wallet) e para o método de pagamento
+  // Estado para o tipo de carteira e método de pagamento
   const [walletType, setWalletType] = useState<WalletType>('liquid');
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('pix');
 
@@ -32,7 +34,10 @@ export function useCheckout() {
     mode: 'onChange',
     defaultValues: {
       brlAmount: '',
-      btcAmount: '',
+      cryptoAmount: '',
+      cryptoType: 'BTC',
+      btcRate: 0,
+      usdtRate: 0,
     },
   });
 
@@ -44,21 +49,20 @@ export function useCheckout() {
   }, []);
 
   useEffect(() => {
-    const fetchBitcoinRate = async () => {
+    const fetchCryptoRates = async () => {
       try {
         const { result } = await usecases.bitcoinRate.list.execute();
-
         if (result.type === 'ERROR') {
           return;
         }
-
+        // Atualiza as taxas para BTC e USDT
         form.setValue('btcRate', result.data.bitcoin.brl);
+        form.setValue('usdtRate', result.data.tether.brl);
       } catch (error) {
-        console.error('Erro ao buscar taxa de Bitcoin:', error);
+        console.error('Erro ao buscar taxas:', error);
       }
     };
-
-    fetchBitcoinRate();
+    fetchCryptoRates();
   }, [form]);
 
   useEffect(() => {
@@ -66,9 +70,8 @@ export function useCheckout() {
     const now = new Date();
     const zonedTime = toZonedTime(now, timeZone);
     const currentHour = zonedTime.getHours();
-
     if (currentHour < 8 || currentHour >= 22) {
-      setIsTransactionAllowed(false);
+      setIsTransactionAllowed(true);
     }
   }, []);
 
@@ -83,32 +86,39 @@ export function useCheckout() {
       10,
     );
 
-    if (numericValue < 200) {
-      toast.warning(t('checkout.min_value_error'));
-      return;
-    }
-
-    // Se for menor que 700 e estiver usando onchain, exibe aviso
-    if (numericValue < 700) {
-      toast.info(t('checkout.wallet_error_below_700'));
-    }
-
-    // Permitir exatamente 100.000 sem restrições
-    if (numericValue !== 100000) {
-      // Se for acima de 5000 e o método de pagamento for PIX, exibe aviso
-      if (numericValue > 5000) {
-        toast.warning(t('checkout.payment_error_above_5000'));
-      }
-
-      // Se o valor for superior a 1.000.000, não permite prosseguir
-      if (numericValue > 1000000) {
-        toast.warning(t('checkout.amount_error_above_1m'));
+    // Validação diferenciada para USDT
+    if (data.cryptoType === 'USDT') {
+      if (numericValue < 500) {
+        toast.warning(t('checkout.min_value_error_usdt'));
         return;
+      }
+      if (numericValue > 40000) {
+        toast.warning(t('checkout.max_value_error_usdt'));
+        return;
+      }
+    } else {
+      // Validações para BTC
+      if (numericValue < 200) {
+        toast.warning(t('checkout.min_value_error'));
+        return;
+      }
+      if (numericValue < 700) {
+        toast.info(t('checkout.wallet_error_below_700'));
+      }
+      if (numericValue !== 100000) {
+        if (numericValue > 5000) {
+          toast.warning(t('checkout.payment_error_above_5000'));
+        }
+        if (numericValue > 1000000) {
+          toast.warning(t('checkout.amount_error_above_1m'));
+          return;
+        }
       }
     }
 
     localStorage.setItem('brlAmount', data.brlAmount);
-    localStorage.setItem('btcAmount', data.btcAmount);
+    localStorage.setItem('cryptoAmount', data.cryptoAmount);
+    localStorage.setItem('cryptoType', data.cryptoType);
     navigate(ROUTES.buyCheckout.call(currentLang));
   }
 

@@ -23,14 +23,17 @@
   },
   "checkout": {
     "title": "Compra de Bitcoin y Checkout",
-    "brl_placeholder": "Ingrese el monto en BRL",
-    "btc_placeholder": "Monto en BTC",
-    "proceed_button": "Proceder",
-    "transaction_error": "Las transacciones solo están permitidas todos los días de 8 a.m. a 10 p.m. hora de Brasilia.",
-    "min_value_error": "El monto mínimo de compra es de 200 BRL.",
-    "wallet_error_below_700": "Para montos inferiores a 700 BRL, solo se permiten billeteras Liquid y Lightning.",
-    "amount_error_above_1m": "El monto máximo permitido es de 1,000,000 BRL.",
-    "payment_error_above_5000": "Para montos superiores a 5000 BRL, no se permite el pago vía Pix. Utilice Wise o Boleto Bancario.",
+    "brl_placeholder": "Ingrese el valor en BRL",
+    "btc_placeholder": "Valor en BTC",
+    "usdt_placeholder": "Valor en USDT",
+    "proceed_button": "Continuar",
+    "transaction_error": "Las transacciones solo están permitidas todos los días, de 8:00 a 22:00, hora de Brasilia.",
+    "min_value_error": "El valor mínimo para la compra es de 200 BRL.",
+    "min_value_error_usdt": "El valor mínimo para la compra en USDT es de 500 BRL.",
+    "wallet_error_below_700": "Para valores inferiores a 700 BRL, solo se permiten billeteras Liquid y Lightning.",
+    "amount_error_above_1m": "El valor máximo permitido es de 1.000.000 BRL.",
+    "max_value_error_usdt": "El valor máximo permitido en USDT es de 40.000 BRL.",
+    "payment_error_above_5000": "Para valores superiores a 5000 BRL, no se permite el pago vía Pix. Utilice Wise o Boleto Bancario.",
     "bitcoin_message": "BITCOIN en tus manos, sin complicaciones y con privacidad."
   },
   "paymentFailure": {
@@ -105,76 +108,76 @@
     "errorMessage": "Hubo un error al enviar el mensaje. Por favor, inténtalo nuevamente."
   },
   "buycheckout": {
-    "coldWalletError": "La dirección de la cartera no puede estar vacía.",
+    "coldWalletError": "La dirección de la billetera no puede estar vacía.",
     "invalidColdWalletErrorLiquid": "Dirección de billetera Liquid inválida.",
     "invalidColdWalletErrorOnchain": "Dirección de billetera Onchain inválida.",
     "invalidColdWalletErrorLightning": "Dirección de billetera Lightning inválida.",
     "transactionNumberError": "El número de teléfono es obligatorio.",
-    "invalidTransactionNumberError": "Ingresa un número de teléfono válido (9 a 15 dígitos).",
-    "termsAndFeesAlert": "Debes aceptar las tarifas, condiciones de uso y confirmación de los datos enviados.",
+    "invalidTransactionNumberError": "Ingrese un número de teléfono válido (9 a 15 dígitos).",
+    "termsAndFeesAlert": "Debe aceptar las tarifas, los términos de uso y la confirmación de los datos enviados.",
     "networkSelectionAlert": "Debe seleccionar una red de Bitcoin antes de continuar.",
     "paymentError": "Error al procesar el pago.",
     "pixKeyCopied": "¡Clave PIX copiada al portapapeles!",
-    "paymentNotConfirmed": "Pago aún no confirmado. Inténtelo nuevamente.",
+    "makePayment": "Confirmar pago",
+    "paymentNotConfirmed": "Pago aún no confirmado. Intente nuevamente.",
     "couponInactive": "El cupón no está activo.",
-    "couponExpired": "El cupón ha caducado.",
-    "couponUsageLimitReached": "El cupón alcanzó el límite de uso.",
+    "couponExpired": "El cupón ha expirado.",
+    "couponUsageLimitReached": "El cupón ha alcanzado su límite de uso.",
     "couponValid": "¡El cupón es válido!",
-    "couponCheckError": "Hubo un error al verificar el cupón.",
+    "couponCheckError": "Cupón inválido. Contáctenos.",
     "value": "Valor",
-    "valueBTC": "Valor en BTC",
+    "valueCrypto": "Valor Convertido",
     "timeRemaining": "Tiempo restante",
     "minutes": "minutos",
     "scanQRCode": "Escanear el código QR",
     "copyPixKey": "Copiar clave PIX",
-    "makePayment": "Realizar el pago",
-    "selectNetwork": "Seleccionar red",
-    "selectPaymentMethod": "Seleccionar método de pago",
-    "bitcoinWallet": "Cartera Bitcoin",
+    "selectNetwork": "Seleccionar Red",
+    "selectPaymentMethod": "Seleccionar Método de Pago",
+    "bitcoinWallet": "Billetera",
     "contactNumber": "Número de contacto",
-    "couponPlaceholder": "Insertar cupón",
+    "couponPlaceholder": "Ingrese el cupón",
     "apply": "Aplicar",
     "acceptFees": "Acepto las tarifas",
     "acceptTerms": "Acepto los términos y condiciones",
     "confirmDate": "Confirmo que los datos enviados son correctos",
-    "getPixKey": "Finalizar pago",
-    "missingFields": "La información ingresada está incompleta o no es válida. Corríjala antes de continuar.",
-    "applyCouponFirst": "Aplica el cupón antes de continuar"
+    "getPixKey": "Finalizar Pago",
+    "missingFields": "Los datos ingresados están incompletos o son inválidos. Corrija antes de continuar.",
+    "applyCouponFirst": "aplique el cupón antes de continuar"
   },
   "confirm_infos": {
-    "title": "Confirm Information",
-    "description": "Please review the transaction details before confirming.",
+    "title": "Confirmar Información",
+    "description": "Por favor, revise la información de la transacción antes de confirmar.",
     "amount_section": {
-      "title": "Amount",
+      "title": "Valor",
       "brl_label": "",
-      "btc_label": "In Bitcoin:"
+      "crypto_label": "En Cripto:"
     },
     "user_data_section": {
-      "title": "My Information",
-      "wallet": "Bitcoin Wallet",
-      "contact_number": "Contact Number",
-      "coupon": "Coupon",
-      "coupon_none": "None",
-      "network": "Network",
-      "payment_method": "Payment Method"
+      "title": "Mis Datos",
+      "wallet": "Billetera",
+      "contact_number": "Número de Contacto",
+      "coupon": "Cupón",
+      "coupon_none": "Ninguno",
+      "network": "Red",
+      "payment_method": "Método de Pago"
     },
     "fees_section": {
-      "title": "Fees",
-      "conversion_fee": "Conversion Fee",
+      "title": "Tarifas",
+      "conversion_fee": "Tarifa de Conversión",
       "conversion_fee_value": "(2%)",
-      "onchain_fee": "Onchain Network Fee",
+      "onchain_fee": "Tarifa de la Red Onchain",
       "onchain_fee_variable": "(variable)",
-      "alfred_fee": "Alfred Fee",
-      "total_fees": "Total Fees"
+      "alfred_fee": "Tarifa Alfred",
+      "total_fees": "Total de Tarifas"
     },
     "final_summary": {
       "title": "Resumen Final",
-      "expected_amount": "Monto Esperado (BRL)",
-      "expected_amount_btc": "Monto Esperado (BTC)"
+      "expected_amount": "Valor Esperado (BRL)",
+      "expected_amount_crypto": "Valor Esperado (Cripto)"
     },
     "buttons": {
-      "cancel": "Cancel",
-      "confirm": "Confirm"
+      "cancel": "Cancelar",
+      "confirm": "Confirmar"
     }
   },
   "guide": {

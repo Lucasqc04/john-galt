@@ -1,5 +1,5 @@
 import { BitcoinRateRepository } from '@/data/repositories/BitcoinRate.repository';
-import { ListedBitcoinRate } from '@/domain/entities/bitcoin/Rate.entity';
+import { ListedCryptoRate } from '@/domain/entities/bitcoin/Rate.entity';
 import { DefaultResultError, Result } from '../../../utils/Result';
 import { UseCase } from '../../../utils/UseCase';
 
@@ -7,7 +7,7 @@ export type ListReq = object;
 
 export type ValidateRes = Promise<
   Result<
-    ListedBitcoinRate,
+    ListedCryptoRate,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     { code: 'SERIALIZATION'; payload: any } | DefaultResultError
   >
@@ -33,6 +33,6 @@ export class ListBitcoinRateUseCaseImpl implements ListBitcoinRateUseCase {
       }
     }
 
-    return Result.Success(ListedBitcoinRate.fromModel(result.data));
+    return Result.Success(ListedCryptoRate.fromModel(result.data));
   }
 }

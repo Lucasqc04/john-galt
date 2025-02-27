@@ -37,7 +37,8 @@ interface ConfirmInfosModalProps {
   onClose: () => void;
   onConfirm: () => void;
   brlAmount: string;
-  btcAmount: string;
+  cryptoAmount: string;
+  cryptoType: string;
   network: string;
   coldWallet: string;
   paymentMethod: string;
@@ -51,7 +52,8 @@ export default function ConfirmInfosModal({
   onClose,
   onConfirm,
   brlAmount,
-  btcAmount,
+  cryptoAmount,
+  cryptoType,
   network,
   coldWallet,
   paymentMethod,
@@ -65,11 +67,12 @@ export default function ConfirmInfosModal({
     swapFee,
     totalFees,
     expectedAmount,
+    expectedAmountCrypto,
     alfredFee,
     alfredFeeRate,
     conversionFeeUsdBrl,
-    expectedAmountBTC,
-  } = useConfirmInfos(network, brlAmount, alfredFeePercentage);
+  } = useConfirmInfos(network, brlAmount, alfredFeePercentage, cryptoType);
+
   const [isDataVisible, setIsDataVisible] = useState(false);
   const [isTaxVisible, setIsTaxVisible] = useState(false);
 
@@ -125,8 +128,10 @@ export default function ConfirmInfosModal({
               <span className="text-xl font-bold">{brlAmount}</span> BRL
             </p>
             <p>
-              {t('confirm_infos.amount_section.btc_label')}{' '}
-              <span className="text-xl font-bold">{btcAmount} BTC</span>
+              {t('confirm_infos.amount_section.crypto_label')}{' '}
+              <span className="text-xl font-bold">
+                {cryptoAmount} {cryptoType.toUpperCase()}
+              </span>
             </p>
           </div>
 
@@ -200,14 +205,23 @@ export default function ConfirmInfosModal({
             </div>
             {isTaxVisible && (
               <div className="mt-4 space-y-2">
-                <p>
-                  <strong>
-                    {t('confirm_infos.fees_section.conversion_fee')}:
-                  </strong>{' '}
-                  R$ {swapFee.toFixed(2)} (
-                  {t('confirm_infos.fees_section.conversion_fee_value')} + R${' '}
-                  {conversionFeeUsdBrl?.toFixed(2)})
-                </p>
+                {cryptoType.toLowerCase() === 'usdt' ? (
+                  <p>
+                    <strong>
+                      {t('confirm_infos.fees_section.conversion_fee')}:
+                    </strong>{' '}
+                    R$ {swapFee.toFixed(2)}
+                  </p>
+                ) : (
+                  <p>
+                    <strong>
+                      {t('confirm_infos.fees_section.conversion_fee')}:
+                    </strong>{' '}
+                    R$ {swapFee.toFixed(2)} (
+                    {t('confirm_infos.fees_section.conversion_fee_value')} + R${' '}
+                    {conversionFeeUsdBrl?.toFixed(2)})
+                  </p>
+                )}
                 {network.toLowerCase() === 'onchain' && (
                   <p>
                     <strong>
@@ -246,9 +260,9 @@ export default function ConfirmInfosModal({
             </p>
             <p>
               <strong>
-                {t('confirm_infos.final_summary.expected_amount_btc')}:
+                {t('confirm_infos.final_summary.expected_amount_crypto')}:
               </strong>{' '}
-              {expectedAmountBTC} BTC
+              {expectedAmountCrypto} {cryptoType.toUpperCase()}
             </p>
           </div>
 
