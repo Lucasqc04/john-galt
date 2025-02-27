@@ -50,6 +50,12 @@
     "redirectButton": "VOLTAR PARA O SITE",
     "Ballon": "Volte logo!"
   },
+  "paymentReview": {
+    "title": "Pagamento em Revisão",
+    "description": "Seu pagamento está em revisão para aumentar a segurança e evitar golpes. Estamos aguardando uma aprovação para garantir a proteção da sua transação. Em poucas horas, o pagamento será processado. Fique tranquilo.",
+    "redirectButton": "VOLTAR PARA O SITE",
+    "whatsapp": "FALE CONOSCO"
+  },
   "fees": {
     "title": "Taxas",
     "above1000": "5% para transações acima de 1.000 BRL.",
