@@ -73,5 +73,9 @@ export const ROUTES = {
       path: 'success-alfred',
       call: (currentLang: string) => `/${currentLang}/success-alfred`,
     },
+    review: {
+      path: 'review-alfred',
+      call: (currentLang: string) => `/${currentLang}/review-alfred`,
+    },
   },
 };
