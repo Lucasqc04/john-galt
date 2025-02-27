@@ -14,6 +14,7 @@ import BuyBitcoin from '../screens/Checkout/Checkout';
 import { CheckoutPix } from '../screens/Checkout/CheckoutPix';
 import DataForm from '../screens/Checkout/DataForm/DataForm';
 import { PaymentAlfredFailure } from '../screens/paymentStatus/pageFailure';
+import { PaymentAlfredReview } from '../screens/paymentStatus/pageReview';
 import { PaymentAlfredSuccess } from '../screens/paymentStatus/pageSucces';
 import { Fees } from '../screens/Rate/RateBitcoin';
 import { TermsOfUse } from '../screens/Terms/TermsUse';
@@ -58,6 +59,10 @@ export function BrowserRouter() {
             <Route
               path={ROUTES.paymentAlfredStatus.failure.path}
               element={<PaymentAlfredFailure />}
+            />
+            <Route
+              path={ROUTES.paymentAlfredStatus.review.path}
+              element={<PaymentAlfredReview />}
             />
             <Route
               path={ROUTES.aboutBitcoin.path}

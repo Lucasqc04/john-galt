@@ -33,6 +33,10 @@ export const usePaymentStatusPolling = () => {
       if (status === 'paid') {
         navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
         clearInterval(timerRef.current!);
+      }
+      if (status === 'under_review') {
+        navigate(ROUTES.paymentAlfredStatus.review.call(currentLang));
+        clearInterval(timerRef.current!);
       } else {
         toast.warn(t('buycheckout.paymentNotConfirmed'));
       }
