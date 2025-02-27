@@ -4,6 +4,7 @@ export function useConfirmInfos(
   network: string,
   brlAmount: string,
   alfredFeePercentage: number,
+  cryptoType: string,
 ) {
   const [localAlfredFeePercentage, setLocalAlfredFeePercentage] =
     useState<number>(alfredFeePercentage);
@@ -66,33 +67,56 @@ export function useConfirmInfos(
   const brlAmountNum = parseFloat(
     brlAmount.replace(/[^\d,]/g, '').replace(',', '.'),
   );
-
   const alfredFeeRate =
     brlAmountNum >= 1000
       ? localAlfredFeePercentage / 100
       : (localAlfredFeePercentage * 2) / 100;
   const alfredFee = brlAmountNum * alfredFeeRate;
 
-  const conversionFeeUsd = 0.65;
-  const conversionFeeBrl = conversionFeeUsd * (usdToBrl || 0);
-  const swapFee = brlAmountNum * 0.02 + conversionFeeBrl;
-  const totalFees = alfredFee + swapFee + (onchainFee || 0);
-  const finalAmount = brlAmountNum - totalFees;
+  if (cryptoType.toLowerCase() === 'usdt') {
+    // Para USDT, não aplica a taxa de conversão
+    const conversionFeeBrl = 0;
+    const swapFee = brlAmountNum * 0.0158; // somente 1.58% de taxa de swap
+    const totalFees = alfredFee + swapFee + (onchainFee || 0);
+    const finalAmount = brlAmountNum - totalFees;
+    const expectedAmountUSDT = usdToBrl
+      ? (finalAmount / usdToBrl).toFixed(2)
+      : '0.00';
 
-  const expectedAmountBTC = btcToBrl
-    ? (finalAmount / btcToBrl).toFixed(8)
-    : '0.00000000';
+    return {
+      onchainFee,
+      btcToBrl,
+      usdToBrl,
+      swapFee,
+      totalFees,
+      expectedAmount: finalAmount,
+      expectedAmountCrypto: expectedAmountUSDT,
+      alfredFee,
+      alfredFeeRate,
+      conversionFeeUsdBrl: conversionFeeBrl,
+    };
+  } else {
+    // Para BTC (ou outros), aplica a taxa de conversão
+    const conversionFeeUsd = 0.65;
+    const conversionFeeBrl = conversionFeeUsd * (usdToBrl || 0);
+    const swapFee = brlAmountNum * 0.02 + conversionFeeBrl;
+    const totalFees = alfredFee + swapFee + (onchainFee || 0);
+    const finalAmount = brlAmountNum - totalFees;
+    const expectedAmountBTC = btcToBrl
+      ? (finalAmount / btcToBrl).toFixed(8)
+      : '0.00000000';
 
-  return {
-    onchainFee,
-    btcToBrl,
-    usdToBrl,
-    swapFee,
-    totalFees,
-    expectedAmount: finalAmount,
-    expectedAmountBTC,
-    alfredFee,
-    alfredFeeRate,
-    conversionFeeUsdBrl: conversionFeeBrl,
-  };
+    return {
+      onchainFee,
+      btcToBrl,
+      usdToBrl,
+      swapFee,
+      totalFees,
+      expectedAmount: finalAmount,
+      expectedAmountCrypto: expectedAmountBTC,
+      alfredFee,
+      alfredFeeRate,
+      conversionFeeUsdBrl: conversionFeeBrl,
+    };
+  }
 }

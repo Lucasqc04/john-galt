@@ -26,7 +26,8 @@ export function useDataForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [brlAmount, setBrlAmount] = useState('');
-  const [btcAmount, setBtcAmount] = useState('');
+  const [cryptoAmount, setCryptoAmount] = useState('');
+  const [cryptoType, setCryptoType] = useState('');
   const [acceptFees, setAcceptFees] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [alfredFeePercentage, setAlfredFeePercentage] = useState(5);
@@ -37,10 +38,12 @@ export function useDataForm() {
 
   useEffect(() => {
     const storedBrl = localStorage.getItem('brlAmount');
-    const storedBtc = localStorage.getItem('btcAmount');
-    if (storedBrl && storedBtc) {
+    const storedCrypto = localStorage.getItem('cryptoAmount');
+    const storedCryptoType = localStorage.getItem('cryptoType');
+    if (storedBrl && storedCrypto && storedCryptoType) {
       setBrlAmount(storedBrl);
-      setBtcAmount(storedBtc);
+      setCryptoAmount(storedCrypto);
+      setCryptoType(storedCryptoType);
     }
   }, []);
 
@@ -152,11 +155,29 @@ export function useDataForm() {
       const valorBRL = parseFloat(brlAmount.replace(/\D/g, ''));
       const valorToSend = valorBRL === 100000 ? 1000 : valorBRL;
 
+      if (cryptoType.toUpperCase() === 'USDT') {
+        const whatsappNumber = '5511993439032';
+
+        let PaymentMethodFormatted = 'Wise';
+
+        if (paymentMethod === 'BANK_TRANSFER') {
+          PaymentMethodFormatted = 'Boleto Bancário';
+        } else if (paymentMethod === 'PIX') {
+          PaymentMethodFormatted = 'PIX';
+        }
+
+        const message = `Olá! Aqui estão os detalhes do pedido :\n\nValor BRL: ${brlAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: ${PaymentMethodFormatted}\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
+
+        const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+        window.location.href = whatsappLink;
+        return;
+      }
+
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/deposit`,
         {
           valorBRL: valorToSend,
-          valorBTC: parseFloat(btcAmount),
+          valorBTC: parseFloat(cryptoAmount),
           paymentMethod: paymentMethod,
           network: network,
           telefone: transactionNumber,
@@ -167,7 +188,7 @@ export function useDataForm() {
 
       if (paymentMethod === 'WISE') {
         const whatsappNumber = '5511993439032';
-        const message = `Olá! Aqui estão os detalhes do pedido Wise:\n\n Valor BRL: ${brlAmount} \n BTC: ${btcAmount}\n Rede: ${network}\n Cold Wallet: ${coldWallet} \n Método: Wise\n Telefone: ${transactionNumber}\n Cupom: ${cupom}`;
+        const message = `Olá! Aqui estão os detalhes do pedido Wise:\n\n Valor BRL: ${brlAmount} \n ${cryptoType}: ${cryptoAmount}\n Rede: ${network}\n Cold Wallet: ${coldWallet} \n Método: Wise\n Telefone: ${transactionNumber}\n Cupom: ${cupom}`;
         const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
         window.location.href = whatsappLink;
@@ -176,7 +197,7 @@ export function useDataForm() {
 
       if (paymentMethod === 'BANK_TRANSFER') {
         const whatsappNumber = '5511993439032';
-        const message = `Olá! Aqui estão os detalhes do pedido Boleto Bancário:\n\n Valor BRL: ${brlAmount} \n BTC: ${btcAmount}\n Rede: ${network}\n Cold Wallet: ${coldWallet} \n Método: Boleto Bancário\n Telefone: ${transactionNumber}\n Cupom: ${cupom}`;
+        const message = `Olá! Aqui estão os detalhes do pedido Boleto Bancário:\n\n Valor BRL: ${brlAmount} \n ${cryptoType}: ${cryptoAmount}\n Rede: ${network}\n Cold Wallet: ${coldWallet} \n Método: Boleto Bancário\n Telefone: ${transactionNumber}\n Cupom: ${cupom}`;
         const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
         window.location.href = whatsappLink;
@@ -316,7 +337,8 @@ export function useDataForm() {
     isLoading,
     errors,
     brlAmount,
-    btcAmount,
+    cryptoAmount,
+    cryptoType,
     acceptFees,
     acceptTerms,
     networks,

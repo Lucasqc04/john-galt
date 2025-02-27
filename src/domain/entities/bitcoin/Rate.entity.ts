@@ -1,17 +1,18 @@
-import { ListedBitcoinRateModel } from '@/data/model/BitcoinRate.model';
+import { ListedCryptoRateModel } from '@/data/model/BitcoinRate.model';
 
-export class ListedBitcoinRate {
-  bitcoin!: {
-    brl: number;
-  };
+export class ListedCryptoRate {
+  bitcoin: { brl: number };
+  tether: { brl: number };
 
-  static fromModel(model: ListedBitcoinRateModel): ListedBitcoinRate {
-    const entity = new ListedBitcoinRate();
+  constructor() {
+    this.bitcoin = { brl: 0 };
+    this.tether = { brl: 0 };
+  }
 
-    entity.bitcoin = {
-      brl: model.bitcoin.brl,
-    };
-
+  static fromModel(model: ListedCryptoRateModel): ListedCryptoRate {
+    const entity = new ListedCryptoRate();
+    entity.bitcoin = { brl: model.bitcoin.brl };
+    entity.tether = { brl: model.tether.brl };
     return entity;
   }
 }
