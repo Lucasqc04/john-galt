@@ -50,6 +50,12 @@
     "redirectButton": "Go back to SITE",
     "Ballon": "Come back soon!"
   },
+  "paymentReview": {
+    "title": "Payment Under Review",
+    "description": "Your payment is under review to enhance security and prevent fraud. We are awaiting approval to ensure the protection of your transaction. In a few hours, the payment will be processed. Rest assured.",
+    "redirectButton": "BACK TO THE SITE",
+    "whatsapp": "CONTACT US"
+  },
   "fees": {
     "title": "Fees",
     "above1000": "5% for transactions above 1,000 BRL.",

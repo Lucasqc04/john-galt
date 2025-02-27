@@ -50,6 +50,12 @@
     "redirectButton": "Volver al SITIO",
     "Ballon": "¡Vuelve pronto!"
   },
+  "paymentReview": {
+    "title": "Pago en Revisión",
+    "description": "Su pago está en revisión para aumentar la seguridad y evitar fraudes. Estamos esperando la aprobación para garantizar la protección de su transacción. En pocas horas, el pago será procesado. Manténgase tranquilo.",
+    "redirectButton": "VOLVER AL SITIO",
+    "whatsapp": "CONTÁCTENOS"
+  },
   "fees": {
     "title": "Tarifas",
     "above1000": "5% para transacciones superiores a 1.000 BRL.",
