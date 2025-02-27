@@ -122,6 +122,8 @@
     "termsAndFeesAlert": "Você precisa aceitar as taxas, termos de uso e a confirmação dos dados enviados",
     "networkSelectionAlert": "Você precisa selecionar uma rede de Bitcoin antes de prosseguir.",
     "paymentError": "Erro ao processar o pagamento.",
+    "invalidColdWalletErrorPolygon": "Endereço de carteira inválido para a rede Polygon.",
+    "invalidNetworkForUSDT": "Para USDT, selecione apenas Liquid ou Polygon.",
     "pixKeyCopied": "Chave PIX copiada para a área de transferência!",
     "makePayment": "Confirmar pagamento",
     "paymentNotConfirmed": "Pagamento ainda não confirmado. Tente novamente.",
