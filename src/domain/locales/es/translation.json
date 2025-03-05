@@ -150,7 +150,12 @@
     "confirmDate": "Confirmo que los datos enviados son correctos",
     "getPixKey": "Finalizar Pago",
     "missingFields": "Los datos ingresados están incompletos o son inválidos. Corrija antes de continuar.",
-    "applyCouponFirst": "aplique el cupón antes de continuar"
+    "applyCouponFirst": "aplique el cupón antes de continuar",
+    "paymentMethod": {
+      "PIX": "PIX",
+      "WISE": "Wise",
+      "TICKET": "Boleto Bancario"
+    }
   },
   "confirm_infos": {
     "title": "Confirmar Información",

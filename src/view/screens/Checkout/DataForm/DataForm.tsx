@@ -46,6 +46,11 @@ export default function DataForm() {
     validateFields,
   } = useDataForm();
 
+  const paymentMethodLabels = {
+    PIX: t('buycheckout.paymentMethod.PIX'),
+    WISE: t('buycheckout.paymentMethod.WISE'),
+    TICKET: t('buycheckout.paymentMethod.TICKET'),
+  };
   // Converte brlAmount para número (removendo caracteres não numéricos)
   const numericBRL = parseInt(brlAmount.replace(/\D/g, ''), 10);
 
@@ -165,7 +170,9 @@ export default function DataForm() {
                 <div className="relative w-full">
                   <input
                     type="text"
-                    value={paymentMethod}
+                    value={
+                      paymentMethod ? paymentMethodLabels[paymentMethod] : ''
+                    }
                     readOnly
                     placeholder={t('buycheckout.selectPaymentMethod')}
                     className="border-2 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-black text-center w-full"
@@ -183,7 +190,7 @@ export default function DataForm() {
                         alt="Wise"
                         className="w-8 h-8 sm:w-10 sm:h-10 rounded-full"
                       />
-                    ) : paymentMethod === 'BANK_TRANSFER' ? (
+                    ) : paymentMethod === 'TICKET' ? (
                       <img
                         src={BoletoIcon}
                         alt="Boleto Bancário"
@@ -227,7 +234,7 @@ export default function DataForm() {
                           />
                         </li>
                         <li
-                          onClick={() => selectPaymentMethod('BANK_TRANSFER')}
+                          onClick={() => selectPaymentMethod('TICKET')}
                           className="flex flex-col items-center justify-center px-4 py-2 cursor-pointer text-white hover:bg-gray-800"
                         >
                           <span className="w-full text-center">

@@ -149,7 +149,12 @@
     "confirmDate": "I confirm that the submitted data is correct",
     "getPixKey": "Complete Payment",
     "missingFields": "The entered data is incomplete or invalid. Please correct it before proceeding.",
-    "applyCouponFirst": "apply the coupon before continuing"
+    "applyCouponFirst": "apply the coupon before continuing",
+    "paymentMethod": {
+      "PIX": "PIX",
+      "WISE": "Wise",
+      "TICKET": "Bank Slip"
+    }
   },
   "confirm_infos": {
     "title": "Confirm Information",
