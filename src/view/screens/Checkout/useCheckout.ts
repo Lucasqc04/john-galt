@@ -92,7 +92,7 @@ export function useCheckout() {
         toast.warning(t('checkout.min_value_error_usdt'));
         return;
       }
-      if (numericValue > 40000) {
+      if (numericValue > 5000) {
         toast.warning(t('checkout.max_value_error_usdt'));
         return;
       }

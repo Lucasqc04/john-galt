@@ -32,7 +32,7 @@
     "min_value_error_usdt": "The minimum purchase amount in USDT is 500 BRL.",
     "wallet_error_below_700": "For amounts below 700 BRL, only Liquid and Lightning wallets are allowed.",
     "amount_error_above_1m": "The maximum allowed amount is 1,000,000 BRL.",
-    "max_value_error_usdt": "The maximum allowed amount in USDT is 40,000 BRL.",
+    "max_value_error_usdt": "The maximum allowed amount in USDT is 5,000 BRL.",
     "payment_error_above_5000": "For amounts above 5000 BRL, payment via Pix is not allowed. Use Wise or Bank Slip.",
     "bitcoin_message": "BITCOIN in your hands, without complications and with privacy."
   },

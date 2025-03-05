@@ -32,7 +32,7 @@
     "min_value_error_usdt": "O valor mínimo para compra em USDT é 500 BRL.",
     "wallet_error_below_700": "Para valores abaixo de 700 BRL, apenas carteiras Liquid e Lightning são permitidas.",
     "amount_error_above_1m": "O valor máximo permitido é 1.000.000 BRL.",
-    "max_value_error_usdt": "O valor máximo permitido em USDT é 40.000 BRL.",
+    "max_value_error_usdt": "O valor máximo permitido em USDT é 5.000 BRL.",
     "payment_error_above_5000": "Para valores acima de 5000 BRL, o pagamento via Pix não é permitido. Utilize Wise ou Boleto Bancário.",
     "bitcoin_message": "BITCOIN na sua mão, sem complicação e com privacidade."
   },
