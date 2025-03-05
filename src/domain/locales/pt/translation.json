@@ -32,7 +32,7 @@
     "min_value_error_usdt": "O valor mínimo para compra em USDT é 500 BRL.",
     "wallet_error_below_700": "Para valores abaixo de 700 BRL, apenas carteiras Liquid e Lightning são permitidas.",
     "amount_error_above_1m": "O valor máximo permitido é 1.000.000 BRL.",
-    "max_value_error_usdt": "O valor máximo permitido em USDT é 40.000 BRL.",
+    "max_value_error_usdt": "O valor máximo permitido em USDT é 5.000 BRL.",
     "payment_error_above_5000": "Para valores acima de 5000 BRL, o pagamento via Pix não é permitido. Utilize Wise ou Boleto Bancário.",
     "bitcoin_message": "BITCOIN na sua mão, sem complicação e com privacidade."
   },
@@ -134,10 +134,6 @@
     "couponCheckError": "Cupom inválido. Entre em contato.",
     "value": "Valor",
     "valueCrypto": "Valor Convertido",
-    "timeRemaining": "Tempo restante",
-    "minutes": "minutos",
-    "scanQRCode": "Escaneie o QR Code",
-    "copyPixKey": "Copiar chave PIX",
     "selectNetwork": "Selecione a Rede",
     "selectPaymentMethod": "Selecione o Método de Pagamento",
     "bitcoinWallet": "Carteira",
@@ -149,7 +145,22 @@
     "confirmDate": "Confirmo que os dados enviados estão corretos",
     "getPixKey": "Finalizar Pagamento",
     "missingFields": "Os dados inseridos estão incompletos ou inválidos. Corrija antes de prosseguir.",
-    "applyCouponFirst": "aplique o cupom antes de continuar"
+    "applyCouponFirst": "aplique o cupom antes de continuar",
+    "attention": "Atenção:",
+    "instruction": "Para concluir sua transação, clique no botão abaixo após realizar o pagamento.",
+    "timeRemaining": "Tempo restante",
+    "minutes": "minutos",
+    "verifying": "Verificando...",
+    "scanQRCode": "Escaneie o QR Code",
+    "qrCode100kAlt": "QR Code para R$ 100.000",
+    "bitcoinPurchaseWarning": "Atenção: Você está comprando Bitcoin",
+    "alfredLogoAlt": "Logo Alfred",
+    "copyPixKey": "Copiar chave PIX",
+    "paymentMethod": {
+      "PIX": "PIX",
+      "WISE": "Wise",
+      "TICKET": "Boleto Bancário"
+    }
   },
   "confirm_infos": {
     "title": "Confirmar Informações",

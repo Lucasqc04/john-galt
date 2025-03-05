@@ -21,7 +21,7 @@ export function useDataForm() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpenMethod, setIsDropdownOpenMethod] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<
-    'PIX' | 'Cartão de Crédito' | 'BANK_TRANSFER' | 'WISE'
+    'PIX' | 'TICKET' | 'WISE'
   >();
   const [pixKey, setPixKey] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -61,7 +61,7 @@ export function useDataForm() {
     setIsDropdownOpenMethod((prevState) => !prevState);
   };
 
-  const selectPaymentMethod = (method: 'PIX' | 'WISE' | 'BANK_TRANSFER') => {
+  const selectPaymentMethod = (method: 'PIX' | 'WISE' | 'TICKET') => {
     setPaymentMethod(method);
     setIsDropdownOpenMethod(false);
   };
@@ -189,7 +189,7 @@ export function useDataForm() {
 
         let PaymentMethodFormatted = 'Wise';
 
-        if (paymentMethod === 'BANK_TRANSFER') {
+        if (paymentMethod === 'TICKET') {
           PaymentMethodFormatted = 'Boleto Bancário';
         } else if (paymentMethod === 'PIX') {
           PaymentMethodFormatted = 'PIX';
@@ -224,7 +224,7 @@ export function useDataForm() {
         return;
       }
 
-      if (paymentMethod === 'BANK_TRANSFER') {
+      if (paymentMethod === 'TICKET') {
         const whatsappNumber = '5511993439032';
         const message = `Olá! Aqui estão os detalhes do pedido Boleto Bancário:\n\n Valor BRL: ${brlAmount} \n ${cryptoType}: ${cryptoAmount}\n Rede: ${network}\n Cold Wallet: ${coldWallet} \n Método: Boleto Bancário\n Telefone: ${transactionNumber}\n Cupom: ${cupom}`;
         const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;

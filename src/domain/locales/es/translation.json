@@ -32,7 +32,7 @@
     "min_value_error_usdt": "El valor mínimo para la compra en USDT es de 500 BRL.",
     "wallet_error_below_700": "Para valores inferiores a 700 BRL, solo se permiten billeteras Liquid y Lightning.",
     "amount_error_above_1m": "El valor máximo permitido es de 1.000.000 BRL.",
-    "max_value_error_usdt": "El valor máximo permitido en USDT es de 40.000 BRL.",
+    "max_value_error_usdt": "El valor máximo permitido en USDT es de 5.000 BRL.",
     "payment_error_above_5000": "Para valores superiores a 5000 BRL, no se permite el pago vía Pix. Utilice Wise o Boleto Bancario.",
     "bitcoin_message": "BITCOIN en tus manos, sin complicaciones y con privacidad."
   },
@@ -135,11 +135,6 @@
     "couponCheckError": "Cupón inválido. Contáctenos.",
     "value": "Valor",
     "valueCrypto": "Valor Convertido",
-    "timeRemaining": "Tiempo restante",
-    "minutes": "minutos",
-    "scanQRCode": "Escanear el código QR",
-    "copyPixKey": "Copiar clave PIX",
-    "selectNetwork": "Seleccionar Red",
     "selectPaymentMethod": "Seleccionar Método de Pago",
     "bitcoinWallet": "Billetera",
     "contactNumber": "Número de contacto",
@@ -150,7 +145,22 @@
     "confirmDate": "Confirmo que los datos enviados son correctos",
     "getPixKey": "Finalizar Pago",
     "missingFields": "Los datos ingresados están incompletos o son inválidos. Corrija antes de continuar.",
-    "applyCouponFirst": "aplique el cupón antes de continuar"
+    "applyCouponFirst": "aplique el cupón antes de continuar",
+    "attention": "Atención:",
+    "instruction": "Para completar su transacción, haga clic en el botón de abajo después de realizar el pago.",
+    "timeRemaining": "Tiempo restante",
+    "minutes": "minutos",
+    "verifying": "Verificando...",
+    "scanQRCode": "Escanee el Código QR",
+    "qrCode100kAlt": "Código QR para 100.000 R$",
+    "bitcoinPurchaseWarning": "Atención: Está comprando Bitcoin",
+    "alfredLogoAlt": "Logo de Alfred",
+    "copyPixKey": "Copiar clave PIX",
+    "paymentMethod": {
+      "PIX": "PIX",
+      "WISE": "Wise",
+      "TICKET": "Boleto Bancario"
+    }
   },
   "confirm_infos": {
     "title": "Confirmar Información",

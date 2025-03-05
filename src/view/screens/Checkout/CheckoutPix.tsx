@@ -25,15 +25,16 @@ export function CheckoutPix() {
   const handleCopyToClipboard = () => {
     const textToCopy = is100k ? pixValue100k : (pixKey ?? '');
     navigator.clipboard.writeText(textToCopy);
-    toast.success(t('buycheckout.pixKeyCopied'));
+    toast.success(t('buycheckout.copyPixKey'));
   };
 
   return (
     <div className="flex flex-col items-center pt-4">
-      <h3 className="text-red-600 text-3xl font-semibold mb-2">Atenção:</h3>
+      <h3 className="text-red-600 text-3xl font-semibold mb-2">
+        {t('buycheckout.attention')}
+      </h3>
       <p className="text-lg text-center text-gray-100 mb-4">
-        Para concluir sua transação, clique no botão abaixo após realizar o
-        pagamento.
+        {t('buycheckout.instruction')}
       </p>
       <p className="text-center text-red-600">
         {t('buycheckout.timeRemaining')}: {Math.floor(timeLeft / 60)}:
@@ -45,7 +46,9 @@ export function CheckoutPix() {
         disabled={isLoadingPayment}
         className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold transition-all duration-300 shadow-md mb-8"
       >
-        {isLoadingPayment ? 'Verificando...' : t('buycheckout.makePayment')}
+        {isLoadingPayment
+          ? t('buycheckout.verifying')
+          : t('buycheckout.makePayment')}
       </button>
 
       <p className="text-xl text-center text-white">
@@ -53,7 +56,11 @@ export function CheckoutPix() {
       </p>
       <div className="relative flex justify-center items-center p-4">
         {is100k ? (
-          <img src={Qrcode} alt="QR Code para R$ 100.000" className="w-[50%]" />
+          <img
+            src={Qrcode}
+            alt={t('buycheckout.qrCode100kAlt')}
+            className="w-[50%]"
+          />
         ) : (
           <div className="relative">
             <QRCodeSVG
@@ -65,11 +72,11 @@ export function CheckoutPix() {
             />
             <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
               <span className="text-red-600 font-bold bg-white text-xs mb-1">
-                Atenção: Você está comprando Bitcoin
+                {t('buycheckout.bitcoinPurchaseWarning')}
               </span>
               <img
                 src={AlfredQr}
-                alt="Logo Alfred"
+                alt={t('buycheckout.alfredLogoAlt')}
                 className="w-[140px] h-[120px] rounded-full"
               />
             </div>
