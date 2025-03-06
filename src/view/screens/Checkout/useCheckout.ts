@@ -88,7 +88,7 @@ export function useCheckout() {
 
     // Validação diferenciada para USDT
     if (data.cryptoType === 'USDT') {
-      if (numericValue < 500) {
+      if (numericValue < 550) {
         toast.warning(t('checkout.min_value_error_usdt'));
         return;
       }
