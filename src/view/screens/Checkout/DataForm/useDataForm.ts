@@ -187,19 +187,21 @@ export function useDataForm() {
       if (cryptoType.toUpperCase() === 'USDT') {
         const whatsappNumber = '5511993439032';
 
-        let PaymentMethodFormatted = 'Wise';
+        let PaymentMethodFormatted = '';
 
         if (paymentMethod === 'TICKET') {
           PaymentMethodFormatted = 'Boleto Bancário';
-        } else if (paymentMethod === 'PIX') {
-          PaymentMethodFormatted = 'PIX';
+        } else if (paymentMethod === 'WISE') {
+          PaymentMethodFormatted = 'Wise';
         }
 
-        const message = `Olá! Aqui estão os detalhes do pedido :\n\nValor BRL: ${brlAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: ${PaymentMethodFormatted}\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
+        if (paymentMethod === 'TICKET' || paymentMethod === 'WISE') {
+          const message = `Olá! Aqui estão os detalhes do pedido :\n\nValor BRL: ${brlAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: ${PaymentMethodFormatted}\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
 
-        const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-        window.location.href = whatsappLink;
-        return;
+          const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+          window.location.href = whatsappLink;
+          return;
+        }
       }
 
       const response = await axios.post(
@@ -212,6 +214,7 @@ export function useDataForm() {
           telefone: transactionNumber,
           coldWallet: coldWallet,
           cupom: cupom,
+          cryptoType: cryptoType.toUpperCase() === 'USDT' ? 'USDT' : 'BITCOIN',
         },
       );
 
@@ -232,6 +235,7 @@ export function useDataForm() {
         window.location.href = whatsappLink;
         return;
       }
+
       const pixKey = response.data.response?.qrCopyPaste;
       const status = response.data.response?.status;
       const transactionId = response.data.response?.id;
@@ -284,6 +288,7 @@ export function useDataForm() {
       toast.success(t('buycheckout.pixKeyCopied'));
     }
   };
+
   useEffect(() => {
     if (!pixKey) return;
 
