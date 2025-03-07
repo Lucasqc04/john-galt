@@ -1,5 +1,4 @@
 import AlfredWhiteLogo from '@/view/assets/logo/alfred-white-logo.svg';
-import WhatsAppButton from '@/view/components/buttonWhatsApp';
 import { Loader } from '@/view/components/Loader';
 import classNames from 'classnames';
 import { t } from 'i18next';
@@ -384,7 +383,6 @@ export default function DataForm() {
           )}
         </section>
       </main>
-      <WhatsAppButton />
     </>
   );
 }
