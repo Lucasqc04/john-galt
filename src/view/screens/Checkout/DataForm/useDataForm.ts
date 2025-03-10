@@ -182,7 +182,7 @@ export function useDataForm() {
 
     try {
       const valorBRL = parseFloat(brlAmount.replace(/\D/g, ''));
-      const valorToSend = valorBRL === 100000 ? 1000 : valorBRL;
+      const valorToSend = valorBRL === 50000 ? 5000 : valorBRL;
 
       if (cryptoType.toUpperCase() === 'USDT') {
         const whatsappNumber = '5511993439032';
