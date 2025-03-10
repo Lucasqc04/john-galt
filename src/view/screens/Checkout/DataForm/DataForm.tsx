@@ -1,5 +1,4 @@
 import AlfredWhiteLogo from '@/view/assets/logo/alfred-white-logo.svg';
-import WhatsAppButton from '@/view/components/buttonWhatsApp';
 import { Loader } from '@/view/components/Loader';
 import classNames from 'classnames';
 import { t } from 'i18next';
@@ -62,7 +61,7 @@ export default function DataForm() {
     parseInt(
       localStorage.getItem('brlAmount')?.replace(/\D/g, '') || '0',
       10,
-    ) === 100000;
+    ) === 50000;
 
   const handleApplyCoupon = async () => {
     await checkCouponValidity();
@@ -204,7 +203,7 @@ export default function DataForm() {
                         <li
                           onClick={() => {
                             // Permite PIX se o valor for 100.000, senão aplica a regra normal (>5000)
-                            if (numericBRL > 5000 && numericBRL !== 100000) {
+                            if (numericBRL > 5000 && numericBRL !== 50000) {
                               toast.warning(
                                 t('checkout.payment_error_above_5000'),
                               );
@@ -384,7 +383,6 @@ export default function DataForm() {
           )}
         </section>
       </main>
-      <WhatsAppButton />
     </>
   );
 }
