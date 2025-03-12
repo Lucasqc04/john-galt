@@ -124,7 +124,7 @@
     "paymentError": "Erro ao processar o pagamento.",
     "invalidColdWalletErrorPolygon": "Endereço de carteira inválido para a rede Polygon.",
     "invalidColdWalletErrorTron": "Endereço de carteira inválido para a rede Tron.",
-    "invalidNetworkForUSDT": "Para USDT, selecione apenas Liquid ou Polygon.",
+    "invalidNetworkForUSDT": "Para USDT, selecione apenas Liquid, Polygon ou Tron.",
     "pixKeyCopied": "Chave PIX copiada para a área de transferência!",
     "makePayment": "Confirmar pagamento",
     "paymentNotConfirmed": "Pagamento ainda não confirmado. Tente novamente.",

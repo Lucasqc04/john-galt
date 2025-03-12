@@ -123,7 +123,7 @@
     "termsAndFeesAlert": "Debe aceptar las tarifas, los términos de uso y la confirmación de los datos enviados.",
     "invalidColdWalletErrorPolygon": "Dirección de cartera inválida para la red Polygon.",
     "invalidColdWalletErrorTron": "Dirección de cartera inválida para la red Tron.",
-    "invalidNetworkForUSDT": "Para USDT, seleccione únicamente Liquid o Polygon.",
+    "invalidNetworkForUSDT": "Para USDT, seleccione únicamente Liquid, Polygon o Tron.",
     "networkSelectionAlert": "Debe seleccionar una red de Bitcoin antes de continuar.",
     "paymentError": "Error al procesar el pago.",
     "pixKeyCopied": "¡Clave PIX copiada al portapapeles!",
