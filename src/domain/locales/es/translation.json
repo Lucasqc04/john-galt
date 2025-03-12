@@ -81,6 +81,8 @@
       "Proporcione un número de teléfono para el envío del comprobante de pago.",
       "Recuerde aceptar los Términos de Uso y las tarifas aplicables para continuar."
     ],
+    "transactionLimitsTitle": "Límites de transacción",
+    "transactionLimitsDescription": "El monto mínimo para la primera compra es de R$ 100. El límite máximo diario para transacciones es de R$ 5.000. Para montos superiores a este límite, comuníquese con el soporte para obtener más información y aprobación.",
     "transactionDurationTitle": "Duración de la Transacción",
     "transactionDurationDescription": "En Alfred, no requerimos KYC (Conozca a su cliente) para realizar transacciones, ya que creemos en la privacidad y libertad de nuestros usuarios. La responsabilidad de la verificación de identidad recae en los bancos que permiten el uso de cuentas bancarias.\n\nNuestra función es garantizar que las transacciones se realicen de manera eficiente y segura, funcionando como un mercado para el intercambio de valores entre usuarios.",
     "kycPoliciesTitle": "Políticas de KYC y Responsabilidad",
