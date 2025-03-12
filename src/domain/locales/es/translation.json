@@ -122,6 +122,7 @@
     "invalidTransactionNumberError": "Ingrese un número de teléfono válido (9 a 15 dígitos).",
     "termsAndFeesAlert": "Debe aceptar las tarifas, los términos de uso y la confirmación de los datos enviados.",
     "invalidColdWalletErrorPolygon": "Dirección de cartera inválida para la red Polygon.",
+    "invalidColdWalletErrorTron": "Dirección de cartera inválida para la red Tron.",
     "invalidNetworkForUSDT": "Para USDT, seleccione únicamente Liquid o Polygon.",
     "networkSelectionAlert": "Debe seleccionar una red de Bitcoin antes de continuar.",
     "paymentError": "Error al procesar el pago.",

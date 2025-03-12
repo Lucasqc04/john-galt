@@ -7,6 +7,7 @@ import Onchain from '../../../assets/bitcoin.svg';
 import Liquid from '../../../assets/lbtc.svg';
 import Lightning from '../../../assets/lightning.svg';
 import Polygon from '../../../assets/polygon.png';
+import Tron from '../../../assets/tron.svg';
 import { ROUTES } from '../../../routes/Routes';
 import { useCurrentLang } from '../../../utils/useCurrentLang';
 
@@ -126,6 +127,13 @@ export function useDataForm() {
               );
             }
             break;
+          case 'Tron':
+            if (!/^T[1-9A-HJ-NP-Za-km-z]{33}$/.test(coldWallet)) {
+              newErrors.coldWallet = t(
+                'buycheckout.invalidColdWalletErrorTron',
+              );
+            }
+            break;
           default:
             newErrors.coldWallet = t('buycheckout.invalidColdWalletError');
             break;
@@ -150,6 +158,7 @@ export function useDataForm() {
       ? [
           { name: 'Liquid', icon: Liquid },
           { name: 'Polygon', icon: Polygon },
+          { name: 'Tron', icon: Tron },
         ]
       : [
           { name: 'Onchain', icon: Onchain },
