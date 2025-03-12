@@ -81,9 +81,9 @@ export function BrowserRouter() {
             <Route path={ROUTES.term.path} element={<TermsOfUse />} />
           </Route>
           {/* Rotas de administração */}
-          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path={ROUTES.admin.login.path} element={<AdminLogin />} />
           <Route
-            path="/admin/dashboard"
+            path={ROUTES.admin.dashboard.path}
             element={
               <ProtectedRoute>
                 <AdminDashboard />
@@ -91,7 +91,7 @@ export function BrowserRouter() {
             }
           />
           <Route
-            path="/admin/kyc/:id"
+            path={ROUTES.admin.kycDetail.path}
             element={
               <ProtectedRoute>
                 <KYCDetail />

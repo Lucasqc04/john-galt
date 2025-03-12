@@ -45,7 +45,6 @@ export const ROUTES = {
     path: 'suporte',
     call: (currentLang: string) => `/${currentLang}/suporte`,
   },
-
   cart: {
     path: 'carrinho',
     call: (currentLang: string) => `/${currentLang}/carrinho`,
@@ -79,6 +78,22 @@ export const ROUTES = {
     review: {
       path: 'review-alfred',
       call: (currentLang: string) => `/${currentLang}/review-alfred`,
+    },
+  },
+
+  // Rotas de administração
+  admin: {
+    login: {
+      path: 'admin/login',
+      call: () => '/admin/login',
+    },
+    dashboard: {
+      path: 'admin/dashboard',
+      call: () => '/admin/dashboard',
+    },
+    kycDetail: {
+      path: 'admin/kyc/:id',
+      call: (id: string) => `/admin/kyc/${id}`,
     },
   },
 };
