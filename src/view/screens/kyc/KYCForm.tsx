@@ -6,7 +6,7 @@ import {
   defaultKYCFormData,
   KYCFormData,
   kycFormSchema,
-} from '../../data/model/kyc';
+} from '../../../data/model/kyc';
 import FileUploadField from './FileUploadField';
 import TermsAndConditions from './TermsAndConditions';
 import useKYCForm from './useKYCForm';

@@ -21,11 +21,11 @@ import { TermsOfUse } from '../screens/Terms/TermsUse';
 import { ROUTES } from './Routes';
 
 // Importa os componentes de administração
-import KYCForm from '../kyc/KYCForm';
 import AdminDashboard from '../screens/admin/AdminDashboard';
 import KYCDetail from '../screens/admin/AdminDetail';
 import AdminLogin from '../screens/admin/AdminLogin';
 import ProtectedRoute from '../screens/admin/ProtectedRoute';
+import KYCForm from '../screens/kyc/KYCForm';
 
 const NotFound = lazy(() =>
   import('../screens/NotFound').then((module) => ({

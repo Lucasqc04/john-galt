@@ -2,6 +2,7 @@ import { RemoteKYCDataSource } from '@/data/datasource/RemoteKYCDataSource';
 import { KYCRepositoryImpl } from '@/data/repositories/KYCRepositoryImpl';
 import { KYC } from '@/domain/entities/KYC';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const kycRepository = new KYCRepositoryImpl(new RemoteKYCDataSource());
 
@@ -42,8 +43,10 @@ const useKYCForm = () => {
       console.log('📤 Enviando dados para o repositório...');
       await kycRepository.submit(data);
       console.log('✅ KYC submetido com sucesso!');
+      toast.success(' Formulário enviado com sucesso!, aguarde aprovação');
       setSuccess(true);
     } catch (err) {
+      toast.error('Erro ao enviar formulário, entre em contato com o suporte');
       console.error('❌ Erro ao submeter KYC:', err);
       setError(
         err instanceof Error
