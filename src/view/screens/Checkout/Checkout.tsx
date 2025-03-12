@@ -15,120 +15,141 @@ export default function Checkout() {
   const { form, steps, isTransactionAllowed, ValidateValues } = useCheckout();
   const [selectedCrypto, setSelectedCrypto] = useState<'BTC' | 'USDT'>('BTC');
 
+  // Variável para ativar/desativar o modo de manutenção
+  const [isMaintenanceMode] = useState(true);
+
   return (
     <>
-      <main className="flex flex-col justify-center items-center w-full max-w-screen-xl px-6 sm:px-12 md:px-20 lg:px-32 xl:px-40 pt-12 sm:pt-28 mx-auto">
-        <section className="w-full max-w-screen-lg flex flex-col lg:flex-row items-center justify-center mx-auto">
-          <article className="w-full lg:w-1/2 flex flex-col items-center justify-center gap-y-4">
-            <img
-              src={AlfredWhiteLogo}
-              alt="Alfred Logo"
-              className="w-44 sm:w-60"
-            />
-            <FormProvider {...form}>
-              <form className="flex flex-col justify-center items-center w-full max-w-2xl space-y-2">
-                {!isTransactionAllowed && (
-                  <span className="text-red-500 text-center font-bold pb-2">
-                    {t('checkout.transaction_error')}
-                  </span>
-                )}
-
-                <div className="flex justify-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setSelectedCrypto('BTC')}
-                    className={`group flex items-center justify-center gap-2 border border-white rounded-full px-3 py-1 text-white transition-colors duration-200 ${
-                      selectedCrypto === 'BTC'
-                        ? 'bg-orange-500'
-                        : 'bg-transparent hover:bg-orange-500'
-                    }`}
-                  >
-                    <img
-                      src={BtcIcon}
-                      alt="BTC"
-                      className="w-4 h-4 hidden group-hover:block"
-                    />
-                    BTC
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setSelectedCrypto('USDT')}
-                    className={`group flex items-center justify-center gap-2 border border-white rounded-full px-3 py-1 text-white transition-colors duration-200 ${
-                      selectedCrypto === 'USDT'
-                        ? 'bg-orange-500'
-                        : 'bg-transparent hover:bg-orange-500'
-                    }`}
-                  >
-                    <img
-                      src={UsdtIcon}
-                      alt="USDT"
-                      className="w-4 h-4 hidden group-hover:block"
-                    />
-                    USDT
-                  </button>
-                </div>
-                {steps.current === 1 && (
-                  <ValuesForm selectedCrypto={selectedCrypto} />
-                )}
-                {steps.current === 1 && (
-                  <>
-                    <div className="w-full flex justify-center items-center pt-2">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          const numericValue = parseInt(
-                            form.getValues('brlAmount').replace(/\D/g, ''),
-                            10,
-                          );
-                          if (numericValue < 200) {
-                            toast.warning(t('checkout.min_value_error'));
-                            return;
+      {/* Container relativo para limitar o overlay à área da página */}
+      <div className="relative w-full">
+        {isMaintenanceMode && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-90 text-white text-center p-6 z-10">
+            <h1 className="text-4xl font-bold mb-4 text-yellow-500">
+              🚧 Alfred em Manutenção 🚧
+            </h1>
+            <p className="text-lg max-w-lg">
+              Estamos realizando melhorias para oferecer um serviço ainda
+              melhor. Voltaremos em algumas horas! Agradecemos sua paciência.
+            </p>
+            <p>
+              Para qualquer dúvida, contate-nos no suporte, ou em nossas redes.
+            </p>
+          </div>
+        )}
+        <main className="flex flex-col justify-center items-center w-full max-w-screen-xl px-6 sm:px-12 md:px-20 lg:px-32 xl:px-40 pt-12 sm:pt-28 mx-auto">
+          <section className="w-full max-w-screen-lg flex flex-col lg:flex-row items-center justify-center mx-auto">
+            <article className="w-full lg:w-1/2 flex flex-col items-center justify-center gap-y-4">
+              <img
+                src={AlfredWhiteLogo}
+                alt="Alfred Logo"
+                className="w-44 sm:w-60"
+              />
+              <FormProvider {...form}>
+                <form className="flex flex-col justify-center items-center w-full max-w-2xl space-y-2">
+                  {!isTransactionAllowed && (
+                    <span className="text-red-500 text-center font-bold pb-2">
+                      {t('checkout.transaction_error')}
+                    </span>
+                  )}
+                  <div className="flex justify-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setSelectedCrypto('BTC')}
+                      className={`group flex items-center justify-center gap-2 border border-white rounded-full px-3 py-1 text-white transition-colors duration-200 ${
+                        selectedCrypto === 'BTC'
+                          ? 'bg-orange-500'
+                          : 'bg-transparent hover:bg-orange-500'
+                      }`}
+                    >
+                      <img
+                        src={BtcIcon}
+                        alt="BTC"
+                        className="w-4 h-4 hidden group-hover:block"
+                      />
+                      BTC
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedCrypto('USDT')}
+                      className={`group flex items-center justify-center gap-2 border border-white rounded-full px-3 py-1 text-white transition-colors duration-200 ${
+                        selectedCrypto === 'USDT'
+                          ? 'bg-orange-500'
+                          : 'bg-transparent hover:bg-orange-500'
+                      }`}
+                    >
+                      <img
+                        src={UsdtIcon}
+                        alt="USDT"
+                        className="w-4 h-4 hidden group-hover:block"
+                      />
+                      USDT
+                    </button>
+                  </div>
+                  {steps.current === 1 && (
+                    <ValuesForm selectedCrypto={selectedCrypto} />
+                  )}
+                  {steps.current === 1 && (
+                    <>
+                      <div className="w-full flex justify-center items-center pt-2">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const numericValue = parseInt(
+                              form.getValues('brlAmount').replace(/\D/g, ''),
+                              10,
+                            );
+                            if (numericValue < 200) {
+                              toast.warning(t('checkout.min_value_error'));
+                              return;
+                            }
+                            ValidateValues(form.getValues());
+                          }}
+                          className={`w-full h-10 sm:h-12 rounded-3xl font-bold text-sm sm:text-base border-2 transition-colors duration-200 ${
+                            parseInt(
+                              form.getValues('brlAmount').replace(/\D/g, ''),
+                              10,
+                            ) < 200 || isMaintenanceMode
+                              ? 'bg-gray-400 cursor-not-allowed'
+                              : 'bg-[#F39200] text-white'
+                          }`}
+                          disabled={
+                            parseInt(
+                              form.getValues('brlAmount').replace(/\D/g, ''),
+                              10,
+                            ) < 200 || isMaintenanceMode
                           }
-                          ValidateValues(form.getValues());
-                        }}
-                        className={`w-full h-10 sm:h-12 rounded-3xl font-bold text-sm sm:text-base border-2 transition-colors duration-200 ${
-                          parseInt(
-                            form.getValues('brlAmount').replace(/\D/g, ''),
-                            10,
-                          ) < 200
-                            ? 'bg-gray-400 cursor-not-allowed'
-                            : 'bg-[#F39200] text-white'
-                        }`}
-                        disabled={
-                          parseInt(
-                            form.getValues('brlAmount').replace(/\D/g, ''),
-                            10,
-                          ) < 200
-                        }
-                      >
-                        {t('checkout.proceed_button')}
-                      </button>
-                    </div>
-                    <section className="hidden lg:flex items-center justify-center text-center">
-                      <p className="text-white">
-                        {t('checkout.bitcoin_message')}
-                      </p>
-                    </section>
-                  </>
-                )}
-              </form>
-            </FormProvider>
-          </article>
-          <article className="w-full lg:w-1/2 flex justify-center">
-            <img
-              src={AlfredImg}
-              alt="Imagem Alfred"
-              className="w-full max-w-md lg:max-w-full image-step"
-            />
-          </article>
-          <section className="lg:hidden mt-4 mb-4 text-center">
-            <p className="text-white">{t('checkout.bitcoin_message')}</p>
+                        >
+                          {isMaintenanceMode
+                            ? '🚧 Site em Manutenção 🚧'
+                            : t('checkout.proceed_button')}
+                        </button>
+                      </div>
+                      <section className="hidden lg:flex items-center justify-center text-center">
+                        <p className="text-white">
+                          {t('checkout.bitcoin_message')}
+                        </p>
+                      </section>
+                    </>
+                  )}
+                </form>
+              </FormProvider>
+            </article>
+            <article className="w-full lg:w-1/2 flex justify-center">
+              <img
+                src={AlfredImg}
+                alt="Imagem Alfred"
+                className="w-full max-w-md lg:max-w-full image-step"
+              />
+            </article>
+            <section className="lg:hidden mt-4 mb-4 text-center">
+              <p className="text-white">{t('checkout.bitcoin_message')}</p>
+            </section>
           </section>
-        </section>
-        <div className="flex justify-center w-full">
-          <SocialButtons />
-        </div>
-      </main>
+          <div className="flex justify-center w-full">
+            <SocialButtons />
+          </div>
+        </main>
+      </div>
     </>
   );
 }
