@@ -5,6 +5,10 @@ export const ROUTES = {
   home: {
     call: () => '/',
   },
+  kycForm: {
+    path: 'otcform',
+    call: (currentLang: string) => `/${currentLang}/otcform`,
+  },
   buyBitcoin: {
     path: '',
     call: (currentLang: string) => `/${currentLang}`,
@@ -63,7 +67,6 @@ export const ROUTES = {
         `/${currentLang}/produto/${name}?id=${id}`,
     },
   },
-
   paymentAlfredStatus: {
     failure: {
       path: 'failure-alfred',

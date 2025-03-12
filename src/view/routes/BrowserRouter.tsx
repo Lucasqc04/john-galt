@@ -20,6 +20,13 @@ import { Fees } from '../screens/Rate/RateBitcoin';
 import { TermsOfUse } from '../screens/Terms/TermsUse';
 import { ROUTES } from './Routes';
 
+// Importa os componentes de administração
+import KYCForm from '../kyc/KYCForm';
+import AdminDashboard from '../screens/admin/AdminDashboard';
+import KYCDetail from '../screens/admin/AdminDetail';
+import AdminLogin from '../screens/admin/AdminLogin';
+import ProtectedRoute from '../screens/admin/ProtectedRoute';
+
 const NotFound = lazy(() =>
   import('../screens/NotFound').then((module) => ({
     default: module.NotFound,
@@ -40,18 +47,21 @@ export function BrowserRouter() {
       <ScrollToTop />
       <Suspense fallback={<Loader />}>
         <Routes>
+          {/* Rota raiz redireciona para o idioma padrão */}
           <Route
             path={ROUTES.home.call()}
             element={
               <Navigate to={`/${currentLang || AcceptedLanguages.pt}`} />
             }
           />
+          {/* Rotas do site */}
           <Route path={ROUTES.lang.call()} element={<DefaultLayout />}>
             <Route path={ROUTES.buyBitcoin.path} element={<BuyBitcoin />} />
             <Route path={ROUTES.fee.path} element={<Fees />} />
             <Route path={ROUTES.buyCheckout.path} element={<DataForm />} />
             <Route path={ROUTES.checkoutPix.path} element={<CheckoutPix />} />
             <Route path={ROUTES.Support.path} element={<SupportPage />} />
+            <Route path={ROUTES.kycForm.path} element={<KYCForm />} />
             <Route
               path={ROUTES.paymentAlfredStatus.success.path}
               element={<PaymentAlfredSuccess />}
@@ -70,6 +80,25 @@ export function BrowserRouter() {
             />
             <Route path={ROUTES.term.path} element={<TermsOfUse />} />
           </Route>
+          {/* Rotas de administração */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route
+            path="/admin/dashboard"
+            element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/kyc/:id"
+            element={
+              <ProtectedRoute>
+                <KYCDetail />
+              </ProtectedRoute>
+            }
+          />
+          {/* Rota para 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
