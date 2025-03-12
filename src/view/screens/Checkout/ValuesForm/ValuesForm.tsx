@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import Btc from '../../../assets/bitcoin.svg';
 import Brl from '../../../assets/brl.svg';
 import Usdt from '../../../assets/usdt.svg'; // Certifique-se de ter o ícone do USDT
@@ -9,6 +11,14 @@ interface ValuesFormProps {
 
 export function ValuesForm({ selectedCrypto }: ValuesFormProps) {
   const { t, form, handleBrlChange } = useValuesForm(selectedCrypto);
+  const [hasShownToast, setHasShownToast] = useState(false);
+
+  useEffect(() => {
+    if (!hasShownToast) {
+      toast.info(t('A primeira compra tem um limite de R$ 100'));
+      setHasShownToast(true);
+    }
+  }, [hasShownToast, t]);
 
   return (
     <>

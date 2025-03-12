@@ -98,7 +98,7 @@ export default function Checkout() {
                               form.getValues('brlAmount').replace(/\D/g, ''),
                               10,
                             );
-                            if (numericValue < 200) {
+                            if (numericValue < 100) {
                               toast.warning(t('checkout.min_value_error'));
                               return;
                             }
@@ -108,7 +108,7 @@ export default function Checkout() {
                             parseInt(
                               form.getValues('brlAmount').replace(/\D/g, ''),
                               10,
-                            ) < 200 || isMaintenanceMode
+                            ) < 100 || isMaintenanceMode
                               ? 'bg-gray-400 cursor-not-allowed'
                               : 'bg-[#F39200] text-white'
                           }`}
@@ -116,7 +116,7 @@ export default function Checkout() {
                             parseInt(
                               form.getValues('brlAmount').replace(/\D/g, ''),
                               10,
-                            ) < 200 || isMaintenanceMode
+                            ) < 100 || isMaintenanceMode
                           }
                         >
                           {isMaintenanceMode
