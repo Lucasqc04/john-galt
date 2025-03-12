@@ -34,7 +34,8 @@
     "amount_error_above_1m": "The maximum allowed amount is 1,000,000 BRL.",
     "max_value_error_usdt": "The maximum allowed amount in USDT is 5,000 BRL.",
     "payment_error_above_5000": "For amounts above 5000 BRL, payment via Pix is not allowed. Use Wise or Bank Slip.",
-    "bitcoin_message": "BITCOIN in your hands, without complications and with privacy."
+    "bitcoin_message": "BITCOIN in your hands, without complications and with privacy.",
+    "opening_hours": "Alfred available 24/7!"
   },
   "paymentFailure": {
     "title": "Payment Failure",

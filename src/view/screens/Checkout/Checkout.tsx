@@ -129,6 +129,11 @@ export default function Checkout() {
                           {t('checkout.bitcoin_message')}
                         </p>
                       </section>
+                      <section className="hidden lg:flex items-center justify-center text-center">
+                        <p className="text-white">
+                          {t('checkout.opening_hours')}
+                        </p>
+                      </section>
                     </>
                   )}
                 </form>
@@ -145,6 +150,10 @@ export default function Checkout() {
               <p className="text-white">{t('checkout.bitcoin_message')}</p>
             </section>
           </section>
+          <section className="lg:hidden mt-4 mb-4 text-center">
+            <p className="text-white">{t('checkout.opening_hours')}</p>
+          </section>
+
           <div className="flex justify-center w-full">
             <SocialButtons />
           </div>
