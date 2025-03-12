@@ -28,7 +28,7 @@
     "usdt_placeholder": "Amount in USDT",
     "proceed_button": "Proceed",
     "transaction_error": "Transactions are only allowed every day, from 8:00 AM to 10:00 PM Brasília time.",
-    "min_value_error": "The minimum purchase amount is 200 BRL.",
+    "min_value_error": "The minimum purchase amount is 100 BRL.",
     "min_value_error_usdt": "The minimum purchase amount in USDT is 550 BRL.",
     "wallet_error_below_700": "For amounts below 700 BRL, only Liquid and Lightning wallets are allowed.",
     "amount_error_above_1m": "The maximum allowed amount is 1,000,000 BRL.",

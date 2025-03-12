@@ -98,13 +98,13 @@ export function useCheckout() {
       }
     } else {
       // Validações para BTC
-      if (numericValue < 200) {
+      if (numericValue < 100) {
         toast.warning(t('checkout.min_value_error'));
         return;
       }
-      if (numericValue < 700) {
-        toast.info(t('checkout.wallet_error_below_700'));
-      }
+      // if (numericValue < 700) {
+      //   toast.info(t('checkout.wallet_error_below_700'));
+      // }
       if (numericValue !== 100000) {
         if (numericValue > 5000) {
           toast.warning(t('checkout.payment_error_above_5000'));
