@@ -123,6 +123,7 @@
     "networkSelectionAlert": "Você precisa selecionar uma rede de Bitcoin antes de prosseguir.",
     "paymentError": "Erro ao processar o pagamento.",
     "invalidColdWalletErrorPolygon": "Endereço de carteira inválido para a rede Polygon.",
+    "invalidColdWalletErrorTron": "Endereço de carteira inválido para a rede Tron.",
     "invalidNetworkForUSDT": "Para USDT, selecione apenas Liquid ou Polygon.",
     "pixKeyCopied": "Chave PIX copiada para a área de transferência!",
     "makePayment": "Confirmar pagamento",
