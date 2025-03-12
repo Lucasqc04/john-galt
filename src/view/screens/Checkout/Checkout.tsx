@@ -16,7 +16,7 @@ export default function Checkout() {
   const [selectedCrypto, setSelectedCrypto] = useState<'BTC' | 'USDT'>('BTC');
 
   // Variável para ativar/desativar o modo de manutenção
-  const [isMaintenanceMode] = useState(true);
+  const [isMaintenanceMode] = useState(false);
 
   return (
     <>
