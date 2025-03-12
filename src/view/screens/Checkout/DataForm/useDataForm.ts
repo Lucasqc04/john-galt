@@ -90,6 +90,10 @@ export function useDataForm() {
               'buycheckout.invalidColdWalletErrorPolygon',
             );
           }
+        } else if (network === 'Tron') {
+          if (!/^T[1-9A-HJ-NP-Za-km-z]{33}$/.test(coldWallet)) {
+            newErrors.coldWallet = t('buycheckout.invalidColdWalletErrorTron');
+          }
         } else {
           newErrors.coldWallet = t('buycheckout.invalidNetworkForUSDT');
         }
@@ -124,13 +128,6 @@ export function useDataForm() {
             ) {
               newErrors.coldWallet = t(
                 'buycheckout.invalidColdWalletErrorLightning',
-              );
-            }
-            break;
-          case 'Tron':
-            if (!/^T[1-9A-HJ-NP-Za-km-z]{33}$/.test(coldWallet)) {
-              newErrors.coldWallet = t(
-                'buycheckout.invalidColdWalletErrorTron',
               );
             }
             break;
