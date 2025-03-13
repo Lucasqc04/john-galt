@@ -270,6 +270,21 @@ export function useDataForm() {
       }
     } catch (error) {
       console.error('Erro ao processar pagamento:', error);
+
+      if (
+        axios.isAxiosError(error) &&
+        error.response?.data?.code === 'IP_BLOCKED'
+      ) {
+        const whatsappNumber = '5511993439032';
+        const message = `Olá, meu IP foi bloqueado e estou recebendo o erro 171. Como posso resolver isso?`;
+
+        toast.error('Erro 171. Entre em contato pelo WhatsApp.');
+
+        const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+        window.location.href = whatsappLink;
+        return;
+      }
+
       toast.error(t('buycheckout.paymentError'));
       setIsLoading(false);
     }
@@ -327,7 +342,7 @@ export function useDataForm() {
       setIsLoading(true);
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/coupons/is-valid`,
-        { code: cupom.trim() },
+        { code: cupom.trim().toUpperCase() },
       );
       const coupon = response.data;
 
@@ -348,6 +363,7 @@ export function useDataForm() {
         });
       }
 
+      setCupom(cupom.toUpperCase());
       setErrors((prev) => ({ ...prev, cupom: '' }));
       toast.success(t('buycheckout.couponValid'));
     } catch (error) {

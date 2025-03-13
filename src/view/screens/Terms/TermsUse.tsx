@@ -1,5 +1,6 @@
 import WhatsAppButton from '@/view/components/buttonWhatsApp';
 import { useTranslation } from 'react-i18next';
+
 export function TermsOfUse() {
   const { t } = useTranslation();
 
@@ -46,7 +47,16 @@ export function TermsOfUse() {
 
         <section className="pb-8">
           <h2 className="text-xl font-semibold pb-4 text-white">
-            3. {t('termsOfUse.transactionDurationTitle')}
+            3. {t('termsOfUse.transactionLimitsTitle')}
+          </h2>
+          <p className="text-white">
+            {t('termsOfUse.transactionLimitsDescription')}
+          </p>
+        </section>
+
+        <section className="pb-8">
+          <h2 className="text-xl font-semibold pb-4 text-white">
+            4. {t('termsOfUse.transactionDurationTitle')}
           </h2>
           <p className="text-white">
             {t('termsOfUse.transactionDurationDescription')}
@@ -55,7 +65,7 @@ export function TermsOfUse() {
 
         <section className="pb-8">
           <h2 className="text-xl font-semibold pb-4 text-white">
-            4. {t('termsOfUse.kycPoliciesTitle')}
+            5. {t('termsOfUse.kycPoliciesTitle')}
           </h2>
           <p className="text-white">
             {t('termsOfUse.kycPoliciesDescription')

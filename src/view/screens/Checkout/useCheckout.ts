@@ -98,7 +98,7 @@ export function useCheckout() {
       }
     } else {
       // Validações para BTC
-      if (numericValue < 100) {
+      if (numericValue < 500) {
         toast.warning(t('checkout.min_value_error'));
         return;
       }

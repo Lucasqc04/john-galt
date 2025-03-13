@@ -105,7 +105,7 @@ export function Support() {
                   </span>
                 </a>
                 <a
-                  href="https://www.instagram.com/diyseclab.io/"
+                  href="https://www.instagram.com/alfredp2p/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 p-4  border border-gray-600 rounded-[24px] shadow-sm hover:bg-[#000A13] transition"
@@ -116,7 +116,7 @@ export function Support() {
                   </span>
                 </a>
                 <a
-                  href="https://x.com/diyseclab"
+                  href="https://x.com/alfredp2p"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 p-4  border border-gray-600 rounded-[24px] shadow-sm hover:bg-[#000A13] transition"

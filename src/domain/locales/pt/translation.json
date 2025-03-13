@@ -28,13 +28,14 @@
     "usdt_placeholder": "Valor em USDT",
     "proceed_button": "Prosseguir",
     "transaction_error": "Transações só são permitidas todos os dias, das 8h às 22h no horário de Brasília.",
-    "min_value_error": "O valor mínimo para compra é 100 BRL.",
+    "min_value_error": "O valor mínimo para compra é 500 BRL.",
     "min_value_error_usdt": "O valor mínimo para compra em USDT é 550 BRL.",
     "wallet_error_below_700": "Para valores abaixo de 700 BRL, apenas carteiras Liquid e Lightning são permitidas.",
     "amount_error_above_1m": "O valor máximo permitido é 1.000.000 BRL.",
     "max_value_error_usdt": "O valor máximo permitido em USDT é 5.000 BRL.",
     "payment_error_above_5000": "Para valores acima de 5000 BRL, o pagamento via Pix não é permitido. Utilize Wise ou Boleto Bancário.",
-    "bitcoin_message": "BITCOIN na sua mão, sem complicação e com privacidade."
+    "bitcoin_message": "BITCOIN na sua mão, sem complicação e com privacidade.",
+    "opening_hours": "Alfred disponível 24h!"
   },
   "paymentFailure": {
     "title": "Falha no pagamento",
@@ -80,6 +81,8 @@
       "Forneça um número de telefone para envio do comprovante de pagamento.",
       "Lembre-se de aceitar os Termos de Uso e as Taxas aplicáveis para continuar."
     ],
+    "transactionLimitsTitle": "Limites de transação",
+    "transactionLimitsDescription": "O valor mínimo para a primeira compra é de R$ 500. O valor máximo diário permitido para transações é de R$ 5.000. Para valores acima deste limite, entre em contato com o suporte para obter mais informações e aprovação.",
     "transactionDurationTitle": "Duração da transação",
     "transactionDurationDescription": "O tempo de processamento de uma transação pode variar entre 30 minutos a 24 horas, dependendo de diversos fatores, como processamento bancário, envio de comprovantes e congestionamento das redes. Caso o mercado sofra flutuações durante a negociação, atrasos adicionais podem ocorrer.",
     "kycPoliciesTitle": "Políticas de KYC e responsabilidade",
