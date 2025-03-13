@@ -66,6 +66,7 @@ export default function DataForm() {
   const handleApplyCoupon = async () => {
     await checkCouponValidity();
     if (!errors.cupom) {
+      setCupom(cupom.toUpperCase());
       setCouponApplied(true);
     }
   };
