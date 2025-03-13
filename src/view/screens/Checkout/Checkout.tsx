@@ -3,7 +3,6 @@ import SocialButtons from '@/view/components/SocialButtons';
 import { useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
 import AlfredImg from '../../assets/_DIY SEC LAB - Apresentação Comercial (1).png';
 import BtcIcon from '../../assets/bitcoin.svg';
 import UsdtIcon from '../../assets/usdt.svg';
@@ -94,14 +93,6 @@ export default function Checkout() {
                         <button
                           type="button"
                           onClick={() => {
-                            const numericValue = parseInt(
-                              form.getValues('brlAmount').replace(/\D/g, ''),
-                              10,
-                            );
-                            if (numericValue < 100) {
-                              toast.warning(t('checkout.min_value_error'));
-                              return;
-                            }
                             ValidateValues(form.getValues());
                           }}
                           className={`w-full h-10 sm:h-12 rounded-3xl font-bold text-sm sm:text-base border-2 transition-colors duration-200 ${

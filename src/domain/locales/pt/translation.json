@@ -28,7 +28,7 @@
     "usdt_placeholder": "Valor em USDT",
     "proceed_button": "Prosseguir",
     "transaction_error": "Transações só são permitidas todos os dias, das 8h às 22h no horário de Brasília.",
-    "min_value_error": "O valor mínimo para compra é 100 BRL.",
+    "min_value_error": "O valor mínimo para compra é 500 BRL.",
     "min_value_error_usdt": "O valor mínimo para compra em USDT é 550 BRL.",
     "wallet_error_below_700": "Para valores abaixo de 700 BRL, apenas carteiras Liquid e Lightning são permitidas.",
     "amount_error_above_1m": "O valor máximo permitido é 1.000.000 BRL.",
