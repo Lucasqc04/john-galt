@@ -82,7 +82,7 @@
       "Remember to accept the Terms of Use and applicable fees to proceed."
     ],
     "transactionLimitsTitle": "Transaction Limits",
-    "transactionLimitsDescription": "The minimum amount for the first purchase is R$ 100. The maximum daily transaction limit is R$ 5,000. For amounts above this limit, please contact support for more information and approval.",
+    "transactionLimitsDescription": "The minimum amount for the first purchase is R$ 500. The maximum daily transaction limit is R$ 5,000. For amounts above this limit, please contact support for more information and approval.",
     "transactionDurationTitle": "Transaction Duration",
     "transactionDurationDescription": "The processing time for a transaction can vary between 30 minutes and 24 hours, depending on several factors, such as banking processing, sending receipts and network congestion. If the market fluctuates during trading, additional delays may occur.",
     "kycPoliciesTitle": "KYC Policies and Responsibility",
