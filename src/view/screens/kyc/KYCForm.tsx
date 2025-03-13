@@ -192,7 +192,7 @@ const KYCForm: React.FC = () => {
     <div className="max-w-4xl mx-auto p-6">
       <div className="bg-transparent rounded-xl shadow-lg p-8">
         <h1 className="text-2xl font-bold text-orange-600 mb-6">
-          Formulário OTC para Compra de Bitcoin
+          Validação para Transações Anônimas
         </h1>
 
         <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg flex items-start">
@@ -202,11 +202,16 @@ const KYCForm: React.FC = () => {
               Por que solicitamos esses documentos?
             </h3>
             <p className="text-blue-700 text-sm mt-1">
-              Como parte do nosso compromisso com a segurança e integridade das
-              transações, realizamos um processo de verificação para clientes
-              que realizam operações de valores significativos. Esta verificação
-              visa proteger todos os envolvidos e garantir a conformidade com as
-              melhores práticas do mercado.
+              O Alfred opera com foco na liberdade financeira, garantindo um
+              ambiente seguro e sem interferências. Para evitar impactos
+              indesejados, realizo um reconhecimento da origem dos fundos antes
+              de liberar transações de alto valor.
+            </p>
+            <p className="text-blue-700 text-sm mt-1">
+              Os documentos solicitados nesse processo são excluídos
+              imediatamente após a verificação, sem qualquer tipo de declaração
+              ou armazenamento. Dessa forma, todas as transações permanecem
+              totalmente anônimas e sem rastros.
             </p>
           </div>
         </div>
