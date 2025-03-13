@@ -188,7 +188,7 @@ export function useDataForm() {
 
     try {
       const valorBRL = parseFloat(brlAmount.replace(/\D/g, ''));
-      const valorToSend = valorBRL === 50000 ? 5000 : valorBRL;
+      const valorToSend = valorBRL === 100000 ? 300 : valorBRL;
 
       if (cryptoType.toUpperCase() === 'USDT') {
         const whatsappNumber = '5511993439032';
@@ -273,10 +273,18 @@ export function useDataForm() {
 
       if (
         axios.isAxiosError(error) &&
+        error.response?.data?.code === 'FIRST_PURCHASE'
+      ) {
+        toast.error('Na primeira compra, o valor deve ser menor que R$500.');
+        return;
+      }
+
+      if (
+        axios.isAxiosError(error) &&
         error.response?.data?.code === 'IP_BLOCKED'
       ) {
         const whatsappNumber = '5511993439032';
-        const message = `Olá, meu IP foi bloqueado e estou recebendo o erro 171. Como posso resolver isso?`;
+        const message = `Olá, estou recebendo o erro 171. Como posso resolver isso?`;
 
         toast.error('Erro 171. Entre em contato pelo WhatsApp.');
 
