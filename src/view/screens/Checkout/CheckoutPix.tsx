@@ -2,7 +2,7 @@ import { t } from 'i18next';
 import { QRCodeSVG } from 'qrcode.react';
 import { toast } from 'react-toastify';
 import AlfredQr from '../../assets/_DIY SEC LAB - Apresentação Comercial (1).png';
-import Qrcode from '../../assets/qrcode50k.jpg';
+import Qrcode from '../../assets/qrcode100k.jpg';
 import { useDataForm } from './DataForm/useDataForm';
 import { usePaymentStatusPolling } from './usePaymentStatusPolling';
 
@@ -15,11 +15,11 @@ export function CheckoutPix() {
     parseInt(
       localStorage.getItem('brlAmount')?.replace(/\D/g, '') || '0',
       10,
-    ) === 50000;
+    ) === 100000;
 
   // Valor específico do PIX para R$ 100.000
   const pixValue100k =
-    '00020126440014BR.GOV.BCB.PIX0122grafeno@plebank.com.br520400005303986540850000.005802BR5901N6001C62070503***630429CC';
+    '00020126360014BR.GOV.BCB.PIX0114vip@depix.info5204000053039865409100000.005802BR5901N6001C62070503***63042A76';
 
   // Função para copiar a chave PIX correta
   const handleCopyToClipboard = () => {
