@@ -342,7 +342,7 @@ export function useDataForm() {
       setIsLoading(true);
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/coupons/is-valid`,
-        { code: cupom.trim() },
+        { code: cupom.trim().toUpperCase() },
       );
       const coupon = response.data;
 
@@ -363,6 +363,7 @@ export function useDataForm() {
         });
       }
 
+      setCupom(cupom.toUpperCase());
       setErrors((prev) => ({ ...prev, cupom: '' }));
       toast.success(t('buycheckout.couponValid'));
     } catch (error) {
