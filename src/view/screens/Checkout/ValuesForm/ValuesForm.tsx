@@ -15,7 +15,7 @@ export function ValuesForm({ selectedCrypto }: ValuesFormProps) {
 
   useEffect(() => {
     if (!hasShownToast) {
-      toast.info(t('A primeira compra tem um limite de R$ 100'));
+      toast.info(t('A primeira compra tem um limite de R$ 500'));
       setHasShownToast(true);
     }
   }, [hasShownToast, t]);
