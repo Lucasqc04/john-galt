@@ -24,6 +24,18 @@ export const kycFormSchema = z.object({
     message: 'Você precisa aceitar os termos para continuar',
   }),
 
+  // Investment amount
+  investmentAmount: z
+    .number()
+    .min(0, 'O valor do investimento não pode ser negativo')
+    .optional(),
+
+  // Contact number
+  contactNumber: z
+    .string()
+    .regex(/^\+?[1-9]\d{1,14}$/, 'Número de contato inválido')
+    .optional(),
+
   // Files are validated separately since they're not simple string values
   identificationFile: z
     .any()
@@ -140,6 +152,8 @@ export const defaultKYCFormData: KYCFormData = {
   personType: 'pf',
   identificationType: 'CNH',
   termsAccepted: false,
+  investmentAmount: undefined,
+  contactNumber: '',
   identificationFile: null,
   bankStatement: null,
   holerite: null,
