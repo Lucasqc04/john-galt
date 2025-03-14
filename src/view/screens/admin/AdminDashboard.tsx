@@ -7,8 +7,8 @@ interface KYCRecord {
   cpf: string;
   name: string;
   status: string;
+  contactNumber: string;
   createdAt: string;
-  // Outros dados que deseja exibir...
 }
 
 const AdminDashboard: React.FC = () => {
@@ -202,6 +202,9 @@ const AdminDashboard: React.FC = () => {
                         Nome
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        contato
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Status
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -224,6 +227,9 @@ const AdminDashboard: React.FC = () => {
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                           {record.name}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          {record.contactNumber || '-'}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <span

@@ -17,6 +17,8 @@ const useKYCForm = () => {
       name: data.name,
       personType: data.personType,
       identificationType: data.identificationType,
+      investmentAmount: data.investmentAmount,
+      contactNumber: data.contactNumber,
       filesInfo: {
         identificationFile: data.identificationFile?.name,
         bankStatement: data.bankStatement?.name,
@@ -43,7 +45,7 @@ const useKYCForm = () => {
       console.log('📤 Enviando dados para o repositório...');
       await kycRepository.submit(data);
       console.log('✅ KYC submetido com sucesso!');
-      toast.success(' Formulário enviado com sucesso!, aguarde aprovação');
+      toast.success('Formulário enviado com sucesso! Aguarde aprovação.');
       setSuccess(true);
     } catch (err) {
       toast.error('Erro ao enviar formulário, entre em contato com o suporte');

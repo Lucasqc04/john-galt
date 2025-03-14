@@ -17,6 +17,8 @@ export interface KYC {
   identificationType: IdentificationType;
   identificationFile: File;
   termsAccepted: boolean;
+  investmentAmount?: number;
+  contactNumber?: string;
 
   // PF documents
   bankStatement?: File;
@@ -47,6 +49,16 @@ export const kycSchema = z.object({
   termsAccepted: z
     .boolean()
     .refine((val) => val === true, 'Termos devem ser aceitos'),
+
+  investmentAmount: z
+    .number()
+    .min(0, 'O valor do investimento não pode ser negativo')
+    .optional(),
+
+  contactNumber: z
+    .string()
+    .regex(/^\+?[1-9]\d{1,14}$/, 'Número de contato inválido')
+    .optional(),
 
   // PF documents
   bankStatement: z.instanceof(File).optional(),
