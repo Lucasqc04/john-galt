@@ -6,6 +6,8 @@ interface KYCRecord {
   cpf: string;
   name: string;
   status: string;
+  contactNumber?: string;
+  investmentAmount?: number;
   identificationFileUrl: string;
   bankStatementUrl?: string;
   holeriteUrl?: string;
@@ -102,6 +104,16 @@ const KYCDetail: React.FC = () => {
           <strong>Status:</strong> {record.status}
         </p>
         <p>
+          <strong>Número de Contato:</strong>{' '}
+          {record.contactNumber ? record.contactNumber : 'Não informado'}
+        </p>
+        <p>
+          <strong>Valor do Investimento:</strong>{' '}
+          {record.investmentAmount
+            ? `R$ ${record.investmentAmount.toFixed(2)}`
+            : 'Não informado'}
+        </p>
+        <p>
           <strong>Data de Submissão:</strong>{' '}
           {new Date(record.createdAt).toLocaleDateString()}
         </p>
@@ -110,6 +122,7 @@ const KYCDetail: React.FC = () => {
           {new Date(record.updatedAt).toLocaleDateString()}
         </p>
       </div>
+
       <h3 className="text-xl font-semibold mb-2">Arquivos Enviados</h3>
       {fileEntries.length > 0 ? (
         <ul className="list-disc pl-5 space-y-2">

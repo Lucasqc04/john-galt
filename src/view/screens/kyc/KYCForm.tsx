@@ -141,6 +141,21 @@ const KYCForm: React.FC = () => {
           newErrors.cnpjCard = 'Cartão CNPJ é obrigatório para Pessoa Jurídica';
         }
 
+        const investmentAmount = Number(formData.investmentAmount) || 0;
+        if (investmentAmount <= 0) {
+          console.warn('❌ Valor do investimento inválido');
+          newErrors.investmentAmount =
+            'O valor do investimento deve ser maior que zero';
+        }
+
+        if (
+          !formData.contactNumber ||
+          !/^\(\d{2}\) \d{4,5}-\d{4}$/.test(formData.contactNumber)
+        ) {
+          console.warn('❌ Número de contato inválido');
+          newErrors.contactNumber = 'Formato inválido. Use (99) 99999-9999';
+        }
+
         const hasPjFinancialDocument =
           formData.revenueDeclaration ||
           formData.decore ||
@@ -311,6 +326,76 @@ const KYCForm: React.FC = () => {
                     {validationErrors.name}
                   </p>
                 )}
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="w-full">
+                  <label
+                    htmlFor="investmentAmount"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    Valor do Investimento (R$){' '}
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="number"
+                    id="investmentAmount"
+                    name="investmentAmount"
+                    value={formData.investmentAmount ?? ''}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        investmentAmount: e.target.value
+                          ? Number(e.target.value)
+                          : undefined,
+                      }))
+                    }
+                    placeholder="Digite o valor do investimento"
+                    className={`w-full p-3 border rounded-lg ${
+                      validationErrors.investmentAmount
+                        ? 'border-red-500'
+                        : 'border-gray-300'
+                    }`}
+                    required
+                  />
+                  {validationErrors.investmentAmount && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {validationErrors.investmentAmount}
+                    </p>
+                  )}
+                </div>
+
+                <div className="w-full">
+                  <label
+                    htmlFor="contactNumber"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    Número de Contato <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="contactNumber"
+                    name="contactNumber"
+                    value={formData.contactNumber}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        contactNumber: e.target.value,
+                      }))
+                    }
+                    placeholder="(99) 99999-9999"
+                    className={`w-full p-3 border rounded-lg ${
+                      validationErrors.contactNumber
+                        ? 'border-red-500'
+                        : 'border-gray-300'
+                    }`}
+                    required
+                  />
+                  {validationErrors.contactNumber && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {validationErrors.contactNumber}
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
           </div>
