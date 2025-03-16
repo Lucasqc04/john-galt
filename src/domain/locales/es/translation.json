@@ -35,7 +35,22 @@
     "max_value_error_usdt": "El valor máximo permitido en USDT es de 5.000 BRL.",
     "payment_error_above_5000": "Para valores superiores a 5000 BRL, no se permite el pago vía Pix. Utilice Wise o Boleto Bancario.",
     "bitcoin_message": "BITCOIN en tus manos, sin complicaciones y con privacidad.",
-    "opening_hours": "¡Alfred disponible 24h!"
+    "opening_hours": "¡Alfred disponible 24h!",
+    "tooltip_btc": {
+      "title": "Transacciones con BTC:",
+      "minimum_value": "El monto mínimo para transacciones con Bitcoin es de R$ 200.",
+      "maximum_value": "El monto máximo permitido para transacciones con Bitcoin es de R$ 1,000,000.",
+      "pix_limit": "Para montos superiores a R$ 5,000, el pago a través de Pix no estará disponible. Utilice métodos alternativos como Wise o Boleto Bancario."
+    },
+    "tooltip_usdt": {
+      "title": "Transacciones con USDT:",
+      "minimum_value": "El monto mínimo para transacciones con USDT es de R$ 550.",
+      "maximum_value": "El monto máximo permitido para transacciones con USDT es de R$ 5,000."
+    },
+    "tooltip_attention": {
+      "title": "Atención:",
+      "message": "Tu primera compra estará limitada a R$ 500 para validar tu cuenta de usuario. Después de la primera compra, podrás realizar compras normalmente, respetando los límites mencionados anteriormente."
+    }
   },
   "paymentFailure": {
     "title": "Fallo en el Pago",
@@ -164,6 +179,10 @@
       "PIX": "PIX",
       "WISE": "Wise",
       "TICKET": "Boleto Bancario"
+    },
+    "contactTooltip": {
+      "message": "Solicitamos tu número para ponernos en contacto en caso de que ocurra algún inconveniente durante la transacción, garantizando mayor seguridad para tu compra.",
+      "alternative": "Si no quieres proporcionar tu número real, puedes ingresar uno ficticio, como 1111111111."
     }
   },
   "confirm_infos": {

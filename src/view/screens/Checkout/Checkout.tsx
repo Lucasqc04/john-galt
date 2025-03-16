@@ -3,6 +3,7 @@ import SocialButtons from '@/view/components/SocialButtons';
 import { useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { FaPlay } from 'react-icons/fa';
 import AlfredImg from '../../assets/_DIY SEC LAB - Apresentação Comercial (1).png';
 import BtcIcon from '../../assets/bitcoin.svg';
 import UsdtIcon from '../../assets/usdt.svg';
@@ -11,7 +12,8 @@ import { ValuesForm } from './ValuesForm/ValuesForm';
 
 export default function Checkout() {
   const { t } = useTranslation();
-  const { form, steps, isTransactionAllowed, ValidateValues } = useCheckout();
+  const { form, steps, isTransactionAllowed, ValidateValues, isAlfred24h } =
+    useCheckout();
   const [selectedCrypto, setSelectedCrypto] = useState<'BTC' | 'USDT'>('BTC');
 
   // Variável para ativar/desativar o modo de manutenção
@@ -50,40 +52,48 @@ export default function Checkout() {
                       {t('checkout.transaction_error')}
                     </span>
                   )}
-                  <div className="flex justify-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setSelectedCrypto('BTC')}
-                      className={`group flex items-center justify-center gap-2 border border-white rounded-full px-3 py-1 text-white transition-colors duration-200 ${
-                        selectedCrypto === 'BTC'
-                          ? 'bg-orange-500'
-                          : 'bg-transparent hover:bg-orange-500'
-                      }`}
-                    >
-                      <img
-                        src={BtcIcon}
-                        alt="BTC"
-                        className="w-4 h-4 hidden group-hover:block"
-                      />
-                      BTC
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setSelectedCrypto('USDT')}
-                      className={`group flex items-center justify-center gap-2 border border-white rounded-full px-3 py-1 text-white transition-colors duration-200 ${
-                        selectedCrypto === 'USDT'
-                          ? 'bg-orange-500'
-                          : 'bg-transparent hover:bg-orange-500'
-                      }`}
-                    >
-                      <img
-                        src={UsdtIcon}
-                        alt="USDT"
-                        className="w-4 h-4 hidden group-hover:block"
-                      />
-                      USDT
-                    </button>
+                  <div className="flex justify-center w-full items-center">
+                    {/* Container centralizado para BTC e USDT */}
+                    <div className="flex gap-2 justify-center">
+                      <button
+                        type="button"
+                        onClick={() => setSelectedCrypto('BTC')}
+                        className={`group flex items-center justify-center gap-2 border border-white rounded-full px-4 py-1.5 text-white transition-colors duration-200 ${selectedCrypto === 'BTC' ? 'bg-orange-500' : 'bg-transparent hover:bg-orange-500'}`}
+                      >
+                        <img
+                          src={BtcIcon}
+                          alt="BTC"
+                          className="w-4 h-4 hidden group-hover:block"
+                        />
+                        BTC
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setSelectedCrypto('USDT')}
+                        className={`group flex items-center justify-center gap-2 border border-white rounded-full px-3 py-1 text-white transition-colors duration-200 ${selectedCrypto === 'USDT' ? 'bg-orange-500' : 'bg-transparent hover:bg-orange-500'}`}
+                      >
+                        <img
+                          src={UsdtIcon}
+                          alt="USDT"
+                          className="w-4 h-4 hidden group-hover:block"
+                        />
+                        USDT
+                      </button>
+                    </div>
+
+                    {/* Botão Play/Stop alinhado à direita */}
+                    {isAlfred24h ? (
+                      <div className="ml-4">
+                        <div
+                          className={`flex items-center gap-2 text-lg font-bold text-green-500 `}
+                        >
+                          <FaPlay size={24} />
+                          <span className="text-3xl">24H</span>
+                        </div>
+                      </div>
+                    ) : null}
                   </div>
+
                   {steps.current === 1 && (
                     <ValuesForm selectedCrypto={selectedCrypto} />
                   )}
@@ -120,11 +130,14 @@ export default function Checkout() {
                           {t('checkout.bitcoin_message')}
                         </p>
                       </section>
-                      <section className="hidden lg:flex items-center justify-center text-center">
-                        <p className="text-white">
-                          {t('checkout.opening_hours')}
-                        </p>
-                      </section>
+
+                      {isAlfred24h && (
+                        <section className="hidden lg:flex items-center justify-center text-center">
+                          <p className="text-white">
+                            {t('checkout.opening_hours')}
+                          </p>
+                        </section>
+                      )}
                     </>
                   )}
                 </form>
@@ -141,10 +154,11 @@ export default function Checkout() {
               <p className="text-white">{t('checkout.bitcoin_message')}</p>
             </section>
           </section>
-          <section className="lg:hidden mt-4 mb-4 text-center">
-            <p className="text-white">{t('checkout.opening_hours')}</p>
-          </section>
-
+          {isAlfred24h && (
+            <section className="lg:hidden mt-4 mb-4 text-center">
+              <p className="text-white">{t('checkout.opening_hours')}</p>
+            </section>
+          )}
           <div className="flex justify-center w-full">
             <SocialButtons />
           </div>
