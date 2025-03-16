@@ -157,7 +157,7 @@
     "verifying": "Verifying...",
     "scanQRCode": "Scan the QR Code",
     "qrCode100kAlt": "QR Code for $100,000",
-    "bitcoinPurchaseWarning": "Attention: You are purchasing Bitcoin",
+    "bitcoinPurchaseWarning": "Attention: You are purchasing",
     "alfredLogoAlt": "Alfred Logo",
     "copyPixKey": "Copy PIX Key",
     "paymentMethod": {
