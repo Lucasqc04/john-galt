@@ -5,6 +5,7 @@ import { t } from 'i18next';
 import { ChangeEvent, useState } from 'react';
 import { FaQuestionCircle } from 'react-icons/fa';
 import { FaPix } from 'react-icons/fa6';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import BoletoIcon from '../../../assets/BoletoIcon.png';
 import AlfredImg from '../../../assets/c1b28810-5a23-4e7c-bcce-bd1f42b271c5.png';
@@ -46,6 +47,8 @@ export default function DataForm() {
     validateFields,
   } = useDataForm();
 
+  const navigate = useNavigate();
+
   const paymentMethodLabels = {
     PIX: t('buycheckout.paymentMethod.PIX'),
     WISE: t('buycheckout.paymentMethod.WISE'),
@@ -84,11 +87,18 @@ export default function DataForm() {
       return;
     }
 
-    if (is100k) {
-      handleProcessPayment();
-    } else {
-      setIsModalOpen(true);
+    if (paymentMethod === 'PIX') {
+      if (is100k) {
+        handleProcessPayment();
+        return;
+      }
+      if (numericBRL > 5000) {
+        navigate(ROUTES.kycForm.call(currentLang));
+        return;
+      }
     }
+
+    setIsModalOpen(true);
   };
 
   return (
@@ -205,25 +215,18 @@ export default function DataForm() {
                       <ul className="w-full">
                         <li
                           onClick={() => {
-                            // Permite PIX se o valor for 100.000, senão aplica a regra normal (>5000)
                             if (numericBRL > 5000 && numericBRL !== 100000) {
                               toast.warning(
                                 t('checkout.payment_error_above_5000'),
                               );
-                              return;
                             }
                             selectPaymentMethod('PIX');
                           }}
-                          className={`flex flex-col items-center justify-center px-4 py-2 cursor-pointer text-white ${
-                            numericBRL > 5000 && numericBRL !== 100000
-                              ? 'opacity-50'
-                              : 'hover:bg-gray-800'
-                          }`}
+                          className="flex flex-col items-center justify-center px-4 py-2 cursor-pointer text-white hover:bg-gray-800"
                         >
                           <span className="w-full text-center">PIX</span>
                           <FaPix className="w-6 h-6 mt-1" />
                         </li>
-
                         <li
                           onClick={() => selectPaymentMethod('WISE')}
                           className="flex flex-col items-center justify-center px-4 py-2 cursor-pointer text-white hover:bg-gray-800"
@@ -271,7 +274,7 @@ export default function DataForm() {
               <div className="flex justify-center items-center pt-4 relative">
                 <div className="relative w-full">
                   <FaQuestionCircle
-                    className="absolute left-[-1.5rem] top-1/2 transform -translate-y-1/2 text-white cursor-pointer"
+                    className="absolute left-[1rem] top-1/2 transform -translate-y-1/2 text-white cursor-pointer"
                     onMouseEnter={() => setShowTooltip(true)}
                     onMouseLeave={() => setShowTooltip(false)}
                     onClick={() => setShowTooltip(!showTooltip)}
