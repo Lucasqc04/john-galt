@@ -90,33 +90,21 @@ export function useCheckout() {
       10,
     );
 
-    // Validação diferenciada para USDT
     if (data.cryptoType === 'USDT') {
-      if (numericValue < 0) {
+      // Valor mínimo para USDT é 550 BRL.
+      if (numericValue < 500) {
         toast.warning(t('checkout.min_value_error_usdt'));
         return;
       }
-      if (numericValue > 5000) {
-        toast.warning(t('checkout.max_value_error_usdt'));
-        return;
-      }
     } else {
-      // Validações para BTC
+      // Valor mínimo para BTC é 200 BRL.
       if (numericValue < 200) {
         toast.warning(t('checkout.min_value_error'));
         return;
       }
-      // if (numericValue < 700) {
-      //   toast.info(t('checkout.wallet_error_below_700'));
-      // }
-      if (numericValue !== 100000) {
-        if (numericValue > 5000) {
-          toast.warning(t('checkout.payment_error_above_5000'));
-        }
-        if (numericValue > 1000000) {
-          toast.warning(t('checkout.amount_error_above_1m'));
-          return;
-        }
+      // Para valores acima de 5.000 BRL em BTC, exibe aviso para preenchimento do formulário de validação.
+      if (numericValue > 5000) {
+        toast.warning(t('checkout.payment_error_above_5000'));
       }
     }
 

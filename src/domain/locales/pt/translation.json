@@ -28,28 +28,26 @@
     "usdt_placeholder": "Valor em USDT",
     "proceed_button": "Prosseguir",
     "transaction_error": "Transações só são permitidas todos os dias, das 8h às 22h no horário de Brasília.",
-    "min_value_error": "O valor mínimo para compra é 200 BRL.",
+    "min_value_error": "O valor mínimo para compra em BTC é 200 BRL.",
     "min_value_error_usdt": "O valor mínimo para compra em USDT é 550 BRL.",
     "wallet_error_below_700": "Para valores abaixo de 700 BRL, apenas carteiras Liquid e Lightning são permitidas.",
-    "amount_error_above_1m": "O valor máximo permitido é 1.000.000 BRL.",
-    "max_value_error_usdt": "O valor máximo permitido em USDT é 5.000 BRL.",
-    "payment_error_above_5000": "Para valores acima de 5000 BRL, o pagamento via Pix não é permitido. Utilize Wise ou Boleto Bancário.",
+    "payment_error_above_5000": "Para pagamentos via Pix com valor superior a 5.000 BRL, é necessário preencher o formulário 'Validação para transações anônimas'.",
+    "first_purchase_limit_error": "Sua primeira compra está limitada a 500 BRL.",
     "bitcoin_message": "BITCOIN na sua mão, sem complicação e com privacidade.",
     "opening_hours": "Alfred disponível 24h!",
     "tooltip_btc": {
       "title": "Transações com BTC:",
       "minimum_value": "O valor mínimo para transações com Bitcoin é de R$ 200.",
-      "maximum_value": "O valor máximo permitido para transações com Bitcoin é de R$ 1.000.000.",
-      "pix_limit": "Para valores superiores a R$ 5.000, o pagamento via Pix não estará disponível. Utilize métodos alternativos como Wise ou Boleto Bancário."
+      "pix_limit": "Para pagamentos via Pix com valores superiores a R$ 5.000, é necessário preencher o formulário 'Validação para transações anônimas', que comprova sua renda e autenticidade."
     },
     "tooltip_usdt": {
       "title": "Transações com USDT:",
       "minimum_value": "O valor mínimo para transações com USDT é de R$ 550.",
-      "maximum_value": "O valor máximo permitido para transações com USDT é de R$ 5.000."
+      "maximum_value": "Não há valor máximo para transações no Alfred."
     },
     "tooltip_attention": {
       "title": "Atenção:",
-      "message": "Sua primeira compra será limitada a R$ 500 para validarmos seu usuário. Após a primeira compra, você poderá realizar compras normalmente, respeitando os limites mencionados acima."
+      "message": "Sua primeira compra será limitada a R$ 500 para validarmos seu usuário. Após a primeira compra, você poderá realizar transações normalmente, respeitando os limites mencionados."
     }
   },
   "paymentFailure": {

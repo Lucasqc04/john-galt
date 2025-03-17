@@ -24,32 +24,30 @@
   "checkout": {
     "title": "Bitcoin Purchase and Checkout",
     "brl_placeholder": "Enter the amount in BRL",
-    "btc_placeholder": "Amount in BTC",
-    "usdt_placeholder": "Amount in USDT",
+    "btc_placeholder": "BTC Amount",
+    "usdt_placeholder": "USDT Amount",
     "proceed_button": "Proceed",
-    "transaction_error": "Transactions are only allowed every day, from 8:00 AM to 10:00 PM Brasília time.",
-    "min_value_error": "The minimum purchase amount is 200 BRL.",
-    "min_value_error_usdt": "The minimum purchase amount in USDT is 550 BRL.",
+    "transaction_error": "Transactions are only allowed every day from 8:00 AM to 10:00 PM Brasília time.",
+    "min_value_error": "The minimum purchase amount for BTC is 200 BRL.",
+    "min_value_error_usdt": "The minimum purchase amount for USDT is 550 BRL.",
     "wallet_error_below_700": "For amounts below 700 BRL, only Liquid and Lightning wallets are allowed.",
-    "amount_error_above_1m": "The maximum allowed amount is 1,000,000 BRL.",
-    "max_value_error_usdt": "The maximum allowed amount in USDT is 5,000 BRL.",
-    "payment_error_above_5000": "For amounts above 5000 BRL, payment via Pix is not allowed. Use Wise or Bank Slip.",
-    "bitcoin_message": "BITCOIN in your hands, without complications and with privacy.",
+    "payment_error_above_5000": "For Pix payments with amounts over 5,000 BRL, it is necessary to fill out the 'Validation for Anonymous Transactions' form.",
+    "first_purchase_limit_error": "Your first purchase is limited to 500 BRL.",
+    "bitcoin_message": "BITCOIN in your hand, hassle-free and with privacy.",
     "opening_hours": "Alfred available 24/7!",
     "tooltip_btc": {
-      "title": "Transactions with BTC:",
-      "minimum_value": "The minimum amount for Bitcoin transactions is R$ 200.",
-      "maximum_value": "The maximum amount allowed for Bitcoin transactions is R$ 1,000,000.",
-      "pix_limit": "For amounts over R$ 5,000, payment via Pix will not be available. Please use alternative methods like Wise or Bank Slip."
+      "title": "BTC Transactions:",
+      "minimum_value": "The minimum amount for Bitcoin transactions is 200 BRL.",
+      "pix_limit": "For Pix payments with amounts over 5,000 BRL, it is necessary to complete the 'Validation for Anonymous Transactions' form, which verifies your income and authenticity."
     },
     "tooltip_usdt": {
-      "title": "Transactions with USDT:",
-      "minimum_value": "The minimum amount for USDT transactions is R$ 550.",
-      "maximum_value": "The maximum amount allowed for USDT transactions is R$ 5,000."
+      "title": "USDT Transactions:",
+      "minimum_value": "The minimum amount for USDT transactions is 550 BRL.",
+      "maximum_value": "There is no maximum amount for transactions on Alfred."
     },
     "tooltip_attention": {
       "title": "Attention:",
-      "message": "Your first purchase will be limited to R$ 500 to validate your user account. After your first purchase, you will be able to make purchases normally, following the limits mentioned above."
+      "message": "Your first purchase will be limited to 500 BRL to validate your account. After the first purchase, you will be able to make transactions normally, respecting the mentioned limits."
     }
   },
   "paymentFailure": {

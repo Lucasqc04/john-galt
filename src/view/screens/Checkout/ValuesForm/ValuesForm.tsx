@@ -74,7 +74,7 @@ export function ValuesForm({ selectedCrypto }: ValuesFormProps) {
       </div>
 
       {/* Ícone de interrogação posicionado ainda mais à esquerda */}
-      <div className="absolute top-1/2 left-[-2rem] transform -translate-y-1/2">
+      <div className="absolute top-[-2rem] left-2">
         <FaQuestionCircle
           className="text-white cursor-pointer"
           size={24}
@@ -83,26 +83,21 @@ export function ValuesForm({ selectedCrypto }: ValuesFormProps) {
           onClick={() => setShowTooltip((prev) => !prev)}
         />
         {showTooltip && (
-          <div className="absolute z-10 left-full top-1/2 transform -translate-y-1/2 ml-2 w-72 p-4 bg-gray-800 text-white text-sm rounded shadow-lg">
+          <div className="absolute z-10 w-72 p-4 bg-gray-800 text-white text-sm rounded shadow-lg left-full top-full ml-2 mt-2">
             <p>
               <strong>{t('checkout.tooltip_btc.title')}</strong>
             </p>
             <p>{t('checkout.tooltip_btc.minimum_value')}</p>
             <br />
-            <p>{t('checkout.tooltip_btc.maximum_value')}</p>
-            <hr className="my-2 border-gray-500" />
-            <p>{t('checkout.tooltip_btc.pix_limit')}</p>
-
-            <hr className="my-2 border-gray-500" />
-
             <p>
               <strong>{t('checkout.tooltip_usdt.title')}</strong>
             </p>
             <p>{t('checkout.tooltip_usdt.minimum_value')}</p>
-            <p>{t('checkout.tooltip_usdt.maximum_value')}</p>
-
             <hr className="my-2 border-gray-500" />
-
+            <p>{t('checkout.tooltip_usdt.maximum_value')}</p>
+            <hr className="my-2 border-gray-500" />
+            <p>{t('checkout.tooltip_btc.pix_limit')}</p>
+            <hr className="my-2 border-gray-500" />
             <p>
               <strong>{t('checkout.tooltip_attention.title')}</strong>
             </p>
