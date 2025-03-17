@@ -24,8 +24,9 @@ export function useCheckout() {
   const { currentLang } = useCurrentLang();
   const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(1);
-  const [isTransactionAllowed, setIsTransactionAllowed] = useState(true);
-
+  const [isTransactionAllowed, setIsTransactionAllowed] = useState(false);
+  // atualizar aqui se o aflred estivar 24H
+  const [isAlfred24h] = useState(true);
   // Estado para o tipo de carteira e método de pagamento
   const [walletType, setWalletType] = useState<WalletType>('liquid');
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('pix');
@@ -70,10 +71,13 @@ export function useCheckout() {
     const now = new Date();
     const zonedTime = toZonedTime(now, timeZone);
     const currentHour = zonedTime.getHours();
-    if (currentHour < 8 || currentHour >= 22) {
+
+    if (isAlfred24h || (currentHour >= 8 && currentHour < 22)) {
       setIsTransactionAllowed(true);
+    } else {
+      setIsTransactionAllowed(false);
     }
-  }, []);
+  }, [isAlfred24h]);
 
   async function ValidateValues(data: Checkout) {
     if (!isTransactionAllowed) {
@@ -136,5 +140,6 @@ export function useCheckout() {
     setWalletType,
     paymentMethod,
     setPaymentMethod,
+    isAlfred24h,
   };
 }

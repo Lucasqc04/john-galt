@@ -94,7 +94,7 @@ export function Support() {
 
               <div className="flex flex-col gap-6 w-full max-w-[368px]">
                 <a
-                  href="https://chat.whatsapp.com/HtFSC2xozFhLEFxaDf5Psx"
+                  href="https://api.whatsapp.com/send?phone=+5511919050416&text=Ol%C3%A1,%20Tudo%20bem?%0A%0APreciso%20de%20ajuda%20sobre%20os%20produtos..."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 p-4  border border-gray-600 rounded-[24px] shadow-sm hover:bg-[#000A13] transition"
