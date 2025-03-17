@@ -1,4 +1,5 @@
 import { KYC } from '@/domain/entities/KYC';
+import WhatsAppButton from '@/view/components/buttonWhatsApp';
 import { t } from 'i18next';
 import { AlertCircle, CheckCircle2, Info } from 'lucide-react';
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
@@ -708,7 +709,7 @@ const KYCForm: React.FC = () => {
           <li>• Seus dados são protegidos de acordo com a LGPD</li>
         </ul>
       </div>
-
+      <WhatsAppButton />
       {showTerms && <TermsAndConditions onClose={toggleTerms} />}
     </div>
   );
