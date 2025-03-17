@@ -78,7 +78,8 @@ export function useDataForm() {
           if (
             !/^VJL[a-km-zA-HJ-NP-Z0-9]{43,}$/i.test(coldWallet) &&
             !/^ex1[a-z0-9]{39,59}$/i.test(coldWallet) &&
-            !/^CT[a-km-zA-HJ-NP-Z0-9]{40,64}$/i.test(coldWallet)
+            !/^CT[a-km-zA-HJ-NP-Z0-9]{40,64}$/i.test(coldWallet) &&
+            !/^lq1[a-z0-9]{40,100}$/i.test(coldWallet)
           ) {
             newErrors.coldWallet = t(
               'buycheckout.invalidColdWalletErrorLiquid',
@@ -114,7 +115,8 @@ export function useDataForm() {
             if (
               !/^VJL[a-km-zA-HJ-NP-Z0-9]{43,}$/i.test(coldWallet) &&
               !/^ex1[a-z0-9]{39,59}$/i.test(coldWallet) &&
-              !/^CT[a-km-zA-HJ-NP-Z0-9]{40,64}$/i.test(coldWallet)
+              !/^CT[a-km-zA-HJ-NP-Z0-9]{40,64}$/i.test(coldWallet) &&
+              !/^lq1[a-z0-9]{40,100}$/i.test(coldWallet)
             ) {
               newErrors.coldWallet = t(
                 'buycheckout.invalidColdWalletErrorLiquid',
@@ -124,7 +126,8 @@ export function useDataForm() {
           case 'Lightning':
             if (
               !/^lnbc[0-9]{1,}[a-zA-Z0-9]+$/.test(coldWallet) &&
-              !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(coldWallet)
+              !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(coldWallet) &&
+              !/^lnurl1[a-z0-9]+$/i.test(coldWallet)
             ) {
               newErrors.coldWallet = t(
                 'buycheckout.invalidColdWalletErrorLightning',
