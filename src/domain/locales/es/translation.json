@@ -28,7 +28,7 @@
     "usdt_placeholder": "Valor en USDT",
     "proceed_button": "Continuar",
     "transaction_error": "Las transacciones solo están permitidas todos los días, de 8:00 a 22:00, hora de Brasilia.",
-    "min_value_error": "El valor mínimo para la compra es de 100 BRL.",
+    "min_value_error": "El valor mínimo para la compra es de 200 BRL.",
     "min_value_error_usdt": "El valor mínimo para la compra en USDT es de 550 BRL.",
     "wallet_error_below_700": "Para valores inferiores a 700 BRL, solo se permiten billeteras Liquid y Lightning.",
     "amount_error_above_1m": "El valor máximo permitido es de 1.000.000 BRL.",
@@ -82,7 +82,7 @@
       "Recuerde aceptar los Términos de Uso y las tarifas aplicables para continuar."
     ],
     "transactionLimitsTitle": "Límites de transacción",
-    "transactionLimitsDescription": "El monto mínimo para la primera compra es de R$ 100. El límite máximo diario para transacciones es de R$ 5.000. Para montos superiores a este límite, comuníquese con el soporte para obtener más información y aprobación.",
+    "transactionLimitsDescription": "El monto mínimo para la primera compra es de R$ 500. El límite máximo diario para transacciones es de R$ 5.000. Para montos superiores a este límite, comuníquese con el soporte para obtener más información y aprobación.",
     "transactionDurationTitle": "Duración de la Transacción",
     "transactionDurationDescription": "En Alfred, no requerimos KYC (Conozca a su cliente) para realizar transacciones, ya que creemos en la privacidad y libertad de nuestros usuarios. La responsabilidad de la verificación de identidad recae en los bancos que permiten el uso de cuentas bancarias.\n\nNuestra función es garantizar que las transacciones se realicen de manera eficiente y segura, funcionando como un mercado para el intercambio de valores entre usuarios.",
     "kycPoliciesTitle": "Políticas de KYC y Responsabilidad",

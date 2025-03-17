@@ -20,6 +20,14 @@ export class RemoteKYCDataSource implements KYCDataSource {
     formData.append('identificationType', data.identificationType);
     formData.append('termsAccepted', String(data.termsAccepted));
 
+    // Adiciona os novos campos
+    if (data.investmentAmount !== undefined && data.investmentAmount !== null) {
+      formData.append('investmentAmount', String(data.investmentAmount));
+    }
+    if (data.contactNumber) {
+      formData.append('contactNumber', data.contactNumber);
+    }
+
     console.log('📎 Adicionando arquivos ao FormData...');
 
     // Adiciona arquivo de identificação

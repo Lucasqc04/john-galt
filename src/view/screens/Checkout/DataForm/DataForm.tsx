@@ -61,11 +61,12 @@ export default function DataForm() {
     parseInt(
       localStorage.getItem('brlAmount')?.replace(/\D/g, '') || '0',
       10,
-    ) === 50000;
+    ) === 100000;
 
   const handleApplyCoupon = async () => {
     await checkCouponValidity();
     if (!errors.cupom) {
+      setCupom(cupom.toUpperCase());
       setCouponApplied(true);
     }
   };
@@ -128,10 +129,10 @@ export default function DataForm() {
                   <div className="absolute left-0 top-full mt-2 w-full bg-gray-900 border border-gray-700 rounded-lg shadow-lg z-10 transition-all duration-300 ease-out transform scale-100 opacity-100">
                     <ul className="w-full">
                       {networks.map((net) => {
-                        const isOnchainDisabled =
-                          net.name.toLowerCase() === 'onchain' &&
-                          numericBRL >= 200 &&
-                          numericBRL < 700;
+                        const isOnchainDisabled = false;
+                        // net.name.toLowerCase() === 'onchain';
+                        //  && numericBRL >= 200 &&
+                        // numericBRL < 700;
                         return (
                           <li
                             key={net.name}
@@ -203,7 +204,7 @@ export default function DataForm() {
                         <li
                           onClick={() => {
                             // Permite PIX se o valor for 100.000, senão aplica a regra normal (>5000)
-                            if (numericBRL > 5000 && numericBRL !== 50000) {
+                            if (numericBRL > 5000 && numericBRL !== 100000) {
                               toast.warning(
                                 t('checkout.payment_error_above_5000'),
                               );

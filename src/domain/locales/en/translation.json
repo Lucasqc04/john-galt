@@ -28,7 +28,7 @@
     "usdt_placeholder": "Amount in USDT",
     "proceed_button": "Proceed",
     "transaction_error": "Transactions are only allowed every day, from 8:00 AM to 10:00 PM Brasília time.",
-    "min_value_error": "The minimum purchase amount is 100 BRL.",
+    "min_value_error": "The minimum purchase amount is 200 BRL.",
     "min_value_error_usdt": "The minimum purchase amount in USDT is 550 BRL.",
     "wallet_error_below_700": "For amounts below 700 BRL, only Liquid and Lightning wallets are allowed.",
     "amount_error_above_1m": "The maximum allowed amount is 1,000,000 BRL.",
@@ -82,7 +82,7 @@
       "Remember to accept the Terms of Use and applicable fees to proceed."
     ],
     "transactionLimitsTitle": "Transaction Limits",
-    "transactionLimitsDescription": "The minimum amount for the first purchase is R$ 100. The maximum daily transaction limit is R$ 5,000. For amounts above this limit, please contact support for more information and approval.",
+    "transactionLimitsDescription": "The minimum amount for the first purchase is R$ 500. The maximum daily transaction limit is R$ 5,000. For amounts above this limit, please contact support for more information and approval.",
     "transactionDurationTitle": "Transaction Duration",
     "transactionDurationDescription": "The processing time for a transaction can vary between 30 minutes and 24 hours, depending on several factors, such as banking processing, sending receipts and network congestion. If the market fluctuates during trading, additional delays may occur.",
     "kycPoliciesTitle": "KYC Policies and Responsibility",

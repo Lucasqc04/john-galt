@@ -141,6 +141,21 @@ const KYCForm: React.FC = () => {
           newErrors.cnpjCard = 'Cartão CNPJ é obrigatório para Pessoa Jurídica';
         }
 
+        const investmentAmount = Number(formData.investmentAmount) || 0;
+        if (investmentAmount <= 0) {
+          console.warn('❌ Valor do investimento inválido');
+          newErrors.investmentAmount =
+            'O valor do investimento deve ser maior que zero';
+        }
+
+        if (
+          !formData.contactNumber ||
+          !/^\(\d{2}\) \d{4,5}-\d{4}$/.test(formData.contactNumber)
+        ) {
+          console.warn('❌ Número de contato inválido');
+          newErrors.contactNumber = 'Formato inválido. Use (99) 99999-9999';
+        }
+
         const hasPjFinancialDocument =
           formData.revenueDeclaration ||
           formData.decore ||
@@ -192,7 +207,7 @@ const KYCForm: React.FC = () => {
     <div className="max-w-4xl mx-auto p-6">
       <div className="bg-transparent rounded-xl shadow-lg p-8">
         <h1 className="text-2xl font-bold text-orange-600 mb-6">
-          Formulário OTC para Compra de Bitcoin
+          Validação para Transações Anônimas
         </h1>
 
         <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg flex items-start">
@@ -202,11 +217,16 @@ const KYCForm: React.FC = () => {
               Por que solicitamos esses documentos?
             </h3>
             <p className="text-blue-700 text-sm mt-1">
-              Como parte do nosso compromisso com a segurança e integridade das
-              transações, realizamos um processo de verificação para clientes
-              que realizam operações de valores significativos. Esta verificação
-              visa proteger todos os envolvidos e garantir a conformidade com as
-              melhores práticas do mercado.
+              O Alfred opera com foco na liberdade financeira, garantindo um
+              ambiente seguro e sem interferências. Para evitar impactos
+              indesejados, realizo um reconhecimento da origem dos fundos antes
+              de liberar transações de alto valor.
+            </p>
+            <p className="text-blue-700 text-sm mt-1">
+              Os documentos solicitados nesse processo são excluídos
+              imediatamente após a verificação, sem qualquer tipo de declaração
+              ou armazenamento. Dessa forma, todas as transações permanecem
+              totalmente anônimas e sem rastros.
             </p>
           </div>
         </div>
@@ -306,6 +326,76 @@ const KYCForm: React.FC = () => {
                     {validationErrors.name}
                   </p>
                 )}
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="w-full">
+                  <label
+                    htmlFor="investmentAmount"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    Valor do Investimento (R$){' '}
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="number"
+                    id="investmentAmount"
+                    name="investmentAmount"
+                    value={formData.investmentAmount ?? ''}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        investmentAmount: e.target.value
+                          ? Number(e.target.value)
+                          : undefined,
+                      }))
+                    }
+                    placeholder="Digite o valor do investimento"
+                    className={`w-full p-3 border rounded-lg ${
+                      validationErrors.investmentAmount
+                        ? 'border-red-500'
+                        : 'border-gray-300'
+                    }`}
+                    required
+                  />
+                  {validationErrors.investmentAmount && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {validationErrors.investmentAmount}
+                    </p>
+                  )}
+                </div>
+
+                <div className="w-full">
+                  <label
+                    htmlFor="contactNumber"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    Número de Contato <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="contactNumber"
+                    name="contactNumber"
+                    value={formData.contactNumber}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        contactNumber: e.target.value,
+                      }))
+                    }
+                    placeholder="(99) 99999-9999"
+                    className={`w-full p-3 border rounded-lg ${
+                      validationErrors.contactNumber
+                        ? 'border-red-500'
+                        : 'border-gray-300'
+                    }`}
+                    required
+                  />
+                  {validationErrors.contactNumber && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {validationErrors.contactNumber}
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
           </div>
