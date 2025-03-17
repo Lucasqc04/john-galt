@@ -3,6 +3,7 @@ import { Loader } from '@/view/components/Loader';
 import classNames from 'classnames';
 import { t } from 'i18next';
 import { ChangeEvent, useState } from 'react';
+import { FaQuestionCircle } from 'react-icons/fa';
 import { FaPix } from 'react-icons/fa6';
 import { toast } from 'react-toastify';
 import BoletoIcon from '../../../assets/BoletoIcon.png';
@@ -56,6 +57,7 @@ export default function DataForm() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [couponApplied, setCouponApplied] = useState(false);
   const closeModal = () => setIsModalOpen(false);
+  const [showTooltip, setShowTooltip] = useState(false);
 
   const is100k =
     parseInt(
@@ -266,23 +268,40 @@ export default function DataForm() {
                   )}
                 </div>
               </div>
-              <div className="flex justify-center items-center pt-4">
+              <div className="flex justify-center items-center pt-4 relative">
                 <div className="relative w-full">
+                  <FaQuestionCircle
+                    className="absolute left-[-1.5rem] top-1/2 transform -translate-y-1/2 text-white cursor-pointer"
+                    onMouseEnter={() => setShowTooltip(true)}
+                    onMouseLeave={() => setShowTooltip(false)}
+                    onClick={() => setShowTooltip(!showTooltip)}
+                  />
                   <input
                     value={transactionNumber}
                     onChange={(e: ChangeEvent<HTMLInputElement>) =>
                       setTransactionNumber(e.target.value)
                     }
                     placeholder={t('buycheckout.contactNumber')}
-                    className="border-2 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-black text-center w-full"
+                    className="border-2 pl-10 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-black text-center w-full"
                   />
-                  {errors.transactionNumber && (
-                    <p className="text-red-500 text-sm">
-                      {errors.transactionNumber}
-                    </p>
-                  )}
                 </div>
+
+                {showTooltip && (
+                  <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-64 bg-gray-900 text-white text-sm p-3 rounded-lg shadow-lg z-10">
+                    <p>{t('buycheckout.contactTooltip.message')}</p>
+                    <p className="text-red-500 mt-2">
+                      {t('buycheckout.contactTooltip.alternative')}
+                    </p>
+                  </div>
+                )}
+
+                {errors.transactionNumber && (
+                  <p className="text-red-500 text-sm">
+                    {errors.transactionNumber}
+                  </p>
+                )}
               </div>
+
               <div className="flex items-center justify-center mt-4">
                 <input
                   type="text"

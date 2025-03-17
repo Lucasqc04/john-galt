@@ -35,7 +35,22 @@
     "max_value_error_usdt": "The maximum allowed amount in USDT is 5,000 BRL.",
     "payment_error_above_5000": "For amounts above 5000 BRL, payment via Pix is not allowed. Use Wise or Bank Slip.",
     "bitcoin_message": "BITCOIN in your hands, without complications and with privacy.",
-    "opening_hours": "Alfred available 24/7!"
+    "opening_hours": "Alfred available 24/7!",
+    "tooltip_btc": {
+      "title": "Transactions with BTC:",
+      "minimum_value": "The minimum amount for Bitcoin transactions is R$ 200.",
+      "maximum_value": "The maximum amount allowed for Bitcoin transactions is R$ 1,000,000.",
+      "pix_limit": "For amounts over R$ 5,000, payment via Pix will not be available. Please use alternative methods like Wise or Bank Slip."
+    },
+    "tooltip_usdt": {
+      "title": "Transactions with USDT:",
+      "minimum_value": "The minimum amount for USDT transactions is R$ 550.",
+      "maximum_value": "The maximum amount allowed for USDT transactions is R$ 5,000."
+    },
+    "tooltip_attention": {
+      "title": "Attention:",
+      "message": "Your first purchase will be limited to R$ 500 to validate your user account. After your first purchase, you will be able to make purchases normally, following the limits mentioned above."
+    }
   },
   "paymentFailure": {
     "title": "Payment Failure",
@@ -157,13 +172,17 @@
     "verifying": "Verifying...",
     "scanQRCode": "Scan the QR Code",
     "qrCode100kAlt": "QR Code for $100,000",
-    "bitcoinPurchaseWarning": "Attention: You are purchasing Bitcoin",
+    "bitcoinPurchaseWarning": "Attention: You are purchasing",
     "alfredLogoAlt": "Alfred Logo",
     "copyPixKey": "Copy PIX Key",
     "paymentMethod": {
       "PIX": "PIX",
       "WISE": "Wise",
       "TICKET": "Bank Slip"
+    },
+    "contactTooltip": {
+      "message": "We request your number to contact you in case something goes wrong during the transaction, ensuring greater security for your purchase.",
+      "alternative": "If you don't want to provide your real number, you can enter a fictitious one, like 1111111111."
     }
   },
   "confirm_infos": {

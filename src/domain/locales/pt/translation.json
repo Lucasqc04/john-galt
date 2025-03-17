@@ -35,7 +35,22 @@
     "max_value_error_usdt": "O valor máximo permitido em USDT é 5.000 BRL.",
     "payment_error_above_5000": "Para valores acima de 5000 BRL, o pagamento via Pix não é permitido. Utilize Wise ou Boleto Bancário.",
     "bitcoin_message": "BITCOIN na sua mão, sem complicação e com privacidade.",
-    "opening_hours": "Alfred disponível 24h!"
+    "opening_hours": "Alfred disponível 24h!",
+    "tooltip_btc": {
+      "title": "Transações com BTC:",
+      "minimum_value": "O valor mínimo para transações com Bitcoin é de R$ 200.",
+      "maximum_value": "O valor máximo permitido para transações com Bitcoin é de R$ 1.000.000.",
+      "pix_limit": "Para valores superiores a R$ 5.000, o pagamento via Pix não estará disponível. Utilize métodos alternativos como Wise ou Boleto Bancário."
+    },
+    "tooltip_usdt": {
+      "title": "Transações com USDT:",
+      "minimum_value": "O valor mínimo para transações com USDT é de R$ 550.",
+      "maximum_value": "O valor máximo permitido para transações com USDT é de R$ 5.000."
+    },
+    "tooltip_attention": {
+      "title": "Atenção:",
+      "message": "Sua primeira compra será limitada a R$ 500 para validarmos seu usuário. Após a primeira compra, você poderá realizar compras normalmente, respeitando os limites mencionados acima."
+    }
   },
   "paymentFailure": {
     "title": "Falha no pagamento",
@@ -157,13 +172,17 @@
     "verifying": "Verificando...",
     "scanQRCode": "Escaneie o QR Code",
     "qrCode100kAlt": "QR Code para R$ 100.000",
-    "bitcoinPurchaseWarning": "Atenção: Você está comprando Bitcoin",
+    "bitcoinPurchaseWarning": "Atenção: Você está comprando",
     "alfredLogoAlt": "Logo Alfred",
     "copyPixKey": "Copiar chave PIX",
     "paymentMethod": {
       "PIX": "PIX",
       "WISE": "Wise",
       "TICKET": "Boleto Bancário"
+    },
+    "contactTooltip": {
+      "message": "Solicitamos seu número para entrar em contato caso ocorra algum imprevisto durante a transação, garantindo maior segurança para sua compra.",
+      "alternative": "Se não quiser informar seu número real, pode inserir um fictício, como 1111111111."
     }
   },
   "confirm_infos": {

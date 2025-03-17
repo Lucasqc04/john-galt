@@ -1,5 +1,6 @@
 import { t } from 'i18next';
 import { QRCodeSVG } from 'qrcode.react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import AlfredQr from '../../assets/_DIY SEC LAB - Apresentação Comercial (1).png';
 import Qrcode from '../../assets/qrcode100k.jpg';
@@ -9,7 +10,14 @@ import { usePaymentStatusPolling } from './usePaymentStatusPolling';
 export function CheckoutPix() {
   const { timeLeft, pixKey } = useDataForm();
   const { isLoadingPayment, verifyPaymentStatus } = usePaymentStatusPolling();
+  const [cryptoType, setCryptoType] = useState('');
 
+  useEffect(() => {
+    const storedCryptoType = localStorage.getItem('cryptoType');
+    if (storedCryptoType) {
+      setCryptoType(storedCryptoType);
+    }
+  }, []);
   // Verifica se o valor é igual a R$ 100.000
   const is100k =
     parseInt(
@@ -72,7 +80,8 @@ export function CheckoutPix() {
             />
             <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
               <span className="text-red-600 font-bold bg-white text-xs mb-1">
-                {t('buycheckout.bitcoinPurchaseWarning')}
+                {t('buycheckout.bitcoinPurchaseWarning')}{' '}
+                {cryptoType === 'BTC' ? 'Bitcoin' : cryptoType}
               </span>
               <img
                 src={AlfredQr}
