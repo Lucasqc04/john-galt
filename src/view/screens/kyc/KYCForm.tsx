@@ -1,6 +1,9 @@
 import { KYC } from '@/domain/entities/KYC';
+import WhatsAppButton from '@/view/components/buttonWhatsApp';
+import { t } from 'i18next';
 import { AlertCircle, CheckCircle2, Info } from 'lucide-react';
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { z } from 'zod';
 import {
   defaultKYCFormData,
@@ -20,6 +23,15 @@ const KYCForm: React.FC = () => {
     Record<string, string>
   >({});
   const [showTerms, setShowTerms] = useState(false);
+
+  useEffect(() => {
+    const brlValueString =
+      localStorage.getItem('brlAmount')?.replace(/\D/g, '') || '0';
+    const numericBRL = parseInt(brlValueString, 10);
+    if (numericBRL > 5000 && numericBRL !== 100000) {
+      toast.info(t('checkout.payment_error_above_5000'));
+    }
+  }, []);
 
   // Handle text input changes
   const handleInputChange = (
@@ -227,6 +239,10 @@ const KYCForm: React.FC = () => {
               imediatamente após a verificação, sem qualquer tipo de declaração
               ou armazenamento. Dessa forma, todas as transações permanecem
               totalmente anônimas e sem rastros.
+            </p>
+            <p className="text-blue-700 text-sm mt-1">
+              Após a verificação dos dados enviados, nossa equipe entrará em
+              contato pelo número informado para liberar o pagamento.
             </p>
           </div>
         </div>
@@ -693,7 +709,7 @@ const KYCForm: React.FC = () => {
           <li>• Seus dados são protegidos de acordo com a LGPD</li>
         </ul>
       </div>
-
+      <WhatsAppButton />
       {showTerms && <TermsAndConditions onClose={toggleTerms} />}
     </div>
   );
