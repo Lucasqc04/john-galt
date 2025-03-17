@@ -311,24 +311,37 @@ export function useDataForm() {
   };
 
   useEffect(() => {
+    const storedTimeLeft = localStorage.getItem('timeLeft');
+    if (storedTimeLeft) {
+      setTimeLeft(parseInt(storedTimeLeft, 10));
+    }
+  }, []);
+
+  useEffect(() => {
     if (!pixKey) return;
 
     if (timeLeft <= 0) {
       setIsTransactionTimedOut(true);
+      localStorage.removeItem('timeLeft');
       navigate(ROUTES.paymentAlfredStatus.failure.call(currentLang));
       return;
     }
 
-    const timer = setTimeout(
-      () => setTimeLeft((prevTime) => prevTime - 1),
-      1000,
-    );
+    const timer = setTimeout(() => {
+      setTimeLeft((prevTime) => {
+        const newTime = prevTime - 1;
+        localStorage.setItem('timeLeft', newTime.toString());
+        return newTime;
+      });
+    }, 1000);
+
     return () => clearTimeout(timer);
   }, [timeLeft, navigate, currentLang, pixKey]);
 
   useEffect(() => {
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      localStorage.removeItem('timeLeft');
     };
   }, []);
 
