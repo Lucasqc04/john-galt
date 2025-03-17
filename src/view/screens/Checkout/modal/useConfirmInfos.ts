@@ -68,9 +68,10 @@ export function useConfirmInfos(
     brlAmount.replace(/[^\d,]/g, '').replace(',', '.'),
   );
   const alfredFeeRate =
-    brlAmountNum >= 1000
-      ? localAlfredFeePercentage / 100
-      : (localAlfredFeePercentage * 2) / 100;
+    // brlAmountNum >= 1000
+    //?
+    localAlfredFeePercentage / 100;
+  // : (localAlfredFeePercentage * 2) / 100;
   const alfredFee = brlAmountNum * alfredFeeRate;
 
   if (cryptoType.toLowerCase() === 'usdt') {
