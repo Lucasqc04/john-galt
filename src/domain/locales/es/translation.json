@@ -26,6 +26,8 @@
     "brl_placeholder": "Ingrese el monto en BRL",
     "btc_placeholder": "Monto en BTC",
     "usdt_placeholder": "Monto en USDT",
+    "buy": "Comprar",
+    "sell": "Vender",
     "proceed_button": "Proceder",
     "transaction_error": "Las transacciones solo están permitidas todos los días, de 8:00 AM a 10:00 PM, hora de Brasilia.",
     "min_value_error": "El monto mínimo para comprar BTC es de 200 BRL.",
