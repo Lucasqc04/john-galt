@@ -26,6 +26,7 @@ import KYCDetail from '../screens/admin/AdminDetail';
 import AdminLogin from '../screens/admin/AdminLogin';
 import ProtectedRoute from '../screens/admin/ProtectedRoute';
 import KYCForm from '../screens/kyc/KYCForm';
+import { FormOtcSuccess } from '../screens/kyc/pageSucces';
 
 const NotFound = lazy(() =>
   import('../screens/NotFound').then((module) => ({
@@ -62,6 +63,7 @@ export function BrowserRouter() {
             <Route path={ROUTES.checkoutPix.path} element={<CheckoutPix />} />
             <Route path={ROUTES.Support.path} element={<SupportPage />} />
             <Route path={ROUTES.kycForm.path} element={<KYCForm />} />
+            <Route path={ROUTES.otcsuccess.path} element={<FormOtcSuccess />} />
             <Route
               path={ROUTES.paymentAlfredStatus.success.path}
               element={<PaymentAlfredSuccess />}

@@ -15,13 +15,35 @@ export default function Checkout() {
   const { form, steps, isTransactionAllowed, ValidateValues, isAlfred24h } =
     useCheckout();
   const [selectedCrypto, setSelectedCrypto] = useState<'BTC' | 'USDT'>('BTC');
+  const [transactionType, setTransactionType] = useState<'buy' | 'sell'>('buy');
 
   // Variável para ativar/desativar o modo de manutenção
   const [isMaintenanceMode] = useState(false);
 
+  const toggleTransactionType = () => {
+    setTransactionType((prevType) => (prevType === 'buy' ? 'sell' : 'buy'));
+  };
+
+  const handleProceedClick = () => {
+    if (transactionType === 'sell') {
+      const brlAmount = form.getValues('brlAmount');
+      const cryptoAmount = form.getValues('cryptoAmount');
+      const cryptoType = form.getValues('cryptoType');
+
+      const whatsappNumber = '5511911872097';
+      const message = `Olá! Estou interessado em realizar uma venda de ${cryptoType}.
+      Valor em BRL: ${brlAmount}
+      Quantidade de ${cryptoType}: ${cryptoAmount}`;
+
+      const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+      window.location.href = whatsappLink;
+    } else {
+      ValidateValues(form.getValues());
+    }
+  };
+
   return (
     <>
-      {/* Container relativo para limitar o overlay à área da página */}
       <div className="relative w-full">
         {isMaintenanceMode && (
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-90 text-white text-center p-6 z-10">
@@ -53,7 +75,6 @@ export default function Checkout() {
                     </span>
                   )}
                   <div className="flex justify-center w-full items-center">
-                    {/* Container centralizado para BTC e USDT */}
                     <div className="flex gap-2 justify-center">
                       <button
                         type="button"
@@ -81,7 +102,6 @@ export default function Checkout() {
                       </button>
                     </div>
 
-                    {/* Botão Play/Stop alinhado à direita */}
                     {isAlfred24h ? (
                       <div className="ml-4">
                         <div
@@ -95,16 +115,19 @@ export default function Checkout() {
                   </div>
 
                   {steps.current === 1 && (
-                    <ValuesForm selectedCrypto={selectedCrypto} />
+                    <ValuesForm
+                      selectedCrypto={selectedCrypto}
+                      transactionType={transactionType}
+                      toggleTransactionType={toggleTransactionType}
+                    />
                   )}
+
                   {steps.current === 1 && (
                     <>
                       <div className="w-full flex justify-center items-center pt-2">
                         <button
                           type="button"
-                          onClick={() => {
-                            ValidateValues(form.getValues());
-                          }}
+                          onClick={handleProceedClick}
                           className={`w-full h-10 sm:h-12 rounded-3xl font-bold text-sm sm:text-base border-2 transition-colors duration-200 ${
                             parseInt(
                               form.getValues('brlAmount').replace(/\D/g, ''),

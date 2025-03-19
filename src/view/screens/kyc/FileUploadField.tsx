@@ -31,10 +31,7 @@ const FileUploadField: React.FC<FileUploadFieldProps> = ({
 
   return (
     <div className="mb-4">
-      <label
-        htmlFor={id}
-        className="block text-sm font-medium text-gray-700 mb-1"
-      >
+      <label htmlFor={id} className="block text-sm font-medium text-white mb-1">
         {label} {required && <span className="text-red-500">*</span>}
       </label>
 
@@ -43,14 +40,14 @@ const FileUploadField: React.FC<FileUploadFieldProps> = ({
           htmlFor={id}
           className={`
             flex items-center justify-center w-full p-4 border-2 border-dashed rounded-lg cursor-pointer
-            ${error ? 'border-red-500 bg-red-50' : 'border-orange-300 bg-orange-50 hover:bg-orange-100'}
+            ${error ? 'border-red-500 bg-red-50' : 'border-white bg-black bg-opacity-70 hover:bg-black'}
             transition-colors duration-200
           `}
         >
           {!selectedFile ? (
             <div className="flex flex-col items-center justify-center">
               <Upload className="w-6 h-6 text-orange-400 mb-2" />
-              <span className="text-sm text-gray-500">
+              <span className="text-sm text-white">
                 Clique para selecionar ou arraste o arquivo aqui
               </span>
               <span className="text-xs text-gray-400 mt-1">
@@ -59,17 +56,17 @@ const FileUploadField: React.FC<FileUploadFieldProps> = ({
             </div>
           ) : (
             <div className="w-full">
-              <div className="flex items-center justify-between p-2 bg-white rounded border border-orange-200">
+              <div className="flex items-center justify-between p-2 bg-black bg-opacity-80 rounded border border-white">
                 <div className="flex items-center space-x-2">
                   <FileCheck className="w-5 h-5 text-green-500" />
                   <div className="flex flex-col">
                     <span
-                      className="text-sm font-medium text-gray-700 truncate"
+                      className="text-sm font-medium text-white truncate"
                       title={selectedFile.name}
                     >
                       {selectedFile.name}
                     </span>
-                    <span className="text-xs text-gray-500">
+                    <span className="text-xs text-gray-300">
                       {formatFileSize(selectedFile.size)}
                     </span>
                   </div>
@@ -88,9 +85,9 @@ const FileUploadField: React.FC<FileUploadFieldProps> = ({
                       } as ChangeEvent<HTMLInputElement>);
                     }
                   }}
-                  className="p-1 hover:bg-gray-100 rounded-full"
+                  className="p-1 hover:bg-gray-700 rounded-full"
                 >
-                  <X className="w-4 h-4 text-gray-500" />
+                  <X className="w-4 h-4 text-gray-300" />
                 </button>
               </div>
             </div>
