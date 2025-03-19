@@ -9,6 +9,10 @@ export const ROUTES = {
     path: 'otcform',
     call: (currentLang: string) => `/${currentLang}/otcform`,
   },
+  otcsuccess: {
+    path: 'success-otc',
+    call: (currentLang: string) => `/${currentLang}/success-otc`,
+  },
   buyBitcoin: {
     path: '',
     call: (currentLang: string) => `/${currentLang}`,

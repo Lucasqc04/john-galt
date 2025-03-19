@@ -90,6 +90,13 @@ export function useCheckout() {
       10,
     );
 
+    if (!numericValue) {
+      toast.warning(t('checkout.min_value_error'));
+      return;
+    }
+
+    console.log(numericValue, '/////////////////////');
+
     if (data.cryptoType === 'USDT') {
       // Valor mínimo para USDT é 550 BRL.
       if (numericValue < 500) {

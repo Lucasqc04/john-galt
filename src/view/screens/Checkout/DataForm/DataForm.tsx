@@ -5,7 +5,6 @@ import { t } from 'i18next';
 import { ChangeEvent, useState } from 'react';
 import { FaQuestionCircle } from 'react-icons/fa';
 import { FaPix } from 'react-icons/fa6';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import BoletoIcon from '../../../assets/BoletoIcon.png';
 import AlfredImg from '../../../assets/c1b28810-5a23-4e7c-bcce-bd1f42b271c5.png';
@@ -46,8 +45,6 @@ export default function DataForm() {
     setTransactionNumber,
     validateFields,
   } = useDataForm();
-
-  const navigate = useNavigate();
 
   const paymentMethodLabels = {
     PIX: t('buycheckout.paymentMethod.PIX'),
@@ -93,7 +90,21 @@ export default function DataForm() {
         return;
       }
       if (numericBRL > 5000) {
-        navigate(ROUTES.kycForm.call(currentLang));
+        const message = `
+          Estou comprando mais de 5 mil reais no Alfred e preciso do formulário de Validação para Transações Anônimas.
+          
+          - Valor BRL: ${brlAmount}
+          - Valor Crypto: ${cryptoAmount} ${cryptoType.toUpperCase()}
+          - Rede: ${network}
+          - Endereço da carteira: ${coldWallet}
+          - Método de pagamento: ${paymentMethodLabels[paymentMethod]}
+          - Número de transação: ${transactionNumber}
+          - Cupom: ${cupom || 'Nenhum'}
+          - Taxa Alfred (%): ${alfredFeePercentage}
+        `;
+
+        const whatsappURL = `https://wa.me/5511911872097?text=${encodeURIComponent(message)}`;
+        window.open(whatsappURL, '_blank');
         return;
       }
     }

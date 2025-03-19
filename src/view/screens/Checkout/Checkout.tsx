@@ -28,11 +28,12 @@ export default function Checkout() {
     if (transactionType === 'sell') {
       const brlAmount = form.getValues('brlAmount');
       const cryptoAmount = form.getValues('cryptoAmount');
+      const cryptoType = form.getValues('cryptoType');
 
       const whatsappNumber = '5511911872097';
-      const message = `Olá! Estou interessado em realizar uma venda de bitcoin.
+      const message = `Olá! Estou interessado em realizar uma venda de ${cryptoType}.
       Valor em BRL: ${brlAmount}
-      Quantidade de Bitcoin: ${cryptoAmount}`;
+      Quantidade de ${cryptoType}: ${cryptoAmount}`;
 
       const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
       window.location.href = whatsappLink;
