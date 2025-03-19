@@ -95,8 +95,6 @@ export function useCheckout() {
       return;
     }
 
-    console.log(numericValue, '/////////////////////');
-
     if (data.cryptoType === 'USDT') {
       // Valor mínimo para USDT é 550 BRL.
       if (numericValue < 500) {

@@ -1,3 +1,4 @@
+import { AuthProvider } from '@/view/context/AuthContext';
 import { TourProvider } from '@reactour/tour';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
@@ -25,6 +26,7 @@ export function App() {
       content: t('guide.proceedButtonStep'),
     },
   ];
+
   return (
     <>
       <Analytics />
@@ -35,7 +37,9 @@ export function App() {
         defaultOpen={isFirstVisit}
         beforeClose={() => localStorage.setItem('tourCompleted', 'true')}
       >
-        <BrowserRouter />
+        <AuthProvider>
+          <BrowserRouter />
+        </AuthProvider>
       </TourProvider>
     </>
   );
