@@ -133,9 +133,9 @@ export function ValuesForm({
               <p>
                 <strong>{t('checkout.tooltip_usdt.title')}</strong>
               </p>
-              <p>{t('checkout.tooltip.usdt.minimum_value')}</p>
+              <p>{t('checkout.tooltip_usdt.minimum_value')}</p>
               <hr className="my-2 border-gray-500" />
-              <p>{t('checkout.tooltip.usdt.maximum_value')}</p>
+              <p>{t('checkout.tooltip_usdt.maximum_value')}</p>
               <hr className="my-2 border-gray-500" />
               <p>{t('checkout.tooltip_btc.pix_limit')}</p>
               <hr className="my-2 border-gray-500" />
