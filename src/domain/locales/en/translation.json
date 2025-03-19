@@ -26,6 +26,8 @@
     "brl_placeholder": "Enter the amount in BRL",
     "btc_placeholder": "BTC Amount",
     "usdt_placeholder": "USDT Amount",
+    "buy": "Buy",
+    "sell": "Sell",
     "proceed_button": "Proceed",
     "transaction_error": "Transactions are only allowed every day from 8:00 AM to 10:00 PM Brasília time.",
     "min_value_error": "The minimum purchase amount for BTC is 200 BRL.",

@@ -1,16 +1,23 @@
 import { useEffect, useState } from 'react';
-import { FaQuestionCircle } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import Btc from '../../../assets/bitcoin.svg';
 import Brl from '../../../assets/brl.svg';
 import Usdt from '../../../assets/usdt.svg';
+
+import { FaQuestionCircle } from 'react-icons/fa';
 import { useValuesForm } from './useValuesForm';
 
 interface ValuesFormProps {
   selectedCrypto: 'BTC' | 'USDT';
+  transactionType: 'buy' | 'sell';
+  toggleTransactionType: () => void;
 }
 
-export function ValuesForm({ selectedCrypto }: ValuesFormProps) {
+export function ValuesForm({
+  selectedCrypto,
+  transactionType,
+  toggleTransactionType,
+}: ValuesFormProps) {
   const { t, form, handleBrlChange } = useValuesForm(selectedCrypto);
   const [hasShownToast, setHasShownToast] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
@@ -24,9 +31,7 @@ export function ValuesForm({ selectedCrypto }: ValuesFormProps) {
 
   return (
     <div className="relative w-full">
-      {/* Reduzi o espaçamento entre os inputs para space-y-2 */}
       <div className="space-y-1">
-        {/* Input do valor em BRL */}
         <div className="w-full flex justify-center items-center brl-step">
           <div className="relative w-full">
             <input
@@ -45,9 +50,18 @@ export function ValuesForm({ selectedCrypto }: ValuesFormProps) {
           </div>
         </div>
 
-        {/* Input do valor em Criptomoeda */}
         <div className="w-full flex justify-center items-center pt-4">
           <div className="relative w-full">
+            <button
+              type="button"
+              onClick={toggleTransactionType}
+              className={`absolute left-2 top-1/2 -translate-y-1/2 text-white ${transactionType === 'buy' ? 'bg-green-500' : 'bg-red-500'} px-4 py-2 rounded-full text-sm`}
+            >
+              {transactionType === 'buy'
+                ? t('checkout.buy')
+                : t('checkout.sell')}
+            </button>
+
             <input
               {...form.register('cryptoAmount', { required: true })}
               readOnly
@@ -73,7 +87,6 @@ export function ValuesForm({ selectedCrypto }: ValuesFormProps) {
         </div>
       </div>
 
-      {/* Ícone de interrogação posicionado ainda mais à esquerda */}
       <div className="absolute top-[-2rem] left-2">
         <FaQuestionCircle
           className="text-white cursor-pointer"
