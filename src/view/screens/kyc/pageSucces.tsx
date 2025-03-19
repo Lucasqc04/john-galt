@@ -5,13 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import logoSucces from '../../assets/Check_Tela_Alfred.png'; // Check reduzido
 import { ROUTES } from '../../routes/Routes';
 
-// Tipagem para os arquivos enviados
 interface SubmittedFile {
   name: string;
-  fileName: string; // Aqui armazenamos apenas o nome do arquivo
+  fileName: string;
 }
 
-// Tipagem para os dados do formulário
 interface FormData {
   name?: string | null;
   cpf?: string | null;
@@ -199,7 +197,7 @@ export function FormOtcSuccess() {
         <button
           onClick={() =>
             window.open(
-              'https://api.whatsapp.com/send?phone=+5511919050416&text=Meu%20pagamento%20foi%20concluído%20e%20tenho%20algumas%20dúvidas.%20Poderia%20me%20ajudar?',
+              'https://api.whatsapp.com/send?phone=+5511911872097&text=Preenchi%20o%20formul%C3%A1rio%20de%20valida%C3%A7%C3%A3o%20para%20transa%C3%A7%C3%B5es%20an%C3%B4nimas,%20tenho%20d%C3%BAvidas,%20poderia%20me%20ajudar?',
               '_blank',
             )
           }
