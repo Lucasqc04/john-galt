@@ -94,6 +94,14 @@ export default function DataForm() {
       return;
     }
 
+    if (username.trim().length < 6) {
+      toast.error('O nome de usuário deve ter pelo menos 6 dígitos.');
+      return;
+    }
+    if (!loggedUser && password.trim().length < 6) {
+      toast.error('A senha deve ter pelo menos 6 dígitos.');
+      return;
+    }
     if (!validateFields()) {
       toast.error(t('buycheckout.missingFields'));
       return;
