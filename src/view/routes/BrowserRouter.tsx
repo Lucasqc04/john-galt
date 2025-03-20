@@ -64,13 +64,14 @@ export function BrowserRouter() {
           {/* Agrupamento por idioma */}
           <Route path={ROUTES.lang.call()}>
             {/* Rotas públicas: login e registro */}
-            <Route path={ROUTES.auth.login.path} element={<LoginPage />} />
-            <Route
-              path={ROUTES.auth.register.path}
-              element={<RegisterPage />}
-            />
+
             {/* Layout padrão para demais páginas */}
             <Route element={<DefaultLayout />}>
+              <Route path={ROUTES.auth.login.path} element={<LoginPage />} />
+              <Route
+                path={ROUTES.auth.register.path}
+                element={<RegisterPage />}
+              />
               <Route path={ROUTES.buyBitcoin.path} element={<BuyBitcoin />} />
               <Route path={ROUTES.fee.path} element={<Fees />} />
               <Route path={ROUTES.Support.path} element={<SupportPage />} />
