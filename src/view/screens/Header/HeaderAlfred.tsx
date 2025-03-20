@@ -53,8 +53,8 @@ export default function Header() {
                 className="flex items-center gap-x-2 text-white hover:text-gray-300 transition-all"
               >
                 <FaRobot size={24} />
-                {/* O nome do usuário só aparece em telas maiores */}
-                <span className="hidden sm:inline text-lg font-semibold">
+                {/* Exibe o nome do usuário em todas as telas */}
+                <span className="inline text-lg font-semibold">
                   {user.username}
                 </span>
               </button>
@@ -73,7 +73,7 @@ export default function Header() {
           ) : (
             <button
               onClick={() => navigate(ROUTES.auth.login.call(currentLang))}
-              className="flex items-center gap-x-2 bg-transparent text-white  hover:text-orange-600 transition-all px-4 py-2 rounded"
+              className="flex items-center gap-x-2 bg-transparent text-white hover:text-orange-600 transition-all px-4 py-2 rounded"
             >
               <FaRobot size={24} />
               Faça login
