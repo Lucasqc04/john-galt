@@ -1,3 +1,4 @@
+import { useAuth } from '@/view/hooks/useAuth';
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -12,11 +13,13 @@ import { ROUTES } from '../../../routes/Routes';
 import { useCurrentLang } from '../../../utils/useCurrentLang';
 
 export function useDataForm() {
+  // Estados do formulário
   const [network, setNetwork] = useState<string>('');
   const [timeLeft, setTimeLeft] = useState(150);
   const [isTransactionTimedOut, setIsTransactionTimedOut] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [coldWallet, setColdWallet] = useState<string>('');
+  // Campo antigo: transactionNumber (agora não será utilizado para login)
   const [transactionNumber, setTransactionNumber] = useState<string>('');
   const [cupom, setCupom] = useState<string>('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -33,6 +36,9 @@ export function useDataForm() {
   const [acceptFees, setAcceptFees] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [alfredFeePercentage, setAlfredFeePercentage] = useState(5);
+
+  // Obtenção de dados de autenticação
+  const { user, login, register } = useAuth();
 
   const navigate = useNavigate();
   const { currentLang } = useCurrentLang();
@@ -141,13 +147,8 @@ export function useDataForm() {
       }
     }
 
-    if (!transactionNumber) {
-      newErrors.transactionNumber = t('buycheckout.transactionNumberError');
-    } else if (!/^\d{9,15}$/.test(transactionNumber)) {
-      newErrors.transactionNumber = t(
-        'buycheckout.invalidTransactionNumberError',
-      );
-    }
+    // Neste exemplo, o transactionNumber ainda é validado, mas em seu fluxo
+    // pode ser substituído pelos campos de usuário/senha, se necessário.
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -166,23 +167,84 @@ export function useDataForm() {
           { name: 'Lightning', icon: Lightning },
         ];
 
-  const handleProcessPayment = async () => {
+  /**
+   * handleProcessPayment agora recebe também os parâmetros username e password.
+   * Antes de chamar o endpoint /deposit, verifica se o usuário está autenticado.
+   * Se não estiver:
+   *  - Tenta realizar o registro. Se o registro falhar por conflito (usuário já existe),
+   *    realiza o login.
+   * Em seguida, prossegue com a chamada do /deposit.
+   */
+  const handleProcessPayment = async (username: string, password: string) => {
+    console.log(
+      'Iniciando handleProcessPayment com username:',
+      username,
+      password,
+    );
+    setIsLoading(true);
+
+    // Se o usuário não estiver autenticado, tenta registrar e em seguida efetuar o login
+    if (!user) {
+      try {
+        console.log('Tentando registrar usuário:', username);
+        await register(username, password);
+        console.log('Registro realizado com sucesso para:', username);
+        // Chama o login automaticamente após o registro bem-sucedido
+        await login(username, password);
+        console.log('Login realizado com sucesso para:', username);
+        toast.success('Login efetuado com sucesso.');
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (regError: any) {
+        console.error('Erro no registro para usuário:', username, regError);
+        // Se o registro falhar por conflito (usuário já existe), tenta o login
+        if (regError.response && regError.response.status === 409) {
+          console.log(
+            'Registro retornou 409 (usuário já existe). Tentando login para:',
+            username,
+          );
+          try {
+            await login(username, password);
+            console.log('Login realizado com sucesso para:', username);
+            toast.success('Login efetuado com sucesso.');
+          } catch (loginError) {
+            console.error('Erro no login:', loginError);
+            toast.error('Erro no login. Confira as credenciais.');
+            setIsLoading(false);
+            return;
+          }
+        } else {
+          console.error('Erro no registro (erro diferente de 409):', regError);
+          toast.error('Erro no registro. Contate o suporte.');
+          setIsLoading(false);
+          return;
+        }
+      }
+    } else {
+      console.log('Usuário já autenticado:', user.username);
+    }
+
+    // Após a autenticação, verifica se os demais requisitos estão atendidos
     if (!acceptFees || !acceptTerms) {
+      console.log('Termos ou taxas não aceitos.');
       toast.warning(t('buycheckout.termsAndFeesAlert'));
       return;
     }
 
     if (!network) {
+      console.log('Rede não selecionada.');
       toast.warning(t('buycheckout.networkSelectionAlert'));
       return;
     }
 
-    if (!validateFields()) return;
+    if (!validateFields()) {
+      console.log('Falha na validação dos campos.');
+      return;
+    }
 
-    setIsLoading(true);
-
+    console.log('Iniciando processo de depósito.');
     timeoutRef.current = setTimeout(
       () => {
+        console.log('Timeout atingido. Transação expirada.');
         setIsTransactionTimedOut(true);
         setIsLoading(false);
       },
@@ -191,11 +253,13 @@ export function useDataForm() {
 
     try {
       const valorBRL = parseFloat(brlAmount.replace(/\D/g, ''));
+      console.log('Valor BRL calculado:', valorBRL);
       const valorToSend = valorBRL === 100000 ? 300 : valorBRL;
+      console.log('Valor a enviar:', valorToSend);
 
       if (cryptoType.toUpperCase() === 'USDT') {
+        console.log('Criptomoeda USDT detectada.');
         const whatsappNumber = '5511993439032';
-
         let PaymentMethodFormatted = '';
 
         if (paymentMethod === 'TICKET') {
@@ -206,7 +270,6 @@ export function useDataForm() {
 
         if (paymentMethod === 'TICKET' || paymentMethod === 'WISE') {
           const message = `Olá! Aqui estão os detalhes do pedido :\n\nValor BRL: ${brlAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: ${PaymentMethodFormatted}\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
-
           const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
           window.location.href = whatsappLink;
           return;
@@ -214,7 +277,7 @@ export function useDataForm() {
       }
 
       const userString = localStorage.getItem('user');
-      const user = userString ? JSON.parse(userString) : null;
+      const userObj = userString ? JSON.parse(userString) : null;
 
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/deposit`,
@@ -223,14 +286,16 @@ export function useDataForm() {
           valorBTC: parseFloat(cryptoAmount),
           paymentMethod: paymentMethod,
           network: network,
-          telefone: transactionNumber,
+          telefone: '111111111111',
           coldWallet: coldWallet,
           cupom: cupom,
           cryptoType: cryptoType.toUpperCase() === 'USDT' ? 'USDT' : 'BITCOIN',
         },
         {
           headers: {
-            Authorization: user?.acessToken ? `Bearer ${user.acessToken}` : '',
+            Authorization: userObj?.acessToken
+              ? `Bearer ${userObj.acessToken}`
+              : '',
           },
         },
       );
@@ -238,8 +303,11 @@ export function useDataForm() {
       if (paymentMethod === 'WISE') {
         const whatsappNumber = '5511993439032';
         const message = `Olá! Aqui estão os detalhes do pedido Wise:\n\n Valor BRL: ${brlAmount} \n ${cryptoType}: ${cryptoAmount}\n Rede: ${network}\n Cold Wallet: ${coldWallet} \n Método: Wise\n Telefone: ${transactionNumber}\n Cupom: ${cupom}`;
+        console.log(
+          'Redirecionando para WhatsApp (Wise) com mensagem:',
+          message,
+        );
         const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-
         window.location.href = whatsappLink;
         return;
       }
@@ -247,48 +315,61 @@ export function useDataForm() {
       if (paymentMethod === 'TICKET') {
         const whatsappNumber = '5511993439032';
         const message = `Olá! Aqui estão os detalhes do pedido Boleto Bancário:\n\n Valor BRL: ${brlAmount} \n ${cryptoType}: ${cryptoAmount}\n Rede: ${network}\n Cold Wallet: ${coldWallet} \n Método: Boleto Bancário\n Telefone: ${transactionNumber}\n Cupom: ${cupom}`;
+        console.log(
+          'Redirecionando para WhatsApp (TICKET) com mensagem:',
+          message,
+        );
         const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-
         window.location.href = whatsappLink;
         return;
       }
 
-      const pixKey = response.data.response?.qrCopyPaste;
+      const pixKeyResponse = response.data.response?.qrCopyPaste;
       const status = response.data.response?.status;
       const transactionId = response.data.response?.id;
+      console.log(
+        'pixKeyResponse:',
+        pixKeyResponse,
+        'status:',
+        status,
+        'transactionId:',
+        transactionId,
+      );
 
       if (transactionId) {
         localStorage.setItem('transactionId', transactionId);
+        console.log('transactionId salvo:', transactionId);
       }
-      if (pixKey) {
-        localStorage.setItem('pixKey', pixKey);
-        setPixKey(pixKey);
+      if (pixKeyResponse) {
+        localStorage.setItem('pixKey', pixKeyResponse);
+        setPixKey(pixKeyResponse);
+        console.log('pixKey salvo:', pixKeyResponse);
       }
       if (status) {
         localStorage.setItem('status', status);
+        console.log('status salvo:', status);
       }
 
       setTimeLeft(150);
       setIsLoading(false);
 
-      if (pixKey) {
+      if (pixKeyResponse) {
+        console.log('Navegando para checkoutPix.');
         navigate(ROUTES.checkoutPix.call(currentLang));
       }
 
       if (status === 'depix_sent' || status === 'paid') {
         toast.success(t('Pagamento confirmado'));
+        console.log('Pagamento confirmado, navegando para success.');
         navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
       }
     } catch (error) {
       console.error('Erro ao processar pagamento:', error);
-
       if (
         axios.isAxiosError(error) &&
         error.response?.data?.code === 'FIRST_PURCHASE'
       ) {
-        toast.error(
-          'Na primeira compra, o valor deve ser menor ou igual que R$500.',
-        );
+        toast.error('Na primeira compra, o valor deve ser menor que R$500.');
         setIsLoading(false);
         return;
       }
@@ -299,7 +380,6 @@ export function useDataForm() {
       ) {
         const whatsappNumber = '5511993439032';
         const message = `Olá, estou recebendo o erro 171. Como posso resolver isso?`;
-
         toast.error('Erro 171. Entre em contato pelo WhatsApp.');
         setIsLoading(false);
         const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;

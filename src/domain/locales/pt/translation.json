@@ -31,7 +31,7 @@
     "proceed_button": "Prosseguir",
     "transaction_error": "Transações só são permitidas todos os dias, das 8h às 22h no horário de Brasília.",
     "min_value_error": "O valor mínimo para compra em BTC é 200 BRL.",
-    "min_value_error_usdt": "O valor mínimo para compra em USDT é 550 BRL.",
+    "min_value_error_usdt": "O valor mínimo para compra em USDT é 500 BRL.",
     "wallet_error_below_700": "Para valores abaixo de 700 BRL, apenas carteiras Liquid e Lightning são permitidas.",
     "payment_error_above_5000": "Para pagamentos via Pix com valor superior a 5.000 BRL, é necessário preencher o formulário 'Validação para transações anônimas'.",
     "first_purchase_limit_error": "Sua primeira compra está limitada a 500 BRL.",
@@ -181,9 +181,15 @@
       "TICKET": "Boleto Bancário"
     },
     "contactTooltip": {
-      "message": "Solicitamos seu número para entrar em contato caso ocorra algum imprevisto durante a transação, garantindo maior segurança para sua compra.",
+      "message": "Por segurança, é necessário realizar o login com seu usuário e senha para que você possa acessar a plataforma em qualquer dispositivo e liberar futuras compras, e valores maiores.",
       "alternative": "Se não quiser informar seu número real, pode inserir um fictício, como 1111111111."
-    }
+    },
+    "loginTooltip": {
+      "message": "Por segurança, é necessário realizar o login com seu usuário e senha para que você possa acessar a plataforma em qualquer dispositivo e liberar futuras compras, e valores maiores.",
+      "alternative": "Suas credenciais serão usadas apenas para autenticação."
+    },
+    "usernamePlaceholder": "Usuário",
+    "passwordPlaceholder": "Senha"
   },
   "confirm_infos": {
     "title": "Confirmar Informações",
