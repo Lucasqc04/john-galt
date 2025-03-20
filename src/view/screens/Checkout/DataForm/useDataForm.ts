@@ -213,6 +213,9 @@ export function useDataForm() {
         }
       }
 
+      const userString = localStorage.getItem('user');
+      const user = userString ? JSON.parse(userString) : null;
+
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/deposit`,
         {
@@ -224,6 +227,11 @@ export function useDataForm() {
           coldWallet: coldWallet,
           cupom: cupom,
           cryptoType: cryptoType.toUpperCase() === 'USDT' ? 'USDT' : 'BITCOIN',
+        },
+        {
+          headers: {
+            Authorization: user?.acessToken ? `Bearer ${user.acessToken}` : '',
+          },
         },
       );
 

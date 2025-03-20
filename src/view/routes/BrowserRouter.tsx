@@ -20,11 +20,17 @@ import { Fees } from '../screens/Rate/RateBitcoin';
 import { TermsOfUse } from '../screens/Terms/TermsUse';
 import { ROUTES } from './Routes';
 
-// Importa os componentes de administração
+// Importação das páginas de login e registro
+import LoginPage from '../screens/auth/LoginPage';
+import RegisterPage from '../screens/auth/RegisterPage';
+
+// Componentes de administração
 import AdminDashboard from '../screens/admin/AdminDashboard';
 import KYCDetail from '../screens/admin/AdminDetail';
 import AdminLogin from '../screens/admin/AdminLogin';
 import ProtectedRoute from '../screens/admin/ProtectedRoute';
+// Páginas protegidas do usuário
+import { UserProtectedRoute } from '../components/UserProtectedRoute';
 import KYCForm from '../screens/kyc/KYCForm';
 import { FormOtcSuccess } from '../screens/kyc/pageSucces';
 
@@ -55,32 +61,50 @@ export function BrowserRouter() {
               <Navigate to={`/${currentLang || AcceptedLanguages.pt}`} />
             }
           />
-          {/* Rotas do site */}
-          <Route path={ROUTES.lang.call()} element={<DefaultLayout />}>
-            <Route path={ROUTES.buyBitcoin.path} element={<BuyBitcoin />} />
-            <Route path={ROUTES.fee.path} element={<Fees />} />
-            <Route path={ROUTES.buyCheckout.path} element={<DataForm />} />
-            <Route path={ROUTES.checkoutPix.path} element={<CheckoutPix />} />
-            <Route path={ROUTES.Support.path} element={<SupportPage />} />
-            <Route path={ROUTES.kycForm.path} element={<KYCForm />} />
-            <Route path={ROUTES.otcsuccess.path} element={<FormOtcSuccess />} />
+          {/* Agrupamento por idioma */}
+          <Route path={ROUTES.lang.call()}>
+            {/* Rotas públicas: login e registro */}
+            <Route path={ROUTES.auth.login.path} element={<LoginPage />} />
             <Route
-              path={ROUTES.paymentAlfredStatus.success.path}
-              element={<PaymentAlfredSuccess />}
+              path={ROUTES.auth.register.path}
+              element={<RegisterPage />}
             />
-            <Route
-              path={ROUTES.paymentAlfredStatus.failure.path}
-              element={<PaymentAlfredFailure />}
-            />
-            <Route
-              path={ROUTES.paymentAlfredStatus.review.path}
-              element={<PaymentAlfredReview />}
-            />
-            <Route
-              path={ROUTES.aboutBitcoin.path}
-              element={<AboutBuyBitcoin />}
-            />
-            <Route path={ROUTES.term.path} element={<TermsOfUse />} />
+            {/* Layout padrão para demais páginas */}
+            <Route element={<DefaultLayout />}>
+              <Route path={ROUTES.buyBitcoin.path} element={<BuyBitcoin />} />
+              <Route path={ROUTES.fee.path} element={<Fees />} />
+              <Route path={ROUTES.Support.path} element={<SupportPage />} />
+              <Route
+                path={ROUTES.aboutBitcoin.path}
+                element={<AboutBuyBitcoin />}
+              />
+              <Route path={ROUTES.term.path} element={<TermsOfUse />} />
+              {/* Rotas protegidas */}
+              <Route element={<UserProtectedRoute />}>
+                <Route path={ROUTES.kycForm.path} element={<KYCForm />} />
+                <Route
+                  path={ROUTES.otcsuccess.path}
+                  element={<FormOtcSuccess />}
+                />
+                <Route
+                  path={ROUTES.paymentAlfredStatus.success.path}
+                  element={<PaymentAlfredSuccess />}
+                />
+                <Route
+                  path={ROUTES.paymentAlfredStatus.failure.path}
+                  element={<PaymentAlfredFailure />}
+                />
+                <Route
+                  path={ROUTES.paymentAlfredStatus.review.path}
+                  element={<PaymentAlfredReview />}
+                />
+                <Route path={ROUTES.buyCheckout.path} element={<DataForm />} />
+                <Route
+                  path={ROUTES.checkoutPix.path}
+                  element={<CheckoutPix />}
+                />
+              </Route>
+            </Route>
           </Route>
           {/* Rotas de administração */}
           <Route path={ROUTES.admin.login.path} element={<AdminLogin />} />

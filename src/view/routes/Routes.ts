@@ -5,6 +5,16 @@ export const ROUTES = {
   home: {
     call: () => '/',
   },
+  auth: {
+    login: {
+      path: 'login',
+      call: (currentLang: string) => `/${currentLang}/login`,
+    },
+    register: {
+      path: 'register',
+      call: (currentLang: string) => `/${currentLang}/register`,
+    },
+  },
   kycForm: {
     path: 'otcform',
     call: (currentLang: string) => `/${currentLang}/otcform`,
@@ -84,7 +94,6 @@ export const ROUTES = {
       call: (currentLang: string) => `/${currentLang}/review-alfred`,
     },
   },
-
   // Rotas de administração
   admin: {
     login: {
