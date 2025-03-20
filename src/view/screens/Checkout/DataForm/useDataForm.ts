@@ -286,7 +286,9 @@ export function useDataForm() {
         axios.isAxiosError(error) &&
         error.response?.data?.code === 'FIRST_PURCHASE'
       ) {
-        toast.error('Na primeira compra, o valor deve ser menor que R$500.');
+        toast.error(
+          'Na primeira compra, o valor deve ser menor ou igual que R$500.',
+        );
         setIsLoading(false);
         return;
       }
