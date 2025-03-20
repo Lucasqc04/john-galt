@@ -287,6 +287,7 @@ export function useDataForm() {
         error.response?.data?.code === 'FIRST_PURCHASE'
       ) {
         toast.error('Na primeira compra, o valor deve ser menor que R$500.');
+        setIsLoading(false);
         return;
       }
 
@@ -298,7 +299,7 @@ export function useDataForm() {
         const message = `Olá, estou recebendo o erro 171. Como posso resolver isso?`;
 
         toast.error('Erro 171. Entre em contato pelo WhatsApp.');
-
+        setIsLoading(false);
         const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
         window.location.href = whatsappLink;
         return;
