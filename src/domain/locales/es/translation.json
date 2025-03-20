@@ -31,7 +31,7 @@
     "proceed_button": "Proceder",
     "transaction_error": "Las transacciones solo están permitidas todos los días, de 8:00 AM a 10:00 PM, hora de Brasilia.",
     "min_value_error": "El monto mínimo para comprar BTC es de 200 BRL.",
-    "min_value_error_usdt": "El monto mínimo para comprar USDT es de 550 BRL.",
+    "min_value_error_usdt": "El monto mínimo para comprar USDT es de 500 BRL.",
     "wallet_error_below_700": "Para montos inferiores a 700 BRL, solo se permiten billeteras Liquid y Lightning.",
     "payment_error_above_5000": "Para pagos con Pix con un monto superior a 5,000 BRL, es necesario completar el formulario de 'Validación para transacciones anónimas'.",
     "first_purchase_limit_error": "Su primera compra está limitada a 500 BRL.",

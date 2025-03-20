@@ -1,9 +1,9 @@
 import AlfredWhiteLogo from '@/view/assets/logo/alfred-white-logo.svg';
-import { Loader } from '@/view/components/Loader';
+import { PaymentLoader } from '@/view/components/PaymentLoader';
 import classNames from 'classnames';
 import { t } from 'i18next';
 import { ChangeEvent, useState } from 'react';
-import { FaQuestionCircle } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaQuestionCircle } from 'react-icons/fa';
 import { FaPix } from 'react-icons/fa6';
 import { toast } from 'react-toastify';
 import BoletoIcon from '../../../assets/BoletoIcon.png';
@@ -17,7 +17,6 @@ export default function DataForm() {
   const {
     network,
     coldWallet,
-    transactionNumber,
     cupom,
     isDropdownOpen,
     isLoading,
@@ -42,22 +41,30 @@ export default function DataForm() {
     setAcceptTerms,
     setAcceptFees,
     setCupom,
-    setTransactionNumber,
     validateFields,
   } = useDataForm();
+
+  // Verifica se há um usuário logado via localStorage
+  const storedUser = localStorage.getItem('user');
+  const loggedUser = storedUser ? JSON.parse(storedUser) : null;
+
+  // Se já estiver logado, o campo de usuário é pré-preenchido
+  const [username, setUsername] = useState(loggedUser?.username || '');
+  const [password, setPassword] = useState('');
 
   const paymentMethodLabels = {
     PIX: t('buycheckout.paymentMethod.PIX'),
     WISE: t('buycheckout.paymentMethod.WISE'),
     TICKET: t('buycheckout.paymentMethod.TICKET'),
   };
-  // Converte brlAmount para número (removendo caracteres não numéricos)
+
   const numericBRL = parseInt(brlAmount.replace(/\D/g, ''), 10);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [couponApplied, setCouponApplied] = useState(false);
   const closeModal = () => setIsModalOpen(false);
   const [showTooltip, setShowTooltip] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const is100k =
     parseInt(
@@ -74,6 +81,14 @@ export default function DataForm() {
   };
 
   const handleOpenModal = async () => {
+    // Se não houver usuário logado, exige usuário e senha
+    if (!username || (!loggedUser && !password)) {
+      toast.error(
+        t('buycheckout.missingLogin') ||
+          'Por favor, insira seu usuário e senha.',
+      );
+      return;
+    }
     if (cupom.trim() && !couponApplied) {
       toast.error(t('buycheckout.applyCouponFirst'));
       return;
@@ -86,7 +101,7 @@ export default function DataForm() {
 
     if (paymentMethod === 'PIX') {
       if (is100k) {
-        handleProcessPayment();
+        handleProcessPayment(username, password);
         return;
       }
       if (numericBRL > 5000) {
@@ -98,12 +113,13 @@ export default function DataForm() {
           - Rede: ${network}
           - Endereço da carteira: ${coldWallet}
           - Método de pagamento: ${paymentMethodLabels[paymentMethod]}
-          - Número de transação: ${transactionNumber}
+          - Usuário: ${username}
           - Cupom: ${cupom || 'Nenhum'}
           - Taxa Alfred (%): ${alfredFeePercentage}
         `;
-
-        const whatsappURL = `https://wa.me/5511911872097?text=${encodeURIComponent(message)}`;
+        const whatsappURL = `https://wa.me/5511911872097?text=${encodeURIComponent(
+          message,
+        )}`;
         window.open(whatsappURL, '_blank');
         return;
       }
@@ -114,14 +130,15 @@ export default function DataForm() {
 
   return (
     <>
-      {isLoading && <Loader />}
+      {isLoading && <PaymentLoader />}
 
-      <main className="flex flex-col justify-center items-center gap-y- pt-12 sm:pt-24">
+      <main className="flex flex-col justify-center items-center pt-12 sm:pt-24">
         <img src={AlfredWhiteLogo} alt="Alfred Logo" className="w-64 sm:w-96" />
         <section className="flex flex-col justify-center items-center gap-y-4 pt-4">
           <p className="text-lg sm:text-xl text-center text-white">
             {t('buycheckout.value')}: {brlAmount} BRL
-            <br /> {t('buycheckout.valueCrypto')}: {cryptoAmount}{' '}
+            <br />
+            {t('buycheckout.valueCrypto')}: {cryptoAmount}{' '}
             {cryptoType.toUpperCase()}
           </p>
 
@@ -153,9 +170,6 @@ export default function DataForm() {
                     <ul className="w-full">
                       {networks.map((net) => {
                         const isOnchainDisabled = false;
-                        // net.name.toLowerCase() === 'onchain';
-                        //  && numericBRL >= 200 &&
-                        // numericBRL < 700;
                         return (
                           <li
                             key={net.name}
@@ -192,7 +206,6 @@ export default function DataForm() {
               <div className="flex justify-center items-center relative w-full pt-4">
                 <div className="relative w-full">
                   <input
-                    type="text"
                     value={
                       paymentMethod ? paymentMethodLabels[paymentMethod] : ''
                     }
@@ -282,40 +295,78 @@ export default function DataForm() {
                   )}
                 </div>
               </div>
-              <div className="flex justify-center items-center pt-4 relative">
-                <div className="relative w-full">
-                  <FaQuestionCircle
-                    className="absolute left-[1rem] top-1/2 transform -translate-y-1/2 text-white cursor-pointer"
-                    onMouseEnter={() => setShowTooltip(true)}
-                    onMouseLeave={() => setShowTooltip(false)}
-                    onClick={() => setShowTooltip(!showTooltip)}
-                  />
-                  <input
-                    value={transactionNumber}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                      setTransactionNumber(e.target.value)
-                    }
-                    placeholder={t('buycheckout.contactNumber')}
-                    className="border-2 pl-10 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-black text-center w-full"
-                  />
-                </div>
-
-                {showTooltip && (
-                  <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-64 bg-gray-900 text-white text-sm p-3 rounded-lg shadow-lg z-10">
-                    <p>{t('buycheckout.contactTooltip.message')}</p>
-                    <p className="text-red-500 mt-2">
-                      {t('buycheckout.contactTooltip.alternative')}
-                    </p>
+              {/* Campos de login: se o usuário já estiver logado, mostra apenas o campo com o nome preenchido */}
+              {loggedUser ? (
+                <div className="flex justify-center items-center pt-4">
+                  <div className="relative w-full">
+                    <input
+                      type="text"
+                      value={username}
+                      readOnly
+                      placeholder={
+                        t('buycheckout.usernamePlaceholder') || 'Usuário'
+                      }
+                      className="border-2 pl-10 px-8 py-3 rounded-3xl text-base sm:text-lg text-white bg-black text-center w-full"
+                    />
                   </div>
-                )}
-
-                {errors.transactionNumber && (
-                  <p className="text-red-500 text-sm">
-                    {errors.transactionNumber}
-                  </p>
-                )}
-              </div>
-
+                </div>
+              ) : (
+                <div className="flex justify-center items-center pt-4">
+                  <div className="flex flex-row gap-4 w-full">
+                    <div className="relative w-1/2">
+                      <FaQuestionCircle
+                        className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white cursor-pointer"
+                        onMouseEnter={() => setShowTooltip(true)}
+                        onMouseLeave={() => setShowTooltip(false)}
+                        onClick={() => setShowTooltip(!showTooltip)}
+                      />
+                      <input
+                        type="text"
+                        value={username}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                          setUsername(e.target.value)
+                        }
+                        placeholder={
+                          t('buycheckout.usernamePlaceholder') || 'Usuário'
+                        }
+                        className="border-2 pl-10 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-black text-center w-full"
+                      />
+                      {showTooltip && (
+                        <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-64 bg-gray-900 text-white text-sm p-3 rounded-lg shadow-lg z-10">
+                          <p>
+                            {t('buycheckout.loginTooltip.message') ||
+                              'Por segurança, informe seu usuário e senha para acessar a plataforma.'}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                    <div className="w-1/2 relative">
+                      <input
+                        type={showPassword ? 'text' : 'password'}
+                        value={password}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                          setPassword(e.target.value)
+                        }
+                        placeholder={
+                          t('buycheckout.passwordPlaceholder') || 'Senha'
+                        }
+                        className="border-2 px-8 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-black text-center w-full"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white"
+                      >
+                        {showPassword ? (
+                          <FaEyeSlash size={20} />
+                        ) : (
+                          <FaEye size={20} />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
               <div className="flex items-center justify-center mt-4">
                 <input
                   type="text"
@@ -402,14 +453,14 @@ export default function DataForm() {
               onClose={closeModal}
               onConfirm={() => {
                 closeModal();
-                handleProcessPayment();
+                handleProcessPayment(username, password);
               }}
               brlAmount={brlAmount || ''}
               cryptoAmount={cryptoAmount || ''}
               network={network || ''}
               coldWallet={coldWallet || ''}
               paymentMethod={paymentMethod || ''}
-              transactionNumber={transactionNumber || ''}
+              transactionNumber={'11111111111'}
               cupom={cupom || ''}
               alfredFeePercentage={alfredFeePercentage}
               cryptoType={cryptoType || ''}

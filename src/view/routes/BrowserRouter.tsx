@@ -72,6 +72,7 @@ export function BrowserRouter() {
                 path={ROUTES.auth.register.path}
                 element={<RegisterPage />}
               />
+              <Route path={ROUTES.buyCheckout.path} element={<DataForm />} />
               <Route path={ROUTES.buyBitcoin.path} element={<BuyBitcoin />} />
               <Route path={ROUTES.fee.path} element={<Fees />} />
               <Route path={ROUTES.Support.path} element={<SupportPage />} />
@@ -99,7 +100,7 @@ export function BrowserRouter() {
                   path={ROUTES.paymentAlfredStatus.review.path}
                   element={<PaymentAlfredReview />}
                 />
-                <Route path={ROUTES.buyCheckout.path} element={<DataForm />} />
+
                 <Route
                   path={ROUTES.checkoutPix.path}
                   element={<CheckoutPix />}
