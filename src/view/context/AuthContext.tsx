@@ -4,10 +4,10 @@ import { axiosInstance } from '@/infrastructure/api/axiosInstance';
 import React, { createContext, useEffect, useState } from 'react';
 
 export type AuthUser = {
-  id: string; // Agora não será utilizado, pois não retornamos o ID do login
+  id: string;
   username: string;
-  acessToken: string; // token JWT recebido do backend (limpo)
-  refreshToken: string; // refresh token recebido do backend (limpo)
+  acessToken: string;
+  refreshToken: string;
 };
 
 type AuthContextType = {
@@ -15,6 +15,10 @@ type AuthContextType = {
   login: (username: string, password: string) => Promise<void>;
   register: (username: string, password: string) => Promise<void>;
   logout: () => void;
+  refreshAccessToken: (
+    userId: string,
+    refreshToken: string,
+  ) => Promise<{ acessToken: string }>;
 };
 
 export const AuthContext = createContext<AuthContextType>(
@@ -39,7 +43,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return null;
   });
 
-  // Configura o header de autorização do axios sempre que o usuário for atualizado
+  // Atualiza o header de autorização do axios sempre que o usuário for atualizado
   useEffect(() => {
     if (user?.acessToken) {
       axiosInstance.defaults.headers.common.Authorization = `Bearer ${user.acessToken}`;
@@ -50,53 +54,56 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [user]);
 
-  // A função do refresh token foi comentada conforme solicitado
-  // useEffect(() => {
-  //     let isMounted = true;
+  // Declaração única da função refreshAccessToken
+  // Defina o tipo de resposta que pode vir do backend:
+  const refreshAccessToken = async (
+    userId: string,
+    refreshToken: string,
+  ): Promise<{ acessToken: string }> => {
+    try {
+      const result = await authRepository.refreshToken(userId, refreshToken);
+      if (!result) {
+        throw new Error('Erro ao atualizar o token: resposta nula.');
+      }
+      // Utilize somente a propriedade "acessToken", pois o schema já faz a transformação
+      const newAcessToken = result.acessToken;
+      if (newAcessToken && typeof newAcessToken === 'string') {
+        console.log('Novo acessToken recebido no refresh:', newAcessToken);
+        if (user) {
+          const updatedUser: AuthUser = { ...user, acessToken: newAcessToken };
+          setUser(updatedUser);
+          localStorage.setItem('user', JSON.stringify(updatedUser));
+          axiosInstance.defaults.headers.common.Authorization = `Bearer ${newAcessToken}`;
+        }
+        return { acessToken: newAcessToken };
+      }
+      throw new Error('Erro ao atualizar o token: resposta inválida.');
+    } catch (error) {
+      console.error('Erro ao atualizar token:', error);
+      throw error;
+    }
+  };
 
-  //     const refreshToken = async () => {
-  //         if (user) {
-  //             try {
-  //                 const userId = user.id || getUserIdFromToken(user.acessToken);
-  //                 console.log("Refresh: userId:", userId);
-  //                 const result = await authRepository.refreshToken(userId, user.refreshToken);
-  //                 if (result) {
-  //                     const newAcessToken = result.acessToken;
-  //                     console.log("Novo acessToken recebido no refresh:", newAcessToken);
-  //                     const updatedUser: AuthUser = { ...user, acessToken: newAcessToken };
-  //                     if (isMounted) {
-  //                         setUser(updatedUser);
-  //                         localStorage.setItem('user', JSON.stringify(updatedUser));
-  //                         axiosInstance.defaults.headers.common.Authorization = `Bearer ${newAcessToken}`;
-  //                     }
-  //                 }
-  //             } catch (error) {
-  //                 console.error('Erro ao atualizar token:', error);
-  //                 logout();
-  //             }
-  //         }
-  //         if (isMounted) {
-  //             setTimeout(refreshToken, 15 * 60 * 1000);
-  //         }
-  //     };
+  useEffect(() => {
+    if (user) {
+      const interval = setInterval(
+        () => {
+          refreshAccessToken(user.id, user.refreshToken);
+        },
+        5 * 60 * 1000,
+      );
+      return () => clearInterval(interval);
+    }
+  }, [user]);
 
-  //     refreshToken();
-
-  //     return () => {
-  //         isMounted = false;
-  //     };
-  // }, [user]);
-
-  // Login: agora, vamos usar apenas o accessToken e não extraímos o id
   const login = async (username: string, password: string) => {
     try {
       const result = await authRepository.login(username, password);
-      if (!result || !result.acessToken || !result.refreshToken) {
+      if (!result || !result.acessToken || !result.refreshToken || !result.id) {
         throw new Error('Dados de login incompletos recebidos do backend');
       }
-
       const loggedUser: AuthUser = {
-        id: '', // Não utilizamos mais o ID
+        id: result.id,
         username,
         acessToken: result.acessToken,
         refreshToken: result.refreshToken,
@@ -104,7 +111,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setUser(loggedUser);
       localStorage.setItem('user', JSON.stringify(loggedUser));
       axiosInstance.defaults.headers.common.Authorization = `Bearer ${loggedUser.acessToken}`;
-
       console.log('Usuário logado:', loggedUser);
       console.log(
         'Header Authorization:',
@@ -135,7 +141,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout }}>
+    <AuthContext.Provider
+      value={{ user, login, register, logout, refreshAccessToken }}
+    >
       {children}
     </AuthContext.Provider>
   );

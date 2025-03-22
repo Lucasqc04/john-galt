@@ -38,7 +38,7 @@ export function useDataForm() {
   const [alfredFeePercentage, setAlfredFeePercentage] = useState(5);
 
   // Obtenção de dados de autenticação
-  const { user, login, register } = useAuth();
+  const { user, login, register, refreshAccessToken } = useAuth();
 
   const navigate = useNavigate();
   const { currentLang } = useCurrentLang();
@@ -221,6 +221,23 @@ export function useDataForm() {
       }
     } else {
       console.log('Usuário já autenticado:', user.username);
+    }
+
+    if (user) {
+      try {
+        console.log(
+          'Tentando atualizar o token via refresh para o usuário:',
+          user.username,
+        );
+        // Mesmo que os nomes estejam invertidos, você passa user.acessToken conforme necessário
+        await refreshAccessToken(user.id, user.acessToken);
+        console.log('Token atualizado via refresh.');
+      } catch (refreshError) {
+        console.error('Erro ao atualizar token via refresh:', refreshError);
+        toast.error('Erro ao atualizar token. Faça login novamente.');
+        setIsLoading(false);
+        return;
+      }
     }
 
     // Após a autenticação, verifica se os demais requisitos estão atendidos
