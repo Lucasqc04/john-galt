@@ -2,7 +2,7 @@ import AlfredWhiteLogo from '@/view/assets/logo/alfred-white-logo.svg';
 import { PaymentLoader } from '@/view/components/PaymentLoader';
 import classNames from 'classnames';
 import { t } from 'i18next';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { FaEye, FaEyeSlash, FaQuestionCircle } from 'react-icons/fa';
 import { FaPix } from 'react-icons/fa6';
 import { toast } from 'react-toastify';
@@ -23,7 +23,7 @@ export default function DataForm() {
     errors,
     brlAmount,
     cryptoAmount,
-    cryptoType,
+    cryptoType, // Agora usaremos cryptoType diretamente
     acceptFees,
     acceptTerms,
     networks,
@@ -65,6 +65,57 @@ export default function DataForm() {
   const closeModal = () => setIsModalOpen(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [brlInput, setBrlInput] = useState(
+    localStorage.getItem('brlAmount') || '',
+  );
+  const [convertedCrypto, setConvertedCrypto] = useState(
+    localStorage.getItem('cryptoAmount') || '',
+  );
+
+  const formatToBRL = (value: string) => {
+    const numeric = value.replace(/\D/g, '');
+    const number = parseFloat(numeric) / 100;
+    return number.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    });
+  };
+
+  const fetchCryptoValue = useCallback(
+    async (brlValue: number) => {
+      try {
+        // Verifica diretamente se cryptoType é USDT ou assume BTC (bitcoin)
+        const coinId =
+          cryptoType && cryptoType.toUpperCase() === 'USDT'
+            ? 'tether'
+            : 'bitcoin';
+
+        const res = await fetch(
+          `https://api.coingecko.com/api/v3/simple/price?ids=${coinId}&vs_currencies=brl`,
+        );
+        const data = await res.json();
+        const price = data[coinId].brl;
+        const cryptoAmountCalc = (brlValue / price).toFixed(6);
+        setConvertedCrypto(cryptoAmountCalc);
+        localStorage.setItem('cryptoAmount', cryptoAmountCalc);
+        // Armazena a moeda de forma padronizada
+        localStorage.setItem(
+          'cryptoType',
+          cryptoType && cryptoType.toUpperCase() === 'USDT' ? 'USDT' : 'BTC',
+        );
+      } catch (err) {
+        console.error('Erro ao buscar cotação:', err);
+      }
+    },
+    [cryptoType],
+  );
+
+  useEffect(() => {
+    const rawValue = brlInput.replace(/\D/g, '');
+    const brlValue = parseFloat(rawValue) / 100;
+    localStorage.setItem('brlAmount', brlInput);
+    if (!isNaN(brlValue)) fetchCryptoValue(brlValue);
+  }, [brlInput, cryptoType, fetchCryptoValue]);
 
   const is100k =
     parseInt(
@@ -115,7 +166,7 @@ export default function DataForm() {
       if (numericBRL > 5000) {
         const message = `
           Estou comprando mais de 5 mil reais no Alfred e preciso do formulário de Validação para Transações Anônimas.
-          
+
           - Valor BRL: ${brlAmount}
           - Valor Crypto: ${cryptoAmount} ${cryptoType.toUpperCase()}
           - Rede: ${network}
@@ -143,12 +194,23 @@ export default function DataForm() {
       <main className="flex flex-col justify-center items-center pt-12 sm:pt-24">
         <img src={AlfredWhiteLogo} alt="Alfred Logo" className="w-64 sm:w-96" />
         <section className="flex flex-col justify-center items-center gap-y-4 pt-4">
-          <p className="text-lg sm:text-xl text-center text-white">
-            {t('buycheckout.value')}: {brlAmount} BRL
-            <br />
-            {t('buycheckout.valueCrypto')}: {cryptoAmount}{' '}
-            {cryptoType.toUpperCase()}
-          </p>
+          <div className="flex flex-col items-center gap-2">
+            <input
+              type="text"
+              value={`${t('buycheckout.value')}: ${brlInput}`}
+              onChange={(e) => setBrlInput(formatToBRL(e.target.value))}
+              placeholder="Digite o valor em BRL"
+              className="text-white text-center text-lg sm:text-xl pt-2 bg-transparent border-none focus:outline-none"
+            />
+
+            {/* Exibição do valor convertido e da moeda definida diretamente por cryptoType */}
+            <p className="text-white text-center text-lg sm:text-xl pt-2">
+              {t('buycheckout.valueCrypto')}: {convertedCrypto}{' '}
+              {cryptoType && cryptoType.toUpperCase() === 'USDT'
+                ? 'USDT'
+                : 'BTC'}
+            </p>
+          </div>
 
           <div className="flex justify-center items-center relative px-4">
             <div className="w-full max-w-2xl">
