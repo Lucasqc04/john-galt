@@ -74,8 +74,12 @@
   },
   "fees": {
     "title": "Taxas",
+    "dailyLimit1": "De 200 BRL a 6.000 BRL por dia:",
     "above1000": "5% para transações acima de 1.000 BRL.",
     "below1000": "10% para transações abaixo de 1.000 BRL.",
+    "dailyLimit2": "De 6.001 BRL em diante:",
+    "fixedRate": "6% de taxa fixa.",
+    "coupons": "Para transações de até 6.000 BRL por dia, cupons estão disponíveis conforme porcentagens dos cupons. Para valores acima de 6.000 BRL, ao utilizar um cupom, a taxa é reduzida para 5%.",
     "convertibilityRates": "Taxas de convertibilidade variáveis para transações envolvendo Pix para LBTC e envio de Bitcoin on-chain.",
     "reflectionTitle": "Reflexão: Bitcoin como Ferramenta Libertária",
     "reflection1": "Se o Bitcoin é realmente uma ferramenta libertária, por que os governos ainda permitem que os indivíduos comprem BTC legalmente?",

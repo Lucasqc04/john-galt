@@ -12,11 +12,32 @@ export function Fees() {
         </h1>
 
         <section className="pb-8">
+          <h2 className="text-xl font-semibold mb-4 text-white">
+            {t('fees.dailyLimit1')}
+          </h2>
           <ul className="list-disc pl-5 text-white">
             <li>{t('fees.above1000')}</li>
             <li>{t('fees.below1000')}</li>
-            <p>{t('fees.convertibilityRates')}</p>
           </ul>
+        </section>
+
+        <section className="pb-8">
+          <h2 className="text-xl font-semibold mb-4 text-white">
+            {t('fees.dailyLimit2')}
+          </h2>
+          <p className="text-white">{t('fees.fixedRate')}</p>
+        </section>
+
+        <section className="pb-8">
+          <h2 className="text-xl font-semibold mb-4 text-white">Coupons</h2>
+          <p className="text-white">{t('fees.coupons')}</p>
+        </section>
+
+        <section className="pb-8">
+          <h2 className="text-xl font-semibold mb-4 text-white">
+            Taxas de Convertibilidade:
+          </h2>
+          <p className="text-white">{t('fees.convertibilityRates')}</p>
         </section>
 
         <section className="pb-8">
