@@ -176,11 +176,7 @@ export function useDataForm() {
    * Em seguida, prossegue com a chamada do /deposit.
    */
   const handleProcessPayment = async (username: string, password: string) => {
-    console.log(
-      'Iniciando handleProcessPayment com username:',
-      username,
-      password,
-    );
+    console.log('Iniciando handleProcessPayment com username:', username);
     setIsLoading(true);
 
     // Se o usuário não estiver autenticado, tenta registrar e em seguida efetuar o login
@@ -208,7 +204,9 @@ export function useDataForm() {
             toast.success('Login efetuado com sucesso.');
           } catch (loginError) {
             console.error('Erro no login:', loginError);
-            toast.error('Erro no login. Confira as credenciais.');
+            toast.error(
+              'Erro no login. Confira as credenciais. Em caso de primeira compra, altere o nome de usuário do registro',
+            );
             setIsLoading(false);
             return;
           }
