@@ -113,21 +113,26 @@ export default function DataForm() {
         return;
       }
       if (numericBRL > 5000) {
-        const message = `
-          Estou comprando mais de 5 mil reais no Alfred e preciso do formulário de Validação para Transações Anônimas.
+        let taxaAlfred = '';
+        if (numericBRL >= 6000) {
+          taxaAlfred = cupom.trim() !== '' ? '4.99' : '6';
+        } else {
+          taxaAlfred = alfredFeePercentage.toString();
+        }
 
-          - Valor BRL: ${brlAmount}
-          - Valor Crypto: ${cryptoAmount} ${cryptoType.toUpperCase()}
-          - Rede: ${network}
-          - Endereço da carteira: ${coldWallet}
-          - Método de pagamento: ${paymentMethodLabels[paymentMethod]}
-          - Usuário: ${username}
-          - Cupom: ${cupom || 'Nenhum'}
-          - Taxa Alfred (%): ${alfredFeePercentage}
+        const message = `
+    Estou comprando mais de 5 mil reais no Alfred e preciso do formulário de Validação para Transações Anônimas.
+
+    - Valor BRL: ${brlAmount}
+    - Valor Crypto: ${cryptoAmount} ${cryptoType.toUpperCase()}
+    - Rede: ${network}
+    - Endereço da carteira: ${coldWallet}
+    - Método de pagamento: ${paymentMethodLabels[paymentMethod]}
+    - Usuário: ${username}
+    - Cupom: ${cupom || 'Nenhum'}
+    - Taxa Alfred (%): ${taxaAlfred}
         `;
-        const whatsappURL = `https://wa.me/5511911872097?text=${encodeURIComponent(
-          message,
-        )}`;
+        const whatsappURL = `https://wa.me/5511911872097?text=${encodeURIComponent(message)}`;
         window.open(whatsappURL, '_blank');
         return;
       }

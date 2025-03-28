@@ -71,7 +71,14 @@ export default function ConfirmInfosModal({
     alfredFee,
     alfredFeeRate,
     conversionFeeUsdBrl,
-  } = useConfirmInfos(network, brlAmount, alfredFeePercentage, cryptoType);
+  } = useConfirmInfos(
+    network,
+    brlAmount,
+    alfredFeePercentage,
+    cryptoType,
+    paymentMethod,
+    cupom,
+  );
 
   const [isDataVisible, setIsDataVisible] = useState(false);
   const [isTaxVisible, setIsTaxVisible] = useState(false);

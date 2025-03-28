@@ -18,6 +18,7 @@ export function Fees() {
           <ul className="list-disc pl-5 text-white">
             <li>{t('fees.above1000')}</li>
             <li>{t('fees.below1000')}</li>
+            <li>{t('fees.rateTicket')}</li>
           </ul>
         </section>
 

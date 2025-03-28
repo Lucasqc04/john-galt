@@ -147,9 +147,6 @@ export function useDataForm() {
       }
     }
 
-    // Neste exemplo, o transactionNumber ainda é validado, mas em seu fluxo
-    // pode ser substituído pelos campos de usuário/senha, se necessário.
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -167,32 +164,21 @@ export function useDataForm() {
           { name: 'Lightning', icon: Lightning },
         ];
 
-  /**
-   * handleProcessPayment agora recebe também os parâmetros username e password.
-   * Antes de chamar o endpoint /deposit, verifica se o usuário está autenticado.
-   * Se não estiver:
-   *  - Tenta realizar o registro. Se o registro falhar por conflito (usuário já existe),
-   *    realiza o login.
-   * Em seguida, prossegue com a chamada do /deposit.
-   */
   const handleProcessPayment = async (username: string, password: string) => {
     console.log('Iniciando handleProcessPayment com username:', username);
     setIsLoading(true);
 
-    // Se o usuário não estiver autenticado, tenta registrar e em seguida efetuar o login
     if (!user) {
       try {
         console.log('Tentando registrar usuário:', username);
         await register(username, password);
         console.log('Registro realizado com sucesso para:', username);
-        // Chama o login automaticamente após o registro bem-sucedido
         await login(username, password);
         console.log('Login realizado com sucesso para:', username);
         toast.success('Login efetuado com sucesso.');
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (regError: any) {
         console.error('Erro no registro para usuário:', username, regError);
-        // Se o registro falhar por conflito (usuário já existe), tenta o login
         if (regError.response && regError.response.status === 409) {
           console.log(
             'Registro retornou 409 (usuário já existe). Tentando login para:',
@@ -227,7 +213,6 @@ export function useDataForm() {
           'Tentando atualizar o token via refresh para o usuário:',
           user.username,
         );
-        // Mesmo que os nomes estejam invertidos, você passa user.acessToken conforme necessário
         await refreshAccessToken(user.id, user.acessToken);
         console.log('Token atualizado via refresh.');
       } catch (refreshError) {
@@ -238,7 +223,6 @@ export function useDataForm() {
       }
     }
 
-    // Após a autenticação, verifica se os demais requisitos estão atendidos
     if (!acceptFees || !acceptTerms) {
       console.log('Termos ou taxas não aceitos.');
       toast.warning(t('buycheckout.termsAndFeesAlert'));
@@ -486,11 +470,11 @@ export function useDataForm() {
         return;
       }
 
-      if (coupon.discountType === 'percentage') {
-        setAlfredFeePercentage(() => {
-          console.log('Novo valor do Alfred Fee:', coupon.discountValue);
-          return coupon.discountValue;
-        });
+      const valorBRL = parseFloat(
+        brlAmount.replace(/[^\d,]/g, '').replace(',', '.'),
+      );
+      if (valorBRL < 6001 && coupon.discountType === 'percentage') {
+        setAlfredFeePercentage(coupon.discountValue);
       }
 
       setCupom(cupom.toUpperCase());
