@@ -29,13 +29,15 @@ export function Fees() {
         </section>
 
         <section className="pb-8">
-          <h2 className="text-xl font-semibold mb-4 text-white">Coupons</h2>
+          <h2 className="text-xl font-semibold mb-4 text-white">
+            {t('fees.couponsTitle')}
+          </h2>
           <p className="text-white">{t('fees.coupons')}</p>
         </section>
 
         <section className="pb-8">
           <h2 className="text-xl font-semibold mb-4 text-white">
-            Taxas de Convertibilidade:
+            {t('fees.convertibilityRatesTile')}
           </h2>
           <p className="text-white">{t('fees.convertibilityRates')}</p>
         </section>
