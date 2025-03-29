@@ -5,6 +5,8 @@ export function useConfirmInfos(
   brlAmount: string,
   alfredFeePercentage: number,
   cryptoType: string,
+  paymentMethod?: string,
+  cupom?: string,
 ) {
   const [localAlfredFeePercentage, setLocalAlfredFeePercentage] =
     useState<number>(alfredFeePercentage);
@@ -49,11 +51,9 @@ export function useConfirmInfos(
         const data = await response.json();
         const satPerVByte = data.halfHourFee;
         const transactionSize = 140;
-
         const feeInSats = satPerVByte * transactionSize;
         const feeInBTC = feeInSats / 1e8;
         const feeInBRL = btcToBrl ? feeInBTC * btcToBrl : 0;
-
         setOnchainFee(feeInBRL);
       } catch (error) {
         console.error('Erro ao buscar a taxa on-chain:', error);
@@ -67,17 +67,23 @@ export function useConfirmInfos(
   const brlAmountNum = parseFloat(
     brlAmount.replace(/[^\d,]/g, '').replace(',', '.'),
   );
-  const alfredFeeRate =
-    // brlAmountNum >= 1000
-    //?
-    localAlfredFeePercentage / 100;
-  // : (localAlfredFeePercentage * 2) / 100;
+
+  let alfredFeeRate = localAlfredFeePercentage / 100;
+  if (brlAmountNum >= 6001) {
+    const isBoleto = paymentMethod?.toLowerCase().includes('TICKET');
+    const hasCupom = cupom && cupom.trim() !== '';
+    if (isBoleto) {
+      alfredFeeRate = hasCupom ? 0.0599 : 0.07;
+    } else {
+      alfredFeeRate = hasCupom ? 0.0499 : 0.06;
+    }
+  }
   const alfredFee = brlAmountNum * alfredFeeRate;
 
   if (cryptoType.toLowerCase() === 'usdt') {
     // Para USDT, não aplica a taxa de conversão
     const conversionFeeBrl = 0;
-    const swapFee = brlAmountNum * 0.0158; // somente 1.58% de taxa de swap
+    const swapFee = brlAmountNum * 0.0158; // taxa de swap de 1.58%
     const totalFees = alfredFee + swapFee + (onchainFee || 0);
     const finalAmount = brlAmountNum - totalFees;
     const expectedAmountUSDT = usdToBrl

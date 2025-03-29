@@ -19,13 +19,13 @@ export function useDataForm() {
   const [isTransactionTimedOut, setIsTransactionTimedOut] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [coldWallet, setColdWallet] = useState<string>('');
-  // Campo antigo: transactionNumber (agora não será utilizado para login)
   const [transactionNumber, setTransactionNumber] = useState<string>('');
   const [cupom, setCupom] = useState<string>('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpenMethod, setIsDropdownOpenMethod] = useState(false);
+  // Atualize o tipo para incluir os novos métodos:
   const [paymentMethod, setPaymentMethod] = useState<
-    'PIX' | 'TICKET' | 'WISE'
+    'PIX' | 'TICKET' | 'WISE' | 'SWIFT' | 'PAYPAL' | 'BANK_TRANSFER'
   >();
   const [pixKey, setPixKey] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -68,7 +68,9 @@ export function useDataForm() {
     setIsDropdownOpenMethod((prevState) => !prevState);
   };
 
-  const selectPaymentMethod = (method: 'PIX' | 'WISE' | 'TICKET') => {
+  const selectPaymentMethod = (
+    method: 'PIX' | 'TICKET' | 'WISE' | 'SWIFT' | 'PAYPAL' | 'BANK_TRANSFER',
+  ) => {
     setPaymentMethod(method);
     setIsDropdownOpenMethod(false);
   };
@@ -147,9 +149,6 @@ export function useDataForm() {
       }
     }
 
-    // Neste exemplo, o transactionNumber ainda é validado, mas em seu fluxo
-    // pode ser substituído pelos campos de usuário/senha, se necessário.
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -167,32 +166,21 @@ export function useDataForm() {
           { name: 'Lightning', icon: Lightning },
         ];
 
-  /**
-   * handleProcessPayment agora recebe também os parâmetros username e password.
-   * Antes de chamar o endpoint /deposit, verifica se o usuário está autenticado.
-   * Se não estiver:
-   *  - Tenta realizar o registro. Se o registro falhar por conflito (usuário já existe),
-   *    realiza o login.
-   * Em seguida, prossegue com a chamada do /deposit.
-   */
   const handleProcessPayment = async (username: string, password: string) => {
     console.log('Iniciando handleProcessPayment com username:', username);
     setIsLoading(true);
 
-    // Se o usuário não estiver autenticado, tenta registrar e em seguida efetuar o login
     if (!user) {
       try {
         console.log('Tentando registrar usuário:', username);
         await register(username, password);
         console.log('Registro realizado com sucesso para:', username);
-        // Chama o login automaticamente após o registro bem-sucedido
         await login(username, password);
         console.log('Login realizado com sucesso para:', username);
         toast.success('Login efetuado com sucesso.');
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (regError: any) {
         console.error('Erro no registro para usuário:', username, regError);
-        // Se o registro falhar por conflito (usuário já existe), tenta o login
         if (regError.response && regError.response.status === 409) {
           console.log(
             'Registro retornou 409 (usuário já existe). Tentando login para:',
@@ -227,7 +215,6 @@ export function useDataForm() {
           'Tentando atualizar o token via refresh para o usuário:',
           user.username,
         );
-        // Mesmo que os nomes estejam invertidos, você passa user.acessToken conforme necessário
         await refreshAccessToken(user.id, user.acessToken);
         console.log('Token atualizado via refresh.');
       } catch (refreshError) {
@@ -238,7 +225,6 @@ export function useDataForm() {
       }
     }
 
-    // Após a autenticação, verifica se os demais requisitos estão atendidos
     if (!acceptFees || !acceptTerms) {
       console.log('Termos ou taxas não aceitos.');
       toast.warning(t('buycheckout.termsAndFeesAlert'));
@@ -266,34 +252,54 @@ export function useDataForm() {
       4 * 60 * 1000,
     );
 
-    try {
-      const valorBRL = parseFloat(brlAmount.replace(/\D/g, ''));
-      console.log('Valor BRL calculado:', valorBRL);
-      const valorToSend = valorBRL === 100000 ? 300 : valorBRL;
-      console.log('Valor a enviar:', valorToSend);
-
-      if (cryptoType.toUpperCase() === 'USDT') {
-        console.log('Criptomoeda USDT detectada.');
-        const whatsappNumber = '5511993439032';
-        let PaymentMethodFormatted = '';
-
-        if (paymentMethod === 'TICKET') {
-          PaymentMethodFormatted = 'Boleto Bancário';
-        } else if (paymentMethod === 'WISE') {
-          PaymentMethodFormatted = 'Wise';
-        }
-
-        if (paymentMethod === 'TICKET' || paymentMethod === 'WISE') {
-          const message = `Olá! Aqui estão os detalhes do pedido :\n\nValor BRL: ${brlAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: ${PaymentMethodFormatted}\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
-          const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-          window.location.href = whatsappLink;
-          return;
-        }
+    // Caso o método seja SWIFT, PAYPAL ou BANK_TRANSFER, redireciona direto para o WhatsApp
+    if (
+      paymentMethod === 'SWIFT' ||
+      paymentMethod === 'PAYPAL' ||
+      paymentMethod === 'BANK_TRANSFER'
+    ) {
+      const whatsappNumber = '5511993439032';
+      let message = '';
+      if (paymentMethod === 'SWIFT') {
+        message = `Olá! Aqui estão os detalhes do pedido Swift:\n\nValor BRL: ${brlAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: Swift\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
+      } else if (paymentMethod === 'PAYPAL') {
+        message = `Olá! Aqui estão os detalhes do pedido PayPal:\n\nValor BRL: ${brlAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: PayPal\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
+      } else if (paymentMethod === 'BANK_TRANSFER') {
+        message = `Olá! Aqui estão os detalhes do pedido Transferência Bancária:\n\nValor BRL: ${brlAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: Transferência Bancária\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
       }
+      const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+      window.location.href = whatsappLink;
+      return;
+    }
 
-      const userString = localStorage.getItem('user');
-      const userObj = userString ? JSON.parse(userString) : null;
+    // Caso a criptomoeda seja USDT e o método seja TICKET ou WISE, redireciona para o WhatsApp
+    if (cryptoType.toUpperCase() === 'USDT') {
+      console.log('Criptomoeda USDT detectada.');
+      const whatsappNumber = '5511993439032';
+      let PaymentMethodFormatted = '';
+      if (paymentMethod === 'TICKET') {
+        PaymentMethodFormatted = 'Boleto Bancário';
+      } else if (paymentMethod === 'WISE') {
+        PaymentMethodFormatted = 'Wise';
+      }
+      if (paymentMethod === 'TICKET' || paymentMethod === 'WISE') {
+        const message = `Olá! Aqui estão os detalhes do pedido :\n\nValor BRL: ${brlAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: ${PaymentMethodFormatted}\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
+        const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+        window.location.href = whatsappLink;
+        return;
+      }
+    }
 
+    // Para os demais métodos (como PIX ou outros que necessitam do backend) prossegue com a requisição
+    const valorBRL = parseFloat(brlAmount.replace(/\D/g, ''));
+    console.log('Valor BRL calculado:', valorBRL);
+    const valorToSend = valorBRL === 100000 ? 300 : valorBRL;
+    console.log('Valor a enviar:', valorToSend);
+
+    const userString = localStorage.getItem('user');
+    const userObj = userString ? JSON.parse(userString) : null;
+
+    try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/deposit`,
         {
@@ -315,6 +321,7 @@ export function useDataForm() {
         },
       );
 
+      // Redirecionamento para WhatsApp conforme o método escolhido (para métodos que não entraram no if acima)
       if (paymentMethod === 'WISE') {
         const whatsappNumber = '5511993439032';
         const message = `Olá! Aqui estão os detalhes do pedido Wise:\n\n Valor BRL: ${brlAmount} \n ${cryptoType}: ${cryptoAmount}\n Rede: ${network}\n Cold Wallet: ${coldWallet} \n Método: Wise\n Telefone: ${transactionNumber}\n Cupom: ${cupom}`;
@@ -486,11 +493,11 @@ export function useDataForm() {
         return;
       }
 
-      if (coupon.discountType === 'percentage') {
-        setAlfredFeePercentage(() => {
-          console.log('Novo valor do Alfred Fee:', coupon.discountValue);
-          return coupon.discountValue;
-        });
+      const valorBRL = parseFloat(
+        brlAmount.replace(/[^\d,]/g, '').replace(',', '.'),
+      );
+      if (valorBRL >= 6001 && coupon.discountType === 'percentage') {
+        setAlfredFeePercentage(coupon.discountValue);
       }
 
       setCupom(cupom.toUpperCase());

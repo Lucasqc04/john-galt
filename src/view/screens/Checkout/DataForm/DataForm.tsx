@@ -9,6 +9,12 @@ import { toast } from 'react-toastify';
 import BoletoIcon from '../../../assets/BoletoIcon.png';
 import AlfredImg from '../../../assets/c1b28810-5a23-4e7c-bcce-bd1f42b271c5.png';
 import WiseIcon from '../../../assets/wiseIcon.png';
+// NOVOS ÍCONES adicionados:
+
+import BankTransf from '../../../assets/bankIcon.png';
+import PayPalIcon from '../../../assets/paypalIcon.png';
+import SwiftIcon from '../../../assets/swiftIcon.png';
+
 import { ROUTES } from '../../../routes/Routes';
 import ConfirmInfosModal from '../modal/ConfirmInfos';
 import { useDataForm } from './useDataForm';
@@ -52,10 +58,14 @@ export default function DataForm() {
   const [username, setUsername] = useState(loggedUser?.username || '');
   const [password, setPassword] = useState('');
 
+  // Adicionamos os novos rótulos para os métodos de pagamento
   const paymentMethodLabels = {
     PIX: t('buycheckout.paymentMethod.PIX'),
     WISE: t('buycheckout.paymentMethod.WISE'),
     TICKET: t('buycheckout.paymentMethod.TICKET'),
+    SWIFT: t('buycheckout.paymentMethod.SWIFT'),
+    PAYPAL: t('buycheckout.paymentMethod.PAYPAL'),
+    BANK_TRANSFER: t('buycheckout.paymentMethod.BANK_TRANSFER'),
   };
 
   const numericBRL = parseInt(brlAmount.replace(/\D/g, ''), 10);
@@ -113,17 +123,24 @@ export default function DataForm() {
         return;
       }
       if (numericBRL > 5000) {
-        const message = `
-          Estou comprando mais de 5 mil reais no Alfred e preciso do formulário de Validação para Transações Anônimas.
+        let taxaAlfred = '';
+        if (numericBRL >= 6000) {
+          taxaAlfred = cupom.trim() !== '' ? '4.99' : '6';
+        } else {
+          taxaAlfred = alfredFeePercentage.toString();
+        }
 
-          - Valor BRL: ${brlAmount}
-          - Valor Crypto: ${cryptoAmount} ${cryptoType.toUpperCase()}
-          - Rede: ${network}
-          - Endereço da carteira: ${coldWallet}
-          - Método de pagamento: ${paymentMethodLabels[paymentMethod]}
-          - Usuário: ${username}
-          - Cupom: ${cupom || 'Nenhum'}
-          - Taxa Alfred (%): ${alfredFeePercentage}
+        const message = `
+    Estou comprando mais de 5 mil reais no Alfred e preciso do formulário de Validação para Transações Anônimas.
+
+    - Valor BRL: ${brlAmount}
+    - Valor Crypto: ${cryptoAmount} ${cryptoType.toUpperCase()}
+    - Rede: ${network}
+    - Endereço da carteira: ${coldWallet}
+    - Método de pagamento: ${paymentMethodLabels[paymentMethod]}
+    - Usuário: ${username}
+    - Cupom: ${cupom || 'Nenhum'}
+    - Taxa Alfred (%): ${taxaAlfred}
         `;
         const whatsappURL = `https://wa.me/5511911872097?text=${encodeURIComponent(
           message,
@@ -240,6 +257,24 @@ export default function DataForm() {
                         alt="Boleto Bancário"
                         className="w-8 h-8 sm:w-10 sm:h-10 rounded-full"
                       />
+                    ) : paymentMethod === 'SWIFT' ? (
+                      <img
+                        src={SwiftIcon}
+                        alt="Swift"
+                        className="w-8 h-8 sm:w-10 sm:h-10 rounded-full"
+                      />
+                    ) : paymentMethod === 'PAYPAL' ? (
+                      <img
+                        src={PayPalIcon}
+                        alt="PayPal"
+                        className="w-8 h-8 sm:w-10 sm:h-10 rounded-full"
+                      />
+                    ) : paymentMethod === 'BANK_TRANSFER' ? (
+                      <img
+                        src={BankTransf}
+                        alt="PayPal"
+                        className="w-8 h-8 sm:w-10 sm:h-10 rounded-full"
+                      />
                     ) : null}
                   </button>
                   {isDropdownOpenMethod && (
@@ -280,6 +315,42 @@ export default function DataForm() {
                           <img
                             src={BoletoIcon}
                             alt="Boleto Bancário"
+                            className="w-6 h-6 mt-1 rounded-full"
+                          />
+                        </li>
+                        {/* Novos métodos adicionados: */}
+                        <li
+                          onClick={() => selectPaymentMethod('SWIFT')}
+                          className="flex flex-col items-center justify-center px-4 py-2 cursor-pointer text-white hover:bg-gray-800"
+                        >
+                          <span className="w-full text-center">Swift</span>
+                          <img
+                            src={SwiftIcon}
+                            alt="Swift"
+                            className="w-6 h-6 mt-1 rounded-full"
+                          />
+                        </li>
+                        <li
+                          onClick={() => selectPaymentMethod('PAYPAL')}
+                          className="flex flex-col items-center justify-center px-4 py-2 cursor-pointer text-white hover:bg-gray-800"
+                        >
+                          <span className="w-full text-center">PayPal</span>
+                          <img
+                            src={PayPalIcon}
+                            alt="PayPal"
+                            className="w-6 h-6 mt-1 rounded-full"
+                          />
+                        </li>
+                        <li
+                          onClick={() => selectPaymentMethod('BANK_TRANSFER')}
+                          className="flex flex-col items-center justify-center px-4 py-2 cursor-pointer text-white hover:bg-gray-800"
+                        >
+                          <span className="w-full text-center">
+                            Transferência Bancária
+                          </span>
+                          <img
+                            src={BankTransf}
+                            alt="PayPal"
                             className="w-6 h-6 mt-1 rounded-full"
                           />
                         </li>
