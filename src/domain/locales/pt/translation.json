@@ -77,7 +77,6 @@
     "dailyLimit1": "De 200 BRL a 6.000 BRL por dia:",
     "above1000": "5% para transações acima de 1.000 BRL.",
     "below1000": "10% para transações abaixo de 1.000 BRL.",
-
     "dailyLimit2": "De 6.001 BRL em diante:",
     "fixedRate": "6% de taxa fixa.",
     "couponsTitle": "Cupom",
@@ -185,7 +184,10 @@
     "paymentMethod": {
       "PIX": "PIX",
       "WISE": "Wise",
-      "TICKET": "Boleto Bancário"
+      "TICKET": "Boleto Bancário",
+      "SWIFT": "Swift",
+      "PAYPAL": "PayPal",
+      "BANK_TRANSFER": "Transferência Bancária"
     },
     "contactTooltip": {
       "message": "Por segurança, é necessário realizar o login com seu usuário e senha para que você possa acessar a plataforma em qualquer dispositivo e liberar futuras compras, e valores maiores.",

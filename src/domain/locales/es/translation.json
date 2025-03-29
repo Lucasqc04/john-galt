@@ -184,7 +184,10 @@
     "paymentMethod": {
       "PIX": "PIX",
       "WISE": "Wise",
-      "TICKET": "Boleto Bancario"
+      "TICKET": "Boleto Bancario",
+      "SWIFT": "Swift",
+      "PAYPAL": "PayPal",
+      "BANK_TRANSFER": "Transferencia Bancaria"
     },
     "contactTooltip": {
       "message": "Solicitamos tu número para ponernos en contacto en caso de que ocurra algún inconveniente durante la transacción, garantizando mayor seguridad para tu compra.",

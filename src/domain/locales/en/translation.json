@@ -184,7 +184,10 @@
     "paymentMethod": {
       "PIX": "PIX",
       "WISE": "Wise",
-      "TICKET": "Bank Slip"
+      "TICKET": "Bank Slip",
+      "SWIFT": "Swift",
+      "PAYPAL": "PayPal",
+      "BANK_TRANSFER": "Bank Transfer"
     },
     "contactTooltip": {
       "message": "We request your number to contact you in case something goes wrong during the transaction, ensuring greater security for your purchase.",
