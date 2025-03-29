@@ -19,13 +19,13 @@ export function useDataForm() {
   const [isTransactionTimedOut, setIsTransactionTimedOut] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [coldWallet, setColdWallet] = useState<string>('');
-  // Campo antigo: transactionNumber (agora não será utilizado para login)
   const [transactionNumber, setTransactionNumber] = useState<string>('');
   const [cupom, setCupom] = useState<string>('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpenMethod, setIsDropdownOpenMethod] = useState(false);
+  // Atualize o tipo para incluir os novos métodos:
   const [paymentMethod, setPaymentMethod] = useState<
-    'PIX' | 'TICKET' | 'WISE'
+    'PIX' | 'TICKET' | 'WISE' | 'SWIFT' | 'PAYPAL' | 'BANK_TRANSFER'
   >();
   const [pixKey, setPixKey] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -72,7 +72,9 @@ export function useDataForm() {
     setIsDropdownOpenMethod((prevState) => !prevState);
   };
 
-  const selectPaymentMethod = (method: 'PIX' | 'WISE' | 'TICKET') => {
+  const selectPaymentMethod = (
+    method: 'PIX' | 'TICKET' | 'WISE' | 'SWIFT' | 'PAYPAL' | 'BANK_TRANSFER',
+  ) => {
     setPaymentMethod(method);
     setIsDropdownOpenMethod(false);
   };
@@ -175,19 +177,10 @@ export function useDataForm() {
           { name: 'Lightning', icon: Lightning },
         ];
 
-  /**
-   * handleProcessPayment:
-   * - Realiza registro/login se necessário.
-   * - Verifica que os termos foram aceitos e que a rede está selecionada.
-   * - Como para fiat sempre assumimos BRL, se fiatType não for "BRL", redireciona para WhatsApp com as informações do pedido.
-   * - Se a compra for com USDT (ou BTC via USDT) a lógica é de redirecionamento para WhatsApp.
-   * - Caso seja uma compra tradicional de Bitcoin, o fluxo segue para o endpoint /deposit.
-   */
   const handleProcessPayment = async (username: string, password: string) => {
     console.log('Iniciando handleProcessPayment com username:', username);
     setIsLoading(true);
 
-    // Registro/Login se necessário
     if (!user) {
       try {
         console.log('Tentando registrar usuário:', username);
@@ -226,7 +219,10 @@ export function useDataForm() {
 
     if (user) {
       try {
-        console.log('Atualizando token para o usuário:', user.username);
+        console.log(
+          'Tentando atualizar o token via refresh para o usuário:',
+          user.username,
+        );
         await refreshAccessToken(user.id, user.acessToken);
         console.log('Token atualizado.');
       } catch (refreshError) {
@@ -286,48 +282,52 @@ Cupom: ${cupom}`;
       4 * 60 * 1000,
     );
 
-    try {
-      const valorBRL = parseFloat(fiatAmount.replace(/\D/g, ''));
-      console.log('Valor BRL calculado:', valorBRL);
-      const valorToSend = valorBRL === 100000 ? 300 : valorBRL;
-      console.log('Valor a enviar:', valorToSend);
+    // Caso o método seja SWIFT, PAYPAL ou BANK_TRANSFER, redireciona direto para o WhatsApp
+    if (
+      paymentMethod === 'SWIFT' ||
+      paymentMethod === 'PAYPAL' ||
+      paymentMethod === 'BANK_TRANSFER'
+    ) {
+      const whatsappNumber = '5511993439032';
+      let message = '';
+      if (paymentMethod === 'SWIFT') {
+        message = `Olá! Aqui estão os detalhes do pedido Swift:\n\nValor BRL: ${fiatAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: Swift\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
+      } else if (paymentMethod === 'PAYPAL') {
+        message = `Olá! Aqui estão os detalhes do pedido PayPal:\n\nValor BRL: ${fiatAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: PayPal\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
+      } else if (paymentMethod === 'BANK_TRANSFER') {
+        message = `Olá! Aqui estão os detalhes do pedido Transferência Bancária:\n\nValor BRL: ${fiatAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: Transferência Bancária\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
+      }
+      const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+      window.location.href = whatsappLink;
+      return;
+    }
 
-      // Se a compra for com USDT (ou BTC via USDT), redireciona para WhatsApp
-      if (
-        cryptoType.toUpperCase() === 'USDT' ||
-        cryptoType.toUpperCase() === 'BTC_USDT'
-      ) {
-        console.log(
-          `Criptomoeda ${cryptoType} detectada. Redirecionando para WhatsApp.`,
-        );
-        const whatsappNumber = '5511993439032';
-        let PaymentMethodFormatted = '';
-        if (paymentMethod === 'TICKET') {
-          PaymentMethodFormatted = 'Boleto Bancário';
-        } else if (paymentMethod === 'WISE') {
-          PaymentMethodFormatted = 'Wise';
-        } else {
-          PaymentMethodFormatted = paymentMethod || '';
-        }
-        const message = `Olá! Aqui estão os detalhes do pedido:
-        
-Valor BRL: ${fiatAmount}
-${cryptoType === 'BTC_USDT' ? 'Bitcoin' : cryptoType}: ${cryptoAmount}
-Rede: ${network}
-Cold Wallet: ${coldWallet}
-Método: ${PaymentMethodFormatted}
-Telefone: ${transactionNumber}
-Cupom: ${cupom}`;
+    if (cryptoType.toUpperCase() === 'USDT') {
+      console.log('Criptomoeda USDT detectada.');
+      const whatsappNumber = '5511993439032';
+      let PaymentMethodFormatted = '';
+      if (paymentMethod === 'TICKET') {
+        PaymentMethodFormatted = 'Boleto Bancário';
+      } else if (paymentMethod === 'WISE') {
+        PaymentMethodFormatted = 'Wise';
+      }
+      if (paymentMethod === 'TICKET' || paymentMethod === 'WISE') {
+        const message = `Olá! Aqui estão os detalhes do pedido :\n\nValor ${fiatType}: ${fiatAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: ${PaymentMethodFormatted}\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
         const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
         window.location.href = whatsappLink;
-        setIsLoading(false);
         return;
       }
+    }
 
-      // Caso seja compra tradicional de Bitcoin
-      const userString = localStorage.getItem('user');
-      const userObj = userString ? JSON.parse(userString) : null;
+    const valorBRL = parseFloat(fiatAmount.replace(/\D/g, ''));
+    console.log('Valor BRL calculado:', valorBRL);
+    const valorToSend = valorBRL === 100000 ? 300 : valorBRL;
+    console.log('Valor a enviar:', valorToSend);
 
+    const userString = localStorage.getItem('user');
+    const userObj = userString ? JSON.parse(userString) : null;
+
+    try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/deposit`,
         {
@@ -348,6 +348,31 @@ Cupom: ${cupom}`;
           },
         },
       );
+
+      // Redirecionamento para WhatsApp conforme o método escolhido (para métodos que não entraram no if acima)
+      if (paymentMethod === 'WISE') {
+        const whatsappNumber = '5511993439032';
+        const message = `Olá! Aqui estão os detalhes do pedido Wise:\n\n Valor ${fiatType}: ${fiatAmount} \n ${cryptoType}: ${cryptoAmount}\n Rede: ${network}\n Cold Wallet: ${coldWallet} \n Método: Wise\n Telefone: ${transactionNumber}\n Cupom: ${cupom}`;
+        console.log(
+          'Redirecionando para WhatsApp (Wise) com mensagem:',
+          message,
+        );
+        const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+        window.location.href = whatsappLink;
+        return;
+      }
+
+      if (paymentMethod === 'TICKET') {
+        const whatsappNumber = '5511993439032';
+        const message = `Olá! Aqui estão os detalhes do pedido Boleto Bancário:\n\n Valor ${fiatType}: ${fiatAmount} \n ${cryptoType}: ${cryptoAmount}\n Rede: ${network}\n Cold Wallet: ${coldWallet} \n Método: Boleto Bancário\n Telefone: ${transactionNumber}\n Cupom: ${cupom}`;
+        console.log(
+          'Redirecionando para WhatsApp (TICKET) com mensagem:',
+          message,
+        );
+        const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+        window.location.href = whatsappLink;
+        return;
+      }
 
       const pixKeyResponse = response.data.response?.qrCopyPaste;
       const status = response.data.response?.status;
@@ -497,11 +522,11 @@ Cupom: ${cupom}`;
         return;
       }
 
-      if (coupon.discountType === 'percentage') {
-        setAlfredFeePercentage(() => {
-          console.log('Novo valor do Alfred Fee:', coupon.discountValue);
-          return coupon.discountValue;
-        });
+      const valorBRL = parseFloat(
+        fiatAmount.replace(/[^\d,]/g, '').replace(',', '.'),
+      );
+      if (valorBRL >= 6001 && coupon.discountType === 'percentage') {
+        setAlfredFeePercentage(coupon.discountValue);
       }
 
       setCupom(cupom.toUpperCase());

@@ -6,6 +6,8 @@ export function useConfirmInfos(
   fiatType: string, // "BRL" ou "USD" (ou outra moeda, mas a lógica aqui trata BRL e USD)
   alfredFeePercentage: number,
   cryptoType: string,
+  paymentMethod?: string,
+  cupom?: string,
 ) {
   const [localAlfredFeePercentage, setLocalAlfredFeePercentage] =
     useState<number>(alfredFeePercentage);
@@ -50,11 +52,9 @@ export function useConfirmInfos(
         const data = await response.json();
         const satPerVByte = data.halfHourFee;
         const transactionSize = 140;
-
         const feeInSats = satPerVByte * transactionSize;
         const feeInBTC = feeInSats / 1e8;
         const feeInBRL = btcToBrl ? feeInBTC * btcToBrl : 0;
-
         setOnchainFee(feeInBRL);
       } catch (error) {
         console.error('Erro ao buscar a taxa on-chain:', error);
@@ -70,14 +70,22 @@ export function useConfirmInfos(
     fiatAmount.replace(/[^\d,]/g, '').replace(',', '.'),
   );
 
-  // Se o fiatType não for BRL, converte para BRL usando a taxa USD->BRL (ou outra, se aplicável)
-  let amountBRL = fiatAmountNum;
-  if (fiatType.toUpperCase() !== 'BRL' && usdToBrl) {
-    amountBRL = fiatAmountNum * usdToBrl;
-  }
+  // Converte o valor para BRL se o fiatType for diferente de BRL
+  const amountBRL =
+    fiatType.toUpperCase() === 'BRL'
+      ? fiatAmountNum
+      : fiatAmountNum * (usdToBrl || 0);
 
-  // Calcula a taxa do Alfred com base no valor (em BRL)
-  const alfredFeeRate = localAlfredFeePercentage / 100;
+  let alfredFeeRate = localAlfredFeePercentage / 100;
+  if (amountBRL >= 6001) {
+    const isBoleto = paymentMethod?.toLowerCase().includes('ticket');
+    const hasCupom = cupom && cupom.trim() !== '';
+    if (isBoleto) {
+      alfredFeeRate = hasCupom ? 0.0599 : 0.07;
+    } else {
+      alfredFeeRate = hasCupom ? 0.0499 : 0.06;
+    }
+  }
   const alfredFee = amountBRL * alfredFeeRate;
 
   if (cryptoType.toLowerCase() === 'usdt') {

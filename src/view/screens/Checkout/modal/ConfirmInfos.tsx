@@ -73,12 +73,24 @@ export default function ConfirmInfosModal({
     alfredFee,
     alfredFeeRate,
     conversionFeeUsdBrl,
+  }: {
+    onchainFee: number | null;
+    btcToBrl: number | null;
+    swapFee: number;
+    totalFees: number;
+    expectedAmount: number;
+    expectedAmountCrypto: string;
+    alfredFee: number;
+    alfredFeeRate: number;
+    conversionFeeUsdBrl: number | null;
   } = useConfirmInfos(
     network,
     fiatAmount,
     fiatType,
     alfredFeePercentage,
     cryptoType,
+    paymentMethod,
+    cupom,
   );
 
   const [isDataVisible, setIsDataVisible] = useState(false);

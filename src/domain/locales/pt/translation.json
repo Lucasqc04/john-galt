@@ -81,7 +81,7 @@
     "dailyLimit2": "De 6.001 BRL em diante:",
     "fixedRate": "6% de taxa fixa.",
     "couponsTitle": "Cupom",
-    "coupons": "Para transações de até 6.000 BRL por dia, cupons estão disponíveis conforme porcentagens dos cupons. Para valores acima de 6.000 BRL, ao utilizar um cupom, a taxa é reduzida para 5%.",
+    "coupons": "Para transações de até 6.000 BRL por dia, cupons estão disponíveis conforme porcentagens dos cupons. Para valores acima de 6.000 BRL, ao utilizar um cupom, a taxa é reduzida para 4,99% e se estiver utilizando boleto bancário a taxa é de 5,99%.",
     "convertibilityRates": "As taxas são variáveis para transações envolvendo Pix para LBTC e envio de Bitcoin on-chain.",
     "convertibilityRatesTile": "Taxas de Convertibilidade",
     "reflectionTitle": "Reflexão: Bitcoin como Ferramenta Libertária",
@@ -185,7 +185,10 @@
     "paymentMethod": {
       "PIX": "PIX",
       "WISE": "Wise",
-      "TICKET": "Boleto Bancário"
+      "TICKET": "Boleto Bancário",
+      "SWIFT": "Swift",
+      "PAYPAL": "PayPal",
+      "BANK_TRANSFER": "Transferência Bancária"
     },
     "contactTooltip": {
       "message": "Por segurança, é necessário realizar o login com seu usuário e senha para que você possa acessar a plataforma em qualquer dispositivo e liberar futuras compras, e valores maiores.",
