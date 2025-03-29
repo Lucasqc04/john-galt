@@ -24,6 +24,7 @@
   "checkout": {
     "title": "Bitcoin Purchase and Checkout",
     "brl_placeholder": "Enter the amount in BRL",
+    "usd_placeholder": "Enter the amount in USD",
     "btc_placeholder": "BTC Amount",
     "usdt_placeholder": "USDT Amount",
     "buy": "Buy",
@@ -196,7 +197,7 @@
     "description": "Please review the transaction information before confirming.",
     "amount_section": {
       "title": "Amount",
-      "brl_label": "",
+      "brl_label": "BRL",
       "crypto_label": "In Crypto:"
     },
     "user_data_section": {

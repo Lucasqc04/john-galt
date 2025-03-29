@@ -262,8 +262,8 @@ export function useDataForm() {
       console.log(
         `Fiat type ${fiatType} não suportado. Redirecionando para WhatsApp.`,
       );
-      const whatsappNumber = '5511993439032';
-      const message = `Olá! Para compras com fiat diferente de BRL, por favor, entre em contato via WhatsApp.
+      const whatsappNumber = '5511911872097';
+      const message = `Olá! Estou Querendo comprar ${cryptoType.toUpperCase()} com ${fiatType} .
 Valor: ${fiatAmount} (${fiatType})
 Crypto (${cryptoType}): ${cryptoAmount}
 Rede: ${network}

@@ -8,6 +8,10 @@ export const CryptoComparePriceModel = z.object({
   BRL: z.number(),
 });
 
+export const BinancePriceModel = z.object({
+  price: z.string(),
+});
+
 export type ListReq = object;
 
 export type ValidateRes = Promise<
@@ -45,6 +49,29 @@ export class BitcoinRateRepositoryImpl implements BitcoinRateRepository {
         result = {
           bitcoin: { brl: btcRes.BRL || 0 },
           tether: { brl: usdtRes.BRL || 0 },
+        };
+      }
+    }
+
+    // Adicionando a Binance como segunda opção de backup
+    if (!result || !result.bitcoin || !result.tether) {
+      const binanceUrl = 'https://api.binance.com/api/v3';
+      const binanceApi = new RemoteDataSource(binanceUrl);
+
+      const btcToBrlRes = await binanceApi.get({
+        url: `/ticker/price?symbol=BTCBRL`,
+        model: BinancePriceModel,
+      });
+
+      const usdtToBtcRes = await binanceApi.get({
+        url: `/ticker/price?symbol=BTCUSDT`,
+        model: BinancePriceModel,
+      });
+
+      if (btcToBrlRes && usdtToBtcRes) {
+        result = {
+          bitcoin: { brl: parseFloat(btcToBrlRes.price) || 0 },
+          tether: { brl: parseFloat(usdtToBtcRes.price) || 0 },
         };
       }
     }
