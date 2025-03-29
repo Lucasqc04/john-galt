@@ -473,7 +473,7 @@ export function useDataForm() {
       const valorBRL = parseFloat(
         brlAmount.replace(/[^\d,]/g, '').replace(',', '.'),
       );
-      if (valorBRL < 6001 && coupon.discountType === 'percentage') {
+      if (valorBRL >= 6001 && coupon.discountType === 'percentage') {
         setAlfredFeePercentage(coupon.discountValue);
       }
 

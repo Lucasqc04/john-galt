@@ -77,7 +77,6 @@
     "dailyLimit1": "From 200 BRL to 6,000 BRL per day:",
     "above1000": "5% for transactions above 1,000 BRL.",
     "below1000": "10% for transactions below 1,000 BRL.",
-    "rateTicket": "7% for bank slip transactions.",
     "dailyLimit2": "From 6,001 BRL onwards:",
     "fixedRate": "6% fixed fee.",
     "couponsTitle": "Coupon",

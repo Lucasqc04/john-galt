@@ -77,7 +77,6 @@
     "dailyLimit1": "De 200 BRL a 6,000 BRL por día:",
     "above1000": "5% para transacciones superiores a 1,000 BRL.",
     "below1000": "10% para transacciones inferiores a 1,000 BRL.",
-    "rateTicket": "7% para transacciones con boleto bancario.",
     "dailyLimit2": "De 6,001 BRL en adelante:",
     "fixedRate": "6% de tarifa fija.",
     "couponsTitle": "Cupón",
