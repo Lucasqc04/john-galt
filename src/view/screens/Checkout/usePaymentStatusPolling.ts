@@ -11,7 +11,7 @@ export const usePaymentStatusPolling = () => {
   const { currentLang } = useCurrentLang();
   const [isLoadingPayment, setIsLoadingPayment] = useState<boolean>(false);
 
-  const pollingInterval = 10000;
+  const pollingInterval = 20000;
   const maxPollingTime = 300000;
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const startTime = useRef<number | null>(null);
