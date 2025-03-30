@@ -51,7 +51,8 @@
     "tooltip_attention": {
       "title": "Atenção:",
       "message": "Sua primeira compra será limitada a R$ 500 para validarmos seu usuário. Após a primeira compra, você poderá realizar transações normalmente, respeitando os limites mencionados."
-    }
+    },
+    "usdt_to_usd_error": "Não é possível comprar USDT com USDT."
   },
   "paymentFailure": {
     "title": "Falha no pagamento",
