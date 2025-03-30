@@ -36,7 +36,8 @@ interface ConfirmInfosModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
-  brlAmount: string;
+  fiatAmount: string;
+  fiatType: string;
   cryptoAmount: string;
   cryptoType: string;
   network: string;
@@ -51,7 +52,8 @@ export default function ConfirmInfosModal({
   isOpen,
   onClose,
   onConfirm,
-  brlAmount,
+  fiatAmount,
+  fiatType,
   cryptoAmount,
   cryptoType,
   network,
@@ -71,9 +73,20 @@ export default function ConfirmInfosModal({
     alfredFee,
     alfredFeeRate,
     conversionFeeUsdBrl,
+  }: {
+    onchainFee: number | null;
+    btcToBrl: number | null;
+    swapFee: number;
+    totalFees: number;
+    expectedAmount: number;
+    expectedAmountCrypto: string;
+    alfredFee: number;
+    alfredFeeRate: number;
+    conversionFeeUsdBrl: number | null;
   } = useConfirmInfos(
     network,
-    brlAmount,
+    fiatAmount,
+    fiatType,
     alfredFeePercentage,
     cryptoType,
     paymentMethod,
@@ -131,8 +144,9 @@ export default function ConfirmInfosModal({
               </h3>
             </div>
             <p>
-              {t('confirm_infos.amount_section.brl_label')}{' '}
-              <span className="text-xl font-bold">{brlAmount}</span> BRL
+              {t('confirm_infos.amount_section.fiat_label')}{' '}
+              <span className="text-xl font-bold">{fiatAmount}</span>{' '}
+              {fiatType.toUpperCase()}
             </p>
             <p>
               {t('confirm_infos.amount_section.crypto_label')}{' '}

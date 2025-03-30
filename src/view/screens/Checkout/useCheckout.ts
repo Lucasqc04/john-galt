@@ -9,11 +9,13 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 export type Checkout = {
-  brlAmount: string;
+  fiatAmount: string;
   cryptoAmount: string;
-  cryptoType: 'BTC' | 'USDT'; // Novo campo para armazenar o tipo
+  cryptoType: 'BTC' | 'USDT';
+  fiatType: 'BRL' | 'USD';
   btcRate: number;
   usdtRate: number;
+  usdRate: number;
 };
 
 export type WalletType = 'liquid' | 'lightning' | 'onchain';
@@ -25,22 +27,33 @@ export function useCheckout() {
   const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(1);
   const [isTransactionAllowed, setIsTransactionAllowed] = useState(false);
-  // atualizar aqui se o aflred estivar 24H
   const [isAlfred24h] = useState(true);
-  // Estado para o tipo de carteira e método de pagamento
   const [walletType, setWalletType] = useState<WalletType>('liquid');
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('pix');
 
   const form = useForm<Checkout>({
     mode: 'onChange',
     defaultValues: {
-      brlAmount: '',
+      fiatAmount: '',
       cryptoAmount: '',
       cryptoType: 'BTC',
+      fiatType: 'BRL',
       btcRate: 0,
       usdtRate: 0,
+      usdRate: 0,
     },
   });
+
+  // Sempre que o formulário mudar, salva os valores relevantes no localStorage
+  useEffect(() => {
+    const subscription = form.watch((value) => {
+      localStorage.setItem('fiatAmount', value.fiatAmount || '');
+      localStorage.setItem('fiatType', value.fiatType || '');
+      localStorage.setItem('cryptoAmount', value.cryptoAmount || '');
+      localStorage.setItem('cryptoType', value.cryptoType || '');
+    });
+    return () => subscription.unsubscribe();
+  }, [form]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,18 +66,25 @@ export function useCheckout() {
     const fetchCryptoRates = async () => {
       try {
         const { result } = await usecases.bitcoinRate.list.execute();
-        if (result.type === 'ERROR') {
-          return;
-        }
-        // Atualiza as taxas para BTC e USDT
-        form.setValue('btcRate', result.data.bitcoin.brl);
-        form.setValue('usdtRate', result.data.tether.brl);
+        if (result.type === 'ERROR') return;
+
+        const btcBrlRate = result.data.bitcoin.brl;
+        const usdtBrlRate = result.data.tether.brl;
+        const btcUsdRate = btcBrlRate / usdtBrlRate;
+
+        form.setValue('btcRate', btcBrlRate);
+        form.setValue('usdtRate', usdtBrlRate);
+        form.setValue('usdRate', btcUsdRate);
       } catch (error) {
         console.error('Erro ao buscar taxas:', error);
+        toast.error(t('checkout.rates_error'));
       }
     };
     fetchCryptoRates();
-  }, [form]);
+
+    const interval = setInterval(fetchCryptoRates, 300000);
+    return () => clearInterval(interval);
+  }, [form, t]);
 
   useEffect(() => {
     const timeZone = 'America/Sao_Paulo';
@@ -76,8 +96,11 @@ export function useCheckout() {
       setIsTransactionAllowed(true);
     } else {
       setIsTransactionAllowed(false);
+      if (!isAlfred24h) {
+        toast.info(t('checkout.outside_hours'));
+      }
     }
-  }, [isAlfred24h]);
+  }, [isAlfred24h, t]);
 
   async function ValidateValues(data: Checkout) {
     if (!isTransactionAllowed) {
@@ -86,36 +109,39 @@ export function useCheckout() {
     }
 
     const numericValue = parseInt(
-      form.getValues('brlAmount').replace(/\D/g, ''),
+      form.getValues('fiatAmount').replace(/\D/g, ''),
       10,
     );
 
-    if (!numericValue) {
+    if (!numericValue || numericValue <= 0) {
       toast.warning(t('checkout.min_value_error'));
       return;
     }
 
+    if (data.cryptoType === 'USDT' && data.fiatType === 'USD') {
+      toast.warning(t('checkout.usdt_to_usd_error'));
+      return;
+    }
+
     if (data.cryptoType === 'USDT') {
-      // Valor mínimo para USDT é 550 BRL.
-      if (numericValue < 500) {
+      const minValue = data.fiatType === 'BRL' ? 500 : 100;
+      if (numericValue < minValue) {
         toast.warning(t('checkout.min_value_error_usdt'));
         return;
       }
     } else {
-      // Valor mínimo para BTC é 200 BRL.
-      if (numericValue < 200) {
+      const minValue = data.fiatType === 'BRL' ? 200 : 50;
+      if (numericValue < minValue) {
         toast.warning(t('checkout.min_value_error'));
         return;
       }
-      // Para valores acima de 5.000 BRL em BTC, exibe aviso para preenchimento do formulário de validação.
-      if (numericValue > 5000) {
-        toast.warning(t('checkout.payment_error_above_5000'));
-      }
     }
 
-    localStorage.setItem('brlAmount', data.brlAmount);
-    localStorage.setItem('cryptoAmount', data.cryptoAmount);
-    localStorage.setItem('cryptoType', data.cryptoType);
+    if (data.fiatType === 'BRL' && numericValue > 5000) {
+      toast.warning(t('checkout.payment_error_above_5000'));
+    }
+
+    localStorage.setItem('checkoutData', JSON.stringify(data));
     navigate(ROUTES.buyCheckout.call(currentLang));
   }
 

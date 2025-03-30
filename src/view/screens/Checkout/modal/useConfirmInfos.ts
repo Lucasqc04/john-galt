@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 
 export function useConfirmInfos(
   network: string,
-  brlAmount: string,
+  fiatAmount: string, // valor inserido, podendo ser BRL ou USD
+  fiatType: string, // "BRL" ou "USD" (ou outra moeda, mas a lógica aqui trata BRL e USD)
   alfredFeePercentage: number,
   cryptoType: string,
   paymentMethod?: string,
@@ -64,13 +65,20 @@ export function useConfirmInfos(
     fetchOnchainFee();
   }, [network, btcToBrl]);
 
-  const brlAmountNum = parseFloat(
-    brlAmount.replace(/[^\d,]/g, '').replace(',', '.'),
+  // Converte o valor fiat para número (considerando que pode vir com vírgula ou outros símbolos)
+  const fiatAmountNum = parseFloat(
+    fiatAmount.replace(/[^\d,]/g, '').replace(',', '.'),
   );
 
+  // Converte o valor para BRL se o fiatType for diferente de BRL
+  const amountBRL =
+    fiatType.toUpperCase() === 'BRL'
+      ? fiatAmountNum
+      : fiatAmountNum * (usdToBrl || 0);
+
   let alfredFeeRate = localAlfredFeePercentage / 100;
-  if (brlAmountNum >= 6001) {
-    const isBoleto = paymentMethod?.toLowerCase().includes('TICKET');
+  if (amountBRL >= 6001) {
+    const isBoleto = paymentMethod?.toLowerCase().includes('ticket');
     const hasCupom = cupom && cupom.trim() !== '';
     if (isBoleto) {
       alfredFeeRate = hasCupom ? 0.0599 : 0.07;
@@ -78,14 +86,15 @@ export function useConfirmInfos(
       alfredFeeRate = hasCupom ? 0.0499 : 0.06;
     }
   }
-  const alfredFee = brlAmountNum * alfredFeeRate;
+  const alfredFee = amountBRL * alfredFeeRate;
 
   if (cryptoType.toLowerCase() === 'usdt') {
-    // Para USDT, não aplica a taxa de conversão
+    // Para USDT, não aplica taxa de conversão
     const conversionFeeBrl = 0;
-    const swapFee = brlAmountNum * 0.0158; // taxa de swap de 1.58%
+    const swapFee = amountBRL * 0.0158; // taxa de swap de 1.58%
     const totalFees = alfredFee + swapFee + (onchainFee || 0);
-    const finalAmount = brlAmountNum - totalFees;
+    const finalAmount = amountBRL - totalFees;
+    // Para USDT, o valor esperado é dado convertendo o finalAmount em BRL para USD
     const expectedAmountUSDT = usdToBrl
       ? (finalAmount / usdToBrl).toFixed(2)
       : '0.00';
@@ -106,9 +115,9 @@ export function useConfirmInfos(
     // Para BTC (ou outros), aplica a taxa de conversão
     const conversionFeeUsd = 0.65;
     const conversionFeeBrl = conversionFeeUsd * (usdToBrl || 0);
-    const swapFee = brlAmountNum * 0.02 + conversionFeeBrl;
+    const swapFee = amountBRL * 0.02 + conversionFeeBrl;
     const totalFees = alfredFee + swapFee + (onchainFee || 0);
-    const finalAmount = brlAmountNum - totalFees;
+    const finalAmount = amountBRL - totalFees;
     const expectedAmountBTC = btcToBrl
       ? (finalAmount / btcToBrl).toFixed(8)
       : '0.00000000';

@@ -30,9 +30,11 @@ export function useDataForm() {
   const [pixKey, setPixKey] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [brlAmount, setBrlAmount] = useState('');
+  // Valores fiat e crypto
+  const [fiatAmount, setfiatAmount] = useState('');
+  const [fiatType, setFiatType] = useState('BRL'); // Agora armazenamos o tipo fiat (padrão BRL)
   const [cryptoAmount, setCryptoAmount] = useState('');
-  const [cryptoType, setCryptoType] = useState('');
+  const [cryptoType, setCryptoType] = useState(''); // Valores possíveis: "BITCOIN", "USDT", "BTC_USDT", etc.
   const [acceptFees, setAcceptFees] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [alfredFeePercentage, setAlfredFeePercentage] = useState(5);
@@ -44,17 +46,19 @@ export function useDataForm() {
   const { currentLang } = useCurrentLang();
   const { t } = useTranslation();
 
+  // Recupera valores salvos no localStorage (incluindo fiatType)
   useEffect(() => {
-    const storedBrl = localStorage.getItem('brlAmount');
+    const storedBrl = localStorage.getItem('fiatAmount');
+    const storedFiatType = localStorage.getItem('fiatType');
     const storedCrypto = localStorage.getItem('cryptoAmount');
     const storedCryptoType = localStorage.getItem('cryptoType');
-    if (storedBrl && storedCrypto && storedCryptoType) {
-      setBrlAmount(storedBrl);
-      setCryptoAmount(storedCrypto);
-      setCryptoType(storedCryptoType);
-    }
+    if (storedBrl) setfiatAmount(storedBrl);
+    if (storedFiatType) setFiatType(storedFiatType);
+    if (storedCrypto) setCryptoAmount(storedCrypto);
+    if (storedCryptoType) setCryptoType(storedCryptoType);
   }, []);
 
+  // Funções de dropdown
   const toggleDropdown = () => {
     setIsDropdownOpen((prevState) => !prevState);
   };
@@ -81,7 +85,11 @@ export function useDataForm() {
     if (!coldWallet) {
       newErrors.coldWallet = t('buycheckout.coldWalletError');
     } else {
-      if (cryptoType.toUpperCase() === 'USDT') {
+      // Validação específica para USDT (compra com USDT ou BTC via USDT)
+      if (
+        cryptoType.toUpperCase() === 'USDT' ||
+        cryptoType.toUpperCase() === 'BTC_USDT'
+      ) {
         if (network === 'Liquid') {
           if (
             !/^VJL[a-km-zA-HJ-NP-Z0-9]{43,}$/i.test(coldWallet) &&
@@ -107,6 +115,7 @@ export function useDataForm() {
           newErrors.coldWallet = t('buycheckout.invalidNetworkForUSDT');
         }
       } else {
+        // Validações para compra tradicional de Bitcoin
         switch (network) {
           case 'Onchain':
             if (
@@ -153,8 +162,10 @@ export function useDataForm() {
     return Object.keys(newErrors).length === 0;
   };
 
+  // Define as redes disponíveis com base na criptomoeda selecionada.
   const networks =
-    cryptoType.toUpperCase() === 'USDT'
+    cryptoType.toUpperCase() === 'USDT' ||
+    cryptoType.toUpperCase() === 'BTC_USDT'
       ? [
           { name: 'Liquid', icon: Liquid },
           { name: 'Polygon', icon: Polygon },
@@ -182,10 +193,7 @@ export function useDataForm() {
       } catch (regError: any) {
         console.error('Erro no registro para usuário:', username, regError);
         if (regError.response && regError.response.status === 409) {
-          console.log(
-            'Registro retornou 409 (usuário já existe). Tentando login para:',
-            username,
-          );
+          console.log('Usuário já existe. Tentando login para:', username);
           try {
             await login(username, password);
             console.log('Login realizado com sucesso para:', username);
@@ -199,7 +207,7 @@ export function useDataForm() {
             return;
           }
         } else {
-          console.error('Erro no registro (erro diferente de 409):', regError);
+          console.error('Erro no registro:', regError);
           toast.error('Erro no registro. Contate o suporte.');
           setIsLoading(false);
           return;
@@ -216,9 +224,9 @@ export function useDataForm() {
           user.username,
         );
         await refreshAccessToken(user.id, user.acessToken);
-        console.log('Token atualizado via refresh.');
+        console.log('Token atualizado.');
       } catch (refreshError) {
-        console.error('Erro ao atualizar token via refresh:', refreshError);
+        console.error('Erro ao atualizar token:', refreshError);
         toast.error('Erro ao atualizar token. Faça login novamente.');
         setIsLoading(false);
         return;
@@ -228,21 +236,43 @@ export function useDataForm() {
     if (!acceptFees || !acceptTerms) {
       console.log('Termos ou taxas não aceitos.');
       toast.warning(t('buycheckout.termsAndFeesAlert'));
+      setIsLoading(false);
       return;
     }
 
     if (!network) {
       console.log('Rede não selecionada.');
       toast.warning(t('buycheckout.networkSelectionAlert'));
+      setIsLoading(false);
       return;
     }
 
     if (!validateFields()) {
       console.log('Falha na validação dos campos.');
+      setIsLoading(false);
       return;
     }
 
-    console.log('Iniciando processo de depósito.');
+    // Verifica o valor fiat: se fiatType não for "BRL", redireciona para o WhatsApp
+    if (fiatType.toUpperCase() !== 'BRL') {
+      console.log(
+        `Fiat type ${fiatType} não suportado. Redirecionando para WhatsApp.`,
+      );
+      const whatsappNumber = '5511911872097';
+      const message = `Olá! Estou Querendo comprar ${cryptoType.toUpperCase()} com ${fiatType} .
+Valor: ${fiatAmount} (${fiatType})
+Crypto (${cryptoType}): ${cryptoAmount}
+Rede: ${network}
+Cold Wallet: ${coldWallet}
+Telefone: ${transactionNumber}
+Cupom: ${cupom}`;
+      const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+      window.location.href = whatsappLink;
+      setIsLoading(false);
+      return;
+    }
+
+    console.log('Iniciando processo de pagamento.');
     timeoutRef.current = setTimeout(
       () => {
         console.log('Timeout atingido. Transação expirada.');
@@ -261,18 +291,17 @@ export function useDataForm() {
       const whatsappNumber = '5511993439032';
       let message = '';
       if (paymentMethod === 'SWIFT') {
-        message = `Olá! Aqui estão os detalhes do pedido Swift:\n\nValor BRL: ${brlAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: Swift\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
+        message = `Olá! Aqui estão os detalhes do pedido Swift:\n\nValor BRL: ${fiatAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: Swift\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
       } else if (paymentMethod === 'PAYPAL') {
-        message = `Olá! Aqui estão os detalhes do pedido PayPal:\n\nValor BRL: ${brlAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: PayPal\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
+        message = `Olá! Aqui estão os detalhes do pedido PayPal:\n\nValor BRL: ${fiatAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: PayPal\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
       } else if (paymentMethod === 'BANK_TRANSFER') {
-        message = `Olá! Aqui estão os detalhes do pedido Transferência Bancária:\n\nValor BRL: ${brlAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: Transferência Bancária\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
+        message = `Olá! Aqui estão os detalhes do pedido Transferência Bancária:\n\nValor BRL: ${fiatAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: Transferência Bancária\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
       }
       const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
       window.location.href = whatsappLink;
       return;
     }
 
-    // Caso a criptomoeda seja USDT e o método seja TICKET ou WISE, redireciona para o WhatsApp
     if (cryptoType.toUpperCase() === 'USDT') {
       console.log('Criptomoeda USDT detectada.');
       const whatsappNumber = '5511993439032';
@@ -283,15 +312,14 @@ export function useDataForm() {
         PaymentMethodFormatted = 'Wise';
       }
       if (paymentMethod === 'TICKET' || paymentMethod === 'WISE') {
-        const message = `Olá! Aqui estão os detalhes do pedido :\n\nValor BRL: ${brlAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: ${PaymentMethodFormatted}\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
+        const message = `Olá! Aqui estão os detalhes do pedido :\n\nValor ${fiatType}: ${fiatAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: ${PaymentMethodFormatted}\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
         const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
         window.location.href = whatsappLink;
         return;
       }
     }
 
-    // Para os demais métodos (como PIX ou outros que necessitam do backend) prossegue com a requisição
-    const valorBRL = parseFloat(brlAmount.replace(/\D/g, ''));
+    const valorBRL = parseFloat(fiatAmount.replace(/\D/g, ''));
     console.log('Valor BRL calculado:', valorBRL);
     const valorToSend = valorBRL === 100000 ? 300 : valorBRL;
     console.log('Valor a enviar:', valorToSend);
@@ -310,7 +338,7 @@ export function useDataForm() {
           telefone: '111111111111',
           coldWallet: coldWallet,
           cupom: cupom,
-          cryptoType: cryptoType.toUpperCase() === 'USDT' ? 'USDT' : 'BITCOIN',
+          cryptoType: 'BITCOIN',
         },
         {
           headers: {
@@ -324,7 +352,7 @@ export function useDataForm() {
       // Redirecionamento para WhatsApp conforme o método escolhido (para métodos que não entraram no if acima)
       if (paymentMethod === 'WISE') {
         const whatsappNumber = '5511993439032';
-        const message = `Olá! Aqui estão os detalhes do pedido Wise:\n\n Valor BRL: ${brlAmount} \n ${cryptoType}: ${cryptoAmount}\n Rede: ${network}\n Cold Wallet: ${coldWallet} \n Método: Wise\n Telefone: ${transactionNumber}\n Cupom: ${cupom}`;
+        const message = `Olá! Aqui estão os detalhes do pedido Wise:\n\n Valor ${fiatType}: ${fiatAmount} \n ${cryptoType}: ${cryptoAmount}\n Rede: ${network}\n Cold Wallet: ${coldWallet} \n Método: Wise\n Telefone: ${transactionNumber}\n Cupom: ${cupom}`;
         console.log(
           'Redirecionando para WhatsApp (Wise) com mensagem:',
           message,
@@ -336,7 +364,7 @@ export function useDataForm() {
 
       if (paymentMethod === 'TICKET') {
         const whatsappNumber = '5511993439032';
-        const message = `Olá! Aqui estão os detalhes do pedido Boleto Bancário:\n\n Valor BRL: ${brlAmount} \n ${cryptoType}: ${cryptoAmount}\n Rede: ${network}\n Cold Wallet: ${coldWallet} \n Método: Boleto Bancário\n Telefone: ${transactionNumber}\n Cupom: ${cupom}`;
+        const message = `Olá! Aqui estão os detalhes do pedido Boleto Bancário:\n\n Valor ${fiatType}: ${fiatAmount} \n ${cryptoType}: ${cryptoAmount}\n Rede: ${network}\n Cold Wallet: ${coldWallet} \n Método: Boleto Bancário\n Telefone: ${transactionNumber}\n Cupom: ${cupom}`;
         console.log(
           'Redirecionando para WhatsApp (TICKET) com mensagem:',
           message,
@@ -414,6 +442,7 @@ export function useDataForm() {
     }
   };
 
+  // Sincroniza o pixKey e o tempo restante com o localStorage
   useEffect(() => {
     if (pixKey) {
       localStorage.setItem('pixKey', pixKey);
@@ -494,7 +523,7 @@ export function useDataForm() {
       }
 
       const valorBRL = parseFloat(
-        brlAmount.replace(/[^\d,]/g, '').replace(',', '.'),
+        fiatAmount.replace(/[^\d,]/g, '').replace(',', '.'),
       );
       if (valorBRL >= 6001 && coupon.discountType === 'percentage') {
         setAlfredFeePercentage(coupon.discountValue);
@@ -529,7 +558,8 @@ export function useDataForm() {
     pixKey,
     isLoading,
     errors,
-    brlAmount,
+    fiatAmount,
+    fiatType,
     cryptoAmount,
     cryptoType,
     acceptFees,
@@ -550,6 +580,11 @@ export function useDataForm() {
     setCupom,
     setTransactionNumber,
     setPaymentMethod,
+    // Expondo setters para os campos fiat/crypto, se necessário
+    setfiatAmount,
+    setFiatType,
+    setCryptoAmount,
+    setCryptoType,
     validateFields,
   };
 }

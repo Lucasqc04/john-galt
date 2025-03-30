@@ -26,6 +26,7 @@
     "buy": "Comprar",
     "sell": "Vender",
     "brl_placeholder": "Digite o valor em BRL",
+    "usd_placeholder": "Digite o valor em USD",
     "btc_placeholder": "Valor em BTC",
     "usdt_placeholder": "Valor em USDT",
     "proceed_button": "Prosseguir",
@@ -50,7 +51,8 @@
     "tooltip_attention": {
       "title": "Atenção:",
       "message": "Sua primeira compra será limitada a R$ 500 para validarmos seu usuário. Após a primeira compra, você poderá realizar transações normalmente, respeitando os limites mencionados."
-    }
+    },
+    "usdt_to_usd_error": "Não é possível comprar USDT com USDT."
   },
   "paymentFailure": {
     "title": "Falha no pagamento",
@@ -205,7 +207,7 @@
     "description": "Por favor, revise as informações da transação antes de confirmar.",
     "amount_section": {
       "title": "Valor",
-      "brl_label": "",
+      "brl_label": "BRL",
       "crypto_label": "Em Cripto:"
     },
     "user_data_section": {
