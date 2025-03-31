@@ -1,26 +1,39 @@
 import { useEffect, useState } from 'react';
+import { FaQuestionCircle } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import Btc from '../../../assets/bitcoin.svg';
 import Brl from '../../../assets/brl.svg';
+import Usd from '../../../assets/usd.svg';
 import Usdt from '../../../assets/usdt.svg';
-
-import { FaQuestionCircle } from 'react-icons/fa';
 import { useValuesForm } from './useValuesForm';
 
 interface ValuesFormProps {
-  selectedCrypto: 'BTC' | 'USDT';
   transactionType: 'buy' | 'sell';
   toggleTransactionType: () => void;
 }
 
 export function ValuesForm({
-  selectedCrypto,
   transactionType,
   toggleTransactionType,
 }: ValuesFormProps) {
-  const { t, form, handleBrlChange } = useValuesForm(selectedCrypto);
+  const { t, form, handleFiatChange, toggleFiatType, toggleCryptoType } =
+    useValuesForm();
   const [hasShownToast, setHasShownToast] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
+
+  // Observa os valores do formulário
+  const fiatAmount = form.watch('fiatAmount');
+  const fiatType = form.watch('fiatType');
+  const cryptoAmount = form.watch('cryptoAmount');
+  const cryptoType = form.watch('cryptoType');
+
+  // Salva automaticamente no localStorage sempre que esses valores mudam
+  useEffect(() => {
+    localStorage.setItem('fiatAmount', fiatAmount);
+    localStorage.setItem('fiatType', fiatType);
+    localStorage.setItem('cryptoAmount', cryptoAmount);
+    localStorage.setItem('cryptoType', cryptoType);
+  }, [fiatAmount, fiatType, cryptoAmount, cryptoType]);
 
   useEffect(() => {
     if (!hasShownToast) {
@@ -48,10 +61,7 @@ export function ValuesForm({
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   return (
@@ -60,15 +70,27 @@ export function ValuesForm({
         <div className="w-full flex justify-center items-center brl-step">
           <div className="relative w-full">
             <input
-              {...form.register('brlAmount', { required: true })}
-              onChange={handleBrlChange}
-              placeholder={t('checkout.brl_placeholder')}
+              {...form.register('fiatAmount', { required: true })}
+              onChange={handleFiatChange}
+              placeholder={
+                fiatType === 'BRL'
+                  ? t('checkout.brl_placeholder')
+                  : t('checkout.usd_placeholder')
+              }
               className="border-2 px-16 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-black text-center w-full"
             />
-            <button className="absolute right-2 top-1/2 -translate-y-1/2 text-white">
+            <button
+              type="button"
+              onClick={toggleFiatType}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-white"
+            >
               <img
-                src={Brl}
-                alt={t('checkout.brl_label')}
+                src={fiatType === 'BRL' ? Brl : Usd}
+                alt={
+                  fiatType === 'BRL'
+                    ? t('checkout.brl_label')
+                    : t('checkout.usd_label')
+                }
                 className="w-6 h-6 sm:w-10 sm:h-10"
               />
             </button>
@@ -80,7 +102,9 @@ export function ValuesForm({
             <button
               type="button"
               onClick={toggleTransactionType}
-              className={`absolute left-2 top-1/2 -translate-y-1/2 text-white ${transactionType === 'buy' ? 'bg-green-500' : 'bg-red-500'} px-4 py-2 rounded-full text-sm`}
+              className={`absolute left-2 top-1/2 -translate-y-1/2 text-white ${
+                transactionType === 'buy' ? 'bg-green-500' : 'bg-red-500'
+              } px-4 py-2 rounded-full text-sm`}
             >
               {transactionType === 'buy'
                 ? t('checkout.buy')
@@ -91,17 +115,21 @@ export function ValuesForm({
               {...form.register('cryptoAmount', { required: true })}
               readOnly
               placeholder={
-                selectedCrypto === 'BTC'
+                cryptoType === 'BTC'
                   ? t('checkout.btc_placeholder')
                   : t('checkout.usdt_placeholder')
               }
               className="border-2 px-16 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-black text-center w-full"
             />
-            <button className="absolute right-2 top-1/2 -translate-y-1/2 text-white">
+            <button
+              type="button"
+              onClick={toggleCryptoType}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-white"
+            >
               <img
-                src={selectedCrypto === 'BTC' ? Btc : Usdt}
+                src={cryptoType === 'BTC' ? Btc : Usdt}
                 alt={
-                  selectedCrypto === 'BTC'
+                  cryptoType === 'BTC'
                     ? t('checkout.btc_label')
                     : t('checkout.usdt_label')
                 }
@@ -118,7 +146,7 @@ export function ValuesForm({
             id="question-icon"
             className="text-white cursor-pointer"
             size={24}
-            onClick={toggleTooltip} // Alternar tooltip ao clicar
+            onClick={toggleTooltip}
           />
           {showTooltip && (
             <div

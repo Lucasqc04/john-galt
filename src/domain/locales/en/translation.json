@@ -24,6 +24,7 @@
   "checkout": {
     "title": "Bitcoin Purchase and Checkout",
     "brl_placeholder": "Enter the amount in BRL",
+    "usd_placeholder": "Enter the amount in USD",
     "btc_placeholder": "BTC Amount",
     "usdt_placeholder": "USDT Amount",
     "buy": "Buy",
@@ -80,7 +81,7 @@
     "dailyLimit2": "From 6,001 BRL onwards:",
     "fixedRate": "6% fixed fee.",
     "couponsTitle": "Coupon",
-    "coupons": "For transactions up to 6,000 BRL per day, coupons are available according to coupon percentages. For amounts above 6,000 BRL, when using a coupon, the fee is reduced to 5%.",
+    "coupons": "For transactions up to 6,000 BRL per day, coupons are available based on the coupon percentages. For amounts above 6,000 BRL, when using a coupon, the fee is reduced to 4.99% and if you are using bank slip, the fee is 5.99%.",
     "convertibilityRates": "Rates are variable for transactions involving Pix to LBTC and Bitcoin on-chain transfers.",
     "convertibilityRatesTile": "Convertibility Rates",
     "reflectionTitle": "Reflection: Bitcoin as a Libertarian Tool",
@@ -184,7 +185,10 @@
     "paymentMethod": {
       "PIX": "PIX",
       "WISE": "Wise",
-      "TICKET": "Bank Slip"
+      "TICKET": "Bank Slip",
+      "SWIFT": "Swift",
+      "PAYPAL": "PayPal",
+      "BANK_TRANSFER": "Bank Transfer"
     },
     "contactTooltip": {
       "message": "We request your number to contact you in case something goes wrong during the transaction, ensuring greater security for your purchase.",
@@ -196,7 +200,7 @@
     "description": "Please review the transaction information before confirming.",
     "amount_section": {
       "title": "Amount",
-      "brl_label": "",
+      "brl_label": "BRL",
       "crypto_label": "In Crypto:"
     },
     "user_data_section": {
