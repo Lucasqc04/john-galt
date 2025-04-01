@@ -1,3 +1,4 @@
+// useDataForm.tsx
 import { useAuth } from '@/view/hooks/useAuth';
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
@@ -41,7 +42,6 @@ export function useDataForm() {
 
   // Obtenção de dados de autenticação
   const { user, login, register, refreshAccessToken } = useAuth();
-
   const navigate = useNavigate();
   const { currentLang } = useCurrentLang();
   const { t } = useTranslation();
@@ -522,10 +522,8 @@ Cupom: ${cupom}`;
         return;
       }
 
-      const valorBRL = parseFloat(
-        fiatAmount.replace(/[^\d,]/g, '').replace(',', '.'),
-      );
-      if (valorBRL >= 6001 && coupon.discountType === 'percentage') {
+      // Remova a verificação do valorBRL para atualizar sempre a taxa do cupom
+      if (coupon.discountType === 'percentage') {
         setAlfredFeePercentage(coupon.discountValue);
       }
 
@@ -580,7 +578,6 @@ Cupom: ${cupom}`;
     setCupom,
     setTransactionNumber,
     setPaymentMethod,
-    // Expondo setters para os campos fiat/crypto, se necessário
     setfiatAmount,
     setFiatType,
     setCryptoAmount,
