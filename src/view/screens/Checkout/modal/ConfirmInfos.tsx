@@ -144,7 +144,6 @@ export default function ConfirmInfosModal({
               </h3>
             </div>
             <p>
-              {t('confirm_infos.amount_section.fiat_label')}{' '}
               <span className="text-xl font-bold">{fiatAmount}</span>{' '}
               {fiatType.toUpperCase()}
             </p>

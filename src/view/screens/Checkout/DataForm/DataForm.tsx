@@ -288,7 +288,7 @@ Cupom: ${cupom || 'Nenhum'}`;
                 </button>
                 {isDropdownOpenMethod && (
                   <div className="absolute left-0 top-full mt-2 w-full bg-gray-900 border border-gray-700 rounded-lg shadow-lg z-10 transition-all duration-300 ease-out transform scale-100 opacity-100">
-                    <ul className="w-full">
+                    <ul className="grid grid-cols-2 gap-4 w-full">
                       <li
                         onClick={() => {
                           if (numericFiat > 5000 && numericFiat !== 100000) {
@@ -327,7 +327,6 @@ Cupom: ${cupom || 'Nenhum'}`;
                           className="w-6 h-6 mt-1 rounded-full"
                         />
                       </li>
-                      {/* Novos métodos adicionados: */}
                       <li
                         onClick={() => selectPaymentMethod('SWIFT')}
                         className="flex flex-col items-center justify-center px-4 py-2 cursor-pointer text-white hover:bg-gray-800"
@@ -359,7 +358,7 @@ Cupom: ${cupom || 'Nenhum'}`;
                         </span>
                         <img
                           src={BankTransf}
-                          alt="PayPal"
+                          alt="Transferência Bancária"
                           className="w-6 h-6 mt-1 rounded-full"
                         />
                       </li>
@@ -530,7 +529,7 @@ Cupom: ${cupom || 'Nenhum'}`;
             </div>
           </div>
 
-          <div className="hidden sm:block absolute right-[-25%] top-[-20%] transform translate-x-1/2 translate-y-1/2 w-[50%]">
+          <div className="hidden lg:block absolute right-[10%] w-[20%]">
             <img src={AlfredImg} alt="Alfred" />
           </div>
         </section>
