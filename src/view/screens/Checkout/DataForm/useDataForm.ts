@@ -426,7 +426,7 @@ Cupom: ${cupom}`;
 
       if (
         axios.isAxiosError(error) &&
-        error.response?.data?.code === 'IP_BLOCKED'
+        error.response?.data?.code === 'BLOCKED'
       ) {
         const whatsappNumber = '5511993439032';
         const message = `Olá, estou recebendo o erro 171. Como posso resolver isso?`;
