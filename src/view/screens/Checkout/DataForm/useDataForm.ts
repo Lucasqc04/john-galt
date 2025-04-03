@@ -428,7 +428,7 @@ Cupom: ${cupom}`;
         axios.isAxiosError(error) &&
         error.response?.data?.code === 'BLOCKED'
       ) {
-        const whatsappNumber = '5511993439032';
+        const whatsappNumber = '5511911872097';
         const message = `Olá, estou recebendo o erro 171. Como posso resolver isso?`;
         toast.error('Erro 171. Entre em contato pelo WhatsApp.');
         setIsLoading(false);
