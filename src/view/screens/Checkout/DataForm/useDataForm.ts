@@ -163,19 +163,24 @@ export function useDataForm() {
   };
 
   // Define as redes disponíveis com base na criptomoeda selecionada.
-  const networks =
-    cryptoType.toUpperCase() === 'USDT' ||
-    cryptoType.toUpperCase() === 'BTC_USDT'
-      ? [
-          { name: 'Liquid', icon: Liquid },
-          { name: 'Polygon', icon: Polygon },
-          { name: 'Tron', icon: Tron },
-        ]
-      : [
-          { name: 'Onchain', icon: Onchain },
-          { name: 'Liquid', icon: Liquid },
-          { name: 'Lightning', icon: Lightning },
-        ];
+  const networks = (() => {
+    const crypto = cryptoType.toUpperCase();
+    if (crypto === 'DEPIX') {
+      return [{ name: 'Liquid', icon: Liquid }];
+    }
+    if (crypto === 'USDT' || crypto === 'BTC_USDT') {
+      return [
+        { name: 'Liquid', icon: Liquid },
+        { name: 'Polygon', icon: Polygon },
+        { name: 'Tron', icon: Tron },
+      ];
+    }
+    return [
+      { name: 'Onchain', icon: Onchain },
+      { name: 'Liquid', icon: Liquid },
+      { name: 'Lightning', icon: Lightning },
+    ];
+  })();
 
   const handleProcessPayment = async (username: string, password: string) => {
     console.log('Iniciando handleProcessPayment com username:', username);
@@ -338,7 +343,7 @@ Cupom: ${cupom}`;
           telefone: '111111111111',
           coldWallet: coldWallet,
           cupom: cupom,
-          cryptoType: 'BITCOIN',
+          cryptoType: cryptoType,
         },
         {
           headers: {

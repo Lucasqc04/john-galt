@@ -65,32 +65,26 @@ export function useConfirmInfos(
     fetchOnchainFee();
   }, [network, btcToBrl]);
 
+  // Converte o valor do fiat para número (supondo que o valor seja formatado com vírgula como separador decimal)
   const fiatAmountNum = parseFloat(
     fiatAmount.replace(/[^\d,]/g, '').replace(',', '.'),
   );
 
+  // Calcula o valor em BRL – se o fiat for USD, multiplica pelo câmbio USD→BRL
   const amountBRL =
     fiatType.toUpperCase() === 'BRL'
       ? fiatAmountNum
       : fiatAmountNum * (usdToBrl || 0);
 
-  // Lógica de definição da taxa:
-  // Se for boleto (ticket), ignora o valor e aplica:
-  //    - Com cupom: 5,99% (0.0599)
-  //    - Sem cupom: 7% (0.07)
-  // Para os demais métodos, aplica a lógica baseada no valor:
-  //    - Se amountBRL < 6000:
-  //         - Com cupom: usa a taxa do cupom (localAlfredFeePercentage / 100)
-  //         - Sem cupom: 5%
-  //    - Se amountBRL >= 6000:
-  //         - Com cupom: 4,99%
-  //         - Sem cupom: 6%
+  // Lógica de definição da taxa (alfredFeeRate):
+  // - Para boleto (ticket): se houver cupom, 5,99% (0.0599); caso contrário, 7% (0.07).
+  // - Para outros métodos:
+  //    - Se amountBRL < 6000: com cupom, usa localAlfredFeePercentage/100; senão, 5%.
+  //    - Se amountBRL >= 6000: com cupom, 4,99%; senão, 6%.
   let alfredFeeRate: number;
   if (paymentMethod?.toLowerCase().includes('ticket')) {
-    // Lógica exclusiva para boleto
     alfredFeeRate = cupom && cupom.trim() !== '' ? 0.0599 : 0.07;
   } else {
-    // Para outros métodos
     if (amountBRL < 6000) {
       alfredFeeRate =
         cupom && cupom.trim() !== '' ? localAlfredFeePercentage / 100 : 0.05;
@@ -100,14 +94,14 @@ export function useConfirmInfos(
   }
   const alfredFee = amountBRL * alfredFeeRate;
 
-  // Cálculo para criptomoedas USDT
+  // Branch para criptomoedas
   if (cryptoType.toLowerCase() === 'usdt') {
-    const conversionFeeBrl = 0;
+    // Cálculo para USDT
     const swapFee = amountBRL * 0.0158; // taxa de swap de 1.58%
     const totalFees = alfredFee + swapFee + (onchainFee || 0);
     const finalAmount = amountBRL - totalFees;
 
-    // Para USDT, o valor esperado é dado convertendo o finalAmount em BRL para USD
+    // Para USDT, converte o finalAmount (BRL) para USD
     const expectedAmountUSDT = usdToBrl
       ? (finalAmount / usdToBrl).toFixed(2)
       : '0.00';
@@ -122,10 +116,32 @@ export function useConfirmInfos(
       expectedAmountCrypto: expectedAmountUSDT,
       alfredFee,
       alfredFeeRate,
-      conversionFeeUsdBrl: conversionFeeBrl,
+      conversionFeeUsdBrl: 0,
+    };
+  } else if (cryptoType.toLowerCase() === 'depix') {
+    // Para Depix: a conversão é 1:1 com o Real
+    // Se o fiat for USD, usamos amountBRL já convertido (via usdToBrl)
+    // Usamos a mesma taxa de swap que para USDT.
+    const swapFee = amountBRL * 0.0158; // taxa de swap de 1.58%
+    const totalFees = alfredFee + swapFee + (onchainFee || 0);
+    const finalAmount = amountBRL - totalFees;
+    // Como Depix é 1:1 com o Real, o valor esperado em Depix é o finalAmount (formata com 2 decimais)
+    const expectedAmountDepix = finalAmount.toFixed(2);
+
+    return {
+      onchainFee,
+      btcToBrl,
+      usdToBrl,
+      swapFee,
+      totalFees,
+      expectedAmount: finalAmount,
+      expectedAmountCrypto: expectedAmountDepix,
+      alfredFee,
+      alfredFeeRate,
+      conversionFeeUsdBrl: 0,
     };
   } else {
-    // Para BTC (ou outros), aplica a taxa de conversão
+    // Para BTC (ou outros que usem a lógica de conversão via BTC)
     const conversionFeeUsd = 0.65;
     const conversionFeeBrl = conversionFeeUsd * (usdToBrl || 0);
     const swapFee = amountBRL * 0.02 + conversionFeeBrl;

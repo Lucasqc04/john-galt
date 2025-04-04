@@ -14,22 +14,24 @@ export function useValuesForm() {
   const calculateCryptoAmount = (numericValue: number) => {
     if (cryptoType === 'BTC') {
       if (fiatType === 'BRL') {
-        // BRL → BTC: valor / taxa BRL/BTC
         const btcAmount = numericValue / form.getValues('btcRate');
         form.setValue('cryptoAmount', btcAmount.toFixed(8));
       } else {
-        // USD → BTC: valor / taxa USD/BTC
         const btcAmount = numericValue / form.getValues('usdRate');
         form.setValue('cryptoAmount', btcAmount.toFixed(8));
       }
-    } else {
-      // USDT
+    } else if (cryptoType === 'DEPIX') {
       if (fiatType === 'BRL') {
-        // BRL → USDT: valor / taxa BRL/USDT
+        form.setValue('cryptoAmount', numericValue.toString());
+      } else {
+        const depixAmount = numericValue / form.getValues('usdtRate');
+        form.setValue('cryptoAmount', depixAmount.toFixed(2));
+      }
+    } else {
+      if (fiatType === 'BRL') {
         const usdtAmount = numericValue / form.getValues('usdtRate');
         form.setValue('cryptoAmount', usdtAmount.toFixed(2));
       } else {
-        // USD → USDT: 1:1 (pois 1 USDT ≈ 1 USD)
         form.setValue('cryptoAmount', numericValue.toFixed(2));
       }
     }
@@ -77,12 +79,18 @@ export function useValuesForm() {
   };
 
   const toggleCryptoType = () => {
-    const newCryptoType = cryptoType === 'BTC' ? 'USDT' : 'BTC';
+    let newCryptoType: 'BTC' | 'DEPIX' | 'USDT';
 
-    // Impede mudança para USDT se fiat for USD
-    if (newCryptoType === 'USDT' && fiatType === 'USD') {
-      toast.warning(t('checkout.usdt_to_usd_error'));
-      return;
+    if (fiatType === 'USD') {
+      newCryptoType = cryptoType === 'BTC' ? 'DEPIX' : 'BTC';
+    } else {
+      if (cryptoType === 'BTC') {
+        newCryptoType = 'DEPIX';
+      } else if (cryptoType === 'DEPIX') {
+        newCryptoType = 'USDT';
+      } else {
+        newCryptoType = 'BTC';
+      }
     }
 
     form.setValue('cryptoType', newCryptoType);
