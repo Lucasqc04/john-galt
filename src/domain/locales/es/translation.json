@@ -25,7 +25,7 @@
     "title": "Compra de Bitcoin y Checkout",
     "brl_placeholder": "Ingrese el monto en BRL",
     "usd_placeholder": "Ingrese el monto en USD",
-    "depix_placeholder": "Ingrese el monto en Depix",
+    "depix_placeholder": "Monto en Depix",
     "btc_placeholder": "Monto en BTC",
     "usdt_placeholder": "Monto en USDT",
     "buy": "Comprar",

@@ -25,7 +25,7 @@
     "title": "Bitcoin Purchase and Checkout",
     "brl_placeholder": "Enter the amount in BRL",
     "usd_placeholder": "Enter the amount in USD",
-    "depix_placeholder": "Enter the amount in Depix",
+    "depix_placeholder": "DePix Amout",
     "btc_placeholder": "BTC Amount",
     "usdt_placeholder": "USDT Amount",
     "buy": "Buy",
