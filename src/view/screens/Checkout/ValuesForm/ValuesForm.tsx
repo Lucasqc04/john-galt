@@ -3,6 +3,7 @@ import { FaQuestionCircle } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import Btc from '../../../assets/bitcoin.svg';
 import Brl from '../../../assets/brl.svg';
+import DepixIcon from '../../../assets/depix-logo.png'; // Importando o ícone do Depix
 import Usd from '../../../assets/usd.svg';
 import Usdt from '../../../assets/usdt.svg';
 import { useValuesForm } from './useValuesForm';
@@ -117,7 +118,9 @@ export function ValuesForm({
               placeholder={
                 cryptoType === 'BTC'
                   ? t('checkout.btc_placeholder')
-                  : t('checkout.usdt_placeholder')
+                  : cryptoType === 'DEPIX'
+                    ? t('checkout.depix_placeholder')
+                    : t('checkout.usdt_placeholder')
               }
               className="border-2 px-16 py-3 rounded-3xl text-base sm:text-lg text-white placeholder-white bg-black text-center w-full"
             />
@@ -127,11 +130,19 @@ export function ValuesForm({
               className="absolute right-2 top-1/2 -translate-y-1/2 text-white"
             >
               <img
-                src={cryptoType === 'BTC' ? Btc : Usdt}
+                src={
+                  cryptoType === 'BTC'
+                    ? Btc
+                    : cryptoType === 'DEPIX'
+                      ? DepixIcon
+                      : Usdt
+                }
                 alt={
                   cryptoType === 'BTC'
                     ? t('checkout.btc_label')
-                    : t('checkout.usdt_label')
+                    : cryptoType === 'DEPIX'
+                      ? t('checkout.depix_label')
+                      : t('checkout.usdt_label')
                 }
                 className="w-6 h-6 sm:w-10 sm:h-10"
               />
