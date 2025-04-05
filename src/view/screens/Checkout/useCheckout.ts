@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 export type Checkout = {
   fiatAmount: string;
   cryptoAmount: string;
-  cryptoType: 'BTC' | 'USDT' | 'DEPIX';
+  cryptoType: 'BITCOIN' | 'USDT' | 'DEPIX';
   fiatType: 'BRL' | 'USD';
   btcRate: number;
   usdtRate: number;
@@ -36,7 +36,7 @@ export function useCheckout() {
     defaultValues: {
       fiatAmount: '',
       cryptoAmount: '',
-      cryptoType: 'BTC',
+      cryptoType: 'BITCOIN',
       fiatType: 'BRL',
       btcRate: 0,
       usdtRate: 0,
