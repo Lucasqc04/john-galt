@@ -12,7 +12,7 @@ export function useValuesForm() {
   const fiatType = form.watch('fiatType');
 
   const calculateCryptoAmount = (numericValue: number) => {
-    if (cryptoType === 'BTC') {
+    if (cryptoType === 'BITCOIN') {
       if (fiatType === 'BRL') {
         const btcAmount = numericValue / form.getValues('btcRate');
         form.setValue('cryptoAmount', btcAmount.toFixed(8));
@@ -79,17 +79,17 @@ export function useValuesForm() {
   };
 
   const toggleCryptoType = () => {
-    let newCryptoType: 'BTC' | 'DEPIX' | 'USDT';
+    let newCryptoType: 'BITCOIN' | 'DEPIX' | 'USDT';
 
     if (fiatType === 'USD') {
-      newCryptoType = cryptoType === 'BTC' ? 'DEPIX' : 'BTC';
+      newCryptoType = cryptoType === 'BITCOIN' ? 'DEPIX' : 'BITCOIN';
     } else {
-      if (cryptoType === 'BTC') {
+      if (cryptoType === 'BITCOIN') {
         newCryptoType = 'DEPIX';
       } else if (cryptoType === 'DEPIX') {
         newCryptoType = 'USDT';
       } else {
-        newCryptoType = 'BTC';
+        newCryptoType = 'BITCOIN';
       }
     }
 

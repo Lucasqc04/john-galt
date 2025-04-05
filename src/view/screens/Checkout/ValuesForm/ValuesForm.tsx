@@ -116,7 +116,7 @@ export function ValuesForm({
               {...form.register('cryptoAmount', { required: true })}
               readOnly
               placeholder={
-                cryptoType === 'BTC'
+                cryptoType === 'BITCOIN'
                   ? t('checkout.btc_placeholder')
                   : cryptoType === 'DEPIX'
                     ? t('checkout.depix_placeholder')
@@ -131,14 +131,14 @@ export function ValuesForm({
             >
               <img
                 src={
-                  cryptoType === 'BTC'
+                  cryptoType === 'BITCOIN'
                     ? Btc
                     : cryptoType === 'DEPIX'
                       ? DepixIcon
                       : Usdt
                 }
                 alt={
-                  cryptoType === 'BTC'
+                  cryptoType === 'BITCOIN'
                     ? t('checkout.btc_label')
                     : cryptoType === 'DEPIX'
                       ? t('checkout.depix_label')
