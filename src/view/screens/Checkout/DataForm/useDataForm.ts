@@ -293,7 +293,7 @@ Cupom: ${cupom}`;
       paymentMethod === 'PAYPAL' ||
       paymentMethod === 'BANK_TRANSFER'
     ) {
-      const whatsappNumber = '5511993439032';
+      const whatsappNumber = '5511911872097';
       let message = '';
       if (paymentMethod === 'SWIFT') {
         message = `Olá! Aqui estão os detalhes do pedido Swift:\n\nValor BRL: ${fiatAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: Swift\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
@@ -309,7 +309,7 @@ Cupom: ${cupom}`;
 
     if (cryptoType.toUpperCase() === 'USDT') {
       console.log('Criptomoeda USDT detectada.');
-      const whatsappNumber = '5511993439032';
+      const whatsappNumber = '5511911872097';
       let PaymentMethodFormatted = '';
       if (paymentMethod === 'TICKET') {
         PaymentMethodFormatted = 'Boleto Bancário';
@@ -356,7 +356,7 @@ Cupom: ${cupom}`;
 
       // Redirecionamento para WhatsApp conforme o método escolhido (para métodos que não entraram no if acima)
       if (paymentMethod === 'WISE') {
-        const whatsappNumber = '5511993439032';
+        const whatsappNumber = '5511911872097';
         const message = `Olá! Aqui estão os detalhes do pedido Wise:\n\n Valor ${fiatType}: ${fiatAmount} \n ${cryptoType}: ${cryptoAmount}\n Rede: ${network}\n Cold Wallet: ${coldWallet} \n Método: Wise\n Telefone: ${transactionNumber}\n Cupom: ${cupom}`;
         console.log(
           'Redirecionando para WhatsApp (Wise) com mensagem:',
@@ -368,7 +368,7 @@ Cupom: ${cupom}`;
       }
 
       if (paymentMethod === 'TICKET') {
-        const whatsappNumber = '5511993439032';
+        const whatsappNumber = '5511911872097';
         const message = `Olá! Aqui estão os detalhes do pedido Boleto Bancário:\n\n Valor ${fiatType}: ${fiatAmount} \n ${cryptoType}: ${cryptoAmount}\n Rede: ${network}\n Cold Wallet: ${coldWallet} \n Método: Boleto Bancário\n Telefone: ${transactionNumber}\n Cupom: ${cupom}`;
         console.log(
           'Redirecionando para WhatsApp (TICKET) com mensagem:',
