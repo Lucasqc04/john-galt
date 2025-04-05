@@ -81,7 +81,7 @@ export function CheckoutPix() {
             <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
               <span className="text-red-600 font-bold bg-white text-xs mb-1">
                 {t('buycheckout.bitcoinPurchaseWarning')}{' '}
-                {cryptoType === 'BTC' ? 'Bitcoin' : cryptoType}
+                {cryptoType === 'BITCOIN' ? 'Bitcoin' : cryptoType}
               </span>
               <img
                 src={AlfredQr}
