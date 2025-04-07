@@ -3,7 +3,8 @@ import { FaQuestionCircle } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import Btc from '../../../assets/bitcoin.svg';
 import Brl from '../../../assets/brl.svg';
-import DepixIcon from '../../../assets/depix-logo.png'; // Importando o ícone do Depix
+import DepixIcon from '../../../assets/depix-logo.png';
+import Mao from '../../../assets/patinha.webp';
 import Usd from '../../../assets/usd.svg';
 import Usdt from '../../../assets/usdt.svg';
 import { useValuesForm } from './useValuesForm';
@@ -22,13 +23,13 @@ export function ValuesForm({
   const [hasShownToast, setHasShownToast] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
 
-  // Observa os valores do formulário
+  // Controle dos valores do formulário
   const fiatAmount = form.watch('fiatAmount');
   const fiatType = form.watch('fiatType');
   const cryptoAmount = form.watch('cryptoAmount');
   const cryptoType = form.watch('cryptoType');
 
-  // Salva automaticamente no localStorage sempre que esses valores mudam
+  // Salva automaticamente no localStorage
   useEffect(() => {
     localStorage.setItem('fiatAmount', fiatAmount);
     localStorage.setItem('fiatType', fiatType);
@@ -65,9 +66,27 @@ export function ValuesForm({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // Estado que controla qual ícone de mão está ativo (0, 1 ou 2)
+  // Após mostrar os 3 (cada um por 2 segundos), ele é removido (null)
+  const [activeMao, setActiveMao] = useState<number | null>(0);
+  useEffect(() => {
+    let counter = 0;
+    const timer = setInterval(() => {
+      counter++;
+      if (counter > 2) {
+        setActiveMao(null);
+        clearInterval(timer);
+      } else {
+        setActiveMao(counter);
+      }
+    }, 2000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="relative w-full">
       <div className="space-y-1">
+        {/* Seção Fiat */}
         <div className="w-full flex justify-center items-center brl-step">
           <div className="relative w-full">
             <input
@@ -94,6 +113,14 @@ export function ValuesForm({
                 }
                 className="w-6 h-6 sm:w-10 sm:h-10"
               />
+              {/* Exibe a mão na seção Fiat se activeMao for 0 */}
+              {activeMao === 0 && (
+                <img
+                  src={Mao}
+                  alt="Mão"
+                  className="w-4 animate-fadeInPop transition-transform duration-500 hover:scale-110"
+                />
+              )}
             </button>
           </div>
         </div>
@@ -105,11 +132,18 @@ export function ValuesForm({
               onClick={toggleTransactionType}
               className={`absolute left-2 top-1/2 -translate-y-1/2 text-white ${
                 transactionType === 'buy' ? 'bg-green-500' : 'bg-red-500'
-              } px-4 py-2 rounded-full text-sm`}
+              } px-4 py-2 rounded-full text-sm `}
             >
               {transactionType === 'buy'
                 ? t('checkout.buy')
                 : t('checkout.sell')}
+              {activeMao === 2 && (
+                <img
+                  src={Mao}
+                  alt="Mão"
+                  className="absolute bottom-0 right-0 w-4 animate-fadeInPop transition-transform duration-500 hover:scale-110"
+                />
+              )}
             </button>
 
             <input
@@ -146,11 +180,20 @@ export function ValuesForm({
                 }
                 className="w-6 h-6 sm:w-10 sm:h-10"
               />
+              {/* Exibe a mão dentro do botão da Cripto se activeMao for 2 */}
+              {activeMao === 1 && (
+                <img
+                  src={Mao}
+                  alt="Mão"
+                  className="w-4 animate-fadeInPop transition-transform duration-500 hover:scale-110"
+                />
+              )}
             </button>
           </div>
         </div>
       </div>
 
+      {/* Tooltip permanece igual */}
       <div className="absolute top-[-2rem] left-2">
         <div className="relative">
           <FaQuestionCircle
