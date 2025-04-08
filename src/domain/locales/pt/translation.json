@@ -22,6 +22,11 @@
     ]
   },
   "checkout": {
+    "missingLogin": "Por favor, insira seu usuário e senha.",
+    "applyCouponFirst": "Aplique o cupom antes de continuar.",
+    "usernameLengthError": "O nome de usuário deve ter pelo menos 6 dígitos.",
+    "passwordLengthError": "A senha deve ter pelo menos 6 dígitos.",
+    "missingFields": "Por favor, preencha todos os campos obrigatórios.",
     "title": "Compra de Bitcoin e Checkout",
     "buy": "Comprar",
     "sell": "Vender",

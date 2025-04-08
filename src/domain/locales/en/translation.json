@@ -22,6 +22,11 @@
     ]
   },
   "checkout": {
+    "missingLogin": "Please enter your username and password.",
+    "applyCouponFirst": "Please apply the coupon before continuing.",
+    "usernameLengthError": "Username must be at least 6 characters.",
+    "passwordLengthError": "Password must be at least 6 characters.",
+    "missingFields": "Please fill in all required fields.",
     "title": "Bitcoin Purchase and Checkout",
     "brl_placeholder": "Enter the amount in BRL",
     "usd_placeholder": "Enter the amount in USD",
