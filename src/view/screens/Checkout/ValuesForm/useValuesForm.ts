@@ -1,3 +1,4 @@
+import { useUserLevel } from '@/view/hooks/useUserLevel';
 import { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -7,6 +8,7 @@ import { Checkout } from '../useCheckout';
 export function useValuesForm() {
   const { t } = useTranslation();
   const form = useFormContext<Checkout>();
+  const { restrictions, userLevelName } = useUserLevel();
 
   const cryptoType = form.watch('cryptoType');
   const fiatType = form.watch('fiatType');
@@ -47,6 +49,22 @@ export function useValuesForm() {
       return;
     }
 
+    // Verificar limite do nível - agora apenas informamos, sem limitar
+    if (numericValue > restrictions.dailyLimit) {
+      // Removemos a linha que limitava o valor
+      // numericValue = restrictions.dailyLimit;
+      toast.info(
+        `Seu limite diário como ${userLevelName} é ${restrictions.dailyLimit.toLocaleString(
+          'pt-BR',
+          {
+            style: 'currency',
+            currency: 'BRL',
+          },
+        )}. Valores acima podem ser recusados pelo sistema bancário.`,
+      );
+    }
+
+    // Mantém o limite máximo global (não relacionado ao nível)
     if (numericValue > 1000000) {
       numericValue = 1000000;
     }
