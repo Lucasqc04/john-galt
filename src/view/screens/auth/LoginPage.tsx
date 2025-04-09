@@ -28,7 +28,16 @@ export default function LoginPage() {
     setIsLoading(true);
     try {
       await login(username, password);
-      toast.success('Login efetuado com sucesso.');
+      // Exibir o nível do usuário após o login bem-sucedido
+      const userStr = localStorage.getItem('user');
+      if (userStr) {
+        const userData = JSON.parse(userStr);
+        toast.success(
+          `Login efetuado com sucesso. Nível: ${userData.levelName}`,
+        );
+      } else {
+        toast.success('Login efetuado com sucesso.');
+      }
       const brlAmount = localStorage.getItem('brlAmount');
       const cryptoAmount = localStorage.getItem('cryptoAmount');
       if (brlAmount && cryptoAmount) {

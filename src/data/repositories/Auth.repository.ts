@@ -5,6 +5,8 @@ const LoginResponseSchema = z.object({
   id: z.string(), // id retornado pelo backend
   acessToken: z.string(),
   refreshToken: z.string(),
+  level: z.number().default(0),
+  levelName: z.string().default('Madeira'),
 });
 
 const RegisterResponseSchema = z.object({
