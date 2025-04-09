@@ -152,9 +152,7 @@ export default function DataForm() {
             style: 'currency',
             currency: 'BRL',
           },
-        ).format(
-          restrictions.dailyLimit,
-        )}). O sistema bancário poderá recusar a transação.`,
+        ).format(restrictions.dailyLimit)}).`,
       );
       // Não retornamos mais aqui, permitimos que o usuário continue
     }
