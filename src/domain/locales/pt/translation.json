@@ -195,7 +195,14 @@
       "TICKET": "Boleto Bancário",
       "SWIFT": "Swift",
       "PAYPAL": "PayPal",
-      "BANK_TRANSFER": "Transferência Bancária"
+      "BANK_TRANSFER": "Transferência Bancária",
+      "TED": "TED",
+      "CASH": "Depósito em Espécie"
+    },
+    "paymentLevelRestriction": {
+      "ted": "TED disponível apenas para nível Prata (2) ou superior",
+      "cash": "Depósito em espécie disponível apenas para nível Ouro (3) ou superior",
+      "general": "Este método de pagamento não está disponível para seu nível atual"
     },
     "contactTooltip": {
       "message": "Por segurança, é necessário realizar o login com seu usuário e senha para que você possa acessar a plataforma em qualquer dispositivo e liberar futuras compras, e valores maiores.",
@@ -248,5 +255,45 @@
     "imageStep": "Olá, eu sou o Alfred! Seja bem-vindo! Sou um robô que facilita para você transações de Bitcoin sem KYC, de forma simples e segura.",
     "brlStep": "Digite o valor em BRL que você deseja converter para Bitcoin.",
     "proceedButtonStep": "Após preencher o valor, clique no botão 'Prosseguir' para continuar com a compra."
+  },
+  "userLevels": {
+    "title": "Seu Nível",
+    "madeira": {
+      "name": "Madeira",
+      "description": "Limite Inicial: Até 2 transações de até R$500 cada no mesmo dia.",
+      "validation": "Após essas duas transações, é necessário aguardar 34 horas para análise."
+    },
+    "bronze": {
+      "name": "Bronze",
+      "description": "Limite de até R$5.000 por dia",
+      "requirements": "Passa pela validação inicial de 34 horas após as 2 primeiras transações."
+    },
+    "prata": {
+      "name": "Prata",
+      "description": "Limite de até R$10.000 por dia",
+      "requirements": "Ter realizado 3 compras."
+    },
+    "ouro": {
+      "name": "Ouro",
+      "description": "Limite de até R$35.000 por dia",
+      "requirements": "Ter realizado 4 compras e movimentado R$50.000 no total."
+    },
+    "diamante": {
+      "name": "Diamante",
+      "description": "Limite de até R$50.000 por dia",
+      "requirements": "Ter transacionado um total de R$100.000."
+    },
+    "platina": {
+      "name": "Platina",
+      "description": "Limite de até R$150.000 por dia",
+      "requirements": "Ter transacionado um total de R$250.000."
+    },
+    "dailyLimitExceeded": "Limite diário excedido para seu nível atual.",
+    "transactionLimitExceeded": "Limite de transações diárias atingido.",
+    "paymentMethods": {
+      "ted": "TED disponível a partir do nível Prata (2)",
+      "cash": "Depósito em espécie disponível a partir do nível Ouro (3)",
+      "all": "Todos os métodos de pagamento disponíveis a partir do nível Diamante (4)"
+    }
   }
 }

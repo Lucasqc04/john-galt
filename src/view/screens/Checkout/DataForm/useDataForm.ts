@@ -1,5 +1,6 @@
 // useDataForm.tsx
 import { useAuth } from '@/view/hooks/useAuth';
+import { useUserLevel } from '@/view/hooks/useUserLevel';
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -13,6 +14,17 @@ import Tron from '../../../assets/tron.svg';
 import { ROUTES } from '../../../routes/Routes';
 import { useCurrentLang } from '../../../utils/useCurrentLang';
 
+// Definindo um tipo para os métodos de pagamento
+type PaymentMethodType =
+  | 'PIX'
+  | 'TICKET'
+  | 'WISE'
+  | 'SWIFT'
+  | 'PAYPAL'
+  | 'BANK_TRANSFER'
+  | 'TED'
+  | 'CASH';
+
 export function useDataForm() {
   // Estados do formulário
   const [network, setNetwork] = useState<string>('');
@@ -24,10 +36,8 @@ export function useDataForm() {
   const [cupom, setCupom] = useState<string>('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpenMethod, setIsDropdownOpenMethod] = useState(false);
-  // Atualize o tipo para incluir os novos métodos:
-  const [paymentMethod, setPaymentMethod] = useState<
-    'PIX' | 'TICKET' | 'WISE' | 'SWIFT' | 'PAYPAL' | 'BANK_TRANSFER'
-  >();
+  // Ajustando a tipagem do estado para usar o novo tipo
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethodType>();
   const [pixKey, setPixKey] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -42,6 +52,13 @@ export function useDataForm() {
 
   // Obtenção de dados de autenticação
   const { user, login, register, refreshAccessToken } = useAuth();
+  const {
+    userLevel,
+    userLevelName,
+    restrictions,
+    isWithinDailyLimit,
+    isPaymentMethodAllowed,
+  } = useUserLevel();
   const navigate = useNavigate();
   const { currentLang } = useCurrentLang();
   const { t } = useTranslation();
@@ -72,9 +89,25 @@ export function useDataForm() {
     setIsDropdownOpenMethod((prevState) => !prevState);
   };
 
-  const selectPaymentMethod = (
-    method: 'PIX' | 'TICKET' | 'WISE' | 'SWIFT' | 'PAYPAL' | 'BANK_TRANSFER',
-  ) => {
+  const selectPaymentMethod = (method: PaymentMethodType) => {
+    // Verificar se o método é permitido para o nível do usuário
+    if (!isPaymentMethodAllowed(method)) {
+      if (method === 'TED' || method === 'BANK_TRANSFER') {
+        toast.warning(
+          `Método TED disponível apenas para nível Prata (2) ou superior. Seu nível: ${userLevelName} (${userLevel})`,
+        );
+      } else if (method === 'CASH') {
+        toast.warning(
+          `Depósito em espécie disponível apenas para nível Ouro (3) ou superior. Seu nível: ${userLevelName} (${userLevel})`,
+        );
+      } else {
+        toast.warning(
+          `Método de pagamento não disponível para seu nível atual: ${userLevelName} (${userLevel})`,
+        );
+      }
+      return;
+    }
+
     setPaymentMethod(method);
     setIsDropdownOpenMethod(false);
   };
@@ -287,45 +320,23 @@ Cupom: ${cupom}`;
       4 * 60 * 1000,
     );
 
-    // Caso o método seja SWIFT, PAYPAL ou BANK_TRANSFER, redireciona direto para o WhatsApp
-    if (
-      paymentMethod === 'SWIFT' ||
-      paymentMethod === 'PAYPAL' ||
-      paymentMethod === 'BANK_TRANSFER'
-    ) {
-      const whatsappNumber = '5511911872097';
-      let message = '';
-      if (paymentMethod === 'SWIFT') {
-        message = `Olá! Aqui estão os detalhes do pedido Swift:\n\nValor BRL: ${fiatAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: Swift\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
-      } else if (paymentMethod === 'PAYPAL') {
-        message = `Olá! Aqui estão os detalhes do pedido PayPal:\n\nValor BRL: ${fiatAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: PayPal\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
-      } else if (paymentMethod === 'BANK_TRANSFER') {
-        message = `Olá! Aqui estão os detalhes do pedido Transferência Bancária:\n\nValor BRL: ${fiatAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: Transferência Bancária\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
-      }
-      const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-      window.location.href = whatsappLink;
-      return;
-    }
-
-    if (cryptoType.toUpperCase() === 'USDT') {
-      console.log('Criptomoeda USDT detectada.');
-      const whatsappNumber = '5511911872097';
-      let PaymentMethodFormatted = '';
-      if (paymentMethod === 'TICKET') {
-        PaymentMethodFormatted = 'Boleto Bancário';
-      } else if (paymentMethod === 'WISE') {
-        PaymentMethodFormatted = 'Wise';
-      }
-      if (paymentMethod === 'TICKET' || paymentMethod === 'WISE') {
-        const message = `Olá! Aqui estão os detalhes do pedido :\n\nValor ${fiatType}: ${fiatAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: ${PaymentMethodFormatted}\nTelefone: ${transactionNumber}\nCupom: ${cupom}`;
-        const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-        window.location.href = whatsappLink;
-        return;
-      }
-    }
-
     const valorBRL = parseFloat(fiatAmount.replace(/\D/g, ''));
     console.log('Valor BRL calculado:', valorBRL);
+
+    // Verificar se o valor está dentro do limite diário do usuário
+    // Agora apenas alertamos, mas permitimos prosseguir
+    if (!isWithinDailyLimit(valorBRL)) {
+      toast.warning(
+        `Atenção: Valor excede seu limite diário como ${userLevelName} (${restrictions.dailyLimit.toLocaleString(
+          'pt-BR',
+          {
+            style: 'currency',
+            currency: 'BRL',
+          },
+        )}). O sistema bancário poderá recusar a transação.`,
+      );
+    }
+
     const valorToSend = valorBRL === 100000 ? 300 : valorBRL;
     console.log('Valor a enviar:', valorToSend);
 
@@ -333,6 +344,7 @@ Cupom: ${cupom}`;
     const userObj = userString ? JSON.parse(userString) : null;
 
     try {
+      // Todos os métodos salvam no backend antes de redirecionar
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/deposit`,
         {
@@ -344,6 +356,7 @@ Cupom: ${cupom}`;
           coldWallet: coldWallet,
           cupom: cupom,
           cryptoType: cryptoType,
+          userLevel: userLevel,
         },
         {
           headers: {
@@ -354,70 +367,87 @@ Cupom: ${cupom}`;
         },
       );
 
-      // Redirecionamento para WhatsApp conforme o método escolhido (para métodos que não entraram no if acima)
-      if (paymentMethod === 'WISE') {
-        const whatsappNumber = '5511911872097';
-        const message = `Olá! Aqui estão os detalhes do pedido Wise:\n\n Valor ${fiatType}: ${fiatAmount} \n ${cryptoType}: ${cryptoAmount}\n Rede: ${network}\n Cold Wallet: ${coldWallet} \n Método: Wise\n Telefone: ${transactionNumber}\n Cupom: ${cupom}`;
-        console.log(
-          'Redirecionando para WhatsApp (Wise) com mensagem:',
-          message,
-        );
-        const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-        window.location.href = whatsappLink;
-        return;
-      }
-
-      if (paymentMethod === 'TICKET') {
-        const whatsappNumber = '5511911872097';
-        const message = `Olá! Aqui estão os detalhes do pedido Boleto Bancário:\n\n Valor ${fiatType}: ${fiatAmount} \n ${cryptoType}: ${cryptoAmount}\n Rede: ${network}\n Cold Wallet: ${coldWallet} \n Método: Boleto Bancário\n Telefone: ${transactionNumber}\n Cupom: ${cupom}`;
-        console.log(
-          'Redirecionando para WhatsApp (TICKET) com mensagem:',
-          message,
-        );
-        const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-        window.location.href = whatsappLink;
-        return;
-      }
-
       const pixKeyResponse = response.data.response?.qrCopyPaste;
       const status = response.data.response?.status;
       const transactionId = response.data.response?.id;
       console.log(
-        'pixKeyResponse:',
-        pixKeyResponse,
+        'Response:',
+        response.data.response,
         'status:',
         status,
         'transactionId:',
         transactionId,
       );
 
+      // Armazenar transactionId em todos os casos
       if (transactionId) {
         localStorage.setItem('transactionId', transactionId);
         console.log('transactionId salvo:', transactionId);
       }
-      if (pixKeyResponse) {
-        localStorage.setItem('pixKey', pixKeyResponse);
-        setPixKey(pixKeyResponse);
-        console.log('pixKey salvo:', pixKeyResponse);
-      }
+
       if (status) {
         localStorage.setItem('status', status);
         console.log('status salvo:', status);
       }
 
-      setTimeLeft(150);
+      // Lógica específica para PIX (permanece inalterada)
+      if (paymentMethod === 'PIX') {
+        if (pixKeyResponse) {
+          localStorage.setItem('pixKey', pixKeyResponse);
+          setPixKey(pixKeyResponse);
+          console.log('pixKey salvo:', pixKeyResponse);
+        }
+
+        setTimeLeft(150);
+        setIsLoading(false);
+
+        if (pixKeyResponse) {
+          console.log('Navegando para checkoutPix.');
+          navigate(ROUTES.checkoutPix.call(currentLang));
+        }
+
+        if (status === 'depix_sent' || status === 'paid') {
+          toast.success(t('Pagamento confirmado'));
+          console.log('Pagamento confirmado, navegando para success.');
+          navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
+        }
+        return;
+      }
+
+      // Para todos os outros métodos (não-PIX), encaminha para WhatsApp após salvar no backend
       setIsLoading(false);
+      const whatsappNumber = '5511911872097';
+      let message = '';
 
-      if (pixKeyResponse) {
-        console.log('Navegando para checkoutPix.');
-        navigate(ROUTES.checkoutPix.call(currentLang));
+      // Configurar a mensagem específica para cada método
+      switch (paymentMethod) {
+        case 'SWIFT':
+          message = `Olá! Aqui estão os detalhes do pedido Swift:\n\nValor BRL: ${fiatAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: Swift\nTelefone: ${transactionNumber}\nCupom: ${cupom}\nID da transação: ${transactionId}`;
+          break;
+        case 'PAYPAL':
+          message = `Olá! Aqui estão os detalhes do pedido PayPal:\n\nValor BRL: ${fiatAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: PayPal\nTelefone: ${transactionNumber}\nCupom: ${cupom}\nID da transação: ${transactionId}`;
+          break;
+        case 'BANK_TRANSFER':
+          message = `Olá! Aqui estão os detalhes do pedido Transferência Bancária:\n\nValor BRL: ${fiatAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: Transferência Bancária\nTelefone: ${transactionNumber}\nCupom: ${cupom}\nID da transação: ${transactionId}`;
+          break;
+        case 'TED':
+          message = `Olá! Sou usuário nível ${userLevelName} e gostaria de realizar uma compra via TED:\n\nValor: ${fiatAmount}\nCripto: ${cryptoAmount} ${cryptoType}\nRede: ${network}\nCarteira: ${coldWallet}\nTelefone: ${transactionNumber}\nCupom: ${cupom || 'Nenhum'}\nID da transação: ${transactionId}\n\nPor favor, me envie as instruções para transferência.`;
+          break;
+        case 'CASH':
+          message = `Olá! Sou usuário nível ${userLevelName} e gostaria de fazer um depósito em espécie:\n\nValor: ${fiatAmount}\nCripto: ${cryptoAmount} ${cryptoType}\nRede: ${network}\nCarteira: ${coldWallet}\nTelefone: ${transactionNumber}\nCupom: ${cupom || 'Nenhum'}\nID da transação: ${transactionId}\n\nPor favor, me envie as instruções para o depósito em espécie.`;
+          break;
+        case 'WISE':
+          message = `Olá! Aqui estão os detalhes do pedido Wise:\n\nValor ${fiatType}: ${fiatAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: Wise\nTelefone: ${transactionNumber}\nCupom: ${cupom}\nID da transação: ${transactionId}`;
+          break;
+        case 'TICKET':
+          message = `Olá! Aqui estão os detalhes do pedido Boleto Bancário:\n\nValor ${fiatType}: ${fiatAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: Boleto Bancário\nTelefone: ${transactionNumber}\nCupom: ${cupom}\nID da transação: ${transactionId}`;
+          break;
+        default:
+          message = `Olá! Aqui estão os detalhes do meu pedido:\n\nValor BRL: ${fiatAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: ${paymentMethod}\nTelefone: ${transactionNumber}\nCupom: ${cupom}\nID da transação: ${transactionId}`;
       }
 
-      if (status === 'depix_sent' || status === 'paid') {
-        toast.success(t('Pagamento confirmado'));
-        console.log('Pagamento confirmado, navegando para success.');
-        navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
-      }
+      const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+      window.location.href = whatsappLink;
     } catch (error) {
       console.error('Erro ao processar pagamento:', error);
       if (
@@ -440,6 +470,25 @@ Cupom: ${cupom}`;
         const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
         window.location.href = whatsappLink;
         return;
+      }
+
+      if (
+        axios.isAxiosError(error) &&
+        error.response?.data?.code === 'DAILY_LIMIT_EXCEEDED'
+      ) {
+        toast.error(`Limite diário excedido para seu nível ${userLevelName}.`);
+        setIsLoading(false);
+        return;
+      }
+
+      // Adicionar tratamento para o erro LIMIT_EXCEEDED
+      if (
+        axios.isAxiosError(error) &&
+        error.response?.data?.code === 'LIMIT_EXCEEDED'
+      ) {
+        toast.error(
+          `Limite excedido para seu nível ${userLevelName}. Por favor, aguarde a validação do seu perfil ou entre em contato com o suporte para aumentar seus limites.`,
+        );
       }
 
       toast.error(t('buycheckout.paymentError'));
@@ -570,6 +619,10 @@ Cupom: ${cupom}`;
     networks,
     currentLang,
     alfredFeePercentage,
+    userLevel,
+    userLevelName,
+    restrictions,
+    isPaymentMethodAllowed,
     toggleDropdown,
     selectNetwork,
     toggleDropdownMethod,
