@@ -8,6 +8,8 @@ export type AuthUser = {
   username: string;
   acessToken: string;
   refreshToken: string;
+  level: number;
+  levelName: string;
 };
 
 type AuthContextType = {
@@ -107,6 +109,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         username,
         acessToken: result.acessToken,
         refreshToken: result.refreshToken,
+        level: result.level || 0,
+        levelName: result.levelName || 'Madeira',
       };
       setUser(loggedUser);
       localStorage.setItem('user', JSON.stringify(loggedUser));

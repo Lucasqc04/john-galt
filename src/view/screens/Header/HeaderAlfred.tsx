@@ -3,6 +3,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { FaRobot } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { LanguageSwitcher } from '../../components/LanguageSwitcher/LanguageSwitcher';
+import { UserLevelBadge } from '../../components/UserLevelBadge';
 import { AuthContext } from '../../context/AuthContext';
 import { ROUTES } from '../../routes/Routes';
 import { NavLinks } from './NavLinks';
@@ -53,17 +54,29 @@ export default function Header() {
                 className="flex items-center gap-x-2 text-white hover:text-gray-300 transition-all"
               >
                 <FaRobot size={24} />
-                {/* Exibe o nome do usuário em todas as telas */}
-                <span className="inline text-lg font-semibold">
-                  {user.username}
-                </span>
+                <div className="flex flex-col items-start">
+                  <span className="inline text-lg font-semibold">
+                    {user.username}
+                  </span>
+                  <div className="text-xs -mt-1">
+                    {user.levelName && (
+                      <span
+                        className={`px-2 py-0.5 rounded-full text-white text-xs ${getLevelColor(user.level)}`}
+                      >
+                        Nível {user.levelName}
+                      </span>
+                    )}
+                  </div>
+                </div>
               </button>
               {isDropdownOpen && (
-                <div className="absolute top-10 right-0 bg-gray-800 shadow-lg rounded-lg p-2 flex flex-col items-center z-50">
-                  <span className="text-white mb-2">Logado</span>
+                <div className="absolute top-14 right-0 bg-gray-800 shadow-lg rounded-lg p-4 flex flex-col items-center z-50 min-w-[200px]">
+                  <div className="mb-3 w-full">
+                    <UserLevelBadge />
+                  </div>
                   <button
                     onClick={handleLogout}
-                    className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-all"
+                    className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-all w-full"
                   >
                     Logout
                   </button>
@@ -83,4 +96,24 @@ export default function Header() {
       </nav>
     </header>
   );
+}
+
+// Função auxiliar para obter a cor baseada no nível
+function getLevelColor(level: number): string {
+  switch (level) {
+    case 0:
+      return 'bg-gray-600'; // Madeira
+    case 1:
+      return 'bg-amber-700'; // Bronze
+    case 2:
+      return 'bg-gray-400'; // Prata
+    case 3:
+      return 'bg-yellow-500'; // Ouro
+    case 4:
+      return 'bg-blue-500'; // Diamante
+    case 5:
+      return 'bg-violet-500'; // Platina
+    default:
+      return 'bg-gray-600';
+  }
 }
