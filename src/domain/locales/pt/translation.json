@@ -22,6 +22,11 @@
     ]
   },
   "checkout": {
+    "missingLogin": "Por favor, insira seu usuário e senha.",
+    "applyCouponFirst": "Aplique o cupom antes de continuar.",
+    "usernameLengthError": "O nome de usuário deve ter pelo menos 6 dígitos.",
+    "passwordLengthError": "A senha deve ter pelo menos 6 dígitos.",
+    "missingFields": "Por favor, preencha todos os campos obrigatórios.",
     "title": "Compra de Bitcoin e Checkout",
     "buy": "Comprar",
     "sell": "Vender",
@@ -256,12 +261,12 @@
     "madeira": {
       "name": "Madeira",
       "description": "Limite Inicial: Até 2 transações de até R$500 cada no mesmo dia.",
-      "validation": "Após essas duas transações, é necessário aguardar 34 horas para análise."
+      "validation": "Após essas duas transações, é necessário aguardar 24 horas para análise."
     },
     "bronze": {
       "name": "Bronze",
       "description": "Limite de até R$5.000 por dia",
-      "requirements": "Passa pela validação inicial de 34 horas após as 2 primeiras transações."
+      "requirements": "Passa pela validação inicial de 24 horas após as 2 primeiras transações."
     },
     "prata": {
       "name": "Prata",
