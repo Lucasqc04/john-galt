@@ -1,4 +1,8 @@
 // useDataForm.tsx
+import {
+  getMaintenanceMessage,
+  isPaymentMethodInMaintenance,
+} from '@/config/paymentMaintenance';
 import { useAuth } from '@/view/hooks/useAuth';
 import { useUserLevel } from '@/view/hooks/useUserLevel';
 import axios from 'axios';
@@ -17,6 +21,7 @@ import { useCurrentLang } from '../../../utils/useCurrentLang';
 // Definindo um tipo para os métodos de pagamento
 type PaymentMethodType =
   | 'PIX'
+  | 'PIX_MAINTENANCE'
   | 'TICKET'
   | 'WISE'
   | 'SWIFT'
@@ -90,6 +95,15 @@ export function useDataForm() {
   };
 
   const selectPaymentMethod = (method: PaymentMethodType) => {
+    // Verificar se o método está em manutenção
+    if (method === 'PIX' && isPaymentMethodInMaintenance('PIX')) {
+      // Se o PIX estiver em manutenção, definimos como PIX_MAINTENANCE
+      toast.warning(getMaintenanceMessage('PIX'));
+      setPaymentMethod('PIX_MAINTENANCE');
+      setIsDropdownOpenMethod(false);
+      return;
+    }
+
     // Verificar se o método é permitido para o nível do usuário
     if (!isPaymentMethodAllowed(method)) {
       if (method === 'TED' || method === 'BANK_TRANSFER') {
@@ -343,6 +357,30 @@ Cupom: ${cupom}`;
     const userString = localStorage.getItem('user');
     const userObj = userString ? JSON.parse(userString) : null;
 
+    // Verificar se o método está em manutenção - se estiver, pular a chamada à API
+    if (
+      paymentMethod !== undefined &&
+      (paymentMethod === ('PIX_MAINTENANCE' as PaymentMethodType) ||
+        isPaymentMethodInMaintenance(paymentMethod))
+    ) {
+      console.log('Método de pagamento em manutenção, pulando chamada à API');
+      setIsLoading(false);
+
+      // Configurar a mensagem para WhatsApp (sem ID de transação do banco)
+      const whatsappNumber = '5511911872097';
+      let message = '';
+
+      if (paymentMethod === ('PIX_MAINTENANCE' as PaymentMethodType)) {
+        message = `Olá! Gostaria de comprar via PIX (atualmente em manutenção):\n\nValor BRL: ${fiatAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: PIX\nUsuário: ${username}\nNível: ${userLevelName} (${userLevel})\nCupom: ${cupom || 'Nenhum'} `;
+      } else {
+        message = `Olá! Gostaria de comprar (sistema em manutenção):\n\nValor BRL: ${fiatAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: ${paymentMethod}\nUsuário: ${username}\nNível: ${userLevelName} (${userLevel})\nCupom: ${cupom || 'Nenhum'} `;
+      }
+
+      const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+      window.location.href = whatsappLink;
+      return;
+    }
+
     try {
       // Todos os métodos salvam no backend antes de redirecionar
       const response = await axios.post(
@@ -350,7 +388,11 @@ Cupom: ${cupom}`;
         {
           valorBRL: valorToSend,
           valorBTC: parseFloat(cryptoAmount),
-          paymentMethod: paymentMethod,
+          // Se estiver em manutenção, enviar PIX_MAINTENANCE para rastreamento
+          paymentMethod:
+            paymentMethod === 'PIX_MAINTENANCE'
+              ? 'PIX_MAINTENANCE'
+              : paymentMethod,
           network: network,
           telefone: '111111111111',
           coldWallet: coldWallet,
@@ -390,8 +432,9 @@ Cupom: ${cupom}`;
         console.log('status salvo:', status);
       }
 
-      // Lógica específica para PIX (permanece inalterada)
-      if (paymentMethod === 'PIX') {
+      // Lógica específica para PIX - Modificar para verificar se é PIX normal ou em manutenção
+      if (paymentMethod === 'PIX' && !isPaymentMethodInMaintenance('PIX')) {
+        // Lógica normal do PIX
         if (pixKeyResponse) {
           localStorage.setItem('pixKey', pixKeyResponse);
           setPixKey(pixKeyResponse);
@@ -414,13 +457,16 @@ Cupom: ${cupom}`;
         return;
       }
 
-      // Para todos os outros métodos (não-PIX), encaminha para WhatsApp após salvar no backend
+      // Se for PIX_MAINTENANCE ou qualquer outro método, redirecionamos para WhatsApp
       setIsLoading(false);
       const whatsappNumber = '5511911872097';
       let message = '';
 
       // Configurar a mensagem específica para cada método
       switch (paymentMethod) {
+        case 'PIX_MAINTENANCE' as PaymentMethodType:
+          message = `Olá! Gostaria de comprar via PIX (atualmente em manutenção):\n\nValor BRL: ${fiatAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: PIX\nUsuário: ${username}\nNível: ${userLevelName} (${userLevel})\nTelefone: ${transactionNumber}\nCupom: ${cupom || 'Nenhum'}\nID da transação: ${transactionId}`;
+          break;
         case 'SWIFT':
           message = `Olá! Aqui estão os detalhes do pedido Swift:\n\nValor BRL: ${fiatAmount}\n${cryptoType}: ${cryptoAmount}\nRede: ${network}\nCold Wallet: ${coldWallet}\nMétodo: Swift\nTelefone: ${transactionNumber}\nCupom: ${cupom}\nID da transação: ${transactionId}`;
           break;
@@ -641,5 +687,6 @@ Cupom: ${cupom}`;
     setCryptoAmount,
     setCryptoType,
     validateFields,
+    isPaymentMethodInMaintenance,
   };
 }
