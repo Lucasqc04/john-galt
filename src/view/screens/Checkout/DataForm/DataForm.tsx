@@ -10,6 +10,7 @@ import {
   FaLock,
   FaMoneyBillWave,
   FaQuestionCircle,
+  FaTools,
 } from 'react-icons/fa';
 import { FaPix } from 'react-icons/fa6';
 import { toast } from 'react-toastify';
@@ -26,9 +27,16 @@ import { ROUTES } from '../../../routes/Routes';
 import ConfirmInfosModal from '../modal/ConfirmInfos';
 import { useDataForm } from './useDataForm';
 
+// Adicionando as importações no topo do arquivo
+import {
+  getMaintenanceMessage,
+  isPaymentMethodInMaintenance,
+} from '@/config/paymentMaintenance';
+
 // Adicionar um tipo para os métodos de pagamento
 type PaymentMethodType =
   | 'PIX'
+  | 'PIX_MAINTENANCE'
   | 'TICKET'
   | 'WISE'
   | 'SWIFT'
@@ -91,6 +99,7 @@ export default function DataForm() {
     BANK_TRANSFER: t('buycheckout.paymentMethod.BANK_TRANSFER'),
     TED: t('buycheckout.paymentMethod.TED'),
     CASH: t('buycheckout.paymentMethod.CASH'),
+    PIX_MAINTENANCE: t('buycheckout.paymentMethod.PIX'),
   };
 
   const numericFiat = parseInt(fiatAmount.replace(/\D/g, ''), 10);
@@ -222,12 +231,16 @@ Cupom: ${cupom || 'Nenhum'}`;
     setIsModalOpen(true);
   };
 
+  // Adicionar um estado para controlar a exibição da mensagem de manutenção
+  const [, setMaintenanceMessage] = useState<string | null>(null);
+
   // Adicionar novos métodos de pagamento:
   const allPaymentMethods = [
     {
       id: 'PIX',
       label: t('buycheckout.paymentMethod.PIX'),
       icon: <FaPix className="w-6 h-6 mt-1" />,
+      maintenance: isPaymentMethodInMaintenance('PIX'),
     },
     {
       id: 'WISE',
@@ -443,14 +456,25 @@ Cupom: ${cupom || 'Nenhum'}`;
                         <ul className="grid grid-cols-2 gap-4 w-full">
                           {allPaymentMethods.map((method) => {
                             const isAllowed = isPaymentMethodAllowed(method.id);
+                            const isInMaintenance = method.maintenance;
+
                             return (
                               <li
                                 key={method.id}
                                 onClick={() => {
-                                  if (isAllowed) {
+                                  if (isInMaintenance) {
+                                    // Se estiver em manutenção, ainda permitimos selecionar, mas com aviso
                                     selectPaymentMethod(
                                       method.id as PaymentMethodType,
                                     );
+                                    setMaintenanceMessage(
+                                      getMaintenanceMessage(method.id),
+                                    );
+                                  } else if (isAllowed) {
+                                    selectPaymentMethod(
+                                      method.id as PaymentMethodType,
+                                    );
+                                    setMaintenanceMessage(null);
                                   } else {
                                     let message = '';
                                     if (method.id === 'TED') {
@@ -464,9 +488,11 @@ Cupom: ${cupom || 'Nenhum'}`;
                                   }
                                 }}
                                 className={`flex flex-col items-center justify-center px-4 py-2 cursor-pointer text-white ${
-                                  isAllowed
-                                    ? 'hover:bg-gray-800'
-                                    : 'opacity-50 cursor-not-allowed'
+                                  !isAllowed
+                                    ? 'opacity-50 cursor-not-allowed'
+                                    : isInMaintenance
+                                      ? 'opacity-70 bg-yellow-900 bg-opacity-30'
+                                      : 'hover:bg-gray-800'
                                 }`}
                               >
                                 <div className="flex items-center gap-2">
@@ -479,8 +505,19 @@ Cupom: ${cupom || 'Nenhum'}`;
                                       className="text-yellow-500"
                                     />
                                   )}
+                                  {isInMaintenance && (
+                                    <FaTools
+                                      size={12}
+                                      className="text-yellow-500"
+                                    />
+                                  )}
                                 </div>
                                 {method.icon}
+                                {isInMaintenance && (
+                                  <span className="text-xs text-yellow-500 mt-1">
+                                    Em Manutenção
+                                  </span>
+                                )}
                               </li>
                             );
                           })}
