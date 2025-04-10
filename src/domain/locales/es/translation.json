@@ -22,6 +22,11 @@
     ]
   },
   "checkout": {
+    "missingLogin": "Por favor, introduce tu nombre de usuario y contraseña.",
+    "applyCouponFirst": "Aplica el cupón antes de continuar.",
+    "usernameLengthError": "El nombre de usuario debe tener al menos 6 caracteres.",
+    "passwordLengthError": "La contraseña debe tener al menos 6 caracteres.",
+    "missingFields": "Por favor, completa todos los campos obligatorios.",
     "title": "Compra de Bitcoin y Checkout",
     "brl_placeholder": "Ingrese el monto en BRL",
     "usd_placeholder": "Ingrese el monto en USD",

@@ -125,27 +125,26 @@ export default function DataForm() {
   };
 
   const handleOpenModal = async () => {
-    // Se não houver usuário logado, exige usuário e senha
     if (!username || (!loggedUser && !password)) {
-      toast.error(
-        t('buycheckout.missingLogin') ||
-          'Por favor, insira seu usuário e senha.',
-      );
+      toast.error(t('buycheckout.missingLogin'));
       return;
     }
+
     if (cupom.trim() && !couponApplied) {
       toast.error(t('buycheckout.applyCouponFirst'));
       return;
     }
 
     if (username.trim().length < 6) {
-      toast.error('O nome de usuário deve ter pelo menos 6 dígitos.');
+      toast.error(t('buycheckout.usernameLengthError'));
       return;
     }
+
     if (!loggedUser && password.trim().length < 6) {
-      toast.error('A senha deve ter pelo menos 6 dígitos.');
+      toast.error(t('buycheckout.passwordLengthError'));
       return;
     }
+
     if (!validateFields()) {
       toast.error(t('buycheckout.missingFields'));
       return;
@@ -162,9 +161,7 @@ export default function DataForm() {
             style: 'currency',
             currency: 'BRL',
           },
-        ).format(
-          restrictions.dailyLimit,
-        )}). O sistema bancário poderá recusar a transação.`,
+        ).format(restrictions.dailyLimit)}).`,
       );
       // Não retornamos mais aqui, permitimos que o usuário continue
     }

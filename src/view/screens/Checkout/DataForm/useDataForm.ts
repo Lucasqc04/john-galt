@@ -347,7 +347,7 @@ Cupom: ${cupom}`;
             style: 'currency',
             currency: 'BRL',
           },
-        )}). O sistema bancário poderá recusar a transação.`,
+        )}).`,
       );
     }
 
