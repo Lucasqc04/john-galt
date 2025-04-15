@@ -14,15 +14,12 @@ import {
 } from 'react-icons/fa';
 import { FaPix } from 'react-icons/fa6';
 import { toast } from 'react-toastify';
+import BankTransf from '../../../assets/bankIcon.png';
 import BoletoIcon from '../../../assets/BoletoIcon.png';
 import AlfredImg from '../../../assets/c1b28810-5a23-4e7c-bcce-bd1f42b271c5.png';
-import WiseIcon from '../../../assets/wiseIcon.png';
-// NOVOS ÍCONES adicionados:
-
-import BankTransf from '../../../assets/bankIcon.png';
 import PayPalIcon from '../../../assets/paypalIcon.png';
 import SwiftIcon from '../../../assets/swiftIcon.png';
-
+import WiseIcon from '../../../assets/wiseIcon.png';
 import { ROUTES } from '../../../routes/Routes';
 import ConfirmInfosModal from '../modal/ConfirmInfos';
 import { useDataForm } from './useDataForm';
@@ -77,7 +74,7 @@ export default function DataForm() {
     validateFields,
     userLevel,
     userLevelName,
-    restrictions,
+    // restrictions,
     isPaymentMethodAllowed,
   } = useDataForm();
 
@@ -150,21 +147,21 @@ export default function DataForm() {
       return;
     }
 
-    const numericValue = parseInt(fiatAmount.replace(/\D/g, ''), 10);
+    // const numericValue = parseInt(fiatAmount.replace(/\D/g, ''), 10);
 
-    // Verificar limites baseados no nível - agora apenas alertamos
-    if (numericValue > restrictions.dailyLimit) {
-      toast.warning(
-        `Atenção: Valor excede seu limite diário como ${userLevelName} (${new Intl.NumberFormat(
-          'pt-BR',
-          {
-            style: 'currency',
-            currency: 'BRL',
-          },
-        ).format(restrictions.dailyLimit)}).`,
-      );
-      // Não retornamos mais aqui, permitimos que o usuário continue
-    }
+    // // Verificar limites baseados no nível - agora apenas alertamos
+    // if (numericValue > restrictions.dailyLimit) {
+    //   toast.warning(
+    //     `Atenção: Valor excede seu limite diário como ${userLevelName} (${new Intl.NumberFormat(
+    //       'pt-BR',
+    //       {
+    //         style: 'currency',
+    //         currency: 'BRL',
+    //       },
+    //     ).format(restrictions.dailyLimit)}).`,
+    //   );
+    //   // Não retornamos mais aqui, permitimos que o usuário continue
+    // }
 
     // Verificar o limite para nível Madeira (2 transações diárias) - agora apenas alertamos
     if (userLevel === 0 && localStorage.getItem('dailyTransactions')) {

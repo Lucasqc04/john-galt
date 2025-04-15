@@ -50,7 +50,7 @@ export function CheckoutPix() {
         {timeLeft % 60} {t('buycheckout.minutes')}
       </p>
       <button
-        onClick={verifyPaymentStatus}
+        onClick={verifyPaymentStatus} // Chama a verificação manual
         disabled={isLoadingPayment}
         className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold transition-all duration-300 shadow-md mb-8"
       >
