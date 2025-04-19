@@ -76,22 +76,22 @@ export function useConfirmInfos(
       ? fiatAmountNum
       : fiatAmountNum * (usdToBrl || 0);
 
-  // Lógica de definição da taxa (alfredFeeRate):
-  // - Para boleto (ticket): se houver cupom, 5,99% (0.0599); caso contrário, 7% (0.07).
-  // - Para outros métodos:
-  //    - Se amountBRL < 6000: com cupom, usa localAlfredFeePercentage/100; senão, 5%.
-  //    - Se amountBRL >= 6000: com cupom, 4,99%; senão, 6%.
+  // Lógica atualizada de definição da taxa (alfredFeeRate):
+  // - Para valores até 6000 BRL:
+  //   - Sem cupom: 4.99% (0.0499)
+  //   - Com cupom: Taxa do influencer (alfredFeePercentage/100)
+  // - Para valores acima de 6000 BRL:
+  //   - Sem cupom: 5.99% (0.0599)
+  //   - Com cupom: 4.99% (0.0499)
   let alfredFeeRate: number;
-  if (paymentMethod?.toLowerCase().includes('ticket')) {
-    alfredFeeRate = cupom && cupom.trim() !== '' ? 0.0599 : 0.07;
+
+  if (amountBRL < 6000) {
+    alfredFeeRate =
+      cupom && cupom.trim() !== '' ? localAlfredFeePercentage / 100 : 0.0499;
   } else {
-    if (amountBRL < 6000) {
-      alfredFeeRate =
-        cupom && cupom.trim() !== '' ? localAlfredFeePercentage / 100 : 0.05;
-    } else {
-      alfredFeeRate = cupom && cupom.trim() !== '' ? 0.0499 : 0.06;
-    }
+    alfredFeeRate = cupom && cupom.trim() !== '' ? 0.0499 : 0.0599;
   }
+
   const alfredFee = amountBRL * alfredFeeRate;
 
   // Branch para criptomoedas
@@ -144,7 +144,7 @@ export function useConfirmInfos(
     // Para BTC (ou outros que usem a lógica de conversão via BTC)
     const conversionFeeUsd = 0.65;
     const conversionFeeBrl = conversionFeeUsd * (usdToBrl || 0);
-    const swapFee = amountBRL * 0.02 + conversionFeeBrl;
+    const swapFee = amountBRL * 0.025 + conversionFeeBrl;
     const totalFees = alfredFee + swapFee + (onchainFee || 0);
     const finalAmount = amountBRL - totalFees;
     const expectedAmountBTC = btcToBrl
