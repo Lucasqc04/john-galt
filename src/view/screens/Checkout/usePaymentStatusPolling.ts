@@ -10,78 +10,87 @@ export const usePaymentStatusPolling = () => {
   const navigate = useNavigate();
   const { currentLang } = useCurrentLang();
   const [isLoadingPayment, setIsLoadingPayment] = useState<boolean>(false);
-  const [isManualCheck, setIsManualCheck] = useState<boolean>(false); // Novo estado
+  const [isVipTransaction, setIsVipTransaction] = useState<boolean>(false);
 
   const pollingInterval = 20000;
   const maxPollingTime = 300000;
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const startTime = useRef<number | null>(null);
 
-  const verifyPaymentStatus = useCallback(
-    async (manualCheck = false) => {
-      setIsManualCheck(manualCheck); // Define se a verificação é manual
-      const transaction = localStorage.getItem('transactionId');
-      if (!transaction) {
-        toast.error(t('buycheckout.transactionNumberError'));
-        return;
-      }
-      setIsLoadingPayment(true);
+  // Verificar se é uma transação VIP quando o hook é inicializado
+  useEffect(() => {
+    const vipFlag = localStorage.getItem('isVipTransaction');
+    if (vipFlag === 'true') {
+      setIsVipTransaction(true);
+    }
+  }, []);
 
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/deposit-status?transactionId=${transaction}`,
-        );
-        const status = response.data.status;
+  const verifyPaymentStatus = useCallback(async () => {
+    // Para usuários VIP, não verificamos o status
+    if (isVipTransaction) {
+      return;
+    }
 
-        if (status === 'paid') {
-          navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
-          clearInterval(timerRef.current!);
-        }
-        if (status === 'under_review') {
-          navigate(ROUTES.paymentAlfredStatus.review.call(currentLang));
-          clearInterval(timerRef.current!);
-        } else if (manualCheck) {
-          // Apenas mostra o toast se for uma verificação manual
-          toast.warn(t('buycheckout.paymentNotConfirmed'));
-        }
-      } catch (error) {
-        console.error('Erro ao verificar o status do pagamento:', error);
-        if (manualCheck) {
-          toast.warn(t('buycheckout.paymentNotConfirmed'));
-        }
-      } finally {
-        setIsLoadingPayment(false);
+    // Fluxo normal para usuários não-VIP
+    const transaction = localStorage.getItem('transactionId');
+    if (!transaction) {
+      toast.error(t('buycheckout.transactionNumberError'));
+      return;
+    }
+    setIsLoadingPayment(true);
+
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/deposit-status?transactionId=${transaction}`,
+      );
+      const status = response.data.status;
+
+      if (status === 'paid') {
+        navigate(ROUTES.paymentAlfredStatus.success.call(currentLang));
+        clearInterval(timerRef.current!);
       }
-    },
-    [currentLang, navigate],
-  );
+      if (status === 'under_review') {
+        navigate(ROUTES.paymentAlfredStatus.review.call(currentLang));
+        clearInterval(timerRef.current!);
+      } else {
+        toast.warn(t('buycheckout.paymentNotConfirmed'));
+      }
+    } catch (error) {
+      console.error('Erro ao verificar o status do pagamento:', error);
+      toast.warn(t('buycheckout.paymentNotConfirmed'));
+    } finally {
+      setIsLoadingPayment(false);
+    }
+  }, [currentLang, navigate, isVipTransaction]);
 
   useEffect(() => {
+    // Para usuários VIP, não precisamos fazer polling no backend
+    if (isVipTransaction) {
+      return;
+    }
+
     startTime.current = Date.now();
 
     timerRef.current = setInterval(() => {
       if (Date.now() - startTime.current! > maxPollingTime) {
         clearInterval(timerRef.current!);
-        if (isManualCheck) {
-          // Apenas mostra o toast se for uma verificação manual
-          toast.warn(t('buycheckout.paymentTimeoutExceeded'));
-        }
+        toast.warn(t('buycheckout.paymentTimeoutExceeded'));
         return;
       }
-      verifyPaymentStatus(false); // Verificação automática
+      verifyPaymentStatus();
     }, pollingInterval);
 
-    // Cleanup function to clear the interval
     return () => {
       if (timerRef.current) {
         clearInterval(timerRef.current);
         timerRef.current = null;
       }
     };
-  }, [verifyPaymentStatus, isManualCheck]);
+  }, [verifyPaymentStatus, isVipTransaction]);
 
   return {
     isLoadingPayment,
-    verifyPaymentStatus: () => verifyPaymentStatus(true), // Passa true para verificação manual
+    verifyPaymentStatus,
+    isVipTransaction,
   };
 };
