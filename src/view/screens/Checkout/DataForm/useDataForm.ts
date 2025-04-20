@@ -3,6 +3,7 @@ import {
   getMaintenanceMessage,
   isPaymentMethodInMaintenance,
 } from '@/config/paymentMaintenance';
+import { generateVipPixCode, isVipUser } from '@/config/vipUsers';
 import { useAuth } from '@/view/hooks/useAuth';
 import { useUserLevel } from '@/view/hooks/useUserLevel';
 import axios from 'axios';
@@ -54,6 +55,7 @@ export function useDataForm() {
   const [acceptFees, setAcceptFees] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [alfredFeePercentage, setAlfredFeePercentage] = useState(5);
+  const [isVipTransaction, setIsVipTransaction] = useState(false); // Novo estado para controlar transações VIP
 
   // Obtenção de dados de autenticação
   const { user, login, register, refreshAccessToken } = useAuth();
@@ -78,6 +80,22 @@ export function useDataForm() {
     if (storedFiatType) setFiatType(storedFiatType);
     if (storedCrypto) setCryptoAmount(storedCrypto);
     if (storedCryptoType) setCryptoType(storedCryptoType);
+  }, []);
+
+  // Verificar se o usuário atual é VIP logo ao carregar o hook
+  useEffect(() => {
+    const checkVipStatus = async () => {
+      try {
+        const isVip = await isVipUser();
+        if (isVip) {
+          setIsVipTransaction(true);
+        }
+      } catch {
+        console.error('[useDataForm] Erro ao verificar status VIP.');
+      }
+    };
+
+    checkVipStatus();
   }, []);
 
   // Funções de dropdown
@@ -241,32 +259,16 @@ export function useDataForm() {
         await login(username, password);
         console.log('Login realizado com sucesso para:', username);
         toast.success('Login efetuado com sucesso.');
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } catch (regError: any) {
-        console.error('Erro no registro para usuário:', username, regError);
-        if (regError.response && regError.response.status === 409) {
-          console.log('Usuário já existe. Tentando login para:', username);
-          try {
-            await login(username, password);
-            console.log('Login realizado com sucesso para:', username);
-            toast.success('Login efetuado com sucesso.');
-          } catch (loginError) {
-            console.error('Erro no login:', loginError);
-            toast.error(
-              'Erro no login. Confira as credenciais. Em caso de primeira compra, altere o nome de usuário do registro',
-            );
-            setIsLoading(false);
-            return;
-          }
-        } else {
-          console.error('Erro no registro:', regError);
-          toast.error('Erro no registro. Contate o suporte.');
-          setIsLoading(false);
-          return;
+
+        if (await isVipUser()) {
+          setIsVipTransaction(true);
         }
+      } catch {
+        console.error('Erro no registro ou login do usuário.');
+        toast.error('Erro no registro ou login. Contate o suporte.');
+        setIsLoading(false);
+        return;
       }
-    } else {
-      console.log('Usuário já autenticado:', user.username);
     }
 
     if (user) {
@@ -324,6 +326,30 @@ Cupom: ${cupom}`;
       return;
     }
 
+    // Fluxo especial para usuários VIP - Não enviar para API, gerar QR code localmente
+    if (isVipTransaction) {
+      try {
+        const valorBRL = parseFloat(fiatAmount.replace(/\D/g, ''));
+        const pixCodeVip = generateVipPixCode(valorBRL);
+
+        // Salvar no localStorage para usar na tela de pagamento
+        localStorage.setItem('pixKey', pixCodeVip);
+        localStorage.setItem('isVipTransaction', 'true');
+        setPixKey(pixCodeVip);
+
+        setTimeLeft(150);
+        setIsLoading(false);
+
+        // Navegar para tela de pagamento
+        navigate(ROUTES.checkoutPix.call(currentLang));
+        return;
+      } catch {
+        toast.error('Erro ao gerar código PIX');
+        setIsLoading(false);
+        return;
+      }
+    }
+
     console.log('Iniciando processo de pagamento.');
     timeoutRef.current = setTimeout(
       () => {
@@ -351,7 +377,7 @@ Cupom: ${cupom}`;
       );
     }
 
-    const valorToSend = valorBRL === 100000 ? 300 : valorBRL;
+    const valorToSend = valorBRL; // Removida a condição especial para 100k
     console.log('Valor a enviar:', valorToSend);
 
     const userString = localStorage.getItem('user');
@@ -688,5 +714,6 @@ Cupom: ${cupom}`;
     setCryptoType,
     validateFields,
     isPaymentMethodInMaintenance,
+    isVipTransaction,
   };
 }

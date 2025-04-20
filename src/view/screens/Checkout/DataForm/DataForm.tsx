@@ -42,6 +42,9 @@ type PaymentMethodType =
   | 'TED'
   | 'CASH';
 
+// Adicionar a importação no topo do arquivo, se necessário
+import { isVipUser } from '@/config/vipUsers';
+
 export default function DataForm() {
   const {
     network,
@@ -76,6 +79,7 @@ export default function DataForm() {
     userLevelName,
     // restrictions,
     isPaymentMethodAllowed,
+    isVipTransaction, // Adicionar esta propriedade aos valores que vêm do useDataForm
   } = useDataForm();
 
   // Verifica se há um usuário logado via localStorage
@@ -107,12 +111,6 @@ export default function DataForm() {
   const [showTooltip, setShowTooltip] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const is100k =
-    parseInt(
-      localStorage.getItem('fiatAmount')?.replace(/\D/g, '') || '0',
-      10,
-    ) === 100000;
-
   const handleApplyCoupon = async () => {
     await checkCouponValidity();
     if (!errors.cupom) {
@@ -122,6 +120,7 @@ export default function DataForm() {
   };
 
   const handleOpenModal = async () => {
+    console.log('[DataForm] handleOpenModal chamado.');
     if (!username || (!loggedUser && !password)) {
       toast.error(t('buycheckout.missingLogin'));
       return;
@@ -144,6 +143,21 @@ export default function DataForm() {
 
     if (!validateFields()) {
       toast.error(t('buycheckout.missingFields'));
+      return;
+    }
+
+    // Para usuários VIP, pular o modal e ir direto para o processamento
+    try {
+      console.log('[DataForm] Chamando isVipUser para verificar status VIP.');
+      const isVip = await isVipUser(); // Corrigido para usar await
+      console.log('[DataForm] Resultado de isVipUser:', isVip);
+      if (isVip) {
+        handleProcessPayment(username, password);
+        return;
+      }
+    } catch (error) {
+      console.error('[DataForm] Erro ao verificar se o usuário é VIP:', error);
+      toast.error('Erro ao verificar status VIP. Tente novamente.');
       return;
     }
 
@@ -192,10 +206,6 @@ Cupom: ${cupom || 'Nenhum'}`;
     }
 
     if (paymentMethod === 'PIX') {
-      if (is100k) {
-        handleProcessPayment(username, password);
-        return;
-      }
       if (numericFiat > 5000) {
         let taxaAlfred = '';
         if (numericFiat >= 6000) {
@@ -698,7 +708,8 @@ Cupom: ${cupom || 'Nenhum'}`;
 
         {/* Removemos a versão anterior da imagem que estava fixa */}
 
-        {!is100k && (
+        {/* Só mostrar o modal para usuários não-VIP */}
+        {!isVipTransaction && (
           <ConfirmInfosModal
             isOpen={isModalOpen}
             onClose={closeModal}
