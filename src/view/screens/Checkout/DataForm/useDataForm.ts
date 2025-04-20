@@ -259,16 +259,32 @@ export function useDataForm() {
         await login(username, password);
         console.log('Login realizado com sucesso para:', username);
         toast.success('Login efetuado com sucesso.');
-
-        if (await isVipUser()) {
-          setIsVipTransaction(true);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (regError: any) {
+        console.error('Erro no registro para usuário:', username, regError);
+        if (regError.response && regError.response.status === 409) {
+          console.log('Usuário já existe. Tentando login para:', username);
+          try {
+            await login(username, password);
+            console.log('Login realizado com sucesso para:', username);
+            toast.success('Login efetuado com sucesso.');
+          } catch (loginError) {
+            console.error('Erro no login:', loginError);
+            toast.error(
+              'Erro no login. Confira as credenciais. Em caso de primeira compra, altere o nome de usuário do registro',
+            );
+            setIsLoading(false);
+            return;
+          }
+        } else {
+          console.error('Erro no registro:', regError);
+          toast.error('Erro no registro. Contate o suporte.');
+          setIsLoading(false);
+          return;
         }
-      } catch {
-        console.error('Erro no registro ou login do usuário.');
-        toast.error('Erro no registro ou login. Contate o suporte.');
-        setIsLoading(false);
-        return;
       }
+    } else {
+      console.log('Usuário já autenticado:', user.username);
     }
 
     if (user) {
