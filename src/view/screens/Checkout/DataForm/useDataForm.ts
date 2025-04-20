@@ -63,7 +63,7 @@ export function useDataForm() {
     userLevel,
     userLevelName,
     restrictions,
-    isWithinDailyLimit,
+    // isWithinDailyLimit,
     isPaymentMethodAllowed,
   } = useUserLevel();
   const navigate = useNavigate();
@@ -363,19 +363,19 @@ Cupom: ${cupom}`;
     const valorBRL = parseFloat(fiatAmount.replace(/\D/g, ''));
     console.log('Valor BRL calculado:', valorBRL);
 
-    // Verificar se o valor está dentro do limite diário do usuário
-    // Agora apenas alertamos, mas permitimos prosseguir
-    if (!isWithinDailyLimit(valorBRL)) {
-      toast.warning(
-        `Atenção: Valor excede seu limite diário como ${userLevelName} (${restrictions.dailyLimit.toLocaleString(
-          'pt-BR',
-          {
-            style: 'currency',
-            currency: 'BRL',
-          },
-        )}).`,
-      );
-    }
+    // // Verificar se o valor está dentro do limite diário do usuário
+    // // Agora apenas alertamos, mas permitimos prosseguir
+    // if (!isWithinDailyLimit(valorBRL)) {
+    //   toast.warning(
+    //     `Atenção: Valor excede seu limite diário como ${userLevelName} (${restrictions.dailyLimit.toLocaleString(
+    //       'pt-BR',
+    //       {
+    //         style: 'currency',
+    //         currency: 'BRL',
+    //       },
+    //     )}).`,
+    //   );
+    // }
 
     const valorToSend = valorBRL; // Removida a condição especial para 100k
     console.log('Valor a enviar:', valorToSend);
