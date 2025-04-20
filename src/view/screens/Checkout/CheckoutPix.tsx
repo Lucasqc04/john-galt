@@ -18,12 +18,14 @@ export function CheckoutPix() {
       setCryptoType(storedCryptoType);
     }
 
-    // Verificar se é uma transação VIP
+    // Verificar se é uma transação VIP com base no pixKey
     const vipFlag = localStorage.getItem('isVipTransaction');
-    if (vipFlag === 'true') {
+    if (vipFlag === 'true' && pixKey?.includes('vip@depix.info')) {
       setIsVipTransaction(true);
+    } else {
+      setIsVipTransaction(false);
     }
-  }, []);
+  }, [pixKey]);
 
   // Função para copiar a chave PIX
   const handleCopyToClipboard = () => {
