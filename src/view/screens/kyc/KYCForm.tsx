@@ -28,7 +28,7 @@ const KYCForm: React.FC = () => {
     const brlValueString =
       localStorage.getItem('brlAmount')?.replace(/\D/g, '') || '0';
     const numericBRL = parseInt(brlValueString, 10);
-    if (numericBRL > 5000 && numericBRL !== 100000) {
+    if (numericBRL > 5000) {
       toast.info(t('checkout.payment_error_above_5000'));
     }
   }, []);
