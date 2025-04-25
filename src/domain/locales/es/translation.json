@@ -29,7 +29,7 @@
     "missingFields": "Por favor, completa todos los campos obligatorios.",
     "title": "Compra de Bitcoin y Checkout",
     "brl_placeholder": "Ingrese el monto en BRL",
-    "usd_placeholder": "Ingrese el monto en USD",
+    "usd_placeholder": "Ingrese el monto en USDT",
     "depix_placeholder": "Monto en Depix",
     "btc_placeholder": "Monto en BTC",
     "usdt_placeholder": "Monto en USDT",

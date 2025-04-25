@@ -5,7 +5,6 @@ import Btc from '../../../assets/bitcoin.svg';
 import Brl from '../../../assets/brl.svg';
 import DepixIcon from '../../../assets/depix-logo.png';
 import Mao from '../../../assets/patinha.webp';
-import Usd from '../../../assets/usd.svg';
 import Usdt from '../../../assets/usdt.svg';
 import { useValuesForm } from './useValuesForm';
 
@@ -105,7 +104,7 @@ export function ValuesForm({
               className="absolute right-2 top-1/2 -translate-y-1/2 text-white"
             >
               <img
-                src={fiatType === 'BRL' ? Brl : Usd}
+                src={fiatType === 'BRL' ? Brl : Usdt}
                 alt={
                   fiatType === 'BRL'
                     ? t('checkout.brl_label')
