@@ -122,27 +122,27 @@ export default function DataForm() {
   const handleOpenModal = async () => {
     console.log('[DataForm] handleOpenModal chamado.');
     if (!username || (!loggedUser && !password)) {
-      toast.error(t('buycheckout.missingLogin'));
+      toast.error(t('checkout.missingLogin'));
       return;
     }
 
     if (cupom.trim() && !couponApplied) {
-      toast.error(t('buycheckout.applyCouponFirst'));
+      toast.error(t('checkout.applyCouponFirst'));
       return;
     }
 
     if (username.trim().length < 6) {
-      toast.error(t('buycheckout.usernameLengthError'));
+      toast.error(t('checkout.usernameLengthError'));
       return;
     }
 
     if (!loggedUser && password.trim().length < 6) {
-      toast.error(t('buycheckout.passwordLengthError'));
+      toast.error(t('checkout.passwordLengthError'));
       return;
     }
 
     if (!validateFields()) {
-      toast.error(t('buycheckout.missingFields'));
+      toast.error(t('checkout.missingFields'));
       return;
     }
 
