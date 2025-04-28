@@ -4,7 +4,7 @@ export class ResultSuccess<S> {
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type ResultErrorF = { code: string; payload?: any };
-export type DefaultResultError = { code: 'UNKNOWN' };
+export type DefaultResultError = { code: 'UNKNOWN'; message?: string };
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
 export class ResultError<F> {

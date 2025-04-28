@@ -29,7 +29,7 @@
     "missingFields": "Please fill in all required fields.",
     "title": "Bitcoin Purchase and Checkout",
     "brl_placeholder": "Enter the amount in BRL",
-    "usd_placeholder": "Enter the amount in USD",
+    "usd_placeholder": "Enter the amount in USDT",
     "depix_placeholder": "DePix Amout",
     "btc_placeholder": "BTC Amount",
     "usdt_placeholder": "USDT Amount",
@@ -67,8 +67,8 @@
   },
   "paymentSuccess": {
     "title": "Payment completed successfully!",
-    "description": "Your transaction has been successfully completed.",
-    "transactionTime": "Processing may take from 30 minutes to 24 hours, please wait.",
+    "description": "Your transaction has been completed successfully.",
+    "transactionTime": "You will receive your crypto in the wallet you provided during checkout. Processing may take from 5 minutes to 6 hours, please wait.",
     "whatsapp": "Contact us via WhatsApp",
     "redirectButton": "Go back to SITE",
     "Ballon": "Come back soon!"

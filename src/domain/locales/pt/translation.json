@@ -31,7 +31,7 @@
     "buy": "Comprar",
     "sell": "Vender",
     "brl_placeholder": "Digite o valor em BRL",
-    "usd_placeholder": "Digite o valor em USD",
+    "usd_placeholder": "Digite o valor em USDT",
     "depix_placeholder": "Valor em Depix",
     "btc_placeholder": "Valor em BTC",
     "usdt_placeholder": "Valor em USDT",
@@ -69,7 +69,7 @@
   "paymentSuccess": {
     "title": "Pagamento concluído com sucesso!",
     "description": "Sua transação foi concluída com sucesso.",
-    "transactionTime": "O processamento pode levar de 30 minutos a 24 horas, por favor, aguarde.",
+    "transactionTime": "Você receberá sua cripto em sua carteira informada no checkout, o processamento pode levar de 5 minutos a 6 horas, por favor aguarde.",
     "whatsapp": "FALE CONOSCO",
     "redirectButton": "VOLTAR PARA O SITE",
     "Ballon": "Volte logo!"

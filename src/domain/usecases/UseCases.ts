@@ -2,11 +2,10 @@ import { RemoteDataSource } from '@/data/datasource/Remote.datasource';
 import { BitcoinRateRepositoryImpl } from '@/data/repositories/BitcoinRate.repository';
 import { ListBitcoinRateUseCaseImpl } from './bitcoin/list-rate.usecase';
 
-const CoingeckoUrl = 'https://api.coingecko.com/api/v3/simple';
+// We'll use a generic RemoteDataSource that will be updated with the proper URL in the repository
+const remoteAPI = new RemoteDataSource();
 
-const coingeckoAPI = new RemoteDataSource(CoingeckoUrl);
-
-const BitcoinRateRepository = new BitcoinRateRepositoryImpl(coingeckoAPI);
+const BitcoinRateRepository = new BitcoinRateRepositoryImpl(remoteAPI);
 
 export const usecases = {
   bitcoinRate: {

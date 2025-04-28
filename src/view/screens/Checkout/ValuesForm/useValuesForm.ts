@@ -100,12 +100,14 @@ export function useValuesForm() {
     let newCryptoType: 'BITCOIN' | 'DEPIX' | 'USDT';
 
     if (fiatType === 'USD') {
+      // For USD, we only allow BITCOIN and DEPIX
       newCryptoType = cryptoType === 'BITCOIN' ? 'DEPIX' : 'BITCOIN';
     } else {
+      // For BRL, cycle through BITCOIN -> USDT -> DEPIX
       if (cryptoType === 'BITCOIN') {
-        newCryptoType = 'DEPIX';
-      } else if (cryptoType === 'DEPIX') {
         newCryptoType = 'USDT';
+      } else if (cryptoType === 'USDT') {
+        newCryptoType = 'DEPIX';
       } else {
         newCryptoType = 'BITCOIN';
       }
