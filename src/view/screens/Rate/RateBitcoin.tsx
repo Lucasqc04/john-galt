@@ -15,9 +15,8 @@ export function Fees() {
           <h2 className="text-xl font-semibold mb-4 text-white">
             {t('fees.dailyLimit1')}
           </h2>
-          <ul className="list-disc pl-5 text-white">
-            <li>{t('fees.above1000')}</li>
-          </ul>
+
+          <p className="text-white">{t('fees.above1000')}</p>
         </section>
 
         <section className="pb-8">
