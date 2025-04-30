@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import Btc from '../../../assets/bitcoin.svg';
 import Brl from '../../../assets/brl.svg';
 import DepixIcon from '../../../assets/depix-logo.png';
-import Mao from '../../../assets/patinha.webp';
+import Mao from '../../../assets/SITE_MAO_ALFRED.png';
 import Usdt from '../../../assets/usdt.svg';
 import { useValuesForm } from './useValuesForm';
 
@@ -117,7 +117,7 @@ export function ValuesForm({
                 <img
                   src={Mao}
                   alt="Mão"
-                  className="w-4 animate-fadeInPop transition-transform duration-500 hover:scale-110"
+                  className="w-6 animate-fadeInPop transition-transform duration-500 hover:scale-110"
                 />
               )}
             </button>
@@ -140,7 +140,7 @@ export function ValuesForm({
                 <img
                   src={Mao}
                   alt="Mão"
-                  className="absolute bottom-0 right-0 w-4 animate-fadeInPop transition-transform duration-500 hover:scale-110"
+                  className="absolute bottom-0 right-0 w-6 animate-fadeInPop transition-transform duration-500 hover:scale-110"
                 />
               )}
             </button>
@@ -184,7 +184,7 @@ export function ValuesForm({
                 <img
                   src={Mao}
                   alt="Mão"
-                  className="w-4 animate-fadeInPop transition-transform duration-500 hover:scale-110"
+                  className="w-6 animate-fadeInPop transition-transform duration-500 hover:scale-110"
                 />
               )}
             </button>
