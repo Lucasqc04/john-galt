@@ -1,4 +1,4 @@
-import AlfredWhiteLogo from '@/view/assets/logo/alfred-white-logo.svg';
+import AlfredWhiteLogo from '@/view/assets/logo/logo-type.svg';
 import { Loader } from '@/view/components/Loader';
 import { useScaleFactor } from '@/view/hooks/useScaleFactor';
 import { useWindowSize } from '@/view/utils/useWindowSize';
@@ -88,7 +88,7 @@ export function Support() {
             <aside className="col-span-full md:col-span-6 flex flex-col items-center">
               <img
                 src={AlfredWhiteLogo}
-                alt="Alfred Logo"
+                alt="johngalt Logo"
                 className="pb-8 w-3/4"
               />
 
@@ -164,7 +164,7 @@ export function Support() {
 
                 <button
                   type="submit"
-                  className="w-full p-3 rounded-lg font-bold transition  border bg-[#F39200] flex items-center justify-center text-white"
+                  className="w-full p-3 rounded-lg font-bold transition  border bg-[#ff007a] flex items-center justify-center text-white"
                   disabled={isLoading}
                 >
                   {t('support.send')}

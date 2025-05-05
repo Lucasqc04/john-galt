@@ -4,8 +4,8 @@ import { CSSProperties, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaWhatsapp } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import Alfred from '../../assets/AlfredComercial.png';
 import logoSucces from '../../assets/Check_Tela_Alfred.png';
+import JohnGaltLogo from '../../assets/logo/Logo.png';
 import TalkBallon from '../../assets/talk.png';
 import { ROUTES } from '../../routes/Routes';
 import { useCurrentLang } from '../../utils/useCurrentLang';
@@ -97,8 +97,8 @@ export function PaymentAlfredSuccess() {
     >
       <Background />
       <motion.img
-        src={Alfred}
-        alt="Alfred Mascote"
+        src={JohnGaltLogo}
+        alt="John Galt Logo"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.3, duration: 0.5 }}
@@ -157,14 +157,14 @@ export function PaymentAlfredSuccess() {
       >
         <button
           onClick={() => handleOnLink(ROUTES.buyBitcoin.call(currentLang))}
-          className="w-[200px] h-[50px] bg-[#F49300] border-[3px] border-white rounded-[40px] "
+          className="w-[200px] h-[50px] bg-[#ff007a] border-[3px] border-white rounded-[40px] "
         >
           {t('paymentSuccess.redirectButton')}
         </button>
         <button
           onClick={() =>
             window.open(
-              'https://api.whatsapp.com/send?phone=+5511919050416&text=Meu%20pagamento%20no%20Alfred%20foi%20conclu%C3%ADdo%20e%20tenho%20algumas%20d%C3%BAvidas.%20Poderia%20me%20ajudar%3F',
+              'https://api.whatsapp.com/send?phone=+5511919050416&text=Meu%20pagamento%20no%20John%20Galt%20foi%20conclu%C3%ADdo%20e%20tenho%20algumas%20d%C3%BAvidas.%20Poderia%20me%20ajudar%3F',
               '_blank',
             )
           }

@@ -1,5 +1,5 @@
 import { useLanguage } from '@/domain/locales/Language';
-import AlfredWhiteLogo from '@/view/assets/logo/alfred-white-logo.svg';
+import JohnGaltWhiteLogo from '@/view/assets/logo/logo-type.svg';
 import { Background } from '@/view/components/BackgroundAnimatedProduct';
 import { Loader } from '@/view/components/Loader';
 import { useAuth } from '@/view/hooks/useAuth';
@@ -9,7 +9,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Ícones de olho
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import AlfredImg from '../../assets/AlfredComercial.png'; // imagem promocional do Alfred
+import JohnGaltLogo from '../../assets/logo/Logo.png';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -66,8 +66,8 @@ export default function LoginPage() {
             <div className="mb-10 text-center text-white">
               <h1 className="text-4xl font-bold mb-6">Login Seguro</h1>
               <img
-                src={AlfredWhiteLogo}
-                alt="Alfred Logo"
+                src={JohnGaltWhiteLogo}
+                alt="johngalt Logo"
                 className="w-44 sm:w-60 mx-auto"
               />
             </div>
@@ -105,7 +105,7 @@ export default function LoginPage() {
                 há recuperação de senha. Guarde bem suas credenciais.
               </p>
               <button
-                className="w-full mt-6 p-4 bg-[#F39200] text-white font-bold rounded-3xl hover:bg-[#e68800] transition-colors duration-200"
+                className="w-full mt-6 p-4 bg-[#ff007a] text-white font-bold rounded-3xl hover:bg-[#c40963] transition-colors duration-200"
                 onClick={handleLogin}
               >
                 Entrar
@@ -114,7 +114,7 @@ export default function LoginPage() {
                 <p className="text-white">
                   <span>Não tem uma conta? </span>
                   <span
-                    className="text-[#F39200] font-bold cursor-pointer"
+                    className="text-[#ff007a] font-bold cursor-pointer"
                     onClick={() =>
                       navigate(ROUTES.auth.register.call(currentLang))
                     }
@@ -128,9 +128,9 @@ export default function LoginPage() {
           {/* Seção da Imagem Promocional */}
           <div className="lg:w-1/2 w-full mt-10 lg:mt-0 flex justify-center">
             <img
-              src={AlfredImg}
-              alt="Imagem Promocional do Alfred"
-              className="w-full max-w-md"
+              src={JohnGaltLogo}
+              alt="Logo John Galt"
+              className="w-full max-w-xs lg:max-w-sm" // Reduzido de max-w-md para max-w-xs/sm
             />
           </div>
         </div>

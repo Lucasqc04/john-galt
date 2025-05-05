@@ -1,17 +1,15 @@
-import AlfredWhiteLogo from '@/view/assets/logo/alfred-white-logo.svg';
+import JohnGaltWhiteLogo from '@/view/assets/logo/logo-type.svg';
 import SocialButtons from '@/view/components/SocialButtons';
 import { useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { FaPlay } from 'react-icons/fa';
-import AlfredImg from '../../assets/_DIY SEC LAB - Apresentação Comercial (1).png';
+import JohnGaltImg from '../../assets/logo/Logo.png';
 import { useCheckout } from './useCheckout';
 import { ValuesForm } from './ValuesForm/ValuesForm';
 
 export default function Checkout() {
   const { t } = useTranslation();
-  const { form, steps, isTransactionAllowed, ValidateValues, isAlfred24h } =
-    useCheckout();
+  const { form, steps, isTransactionAllowed, ValidateValues } = useCheckout();
 
   const [transactionType, setTransactionType] = useState<'buy' | 'sell'>('buy');
   const [isMaintenanceMode] = useState(false);
@@ -35,11 +33,11 @@ Quantidade de ${checkoutData.cryptoType}: ${checkoutData.cryptoAmount}`;
   };
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full min-h-screen flex items-center justify-center -mt-8 pt-20">
       {isMaintenanceMode && (
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-90 text-white text-center p-6 z-10">
           <h1 className="text-4xl font-bold mb-4 text-yellow-500">
-            🚧 Alfred em Manutenção 🚧
+            🚧 John Galt em Manutenção 🚧
           </h1>
           <p className="text-lg max-w-lg">
             Estamos realizando melhorias para oferecer um serviço ainda melhor.
@@ -51,17 +49,17 @@ Quantidade de ${checkoutData.cryptoType}: ${checkoutData.cryptoAmount}`;
         </div>
       )}
 
-      <main className="flex flex-col justify-center items-center w-full max-w-screen-xl px-6 sm:px-12 md:px-20 lg:px-32 xl:px-40 pt-12 sm:pt-28 mx-auto">
+      <main className="flex flex-col justify-center items-center w-full max-w-screen-xl px-6 sm:px-12 md:px-20 lg:px-28 xl:px-36 py-16 mx-auto">
         <section className="w-full max-w-screen-lg flex flex-col lg:flex-row items-center justify-center mx-auto">
-          <article className="w-full lg:w-1/2 flex flex-col items-center justify-center gap-y-4">
+          <article className="w-full lg:w-3/5 flex flex-col items-center justify-center gap-y-6">
             <img
-              src={AlfredWhiteLogo}
-              alt="Alfred Logo"
-              className="w-44 sm:w-60"
+              src={JohnGaltWhiteLogo}
+              alt="John Galt Logo"
+              className="w-64 sm:w-96"
             />
 
             <FormProvider {...form}>
-              <form className="flex flex-col justify-center items-center w-full max-w-2xl space-y-2">
+              <form className="flex flex-col justify-center items-center w-full max-w-2xl space-y-4">
                 {!isTransactionAllowed && (
                   <span className="text-red-500 text-center font-bold pb-2">
                     {t('checkout.transaction_error')}
@@ -69,14 +67,7 @@ Quantidade de ${checkoutData.cryptoType}: ${checkoutData.cryptoAmount}`;
                 )}
 
                 <div className="flex justify-center w-full items-center">
-                  {isAlfred24h && (
-                    <div className="ml-4">
-                      <div className="flex items-center gap-2 text-lg font-bold text-green-500">
-                        <FaPlay size={24} />
-                        <span className="text-3xl">24H</span>
-                      </div>
-                    </div>
-                  )}
+                  {/* 24H removido daqui */}
                 </div>
 
                 {steps.current === 1 && (
@@ -88,11 +79,11 @@ Quantidade de ${checkoutData.cryptoType}: ${checkoutData.cryptoAmount}`;
 
                 {steps.current === 1 && (
                   <>
-                    <div className="w-full flex justify-center items-center pt-2">
+                    <div className="w-full flex justify-center items-center pt-4">
                       <button
                         type="button"
                         onClick={handleProceedClick}
-                        className="w-full h-10 sm:h-12 rounded-3xl font-bold text-sm sm:text-base border-2 transition-colors duration-200 bg-[#F39200] text-white hover:bg-[#E07F00]"
+                        className="w-full h-12 sm:h-14 rounded-3xl font-bold text-base sm:text-lg border-2 transition-colors duration-200 bg-[#ff007a] text-white hover:bg-[#c40963]"
                       >
                         {isMaintenanceMode
                           ? '🚧 Site em Manutenção 🚧'
@@ -106,24 +97,18 @@ Quantidade de ${checkoutData.cryptoType}: ${checkoutData.cryptoAmount}`;
                       </p>
                     </section>
 
-                    {isAlfred24h && (
-                      <section className="hidden lg:flex items-center justify-center text-center">
-                        <p className="text-white">
-                          {t('checkout.opening_hours')}
-                        </p>
-                      </section>
-                    )}
+                    {/* Seção com horário de funcionamento removida */}
                   </>
                 )}
               </form>
             </FormProvider>
           </article>
 
-          <article className="w-full lg:w-1/2 flex justify-center">
+          <article className="w-full lg:w-2/5 flex justify-center items-center mt-10 lg:mt-0 lg:pl-12">
             <img
-              src={AlfredImg}
-              alt="Imagem Alfred"
-              className="w-full max-w-md lg:max-w-full image-step"
+              src={JohnGaltImg}
+              alt="Imagem John Galt"
+              className="w-full max-w-sm lg:max-w-full scale-100 lg:scale-110 image-step"
             />
           </article>
 
@@ -132,11 +117,7 @@ Quantidade de ${checkoutData.cryptoType}: ${checkoutData.cryptoAmount}`;
           </section>
         </section>
 
-        {isAlfred24h && (
-          <section className="lg:hidden mt-4 mb-4 text-center">
-            <p className="text-white">{t('checkout.opening_hours')}</p>
-          </section>
-        )}
+        {/* Seção mobile com horário de funcionamento removida */}
 
         <div className="flex justify-center w-full">
           <SocialButtons />

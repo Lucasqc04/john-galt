@@ -230,7 +230,7 @@ const KYCForm: React.FC = () => {
               Por que solicitamos esses documentos?
             </h3>
             <p className="text-white text-sm mt-1">
-              O Alfred opera com foco na liberdade financeira, garantindo um
+              O johngalt opera com foco na liberdade financeira, garantindo um
               ambiente seguro e sem interferências. Para evitar impactos
               indesejados, realizo um reconhecimento da origem dos fundos antes
               de liberar transações de alto valor.

@@ -27,7 +27,7 @@ export function useCheckout() {
   const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(1);
   const [isTransactionAllowed, setIsTransactionAllowed] = useState(false);
-  const [isAlfred24h] = useState(true);
+  const [isJohnGalt24h] = useState(true);
   const [walletType, setWalletType] = useState<WalletType>('liquid');
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('pix');
 
@@ -92,15 +92,15 @@ export function useCheckout() {
     const zonedTime = toZonedTime(now, timeZone);
     const currentHour = zonedTime.getHours();
 
-    if (isAlfred24h || (currentHour >= 8 && currentHour < 22)) {
+    if (isJohnGalt24h || (currentHour >= 8 && currentHour < 22)) {
       setIsTransactionAllowed(true);
     } else {
       setIsTransactionAllowed(false);
-      if (!isAlfred24h) {
+      if (!isJohnGalt24h) {
         toast.info(t('checkout.outside_hours'));
       }
     }
-  }, [isAlfred24h, t]);
+  }, [isJohnGalt24h, t]);
 
   async function ValidateValues(data: Checkout) {
     if (!isTransactionAllowed) {
@@ -159,6 +159,6 @@ export function useCheckout() {
     setWalletType,
     paymentMethod,
     setPaymentMethod,
-    isAlfred24h,
+    isJohnGalt24h,
   };
 }

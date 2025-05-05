@@ -82,16 +82,16 @@ export const ROUTES = {
   },
   paymentAlfredStatus: {
     failure: {
-      path: 'failure-alfred',
-      call: (currentLang: string) => `/${currentLang}/failure-alfred`,
+      path: 'failure',
+      call: (currentLang: string) => `/${currentLang}/failure`,
     },
     success: {
-      path: 'success-alfred',
-      call: (currentLang: string) => `/${currentLang}/success-alfred`,
+      path: 'success',
+      call: (currentLang: string) => `/${currentLang}/success`,
     },
     review: {
-      path: 'review-alfred',
-      call: (currentLang: string) => `/${currentLang}/review-alfred`,
+      path: 'review',
+      call: (currentLang: string) => `/${currentLang}/review`,
     },
   },
   // Rotas de administração

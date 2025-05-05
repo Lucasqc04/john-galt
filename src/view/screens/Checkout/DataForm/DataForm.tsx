@@ -1,10 +1,11 @@
-import AlfredWhiteLogo from '@/view/assets/logo/alfred-white-logo.svg';
+import JohnGaltWhiteLogo from '@/view/assets/logo/logo-type.svg';
 import { PaymentLoader } from '@/view/components/PaymentLoader';
 import { UserLevelBadge } from '@/view/components/UserLevelBadge';
 import classNames from 'classnames';
 import { t } from 'i18next';
 import { ChangeEvent, useState } from 'react';
 import {
+  FaExternalLinkAlt,
   FaEye,
   FaEyeSlash,
   FaLock,
@@ -16,7 +17,6 @@ import { FaPix } from 'react-icons/fa6';
 import { toast } from 'react-toastify';
 import BankTransf from '../../../assets/bankIcon.png';
 import BoletoIcon from '../../../assets/BoletoIcon.png';
-import AlfredImg from '../../../assets/c1b28810-5a23-4e7c-bcce-bd1f42b271c5.png';
 import PayPalIcon from '../../../assets/paypalIcon.png';
 import SwiftIcon from '../../../assets/swiftIcon.png';
 import WiseIcon from '../../../assets/wiseIcon.png';
@@ -207,15 +207,15 @@ Cupom: ${cupom || 'Nenhum'}`;
 
     if (paymentMethod === 'PIX') {
       if (numericFiat > 5000) {
-        let taxaAlfred = '';
+        let taxaJohnGalt = '';
         if (numericFiat >= 6000) {
-          taxaAlfred = cupom.trim() !== '' ? '4.99' : '6';
+          taxaJohnGalt = cupom.trim() !== '' ? '4.99' : '6';
         } else {
-          taxaAlfred = alfredFeePercentage.toString();
+          taxaJohnGalt = alfredFeePercentage.toString();
         }
 
         const message = `
-    Estou comprando mais de 5 mil reais no Alfred e preciso do formulário de Validação para Transações Anônimas.
+    Estou comprando mais de 5 mil reais no John Galt e preciso do formulário de Validação para Transações Anônimas.
 
     - Valor: ${fiatAmount} (${fiatType})
     - Valor Crypto: ${cryptoAmount} ${cryptoType.toUpperCase()}
@@ -224,7 +224,7 @@ Cupom: ${cupom || 'Nenhum'}`;
     - Método de pagamento: ${paymentMethodLabels[paymentMethod]}
     - Usuário: ${username}
     - Cupom: ${cupom || 'Nenhum'}
-    - Taxa Alfred (%): ${taxaAlfred}
+    - Taxa John Galt (%): ${taxaJohnGalt}
         `;
         const whatsappURL = `https://wa.me/5511911872097?text=${encodeURIComponent(message)}`;
         window.open(whatsappURL, '_blank');
@@ -316,8 +316,12 @@ Cupom: ${cupom || 'Nenhum'}`;
     <>
       {isLoading && <PaymentLoader />}
 
-      <main className="flex flex-col justify-center items-center pt-12 sm:pt-24">
-        <img src={AlfredWhiteLogo} alt="Alfred Logo" className="w-64 sm:w-96" />
+      <main className="flex flex-col justify-center items-center pt-12 sm:pt-24 px-4 sm:px-6">
+        <img
+          src={JohnGaltWhiteLogo}
+          alt="John Galt Logo"
+          className="w-64 sm:w-96"
+        />
 
         {/* Exibir o nível do usuário */}
         {loggedUser && (
@@ -335,8 +339,8 @@ Cupom: ${cupom || 'Nenhum'}`;
           </p>
 
           <div className="w-full flex justify-center">
-            {/* Container principal com posição relativa para posicionar o Alfred */}
-            <div className="w-full max-w-2xl relative">
+            {/* Container principal sem a imagem posicionada à direita */}
+            <div className="w-full max-w-xl">
               {/* Área dos inputs */}
               <div className="w-full">
                 <div className="flex justify-center items-center relative w-full">
@@ -632,60 +636,85 @@ Cupom: ${cupom || 'Nenhum'}`;
                   />
                   <button
                     onClick={handleApplyCoupon}
-                    className="ml-4 px-6 py-3 bg-[#F39200] text-white rounded-3xl font-bold"
+                    className="ml-4 px-6 py-3 bg-[#ff007a] text-white rounded-3xl font-bold"
                   >
                     {t('buycheckout.apply')}
                   </button>
                 </div>
-                <div className="flex flex-col justify-center items-start pt-4">
-                  <label className="flex items-center text-white">
-                    <input
-                      type="checkbox"
-                      checked={acceptFees}
-                      onChange={() => setAcceptFees(!acceptFees)}
-                      className="mr-2"
-                    />
-                    <span
-                      onClick={() =>
-                        window.open(
-                          ROUTES.fee.call(currentLang),
-                          '_blank',
-                          'noopener,noreferrer',
-                        )
-                      }
-                      className="text-xs sm:text-base cursor-pointer text-blue-500 hover:underline"
-                    >
-                      {t('buycheckout.acceptFees')}
-                    </span>
-                  </label>
-                  <label className="flex items-center text-white">
-                    <input
-                      type="checkbox"
-                      checked={acceptTerms}
-                      onChange={() => setAcceptTerms(!acceptTerms)}
-                      className="mr-2"
-                    />
-                    <span
-                      onClick={() =>
-                        window.open(
-                          ROUTES.term.call(currentLang),
-                          '_blank',
-                          'noopener,noreferrer',
-                        )
-                      }
-                      className="text-xs sm:text-base cursor-pointer text-blue-500 hover:underline"
-                    >
-                      {t('buycheckout.acceptTerms')}
-                    </span>
-                  </label>
+                {/* Seção de termos e taxas com estilo melhorado e largura reduzida */}
+                <div className="flex flex-col justify-center space-y-3 pt-6 max-w-md mx-auto w-full">
+                  <div className="bg-gray-800 bg-opacity-50 rounded-xl p-3 transition-all hover:bg-opacity-70">
+                    <label className="flex items-center text-white cursor-pointer">
+                      <div className="relative">
+                        <input
+                          type="checkbox"
+                          checked={acceptFees}
+                          onChange={() => setAcceptFees(!acceptFees)}
+                          className="sr-only"
+                        />
+                        <div
+                          className={`w-10 h-5 ${acceptFees ? 'bg-[#ff007a]' : 'bg-gray-600'} rounded-full shadow-inner transition-colors duration-300`}
+                        ></div>
+                        <div
+                          className={`absolute w-4 h-4 bg-white rounded-full shadow top-0.5 left-0.5 transition-transform transform ${acceptFees ? 'translate-x-5' : ''}`}
+                        ></div>
+                      </div>
+                      <div
+                        onClick={() =>
+                          window.open(
+                            ROUTES.fee.call(currentLang),
+                            '_blank',
+                            'noopener,noreferrer',
+                          )
+                        }
+                        className="ml-3 text-sm sm:text-base cursor-pointer text-white hover:text-[#ff007a] transition-colors flex items-center"
+                      >
+                        {t('buycheckout.acceptFees')}
+                        <FaExternalLinkAlt className="ml-1 text-[#ff007a] text-xs" />
+                      </div>
+                    </label>
+                  </div>
+
+                  <div className="bg-gray-800 bg-opacity-50 rounded-xl p-3 transition-all hover:bg-opacity-70">
+                    <label className="flex items-center text-white cursor-pointer">
+                      <div className="relative">
+                        <input
+                          type="checkbox"
+                          checked={acceptTerms}
+                          onChange={() => setAcceptTerms(!acceptTerms)}
+                          className="sr-only"
+                        />
+                        <div
+                          className={`w-10 h-5 ${acceptTerms ? 'bg-[#ff007a]' : 'bg-gray-600'} rounded-full shadow-inner transition-colors duration-300`}
+                        ></div>
+                        <div
+                          className={`absolute w-4 h-4 bg-white rounded-full shadow top-0.5 left-0.5 transition-transform transform ${acceptTerms ? 'translate-x-5' : ''}`}
+                        ></div>
+                      </div>
+                      <div
+                        onClick={() =>
+                          window.open(
+                            ROUTES.term.call(currentLang),
+                            '_blank',
+                            'noopener,noreferrer',
+                          )
+                        }
+                        className="ml-3 text-sm sm:text-base cursor-pointer text-white hover:text-[#ff007a] transition-colors flex items-center"
+                      >
+                        {t('buycheckout.acceptTerms')}
+                        <FaExternalLinkAlt className="ml-1 text-[#ff007a] text-xs" />
+                      </div>
+                    </label>
+                  </div>
                 </div>
-                <div className="flex justify-center items-center pt-4">
+
+                <div className="flex justify-center items-center pt-6">
                   <button
                     onClick={handleOpenModal}
                     type="button"
                     disabled={!acceptFees || !acceptTerms}
                     className={classNames(
-                      'w-full h-12 sm:h-14 bg-[#F39200] text-white rounded-3xl font-bold text-sm sm:text-base mb-[10%]',
+                      'w-full h-12 sm:h-14 bg-[#ff007a] text-white rounded-3xl font-bold text-sm sm:text-base mb-[10%]',
                       (!acceptFees || !acceptTerms) && 'opacity-50',
                     )}
                   >
@@ -693,20 +722,9 @@ Cupom: ${cupom || 'Nenhum'}`;
                   </button>
                 </div>
               </div>
-
-              {/* Imagem do Alfred posicionada à direita, fora do fluxo normal */}
-              <div className="hidden lg:block absolute -right-72 top-0 h-full">
-                <img
-                  src={AlfredImg}
-                  alt="Alfred"
-                  className="h-[400px] w-auto object-contain"
-                />
-              </div>
             </div>
           </div>
         </section>
-
-        {/* Removemos a versão anterior da imagem que estava fixa */}
 
         {/* Só mostrar o modal para usuários não-VIP */}
         {!isVipTransaction && (
