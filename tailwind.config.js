@@ -11,12 +11,12 @@ export default {
       colors: {
         'text-primary-light': '#000000',
         'text-primary-dark': '#ffffff',
-        'orange-primary': '#F39200',
+        'orange-primary': '#ff007a',
         success: '#28A745',
       },
       fontFamily: {
         lexend: ['"Lexend Deca"', 'sans-serif'], // Fonte global
-        pixelade: ['"Pixelade"', 'sans-serif'], // Fonte exclusiva do Navbar
+        orbitron: ['"Orbitron"', 'sans-serif'], // Fonte exclusiva do Navbar
       },
     },
   },

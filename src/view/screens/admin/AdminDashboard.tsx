@@ -138,7 +138,7 @@ const AdminDashboard: React.FC = () => {
             <div className="flex items-center">
               <button
                 onClick={handleLogout}
-                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700"
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-[#ff007a] hover:bg-[#c40963]"
                 disabled={actionLoading}
               >
                 <LogOut className="w-4 h-4 mr-2" />
@@ -160,7 +160,7 @@ const AdminDashboard: React.FC = () => {
                   placeholder="Filtrar por CPF"
                   value={cpfFilter}
                   onChange={(e) => setCpfFilter(e.target.value)}
-                  className="pl-10 w-full border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500"
+                  className="pl-10 w-full border border-gray-300 rounded-md shadow-sm focus:ring-[#ff007a] focus:border-[#ff007a]"
                 />
               </div>
               <div className="flex-1 min-w-[200px] relative">
@@ -168,7 +168,7 @@ const AdminDashboard: React.FC = () => {
                 <select
                   value={statusFilter}
                   onChange={(e) => setStatusFilter(e.target.value)}
-                  className="pl-10 w-full border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500"
+                  className="pl-10 w-full border border-gray-300 rounded-md shadow-sm focus:ring-[#ff007a] focus:border-[#ff007a]"
                 >
                   <option value="">Todos os status</option>
                   <option value="PENDING_REVIEW">Pendente</option>
@@ -188,7 +188,7 @@ const AdminDashboard: React.FC = () => {
 
             {loading ? (
               <div className="flex justify-center items-center h-64">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-600"></div>
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#ff007a]"></div>
               </div>
             ) : (
               <div className="overflow-x-auto">

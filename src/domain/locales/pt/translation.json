@@ -13,12 +13,12 @@
       "A liberdade de negociar, a segurança de sempre"
     ],
     "paragraphs": [
-      "No Alfred, acreditamos que a liberdade financeira deve ser simples e acessível para todos. Por isso, oferecemos uma plataforma P2P (peer-to-peer) onde você pode comprar e vender Bitcoin de maneira direta, sem a necessidade de processos de verificação de identidade (KYC). Aqui, a privacidade e a autonomia são respeitadas em cada transação.",
-      "Sabemos que cada pessoa tem o direito de gerenciar seus recursos de forma discreta e sem interferências. Ao optar pelo Alfred, você está escolhendo um serviço onde a sua identidade e dados pessoais não são exigidos. Nosso modelo de operação é baseado na confiança entre compradores e vendedores, criando um ambiente onde todos podem negociar com segurança e sem comprometer sua privacidade.",
+      "No johngalt, acreditamos que a liberdade financeira deve ser simples e acessível para todos. Por isso, oferecemos uma plataforma P2P (peer-to-peer) onde você pode comprar e vender Bitcoin de maneira direta, sem a necessidade de processos de verificação de identidade (KYC). Aqui, a privacidade e a autonomia são respeitadas em cada transação.",
+      "Sabemos que cada pessoa tem o direito de gerenciar seus recursos de forma discreta e sem interferências. Ao optar pelo johngalt, você está escolhendo um serviço onde a sua identidade e dados pessoais não são exigidos. Nosso modelo de operação é baseado na confiança entre compradores e vendedores, criando um ambiente onde todos podem negociar com segurança e sem comprometer sua privacidade.",
       "Embora não solicitemos KYC, não comprometemos a segurança. Nossa plataforma oferece um sistema robusto de verificação e monitoramento, que garante que todas as transações realizadas sejam legítimas e seguras. Cada vendedor é responsável por garantir a qualidade do Bitcoin que está sendo negociado, e nossa equipe está sempre à disposição para solucionar eventuais problemas, garantindo que todos os envolvidos na negociação cumpram com suas responsabilidades.",
-      "Esqueça as longas filas de verificações e o excesso de documentação. No Alfred, as transações acontecem de forma rápida, simples e transparente. Sem intermediários, você lida diretamente com quem está do outro lado, sem perder a segurança necessária para garantir que tudo ocorra da melhor forma possível.",
+      "Esqueça as longas filas de verificações e o excesso de documentação. No johngalt, as transações acontecem de forma rápida, simples e transparente. Sem intermediários, você lida diretamente com quem está do outro lado, sem perder a segurança necessária para garantir que tudo ocorra da melhor forma possível.",
       "Entendemos que, ao operar sem KYC, o suporte ao cliente se torna essencial. Nossa equipe de atendimento está sempre disponível para resolver qualquer problema, mediar disputas e garantir que sua experiência de compra e venda seja tranquila e sem riscos. Caso algo não ocorra como esperado, nossa estrutura de resolução de disputas está pronta para agir e proteger os interesses de nossos usuários.",
-      "Com o Alfred, você tem a oportunidade de fazer parte de uma comunidade que valoriza a liberdade financeira e a privacidade, sem abrir mão da segurança. Nós acreditamos em um mercado mais justo, onde a confiança é o principal alicerce das transações. Junte-se a nós e experimente a verdadeira liberdade ao negociar Bitcoin."
+      "Com o johngalt, você tem a oportunidade de fazer parte de uma comunidade que valoriza a liberdade financeira e a privacidade, sem abrir mão da segurança. Nós acreditamos em um mercado mais justo, onde a confiança é o principal alicerce das transações. Junte-se a nós e experimente a verdadeira liberdade ao negociar Bitcoin."
     ]
   },
   "checkout": {
@@ -42,8 +42,8 @@
     "wallet_error_below_700": "Para valores abaixo de 700 BRL, apenas carteiras Liquid e Lightning são permitidas.",
     "payment_error_above_5000": "Para pagamentos via Pix com valor superior a 5.000 BRL, é necessário preencher o formulário 'Validação para transações anônimas'.",
     "first_purchase_limit_error": "Sua primeira compra está limitada a 500 BRL.",
-    "bitcoin_message": "BITCOIN na sua mão, sem complicação e com privacidade.",
-    "opening_hours": "Alfred disponível 24h!",
+    "bitcoin_message": "Compre BITCOIN com privacidade, anonimato e segurança",
+    "opening_hours": "johngalt disponível 24h!",
     "tooltip_btc": {
       "title": "Transações com BTC:",
       "minimum_value": "O valor mínimo para transações com Bitcoin é de R$ 200.",
@@ -52,7 +52,7 @@
     "tooltip_usdt": {
       "title": "Transações com USDT:",
       "minimum_value": "O valor mínimo para transações com USDT é de R$ 550.",
-      "maximum_value": "Não há valor máximo para transações no Alfred."
+      "maximum_value": "Não há valor máximo para transações no johngalt."
     },
     "tooltip_attention": {
       "title": "Atenção:",
@@ -97,13 +97,13 @@
     "reflection3": "Embora você pague uma pequena taxa por transação, o verdadeiro custo vem no momento do saque. Além da taxa fixa de saque, suas transações ficam expostas ao controle governamental. E o preço dessa exposição pode ser alto: impostos de até 27,5% podem ser aplicados, dependendo da sua localização e das regulamentações vigentes.",
     "reflection4": "A 'conveniência' das exchanges convencionais pode sair muito mais cara do que você imagina. E, além disso, ao entregar seus dados pessoais, você nunca sabe como eles poderão ser usados ou manipulados no futuro.",
     "privacyTitle": "Privacidade e Anonimato",
-    "privacy1": "É simples: ao escolher o Alfred, você garante a sua privacidade e anonimato.",
+    "privacy1": "É simples: ao escolher o johngalt, você garante a sua privacidade e anonimato.",
     "privacy2": "Aqui, você pode começar a negociar a partir de 200 BRL usando as redes Liquid, ochain Lightning."
   },
   "termsOfUse": {
     "title": "Termos de Uso",
     "platformTitle": "Sobre a plataforma",
-    "platformDescription": "O Alfred é uma plataforma P2P (peer-to-peer) que oferece um ambiente seguro para a negociação de Bitcoin (BTC). Diferente das exchanges tradicionais, Alfred não possui transações instantâneas. O modelo P2P garante que você negocie diretamente com outros usuários, seja como fornecedor de liquidez ou criador de ordens, sempre com a segurança de que as transações serão realizadas de maneira eficiente e confiável.\n\nTodos os provedores de liquidez no Alfred fazem um depósito em BTC, que fica retido até a conclusão da transação, garantindo que ambas as partes cumpram com o acordado.",
+    "platformDescription": "O johngalt é uma plataforma P2P (peer-to-peer) que oferece um ambiente seguro para a negociação de Bitcoin (BTC). Diferente das exchanges tradicionais, johngalt não possui transações instantâneas. O modelo P2P garante que você negocie diretamente com outros usuários, seja como fornecedor de liquidez ou criador de ordens, sempre com a segurança de que as transações serão realizadas de maneira eficiente e confiável.\n\nTodos os provedores de liquidez no johngalt fazem um depósito em BTC, que fica retido até a conclusão da transação, garantindo que ambas as partes cumpram com o acordado.",
     "transactionsTitle": "Como as transações funcionam",
     "transactionsSteps": [
       "Escolha o valor desejado, selecione a rede e informe o endereço da sua carteira.",
@@ -115,7 +115,7 @@
     "transactionDurationTitle": "Duração da transação",
     "transactionDurationDescription": "O tempo de processamento de uma transação pode variar entre 30 minutos a 24 horas, dependendo de diversos fatores, como processamento bancário, envio de comprovantes e congestionamento das redes. Caso o mercado sofra flutuações durante a negociação, atrasos adicionais podem ocorrer.",
     "kycPoliciesTitle": "Políticas de KYC e responsabilidade",
-    "kycPoliciesDescription": "No Alfred, não exigimos KYC (Know Your Customer) para realizar transações, pois acreditamos na privacidade e na liberdade de nossos usuários. A responsabilidade pela verificação de identidade recai sobre os bancos que permitem o uso de contas bancárias.\n\nNosso papel é garantir que as transações ocorram de forma eficiente e segura, funcionando como um marketplace para a troca de valores entre os usuários.",
+    "kycPoliciesDescription": "No johngalt, não exigimos KYC (Know Your Customer) para realizar transações, pois acreditamos na privacidade e na liberdade de nossos usuários. A responsabilidade pela verificação de identidade recai sobre os bancos que permitem o uso de contas bancárias.\n\nNosso papel é garantir que as transações ocorram de forma eficiente e segura, funcionando como um marketplace para a troca de valores entre os usuários.",
     "globalReachTitle": "Alcance global e métodos de pagamento",
     "globalReachDescription1": "A operação é realizada globalmente, oferecendo diversas opções de pagamento.",
     "globalReachDescription2": "Os fornecedores operam de forma independente, sem vínculos específicos com bancos ou entidades reguladoras.",
@@ -187,7 +187,7 @@
     "scanQRCode": "Escaneie o QR Code",
     "qrCode100kAlt": "QR Code para R$ 100.000",
     "bitcoinPurchaseWarning": "Atenção: Você está comprando",
-    "alfredLogoAlt": "Logo Alfred",
+    "alfredLogoAlt": "Logo John Galt",
     "copyPixKey": "Copiar chave PIX",
     "paymentMethod": {
       "PIX": "PIX",
@@ -238,7 +238,7 @@
       "conversion_fee_value": "(2.5%)",
       "onchain_fee": "Taxa da Rede Onchain",
       "onchain_fee_variable": "(variável)",
-      "alfred_fee": "Taxa Alfred",
+      "john_galt_fee": "Taxa John Galt",
       "total_fees": "Total de Taxas"
     },
     "final_summary": {
@@ -252,7 +252,7 @@
     }
   },
   "guide": {
-    "imageStep": "Olá, eu sou o Alfred! Seja bem-vindo! Sou um robô que facilita para você transações de Bitcoin sem KYC, de forma simples e segura.",
+    "imageStep": "Olá, eu sou o John Galt! Seja bem-vindo! Sou um robô que facilita para você transações de Bitcoin sem KYC, de forma simples e segura.",
     "brlStep": "Digite o valor em BRL que você deseja converter para Bitcoin.",
     "proceedButtonStep": "Após preencher o valor, clique no botão 'Prosseguir' para continuar com a compra."
   },

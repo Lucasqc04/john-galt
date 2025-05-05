@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Logo from '../assets/logo/alfred-black-logo.svg';
+import Logo from '../assets/logo/Logo.png';
 import { ROUTES } from '../routes/Routes';
 
 export function NotFound() {
@@ -8,13 +8,13 @@ export function NotFound() {
       <img src={Logo} alt="Logo da Empresa" className="mb-4 w-24 h-24" />
       <h1 className="text-4xl font-bold mb-4">404 - Page Not Found</h1>
       <p className="text-lg mb-6">
-        It seems like you’ve tried to access a page that doesn’t exist.
+        It seems like you've tried to access a page that doesn't exist.
       </p>
       <Link
         to={ROUTES.home.call()}
-        className="px-6 py-3 bg-orange-primary text-white rounded-lg transition"
+        className="px-6 py-3 bg-[#ff007a] text-white rounded-lg transition"
       >
-        Back to ALFRED
+        Back to JOHN GALT
       </Link>
     </div>
   );

@@ -24,8 +24,8 @@ const Button = ({
     onClick={onClick}
     className={`px-6 py-3 rounded-3xl font-bold text-sm sm:text-base transition duration-300 ${
       variant === 'outline'
-        ? 'border-2 border-[#F39200] text-[#F39200] hover:bg-[#F39200] hover:text-white'
-        : 'bg-[#F39200] text-white hover:bg-orange-600'
+        ? 'border-2 border-[#ff007a] text-[#ff007a] hover:bg-[#ff007a] hover:text-white'
+        : 'bg-[#ff007a] text-white hover:bg-[#c40963]'
     }`}
   >
     {children}
@@ -138,7 +138,7 @@ export default function ConfirmInfosModal({
           {/* Seção de Valor */}
           <div className="bg-[#1a1d2b] p-4 rounded-lg">
             <div className="flex items-center space-x-2">
-              <CurrencyDollarIcon className="w-6 h-6 text-[#F39200]" />
+              <CurrencyDollarIcon className="w-6 h-6 text-[#ff007a]" />
               <h3 className="text-lg font-semibold">
                 {t('confirm_infos.amount_section.title')}
               </h3>
@@ -161,14 +161,14 @@ export default function ConfirmInfosModal({
             onClick={() => setIsDataVisible(!isDataVisible)}
           >
             <div className="flex items-center space-x-2">
-              <InformationCircleIcon className="w-6 h-6 text-[#F39200]" />
+              <InformationCircleIcon className="w-6 h-6 text-[#ff007a]" />
               <h3 className="text-lg font-semibold">
                 {t('confirm_infos.user_data_section.title')}
               </h3>
               {isDataVisible ? (
-                <ChevronUpIcon className="w-5 h-5 text-[#F39200]" />
+                <ChevronUpIcon className="w-5 h-5 text-[#ff007a]" />
               ) : (
-                <ChevronDownIcon className="w-5 h-5 text-[#F39200]" />
+                <ChevronDownIcon className="w-5 h-5 text-[#ff007a]" />
               )}
             </div>
             {isDataVisible && (
@@ -213,14 +213,14 @@ export default function ConfirmInfosModal({
             onClick={() => setIsTaxVisible(!isTaxVisible)}
           >
             <div className="flex items-center space-x-2">
-              <ArrowPathIcon className="w-6 h-6 text-[#F39200]" />
+              <ArrowPathIcon className="w-6 h-6 text-[#ff007a]" />
               <h3 className="text-lg font-semibold">
                 {t('confirm_infos.fees_section.title')}
               </h3>
               {isTaxVisible ? (
-                <ChevronUpIcon className="w-5 h-5 text-[#F39200]" />
+                <ChevronUpIcon className="w-5 h-5 text-[#ff007a]" />
               ) : (
-                <ChevronDownIcon className="w-5 h-5 text-[#F39200]" />
+                <ChevronDownIcon className="w-5 h-5 text-[#ff007a]" />
               )}
             </div>
             {isTaxVisible && (
@@ -252,7 +252,9 @@ export default function ConfirmInfosModal({
                   </p>
                 )}
                 <p>
-                  <strong>{t('confirm_infos.fees_section.alfred_fee')}:</strong>{' '}
+                  <strong>
+                    {t('confirm_infos.fees_section.john_galt_fee')}:
+                  </strong>{' '}
                   R$ {alfredFee.toFixed(2)} ({(alfredFeeRate * 100).toFixed(2)}
                   %)
                 </p>
@@ -267,7 +269,7 @@ export default function ConfirmInfosModal({
           {/* Resumo Final */}
           <div className="bg-[#1a1d2b] p-4 rounded-lg">
             <div className="flex items-center space-x-2">
-              <ArrowPathIcon className="w-6 h-6 text-[#F39200]" />
+              <ArrowPathIcon className="w-6 h-6 text-[#ff007a]" />
               <h3 className="text-lg font-semibold">
                 {t('confirm_infos.final_summary.title')}
               </h3>

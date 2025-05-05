@@ -1,7 +1,7 @@
 import { useLanguage } from '@/domain/locales/Language';
 import { useContext, useEffect, useRef, useState } from 'react';
-import { FaRobot } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import logoImg from '../../assets/logo/Logo.png';
 import { LanguageSwitcher } from '../../components/LanguageSwitcher/LanguageSwitcher';
 import { UserLevelBadge } from '../../components/UserLevelBadge';
 import { AuthContext } from '../../context/AuthContext';
@@ -36,7 +36,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="flex flex-col items-center justify-center w-full max-w-[100vw] transition-all duration-300 bg-transparent px-2 sm:px-4 py-2 sm:py-4 text-center">
+    <header className="flex flex-col items-center justify-center w-full max-w-[100vw] transition-all duration-300 bg-transparent px-2 sm:px-4 py-2 sm:py-4 text-center z-50 relative">
       <nav
         aria-label="Global"
         className="w-full flex flex-row items-center justify-center flex-wrap gap-y-2 gap-x-8"
@@ -44,7 +44,7 @@ export default function Header() {
         <NavLinks isVisible={true} isLargeScreen={false} />
         <LanguageSwitcher
           className="flex justify-center"
-          LabelClassName="text-xl sm:text-2xl lg:text-3xl font-pixelade items-center justify-center gap-x-2 font-extralight leading-6"
+          LabelClassName="text-xl sm:text-2xl lg:text-3xl font-orbitron items-center justify-center gap-x-2 font-extralight leading-6"
         />
         <div className="relative" ref={dropdownRef}>
           {user ? (
@@ -53,7 +53,11 @@ export default function Header() {
                 onClick={() => setIsDropdownOpen((prev) => !prev)}
                 className="flex items-center gap-x-2 text-white hover:text-gray-300 transition-all"
               >
-                <FaRobot size={24} />
+                <img
+                  src={logoImg}
+                  alt="Logo"
+                  className="w-6 h-6 filter brightness-0 invert"
+                />
                 <div className="flex flex-col items-start">
                   <span className="inline text-lg font-semibold">
                     {user.username}
@@ -86,9 +90,13 @@ export default function Header() {
           ) : (
             <button
               onClick={() => navigate(ROUTES.auth.login.call(currentLang))}
-              className="flex items-center gap-x-2 bg-transparent text-white hover:text-orange-600 transition-all px-4 py-2 rounded"
+              className="flex items-center gap-x-2 bg-transparent text-white hover:text-pink-600 transition-all px-4 py-2 rounded"
             >
-              <FaRobot size={24} />
+              <img
+                src={logoImg}
+                alt="Logo"
+                className="w-6 h-6 filter brightness-0 invert"
+              />
               Faça login
             </button>
           )}

@@ -29,7 +29,7 @@ const AdminLogin: React.FC = () => {
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8">
         <div className="flex items-center justify-center mb-8">
-          <LogIn className="w-12 h-12 text-orange-600" />
+          <LogIn className="w-12 h-12 text-[#ff007a]" />
         </div>
 
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-8">
@@ -49,7 +49,7 @@ const AdminLogin: React.FC = () => {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#ff007a] focus:border-[#ff007a]"
               required
             />
           </div>
@@ -66,7 +66,7 @@ const AdminLogin: React.FC = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#ff007a] focus:border-[#ff007a]"
               required
             />
           </div>
@@ -79,7 +79,7 @@ const AdminLogin: React.FC = () => {
 
           <button
             type="submit"
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#ff007a] hover:bg-[#c40963] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#ff007a]"
           >
             Entrar
           </button>

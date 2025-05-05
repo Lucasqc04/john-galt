@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import logoSucces from '../../assets/Check_Tela_Alfred.png'; // Check reduzido
+import logoSucces from '../../assets/Check_Tela_Alfred.png';
 import { ROUTES } from '../../routes/Routes';
 
 interface SubmittedFile {
@@ -190,7 +190,7 @@ export function FormOtcSuccess() {
       >
         <button
           onClick={() => handleOnLink(ROUTES.buyBitcoin.call('pt'))}
-          className="w-[200px] h-[50px] bg-[#F49300] border-[3px] border-white rounded-[40px] text-white"
+          className="w-[200px] h-[50px] bg-[#ff007a] border-[3px] border-white rounded-[40px] text-white"
         >
           Voltar para o site
         </button>

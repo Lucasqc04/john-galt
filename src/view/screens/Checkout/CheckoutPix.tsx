@@ -2,7 +2,7 @@ import { t } from 'i18next';
 import { QRCodeSVG } from 'qrcode.react';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import AlfredQr from '../../assets/_DIY SEC LAB - Apresentação Comercial (1).png';
+import JohnGaltQr from '../../assets/logo/Logo.png';
 import { useDataForm } from './DataForm/useDataForm';
 import { usePaymentStatusPolling } from './usePaymentStatusPolling';
 
@@ -73,28 +73,43 @@ export function CheckoutPix() {
         {t('buycheckout.scanQRCode')}
       </p>
       <div className="relative flex justify-center items-center p-4">
-        <div className="relative">
-          <QRCodeSVG
-            value={pixKey ?? ''}
-            size={256}
-            level="H"
-            marginSize={10}
-            className="relative"
-          />
-          <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-            <span className="text-red-600 font-bold bg-white text-xs mb-1">
-              {t('buycheckout.bitcoinPurchaseWarning')}{' '}
-              {cryptoType === 'BITCOIN' ? 'Bitcoin' : cryptoType}
-            </span>
-            <img
-              src={AlfredQr}
-              alt={t('buycheckout.alfredLogoAlt')}
-              className={
-                isVipTransaction
-                  ? 'w-[100px] h-[80px] rounded-full'
-                  : 'w-[140px] h-[120px] rounded-full'
-              }
+        <div className="relative bg-white rounded-lg shadow-lg p-2 overflow-hidden">
+          {/* Container com posição relativa que contém o QR Code */}
+          <div className="relative">
+            <QRCodeSVG
+              value={pixKey ?? ''}
+              size={280}
+              level="H" // Maior nível de correção de erro
+              marginSize={10}
+              className="z-0"
             />
+
+            {/* Sobreposição semi-transparente com a mensagem que fica integrada ao QR Code */}
+            <div className="absolute inset-0 flex flex-col items-center justify-between pointer-events-none">
+              {/* Faixa superior semi-transparente com texto */}
+              <div className="w-full bg-red-600 bg-opacity-80 py-1 px-1 text-center">
+                <span className="text-white font-bold text-xs">
+                  {t('buycheckout.bitcoinPurchaseWarning')}{' '}
+                  {cryptoType === 'BITCOIN' ? 'Bitcoin' : cryptoType}
+                </span>
+              </div>
+
+              {/* Logo centralizada no meio do QR */}
+              <div className="bg-white bg-opacity-90 rounded-full p-2 shadow-lg">
+                <img
+                  src={JohnGaltQr}
+                  alt={t('buycheckout.alfredLogoAlt')}
+                  className="w-[60px] h-[60px] object-contain"
+                />
+              </div>
+
+              {/* Faixa inferior semi-transparente com texto */}
+              <div className="w-full bg-gray-900 bg-opacity-80 py-1 px-1 text-center">
+                <span className="text-white font-bold text-xs">
+                  JOHN GALT - COMPRA DE {cryptoType}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -108,7 +123,7 @@ export function CheckoutPix() {
 
       <button
         onClick={handleCopyToClipboard}
-        className="pt-4 px-6 py-3 bg-[#F39200] text-white rounded-3xl font-bold m-3 mb-[5%]"
+        className="pt-4 px-6 py-3 bg-[#ff007a] text-white rounded-3xl font-bold m-3 mb-[5%]"
       >
         {t('buycheckout.copyPixKey')}
       </button>
